@@ -1,33 +1,36 @@
-Caching
-=======
+VersaTul Caching
+================
+
+Getting Started
+----------------
 
 .. _installation:
 
 Installation
 ------------
 
-To use Caching, first install it using nuget:
+To use VersaTul Caching, first install it using nuget:
 
 .. code-block:: console
     
     PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
-Getting Started
-----------------
-The VersaTul Caching project is designed to provide a simple caching interface with the ability to change the underlining cache engine. 
-The default cache engine is built on top of the Microsoft Extensions Caching Memory which provides in memory caching. 
-The VersaTul Caching project also provides the ability to easily replace the underline caching engine using easily implemented interfaces.
-
 Basic Information about VersaTul Caching
 -----------------------------------------
 
+The VersaTul Caching project is designed to provide a simplfied caching interface with the ability to change the underlining caching engine easily and quickly. 
+The default cache engine is built on top of the Microsoft Extensions Caching Memory class, which provides an in memory caching store. 
+This implementation can be easily replaced using the interface provided.
+
+Components
+-----------
 Interaction can be achieved through the Cache Provider Interface: ``ICacheProvider<T>``
 The Concrete class for the Cache Provider is ``MemCacheProvider<T>``
 The Configuration interface for the cache provider is ``ICacheConfiguration``
 The Concrete class for the configuration is ``CacheConfiguration``
 
 
-Simple Examples
+Simple Example
 ----------------
 
 .. code-block::c
@@ -52,18 +55,17 @@ Simple Examples
     }
 
 
-Using With a IoC Container
+Use With a IoC Container
 --------------------------
 
 .. code-block:: c
     //Creating the IoC container
     var builder = new ContainerBuilder();
 
-    //Populating the container
-
     //default configs
     var configSettings = new Builder().BuildConfig();
 
+    //Populating the container
     builder
         .RegisterType<CacheConfiguration>()
         .As<ICacheConfiguration>()
