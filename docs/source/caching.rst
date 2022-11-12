@@ -9,6 +9,7 @@ Installation
 To use Caching, first install it using nuget:
 
 .. code-block:: console
+    
     PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
 Getting Started
