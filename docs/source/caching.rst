@@ -30,8 +30,7 @@ The Concrete class for the configuration is ``CacheConfiguration``
 Simple Examples
 ----------------
 
-.. code:: c
-    
+```
 class Program
 {
     static void Main(string[] args)
@@ -51,13 +50,12 @@ class Program
 
     Console.ReadLine();
 }
-.. code:: c
+```
 
 Using With a IoC Container
 --------------------------
 
-.. code:: c
-
+```
 //Creating the IoC container
 var builder = new ContainerBuilder();
 
@@ -103,4 +101,4 @@ using (var container = new IoCBuilder())
     //Calling the method from the main method
     CachingTest(container.Resolve<ICacheProvider<Person>>());
 }
-
+```
