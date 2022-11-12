@@ -29,7 +29,10 @@ Components
 
 Simple Example
 ----------------
-.. code-block::c
+
+.. code-block:: c
+    :caption: Simple example
+
     class Program
     {
         static void Main(string[] args)
@@ -53,6 +56,8 @@ Simple Example
 Use With a IoC Container
 --------------------------
 .. code-block:: c
+    :caption: using with container
+    
     //Creating the IoC container
     var builder = new ContainerBuilder();
 
