@@ -31,8 +31,8 @@ Code Examples
 
 .. code-block:: antlr-c#
     :caption: Simple Example
-    :options:
 
+    :code:
     class Program
     {
         static void Main(string[] args)
@@ -47,11 +47,10 @@ Code Examples
         Console.ReadLine();
     }
 
-
 .. code-block:: antlr-c#
     :caption: Use With a IoC Container
-    :options:
     
+    :code:
     //Creating the IoC container
     var builder = new ContainerBuilder();
 
