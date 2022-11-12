@@ -6,8 +6,6 @@ Getting Started
 
 
 .. code-block:: antlr-c#
-    :caption:
-    :options:
 
     class Program
     {
