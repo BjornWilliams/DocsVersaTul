@@ -26,12 +26,11 @@ Components
 ``ICacheConfiguration``: The Configuration interface for accessing default configurations 
 ``CacheConfiguration``: Default Concrete implementation of the configuration interface. 
 
-
-Simple Example
-----------------
+Code Examples
+-------------
 
 .. code-block:: antlr-c#
-    :caption:
+    :caption: Simple Example
     :options:
 
     class Program
@@ -48,11 +47,9 @@ Simple Example
         Console.ReadLine();
     }
 
-Use With a IoC Container
---------------------------
 
 .. code-block:: antlr-c#
-    :caption:
+    :caption: Use With a IoC Container
     :options:
     
     //Creating the IoC container
