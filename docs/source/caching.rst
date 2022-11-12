@@ -30,7 +30,7 @@ The Concrete class for the configuration is ``CacheConfiguration``
 Simple Examples
 ----------------
 
-.. code-block:: python
+.. code-block:: c
     
 class Program
 {
@@ -56,7 +56,7 @@ class Program
 Using With a IoC Container
 --------------------------
 
-.. code-block:: c#
+.. code-block:: c
 
 //Creating the IoC container
 var builder = new ContainerBuilder();
