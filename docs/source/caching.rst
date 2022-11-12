@@ -3,6 +3,9 @@ VersaTul Caching
 
 Getting Started
 ----------------
+The VersaTul Caching project is designed to provide a simplfied caching interface with the ability to change the underlining caching engine easily and quickly. 
+The default cache engine is built on top of the Microsoft Extensions Caching Memory class, which provides an in memory caching store. 
+This implementation can be easily replaced using the interface provided.
 
 .. _installation:
 
@@ -15,24 +18,17 @@ To use VersaTul Caching, first install it using nuget:
     
     PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
-Basic Information about VersaTul Caching
------------------------------------------
-
-The VersaTul Caching project is designed to provide a simplfied caching interface with the ability to change the underlining caching engine easily and quickly. 
-The default cache engine is built on top of the Microsoft Extensions Caching Memory class, which provides an in memory caching store. 
-This implementation can be easily replaced using the interface provided.
 
 Components
 -----------
-Interaction can be achieved through the Cache Provider Interface: ``ICacheProvider<T>``
-The Concrete class for the Cache Provider is ``MemCacheProvider<T>``
-The Configuration interface for the cache provider is ``ICacheConfiguration``
-The Concrete class for the configuration is ``CacheConfiguration``
+``ICacheProvider<T>``: Interaction can be achieved through the Cache Provider Interface.
+``MemCacheProvider<T>``: Default Concrete implementation of the Cache Provider interface.
+``ICacheConfiguration``: The Configuration interface for accessing default configurations 
+``CacheConfiguration``: Default Concrete implementation of the configuration interface. 
 
 
 Simple Example
 ----------------
-
 .. code-block::c
     class Program
     {
@@ -54,10 +50,8 @@ Simple Example
         Console.ReadLine();
     }
 
-
 Use With a IoC Container
 --------------------------
-
 .. code-block:: c
     //Creating the IoC container
     var builder = new ContainerBuilder();
