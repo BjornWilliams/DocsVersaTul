@@ -29,7 +29,7 @@ Components
 Code Examples
 -------------
 
-.. code-block:: c
+.. code-block:: c#
     :caption: Simple Example
 
     
@@ -51,7 +51,7 @@ Code Examples
         Console.ReadLine();
     }
 
-.. code-block:: c
+.. code-block:: c#
     :caption: Use With a IoC Container
     
     
