@@ -18,4 +18,4 @@ Contents
 
    usage
    api
-   Caching
+   caching
