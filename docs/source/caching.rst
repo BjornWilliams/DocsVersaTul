@@ -10,7 +10,7 @@ To use Caching, first install it using nuget:
 
 .. code-block:: c#
 
-   (.venv) PM> NuGet\Install-Package VersaTul.Caching -Version latest
+   PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
 Getting Started
 ----------------
@@ -30,7 +30,7 @@ The Concrete class for the configuration is ``CacheConfiguration``
 Simple Examples
 ----------------
 
-.. code-block:: c#
+.. code-block:: python
     
 class Program
 {
