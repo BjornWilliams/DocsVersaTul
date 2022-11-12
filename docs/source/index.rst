@@ -18,4 +18,22 @@ Contents
 
    caching
    streamers
+   configuration
+   configuration-defaults
+   mongodb
+   mssql
+   sql
+   logger
+   logger-file
+   logger-mail
+   logger-web
+   extensions
+   efcore
+   pipeline-infrastructure
+   attributes
+   compression
+   converters
+   mailer
+   scheduler
+   utilities
 
