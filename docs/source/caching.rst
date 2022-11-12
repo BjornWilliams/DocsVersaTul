@@ -8,7 +8,7 @@ Installation
 
 To use Caching, first install it using nuget:
 
-.. code-block:: console
+.. code-block:: c#
 
    (.venv) PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
@@ -30,7 +30,7 @@ The Concrete class for the configuration is ``CacheConfiguration``
 Simple Examples
 ----------------
 
-.. code-block:: console
+.. code-block:: c#
     
 class Program
 {
@@ -56,7 +56,7 @@ class Program
 Using With a IoC Container
 --------------------------
 
-.. code-block:: console
+.. code-block:: c#
 
 //Creating the IoC container
 var builder = new ContainerBuilder();
