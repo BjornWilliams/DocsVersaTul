@@ -5,7 +5,7 @@ Getting Started
 ----------------
 
 
-.. code-block:: antlr-c#
+.. code-block:: c#
 
     class Program
     {
