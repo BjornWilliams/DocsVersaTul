@@ -30,9 +30,9 @@ Components
 Simple Example
 ----------------
 
-.. code-block:: antlr-c#
-    :caption: Simple example
-
+.. code-block:: c
+    :caption:
+    :options:
 
     class Program
     {
@@ -56,9 +56,10 @@ Simple Example
 
 Use With a IoC Container
 --------------------------
+
 .. code-block:: c
-    :caption: using with container
-    
+    :caption:
+    :options:
     
     //Creating the IoC container
     var builder = new ContainerBuilder();
