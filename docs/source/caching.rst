@@ -30,7 +30,7 @@ Components
 Simple Example
 ----------------
 
-.. code-block:: antlr-c#
+.. code-block:: csharp
     :caption:
     :options:
 
@@ -57,7 +57,7 @@ Simple Example
 Use With a IoC Container
 --------------------------
 
-.. code-block:: 
+.. code-block:: csharp
     :caption:
     :options:
     

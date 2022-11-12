@@ -16,6 +16,6 @@ Contents
 
 .. toctree::
 
-   usage
-   api
    caching
+   streamers
+
