@@ -30,7 +30,7 @@ The Concrete class for the configuration is ``CacheConfiguration``
 Simple Examples
 ----------------
 
-.. code-block:: c
+.. code:: c
     
 class Program
 {
@@ -51,12 +51,12 @@ class Program
 
     Console.ReadLine();
 }
-
+.. code:: c
 
 Using With a IoC Container
 --------------------------
 
-.. code-block:: c
+.. code:: c
 
 //Creating the IoC container
 var builder = new ContainerBuilder();
