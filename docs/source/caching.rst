@@ -8,9 +8,8 @@ Installation
 
 To use Caching, first install it using nuget:
 
-.. code-block:: c#
-
-   PM> NuGet\Install-Package VersaTul.Caching -Version latest
+.. code-block:: console
+    PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
 Getting Started
 ----------------
@@ -30,75 +29,74 @@ The Concrete class for the configuration is ``CacheConfiguration``
 Simple Examples
 ----------------
 
-```
-class Program
-{
-    static void Main(string[] args)
+.. code-block::c
+    class Program
     {
-        //default configs
-        var configSettings = new Builder().BuildConfig();
-        
-        var cacheProvider = new MemCacheProvider<Person>(new CacheConfiguration(configSettings));
-        
-        person = new Person { Age = 10, Name = "Bjorn" };
+        static void Main(string[] args)
+        {
+            //default configs
+            var configSettings = new Builder().BuildConfig();
+            
+            var cacheProvider = new MemCacheProvider<Person>(new CacheConfiguration(configSettings));
+            
+            person = new Person { Age = 10, Name = "Bjorn" };
 
-        cacheProvider.Add("Bjorn", person);
+            cacheProvider.Add("Bjorn", person);
 
-        var person = cacheProvider.Get("Bjorn");
+            var person = cacheProvider.Get("Bjorn");
 
+        }
+
+        Console.ReadLine();
     }
 
-    Console.ReadLine();
-}
-```
 
 Using With a IoC Container
 --------------------------
 
-```
-//Creating the IoC container
-var builder = new ContainerBuilder();
+.. code-block:: c
+    //Creating the IoC container
+    var builder = new ContainerBuilder();
 
-//Populating the container
+    //Populating the container
 
-//default configs
-var configSettings = new Builder().BuildConfig();
+    //default configs
+    var configSettings = new Builder().BuildConfig();
 
-builder
-    .RegisterType<CacheConfiguration>()
-    .As<ICacheConfiguration>()
-    .WithParameter("configSettings", configSettings)
-    .SingleInstance();
+    builder
+        .RegisterType<CacheConfiguration>()
+        .As<ICacheConfiguration>()
+        .WithParameter("configSettings", configSettings)
+        .SingleInstance();
 
-builder
-    .RegisterGeneric(typeof(MemCacheProvider<>))
-    .As(typeof(ICacheProvider<>))
-    .SingleInstance();
+    builder
+        .RegisterGeneric(typeof(MemCacheProvider<>))
+        .As(typeof(ICacheProvider<>))
+        .SingleInstance();
 
-//Static method where cache provider can be injected by autofac...
-static void CachingTest(ICacheProvider<Person> cacheProvider)
-{
-    var person = cacheProvider.Get("Bjorn");
-
-    Console.WriteLine($"Is Person Null: {person == null}");
-
-    if (person == null)
+    //Static method where cache provider can be injected by autofac...
+    static void CachingTest(ICacheProvider<Person> cacheProvider)
     {
-        person = new Person { Age = 10, Name = "Bjorn" };
+        var person = cacheProvider.Get("Bjorn");
 
-        cacheProvider.Add("Bjorn", person);
+        Console.WriteLine($"Is Person Null: {person == null}");
 
-        Console.WriteLine($"Added Person: {person.Name}");
+        if (person == null)
+        {
+            person = new Person { Age = 10, Name = "Bjorn" };
+
+            cacheProvider.Add("Bjorn", person);
+
+            Console.WriteLine($"Added Person: {person.Name}");
+        }
+
+        person = cacheProvider.Get("Bjorn");
+
+        Console.WriteLine($"And Person Is: {person.Name}");
     }
 
-    person = cacheProvider.Get("Bjorn");
-
-    Console.WriteLine($"And Person Is: {person.Name}");
-}
-
-using (var container = new IoCBuilder())
-{
-    //Calling the method from the main method
-    CachingTest(container.Resolve<ICacheProvider<Person>>());
-}
-```
+    using (var container = new IoCBuilder())
+    {
+        //Calling the method from the main method
+        CachingTest(container.Resolve<ICacheProvider<Person>>());
+    }
