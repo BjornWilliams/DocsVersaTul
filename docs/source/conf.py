@@ -6,8 +6,8 @@ project = 'VersaTul'
 copyright = '2022, VersaTul'
 author = 'Bjorn'
 
-release = '0.1'
-version = '0.1.0'
+release = '0.2'
+version = '0.1.2'
 
 # -- General configuration
 
