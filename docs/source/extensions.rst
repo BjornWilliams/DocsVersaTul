@@ -1,4 +1,4 @@
-VersaTul Extensions
+Extensions
 ===================
 
 Getting Started

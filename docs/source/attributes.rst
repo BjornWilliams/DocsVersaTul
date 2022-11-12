@@ -1,4 +1,4 @@
-VersaTul Attributes
+Attributes
 ===================
 
 Getting Started

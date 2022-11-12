@@ -1,4 +1,4 @@
-VersaTul Utilities
+Utilities
 ==================
 
 Getting Started

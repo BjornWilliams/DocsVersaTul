@@ -1,4 +1,4 @@
-VersaTul Pipeline Infrastructure
+Pipeline Infrastructure
 ================================
 
 Getting Started

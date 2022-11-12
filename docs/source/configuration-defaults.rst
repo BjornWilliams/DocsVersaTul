@@ -1,4 +1,4 @@
-VersaTul Configuration Defaults
+Configuration Defaults
 ===============================
 
 Getting Started

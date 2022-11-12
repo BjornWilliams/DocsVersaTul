@@ -1,4 +1,4 @@
-VersaTul Logger
+Logger
 ================
 
 Getting Started

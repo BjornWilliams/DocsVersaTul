@@ -1,4 +1,4 @@
-VersaTul Logger Mail
+Logger Mail
 ====================
 
 Getting Started

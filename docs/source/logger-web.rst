@@ -1,4 +1,4 @@
-VersaTul Logger Web
+Logger Web
 ====================
 
 Getting Started

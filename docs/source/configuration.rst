@@ -1,4 +1,4 @@
-VersaTul Configuration
+Configuration
 ======================
 
 Getting Started

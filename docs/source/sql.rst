@@ -1,4 +1,4 @@
-VersaTul Sql
+Data Sql
 ================
 
 Getting Started

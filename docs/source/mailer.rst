@@ -1,4 +1,4 @@
-VersaTul Mailer
+Mailer
 ================
 
 Getting Started

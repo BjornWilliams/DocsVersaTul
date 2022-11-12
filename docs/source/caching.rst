@@ -1,4 +1,4 @@
-VersaTul Caching
+Caching
 ================
 
 Getting Started

@@ -1,5 +1,5 @@
-VersaTul Streamers
-================
+Collection Streamers
+====================
 
 Getting Started
 ----------------

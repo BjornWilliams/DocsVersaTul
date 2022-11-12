@@ -1,4 +1,4 @@
-VersaTul Scheduler
+Scheduler
 ==================
 
 Getting Started

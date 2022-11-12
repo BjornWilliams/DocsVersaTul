@@ -1,4 +1,4 @@
-VersaTul Compression
+Compression
 ====================
 
 Getting Started

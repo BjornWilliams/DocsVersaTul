@@ -1,4 +1,4 @@
-VersaTul EFCore
+EFCore
 ================
 
 Getting Started
