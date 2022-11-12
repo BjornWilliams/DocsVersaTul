@@ -16,6 +16,7 @@ Contents
 
 .. toctree::
 
+   usage
    caching
    streamers
    configuration
