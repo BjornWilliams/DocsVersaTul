@@ -21,10 +21,10 @@ To use VersaTul Caching, first install it using nuget:
 
 Components
 -----------
-``ICacheProvider<T>``: Interaction can be achieved through the Cache Provider Interface.
-``MemCacheProvider<T>``: Default Concrete implementation of the Cache Provider interface.
-``ICacheConfiguration``: The Configuration interface for accessing default configurations 
-``CacheConfiguration``: Default Concrete implementation of the configuration interface. 
+``ICacheProvider<T>`` :Interaction can be achieved through the Cache Provider Interface.
+``MemCacheProvider<T>`` :Default Concrete implementation of the Cache Provider interface.
+``ICacheConfiguration`` :The Configuration interface for accessing default configurations 
+``CacheConfiguration`` :Default Concrete implementation of the configuration interface. 
 
 Code Examples
 -------------
@@ -32,7 +32,7 @@ Code Examples
 .. code-block:: antlr-c#
     :caption: Simple Example
 
-    :code:
+    
     class Program
     {
         static void Main(string[] args)
@@ -50,7 +50,7 @@ Code Examples
 .. code-block:: antlr-c#
     :caption: Use With a IoC Container
     
-    :code:
+    
     //Creating the IoC container
     var builder = new ContainerBuilder();
 
