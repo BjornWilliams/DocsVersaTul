@@ -5,7 +5,7 @@ Welcome to VersaTul documentation!
 functionality that can be reused across a multitude of DOTNET projects.
 
 It’s comprised of several NuGet packages that can be used alone or together. 
-There are packages for Caching, Database Data Access, Logging and Array/Collection 
+There are packages for Caching, Database Access, Logging and Array/Collection 
 management.  
 
 .. note::
