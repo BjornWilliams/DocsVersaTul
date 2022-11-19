@@ -7,8 +7,6 @@ The VersaTul Caching project is designed to provide a simplfied caching interfac
 The default cache engine is built on top of the Microsoft Extensions Caching Memory class, which provides an in memory caching store. 
 This implementation can be easily replaced using the interface provided.
 
-.. _installation:
-
 Installation
 ------------
 
