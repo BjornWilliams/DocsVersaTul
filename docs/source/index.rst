@@ -18,24 +18,23 @@ Contents
 .. toctree::
 
    home <self>
+   attributes
    caching
-   streamers
+   compression
    configuration
    configuration-defaults
-   mongodb
-   mssql
-   sql
+   converters
+   efcore
+   extensions
    logger
    logger-file
    logger-mail
    logger-web
-   extensions
-   efcore
-   pipeline-infrastructure
-   attributes
-   compression
-   converters
    mailer
+   mongodb
+   mssql
+   pipeline-infrastructure
    scheduler
+   sql
+   streamers
    utilities
-
