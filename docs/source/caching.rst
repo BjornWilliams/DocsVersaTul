@@ -47,9 +47,12 @@ Code Examples
         static void Main(string[] args)
         {
             //default configs
-            var configSettings = new Builder().BuildConfig(); 
+            var configSettings = new Builder().BuildConfig();
+            
+            //cache configuration
+            var cacheConfiguration = new CacheConfiguration(configSettings);
 
-            var cacheProvider = new MemCacheProvider<Person>(new CacheConfiguration(configSettings));   
+            var cacheProvider = new MemCacheProvider<Person>(cacheConfiguration);
 
             person = new Person { Age = 10, Name = "Bjorn" };
 
