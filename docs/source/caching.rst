@@ -21,14 +21,14 @@ To use VersaTul Caching, first install it using nuget:
 
 Components
 -----------
-``ICacheProvider<T>`` : Interaction can be achieved through the Cache Provider Interface.
-``MemCacheProvider<T>`` : Default Concrete implementation of the Cache Provider interface.
-``ICacheConfiguration`` : The Configuration interface for accessing default configurations 
-``CacheConfiguration`` : Default Concrete implementation of the configuration interface. 
+1. ``ICacheProvider<T>`` : Interaction can be achieved through the Cache Provider Interface.
+2. ``MemCacheProvider<T>`` : Default Concrete implementation of the Cache Provider interface.
+3. ``ICacheConfiguration`` : The Configuration interface for accessing default configurations 
+4. ``CacheConfiguration`` : Default Concrete implementation of the configuration interface. 
 
 Functional Summary
 ------------------
-T Get(string key): Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
+*T Get(string key)* : Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
 
 Code Examples
 -------------
