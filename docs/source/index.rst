@@ -18,12 +18,12 @@ Contents
 .. toctree::
 
    home <self>
-   attributes
    caching
    compression
    configuration
    configuration-defaults
    converters
+   display-attributes
    efcore
    extensions
    logger

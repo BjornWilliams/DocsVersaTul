@@ -1,5 +1,0 @@
-Attributes
-===================
-
-Getting Started
-----------------
