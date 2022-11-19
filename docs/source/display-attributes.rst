@@ -27,9 +27,34 @@ Components
 
 Functional Summary
 ------------------
-**Display(Name = "Newname")** : 
-**Display(Decimal = 2)** : 
-**Display(DateFormattingString = "D")** : 
+1. **Display(Name = "Newname")** : Apply to property to change property name on export.
+2. **Display(Decimal = 2)** : Apply to floating point properties to round property value on export.
+3. **Display(DateFormattingString = "D")** : Apply to DateTime property to format value on export.
 
 Code Examples
 -------------
+
+.. code-block:: c#
+    :caption: Attribute usage
+
+    internal class Order
+    {
+        public int OrderId { get; set; }
+
+        [Display(Name = "Shipping")] //Rename to Shipping
+        public string ShipVia { get; set; }
+
+        [Display(Decimals = 2)] //Round value to 2 decimal places
+        public decimal SubTotal { get; set; }
+
+        public IEnumerable<OrderItem> Items { get; set; }
+
+        [Display(DateFormattingString = "D")] //Format to Date only.
+        public DateTime OrderDate { get; set; }
+
+        public Customer Customer { get; set; }
+
+        public string OrderNumber { get; set; }
+
+        public bool IsMailSent { get; set; }
+    }
