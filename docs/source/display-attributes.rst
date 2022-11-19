@@ -3,9 +3,9 @@ Display Attributes
 
 Getting Started
 ----------------
-The VersaTul Display Attributes project provides the ability to provide meta-data to the export engine for outputting collections as files.
-This package works in conjunction with the Collection streamers package.
-Attributes can be applied to properties of a collection data type.
+The VersaTul Display Attributes project enables the ability to provide meta-data to the export engine for outputting collections as files.
+This package works with the Collection streamers package.
+Attributes can be applied to the properties of a collection data type in order to manipulate the outputted data.
 
 Installation
 ------------
@@ -19,11 +19,11 @@ To use VersaTul Display Attributes, first install it using nuget:
 
 Components
 -----------
-1. ``IFormatter`` : 
-2. ``IDisplayAnalyzer`` : 
-3. ``DisplayAttribute`` :
-4. ``DateFormatter`` : 
-5. ``DecimalFormatter`` : 
+1. ``IFormatter`` : Specifies the functionality provided by a Display formatter.
+2. ``IDisplayAnalyzer`` : Specifies the functionality provided by a Display analyzer.
+3. ``DisplayAttribute`` : Apply to a property in order to provide meta-data to the export engine for outputting data to files.
+4. ``DateFormatter`` : Represents the formatter for formatting dates.
+5. ``DecimalFormatter`` : Represents the formatter for formatting decimals.
 
 Functional Summary
 ------------------
@@ -35,9 +35,10 @@ Code Examples
 -------------
 
 .. code-block:: c#
-    :caption: Attribute usage
+    :caption: Display Attribute Usage
+    :emphasize-lines: 45,48,53
 
-    internal class Order
+    class Order
     {
         public int OrderId { get; set; }
 
