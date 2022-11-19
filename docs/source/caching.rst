@@ -31,7 +31,7 @@ Functional Summary
 1. **T Get(string key)** : Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
 2. **void Add(string key, T data)** : Inserts the cache entry using the key for a default duration of 60 minutes.
 3. **void Add(string key, T data, int cacheTime)** : Inserts the given item into the Cache using the given key for a the specified duration in minutes.
-4. **void Add(string key, T data, CacheExpiration expiration)** : Inserts the given item into the Cache using the given key for a the specified CacheExpiration.
+4. **void Add(string key, T data, CacheExpiration expiration)** : Inserts the given item into the Cache using the given key for the specified CacheExpiration.
 5. **bool IsExists(string key)** : Indicates if there is a cache entry for the key.
 6. **void Remove(string key)** : Removes the cache entry from the cache for the given key.
 
