@@ -19,8 +19,8 @@ To use VersaTul Caching, first install it using nuget:
     PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
 
-Components
------------
+Main Components
+----------------
 1. ``ICacheProvider<T>`` : Interaction can be achieved through the Cache Provider Interface.
 2. ``MemCacheProvider<T>`` : Default Concrete implementation of the Cache Provider interface.
 3. ``ICacheConfiguration`` : The Configuration interface for accessing default configurations 

@@ -17,8 +17,8 @@ To use VersaTul Display Attributes, first install it using nuget:
     PM> NuGet\Install-Package VersaTul.Display.Attributes -Version latest
 
 
-Components
------------
+Main Components
+---------------
 1. ``IFormatter`` : Specifies the functionality provided by a Display formatter.
 2. ``IDisplayAnalyzer`` : Specifies the functionality provided by a Display analyzer.
 3. ``DisplayAttribute`` : Apply to a property in order to provide meta-data to the export engine for outputting data to files.
