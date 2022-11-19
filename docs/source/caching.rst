@@ -52,7 +52,7 @@ Code Examples
             //cache configuration
             var cacheConfiguration = new CacheConfiguration(configSettings);
 
-            var cacheProvider = new MemCacheProvider<Person>(cacheConfiguration);
+            ICacheProvider<Person> cacheProvider = new MemCacheProvider<Person>(cacheConfiguration);
 
             person = new Person { Age = 10, Name = "Bjorn" };
 
