@@ -1,7 +1,7 @@
 Welcome to VersaTul documentation!
 ===================================
 
-**VersaTul** (/'Versa Tool/) Collection Libraries is a collection of frequently used 
+**VersaTul** (/'Versa Tool/) Libraries is a collection of frequently used 
 functionality that can be reused across a multitude of DOTNET projects.
 
 It’s comprised of several NuGet packages that can be used alone or together. 
