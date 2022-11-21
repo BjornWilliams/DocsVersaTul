@@ -4,7 +4,7 @@ Compression
 Getting Started
 ----------------
 The VersaTul Compression project enables the ability to compress and decompress streams.
-This project was build using the DotNet ``System.IO.Compression`` namespace. 
+This project is build using the DotNet ``System.IO.Compression`` namespace. 
 It can be used to zip a collection of streams into a zip folder.
 
 Installation
@@ -32,3 +32,36 @@ Functional Summary
 
 Code Examples
 --------------
+
+.. code-block:: c#
+    :caption: Simple Stream Compressing
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IArchiver archiver = new Archiver();
+
+            IZipper zipper = new Zipper(archiver);
+
+            var zipStream = new ZipStream
+            {
+                ContentType = "text/csv",
+                Filename = "Bjorn.csv",
+                Stream = GenerateStreamFromString("This is test stream I want to zip up in a folder.")
+            }
+
+            //create MemoryStream (archive) to be written out to Storage.
+            var archive = zipper.Zip(zipStream);
+        }
+
+        public static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+    }
