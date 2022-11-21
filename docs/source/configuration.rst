@@ -23,7 +23,7 @@ Main Components
 2. ``IAppConfiguration`` : Represents the base application configuration.
 3. ``Configuration`` : Abstract class implementing ``IConfiguration``. This class must be inherited.
 4. ``AppConfiguration`` : Abstract class implementing ``IAppConfiguration``. This class must be inherited.
-5. ``ConfigSettings`` : Represents a collection of Key Values. [Keys] are strings and [Values] are object.
+5. ``ConfigSettings`` : Represents a collection of Key Values. Keys are strings and Values are object.
 
 Functional Summary
 ------------------
