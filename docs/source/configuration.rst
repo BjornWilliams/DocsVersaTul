@@ -27,7 +27,7 @@ Main Components
 
 Functional Summary
 ------------------
-1. **T Get<T>([CallerMemberName] string name = null)** : Gets the value of the specified key stored in the settings dictionary.
+1. **T Get<T>(string name = null)** : Gets the value of the specified key stored in the settings dictionary.
 
 Code Examples
 -------------
