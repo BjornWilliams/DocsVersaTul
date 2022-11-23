@@ -4,8 +4,8 @@ Compression
 Getting Started
 ----------------
 The VersaTul Compression project enables the ability to compress and decompress streams.
-This project is build using the DotNet ``System.IO.Compression`` namespace. 
-It can be used to zip a collection of streams into a zip stream ``MemoryStream``.
+This project is built around the DotNet ``System.IO.Compression`` classes. 
+Using its inbuilt ``ZipStream`` class ``MemoryStreams`` can be quickly compressed into Archive Streams.
 
 Installation
 ------------
@@ -41,6 +41,7 @@ Code Examples
     {
         static void Main(string[] args)
         {
+            //Contains the ZipArchive to zip given streams.
             IArchiver archiver = new Archiver();
 
             IZipper zipper = new Zipper(archiver);
