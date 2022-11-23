@@ -7,9 +7,9 @@ functionality that can be reused across a multitude of DOTNET projects.
 It’s comprised of several NuGet packages that can be used as standalone projects or together to solve problems. 
 The library is made up of several packages that can be used to manage:
 
-1.	**Caching**
-2.	**Database Access** – multiple databases Mongo Db, and SQL Server.
-3.	**Logging** - either to a flat files, APIs, or emails.
+1.	**Caching** - Default in-memory cache.
+2.	**Database Access** – multiple databases including MongoDb, SQL Server, etc.
+3.	**Logging** - either to flat files, APIs, or emails.
 4.	**Collection Streamers** - a special package for exporting collections to formats such as CSV, TAB Delimited, or JSON files.
   
 
