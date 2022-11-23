@@ -8,8 +8,8 @@ It’s comprised of several NuGet packages that can be used as standalone projec
 The library is made up of several packages that can be used to manage:
 
 1.	**Caching**
-2.	**Database Access** – multiple databases Mongo, and SQL 
-3.	**Logging** - either to a flat file, API, or email accounts
+2.	**Database Access** – multiple databases Mongo Db, and SQL Server.
+3.	**Logging** - either to a flat files, APIs, or emails.
 4.	**Collection Streamers** - a special package for exporting collections to formats such as CSV, TAB Delimited, or JSON files.
   
 
