@@ -27,7 +27,8 @@ Main Components
 
 Functional Summary
 ------------------
-1. **T Get<T>(string name = null)** : Gets the value of the specified key stored in the settings dictionary.
+1. **T Get<T>(string name = null)** : Gets the value of the specified key stored in the settings dictionary. 
+Note: If no name is supplied the calling property name is used for the setting lookup.
 
 Code Examples
 -------------
@@ -40,13 +41,11 @@ Code Examples
     {
         public BaseConfig(ConfigSettings configSettings) : base(configSettings) { }
 
-        public int Property1 => Get<int>();
+        public int Property1 => Get<int>(); //uses the property name as setting key.
 
         public string Property2 => Get<string>();
 
-        public string Property3 => Get<string>(null);
-
-        public string Property4 => Get<string>();
+        public string Property3 => Get<string>();
     }
 
      //configuration settings - This can be from any source e.g app.setting.json, app.config ...
