@@ -37,7 +37,8 @@ Code Examples
     :caption: Configuration inherited
     :emphasize-lines: 61, 64
 
-    ///Inherits the Configuration base class and extends its functionality with the additional properties.
+    // Inherits the Configuration base class and extends its functionality with 
+    // the additional properties.
     public class BaseConfig : Configuration
     {
         public BaseConfig(ConfigSettings configSettings) : base(configSettings) { }
@@ -49,7 +50,8 @@ Code Examples
         public string Property3 => Get<string>();
     }
 
-    //configuration settings - This can be from any source e.g app.setting.json, app.config ...
+    // configuration settings - This can be from any source e.g app.setting.json, 
+    // app.config ...
     var configSettings = new ConfigSettings
     {
         { "Property1", 100 },
