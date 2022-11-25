@@ -28,7 +28,7 @@ Main Components
 Functional Summary
 ------------------
 1. **T Get<T>(string name = null)** : Gets the value of the specified key stored in the settings dictionary. 
-Note: If no name is supplied the calling property name is used for the setting lookup.
+*Note:* If no name is supplied the calling property name is used for the setting lookup.
 
 Code Examples
 -------------
