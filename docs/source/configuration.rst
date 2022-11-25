@@ -37,6 +37,7 @@ Code Examples
     :caption: Configuration inherited
     :emphasize-lines: 61, 64
 
+    ///Inherits the Configuration base class and extends its functionality with the additional properties.
     public class BaseConfig : Configuration
     {
         public BaseConfig(ConfigSettings configSettings) : base(configSettings) { }
