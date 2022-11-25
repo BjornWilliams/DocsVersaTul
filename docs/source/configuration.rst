@@ -44,16 +44,16 @@ Code Examples
 
         public int Property1 => Get<int>(); //uses the property name as setting key.
 
-        public string Property2 => Get<string>();
+        public string FilePath => Get<string>("FileSourcePath");
 
         public string Property3 => Get<string>();
     }
 
-     //configuration settings - This can be from any source e.g app.setting.json, app.config ...
+    //configuration settings - This can be from any source e.g app.setting.json, app.config ...
     var configSettings = new ConfigSettings
     {
         { "Property1", 100 },
-        { "Property2", "This is property 2" },
+        { "FileSourcePath", "This is File Source Path" },
         { "Property3", "This is property 3" }
     };
 
