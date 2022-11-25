@@ -5,11 +5,12 @@ Getting Started
 ----------------
 The VersaTul Configuration default project enables the ability to quickly setup default settings for VersaTul
 projects. Currently supported projects are:
-* Caching - *VersaTul.Configuration.Defaults.Caching*
-* Entity Framework Core - *VersaTul.Configuration.Defaults.EntityFrameworkCore*
-* Mailer - *VersaTul.Configuration.Defaults.Mailer*
-* MongoDb - *VersaTul.Configuration.Defaults.MongoDB*
-* Sql - *VersaTul.Configuration.Defaults.Sql*
+
+- Caching - *VersaTul.Configuration.Defaults.Caching*
+- Entity Framework Core - *VersaTul.Configuration.Defaults.EntityFrameworkCore*
+- Mailer - *VersaTul.Configuration.Defaults.Mailer*
+- MongoDb - *VersaTul.Configuration.Defaults.MongoDB*
+- Sql - *VersaTul.Configuration.Defaults.Sql*
 
 Installation
 ------------
