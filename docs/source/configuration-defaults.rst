@@ -23,8 +23,7 @@ To use VersaTul Configuration Defaults, first install it using nuget:
 
 Main Components
 ----------------
-1. ``ConfigurationBuilder`` : Provides the functionality needed to setup default settings. All builder classes are
-    derived from this class.
+1. ``ConfigurationBuilder`` : Provides the functionality needed to setup default settings. All builder classes are derived from this class.
 2. ``Builder`` : Project specific builders. These can be found under their respective namespaces.
 
 Functional Summary
