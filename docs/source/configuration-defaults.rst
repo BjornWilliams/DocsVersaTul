@@ -53,3 +53,17 @@ Code Examples
             builder.RegisterGeneric(typeof(DataConfiguration<>)).As(typeof(IDataConfiguration<>)).SingleInstance();            
         }
     }
+
+Default settings
+----------------
+
+.. _tbl-grid:
+
++----------------------+------------+----------+----------+
+| Header row, column 1 | Header 2   | Header 3 | Header 4 |
+|                      |            |          |          |
++======================+============+==========+==========+
+| body row 1, column 1 | column 2   | column 3 | column 4 |
++----------------------+------------+----------+----------+
+| body row 2           | ...        | ...      |          |
++----------------------+------------+----------+----------+
