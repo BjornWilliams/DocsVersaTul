@@ -62,7 +62,7 @@ Default settings
 +--------------+-----------------------+----------------+
 | Project Name | Setting Name          | Default Value  |
 +==============+=======================+================+
-| Caching      | CacheDuration         | 60             |
+| Caching      | CacheDuration         | 60s            |
 +--------------+-----------------------+----------------+
 | efCore       | ConnectionName        | DBCon          |
 +--------------+-----------------------+----------------+
