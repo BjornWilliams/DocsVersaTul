@@ -74,21 +74,21 @@ Default settings
 +--------------+-----------------------+----------------+
 | Mailer       | SmtpPassword          |                |
 +--------------+-----------------------+----------------+
-| Mailer       | MaxAttachmentSize     | 10000000       |
+| Mailer       | MaxAttachmentSize     | 10000000 Bytes |
 +--------------+-----------------------+----------------+
 | MongoDB      | ConnectionName        | MongoDb        |
 +--------------+-----------------------+----------------+
-| MongoDB      | SocketTimeout         | 600000         |
+| MongoDB      | SocketTimeout         | 600000ms       |
 +--------------+-----------------------+----------------+
-| MongoDB      | ConnectTimeout        | 600000         |
+| MongoDB      | ConnectTimeout        | 600000ms       |
 +--------------+-----------------------+----------------+
-| MongoDB      | MaxConnectionIdleTime | 600000         |
+| MongoDB      | MaxConnectionIdleTime | 600000ms       |
 +--------------+-----------------------+----------------+
 | MongoDB      | EnabledSslProtocols   | false          |
 +--------------+-----------------------+----------------+
-| Sql          | BulkCopyTimeout       | 1800           |
+| Sql          | BulkCopyTimeout       | 1800s          |
 +--------------+-----------------------+----------------+
-| Sql          | CommandTimeout        | 600            |
+| Sql          | CommandTimeout        | 600s           |
 +--------------+-----------------------+----------------+
 | Sql          | ConnectionName        | DBCon          |
 +--------------+-----------------------+----------------+
