@@ -64,3 +64,22 @@ Code Examples
             var firstName = returnedSource["[2] Person.FirstName"];
         }       
     }
+
+.. code-block:: c#
+    :caption: Flattening a list of intergers.
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> integers = new() { 1, 2, 3, 4, 5 };
+
+            var flattener = new Flattener();
+            
+            //result is now flattened.
+            string result = flattener.AsString(integers);
+
+            //outputs:
+            //1||2||3||4||5
+        }       
+    }
