@@ -106,3 +106,29 @@ Code Examples
             var age = result["Age"];
         }       
     }
+
+.. code-block:: c#
+    :caption: Processing the value of a given property.
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var person = new Person
+            {
+                Age = 37,
+                FirstName = "Bjorn",
+                ID = 100018,
+                LastName = "Williams"
+            }
+            
+            var propertyInfo = person.GetType().GetProperty("Age");
+
+            var type = person.Age.GetType();
+
+            var propertyProcessor = new PropertyProcessor(new DisplayAnalyzer());
+            
+            //value here will be 37
+            var value = propertyProcessor.Process(propertyInfo, null, type);
+        }       
+    }
