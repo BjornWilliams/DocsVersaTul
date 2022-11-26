@@ -38,4 +38,29 @@ Code Examples
 -------------
 
 .. code-block:: c#
-    :caption: Display Attribute Usage
+    :caption: Flattening multilevel dictionary.
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IDictionary<string, object> innerDictionary = new Dictionary<string, object>()
+            {
+                { "Age" , 37 },
+                { "FirstName", "Bjorn" },
+            };
+
+            IDictionary<string, object> source = new Dictionary<string, object>()
+            {
+               { "Person", innerDictionary }
+            };
+
+            var flattener = new Flattener();
+
+            var returnedSource = flattener.AsDictionary(source);
+
+            //keys are now flattened.
+            var age = returnedSource["[1] Person.Age"];
+            var firstName = returnedSource["[2] Person.FirstName"];
+        }       
+    }
