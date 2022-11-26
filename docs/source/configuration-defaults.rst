@@ -61,9 +61,18 @@ Default settings
 
 +------------------+---------------+---------------+
 | Project Name     | Setting Name   | Default Value |
-|                  |                |               |
 +======================+============+===============+
 | Defaults.Caching | CacheDuration  | 60            |
 +----------------------+------------+---------------+
 | Defaults.efCore  | ConnectionName | DBCon         |
++----------------------+------------+---------------+
+| Defaults.Mailer  | SmtpServer     | 127.0.0.1     |
++----------------------+------------+---------------+
+| Defaults.efCore  | SmtpPort       | DBCon         |
++----------------------+------------+---------------+
+| Defaults.efCore  | SmtpUserName   | DBCon         |
++----------------------+------------+---------------+
+| Defaults.efCore  | SmtpPassword   | DBCon         |
++----------------------+------------+---------------+
+| Defaults.efCore  | MaxAttachmentSize | DBCon      |
 +----------------------+------------+---------------+
