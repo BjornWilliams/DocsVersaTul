@@ -60,8 +60,10 @@ Default settings
 .. _tbl-grid:
 
 +------------------+---------------+---------------+
-| Project Name     | Setting Name  | Default Value |
-|                  |               |               |
-+======================+============+==============+
-| Defaults.Caching | CacheDuration | 60            |
-+----------------------+------------+--------------+
+| Project Name     | Setting Name   | Default Value |
+|                  |                |               |
++======================+============+===============+
+| Defaults.Caching | CacheDuration  | 60            |
++----------------------+------------+---------------+
+| Defaults.efCore  | ConnectionName | DBCon         |
++----------------------+------------+---------------+
