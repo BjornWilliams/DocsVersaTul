@@ -79,7 +79,6 @@ Code Examples
             //result is now flattened.
             string result = flattener.AsString(integers);
 
-            //outputs:
-            //1||2||3||4||5
+            //outputs: 1||2||3||4||5
         }       
     }
