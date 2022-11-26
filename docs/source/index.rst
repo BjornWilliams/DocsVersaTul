@@ -21,7 +21,7 @@ Contents
 
 .. toctree::
 
-   home <self>
+   Home <self>
    caching
    compression
    configuration
