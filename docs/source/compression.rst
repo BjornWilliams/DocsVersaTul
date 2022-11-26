@@ -35,7 +35,7 @@ Code Examples
 
 .. code-block:: c#
     :caption: Simple ZipStream Compressing.
-    :emphasize-lines: 56
+    :emphasize-lines: 57
 
     class Program
     {
@@ -55,6 +55,8 @@ Code Examples
 
             //create MemoryStream (archive) to be written out to Storage.
             var archive = zipper.Zip(zipStream);
+
+            //archive can then be written to disk..
         }
 
         public static Stream GenerateStreamFromString(string s)
