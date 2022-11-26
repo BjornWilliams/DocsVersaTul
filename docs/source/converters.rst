@@ -82,3 +82,27 @@ Code Examples
             //outputs: 1||2||3||4||5
         }       
     }
+
+.. code-block:: c#
+    :caption: Converting object to dictionary.
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var person = new Person
+            {
+                Age = 37,
+                FirstName = "Bjorn",
+                ID = 100018,
+                LastName = "Williams"
+            }
+
+            var processor = new ObjectProcessor();
+
+            var result = processor.ToDictionary(person);
+
+            //accessing age 
+            var age = result["Age"];
+        }       
+    }
