@@ -16,29 +16,4 @@ The library is made up of several packages that can be used to manage:
 
    This project is under active development.
 
-Contents
---------
 
-.. toctree::
-
-   Home <self>
-   caching
-   compression
-   configuration
-   configuration-defaults
-   converters
-   display-attributes
-   efcore
-   extensions
-   logger
-   logger-file
-   logger-mail
-   logger-web
-   mailer
-   mongodb
-   mssql
-   pipeline-infrastructure
-   scheduler
-   sql
-   streamers
-   utilities
