@@ -19,12 +19,12 @@ To use VersaTul Converters, first install it using nuget:
 
 Main Components
 ----------------
-#. ``IFlattener`` : Describes the contract needed to successfully convert from multi-demensional objects to one demension with flattened keys.
-#. ``IObjectProcessor`` : Represent functionality that can convert an object into dictionary of string, object.
-#. ``IPropertyProcessor`` : Describes the contract needed to successfully process the properties of object instances.
-#. ``Flattener`` : Represents a convert for a dictionary of multi-dimensional to one dimension with flattened keys.
-#. ``ObjectProcessor`` : Represent functionality that can convert an object into dictionary of string, object.
-#. ``PropertyProcessor`` : A class that analyzes a given property and its value and creates a Dictionary or List of the values of the property or simple returns the value of the property.
+#. ``IFlattener`` : Describes the functionality needed to successfully convert from a multi-dimensional object to a one-dimensional key/value pair dictionary with flattened keys.
+#. ``IObjectProcessor`` : Represent functionality that can convert an object into a dictionary of string keys and object values.
+#. ``IPropertyProcessor`` : Describes the functionality needed to successfully process the properties of object instances.
+#. ``Flattener`` : The concrete implementation of ``IFlattener``.
+#. ``ObjectProcessor`` : The concrete implementation of ``IObjectProcessor``.
+#. ``PropertyProcessor`` : The concrete implementation of ``IPropertyProcessor``.
 
 Functional Summary
 ------------------
