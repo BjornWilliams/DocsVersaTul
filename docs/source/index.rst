@@ -20,6 +20,7 @@ Contents
 --------
 
 .. toctree::
+   :hidden:
 
    Home <self>
    caching
