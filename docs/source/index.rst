@@ -16,9 +16,6 @@ The library is made up of several packages that can be used to manage:
 
    This project is under active development.
 
-Contents
---------
-
 .. toctree::
    :hidden:
 
