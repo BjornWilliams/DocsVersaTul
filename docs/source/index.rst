@@ -19,7 +19,7 @@ The library is made up of several packages that can be used to manage:
 Contents
 --------
 
-
+.. toctree::
 
    Home <self>
    caching
