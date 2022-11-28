@@ -8,7 +8,7 @@ It’s comprised of several NuGet packages that can be used as standalone projec
 The library is made up of several packages that can be used to manage:
 
 1.	**Caching** - This package provides a default in-memory cache.
-2.	**Database Access** - There are multiple database access packages included. For example: MongoDb, SQL Server, etc.
+2.	**Database Access** - There are multiple database access packages included. For example: MongoDb, SQL Server, Oracle, and MySql.
 3.	**Logging** - There are packages for logging either to flat files, APIs, or emails.
 4.	**Data Exporting** - There is a package provided for exporting collections to formats such as CSV, TAB Delimited, or JSON files.  
 
