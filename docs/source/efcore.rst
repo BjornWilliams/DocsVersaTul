@@ -26,6 +26,11 @@ Main Components
 
 Functional Summary
 ------------------
+#. **TEntity Add(TEntity entity)** : Add the given entity to the database.
+#. **TEntity Find(params object[] keyValues)** : Finds an entity with the given primary key values.
+#. **IEnumerable<TEntity> Get()** : Gets all entities from the database.
+#. **TEntity Update(TEntity entity)** : Updates the given entity in the database.
+#. **TEntity Remove(TEntity entity)** : Deletes the given entity from the database.
 
 Code Examples
 -------------
