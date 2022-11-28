@@ -18,10 +18,10 @@ To use VersaTul EFCore, first install it using nuget:
 
 Main Components
 ----------------
-#. `IUnitOfWork` : 
-#. `BaseRepository<TEntity, TKey>` : 
-#. `BaseUnitOfWork` : 
-#. `DataConfiguration` : 
+#. ``IUnitOfWork`` : Provides the functionality needed to support absolute unit of work.
+#. ``BaseRepository<TEntity, TKey>`` : Abstract class that provides common functionality for CRUD operations.
+#. ``BaseUnitOfWork`` : Default implementation of **IUnitOfWork**. 
+#. ``DataConfiguration``` : Default implementation of the Configuration needed to connect to database.
 
 
 Functional Summary
