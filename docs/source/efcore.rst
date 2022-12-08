@@ -74,3 +74,41 @@ Code Examples
             modelBuilder.Entity<PlayerData>().HasKey(x => x.Id);
         }
     }
+
+    // Create a base repository interface that inherits IRepository<TEntity, TKey>
+    // this will ensure all CRUD functionality is supported by every repository that inherits
+    // from this interface. Also specifing the TKey value as ``int`` to reduce complexity.
+    public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : class, new()
+    {
+
+    }
+
+    // Create project specific repository
+    public interface IPlayerRepository : IRepository<PlayerData>
+    {
+        //project specific methods can be added here
+    }
+
+    // Create BaseRepository that inherits from BaseRepository<TEnity, TKey>
+    // this will ensure all CRUD functionality is supported by every repository that inherits
+    // from this base. Also specifing the TKey value as ``int`` to reduce complexity.
+    // project specific DbContext should also be exposed from this class.
+    public abstract class BaseRepository<TEnity> : BaseRepository<TEnity, int> where TEnity : class, new()
+    {
+        public BaseRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+            if(unitOfWork == null) throw new ArgumentNullException(nameof(unitOfWork));
+
+            DbSet = unitOfWork.DataContext.Set<TEnity>();
+        }
+
+        /// <summary>
+        /// Gets the <seealso cref="DbSet{TEntity}"/>.
+        /// </summary>
+        protected DbSet<TEnity> DbSet { get; }
+
+        /// <summary>
+        /// Gets the <seealso cref="GameContext"/> converted from the generic DbContext.
+        /// </summary>
+        protected DatabaseContext DatabaseContext => DataContext as DatabaseContext;   
+    }
