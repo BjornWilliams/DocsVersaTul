@@ -112,3 +112,37 @@ Code Examples
         /// </summary>
         protected DatabaseContext DatabaseContext => DataContext as DatabaseContext;   
     }
+
+    // Create project specific UnitOfWork
+    public class UnitOfWork : BaseUnitOfWork
+    {
+        public UnitOfWork(DatabaseContext dataContext) : base(dataContext) { }
+    }
+
+    // Create project specific repository
+    public class PlayerRepository : BaseRepository<PlayerData>, IPlayerRepository
+    {
+        public PlayerRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+    }
+
+    // Configure the container E.G AutoFac Module
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            //Configs
+            var configSettings = new Builder()
+                .AddOrReplace("DBCon", "Server=192.168.1.135;Database=DemoDb;User Id=sa;Password=Lumberjack256;Persist Security Info=True;")
+                .BuildConfig();
+
+            builder.RegisterInstance(configSettings);
+
+            //Singletons
+            builder.RegisterType<DataConfiguration>().As<IDataConnection>().SingleInstance();
+
+            //Per Dependency
+            builder.RegisterType<DatabaseContext>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().As<VersaTul.Data.EFCore.Contracts.IUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<PlayerRepository>().As<IPlayerRepository>().InstancePerLifetimeScope();
+        }
+    }
