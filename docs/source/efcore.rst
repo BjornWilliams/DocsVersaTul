@@ -34,3 +34,43 @@ Functional Summary
 
 Code Examples
 -------------
+
+.. code-block:: c#
+    :caption: Sample Repository Database Call
+
+    //DataModel
+    public class PlayerData
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime CreatedDate { get; set; }
+    }
+
+    //Create DbContext class
+    public class DatabaseContext : DbContext
+    {
+        // IDataConnection - will be supplied from container 
+        // provides framework for get connection string
+        private readonly IDataConnection dataConnection;
+        
+        public DatabaseContext(IDataConnection dataConnection)
+        {
+            this.dataConnection = dataConnection;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(dataConnection.GetConnectionString());
+            }
+        }
+
+        public DbSet<PlayerData> Players { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PlayerData>().HasKey(x => x.Id);
+        }
+    }
