@@ -47,11 +47,11 @@ Code Examples
         public DateTime CreatedDate { get; set; }
     }
 
-    //Create DbContext class
+    //Create DbContext class which inherits from DbContext
     public class DatabaseContext : DbContext
     {
-        // IDataConnection - will be supplied from container 
-        // provides framework for get connection string
+        // IDataConnection - provides the means by which the data connection string
+        // can be obtained from DataConfiguration.
         private readonly IDataConnection dataConnection;
         
         public DatabaseContext(IDataConnection dataConnection)
@@ -63,6 +63,7 @@ Code Examples
         {
             if (!optionsBuilder.IsConfigured)
             {
+                // using the GetConnectionString method to get connection string at runtime.
                 optionsBuilder.UseSqlServer(dataConnection.GetConnectionString());
             }
         }
@@ -77,13 +78,14 @@ Code Examples
 
     // Create a base repository interface that inherits IRepository<TEntity, TKey>
     // this will ensure all CRUD functionality is supported by every repository that inherits
-    // from this interface. Also specifing the TKey value as ``int`` to reduce complexity.
+    // from this interface. 
+    // Optional: Specifing the TKey value here as ``int`` can reduce complexity for other repositories.
     public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : class, new()
     {
 
     }
 
-    // Create project specific repository
+    // Create project specific repository from IRepository<TEntity> interface.
     public interface IPlayerRepository : IRepository<PlayerData>
     {
         //project specific methods can be added here
@@ -125,7 +127,7 @@ Code Examples
         public PlayerRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
     }
 
-    // Configure the container E.G AutoFac Module
+    // Configure the container using AutoFac Module
     public class AppModule : Module
     {
         protected override void Load(ContainerBuilder builder)
