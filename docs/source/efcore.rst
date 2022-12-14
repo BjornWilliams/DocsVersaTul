@@ -42,6 +42,7 @@ Code Examples
     public class PlayerData
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -50,8 +51,8 @@ Code Examples
     //Create DbContext class which inherits from DbContext
     public class DatabaseContext : DbContext
     {
-        // IDataConnection - provides the means by which the data connection string
-        // can be obtained from DataConfiguration.
+        // IDataConnection - provides the means by which the connection string
+        // can be obtained from Configuration settings.
         private readonly IDataConnection dataConnection;
         
         public DatabaseContext(IDataConnection dataConnection)
@@ -63,7 +64,7 @@ Code Examples
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // using the GetConnectionString method to get connection string at runtime.
+                // using the GetConnectionString method to get the connection string at runtime.
                 optionsBuilder.UseSqlServer(dataConnection.GetConnectionString());
             }
         }
@@ -79,7 +80,8 @@ Code Examples
     // Create a base repository interface that inherits IRepository<TEntity, TKey>
     // this will ensure all CRUD functionality is supported by every repository that inherits
     // from this interface. 
-    // Optional: Specifing the TKey value here as ``int`` can reduce complexity for other repositories.
+    // This techique is optional, am simply specifing the TKey value here as ``int`` so as to 
+    // reduce complexity for other repositories.
     public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : class, new()
     {
 
@@ -147,4 +149,23 @@ Code Examples
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().As<VersaTul.Data.EFCore.Contracts.IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<PlayerRepository>().As<IPlayerRepository>().InstancePerLifetimeScope();
         }
+    }
+
+    // Repository usage could look like the following:
+    public class PlayerController: Controller
+    {
+        private readonly IPlayerRepository playerRepository;
+
+        public PlayerController(IPlayerRepository playerRepository)
+        {
+            this.playerRepository = playerRepository;
+        }
+
+        // Get
+        public IActionResult GetPlayers()
+        {
+            var players = playerRepository.Get();
+
+            return OK(players);
+        }   
     }
