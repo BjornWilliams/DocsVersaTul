@@ -152,6 +152,7 @@ Code Examples
     }
 
     // Repository usage could look like the following:
+     [Route("api/players")]
     public class PlayerController: Controller
     {
         private readonly IPlayerRepository playerRepository;
@@ -162,10 +163,35 @@ Code Examples
         }
 
         // Get
+        [HttpGet]
         public IActionResult GetPlayers()
         {
             var players = playerRepository.Get();
 
             return OK(players);
-        }   
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPlayers(int id)
+        {
+            var player = playerRepository.Get(id);
+
+            if(player == null)
+                return NotFound();
+
+            return OK(player);
+        }
+
+        [HttpPost]
+        public IActionResult CreatePlayer(CreatePlayerModel model)
+        {
+            var player = playerRepository.Add(new PlayerData {
+                Name = model.Name,
+                FirstName = model.FirstName,
+                LastName = model.LastName
+            });
+
+            return OK(player);
+        }
+
     }
