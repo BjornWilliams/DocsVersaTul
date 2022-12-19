@@ -81,7 +81,7 @@ Code Examples
     // this will ensure all CRUD functionality is supported by every repository that inherits
     // from this interface. 
     // This techique is optional, am simply specifing the TKey value here as ``int`` so as to 
-    // reduce complexity for other repositories.
+    // reduce complexity for project specific repositories.
     public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : class, new()
     {
 
