@@ -38,7 +38,10 @@ Code Examples
     {
         static void Main(string[] args)
         {
-            
+            var array = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+
+            // Value will be a new IEnumerable containing 5 randomly selected strings.
+            var value = array.Pick(5);
         }
         Console.ReadLine();
     }
