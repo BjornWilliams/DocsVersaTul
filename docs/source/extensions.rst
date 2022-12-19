@@ -45,3 +45,27 @@ Code Examples
         }
         Console.ReadLine();
     }
+
+.. code-block:: c#
+    :caption: Conversion Examples
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var intVal = "123";
+
+            var newIntVal = intVal.To<int>();
+
+            var decimalVal = "123.22";
+
+            var newDecimalVal = decimalVal.To<decimal>();
+
+            // Array Type conversion 
+            var list = new List<string> { "1", "2", "3", "4" };
+
+            // convert from string to int
+            var newList = list.To<string, int>().ToList();
+        }
+        Console.ReadLine();
+    }    
