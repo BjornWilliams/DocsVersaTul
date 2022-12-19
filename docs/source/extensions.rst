@@ -25,9 +25,9 @@ Main Components
 Functional Summary
 ------------------
 1. **IEnumerable<T> Pick<T>(this IEnumerable<T> source, int amount)** : Randomly select the given amount of items from a collection.
-1. **string ToCamelCase(this string phrase)** : Convert the first letter of the first word to lower case.
-1. **T To<T>(this object value)** : Returns an object of the specified type and whose value is equivalent to the specified object.
-1. **long ToMicron(this decimal amount)** : Converts the given amount to micros. Multiple the value by one million.
+2. **string ToCamelCase(this string phrase)** : Convert the first letter of the first word to lower case.
+3. **T To<T>(this object value)** : Returns an object of the specified type and whose value is equivalent to the specified object.
+4. **long ToMicron(this decimal amount)** : Converts the given amount to micros. Multiple the value by one million.
 
 Code Examples
 -------------
