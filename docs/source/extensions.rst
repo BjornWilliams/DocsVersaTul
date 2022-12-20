@@ -3,7 +3,7 @@ Extensions
 
 Getting Started
 ----------------
-The VersaTul Extensions project provides a wide variety of methods for manipulating arrays, performing conversions and many other common functionalities.
+The VersaTul Extensions project provides a variety of methods for manipulating arrays, performing conversions and other common functionalities.
 
 Installation
 ------------
@@ -17,22 +17,22 @@ To use VersaTul Extensions, first install it using nuget:
 
 Main Components
 ----------------
-1. ``ArrayExtensions`` : Static class containing all methods for extending array functionality.
-2. ``CommonExtensions`` : Static class containing all methods for extending common functionality.
-3. ``ConvertExtensions`` : Static class containing all methods for extending object conversion functionality.
-4. ``CurrencyExtensions`` : Static class containing all methods for extending currency manipulation functionality.
+1. ``ArrayExtensions`` : Class containing all methods for extending arrays.
+2. ``CommonExtensions`` : Class containing all methods for common functionality.
+3. ``ConvertExtensions`` : Class containing all methods for extending object conversions.
+4. ``CurrencyExtensions`` : Class containing all methods for extending currency manipulations.
 
 Functional Summary
 ------------------
-1. **IEnumerable<T> Pick<T>(this IEnumerable<T> source, int amount)** : Randomly select the given amount of items from a collection.
-2. **string ToCamelCase(this string phrase)** : Convert the first letter of the first word to lower case.
+1. **IEnumerable<T> Pick<T>(this IEnumerable<T> source, int amount)** : Randomly selects the given amount of items from a collection.
+2. **string ToCamelCase(this string phrase)** : Converts the first letter of the first word to lower case.
 3. **T To<T>(this object value)** : Returns an object of the specified type and whose value is equivalent to the specified object.
-4. **long ToMicron(this decimal amount)** : Converts the given amount to micros. Multiple the value by one million.
+4. **long ToMicron(this decimal amount)** : Converts the given amount to micros. It Multiplies the value by one million.
 
 Code Examples
 -------------
 .. code-block:: c#
-    :caption: Randomly Selected Example
+    :caption: Random Selection Example
 
     class Program
     {
@@ -40,14 +40,15 @@ Code Examples
         {
             var array = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
-            // Value will be a new IEnumerable containing 5 randomly selected strings.
+            // Value will be a new array containing 5 
+            // randomly selected strings from the given array.
             var value = array.Pick(5);
         }
         Console.ReadLine();
     }
 
 .. code-block:: c#
-    :caption: Conversion Examples
+    :caption: Different Conversion Examples
 
     class Program
     {
@@ -55,17 +56,17 @@ Code Examples
         {
             var intVal = "123";
 
-            var newIntVal = intVal.To<int>();
+            var newIntVal = intVal.To<int>(); //To Int
 
             var decimalVal = "123.22";
 
-            var newDecimalVal = decimalVal.To<decimal>();
+            var newDecimalVal = decimalVal.To<decimal>(); //To decimal
 
             // Array Type conversion 
             var list = new List<string> { "1", "2", "3", "4" };
 
             // convert from string to int
-            var newList = list.To<string, int>().ToList();
+            var newList = list.To<string, int>().ToList(); //To array of int
         }
         Console.ReadLine();
     }    
