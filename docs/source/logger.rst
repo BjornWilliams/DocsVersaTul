@@ -32,3 +32,14 @@ Functional Summary
 
 Code Examples
 -------------
+.. code-block:: c#
+    :caption: Exception Logging Example
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+        }
+        Console.ReadLine();
+    }
