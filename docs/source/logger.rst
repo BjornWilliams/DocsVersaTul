@@ -3,8 +3,9 @@ Logger
 
 Getting Started
 ----------------
-The VersaTul Logger project provides all the common functionality needed by the other logging projects. 
-It provides the contractual interface that a logging project must support in order to be consistent across different logging projects.
+The VersaTul Logger project provides all the common functionality used by all VersaTul loggers. 
+This project provides the interfaces used in order to keep consistency across all the different logger apps, 
+such as FileLogger, MailLogger, and WebLogger.
 
 Installation
 ------------
@@ -90,7 +91,7 @@ Code Examples
         }
     }
     
-    // Usage
+    // Usage catching and logging exceptions...
     public abstract class BaseController : Controller
     {
         private readonly ILogger logger;
@@ -105,38 +106,12 @@ Code Examples
             try
             {
                 return codeToExecute();
-            }           
-            catch (DuplicateKeyViolationException ex)
-            {
-                logger.Log(ex);
-
-                return BadRequest(new ExceptionModel { Result = false, Message = ex.UserMessage });
             }
             catch (Exception ex)
             {
                 logger.Log(ex);
 
-                return BadRequest(new ExceptionModel { Result = false, Message = ex.Message });
-            }
-        }
-
-        protected async Task<IActionResult> FaultHandlerAsync(Func<Task<IActionResult>> codeToExecute)
-        {
-            try
-            {
-                return await codeToExecute();
-            }
-            catch (DuplicateKeyViolationException ex)
-            {
-                logger.Log(ex);
-
-                return BadRequest(new ExceptionModel { Result = false, Message = ex.UserMessage });
-            }
-            catch (Exception ex)
-            {
-                await logger.LogAysnc(ex);
-
-                return BadRequest(new ExceptionModel { Result = false, Message = ex.Message });
+                return BadRequest();
             }
         }
     }
