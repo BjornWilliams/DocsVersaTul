@@ -33,13 +33,110 @@ Functional Summary
 Code Examples
 -------------
 .. code-block:: c#
-    :caption: Exception Logging Example
+    :caption: Implementing a Logger Example
 
-    class Program
+    // Create a project specific interface
+    public interface IDatabaseLogger : ILogger 
     {
-        static void Main(string[] args)
+        // project specific methods can be added here...
+    }
+    
+    // Implementing interface
+    public class DatabaseLogger: IDatabaseLogger
+    {
+        private readonly ILogParser logParser;
+       
+        public DatabaseLogger(ILogParser logParser)
         {
-           
+           this.logParser = logParser;
         }
-        Console.ReadLine();
+        
+        // interface methods...
+        public void Log(LogInfo logInfo) => LogAsync(logInfo)
+            .GetAwaiter()
+            .GetResult();
+
+        public void Log(Exception exception) => LogAsync(exception)
+            .GetAwaiter()
+            .GetResult();
+
+        public void Log(LogInfo logInfo, Exception exception) => LogAsync(logInfo, exception)
+            .GetAwaiter()
+            .GetResult();
+
+        public async Task LogAsync(Exception exception) => await LogAsync(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+
+        public async Task LogAsync(LogInfo logInfo) => await LogAsync(logInfo, null);
+
+        public async Task LogAsync(LogInfo logInfo, Exception exception)
+        {
+            var message = logParser.Parse(logInfo, exception, ParseFormat.Tab);
+
+            // send message to database here...
+        }
+    }
+
+    // Configure the container using AutoFac Module
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+           // Registering logger to container
+           builder
+             .RegisterType<DatabaseLogger>()
+             .As<IDatabaseLogger>()
+             .As<ILogger>()
+             .SingleInstance();
+        }
+    }
+    
+    // Usage
+    public abstract class BaseController : Controller
+    {
+        private readonly ILogger logger;
+       
+        protected BaseController(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        protected IActionResult FaultHandler(Func<IActionResult> codeToExecute)
+        {
+            try
+            {
+                return codeToExecute();
+            }           
+            catch (DuplicateKeyViolationException ex)
+            {
+                logger.Log(ex);
+
+                return BadRequest(new ExceptionModel { Result = false, Message = ex.UserMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.Log(ex);
+
+                return BadRequest(new ExceptionModel { Result = false, Message = ex.Message });
+            }
+        }
+
+        protected async Task<IActionResult> FaultHandlerAsync(Func<Task<IActionResult>> codeToExecute)
+        {
+            try
+            {
+                return await codeToExecute();
+            }
+            catch (DuplicateKeyViolationException ex)
+            {
+                logger.Log(ex);
+
+                return BadRequest(new ExceptionModel { Result = false, Message = ex.UserMessage });
+            }
+            catch (Exception ex)
+            {
+                await logger.LogAysnc(ex);
+
+                return BadRequest(new ExceptionModel { Result = false, Message = ex.Message });
+            }
+        }
     }
