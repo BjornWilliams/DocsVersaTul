@@ -37,7 +37,7 @@ Functional Summary
 Code Examples
 -------------
 .. code-block:: c#
-    :caption: Implementing a Logger Example
+    :caption: Implementing a File Logger Example
 
     // Configure the container using AutoFac Module
     public class AppModule : Module
