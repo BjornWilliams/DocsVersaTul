@@ -1,4 +1,4 @@
-.. _logger_label
+.. _logger_label:
 
 Logger
 ================
