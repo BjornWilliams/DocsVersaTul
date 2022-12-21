@@ -31,8 +31,58 @@ Functional Summary
 3. **string FileName** : Gets the configured file name.
 4. **string FilePath** : Gets the configured file path.
 5. **long MaxFileSize** : Gets the configured max file size.
-6. See Logger project for logging methods.
+6. See .. Logger:: project for logging methods.
 
 
 Code Examples
 -------------
+.. code-block:: c#
+    :caption: Implementing a Logger Example
+
+    // Configure the container using AutoFac Module
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            // File logger configs
+            var configSettings = new Builder()
+                    .AddOrReplace("MaxFileSize", 10000000)
+                    .AddOrReplace("FileName", "app_log")
+                    .AddOrReplace("FilePath", "c:\logs\")
+                    .BuildConfig();
+
+            builder.RegisterInstance(configSettings);
+
+           // Registering logger to container
+           builder
+             .RegisterType<DatabaseLogger>()
+             .As<IFileLogger>()
+             .As<ILogger>()
+             .SingleInstance();
+        }
+    }
+    
+    // Usage catching and logging exceptions...
+    public abstract class BaseController : Controller
+    {
+        private readonly ILogger logger;
+       
+        protected BaseController(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        protected IActionResult FaultHandler(Func<IActionResult> codeToExecute)
+        {
+            try
+            {
+                return codeToExecute();
+            }
+            catch (Exception ex)
+            {
+                logger.Log(ex);
+
+                return BadRequest();
+            }
+        }
+    }
