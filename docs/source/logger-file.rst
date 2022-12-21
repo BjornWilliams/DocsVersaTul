@@ -55,7 +55,7 @@ Code Examples
 
            // Registering logger to container
            builder
-             .RegisterType<DatabaseLogger>()
+             .RegisterType<FileLogger>()
              .As<IFileLogger>()
              .As<ILogger>()
              .SingleInstance();
