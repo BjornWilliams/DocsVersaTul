@@ -31,7 +31,7 @@ Functional Summary
 3. **string FileName** : Gets the configured file name.
 4. **string FilePath** : Gets the configured file path.
 5. **long MaxFileSize** : Gets the configured max file size.
-6. See :doc:`/logger` project for logging methods.
+6. See :doc:`/logger` project for more details.
 
 
 Code Examples
