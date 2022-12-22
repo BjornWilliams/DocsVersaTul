@@ -27,10 +27,9 @@ Main Components
 
 Functional Summary
 ------------------
-1. **bool SendMail(string fromAddress, string toAddress, string subject, string body)** :   
-2. **bool SendMail(string fromAddress, string toAddress, string subject, string body, bool isHtml)** : 
-3. **bool SendMail(string fromAddress, string toAddress, string subject, string body, bool isHtml, IEnumerable<Attachment> attachments)** : 
-4. **void Send(MailMessage mailMessage)** : 
+1. **bool SendMail(string fromAddress, string toAddress, string subject, string body)** : Overloaded method for sending SMTP e-mails to receiver.
+2. **void Send(MailMessage mailMessage)** : Sends the specified message to an SMTP server for delivery.
+3. See :doc:`configuration-defaults` for more details.
 
 
 Code Examples
