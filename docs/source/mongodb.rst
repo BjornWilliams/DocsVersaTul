@@ -28,6 +28,13 @@ Main Components
 
 Functional Summary
 ------------------
+1. **TEntity Add(TEntity entity)** : Adds a single document.
+2. **Add(IEnumerable<TEntity> entities)** : Adds the list of entities to the collection.
+3. **IEnumerable<TEntity> Find(IPredicate<TEntity> predicate)** : Lazy loads any entity that matches given condiction.
+4. **TEntity GetById(TKey id)** : Gets an entity for the given identifier.
+5. **TEntity Update(TEntity entity)** : Updates a single entity.
+6. **void Update(IEnumerable<TEntity> entities)** : Updates a collection with the given list of entities.
+7. See :doc:`configuration-defaults` for more configuration settings.
 
 Code Examples
 -------------

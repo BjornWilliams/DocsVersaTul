@@ -29,7 +29,7 @@ Functional Summary
 ------------------
 1. **bool SendMail()** : Overloaded method for sending SMTP e-mails to receiver as Raw text or HTML with or without attachments.
 2. **void Send(MailMessage mailMessage)** : Sends the specified message to an SMTP server for delivery.
-3. See :doc:`configuration-defaults` for more Mailer configuration settings.
+3. See :doc:`configuration-defaults` for more configuration settings.
 
 
 Code Examples
