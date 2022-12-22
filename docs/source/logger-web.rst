@@ -24,7 +24,9 @@ Main Components
 
 Functional Summary
 ------------------
-1. See :doc:`/logger` project for more details.
+1. **BaseUrl** : Gets the Base Url of the API E.G http://domain.com.
+2. **LogEndPoint** : Gets the relative end point to send data to.
+3. See :doc:`/logger` project for more details.
 
 
 Code Examples
@@ -37,7 +39,7 @@ Code Examples
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // Mail logger configs
+            // Web logger configs
             var configSettings = new Builder()
                     .AddOrReplace("BaseUrl", "https://domain.com")
                     .AddOrReplace("LogEndPoint", "/api/logger")
