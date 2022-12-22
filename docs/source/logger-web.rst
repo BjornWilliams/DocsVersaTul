@@ -40,10 +40,11 @@ Code Examples
         protected override void Load(ContainerBuilder builder)
         {
             // Web logger configs
-            var configSettings = new Builder()
-                    .AddOrReplace("BaseUrl", "https://domain.com")
-                    .AddOrReplace("LogEndPoint", "/api/logger")
-                    .BuildConfig();
+            var configSettings = new ConfigSettings
+            {
+                { "BaseUrl", "https://domain.com" }
+                { "LogEndPoint", "/api/logger" }
+            };                  
 
             builder.RegisterInstance(configSettings);
 
