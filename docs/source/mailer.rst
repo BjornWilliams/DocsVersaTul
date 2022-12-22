@@ -34,3 +34,6 @@ Functional Summary
 
 Code Examples
 -------------
+.. code-block:: c#
+    :caption: Setting up Mailer Example
+    
