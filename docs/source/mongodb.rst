@@ -3,9 +3,8 @@ Data MongoDB
 
 Getting Started
 ----------------
-The VersaTul Data MongoDB project provides a set of functionality for working with a MongoDB Database.
-The project provides the ability to adds a single document, add a list of entities to a collection and many other functions.
-It provides a base repository to support the repository pattern of accessing a database.
+The VersaTul Data MongoDB project provides functionality for working with a Mongo Database.
+The project uses the repository design pattern to provide the ability to Get, Add, Update, and Delete documents.
 
 Installation
 ------------
