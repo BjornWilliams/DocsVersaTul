@@ -139,7 +139,7 @@ Code Examples
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCar(int id)
+        public IActionResult GetCar(string id)
         {
             var car = carRepository.GetById(id);
 
