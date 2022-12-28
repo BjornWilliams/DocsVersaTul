@@ -38,3 +38,141 @@ Functional Summary
 
 Code Examples
 -------------
+
+.. code-block:: c#
+    :caption: Sample Repository Database Call
+
+    // DataModel inheriting the Entity class
+    public class Car : Entity
+    {
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+        public string EngineId { get; set; }
+        public Owner Owner { get; set; }
+        public IDictionary<string, object> ExtraElements { get; set; }
+    }
+
+    public class Owner
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public HashSet<Size> ParkingSpots { get; set; }
+        public IDictionary<string, object> ExtraElements { get; set; }
+
+        public Owner()
+        {
+            ParkingSpots = new HashSet<Size>();
+        }
+    }
+
+    // Mongo base class maps 
+    // Also specifies the associated mongo collection 
+    public class CarMap : BaseMap<Car>
+    {
+        public CarMap() : base("cars", model => model.ExtraElements) { }
+
+        public override void Register(BsonClassMap<Car> classMap)
+        {
+            base.Register(classMap);
+            classMap.GetMemberMap(model => model.EngineId).SetSerializer(new StringSerializer(BsonType.ObjectId));
+
+            RegisterSub<Owner>((clsmp) =>
+            {
+                clsmp.GetMemberMap(model => model.ParkingSpots).SetSerializer(new SizeSerializer());
+            }, 
+            model => model.ExtraElements);
+        }
+    }
+
+    // Project repository interface inheriting from IRepository<Entity>.
+    public interface ICarRepository : IRepository<Car> { }
+
+
+    // Project repository implementation, with BaseRepository inheritance.
+    public class CarRepository : BaseRepository<Car, IEntityMap<Car>>, ICarRepository
+    {
+        public CarRepository(IDataConfiguration<string> configuration, IEntityMap<Car> entityMap) : base(configuration, entityMap)
+        {
+        }
+    }
+
+    // Configure the container using AutoFac Module
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            //Configs
+            var configSettings = new MongoDBBuilder.Builder()
+                .AddOrReplace("MongoDb", "mongodb://root:password123@sharedvm.local.com:27017,sharedvm.local.com:27018,sharedvm.local.com:27019/DemoDB?replicaSet=replicaset")
+                .BuildConfig();
+
+            builder.RegisterInstance(configSettings);
+
+            //Singletons
+            builder.RegisterGeneric(typeof(DataConfiguration<>)).As(typeof(IDataConfiguration<>)).SingleInstance();
+            builder.RegisterType<CarRepository>().As<ICarRepository>().SingleInstance();
+            builder.RegisterType<CarMap>().As<IEntityMap<Car>>().SingleInstance();
+
+            //Per Dependency
+        }
+    }
+
+    // Repository usage could look like the following:
+    [Route("api/cars")]
+    public class CarController: Controller
+    {
+        private readonly ICarRepository carRepository;
+
+        public PlayerController(ICarRepository carRepository)
+        {
+            this.carRepository = carRepository;
+        }
+
+        // Get
+        [HttpGet]
+        public IActionResult GetCars()
+        {
+            var cars = carRepository.ToList();
+
+            return OK(cars);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetCar(int id)
+        {
+            var car = carRepository.GetById(id);
+
+            if(car == null)
+                return NotFound();
+
+            return OK(car);
+        }
+
+         // find
+        [HttpGet("find")]
+        public IActionResult FindCars(string SearchTerm)
+        {
+            var cars = carRepository.Find(new WherePredicate<Car>(model => model.Make.Contains(SearchTerm) || model.Model.Contains(SearchTerm)));
+
+            return OK(cars);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCar(CreateCarModel model)
+        {
+            var car = carRepository.Add(new Car {
+                Make = model.Make,
+                Model = model.Model,
+                Year = model.Year
+                EngineId = model.EngineId,
+                Owner = new Owner { 
+                    Name = model.Name,
+                    Age = model.Age
+                }
+            });
+
+            return OK(car);
+        }
+
+    }
