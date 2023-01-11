@@ -124,7 +124,7 @@ Code Examples
     {
         private readonly ICarRepository carRepository;
 
-        public PlayerController(ICarRepository carRepository)
+        public CarController(ICarRepository carRepository)
         {
             this.carRepository = carRepository;
         }
