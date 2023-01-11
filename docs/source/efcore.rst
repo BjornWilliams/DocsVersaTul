@@ -34,7 +34,6 @@ Functional Summary
 
 Code Examples
 -------------
-
 .. code-block:: c#
     :caption: Sample Repository Database Call
 
@@ -152,7 +151,7 @@ Code Examples
     }
 
     // Repository usage could look like the following:
-     [Route("api/players")]
+    [Route("api/players")]
     public class PlayerController: Controller
     {
         private readonly IPlayerRepository playerRepository;
@@ -172,7 +171,7 @@ Code Examples
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetPlayers(int id)
+        public IActionResult GetPlayer(int id)
         {
             var player = playerRepository.Get(id);
 
