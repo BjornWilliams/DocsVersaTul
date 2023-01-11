@@ -38,10 +38,11 @@ Functional Summary
 
 Code Examples
 -------------
+
 .. code-block:: c#
     :caption: Sample Repository Database Call
 
-    //Data Models
+    // DataModel inheriting the Entity class
     public class Car : Entity
     {
         public string Make { get; set; }
@@ -52,7 +53,6 @@ Code Examples
         public IDictionary<string, object> ExtraElements { get; set; }
     }
 
-    //Sub Model without Entity ID 
     public class Owner
     {
         public string Name { get; set; }
@@ -66,7 +66,8 @@ Code Examples
         }
     }
 
-    //mapping class used to map collection and bson class maps.
+    // Mongo base class maps 
+    // Also specifies the associated mongo collection 
     public class CarMap : BaseMap<Car>
     {
         public CarMap() : base("cars", model => model.ExtraElements) { }
@@ -84,9 +85,11 @@ Code Examples
         }
     }
 
-    // Create project specific repository from IRepository interface.
+    // Project repository interface inheriting from IRepository<Entity>.
     public interface ICarRepository : IRepository<Car> { }
 
+
+    // Project repository implementation, with BaseRepository inheritance.
     public class CarRepository : BaseRepository<Car, IEntityMap<Car>>, ICarRepository
     {
         public CarRepository(IDataConfiguration<string> configuration, IEntityMap<Car> entityMap) : base(configuration, entityMap)
@@ -103,7 +106,7 @@ Code Examples
             var configSettings = new MongoDBBuilder.Builder()
                 .AddOrReplace("MongoDb", "mongodb://root:password123@sharedvm.local.com:27017,sharedvm.local.com:27018,sharedvm.local.com:27019/DemoDB?replicaSet=replicaset")
                 .BuildConfig();
-            
+
             builder.RegisterInstance(configSettings);
 
             //Singletons
@@ -130,15 +133,15 @@ Code Examples
         [HttpGet]
         public IActionResult GetCars()
         {
-            var cars = carRepository.Get();
+            var cars = carRepository.ToList();
 
             return OK(cars);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCar(int id)
+        public IActionResult GetCar(string id)
         {
-            var car = carRepository.Get(id);
+            var car = carRepository.GetById(id);
 
             if(car == null)
                 return NotFound();
@@ -146,18 +149,26 @@ Code Examples
             return OK(car);
         }
 
+         // find
+        [HttpGet("find")]
+        public IActionResult FindCars(string SearchTerm)
+        {
+            var cars = carRepository.Find(new WherePredicate<Car>(model => model.Make.Contains(SearchTerm) || model.Model.Contains(SearchTerm)));
+
+            return OK(cars);
+        }
+
         [HttpPost]
         public IActionResult CreateCar(CreateCarModel model)
         {
             var car = carRepository.Add(new Car {
-                Make = model.Make
-                Model = model.Model
+                Make = model.Make,
+                Model = model.Model,
                 Year = model.Year
-                EngineId = model.EngineId
+                EngineId = model.EngineId,
                 Owner = new Owner { 
-                    Name = model.Name
+                    Name = model.Name,
                     Age = model.Age
-                    ParkingSpots = model.ParkingSpots
                 }
             });
 
