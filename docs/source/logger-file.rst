@@ -47,7 +47,7 @@ Code Examples
             // File logger configs
             var configSettings = new Builder()
                     .AddOrReplace("MaxFileSize", 10000000)
-                    .AddOrReplace("FileName", "app_log")
+                    .AddOrReplace("LogFileName", "app_log")
                     .AddOrReplace("FilePath", "c:\logs\")
                     .BuildConfig();
 
