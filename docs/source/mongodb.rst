@@ -4,7 +4,7 @@ Data MongoDB
 Getting Started
 ----------------
 The VersaTul Data MongoDB project provides functionality for working with Mongo Databases.
-The project uses the repository design pattern to provide the ability to Get, Add, Update, and Delete documents.
+The project uses the repository design pattern to provide the functionality to Fetch, Add, Update, or Delete data.
 
 
 Installation
@@ -19,8 +19,8 @@ To use VersaTul.Data.MongoDB, first install it using nuget:
 
 Main Components
 ----------------
-1. ``IRepository<TEntity, TKey>`` : Generic Interface for supporting common CRUD operations.
-2. ``IDataConfiguration<TKey>`` : Generic Interface for Configuration settings. TKey is the identity type of the collection.
+1. ``IRepository<TEntity, TKey>`` : This is  a generic interface for supporting common CRUD operations.
+2. ``IDataConfiguration<TKey>`` : This is a generic interface for fetching configuration settings. `TKey` represents the identity type of the collection.
 3. ``DataConfiguration<TKey>`` : Default implementation for Data Configuration interface. 
 4. ``BaseRepository<TEntity, TMap, TKey>`` : Abstract class providing commong functionality for working with a MongoDB Database.
 5. ``WherePredicate<TEntity>`` : Helper for generating search conditional expressions.
