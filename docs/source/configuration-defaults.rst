@@ -55,8 +55,8 @@ Code Examples
         }
     }
 
-Default settings
-----------------
+Project Config settings
+------------------------
 
 .. _tbl-grid:
 
@@ -75,6 +75,10 @@ Default settings
 +--------------+-----------------------+------------------+
 | Mailer       | SmtpPassword          |                  |
 +--------------+-----------------------+------------------+
+| Mailer       | FromAddress           |                  |
++--------------+-----------------------+------------------+
+| Mailer       | ToAddress             |                  |
++--------------+-----------------------+------------------+
 | Mailer       | MaxAttachmentSize     | 10000000 Bytes   |
 +--------------+-----------------------+------------------+
 | MongoDB      | MongoDbConnectionName | MongoDb          |
@@ -82,6 +86,8 @@ Default settings
 | MongoDB      | SocketTimeout         | 600000ms         |
 +--------------+-----------------------+------------------+
 | MongoDB      | ConnectTimeout        | 600000ms         |
++--------------+-----------------------+------------------+
+| MongoDB      | WorkingDatabaseName   |                  |
 +--------------+-----------------------+------------------+
 | MongoDB      | MaxConnectionIdleTime | 600000ms         |
 +--------------+-----------------------+------------------+
