@@ -71,13 +71,13 @@ Project Config settings
 +--------------+-----------------------+------------------+
 | Mailer       | SmtpPort              | 25               |
 +--------------+-----------------------+------------------+
-| Mailer       | SmtpUserName          |                  |
+| Mailer       | SmtpUserName          | User-Defined     |
 +--------------+-----------------------+------------------+
-| Mailer       | SmtpPassword          |                  |
+| Mailer       | SmtpPassword          | User-Defined     |
 +--------------+-----------------------+------------------+
-| Mailer       | FromAddress           |                  |
+| Mailer       | FromAddress           | User-Defined     |
 +--------------+-----------------------+------------------+
-| Mailer       | ToAddress             |                  |
+| Mailer       | ToAddress             | User-Defined     |
 +--------------+-----------------------+------------------+
 | Mailer       | MaxAttachmentSize     | 10000000 Bytes   |
 +--------------+-----------------------+------------------+
@@ -87,7 +87,7 @@ Project Config settings
 +--------------+-----------------------+------------------+
 | MongoDB      | ConnectTimeout        | 600000ms         |
 +--------------+-----------------------+------------------+
-| MongoDB      | WorkingDatabaseName   |                  |
+| MongoDB      | WorkingDatabaseName   | User-Defined     |
 +--------------+-----------------------+------------------+
 | MongoDB      | MaxConnectionIdleTime | 600000ms         |
 +--------------+-----------------------+------------------+
@@ -99,7 +99,13 @@ Project Config settings
 +--------------+-----------------------+------------------+
 | Sql          | SqlDbConnectionName   | DBCon            |
 +--------------+-----------------------+------------------+
-| Logger       | MaxFileSize           | 2000000000 Bytes |
+| Logger.File  | MaxFileSize           | 2000000000 Bytes |
 +--------------+-----------------------+------------------+
-| Logger       | LogFileName           | log              |
+| Logger.File  | LogFileName           | log              |
++--------------+-----------------------+------------------+
+| Logger.File  | FilePath              | User-Defined     |
++--------------+-----------------------+------------------+
+| Logger.Web   | BaseUrl               | User-Defined     |
++--------------+-----------------------+------------------+
+| Logger.Web   | LogEndPoint           | User-Defined     |
 +--------------+-----------------------+------------------+
