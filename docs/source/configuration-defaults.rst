@@ -48,6 +48,7 @@ Code Examples
                 .AddOrReplace("MongoDb", "mongodb://root:password123@sharedvm.local.com:27017,sharedvm.local.com:27018,sharedvm.local.com:27019/DemoDB?replicaSet=replicaset")
                 .BuildConfig();
             
+            // Registering the settings so that it can be used to build DataConfiguration<>.
             builder.RegisterInstance(configSettings);
 
             //Singletons
@@ -55,7 +56,7 @@ Code Examples
         }
     }
 
-Project Config settings
+Project Config Settings
 ------------------------
 
 .. _tbl-grid:
