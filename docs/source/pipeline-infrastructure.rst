@@ -98,6 +98,7 @@ Code Examples
     // Usage could look something like the following:
     public class DisplayAnalyzer
     {
+        // store pipeline instance
         private readonly FormatPipeline formatPipeline;
        
         public DisplayAnalyzer()
@@ -111,6 +112,8 @@ Code Examples
             if (displayAttribute == null) { return propertyValue; }
 
             // using the pipeline to format the given value.
+            // value PropertyData will be passed through all filters and properly formatted 
+            // by valid filters.
             propertyValue = formatPipeline.Filter(new PropertyData
             {
                 Attribute = displayAttribute,
