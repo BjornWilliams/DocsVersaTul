@@ -24,6 +24,9 @@ Main Components
 
 Functional Summary
 ------------------
+1. **U Execute(T input);** : Filters implementing this method would perform processing on the input type{T}.
+2. **Func<T, U> Filter** : Property on the Pipeline that gets the filter associated with this pipeline.
+3. **U Filter<T, U>(this T input, IFilter<T, U> filter)** : An extension method for Providing an easy way of extending objects with pipeline filters.
 
 Code Examples
 -------------
