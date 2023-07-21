@@ -37,7 +37,7 @@ Code Examples
     // Input model 
     public class PropertyData
     {
-        // See more details at :doc:`/display-attributes` project for more details. 
+        // See the display attribute project for more details. 
         public DisplayAttribute Attribute { get; set; }
 
         public object Value { get; set; }        
