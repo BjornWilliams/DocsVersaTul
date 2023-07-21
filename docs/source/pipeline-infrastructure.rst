@@ -21,7 +21,9 @@ Main Components
 1. ``IFilter<T, U>`` : A filter represents the work to be done on a given input with the given return type.
 2. ``Pipeline<T, U> : IFilter<T, U>`` : Represents an accumulative set of steps or filters that can be performed on a given input.
 3. ``PipelineExtensions`` : Provides an easy way of extending objects with pipeline filters.
-4. ``DisplayAttributes`` : See :doc: `display-attributes`.
+4. ``DisplayAttributes`` : 
+
+See more details at :ref: `display-attributes`.
 
 Functional Summary
 ------------------
