@@ -92,4 +92,31 @@ Code Examples
         }
     }
 
+    // Usage could look something like the following:
+    public class DisplayAnalyzer
+    {
+        private readonly FormatPipeline formatPipeline;
+       
+        public DisplayAnalyzer()
+        {
+            // setup the pipeline for use
+            formatPipeline = new FormatPipeline();
+        }
+       
+        public object FormatValue(DisplayAttribute displayAttribute, object propertyValue)
+        {
+            if (displayAttribute == null) { return propertyValue; }
+
+            // using the pipeline to format the given value.
+            propertyValue = formatPipeline.Filter(new PropertyData
+            {
+                Attribute = displayAttribute,
+                Value = propertyValue
+            })
+            .Value;
+
+            return propertyValue;
+        }
+    }
+
     
