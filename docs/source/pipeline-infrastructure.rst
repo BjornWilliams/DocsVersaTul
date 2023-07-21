@@ -21,7 +21,6 @@ Main Components
 1. ``IFilter<T, U>`` : A filter represents the work to be done on a given input with the given return type.
 2. ``Pipeline<T, U> : IFilter<T, U>`` : Represents an accumulative set of steps or filters that can be performed on a given input.
 3. ``PipelineExtensions`` : Provides an easy way of extending objects with pipeline filters.
-4. ``DisplayAttributes`` : See more details at :doc:`/display-attributes`.
 
 Functional Summary
 ------------------
@@ -38,7 +37,7 @@ Code Examples
     // Input model 
     public class PropertyData
     {
-        // See the display attribute project for more details. 
+        // See more details at :doc:`/display-attributes` project for more details. 
         public DisplayAttribute Attribute { get; set; }
 
         public object Value { get; set; }        
