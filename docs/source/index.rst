@@ -40,3 +40,6 @@ The library is made up of several packages that provides functionality such as:
    sql
    streamers
    utilities
+   contracts
+   data-contracts
+   handler-file
