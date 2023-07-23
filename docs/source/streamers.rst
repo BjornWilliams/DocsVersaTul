@@ -9,7 +9,7 @@ Developers can use the streamers to:
 #. Convert a Collection to a Data-Reader.
 #. Convert from a Data-Reader to other file formats such as CSV, TAB or Json.
 #. Compress converted data into Zip files.
-#. Transport the converted data via mail.
+#. Transport the converted data via e-mail.
 
 The Streamers project also works with :doc:`display-attributes` which is used to manipulate the properties on the objects in the collection such as formatting the data or renaming the property with a desired display name.
 
