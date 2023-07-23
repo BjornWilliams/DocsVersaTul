@@ -6,7 +6,7 @@ Getting Started
 The VersaTul Data Sql project provides the ability to quickly create database access objects, 
 usable on any suppporting SQL databases. This project is built on top of the System.Data.Common namespace and
 provides the functionality to quickly call stored procedures or plain text sql queries, then map the result into data objects using the provided helper methods.
-The project also provides Sql Bulk Copy functionality, which can be use to build insert data into a any SQL database.
+The project also provides Sql Bulk Copy functionality, which can be use to bulk insert data into a any SQL database.
 
 Installation
 ------------
