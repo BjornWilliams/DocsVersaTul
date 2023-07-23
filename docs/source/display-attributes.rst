@@ -4,7 +4,7 @@ Display Attributes
 Getting Started
 ----------------
 The VersaTul Display Attributes project enables the ability to provide meta-data to the export engine for outputting collections as files.
-This package works with the Collection streamers package.
+This package works with the :doc:`streamers` package.
 Attributes can be applied to the properties of a collection data type in order to manipulate the outputted data.
 
 Installation
