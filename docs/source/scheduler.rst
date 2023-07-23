@@ -14,7 +14,6 @@ To use VersaTul Task Scheduler, first install it using nuget:
     
     PM> NuGet\Install-Package VersaTul.Task.Scheduler -Version latest
 
-
 Main Components
 ----------------
 
