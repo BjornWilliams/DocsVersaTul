@@ -44,10 +44,10 @@ Code Examples
     {
         static void Main(string[] args)
         {
-            //default configs - see configuration default for more details.
+            // default configs - see configuration default for more details.
             var configSettings = new Builder().BuildConfig();
             
-            //cache configuration
+            // cache configuration
             var cacheConfiguration = new CacheConfiguration(configSettings);
 
             ICacheProvider<Person> cacheProvider = new MemCacheProvider<Person>(cacheConfiguration);
@@ -64,13 +64,13 @@ Code Examples
 .. code-block:: c#
     :caption: Simple Example With a (AutoFac) as the IoC Container
         
-    //Creating the IoC container
+    // creating the IoC container
     var builder = new ContainerBuilder();
 
-    //default configs - see configuration default for more details.
+    // default configs - see configuration default for more details.
     var configSettings = new Builder().BuildConfig();
 
-    //Populating the container
+    // Populating the container
     builder.RegisterInstance(configSettings);
 
     builder
@@ -83,7 +83,7 @@ Code Examples
         .As(typeof(ICacheProvider<>))
         .SingleInstance();
 
-    //Static method where cache provider can be injected by autofac...
+    // static method where cache provider can be injected by autofac...
     static void CachingTest(ICacheProvider<Person> cacheProvider)
     {
         var person = cacheProvider.Get("Bjorn");
@@ -104,8 +104,9 @@ Code Examples
         Console.WriteLine($"And Person Is: {person.Name}");
     }
 
+    // main
     using (var container = new IoCBuilder())
     {
-        //Calling the method from the main method
+        // calling the method from the main method
         CachingTest(container.Resolve<ICacheProvider<Person>>());
     }
