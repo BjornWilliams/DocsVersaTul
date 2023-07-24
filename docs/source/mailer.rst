@@ -20,7 +20,7 @@ Main Components
 ----------------
 1. ``IMailConfiguration`` : Represents a configuration file that is applicable to the mailing application.
 2. ``IMailDispatcher`` : Represents the functionality to send emails messages.
-3. ``ISmtpClient`` : Represents an implemetation that can be used to send SMTP messages.
+3. ``ISmtpClient`` : Represents an implementation that can be used to send SMTP messages.
 4. ``MailConfiguration`` : Default implementation of the ``IMailConfiguration`` interface.
 5. ``MailDispatcher`` : Default implementation of the ``IMailDispatcher`` interface.
 6. ``SmtpClientWrapper`` : Default implementation of the ``ISmtpClient`` interface.

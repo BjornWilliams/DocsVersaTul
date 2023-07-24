@@ -28,7 +28,7 @@ Main Components
 Functional Summary
 ------------------
 1. **MemoryStream Zip(ZipStream zipStream)** : Zips the given ``ZipStream`` into a zipped ``MemoryStream``.
-2. **MemoryStream Zip(IEnumerable<ZipStream> zipStreams)** : Zips the given collection of ``ZipStreams`` into a zippped ``MemoryStream``.
+2. **MemoryStream Zip(IEnumerable<ZipStream> zipStreams)** : Zips the given collection of ``ZipStreams`` into a zipped ``MemoryStream``.
 
 Code Examples
 --------------

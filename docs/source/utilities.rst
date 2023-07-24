@@ -3,7 +3,7 @@ Utilities
 
 Getting Started
 ----------------
-The VersaTul Utilities project provides a variety of commonly used helper methods to help with the rapid developement process.
+The VersaTul Utilities project provides a variety of commonly used helper methods to help with the rapid development process.
 
 Installation
 ------------

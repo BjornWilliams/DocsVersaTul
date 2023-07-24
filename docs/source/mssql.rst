@@ -20,10 +20,10 @@ To use VersaTul Data MsSql, first install it using nuget:
 
 Main Components
 ----------------
-#. ``ISqlDataSource`` : Represent funcationality to get connected to a MsSQL Database and perform CRUD operations.
+#. ``ISqlDataSource`` : Represent functionality to get connected to a MsSQL Database and perform CRUD operations.
 #. ``ISqlParameter`` : Represents a parameter to a SqlCommand object, and optionally, its mapping to DataSet columns; and is implemented by .NET Framework data providers that access data sources.
-#. ``SqlDataSource`` : Concrete implementation of ISqlDataSource interface that represent funcationality to get connected to a MsSQL Database and perform CRUD operations.
-#. ``SqlParameter`` : Concrete implementation of ISqlParameter interface that represent funcationality to get connected to a MsSQL Database and perform CRUD operations.
+#. ``SqlDataSource`` : Concrete implementation of ISqlDataSource interface that represent functionality to get connected to a MsSQL Database and perform CRUD operations.
+#. ``SqlParameter`` : Concrete implementation of ISqlParameter interface that represent functionality to get connected to a MsSQL Database and perform CRUD operations.
 
 Functional Summary
 ------------------

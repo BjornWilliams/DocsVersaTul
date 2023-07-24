@@ -3,7 +3,9 @@ Data Contracts
 
 Getting Started
 ----------------
-The VersaTul Data Contracts project provides generic interfaces that are supported throughout the Data manipulating projects in the VersaTul ecosystem. These tend to be more database-oriented projects. Developers who may want to change the underline implementation of these contracts can create their own implementation of such contract and supply it to the VersaTul project in which they require to change the behavior. 
+The VersaTul Data Contracts project provides generic interfaces that are supported throughout the Data manipulating projects in the VersaTul ecosystem. 
+These tend to be more database-oriented projects. 
+Developers who may want to change the underline implementation of these contracts can create their own implementation of such contract and supply it to the VersaTul project in which they require to change the behavior. 
 
 Installation
 ------------

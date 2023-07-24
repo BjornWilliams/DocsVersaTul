@@ -79,7 +79,7 @@ Code Examples
     // Create a base repository interface that inherits IRepository<TEntity, TKey>
     // this will ensure all CRUD functionality is supported by every repository that inherits
     // from this interface. 
-    // This techique is optional, am simply specifing the TKey value here as ``int`` so as to 
+    // This technique is optional, am simply specifying the TKey value here as ``int`` so as to 
     // reduce complexity for project specific repositories.
     public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : class, new()
     {
@@ -94,7 +94,7 @@ Code Examples
 
     // Create BaseRepository that inherits from BaseRepository<TEnity, TKey>
     // this will ensure all CRUD functionality is supported by every repository that inherits
-    // from this base. Also specifing the TKey value as ``int`` to reduce complexity.
+    // from this base. Also specifying the TKey value as ``int`` to reduce complexity.
     // project specific DbContext should also be exposed from this class.
     public abstract class BaseRepository<TEnity> : BaseRepository<TEnity, int> where TEnity : class, new()
     {
@@ -105,14 +105,8 @@ Code Examples
             DbSet = unitOfWork.DataContext.Set<TEnity>();
         }
 
-        /// <summary>
-        /// Gets the <seealso cref="DbSet{TEntity}"/>.
-        /// </summary>
         protected DbSet<TEnity> DbSet { get; }
 
-        /// <summary>
-        /// Gets the <seealso cref="GameContext"/> converted from the generic DbContext.
-        /// </summary>
         protected DatabaseContext DatabaseContext => DataContext as DatabaseContext;   
     }
 
@@ -135,7 +129,7 @@ Code Examples
         {
             //Configs
             var configSettings = new Builder()
-                .AddOrReplace("DBCon", "Server=192.168.1.135;Database=DemoDb;User Id=sa;Password=Lumberjack256;Persist Security Info=True;")
+                .AddOrReplace("DBCon", "Server=127.0.0.1;Database=DemoDb;User Id=sa;Password=password@123;Persist Security Info=True;")
                 .BuildConfig();
 
             builder.RegisterInstance(configSettings);
