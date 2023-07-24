@@ -62,7 +62,7 @@ Code Examples
     }
 
 .. code-block:: c#
-    :caption: Simple Example With a (AutoFac) as the IoC Container
+    :caption: Simple Example With (AutoFac) as the IoC Container
         
     // creating the IoC container
     var builder = new ContainerBuilder();
@@ -83,7 +83,7 @@ Code Examples
         .As(typeof(ICacheProvider<>))
         .SingleInstance();
 
-    // static method where cache provider can be injected by autofac...
+    // static method where cache provider can be injected by autofac.
     static void CachingTest(ICacheProvider<Person> cacheProvider)
     {
         var person = cacheProvider.Get("Bjorn");
