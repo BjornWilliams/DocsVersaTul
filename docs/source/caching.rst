@@ -3,7 +3,7 @@ Caching
 
 Getting Started
 ----------------
-The VersaTul Caching project is designed to provide a simplfied caching interface with the ability to change the underlining caching engine easily and quickly. 
+The VersaTul Caching project is designed to provide a simplified caching interface with the ability to change the underlining caching engine easily and quickly. 
 The default cache engine is built on top of the Microsoft Extensions Caching Memory class, which provides an in memory caching store. 
 This implementation can be easily replaced using the interface provided.
 
@@ -19,32 +19,32 @@ To use VersaTul Caching, first install it using nuget:
 
 Main Components
 ----------------
-1. ``ICacheProvider<T>`` : Interaction can be achieved through the Cache Provider Interface.
-2. ``MemCacheProvider<T>`` : Default Concrete implementation of the Cache Provider interface.
-3. ``ICacheConfiguration`` : The Configuration interface for accessing default configurations 
-4. ``CacheConfiguration`` : Default Concrete implementation of the configuration interface. 
+#. ``ICacheProvider<T>`` : Adding and getting items from the cache can be achieved through the Cache Provider Interface.
+#. ``MemCacheProvider<T>`` : This is a default concrete implementation of the Cache Provider interface. This can be replaced with another provider if so desires.
+#. ``ICacheConfiguration`` : The Configuration interface for accessing default configurations.
+#. ``CacheConfiguration`` : Default Concrete implementation of the configuration interface. 
 
 Functional Summary
 ------------------
-1. **T Get(string key)** : Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
-2. **void Add(string key, T data)** : Inserts the cache entry using the key for a default duration of 60 minutes.
-3. **void Add(string key, T data, int cacheTime)** : Inserts the given item into the Cache using the given key for a the specified duration in minutes.
-4. **void Add(string key, T data, CacheExpiration expiration)** : Inserts the given item into the Cache using the given key for the specified CacheExpiration.
-5. **bool IsExists(string key)** : Indicates if there is a cache entry for the key.
-6. **void Remove(string key)** : Removes the cache entry from the cache for the given key.
+#. **ICacheProvider<T>.Get(string key)** : Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
+#. **ICacheProvider<T>.Add(string key, T data)** : Inserts the cache entry using the key for a default duration of 60 minutes.
+#. **ICacheProvider<T>.Add(string key, T data, int cacheTime)** : Inserts the given item into the Cache using the given key for a the specified duration in minutes.
+#. **ICacheProvider<T>.Add(string key, T data, CacheExpiration expiration)** : Inserts the given item into the Cache using the given key for the specified CacheExpiration.
+#. **ICacheProvider<T>.IsExists(string key)** : Indicates if there is a cache entry for the key.
+#. **ICacheProvider<T>.Remove(string key)** : Removes the cache entry from the cache for the given key.
+#. See :doc:`configuration-defaults` for more configuration settings details for the caching project.
 
 Code Examples
 -------------
 
 .. code-block:: c#
     :caption: Simple Example
-
     
     class Program
     {
         static void Main(string[] args)
         {
-            //default configs
+            //default configs - see configuration default for more details.
             var configSettings = new Builder().BuildConfig();
             
             //cache configuration
@@ -62,20 +62,20 @@ Code Examples
     }
 
 .. code-block:: c#
-    :caption: Use With a IoC Container
-    
-    
+    :caption: Simple Example With a (AutoFac) as the IoC Container
+        
     //Creating the IoC container
     var builder = new ContainerBuilder();
 
-    //default configs
+    //default configs - see configuration default for more details.
     var configSettings = new Builder().BuildConfig();
 
     //Populating the container
+    builder.RegisterInstance(configSettings);
+
     builder
         .RegisterType<CacheConfiguration>()
         .As<ICacheConfiguration>()
-        .WithParameter("configSettings", configSettings)
         .SingleInstance();
 
     builder
