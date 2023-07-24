@@ -19,10 +19,10 @@ To use VersaTul Caching, first install it using nuget:
 
 Main Components
 ----------------
-#. ``ICacheProvider<T>`` : Adding and getting items from the cache can be achieved through the Cache Provider Interface.
-#. ``MemCacheProvider<T>`` : This is a default concrete implementation of the Cache Provider interface. This can be replaced with another provider if so desires.
-#. ``ICacheConfiguration`` : The Configuration interface for accessing default configurations.
-#. ``CacheConfiguration`` : Default Concrete implementation of the configuration interface. 
+#. ``ICacheProvider<T>`` : Adding and retrieving items from the cache can be achieved using this interface.
+#. ``MemCacheProvider<T>`` : This is a default concrete implementation of the Cache Provider interface. This can be replaced with another provider if so desired.
+#. ``ICacheConfiguration`` : The cache configuration interface for accessing configuration settings. See :doc:`configuration-defaults` for more details on configuration settings.
+#. ``CacheConfiguration`` : This is the default concrete implementation of the cache configuration interface. 
 
 Functional Summary
 ------------------
@@ -32,7 +32,6 @@ Functional Summary
 #. **ICacheProvider<T>.Add(string key, T data, CacheExpiration expiration)** : Inserts the given item into the Cache using the given key for the specified CacheExpiration.
 #. **ICacheProvider<T>.IsExists(string key)** : Indicates if there is a cache entry for the key.
 #. **ICacheProvider<T>.Remove(string key)** : Removes the cache entry from the cache for the given key.
-#. See :doc:`configuration-defaults` for more configuration settings details for the caching project.
 
 Code Examples
 -------------
