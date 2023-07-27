@@ -157,15 +157,13 @@ Code Examples
             {
                 // Configs
                 // VersaTul.Configuration.Defaults.Mailer
-                var configSettings = new Builder()
-                    .AddOrReplace(new[]
-                    {
+                var configSettings = new Builder().AddOrReplace(new[]
+                {
                             new KeyValuePair<string,object>("FromAddress", "author@versatul.com"),
                             new KeyValuePair<string,object>("ToAddress", "joesmith@domain.com"),
                             new KeyValuePair<string,object>("SmtpServer", "127.0.0.1"),
                             new KeyValuePair<string,object>("SmtpPort", 25)
-                    })
-                    .BuildConfig();
+                }).BuildConfig();
 
                 builder.RegisterInstance(configSettings);
 
@@ -211,14 +209,14 @@ Code Examples
         public class StreamConverter
         {
             // injecting container for simplicity
-            public void Execute(AppContainer appContainer, string type, string output)
+            public void Execute(AppContainer appContainer, string type, string output, string compressed)
             {
                 IUtility utility = appContainer.Resolve<IUtility>();
 
                 // generate list of person to convert. 
-                var people = GetPeople(Amount);
+                var people = GetPeople(1000);
 
-                IStreamer streamer = null;
+                IStreamer? streamer = null;
                 IStreamCreator streamCreator;
 
                 switch (type)
@@ -240,7 +238,7 @@ Code Examples
                 switch (output)
                 {
                     case "file":
-                        OutputToFile(streamer, appContainer, $@"{utility.GetExecutingPath()}\\data", Compressed == "yes");
+                        OutputToFile(streamer, appContainer, $@"{utility.GetExecutingPath()}\\data", compressed == "yes");
                         break;
                     case "screen":
                         OutputToScreen(streamer);
@@ -272,7 +270,7 @@ Code Examples
 
                 string streamAsString = streamReader.ReadToEnd();
 
-                Print(streamAsString);
+                Console.WriteLine(streamAsString);
             }
 
             private static void OutputToFile(IStreamer streamer, AppContainer appContainer, string filePath, bool compressed)
