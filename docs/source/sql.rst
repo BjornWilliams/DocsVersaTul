@@ -128,11 +128,12 @@ Code Examples
             {
                 var products = new List<Product>();
 
+                // using the ProcessReader method to read the return DbDataReader from ExecuteReader.
+                // technique commonly used to populate data models from returned data. 
                 ProcessReader(ExecuteReader(new StoredCommand("GetAllProducts")), (position) =>
                 {
                     // position parameter: useful for multiple result sets, this value represents which reader is currently being read from in the result set.
                     // this information can then be used to populate different models in the lambda helper method. 
-
                     products.Add(new Product
                     {
                         CategoryId = Get((Product prod) => prod.CategoryId),
@@ -205,3 +206,77 @@ Code Examples
 
 .. code-block:: c#
     :caption: Simple Example Using IoC and Oracle as Database.
+
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            //Configs
+            var configSettings = new Builder().AddOrReplace(new[]
+            {
+                new KeyValuePair<string,object>("OracleSqlDb", new ConnectionInfo("User Id=SYS;Password=Secretdatabasepassword;Data Source=database-address.local.com/ORCLCDB;DBA Privilege=SYSDBA;","Oracle.ManagedDataAccess.Client.OracleClientFactory")),
+                new KeyValuePair<string, object>("SqlDbConnectionName", "OracleSqlDb")
+            }).BuildConfig();
+
+
+            builder.RegisterInstance(configSettings);
+
+            //Singletons
+            builder.RegisterType<CommonUtility>().As<IUtility>().As<INullFiltering>().As<IGenerator>().SingleInstance();
+            builder.RegisterType<SqlDbDataSource>().As<IDataSource>().SingleInstance();
+            builder.RegisterType<CommandFactory>().As<ICommandFactory>().SingleInstance();
+            builder.RegisterType<ProviderFactory>().As<IProviderFactory>().SingleInstance();
+            builder.RegisterType<DataConfiguration>().As<IDataConfiguration>().SingleInstance();
+
+            //Per Dependency
+            builder.RegisterType<EmployeeDataService>().As<IEmployeeService>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductDataService>().As<IProductService>().InstancePerLifetimeScope();
+        }
+    }
+
+    // Data Service usage could look like the following:
+    [Route("api/product")]
+    public class ProductController: Controller
+    {
+        private readonly IProductService productService;
+
+        public ProductController(IProductService productService)
+        {
+            this.productService = productService;
+        }
+
+        // Get
+        [HttpGet]
+        public IActionResult GetProducts()
+        {
+            var products = productService.Get();
+
+            return OK(products);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetProduct(string id)
+        {
+            var product = productService.Get(id);
+
+            if(product == null)
+                return NotFound();
+
+            return OK(product);
+        }
+         
+        [HttpPost]
+        public IActionResult CreateProduct(CreateProductModel model)
+        {
+            var product = productService.Add(new Product
+            {
+                Name = model.Name
+                Description = model.Description
+                StandardCost = model.StandardCost
+                ListPrice = model.ListPrice
+                CategoryId = model.CategoryId
+            });
+
+            return OK(product);
+        }
+    } 
