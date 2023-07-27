@@ -36,4 +36,37 @@ Code Examples
 -------------
 .. code-block:: c#
     :caption: Setting up Mailer Example
-    
+        
+    using VersaTul.Configurations;
+    using VersaTul.Mailer;
+    using VersaTul.Mailer.Configurations;
+    using VersaTul.Mailer.SmtpClients;
+
+    namespace VersaTulMailer
+    {
+        public class Program
+        {
+            static void Main(string[] args)
+            {
+                // Setup mailer configuration with use of default builder
+                var configSettings = new ConfigSettings()
+                {
+                { "FromAddress", "sally@customerservice.com" },
+                { "ToAddress", "mygoodcustomer@domain.com" },
+                { "SmtpServer", "120.0.0.1" },
+                { "SmtpPort", 25 },
+                { "SmtpUserName", "bjorn@versatul.com" },
+                { "SmtpPassword", "Some super secret password" },
+                { "MaxAttachmentSize", 10000000 }
+                };
+
+                // Setup needed class instances
+                var configuration = new MailConfiguration(configSettings);
+                var smtpClient = new SmtpClientWrapper(configuration);
+                var mailDispatcher = new MailDispatcher(smtpClient);
+                
+                // Send email here..
+                mailDispatcher.SendMail(configuration.FromAddress, configuration.ToAddress, "your subject line", "your mail body here");
+            }
+        }
+    }
