@@ -23,6 +23,7 @@ Main Components
 #. ``IProviderFactory`` : Represents a set of methods for creating instances of a provider's implementation of the data source classes.
 #. ``IDataConfiguration`` : Represents a set of methods or properties for getting configuration values from setting store.
 #. ``IParameter`` : Represents the set of properties and methods that describes a parameter passed into the Sql Command.
+#. ``IParameterCollection`` : Represents a collection of IParameter objects.
 #. ``IConnectionInfo`` : Represents a connection string details.
 #. ``SqlDbDataSource`` :  Represent a default implementation of the IDataSource interface.
 #. ``BaseDataService`` : Provides a starting point for custom data services used in projects. Provides all the basic or general database functionality.
@@ -34,6 +35,10 @@ Main Components
 
 Functional Summary
 ------------------
+#. **BaseDataService.ExecuteReader()** : Overloaded method for reading a forward-only stream of rows from the data source.
+#. **BaseDataService.ExecuteNonQuery()** : Overloaded method for executing a given stored procedure and returns the affected number of rows count.
+#. **BaseDataService.ProcessReader(DbDataReader reader, ProccessReaderHandler handler)** : Helper method to iterate the given data reader and provide access to the data at each row via the helper methods. For example GetInt(),GetString(), or Get<TInput, TResult>().
+#. **ParameterCollection.Add(IParameter parameter)** : Adds the given IParameter object to the end of the parameter collection List.
 
 Code Examples
 -------------
@@ -155,6 +160,8 @@ Code Examples
                 var parameterCollection = new ParameterCollection();
                 parameterCollection.Add(new Parameter("productId", productId, DbType.Int32, 0, ParameterDirection.Input));
 
+                // using the ProcessReader method to read the return DbDataReader from ExecuteReader.
+                // technique commonly used to populate data models from returned data. 
                 ProcessReader(ExecuteReader(new DataCommand(commandText, DataCommandType.Query), parameterCollection), (position) =>
                 {
                     product = new Product
@@ -190,3 +197,7 @@ Code Examples
             }
         }
     }
+
+
+.. code-block:: c#
+    :caption: Simple Example Using IoC and Oracle as Database.
