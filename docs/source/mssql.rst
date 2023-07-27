@@ -175,3 +175,72 @@ Code Examples
             }
         }
     }
+
+.. code-block:: c#
+    :caption: Simple Example Using IoC and MsSQL as Database.
+
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            //Configs
+            var configSettings = new Builder().AddOrReplace(new[]
+            {
+                new KeyValuePair<string,object>("DemoDb", new ConnectionInfo("Server=127.0.0.1;Database=DemoDb;User Id=sa;Password=Secretdatabasepassword;","System.Data.SqlClient")),
+                new KeyValuePair<string,object>("AdventureWorks2019", new ConnectionInfo("Server=127.0.0.1;Database=AdventureWorks2019;User Id=sa;Password=Secretdatabasepassword;","System.Data.SqlClient")),
+                new KeyValuePair<string,object>("SqlDbConnectionName", "AdventureWorks2019")
+            }).BuildConfig();
+            
+            // Registering config to help with creation of DataConfiguration class.
+            builder.RegisterInstance(configSettings);
+
+            //Singletons
+            builder.RegisterType<CommonUtility>().As<IUtility>().As<INullFiltering>().As<IGenerator>().SingleInstance();
+            builder.RegisterType<SqlDataSource>().As<ISqlDataSource>().As<IDataSource>().SingleInstance();
+            builder.RegisterType<CommandFactory>().As<ICommandFactory>().SingleInstance();
+            builder.RegisterType<ProviderFactory>().As<IProviderFactory>().SingleInstance();
+            builder.RegisterType<DataConfiguration>().As<IDataConfiguration>().SingleInstance();
+
+            //Per Dependency
+            builder.RegisterType<CustomerDataService>().As<ICustomerDataService>().InstancePerLifetimeScope();
+        }
+    }
+
+    // Data Service usage could look like the following:
+    [Route("api/customer")]
+    public class CustomerController: Controller
+    {
+        private readonly ICustomerDataService customerDataService;
+
+        public CustomerController(ICustomerDataService customerDataService)
+        {
+            this.customerDataService = customerDataService;
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetCustomer(string id)
+        {
+            var customer = customerDataService.Get(id);
+
+            if(customer == null)
+                return NotFound();
+
+            return OK(customer);
+        }
+         
+        [HttpPost]
+        public IActionResult CreateCustomers(CreateCustomerModel customerModels)
+        {
+            var customers = new List<Customer>();
+
+            customerModels.ForEach(model => customers.Add(new Customer
+            {
+                FirstName = model.FirstName
+                LastName = model.LastName
+            }));
+
+            var amountInserted = customerDataService.Add(customers);
+
+            return OK(amountInserted);
+        }
+    } 
