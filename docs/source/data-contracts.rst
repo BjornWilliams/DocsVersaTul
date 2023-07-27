@@ -42,6 +42,7 @@ Code Examples
 .. code-block:: c#
     :caption: Example implementation as found in VersaTul.Data.EFCore.
 
+    // code shortened for breviate.
     public abstract class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, new()
     {
         public TEntity Add(TEntity entity)
@@ -56,6 +57,7 @@ Code Examples
         public TEntity Find(params object[] keyValues) => entity.Find(keyValues);
     }
 
+    // code shortened for breviate.
     public abstract class BaseUnitOfWork : IUnitOfWork
     {
         public int Commit() => DataContext.SaveChanges();
@@ -70,6 +72,7 @@ Code Examples
         }
     }
 
+    // code shortened for breviate.
     public class ConnectionInfo : IConnectionInfo
     {
         public ConnectionInfo(string connectionString, string providerName)
