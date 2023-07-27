@@ -147,139 +147,139 @@ Code Examples
 
 .. code-block:: c#
     :caption: IoC Example of CsvStreamer.
-
-        namespace CollectionStreamers
+    
+    namespace CollectionStreamers
+    {
+        // AutoFac Module
+        public class AppModule : Module
         {
-            // AutoFac Module
-            public class AppModule : Module
+            protected override void Load(ContainerBuilder builder)
             {
-                protected override void Load(ContainerBuilder builder)
-                {
-                    // Configs
-                    // VersaTul.Configuration.Defaults.Mailer
-                    var configSettings = new Builder()
-                        .AddOrReplace(new[]
-                        {
-                                new KeyValuePair<string,object>("FromAddress", "author@versatul.com"),
-                                new KeyValuePair<string,object>("ToAddress", "joesmith@domain.com"),
-                                new KeyValuePair<string,object>("SmtpServer", "127.0.0.1"),
-                                new KeyValuePair<string,object>("SmtpPort", 25)
-                        })
-                        .BuildConfig();
-
-                    builder.RegisterInstance(configSettings);
-
-                    // Singletons
-
-                    // VersaTul.Handler.File
-                    builder.RegisterType<FileHandler>().As<IFileHandler>().SingleInstance();
-                    builder.RegisterType<IOWrapper>().As<IDirectoryIO>().As<IFileIO>().SingleInstance();
-                    builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
-
-                    // VersaTul.Compression
-                    builder.RegisterType<Compressor>().As<ICompressor>().SingleInstance();
-                    builder.RegisterType<Zipper>().As<IZipper>().SingleInstance();
-                    builder.RegisterType<Archiver>().As<IArchiver>().SingleInstance();
-
-                    // VersaTul.Utilities
-                    builder.RegisterType<CommonUtility>().As<IUtility>().SingleInstance();
-
-                    // VersaTul.Object.Converters
-                    builder.RegisterType<Flattener>().As<IFlattener>().SingleInstance();
-
-                    // VersaTul.Mailer
-                    builder.RegisterType<MailConfiguration>().As<IMailConfiguration>().SingleInstance();
-                    builder.RegisterType<SmtpClientWrapper>().As<ISmtpClient>().SingleInstance();
-
-                    // VersaTul.Collection.Streamers
-                    builder.RegisterType<CompressTransport>().As<ICompressTransport>().SingleInstance();
-
-                    // Per Dependency
-
-                    // VersaTul.Collection.Streamers
-                    builder.RegisterType<FileConverter>().As<IStreamFileConverter>().InstancePerDependency();
-                    builder.RegisterType<CsvStreamer>().As<ICsvStreamer>().InstancePerDependency();
-                    builder.RegisterType<TabStreamer>().As<ITabStreamer>().InstancePerDependency();
-                    builder.RegisterType<JsonStreamer>().As<IJsonStreamer>().InstancePerDependency();
-                    builder.RegisterType<MailTransporter>().As<IMailTransporter>().InstancePerDependency();
-
-                    // VersaTul.Mailer
-                    builder.RegisterType<MailDispatcher>().As<IMailDispatcher>().InstancePerDependency();
-                }
-            }
-
-            public class StreamConverter
-            {
-                // injecting container for simplicity
-                public void Execute(AppContainer appContainer, string type, string output)
-                {
-                    IUtility utility = appContainer.Resolve<IUtility>();
-
-                    // generate list of person to convert. 
-                    var people = GetPeople(Amount);
-
-                    IStreamer streamer = null;
-                    IStreamCreator streamCreator;
-
-                    switch (type)
+                // Configs
+                // VersaTul.Configuration.Defaults.Mailer
+                var configSettings = new Builder()
+                    .AddOrReplace(new[]
                     {
-                        case "csv":
-                            streamCreator = appContainer.Resolve<ICsvStreamer>();
-                            streamer = streamCreator.Create(people, "people");
-                            break;
-                        case "tab":
-                            streamCreator = appContainer.Resolve<ITabStreamer>();
-                            streamer = streamCreator.Create(people, "people");
-                            break;
-                        case "json":
-                            streamCreator = appContainer.Resolve<IJsonStreamer>();
-                            streamer = streamCreator.Create(people, "people");
-                            break;
-                    }
+                            new KeyValuePair<string,object>("FromAddress", "author@versatul.com"),
+                            new KeyValuePair<string,object>("ToAddress", "joesmith@domain.com"),
+                            new KeyValuePair<string,object>("SmtpServer", "127.0.0.1"),
+                            new KeyValuePair<string,object>("SmtpPort", 25)
+                    })
+                    .BuildConfig();
 
-                    switch (output)
-                    {
-                        case "file":
-                            OutputToFile(streamer, appContainer, $@"{utility.GetExecutingPath()}\data", Compressed == "yes");
-                            break;
-                        case "screen":
-                            OutputToScreen(streamer);
-                            break;
-                        case "email":
-                            OutputToEmail(streamer, appContainer);
-                            break;
-                    }
+                builder.RegisterInstance(configSettings);
 
-                    streamer.Dispose();
-                }
+                // Singletons
 
-                private static void OutputToEmail(IStreamer streamer, AppContainer appContainer)
-                {
-                    var mailTransporter = appContainer.Resolve<IMailTransporter>();
-                    var mailConfiguration = appContainer.Resolve<IMailConfiguration>();
+                // VersaTul.Handler.File
+                builder.RegisterType<FileHandler>().As<IFileHandler>().SingleInstance();
+                builder.RegisterType<IOWrapper>().As<IDirectoryIO>().As<IFileIO>().SingleInstance();
+                builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
 
-                    mailTransporter.Transport(
-                        mailConfiguration.FromAddress,
-                        mailConfiguration.ToAddress,
-                        $"Stream Test Email on {DateTime.Now}",
-                        "Please see attached files.",
-                        streamer);
-                }
+                // VersaTul.Compression
+                builder.RegisterType<Compressor>().As<ICompressor>().SingleInstance();
+                builder.RegisterType<Zipper>().As<IZipper>().SingleInstance();
+                builder.RegisterType<Archiver>().As<IArchiver>().SingleInstance();
 
-                private static void OutputToScreen(IStreamer streamer)
-                {
-                    StreamReader streamReader = new(streamer.GetFileStream());
+                // VersaTul.Utilities
+                builder.RegisterType<CommonUtility>().As<IUtility>().SingleInstance();
 
-                    string streamAsString = streamReader.ReadToEnd();
+                // VersaTul.Object.Converters
+                builder.RegisterType<Flattener>().As<IFlattener>().SingleInstance();
 
-                    Print(streamAsString);
-                }
+                // VersaTul.Mailer
+                builder.RegisterType<MailConfiguration>().As<IMailConfiguration>().SingleInstance();
+                builder.RegisterType<SmtpClientWrapper>().As<ISmtpClient>().SingleInstance();
 
-                private static void OutputToFile(IStreamer streamer, AppContainer appContainer, string filePath, bool compressed)
-                {
-                    IStreamFileConverter fileConverter = appContainer.Resolve<IStreamFileConverter>();
+                // VersaTul.Collection.Streamers
+                builder.RegisterType<CompressTransport>().As<ICompressTransport>().SingleInstance();
 
-                    fileConverter.Save(streamer, filePath, compressed);
-                }
+                // Per Dependency
+
+                // VersaTul.Collection.Streamers
+                builder.RegisterType<FileConverter>().As<IStreamFileConverter>().InstancePerDependency();
+                builder.RegisterType<CsvStreamer>().As<ICsvStreamer>().InstancePerDependency();
+                builder.RegisterType<TabStreamer>().As<ITabStreamer>().InstancePerDependency();
+                builder.RegisterType<JsonStreamer>().As<IJsonStreamer>().InstancePerDependency();
+                builder.RegisterType<MailTransporter>().As<IMailTransporter>().InstancePerDependency();
+
+                // VersaTul.Mailer
+                builder.RegisterType<MailDispatcher>().As<IMailDispatcher>().InstancePerDependency();
             }
         }
+
+        public class StreamConverter
+        {
+            // injecting container for simplicity
+            public void Execute(AppContainer appContainer, string type, string output)
+            {
+                IUtility utility = appContainer.Resolve<IUtility>();
+
+                // generate list of person to convert. 
+                var people = GetPeople(Amount);
+
+                IStreamer streamer = null;
+                IStreamCreator streamCreator;
+
+                switch (type)
+                {
+                    case "csv":
+                        streamCreator = appContainer.Resolve<ICsvStreamer>();
+                        streamer = streamCreator.Create(people, "people");
+                        break;
+                    case "tab":
+                        streamCreator = appContainer.Resolve<ITabStreamer>();
+                        streamer = streamCreator.Create(people, "people");
+                        break;
+                    case "json":
+                        streamCreator = appContainer.Resolve<IJsonStreamer>();
+                        streamer = streamCreator.Create(people, "people");
+                        break;
+                }
+
+                switch (output)
+                {
+                    case "file":
+                        OutputToFile(streamer, appContainer, $@"{utility.GetExecutingPath()}\\data", Compressed == "yes");
+                        break;
+                    case "screen":
+                        OutputToScreen(streamer);
+                        break;
+                    case "email":
+                        OutputToEmail(streamer, appContainer);
+                        break;
+                }
+
+                streamer.Dispose();
+            }
+
+            private static void OutputToEmail(IStreamer streamer, AppContainer appContainer)
+            {
+                var mailTransporter = appContainer.Resolve<IMailTransporter>();
+                var mailConfiguration = appContainer.Resolve<IMailConfiguration>();
+
+                mailTransporter.Transport(
+                    mailConfiguration.FromAddress,
+                    mailConfiguration.ToAddress,
+                    $"Stream Test Email on {DateTime.Now}",
+                    "Please see attached files.",
+                    streamer);
+            }
+
+            private static void OutputToScreen(IStreamer streamer)
+            {
+                StreamReader streamReader = new(streamer.GetFileStream());
+
+                string streamAsString = streamReader.ReadToEnd();
+
+                Print(streamAsString);
+            }
+
+            private static void OutputToFile(IStreamer streamer, AppContainer appContainer, string filePath, bool compressed)
+            {
+                IStreamFileConverter fileConverter = appContainer.Resolve<IStreamFileConverter>();
+
+                fileConverter.Save(streamer, filePath, compressed);
+            }
+        }
+    }
