@@ -60,6 +60,15 @@ Code Examples
         {
             static void Main(string[] args)
             {
+                //MSSQL ---> System.Data.SqlClient.SqlClientFactory
+                //SQLite ---> System.Data.SQLite.SQLiteFactory
+                //MySql ---> MySql.Data.MySqlClient.MySqlClientFactory
+                //PostgreSql ---> Npgsql.NpgsqlFactory
+                //Oracle ---> Oracle.ManagedDataAccess.Client.OracleClientFactory
+
+                //Register factory
+                DbProviderFactories.RegisterFactory("Oracle.ManagedDataAccess.Client.OracleClientFactory", OracleClientFactory.Instance);
+
                 // Setup configuration for Oracle Database querying
                 var configSettings = new Builder().AddOrReplace(new[]
                 {

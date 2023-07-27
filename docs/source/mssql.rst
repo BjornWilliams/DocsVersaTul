@@ -30,3 +30,148 @@ Functional Summary
 
 Code Examples
 -------------
+
+.. code-block:: c#
+    :caption: Simple Example Using MsSql Server as Database.
+
+    using Microsoft.SqlServer.Server;
+    using System.Data;
+    using System.Data.Common;
+    using System.Data.SqlClient;
+    using VersaTul.Configuration.Defaults.Sql;
+    using VersaTul.Data.MsSql;
+    using VersaTul.Data.MsSql.Contracts;
+    using VersaTul.Data.Sql;
+    using VersaTul.Data.Sql.Configurations;
+    using VersaTul.Utilities;
+    using VersaTul.Utilities.Contracts;
+    using SqlParameter = VersaTul.Data.MsSql.SqlParameter;
+
+    namespace MsSqlDatabaseConnection
+    {
+        public class Program
+        {
+            static void Main(string[] args)
+            {
+                //Register factory
+                DbProviderFactories.RegisterFactory("System.Data.SqlClient", SqlClientFactory.Instance);
+
+                // Setup configuration for MsSqlServer Database quering
+                var configSettings = new Builder().AddOrReplace(new[]
+                {
+                    new KeyValuePair<string,object>("DemoDb", new ConnectionInfo("Server=127.0.0.1;Database=DemoDb;User Id=sa;Password=Secretdatabasepassword;","System.Data.SqlClient")),
+                    new KeyValuePair<string,object>("AdventureWorks2019", new ConnectionInfo("Server=127.0.0.1;Database=AdventureWorks2019;User Id=sa;Password=Secretdatabasepassword;","System.Data.SqlClient")),
+                    new KeyValuePair<string, object>("SqlDbConnectionName", "AdventureWorks2019") // default to AdventureWorks2019 database.
+
+                }).BuildConfig();
+
+                var dataConfiguration = new DataConfiguration(configSettings);
+
+                // Setup needed class instance
+                var providerFactory = new ProviderFactory();
+                var commandFactory = new CommandFactory(dataConfiguration, providerFactory);
+                var sqlDataSource = new SqlDataSource(commandFactory);
+                var commonUtility = new CommonUtility();
+
+                // Create our DAL or DataService class
+                var dataService = new CustomerDataService(sqlDataSource, commonUtility, commonUtility);
+
+                // Get a customer
+                var customer = dataService.GetCustomer(customerId: 10);
+
+                // Add list of customer 
+                var customers = new List<Customer>() 
+                {
+                    new Customer{ FirstName = "Joe", LastName = "Money" },
+                    new Customer{ FirstName = "Silly", LastName = "Sally" }
+                };
+
+                var amountAdded = dataService.AddCustomers(customers);
+
+            }
+        }
+
+        // Data Model 
+        public class Customer
+        {
+            public int CustomerId { get; set; }
+            public string? FirstName { get; set; }
+            public string? LastName { get; set; }
+        }
+
+        // Setup Support for SqlServer SqlDbType.Structured.
+        internal class CustomerDataRecord : List<Customer>, IEnumerable<SqlDataRecord>
+        {
+            IEnumerator<SqlDataRecord> IEnumerable<SqlDataRecord>.GetEnumerator()
+            {
+                var sqlRow = new SqlDataRecord(
+                        new SqlMetaData("FirstName", SqlDbType.NVarChar, 50),
+                        new SqlMetaData("LastName", SqlDbType.NVarChar, 50)
+                    );
+
+                foreach (var customer in this)
+                {
+                    sqlRow.SetString(0, customer.FirstName);
+                    sqlRow.SetString(1, customer.LastName);
+
+                    yield return sqlRow;
+                }
+            }
+        }
+
+        // Setup for Connection String switching 
+        public enum ConnectionName
+        {
+            DemoDb,
+            AdventureWorks2019
+        }
+
+        // DAL or DataServices
+        public interface ICustomerDataService
+        {
+            Customer? GetCustomer(int customerId);
+            int AddCustomers(IEnumerable<Customer> customers);
+        }
+
+        // By inheriting from BaseDataService all project specific data service will have the common functionality they need to access the dataSource. 
+        public class CustomerDataService : BaseDataService, ICustomerDataService
+        {
+            public CustomerDataService(ISqlDataSource dataSource, INullFiltering filtering, IUtility utility) : base(dataSource, filtering, utility) { }
+
+            public Customer? GetCustomer(int customerId)
+            {
+                Customer? customer = null;
+
+                var parameterCollection = new ParameterCollection();
+                parameterCollection.Add(new SqlParameter("CustomerId", customerId, SqlDbType.Int, 0, ParameterDirection.Input));
+
+                // Using the overloaded ExecuteReader method replacing the default datable connection string with given name here.
+                // ConnectionName.DemoDb.ToString() - This can come in handy when you need to talk to multiple database from the one project.
+                ProcessReader(ExecuteReader(new StoredCommand("GetCustomer"), parameterCollection, ConnectionName.DemoDb.ToString()), delegate
+                {
+                    customer = new Customer
+                    {
+                        CustomerId = Get((Customer customer) => customer.CustomerId),
+                        FirstName = Get((Customer customer) => customer.FirstName),
+                        LastName = Get((Customer customer) => customer.LastName)
+                    };
+                });
+
+                return customer;
+            }
+
+            public int AddCustomers(IEnumerable<Customer> customers)
+            {
+                var customersRecords = new CustomerDataRecord();
+                customers.ToList().ForEach(model => customersRecords.Add(model));
+
+                var parameterCollection = new ParameterCollection();
+                
+                // Note SqlParameter used here.
+                parameterCollection.Add(new SqlParameter("customers", customersRecords, SqlDbType.Structured, customersRecords.Count, ParameterDirection.Input));
+
+                // Performing a bulk insert using MsSql Server Structured data type.
+                return ExecuteNonQuery(new StoredCommand("dbo.BulkInsertCustomers"), parameterCollection, ConnectionName.DemoDb.ToString());
+            }
+        }
+    }
