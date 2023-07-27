@@ -24,7 +24,7 @@ To use VersaTul Collection Streamers, first install it using nuget:
 
 Main Components
 ----------------
-#. ``IStreamer`` : A base interface that represents the data contained in the stream and the functionality than can be applied to the data.
+#. ``IStreamer`` : A base interface that represents the data contained in the stream and the functionality that can be applied to the data.
 #. ``IStreamCreator`` : A base interface that represents the functionality for creating streamers.
 #. ``ICsvStreamer`` : A specific stream type interface that represents the functionality for creating csv streamers.
 #. ``ITabStreamer`` : A specific stream type interface that represents the functionality for creating tab streamers.
