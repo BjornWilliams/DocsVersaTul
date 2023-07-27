@@ -156,7 +156,7 @@ Code Examples
             protected override void Load(ContainerBuilder builder)
             {
                 // Configs
-
+                
                 // VersaTul.Configuration.Defaults.Mailer
                 var configSettings = new Builder().AddOrReplace(new[]
                 {
@@ -204,6 +204,112 @@ Code Examples
 
                 // VersaTul.Mailer
                 builder.RegisterType<MailDispatcher>().As<IMailDispatcher>().InstancePerDependency();
+            }
+        }
+
+        public class StreamConverter
+        {
+            // injecting container for simplicity
+            public void Execute(AppContainer appContainer, string type, string output, string compressed)
+            {
+                IUtility utility = appContainer.Resolve<IUtility>();
+
+                // generate list of person to convert. 
+                var people = GetPeople(1000);
+
+                IStreamer? streamer = null;
+                IStreamCreator streamCreator;
+
+                switch (type)
+                {
+                    case "csv":
+                        streamCreator = appContainer.Resolve<ICsvStreamer>();
+                        streamer = streamCreator.Create(people, "people");
+                        break;
+                    case "tab":
+                        streamCreator = appContainer.Resolve<ITabStreamer>();
+                        streamer = streamCreator.Create(people, "people");
+                        break;
+                    case "json":
+                        streamCreator = appContainer.Resolve<IJsonStreamer>();
+                        streamer = streamCreator.Create(people, "people");
+                        break;
+                }
+
+                switch (output)
+                {
+                    case "file":
+                        OutputToFile(streamer, appContainer, "filePath\\here", compressed == "yes");
+                        break;
+                    case "screen":
+                        OutputToScreen(streamer);
+                        break;
+                    case "email":
+                        OutputToEmail(streamer, appContainer);
+                        break;
+                }
+
+                streamer.Dispose();
+            }
+
+            private static void OutputToEmail(IStreamer streamer, AppContainer appContainer)
+            {
+                var mailTransporter = appContainer.Resolve<IMailTransporter>();
+                var mailConfiguration = appContainer.Resolve<IMailConfiguration>();
+
+                mailTransporter.Transport(
+                    mailConfiguration.FromAddress,
+                    mailConfiguration.ToAddress,
+                    "Stream Test Email Sent",
+                    "Please see attached files.",
+                    streamer);
+            }
+
+            private static void OutputToScreen(IStreamer streamer)
+            {
+                StreamReader streamReader = new(streamer.GetFileStream());
+
+                string streamAsString = streamReader.ReadToEnd();
+
+                Console.WriteLine(streamAsString);
+            }
+
+            private static void OutputToFile(IStreamer streamer, AppContainer appContainer, string filePath, bool compressed)
+            {
+                IStreamFileConverter fileConverter = appContainer.Resolve<IStreamFileConverter>();
+
+                fileConverter.Save(streamer, filePath, compressed);
+            }
+
+            // Helper method for generating list of data model.
+            private static IEnumerable<Person> GetPeople(int amount)
+            {
+                var people = new List<Person>(amount);
+                var names = new[]
+                {
+                    "John Doe",
+                    "Jane Smith",
+                    "Susan Williams",
+                    "Mike Burger",
+                    "Joe Williams",
+                    "Timmy Smith",
+                    "Lisa Ray",
+                    "Stanley Smith",
+                    "Sam Jones",
+                };
+
+                for (int i = 0; i < amount; i++)
+                {
+                    people.Add(new Person
+                    {
+                        Age = i + 10,
+                        Name = CommonUtil.RandomSampler(names),
+                        AccountBalance = (100.99m * i),
+                        BestFriend = CommonUtil.RandomSampler(people)
+                    });
+                }
+
+                return people;
             }
         }
     }
