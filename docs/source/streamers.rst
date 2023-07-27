@@ -144,6 +144,10 @@ Code Examples
         }
     }
 
+
+.. code-block:: c#
+    :caption: IoC Example of CsvStreamer.
+    
     namespace CollectionStreamers
     {
         // AutoFac Module
@@ -156,10 +160,10 @@ Code Examples
                 var configSettings = new Builder()
                     .AddOrReplace(new[]
                     {
-                        new KeyValuePair<string,object>("FromAddress", "author@versatul.com"),
-                        new KeyValuePair<string,object>("ToAddress", "joesmith@domain.com"),
-                        new KeyValuePair<string,object>("SmtpServer", "127.0.0.1"),
-                        new KeyValuePair<string,object>("SmtpPort", 25)
+                            new KeyValuePair<string,object>("FromAddress", "author@versatul.com"),
+                            new KeyValuePair<string,object>("ToAddress", "joesmith@domain.com"),
+                            new KeyValuePair<string,object>("SmtpServer", "127.0.0.1"),
+                            new KeyValuePair<string,object>("SmtpPort", 25)
                     })
                     .BuildConfig();
 
@@ -255,10 +259,10 @@ Code Examples
                 var mailConfiguration = appContainer.Resolve<IMailConfiguration>();
 
                 mailTransporter.Transport(
-                    mailConfiguration.FromAddress, 
-                    mailConfiguration.ToAddress, 
-                    $"Stream Test Email on {DateTime.Now}", 
-                    "Please see attached files.", 
+                    mailConfiguration.FromAddress,
+                    mailConfiguration.ToAddress,
+                    $"Stream Test Email on {DateTime.Now}",
+                    "Please see attached files.",
                     streamer);
             }
 
@@ -276,6 +280,6 @@ Code Examples
                 IStreamFileConverter fileConverter = appContainer.Resolve<IStreamFileConverter>();
 
                 fileConverter.Save(streamer, filePath, compressed);
-            }        
+            }
         }
     }
