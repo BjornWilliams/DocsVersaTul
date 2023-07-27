@@ -156,13 +156,14 @@ Code Examples
             protected override void Load(ContainerBuilder builder)
             {
                 // Configs
+                
                 // VersaTul.Configuration.Defaults.Mailer
                 var configSettings = new Builder().AddOrReplace(new[]
                 {
-                            new KeyValuePair<string,object>("FromAddress", "author@versatul.com"),
-                            new KeyValuePair<string,object>("ToAddress", "joesmith@domain.com"),
-                            new KeyValuePair<string,object>("SmtpServer", "127.0.0.1"),
-                            new KeyValuePair<string,object>("SmtpPort", 25)
+                    new KeyValuePair<string,object>("FromAddress", "author@versatul.com"),
+                    new KeyValuePair<string,object>("ToAddress", "joesmith@domain.com"),
+                    new KeyValuePair<string,object>("SmtpServer", "127.0.0.1"),
+                    new KeyValuePair<string,object>("SmtpPort", 25)
                 }).BuildConfig();
 
                 builder.RegisterInstance(configSettings);
@@ -278,6 +279,37 @@ Code Examples
                 IStreamFileConverter fileConverter = appContainer.Resolve<IStreamFileConverter>();
 
                 fileConverter.Save(streamer, filePath, compressed);
+            }
+
+            // Helper method for generating list of data model.
+            private static IEnumerable<Person> GetPeople(int amount)
+            {
+                var people = new List<Person>(amount);
+                var names = new[]
+                {
+                    "John Doe",
+                    "Jane Smith",
+                    "Susan Williams",
+                    "Mike Burger",
+                    "Joe Williams",
+                    "Timmy Smith",
+                    "Lisa Ray",
+                    "Stanley Smith",
+                    "Sam Jones",
+                };
+
+                for (int i = 0; i < amount; i++)
+                {
+                    people.Add(new Person
+                    {
+                        Age = i + 10,
+                        Name = CommonUtil.RandomSampler(names),
+                        AccountBalance = (100.99m * i),
+                        BestFriend = CommonUtil.RandomSampler(people)
+                    });
+                }
+
+                return people;
             }
         }
     }
