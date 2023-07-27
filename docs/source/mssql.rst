@@ -17,7 +17,6 @@ To use VersaTul Data MsSql, first install it using nuget:
     
     PM> NuGet\Install-Package VersaTul.Data.MsSql -Version latest
 
-
 Main Components
 ----------------
 #. ``ISqlDataSource`` : Represent functionality to get connected to a MsSQL Database and perform CRUD operations.
@@ -27,6 +26,8 @@ Main Components
 
 Functional Summary
 ------------------
+VersaTul Data MsSql shares most of its functionality with :doc:`sql`. 
+See :doc:`sql` for more details on the functionality provided.
 
 Code Examples
 -------------
