@@ -145,9 +145,9 @@ Code Examples
     }
 
 
-.. code-block:: c#
+.. code-block:: c
     :caption: IoC Example of CsvStreamer
-    
+
     namespace CollectionStreamers
     {
         // AutoFac Module
