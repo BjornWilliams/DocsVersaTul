@@ -48,7 +48,7 @@ Code Examples
         {
             static void Main(string[] args)
             {
-                // Setup mailer configuration with use of default builder
+                // Setup mailer configuration without the use of default builder
                 var configSettings = new ConfigSettings()
                 {
                     { "FromAddress", "sally@customerservice.com" },
