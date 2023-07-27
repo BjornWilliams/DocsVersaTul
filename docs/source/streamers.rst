@@ -39,19 +39,14 @@ Functional Summary
 ------------------
 #. **IStreamer.GetFileStream()** : Returns the file data as a stream whose backing store is MemoryStream.
 #. **IStreamCreator.Create<T>(IEnumerable<T> source, string fileName)** : Creates a Memory Stream from the given collection.
-.. #. **Class.Method()** :
-.. #. **Class.Method()** :
-.. #. **Class.Method()** :
-.. #. **Class.Method()** :
-.. #. **Class.Method()** :
-.. #. **Class.Method()** :
+
 
 
 Code Examples
 -------------
 
 .. code-block:: c#
-    :caption: Simple Example of using Csv Streamer to export a collection.
+    :caption: Simple Example of CsvStreamer.
 
     using VersaTul.Collection.Streamers;
     using VersaTul.Collection.Streamers.Compressions;
@@ -103,9 +98,9 @@ Code Examples
                     "Susan Williams",
                     "Mike Burger",
                     "Joe Williams",
-                    "Kimmy Smith",
+                    "Timmy Smith",
                     "Lisa Ray",
-                    "Stancey Smith",
+                    "Stanley Smith",
                     "Sam Jones",
                 };
 
