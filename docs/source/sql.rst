@@ -60,6 +60,7 @@ Code Examples
         {
             static void Main(string[] args)
             {
+                // Supported database engines.
                 //MSSQL ---> System.Data.SqlClient.SqlClientFactory
                 //SQLite ---> System.Data.SQLite.SQLiteFactory
                 //MySql ---> MySql.Data.MySqlClient.MySqlClientFactory
