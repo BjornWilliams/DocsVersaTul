@@ -27,8 +27,8 @@ Main Components
 
 Functional Summary
 ------------------
-1. **bool SendMail()** : Overloaded method for sending SMTP e-mails to receiver as Raw text or HTML with or without attachments.
-2. **void Send(MailMessage mailMessage)** : Sends the specified message to an SMTP server for delivery.
+1. **IMailDispatcher.SendMail()** : Overloaded method for sending SMTP e-mails to receiver as Raw text or HTML with or without attachments.
+2. **ISmtpClient.Send(MailMessage mailMessage)** : Sends the specified message to an SMTP server for delivery.
 3. See :doc:`configuration-defaults` for more configuration settings.
 
 
@@ -51,13 +51,13 @@ Code Examples
                 // Setup mailer configuration with use of default builder
                 var configSettings = new ConfigSettings()
                 {
-                { "FromAddress", "sally@customerservice.com" },
-                { "ToAddress", "mygoodcustomer@domain.com" },
-                { "SmtpServer", "120.0.0.1" },
-                { "SmtpPort", 25 },
-                { "SmtpUserName", "bjorn@versatul.com" },
-                { "SmtpPassword", "Some super secret password" },
-                { "MaxAttachmentSize", 10000000 }
+                    { "FromAddress", "sally@customerservice.com" },
+                    { "ToAddress", "mygoodcustomer@domain.com" },
+                    { "SmtpServer", "120.0.0.1" },
+                    { "SmtpPort", 25 },
+                    { "SmtpUserName", "bjorn@versatul.com" },
+                    { "SmtpPassword", "Some super secret password" },
+                    { "MaxAttachmentSize", 10000000 }
                 };
 
                 // Setup needed class instances
