@@ -207,7 +207,7 @@ Code Examples
             }
         }
 
-        public class StreamConverter
+        public class CollectionConverter
         {
             // injecting container for simplicity
             public void Execute(AppContainer appContainer, string type, string output, string compressed)
@@ -252,6 +252,7 @@ Code Examples
                 streamer.Dispose();
             }
 
+            // send file via email. 
             private static void OutputToEmail(IStreamer streamer, AppContainer appContainer)
             {
                 var mailTransporter = appContainer.Resolve<IMailTransporter>();
@@ -265,6 +266,7 @@ Code Examples
                     streamer);
             }
 
+            // send file to console.
             private static void OutputToScreen(IStreamer streamer)
             {
                 StreamReader streamReader = new(streamer.GetFileStream());
@@ -274,6 +276,7 @@ Code Examples
                 Console.WriteLine(streamAsString);
             }
 
+            // send file to disc.
             private static void OutputToFile(IStreamer streamer, AppContainer appContainer, string filePath, bool compressed)
             {
                 IStreamFileConverter fileConverter = appContainer.Resolve<IStreamFileConverter>();
