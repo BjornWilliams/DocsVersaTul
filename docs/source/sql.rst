@@ -118,6 +118,7 @@ Code Examples
             IEnumerable<Product> Get();
         }
 
+        // By inheriting from BaseDataService all project specific data service will have the common functionality they need to access the dataSource.        
         public class ProductDataService : BaseDataService, IProductService
         {
             public ProductDataService(IDataSource dataSource, INullFiltering filtering, IUtility utility) : base(dataSource, filtering, utility) { }
@@ -129,6 +130,9 @@ Code Examples
 
                 ProcessReader(ExecuteReader(new StoredCommand("GetAllProducts")), (position) =>
                 {
+                    // position parameter: useful for multiple result sets, this value represents which reader is currently being read from in the result set.
+                    // this information can then be used to populate different models in the lambda helper method. 
+
                     products.Add(new Product
                     {
                         CategoryId = Get((Product prod) => prod.CategoryId),
