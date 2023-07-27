@@ -207,6 +207,7 @@ Code Examples
 .. code-block:: c#
     :caption: Simple Example Using IoC and Oracle as Database.
 
+    // AutoFac as IoC container
     public class AppModule : Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -218,7 +219,7 @@ Code Examples
                 new KeyValuePair<string, object>("SqlDbConnectionName", "OracleSqlDb")
             }).BuildConfig();
 
-
+            // Registering config to help with creation of DataConfiguration class.
             builder.RegisterInstance(configSettings);
 
             //Singletons
