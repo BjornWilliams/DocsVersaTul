@@ -217,8 +217,6 @@ Code Examples
             // injecting container for simplicity
             public void Execute(AppContainer appContainer, string type, string output, string compressed)
             {
-                IUtility utility = appContainer.Resolve<IUtility>();
-
                 // generate list of person to convert. 
                 var people = GetPeople(1000);
 
