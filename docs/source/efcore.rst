@@ -26,11 +26,13 @@ Main Components
 
 Functional Summary
 ------------------
-#. **TEntity Add(TEntity entity)** : Add the given entity to the database.
-#. **TEntity Find(params object[] keyValues)** : Finds an entity with the given primary key values.
-#. **IEnumerable<TEntity> Get()** : Gets all entities from the database.
-#. **TEntity Update(TEntity entity)** : Updates the given entity in the database.
-#. **TEntity Remove(TEntity entity)** : Deletes the given entity from the database.
+#. **TEntity BaseRepository<TEntity, TKey>.Add()** : Overloaded method for adding a given entity to the database.
+#. **TEntity BaseRepository<TEntity, TKey>.AddRange()** : Overloaded method for adding a given list of entities to the database.
+#. **TEntity BaseRepository<TEntity, TKey>.Find()** : Overloaded method for finding an entity with the given primary key values.
+#. **IEnumerable<TEntity> BaseRepository<TEntity, TKey>.Get()** : Overloaded method for getting entities from the database.
+#. **TEntity BaseRepository<TEntity, TKey>.Update()** : Overloaded method for updating a given entity in the database.
+#. **TEntity BaseRepository<TEntity, TKey>.Remove()** : Overloaded method for deleting a given entity from the database.
+#. **void BaseRepository<TEntity, TKey>.RemoveRange()** : Overloaded method for deleting a list of given entities from the database.
 
 Code Examples
 -------------

@@ -18,19 +18,21 @@ To use VersaTul Logger Mail, first install it using nuget:
 
 Main Components
 ----------------
-1. ``IMailLogger`` : Represent functionality need to log to a email source E.g errors@domain.com.
-2. ``MailLogger`` : Default implementation of the Mail Logger interface.
+#. ``IMailLogger`` : Represent functionality need to log to a email source E.g errors@domain.com.
+#. ``MailLogger`` : Default implementation of the Mail Logger interface.
 
 Functional Summary
 ------------------
-1. See :doc:`/logger` project for more details.
-2. See :doc:`/mailer` project for more details.
+#. See :doc:`/logger` project for more details.
+#. See :doc:`/mailer` project for more details.
 
 Code Examples
 -------------
 .. code-block:: c#
     :caption: Implementing a Mail Logger Example
 
+    using VersaTul.Logger.Mail;
+    
     // Configure the container using AutoFac Module
     public class AppModule : Module
     {

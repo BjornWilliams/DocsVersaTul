@@ -18,18 +18,18 @@ To use VersaTul Mailer, first install it using nuget:
 
 Main Components
 ----------------
-1. ``IMailConfiguration`` : Represents a configuration file that is applicable to the mailing application.
-2. ``IMailDispatcher`` : Represents the functionality to send emails messages.
-3. ``ISmtpClient`` : Represents an implementation that can be used to send SMTP messages.
-4. ``MailConfiguration`` : Default implementation of the ``IMailConfiguration`` interface.
-5. ``MailDispatcher`` : Default implementation of the ``IMailDispatcher`` interface.
-6. ``SmtpClientWrapper`` : Default implementation of the ``ISmtpClient`` interface.
+#. ``IMailConfiguration`` : Represents a configuration file that is applicable to the mailing application.
+#. ``IMailDispatcher`` : Represents the functionality to send emails messages.
+#. ``ISmtpClient`` : Represents an implementation that can be used to send SMTP messages.
+#. ``MailConfiguration`` : Default implementation of the ``IMailConfiguration`` interface.
+#. ``MailDispatcher`` : Default implementation of the ``IMailDispatcher`` interface.
+#. ``SmtpClientWrapper`` : Default implementation of the ``ISmtpClient`` interface.
 
 Functional Summary
 ------------------
-1. **IMailDispatcher.SendMail()** : Overloaded method for sending SMTP e-mails to receiver as Raw text or HTML with or without attachments.
-2. **ISmtpClient.Send(MailMessage mailMessage)** : Sends the specified message to an SMTP server for delivery.
-3. See :doc:`configuration-defaults` for more configuration settings.
+#. **bool IMailDispatcher.SendMail()** : Overloaded method for sending SMTP e-mails to receiver as Raw text or HTML with or without attachments.
+#. **void ISmtpClient.Send(MailMessage mailMessage)** : Sends the specified message to an SMTP server for delivery.
+#. See :doc:`configuration-defaults` for more configuration settings.
 
 
 Code Examples

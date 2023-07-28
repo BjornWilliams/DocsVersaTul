@@ -16,25 +16,24 @@ To use VersaTul.Data.MongoDB, first install it using nuget:
     
     PM> NuGet\Install-Package VersaTul.Data.MongoDB -Version latest
 
-
 Main Components
 ----------------
-1. ``IRepository<TEntity, TKey>`` : This is  a generic interface for supporting common CRUD operations.
-2. ``IDataConfiguration<TKey>`` : This is a generic interface for fetching configuration settings. `TKey` represents the identity type of the collection.
-3. ``DataConfiguration<TKey>`` : This is the default implementation of the data configuration interface. 
-4. ``BaseRepository<TEntity, TMap, TKey>`` : This is an abstract class providing common functionality for a MongoDB Database.
-5. ``WherePredicate<TEntity>`` : Thi is a helper class for generating search conditional expressions.
-6. ``Entity`` : This is an abstract entity used for all Business Entities. It provides a default bson document Id property.
+#. ``IRepository<TEntity, TKey>`` : This is  a generic interface for supporting common CRUD operations.
+#. ``IDataConfiguration<TKey>`` : This is a generic interface for fetching configuration settings. `TKey` represents the identity type of the collection.
+#. ``DataConfiguration<TKey>`` : This is the default implementation of the data configuration interface. 
+#. ``BaseRepository<TEntity, TMap, TKey>`` : This is an abstract class providing common functionality for a MongoDB Database.
+#. ``WherePredicate<TEntity>`` : Thi is a helper class for generating search conditional expressions.
+#. ``Entity`` : This is an abstract entity used for all Business Entities. It provides a default bson document Id property.
 
 Functional Summary
 ------------------
-1. **TEntity Add(TEntity entity)** : Adds a single entity.
-2. **Add(IEnumerable<TEntity> entities)** : Adds the list of entities to the collection.
-3. **IEnumerable<TEntity> Find(IPredicate<TEntity> predicate)** : Lazy loads any entity that matches given condition.
-4. **TEntity GetById(TKey id)** : Gets an entity for the given identifier.
-5. **TEntity Update(TEntity entity)** : Updates a single entity.
-6. **void Update(IEnumerable<TEntity> entities)** : Updates the given list of entities inside a collection.
-7. See :doc:`configuration-defaults` for more configuration settings.
+#. **TEntity IRepository<TEntity, TKey>.Add(TEntity entity)** : Adds a single entity.
+#. **void IRepository<TEntity, TKey>.Add(IEnumerable<TEntity> entities)** : Adds the list of entities to the collection.
+#. **IEnumerable<TEntity> IRepository<TEntity, TKey>.Find(IPredicate<TEntity> predicate)** : Lazy loads any entity that matches given condition.
+#. **TEntity IRepository<TEntity, TKey>.GetById(TKey id)** : Gets an entity for the given identifier.
+#. **TEntity IRepository<TEntity, TKey>.Update(TEntity entity)** : Updates a single entity.
+#. **void IRepository<TEntity, TKey>.Update(IEnumerable<TEntity> entities)** : Updates the given list of entities inside a collection.
+#. See :doc:`configuration-defaults` for more configuration settings.
 
 Code Examples
 -------------
@@ -103,8 +102,8 @@ Code Examples
         protected override void Load(ContainerBuilder builder)
         {
             //Configs
-            var configSettings = new MongoDBBuilder.Builder()
-                .AddOrReplace("MongoDb", "mongodb://root:password123@sharedvm.local.com:27017,sharedvm.local.com:27018,sharedvm.local.com:27019/DemoDB?replicaSet=replicaset")
+            var configSettings = new Builder()
+                .AddOrReplace("MongoDb", "mongodb://root:password123@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/DemoDB?replicaSet=replicaset")
                 .BuildConfig();
 
             builder.RegisterInstance(configSettings);

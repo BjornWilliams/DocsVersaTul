@@ -17,16 +17,16 @@ To use VersaTul Logger Web, first install it using nuget:
 
 Main Components
 ----------------
-1. ``IWebLogger`` : Represent functionality need to log to an API endpoint.
-2. ``ILogWebConfiguration`` : Represents functionality needed to get settings for the Web logger.
-3. ``WebLogger`` : Default implementation of the Web Logger interface.
-4. ``LogWebConfiguration`` : Default implementation of the Web Logger configuration interface.
+#. ``IWebLogger`` : Represent functionality need to log to an API endpoint.
+#. ``ILogWebConfiguration`` : Represents functionality needed to get settings for the Web logger.
+#. ``WebLogger`` : Default implementation of the Web Logger interface.
+#. ``LogWebConfiguration`` : Default implementation of the Web Logger configuration interface.
 
 Functional Summary
 ------------------
-1. **BaseUrl** : Gets the Base Url of the API E.G http://domain.com.
-2. **LogEndPoint** : Gets the relative end point to send data to.
-3. See :doc:`/logger` project for more details.
+#. **ILogWebConfiguration.BaseUrl** : Property for getting the Base Url of the API E.G http://domain.com.
+#. **ILogWebConfiguration.LogEndPoint** : Property for getting the relative end point to send data to.
+#. See :doc:`/logger` project for more details.
 
 
 Code Examples
@@ -34,6 +34,8 @@ Code Examples
 .. code-block:: c#
     :caption: Implementing a Web Logger Example
 
+    using VersaTul.Logger.Web;
+    
     // Configure the container using AutoFac Module
     public class AppModule : Module
     {

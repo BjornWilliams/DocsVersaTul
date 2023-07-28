@@ -17,22 +17,24 @@ To use VersaTul Extensions, first install it using nuget:
 
 Main Components
 ----------------
-1. ``ArrayExtensions`` : Class containing all methods for extending arrays.
-2. ``CommonExtensions`` : Class containing all methods for common functionality.
-3. ``ConvertExtensions`` : Class containing all methods for extending object conversions.
-4. ``CurrencyExtensions`` : Class containing all methods for extending currency manipulations.
+#. ``ArrayExtensions`` : Class containing all methods for extending arrays.
+#. ``CommonExtensions`` : Class containing all methods for common functionality.
+#. ``ConvertExtensions`` : Class containing all methods for extending object conversions.
+#. ``CurrencyExtensions`` : Class containing all methods for extending currency manipulations.
 
 Functional Summary
 ------------------
-1. **IEnumerable<T> Pick<T>(this IEnumerable<T> source, int amount)** : Randomly selects the given amount of items from a collection.
-2. **string ToCamelCase(this string phrase)** : Converts the first letter of the first word to lower case.
-3. **T To<T>(this object value)** : Returns an object of the specified type and whose value is equivalent to the specified object.
-4. **long ToMicron(this decimal amount)** : Converts the given amount to micros. It Multiplies the value by one million.
+#. **IEnumerable<T> ArrayExtensions.Pick<T>(this IEnumerable<T> source, int amount)** : Randomly selects the given amount of items from a collection.
+#. **string CommonExtensions.ToCamelCase(this string phrase)** : Converts the first letter of the first word to lower case.
+#. **T ConvertExtensions.To<T>(this object value)** : Returns an object of the specified type and whose value is equivalent to the specified object.
+#. **long CurrencyExtensions.ToMicron(this decimal amount)** : Converts the given amount to micros. It Multiplies the value by one million.
 
 Code Examples
 -------------
 .. code-block:: c#
     :caption: Random Selection Example
+
+    using VersaTul.Extensions;
 
     class Program
     {
@@ -50,6 +52,8 @@ Code Examples
 .. code-block:: c#
     :caption: Different Conversion Examples
 
+    using VersaTul.Extensions;
+    
     class Program
     {
         static void Main(string[] args)
