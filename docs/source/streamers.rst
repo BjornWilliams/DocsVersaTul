@@ -39,12 +39,11 @@ Main Components
 
 Functional Summary
 ------------------
-#. **IStreamer.GetFileStream()** : Returns the file data as a stream whose backing store is MemoryStream.
-#. **IStreamCreator.Create<T>(IEnumerable<T> source, string fileName)** : Creates a Memory Stream from the given collection.
-#. **IMailTransporter.Transport(string fromAddress, string toAddress, string subject, string body, IStreamer streamer)** : Transfer the given IStreamer via email to given recipient.
-#. **IMailTransporter.Transport(string fromAddress, string toAddress, string subject, string body, IEnumerable<IStreamer> streamers)** : Transfer the given list of IStreamers via email to given recipient.
-#. **IStreamFileConverter.Save(IStreamer streamer, string filePath, bool compressed = false)** : Convert the given IStreamer to a physical file on disc at the given path.
-#. **ICompressTransport.GetAttachments(long maxAttachmentSize, StreamContainer streamContainer)** : Creates a list of Attachment from the given StreamContainer instance.
+#. **MemoryStream IStreamer.GetFileStream()** : Returns the file data as a stream whose backing store is MemoryStream.
+#. **IStreamer IStreamCreator.Create<T>(IEnumerable<T> source, string fileName)** : Creates a Memory Stream from the given collection.
+#. **bool IMailTransporter.Transport()** : Overloaded method for transferring a given IStreamer or list of IStreamers via email to given recipient.
+#. **void IStreamFileConverter.Save(IStreamer streamer, string filePath, bool compressed = false)** : Convert the given IStreamer to a physical file on disc at the given path.
+#. **IEnumerable<Attachment> ICompressTransport.GetAttachments(long maxAttachmentSize, StreamContainer streamContainer)** : Creates a list of Attachment from the given StreamContainer instance.
 
 Code Examples
 -------------

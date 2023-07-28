@@ -18,15 +18,15 @@ To use VersaTul Caching, first install it using nuget:
 
 Main Components
 ----------------
-1. ``IFilter<T, U>`` : A filter represents the work to be done on a given input with the given return type.
-2. ``Pipeline<T, U> : IFilter<T, U>`` : Represents an accumulative set of steps or filters that can be performed on a given input.
-3. ``PipelineExtensions`` : Provides an easy way of extending objects with pipeline filters.
+#. ``IFilter<T, U>`` : A filter represents the work to be done on a given input with the given return type.
+#. ``Pipeline<T, U> : IFilter<T, U>`` : Represents an accumulative set of steps or filters that can be performed on a given input.
+#. ``PipelineExtensions`` : Provides an easy way of extending objects with pipeline filters.
 
 Functional Summary
 ------------------
-1. **U Execute(T input);** : Filters implementing this method would perform processing on the input type{T}.
-2. **Func<T, U> Filter** : Property on the Pipeline that gets the filter associated with this pipeline.
-3. **U Filter<T, U>(this T input, IFilter<T, U> filter)** : An extension method for Providing an easy way of extending objects with pipeline filters.
+#. **U IFilter<T, U>.Execute(T input);** : Filters implementing this method would perform processing on the input type{T}.
+#. **Func<T, U> Pipeline<T, U>.Filter** : Property on the Pipeline that gets the filter associated with this pipeline.
+#. **U PipelineExtensions.Filter<T, U>(this T input, IFilter<T, U> filter)** : An extension method for Providing an easy way of extending objects with pipeline filters.
 
 Code Examples
 -------------

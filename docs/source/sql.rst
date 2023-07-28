@@ -35,10 +35,10 @@ Main Components
 
 Functional Summary
 ------------------
-#. **BaseDataService.ExecuteReader()** : Overloaded method for reading a forward-only stream of rows from the data source.
-#. **BaseDataService.ExecuteNonQuery()** : Overloaded method for executing a given stored procedure and returns the affected number of rows count.
-#. **BaseDataService.ProcessReader(DbDataReader reader, ProccessReaderHandler handler)** : Helper method to iterate the given data reader and provide access to the data at each row via the helper methods. For example GetInt(),GetString(), or Get<TInput, TResult>().
-#. **ParameterCollection.Add(IParameter parameter)** : Adds the given IParameter object to the end of the parameter collection List.
+#. **DbDataReader BaseDataService.ExecuteReader()** : Overloaded method for reading a forward-only stream of rows from the data source.
+#. **int BaseDataService.ExecuteNonQuery()** : Overloaded method for executing a given stored procedure and returns the affected number of rows count.
+#. **void BaseDataService.ProcessReader(DbDataReader reader, ProccessReaderHandler handler)** : Helper method to iterate the given data reader and provide access to the data at each row via the helper methods. For example GetInt(),GetString(), or Get<TInput, TResult>().
+#. **void ParameterCollection.Add(IParameter parameter)** : Adds the given IParameter object to the end of the parameter collection List.
 
 Code Examples
 -------------
