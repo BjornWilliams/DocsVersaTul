@@ -19,16 +19,16 @@ To use VersaTul Compression, first install it using nuget:
 
 Main Components
 ----------------
-1. ``IArchiver`` : Provides functionality to write ``ZipStream`` to ``ZipArchive`` stream.
-2. ``IZipper`` : Provides functionality to zip ``ZipStream`` into zip up ``MemoryStream``.
-3. ``Archiver`` : Concrete implementation of the ``IArchiver`` interface.
-4. ``Zipper`` : Concrete implementation of the ``IZipper`` interface.
-5. ``ZipStream`` : Represents a class containing the ``MemoryStream`` and meta-data to save stream as.
+#. ``IArchiver`` : Provides functionality to write ``ZipStream`` to ``ZipArchive`` stream.
+#. ``IZipper`` : Provides functionality to zip ``ZipStream`` into zip up ``MemoryStream``.
+#. ``Archiver`` : Concrete implementation of the ``IArchiver`` interface.
+#. ``Zipper`` : Concrete implementation of the ``IZipper`` interface.
+#. ``ZipStream`` : Represents a class containing the ``MemoryStream`` and meta-data to save stream as.
 
 Functional Summary
 ------------------
-1. **MemoryStream Zip(ZipStream zipStream)** : Zips the given ``ZipStream`` into a zipped ``MemoryStream``.
-2. **MemoryStream Zip(IEnumerable<ZipStream> zipStreams)** : Zips the given collection of ``ZipStreams`` into a zipped ``MemoryStream``.
+#. **MemoryStream IZipper.Zip(ZipStream zipStream)** : Overloaded method for zipping the given ``ZipStream`` into a zipped ``MemoryStream``.
+#. **void IArchiver.Archive(ZipArchive zipArchive, ZipStream zipStream)** : Method for writing the entire contents of a memory stream to a zipArchive stream.
 
 Code Examples
 --------------

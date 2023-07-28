@@ -24,14 +24,13 @@ To use VersaTul Configuration Defaults, first install it using nuget:
 
 Main Components
 ----------------
-1. ``ConfigurationBuilder`` : Provides the functionality needed to setup default settings. All builder classes are derived from this class.
-2. ``Builder`` : Project specific builders. These can be found under their respective namespaces.
+#. ``ConfigurationBuilder`` : Provides the functionality needed to setup default settings. All builder classes are derived from this class.
+#. ``Builder`` : Project specific builders. These can be found under their respective namespaces.
 
 Functional Summary
 ------------------
-1. **AddOrReplace(string key, object value)** : Used to add or replace the given key and value in the configuration dictionary. For the given key/value options.
-2. **AddOrReplace(IEnumerable<KeyValuePair<string, object>> valuePairs)** : Used to add or replace a list of keys and values in the configuration dictionary.
-3. **AddOrReplace(IDictionary<string,object> keyValuePairs)** : Used to add or replace a list of keys and values in the configuration dictionary.
+#. **ConfigurationBuilder ConfigurationBuilder.AddOrReplace()** : Overloaded method for adding or replacing the value at the given key in the configuration dictionary.
+#. **ConfigSettings ConfigurationBuilder.BuildConfig()** : Create a new ConfigSettings dictionary from the underlining dictionary keys and values added during setup.
 
 Code Examples
 --------------
@@ -39,13 +38,15 @@ Code Examples
 .. code-block:: c#
     :caption: Configuration builder MongoDb example.
 
+    using VersaTul.Configuration.Defaults.MongoDB;
+
     public class AppModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             //Default configs with connection name replacement.
-            var configSettings = new MongoDB.Builder()
-                .AddOrReplace("MongoDb", "mongodb://root:password123@sharedvm.local.com:27017,sharedvm.local.com:27018,sharedvm.local.com:27019/DemoDB?replicaSet=replicaset")
+            var configSettings = new Builder()
+                .AddOrReplace("MongoDb", "mongodb://root:password123@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/DemoDB?replicaSet=replicaset")
                 .BuildConfig();
             
             // Registering the settings so that it can be used to build DataConfiguration<>.

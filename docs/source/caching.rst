@@ -26,12 +26,10 @@ Main Components
 
 Functional Summary
 ------------------
-#. **ICacheProvider<T>.Get(string key)** : Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
-#. **ICacheProvider<T>.Add(string key, T data)** : Inserts the cache entry using the key for a default duration of 60 minutes.
-#. **ICacheProvider<T>.Add(string key, T data, int cacheTime)** : Inserts the given item into the Cache using the given key for a the specified duration in minutes.
-#. **ICacheProvider<T>.Add(string key, T data, CacheExpiration expiration)** : Inserts the given item into the Cache using the given key for the specified CacheExpiration.
-#. **ICacheProvider<T>.IsExists(string key)** : Indicates if there is a cache entry for the key.
-#. **ICacheProvider<T>.Remove(string key)** : Removes the cache entry from the cache for the given key.
+#. **T ICacheProvider<T>.Get(string key)** : Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
+#. **void ICacheProvider<T>.Add()** : Overloaded method for inserting the cache entry using the key for a the specified duration.
+#. **bool ICacheProvider<T>.IsExists(string key)** : Indicates if there is a cache entry for the key.
+#. **void ICacheProvider<T>.Remove(string key)** : Removes the cache entry from the cache for the given key.
 
 Code Examples
 -------------

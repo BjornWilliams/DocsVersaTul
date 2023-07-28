@@ -19,23 +19,24 @@ To use VersaTul Configuration, first install it using nuget:
 
 Main Components
 ----------------
-1. ``IConfiguration`` : Represents a configuration file that is applicable to a particular application, or resource.
-2. ``IAppConfiguration`` : Represents the base application configuration.
-3. ``Configuration`` : Abstract class implementing ``IConfiguration``. This class must be inherited.
-4. ``AppConfiguration`` : Abstract class implementing ``IAppConfiguration``. This class must be inherited.
-5. ``ConfigSettings`` : Represents a collection of Key Values. Keys are strings and Values are object.
+#. ``IConfiguration`` : Represents a configuration file that is applicable to a particular application, or resource.
+#. ``IAppConfiguration`` : Represents the base application configuration.
+#. ``Configuration`` : Abstract class implementing ``IConfiguration``. This class must be inherited.
+#. ``AppConfiguration`` : Abstract class implementing ``IAppConfiguration``. This class must be inherited.
+#. ``ConfigSettings`` : Represents a collection of Key Values. Keys are strings and Values are object.
 
 Functional Summary
 ------------------
-1. **T Get<T>(string name = null)** : Gets the value of the specified key stored in the settings dictionary. 
-*Note:* If no name is supplied the calling property name is used for the setting lookup.
+#. **T IConfiguration.Get<T>(string name = null)** : Gets the value of the specified key stored in the settings dictionary. *Note:* If no name is supplied the calling property name is used for the setting lookup. 
+#. **T IConfiguration.GetOrDefault<T>(string name = null)** : Get the value of the specified key stored in the settings dictionary. However, if the key is not present then the default of the type T is returned.
+
 
 Code Examples
 -------------
 
 .. code-block:: c#
     :caption: Configuration inherited
-    :emphasize-lines: 61, 64
+    :emphasize-lines: 64, 67
 
     // Inherits the Configuration base class and extends its functionality with 
     // the additional properties.
