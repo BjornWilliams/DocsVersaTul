@@ -28,11 +28,10 @@ Main Components
 
 Functional Summary
 ------------------
-#. **IDictionary<string, object> AsDictionary(IDictionary<string, object> source)** : Converts the given dictionary of string, objects with different levels of object depth into one level. Essentially create a dictionary flatter dictionary with keys/values.
-#. **string AsString(object source)** : Converts the given object from a multi-dimensional object to one-dimensional string.
-#. **IDictionary<string, object> ToDictionary(object source)** : Converts the given object into a dictionary of String keys and value objects.
-#. **object Process(PropertyInfo propertyInfo, object propertyValue, Type propertyType)** : Analyze the given property of an object and its value to see if further processing is needed in order to flatten the given object. 
-#. **object Process(PropertyInfo propertyInfo, object propertyValue, IDictionary<string, object> dictionary)** : Analyze the given property of an object and its value to see if further processing is needed in order to flatten the given object.  
+#. **IDictionary<string, object> IFlattener.AsDictionary(IDictionary<string, object> source)** : Converts the given dictionary of string, objects with different levels of object depth into one level. Essentially create a dictionary flatter dictionary with keys/values.
+#. **string IFlattener.AsString(object source)** : Converts the given object from a multi-dimensional object to one-dimensional string.
+#. **IDictionary<string, object> IObjectProcessor.ToDictionary(object source)** : Converts the given object into a dictionary of String keys and value objects.
+#. **object IPropertyProcessor.Process()** : Overloaded method for analyzing a given property of an object and its values to see if further processing is needed in order to flatten the given object.
 
 Code Examples
 -------------
