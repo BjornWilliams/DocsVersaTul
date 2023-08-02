@@ -1,6 +1,5 @@
 .. meta::
-    :name: google-site-verification
-    :content: qzvlosH2brzdVklyvowF3R1QXvefZW6xph30oJPaPNc
+    :google-site-verification: qzvlosH2brzdVklyvowF3R1QXvefZW6xph30oJPaPNc
 
 
 Welcome to VersaTul documentation!
