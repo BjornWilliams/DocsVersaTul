@@ -35,22 +35,7 @@ Main Components
 
 Functional Summary
 ------------------
-#. **DirectoryInfo IDirectoryIO.CreateDirectory(string path)** : 
-#. **bool IDirectoryIO.Exists(string path)** : 
-#. **string[] IDirectoryIO.GetFiles(string path, string searchPattern)** : 
-#. **void IFileIO.AppendAllLines(string path, IEnumerable<string> contents)** : 
-#. **void IFileIO.Delete(string path)** : 
-#. **bool IFileIO.Exists(string path)** : 
-#. **string[] IFileIO.ReadAllLines(string path)** : 
-#. **void IFileIO.WriteAllLines(string path, IEnumerable<string> contents)** : 
-#. **void IFileIO.Write(string filePath, MemoryStream content)** : 
-#. **interface.method** : 
-#. **interface.method** : 
-#. **interface.method** : 
-#. **interface.method** : 
-#. **interface.method** : 
-#. **interface.method** : 
-#. **interface.method** : 
+
 
 Code Examples
 -------------
