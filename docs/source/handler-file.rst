@@ -35,7 +35,28 @@ Main Components
 
 Functional Summary
 ------------------
-
+#. **DirectoryInfo IDirectoryIO.CreateDirectory(string path)** : Creates all directories and subdirectories in the specified path unless they already exist.
+#. **bool IDirectoryIO.Exists(string path)** : Determines whether the given path refers to an existing directory on disk.
+#. **string[] IDirectoryIO.GetFiles(string path, string searchPattern)** : Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+#. **void IFileIO.AppendAllLines(string path, IEnumerable<string> contents)** : Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
+#. **void IFileIO.Delete(string path)** : Deletes the specified file.
+#. **bool IFileIO.Exists(string path)** : Determines whether the specified file exists.
+#. **string[] IFileIO.ReadAllLines(string path)** : Opens a text file, reads all lines of the file into a string array, and then closes the file.
+#. **void IFileIO.WriteAllLines(string path, IEnumerable<string> contents)** : Creates a new file, write the specified string array to the file, and then closes the file.
+#. **void IFileIO.Write(string filePath, MemoryStream content)** : Writes the given memory stream to physical file on disk at the specified path.
+#. **FileResult IFileUtility.ReadAllLines(string path)** : Opens a text file, reads all lines of the file, and then closes the file.
+#. **void IFileUtility.SaveOrUpdate(FileInfo file)** : Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
+#. **void IFileUtility.Save(StreamFileInfo file)** : Writes the given stream to a file. If the specified file does not exist, this method creates the file, writes the specified stream to the file, and then closes the file.
+#. **string IFileHandler.GetFileName(string path)** : Returns the Filename only from a given file path.
+#. **string IFileHandler.GetFileNameWithOutExtension(string path)** : Returns the Filename only from a given file path with the file extension removed.
+#. **void IFileHandler.RemoveFile(string sourceFile)** : Deletes the given file from the hard disc.
+#. **string IFileHandler.GetExtension(string fileName)** : Returns the extension of the given file without the (dot) notation.
+#. **bool IFileHandler.CheckFileExtensionMatch(string fileName, string extension)** : Checks if the given filename and file extension are the same.
+#. **IEnumerable<string> IFileHandler.FindFilesWithExtension(string path, string extension)** : Returns the names of files (including their paths) that match the specified extension in the specified directory.
+#. **void IFileHandler.CreateDirectoryIfNotExists(string path)** : Determines whether the given path refers to an existing directory on disk and if not creates all the directories in a specified path.
+#. **IEnumerable<string> IFileHandler.FindFiles(string path, string searchPattern)** : Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+#. **string IFileHandler.EnsureExtension(string fileName, string extension)** : Checks the give fileName contains the given extension, if not then the fileName is updated to match.
+#. **void IFileHandler.ReadLine(string path, Action<string> action)** : Opens the given file and reads the content line by line as string passed into the given action.
 
 Code Examples
 -------------
