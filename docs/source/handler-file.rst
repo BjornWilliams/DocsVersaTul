@@ -60,3 +60,28 @@ Functional Summary
 
 Code Examples
 -------------
+.. code-block:: c#
+    :caption: File Utility Save Or Update Example
+
+    using VersaTul.Handler.File.Contracts;
+    using VersaTul.Handler.File.Types;
+    using VersaTul.Utilities.Contracts;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create instances 
+            var iOWrapper = new IOWrapper();
+            var fileHandler = new FileHandler(iOWrapper, iOWrapper);
+            var fileUtility = new FileUtility(fileHandler, iOWrapper);
+
+            // Text File Info to save 
+            var textFileData = "Large amount of text to save to file";
+            var fileData = new TextFileInfo("c:\some\path\on\disk","data", textFileData);
+
+            //Save or Update 
+            fileUtility.SaveOrUpdate(fileData);
+        }
+        Console.ReadLine();
+    }
