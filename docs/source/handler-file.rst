@@ -85,3 +85,64 @@ Code Examples
         }
         Console.ReadLine();
     }
+
+.. code-block:: c#
+    :caption: File Utility Read data Example
+
+    using VersaTul.Handler.File.Contracts;
+    using VersaTul.Handler.File.Types;
+    using VersaTul.Utilities.Contracts;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create instances 
+            var iOWrapper = new IOWrapper();
+            var fileHandler = new FileHandler(iOWrapper, iOWrapper);
+            var fileUtility = new FileUtility(fileHandler, iOWrapper);
+
+            // file to read 
+            var fullFilePath = "c:\some\path\filename.txt";
+
+            // Open and read data from file.
+            FileResult data = fileUtility.ReadAllLines(fullFilePath);
+
+            if (data.IsExists)
+            {
+                Print("Here is your file data");
+                Print("=========================");
+                data.Content.ToList().ForEach(val => Print(val));
+            }
+            else
+            {
+                Print($"No file @:'{fullFilePath}'");
+            }
+        }
+        Console.ReadLine();
+    }
+
+.. code-block:: c#
+    :caption: File Utility Remove Example
+
+    using VersaTul.Handler.File.Contracts;
+    using VersaTul.Handler.File.Types;
+    using VersaTul.Utilities.Contracts;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create instances 
+            var iOWrapper = new IOWrapper();
+            var fileHandler = new FileHandler(iOWrapper, iOWrapper);
+            var fileUtility = new FileUtility(fileHandler, iOWrapper);
+
+            // file to read 
+            var fullFilePath = "c:\some\path\filename.txt";
+
+            // delete file
+            fileHandler.RemoveFile(fullFilePath);
+        }
+        Console.ReadLine();
+    }
