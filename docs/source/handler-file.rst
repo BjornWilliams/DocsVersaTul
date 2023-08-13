@@ -146,3 +146,39 @@ Code Examples
         }
         Console.ReadLine();
     }
+
+.. code-block:: c#
+    :caption: File Utility Save Or Update IoC Example
+
+    using VersaTul.Handler.File.Contracts;
+    using VersaTul.Handler.File.Types;
+    using VersaTul.Utilities.Contracts;
+
+    public class AppModule : Module
+    {
+        // Setup AutoFac container
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<CommonUtility>().As<IUtility>();
+
+            builder.RegisterType<IOWrapper>().As<IFileIO>().As<IDirectoryIO>().SingleInstance();
+            builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();  
+            builder.RegisterType<FileHandler>().As<IFileHandler>().SingleInstance();
+        }
+    }
+
+    public class FileManager
+    {
+        // injecting container for simplicity
+        public void Execute(AppContainer appContainer)
+        { 
+            fileUtility = appContainer.Resolve<FileUtility>();
+
+            // Text File Info to save 
+            var textFileData = "Large amount of text to save to file";
+            var fileData = new TextFileInfo("c:\some\path\on\disk","data", textFileData);
+
+            //Save or Update 
+            fileUtility.SaveOrUpdate(fileData);
+        }
+    }
