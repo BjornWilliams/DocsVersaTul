@@ -50,6 +50,7 @@ Code Examples
 -------------
 .. code-block:: c#
     :caption: Simple Example Using ScheduleTimer in a BackgroundService.
+    :emphasize-lines: 85
 
     using Autofac;
     using MongoDB.Driver;
