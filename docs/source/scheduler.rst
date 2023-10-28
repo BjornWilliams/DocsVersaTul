@@ -48,3 +48,96 @@ Functional Summary
 
 Code Examples
 -------------
+.. code-block:: c#
+    :caption: Simple Example Using ScheduleTimer in a BackgroundService.
+
+    using Autofac;
+    using MongoDB.Driver;
+    using Technojam.Data.Syncer.Data.EFCore.Models;
+    using Technojam.Data.Syncer.Data.EFCore.Repository.Contracts;
+    using Technojam.Data.Syncer.Data.Mongod.Repositories.Contracts;
+    using Technojam.Data.Syncer.Models;
+    using VersaTul.Data.EFCore.Contracts;
+    using VersaTul.Task.Scheduler.Events;
+    using VersaTul.Task.Scheduler.Timers;
+
+    namespace Technojam.Data.Syncer
+    {
+        public class Worker : BackgroundService
+        {
+            private readonly ILogger<Worker> _logger;
+            private readonly ScheduleTimer _scheduleTimer;
+            private readonly ILifetimeScope _lifetimeScope;
+
+            public Worker(ILogger<Worker> logger, ScheduleTimer scheduleTimer, ILifetimeScope lifetimeScope)
+            {
+                _logger = logger;
+                _scheduleTimer = scheduleTimer;
+                _lifetimeScope = lifetimeScope;
+            }
+
+            protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+            {
+                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+
+                // Need to add the timer code here 
+                _scheduleTimer.Elapsed += async (sender, args) =>
+                {
+                    using var scope = _lifetimeScope.BeginLifetimeScope();
+                    IDatumRepository _repository = scope.Resolve<IDatumRepository>();
+                    ICategoryRepository _categoryRepository = scope.Resolve<ICategoryRepository>();
+                    IUnitOfWork _unitOfWork = scope.Resolve<IUnitOfWork>();
+
+                    _logger.LogInformation("Find any records not synced as yet: {time}", DateTimeOffset.Now);
+
+                    // Find any records not synced as yet 
+                    var asyncCursor = await _repository.Collection
+                        .Find(Builders<DatumModel>.Filter.Exists(m => m.IsSynced, false))
+                        .Limit(1000)
+                        .ToCursorAsync(stoppingToken);
+
+                    var datumModels = asyncCursor
+                            .ToList(cancellationToken: stoppingToken);
+
+                    _logger.LogInformation("Bulk Insert records at: {time}", DateTimeOffset.Now);
+
+                    // Add the EFCore code to sync 
+                    var categories = datumModels.Select(model => new CategoryData
+                    {
+                        Category = model.Category,
+                        CreatedOn = model.CreatedOn,
+                        Text = model.Text
+                    });
+
+                    await _categoryRepository.AddRangeAsync(categories, stoppingToken);
+
+                    await _unitOfWork.CommitAsync();
+
+                    _logger.LogInformation("Update MongoDb Database at: {time}", DateTimeOffset.Now);
+
+                    // Code to update Mongo DB
+                    foreach (var data in datumModels)
+                    {
+                        data.IsSynced = true;
+                    }
+
+                    await _repository.UpdateAsync(datumModels);
+
+                    _logger.LogInformation("Work Completed at: {time}", DateTimeOffset.Now);
+                };
+
+                _scheduleTimer.Error += (sender, args) =>
+                {
+                    _logger.LogError("There was an error working");
+
+                    _logger.LogError(args.Exception.Message, args.Exception.StackTrace);
+                };
+
+                _scheduleTimer.AddEvent(new IntervalEvent(DateTime.Now.AddSeconds(10), new TimeSpan(0, 0, 120)));
+
+                await Task.Run(() => _scheduleTimer.Start(), stoppingToken);
+
+                _logger.LogInformation("Timer Setup at: {time}", DateTimeOffset.Now);
+            }
+        }
+    }
