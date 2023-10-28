@@ -80,10 +80,10 @@ Code Examples
 
     IEnumParser<Color> enumParser = new EnumParser<Color>();
 
-    Console.WriteLine(enumParser.Parse(Color.Red)); //output 1
-    Console.WriteLine(enumParser.ParseToString(Color.Red)); //output Red
-    Console.WriteLine(enumParser.Parse("Green")); //output Green
-    Console.WriteLine(enumParser.Parse(3)); //output  Blue
+    Console.WriteLine(enumParser.Parse(Color.Red)); //output value 1
+    Console.WriteLine(enumParser.ParseToString(Color.Red)); //output string "Red"
+    Console.WriteLine(enumParser.Parse("Green")); //output Color.Green
+    Console.WriteLine(enumParser.Parse(3)); //output Color.Blue
 
     public enum Color
     {
