@@ -133,8 +133,10 @@ Code Examples
                     _logger.LogError(args.Exception.Message, args.Exception.StackTrace);
                 };
 
+                // Wire up timer with an IntervalEvent.
                 _scheduleTimer.AddEvent(new IntervalEvent(DateTime.Now.AddSeconds(10), new TimeSpan(0, 0, 120)));
 
+                // starting the timer.
                 await Task.Run(() => _scheduleTimer.Start(), stoppingToken);
 
                 _logger.LogInformation("Timer Setup at: {time}", DateTimeOffset.Now);
