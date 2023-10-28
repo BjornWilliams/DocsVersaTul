@@ -84,7 +84,9 @@ Code Examples
     Console.WriteLine(enumParser.ParseToString(Color.Red)); //output string "Red"
     Console.WriteLine(enumParser.Parse("Green")); //output Color.Green
     Console.WriteLine(enumParser.Parse(3)); //output Color.Blue
-
+    Console.WriteLine(enumParser.Parse("Green") == Color.Green); //output true
+    Console.WriteLine(enumParser.Parse(3) == Color.Blue); //output  true
+    
     public enum Color
     {
         None, Red, Green, Blue
