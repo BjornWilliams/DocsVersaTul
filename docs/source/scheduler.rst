@@ -29,6 +29,22 @@ Main Components
 
 Functional Summary
 ------------------
+#. **BaseTimer.Add()** : An Overloaded method for adding timer tasks.
+#. **BaseTimer.AddSyncronized()** : Adds a timer task to the timer to operate asynchronously.
+#. **BaseTimer.Clear()** : Clears out all scheduled tasks..
+#. **BaseTimer.Start()** : Begins executing all assigned tasks at the scheduled times..
+#. **BaseTimer.Stop()** : Stops the execution of all jobs.
+#. **ScheduleTimer.AddEvent()** : Adds an event to be used.
+#. **BlockEvent.AddEvent()** : Adds the time of the events that occur in the given time interval.
+#. **BlockEvent.NextEvent()** : Overloaded method that returns the next run time of the scheduled event.
+#. **IntervalEvent.AddEvent()** : Adds the time of the events that occur in the given time interval.
+#. **QueuedEvent.Add()** : Adds a Scheduled Item to the queue.
+#. **QueuedEvent.Clear()** : Clears the list of scheduled times.
+#. **QueuedEvent.AddEvent()** : Adds the time of the events that occur in the given time interval.
+#. **ScheduledEvent.AddEvent()** : Adds the time of the events that occur in the given time interval.
+#. **ScheduledEvent.NextEvent()** : Returns the next run time of the scheduled event.
+#. **SingleEvent.method()** : Adds the time of the events that occur in the given time interval.
+#. **SingleEvent.method()** : Returns the next run time of the scheduled item. Optionally excludes the starting time.
 
 Code Examples
 -------------
