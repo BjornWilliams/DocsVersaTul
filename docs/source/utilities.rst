@@ -23,6 +23,7 @@ Main Components
 #. ``IGenerator`` : Represents a set of methods that can be used to produces a sequence of numbers or letters that meet certain statistical requirements for randomness.
 #. ``INullFiltering`` : Represents utility methods that can be use for operating on fillering ``Null`` values.
 #. ``IUtility`` : Represent a set of generic functionality.
+#. ``CommonUtility`` : Concrete implementation of the above interfaces.
 
 Functional Summary
 ------------------
@@ -38,3 +39,53 @@ Functional Summary
 
 Code Examples
 -------------
+.. code-block:: c#
+    :caption: Random Generator Example
+
+    using VersaTul.Utilities;
+    using VersaTul.Utilities.Contracts;
+
+    IGenerator generator = new CommonUtility();
+
+    // variable length strings
+    Console.WriteLine(generator.RandomString(10));
+    Console.WriteLine(generator.RandomString(20));
+    Console.WriteLine(generator.RandomString(40));
+    Console.WriteLine(generator.RandomString(5));
+    Console.WriteLine(generator.RandomString(3));
+    Console.WriteLine(generator.RandomString(6));
+    Console.WriteLine(generator.RandomString(80));
+
+.. code-block:: c#
+    :caption: Null Filtering Examples
+
+    using VersaTul.Utilities;
+    using VersaTul.Utilities.Contracts;
+
+    INullFiltering nullFiltering = new CommonUtility();
+
+    Console.WriteLine(nullFiltering.NullFilter<int>(1)); //output 1 
+    Console.WriteLine(nullFiltering.NullFilter<string>("This is my string")); //output "This is my string"
+
+
+    Console.WriteLine(nullFiltering.NullFilter<int>(null)); // output 0
+    Console.WriteLine(nullFiltering.NullFilter<string>(null)); // output empty
+
+
+.. code-block:: c#
+    :caption: Enum Parser Examples
+
+    using VersaTul.Utilities;
+    using VersaTul.Utilities.Contracts;   
+
+    IEnumParser<Color> enumParser = new EnumParser<Color>();
+
+    Console.WriteLine(enumParser.Parse(Color.Red)); //output 1
+    Console.WriteLine(enumParser.ParseToString(Color.Red)); //output Red
+    Console.WriteLine(enumParser.Parse("Green")); //output Green
+    Console.WriteLine(enumParser.Parse(3)); //output  Blue
+
+    public enum Color
+    {
+        None, Red, Green, Blue
+    } 
