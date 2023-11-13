@@ -24,27 +24,27 @@ The library is made up of several packages that provides functionality such as:
    :hidden:
 
    Home <self>
+   bulk
    caching
    compression
    configuration
    configuration-defaults
+   contracts
    converters
+   data-contracts
    display-attributes
    efcore
    extensions
+   handler-file
    logger
    logger-file
    logger-mail
    logger-web
    mailer
    mongodb
-   bulk
    mssql
    pipeline-infrastructure
    scheduler
    sql
    streamers
    utilities
-   contracts
-   data-contracts
-   handler-file
