@@ -38,6 +38,7 @@ The library is made up of several packages that provides functionality such as:
    logger-web
    mailer
    mongodb
+   bulk
    mssql
    pipeline-infrastructure
    scheduler
