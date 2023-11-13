@@ -37,4 +37,26 @@ Code Examples
 -------------
 
 .. code-block:: c#
-    :caption: Simple Example.
+    :caption: Simple Example of CopyDetail & BulkCopyColumnMapping setup.
+
+    // Bulk Copy people.csv file to database table Persons
+    var copyDetail = new CopyDetail(destinationName: "Persons", sourceFilePath: @"path\to\csv\people.csv", new[]
+    {
+        // This example showcases using the Source Type to Destination Type support in mapping BulkCopyColumnMapping<Person, Person>
+        // however this could also be achieved with simple typing the string column names.
+        new BulkCopyColumnMapping<Person, Person>(model => model.AccountBalance, model => model.AccountBalance),
+        new BulkCopyColumnMapping<Person, Person>(model => model.Age, model => model.Age),
+        new BulkCopyColumnMapping<Person, Person>(model => model.BestFriend, model => model.BestFriend),
+        new BulkCopyColumnMapping<Person, Person>(model => model.Friends, model => model.Friends),
+        new BulkCopyColumnMapping<Person, Person>(model => model.Name, model => model.Name)
+    });
+
+    // pulling BulkCopy object from container.
+    var copy = appContainer.Resolve<BulkCopy>();
+
+    // Optionally set properties
+    copy.BatchSize = 200;
+    copy.EnableStreaming = true;
+
+    // perform bulk uploading.. 
+    copy.DoCopy(new[] { copyDetail });
