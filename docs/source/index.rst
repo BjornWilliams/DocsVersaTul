@@ -30,10 +30,12 @@ The library is made up of several packages that provides functionality such as:
    configuration-defaults
    contracts
    converters
+   streamers
    data-contracts
    bulk
    sql
    mssql
+   mongodb
    display-attributes
    efcore
    extensions
@@ -43,8 +45,6 @@ The library is made up of several packages that provides functionality such as:
    logger-mail
    logger-web
    mailer
-   mongodb
    pipeline-infrastructure
    scheduler
-   streamers
    utilities
