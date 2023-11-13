@@ -31,8 +31,7 @@ Functional Summary
 #. **bool BulkCopy.IsAllUploaded** : Get a value indicating if all files are inserted successfully.
 #. **int BulkCopy.BatchSize** : Gets or Sets the number of rows in each batch.
 #. **bool BulkCopy.EnableStreaming** : Gets or Sets a value enabling or disabling streaming data from an IDataReader object.
-#. VersaTul Data MsSql shares most of its functionality with :doc:`sql`. 
-See :doc:`sql` for more details on the functionality provided.
+#. **VersaTul Data MsSql** : shares most of its functionality with :doc:`sql`. See :doc:`sql` for more details on the functionality provided.
 
 Code Examples
 -------------
