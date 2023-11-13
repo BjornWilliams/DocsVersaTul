@@ -24,7 +24,6 @@ The library is made up of several packages that provides functionality such as:
    :hidden:
 
    Home <self>
-   bulk
    caching
    compression
    configuration
@@ -32,6 +31,9 @@ The library is made up of several packages that provides functionality such as:
    contracts
    converters
    data-contracts
+   bulk
+   sql
+   mssql
    display-attributes
    efcore
    extensions
@@ -42,9 +44,7 @@ The library is made up of several packages that provides functionality such as:
    logger-web
    mailer
    mongodb
-   mssql
    pipeline-infrastructure
    scheduler
-   sql
    streamers
    utilities
