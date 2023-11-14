@@ -36,6 +36,7 @@ Main Components
 #. ``IMailTransporter`` : Represents a set of functionality to send streamers via email attachments.
 #. ``IStreamFileConverter`` : Represent a set of conversion techniques that can be applied to a Streamer.
 #. ``ICompressTransport`` : Represents a set of functionality to reduce streamers for transport over the network.
+#. ``CollectionReaderExtensions`` : Contains the ToReader method that can be used to convert any collection to an IDataReader.
 
 Functional Summary
 ------------------
@@ -44,6 +45,7 @@ Functional Summary
 #. **bool IMailTransporter.Transport()** : Overloaded method for transferring a given IStreamer or list of IStreamers via email to given recipient.
 #. **void IStreamFileConverter.Save(IStreamer streamer, string filePath, bool compressed = false)** : Convert the given IStreamer to a physical file on disc at the given path.
 #. **IEnumerable<Attachment> ICompressTransport.GetAttachments(long maxAttachmentSize, StreamContainer streamContainer)** : Creates a list of Attachment from the given StreamContainer instance.
+#. **CollectionReader<T> CollectionReaderExtensions.ToReader<T>(this IEnumerable<T> collection)** : Convert the given collection into a CollectionReader of T or an IDataReader.
 
 Code Examples
 -------------
@@ -318,3 +320,14 @@ Code Examples
             }
         }
     }
+
+.. code-block:: c#
+    :caption: Simple Example of converting a collection to IDataReader.
+
+    // Create N number of data model
+    var people = GetPeople(1000);
+
+    // Extension method call 
+    var reader = people.ToReader();
+
+    
