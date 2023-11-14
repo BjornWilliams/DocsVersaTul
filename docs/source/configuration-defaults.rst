@@ -11,6 +11,7 @@ projects. Currently supported projects are:
 - Mailer - *VersaTul.Configuration.Defaults.Mailer*
 - MongoDb - *VersaTul.Configuration.Defaults.MongoDB*
 - Sql - *VersaTul.Configuration.Defaults.Sql*
+- MsSql - *VersaTul.Configuration.Defaults.MsSql*
 - Logger - *VersaTul.Configuration.Defaults.Logger*
 
 Installation
@@ -95,7 +96,7 @@ Project Config Settings
 +--------------+-----------------------+------------------+
 | MongoDB      | EnabledSslProtocols   | false            |
 +--------------+-----------------------+------------------+
-| Sql          | BulkCopyTimeout       | 1800s            |
+| MsSql        | BulkCopyTimeout       | 1800s            |
 +--------------+-----------------------+------------------+
 | Sql          | CommandTimeout        | 600s             |
 +--------------+-----------------------+------------------+
