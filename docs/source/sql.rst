@@ -30,7 +30,6 @@ Main Components
 #. ``Parameter`` : Represents a parameter to a Command and optionally its mapping to DataSet columns.
 #. ``ProviderFactory`` : Represents a set of methods for creating instances of a provider's implementation of the data source classes.
 #. ``DataConfiguration`` : Provides a set of methods or properties for getting configuration values from setting store.
-#. ``BulkCopy`` : Represents the functionality needed to efficiently bulk load a SQL Server table with data from another source.
 
 Functional Summary
 ------------------
