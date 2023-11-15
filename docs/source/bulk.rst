@@ -17,10 +17,10 @@ To use VersaTul Data Bulk, first install it using nuget:
 
 Main Components
 ----------------
-#. ``IBulkCopy`` : Represents functionality for bulk uploading data from data source to another.
-#. ``IBulkCopyColumnMapping`` : Defines the mapping between a column in a Bulk Copy instance data source and a column in the instance's destination source.
-#. ``CopyDetail`` : Represents the details that will be used by the BulkCopy implementation.
-#. ``BulkCopyColumnMapping`` : implementation of the IBulkCopyColumnMapping interface.
+#. ``IBulkCopy`` : Represents functionality for bulk uploading data from one data source to another.
+#. ``IBulkCopyColumnMapping`` : Defines the mapping between a column in a Bulk Copy data source and a column in the destination source.
+#. ``CopyDetail`` : Represents the details of the Bulk Copy, how to get the data and where to put it.
+#. ``BulkCopyColumnMapping`` : Implementation of the ``IBulkCopyColumnMapping`` interface.
 
 Functional Summary
 ------------------
