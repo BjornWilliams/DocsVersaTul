@@ -18,13 +18,13 @@ To use VersaTul Handler File, first install it using nuget:
 
 Main Components
 ----------------
-#. ``IDirectoryIO`` : Interface used to expose System.IO.File methods pertaining to Directory manipulation.
+#. ``IDirectoryWrapper`` : Interface used to expose **System.IO.File** methods pertaining to Directory manipulation.
 #. ``IFileHandler`` : Interface used for providing the general File manipulation functionalities.
-#. ``IFileIO`` : Interface used to expose System.IO.File methods pertaining to File manipulation.
+#. ``IFileWrapper`` : Interface used to expose **System.IO.File** methods pertaining to File manipulation.
 #. ``IFileUtility`` :  Interface used to provide a File read and Write functionalities.
 #. ``FileHandler`` : The concrete implementation of IFileHandler Interface.
 #. ``FileUtility`` : The concrete implementation of the IFileUtility Interface.
-#. ``IOWrapper`` : The concrete implementation of IDirectoryIO and IFileIO Interfaces.
+#. ``DirectoryWrapper`` : The concrete implementation of IDirectoryWrapper and IFileWrapper Interfaces.
 #. ``BaseInfo`` : An abstract base class that represent the basic information provided by a FileInfo class.
 #. ``FileInfo`` : A custom VersaTul class used to represent a file details and its contents.
 #. ``CsvFileInfo`` : Class that represent a csv file details and its contents.
@@ -35,15 +35,15 @@ Main Components
 
 Functional Summary
 ------------------
-#. **DirectoryInfo IDirectoryIO.CreateDirectory(string path)** : Creates all directories and subdirectories in the specified path unless they already exist.
-#. **bool IDirectoryIO.Exists(string path)** : Determines whether the given path refers to an existing directory on disk.
-#. **string[] IDirectoryIO.GetFiles(string path, string searchPattern)** : Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
-#. **void IFileIO.AppendAllLines(string path, IEnumerable<string> contents)** : Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
-#. **void IFileIO.Delete(string path)** : Deletes the specified file.
-#. **bool IFileIO.Exists(string path)** : Determines whether the specified file exists.
-#. **string[] IFileIO.ReadAllLines(string path)** : Opens a text file, reads all lines of the file into a string array, and then closes the file.
-#. **void IFileIO.WriteAllLines(string path, IEnumerable<string> contents)** : Creates a new file, write the specified string array to the file, and then closes the file.
-#. **void IFileIO.Write(string filePath, MemoryStream content)** : Writes the given memory stream to physical file on disk at the specified path.
+#. **DirectoryInfo IDirectoryWrapper.CreateDirectory(string path)** : Creates all directories and subdirectories in the specified path unless they already exist.
+#. **bool IDirectoryWrapper.Exists(string path)** : Determines whether the given path refers to an existing directory on disk.
+#. **string[] IDirectoryWrapper.GetFiles(string path, string searchPattern)** : Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+#. **void IFileWrapper.AppendAllLines(string path, IEnumerable<string> contents)** : Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
+#. **void IFileWrapper.Delete(string path)** : Deletes the specified file.
+#. **bool IFileWrapper.Exists(string path)** : Determines whether the specified file exists.
+#. **string[] IFileWrapper.ReadAllLines(string path)** : Opens a text file, reads all lines of the file into a string array, and then closes the file.
+#. **void IFileWrapper.WriteAllLines(string path, IEnumerable<string> contents)** : Creates a new file, write the specified string array to the file, and then closes the file.
+#. **void IFileWrapper.Write(string filePath, MemoryStream content)** : Writes the given memory stream to physical file on disk at the specified path.
 #. **FileResult IFileUtility.ReadAllLines(string path)** : Opens a text file, reads all lines of the file, and then closes the file.
 #. **void IFileUtility.SaveOrUpdate(FileInfo file)** : Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
 #. **void IFileUtility.Save(StreamFileInfo file)** : Writes the given stream to a file. If the specified file does not exist, this method creates the file, writes the specified stream to the file, and then closes the file.
@@ -72,9 +72,8 @@ Code Examples
         static void Main(string[] args)
         {
             // Create instances 
-            var iOWrapper = new IOWrapper();
-            var fileHandler = new FileHandler(iOWrapper, iOWrapper);
-            var fileUtility = new FileUtility(fileHandler, iOWrapper);
+            var directoryWrapper = new DirectoryWrapper();
+            var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
 
             // Text File Info to save 
             var textFileData = "Large amount of text to save to file";
@@ -98,9 +97,8 @@ Code Examples
         static void Main(string[] args)
         {
             // Create instances 
-            var iOWrapper = new IOWrapper();
-            var fileHandler = new FileHandler(iOWrapper, iOWrapper);
-            var fileUtility = new FileUtility(fileHandler, iOWrapper);
+            var directoryWrapper = new DirectoryWrapper();
+            var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
 
             // file to read 
             var fullFilePath = "c:\some\path\filename.txt";
@@ -134,15 +132,14 @@ Code Examples
         static void Main(string[] args)
         {
             // Create instances 
-            var iOWrapper = new IOWrapper();
-            var fileHandler = new FileHandler(iOWrapper, iOWrapper);
-            var fileUtility = new FileUtility(fileHandler, iOWrapper);
+            var directoryWrapper = new DirectoryWrapper();
+            var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
 
             // file to read 
             var fullFilePath = "c:\some\path\filename.txt";
 
             // delete file
-            fileHandler.RemoveFile(fullFilePath);
+            fileUtility.RemoveFile(fullFilePath);
         }
         Console.ReadLine();
     }
@@ -161,9 +158,8 @@ Code Examples
         {
             builder.RegisterType<CommonUtility>().As<IUtility>();
 
-            builder.RegisterType<IOWrapper>().As<IFileIO>().As<IDirectoryIO>().SingleInstance();
-            builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();  
-            builder.RegisterType<FileHandler>().As<IFileHandler>().SingleInstance();
+            builder.RegisterType<DirectoryWrapper>().As<IFileWrapper>().As<IDirectoryWrapper>().SingleInstance();
+            builder.RegisterType<FileUtility>().As<IFileHandler>().As<IFileUtility>().SingleInstance(); 
         }
     }
 
