@@ -21,10 +21,10 @@ Main Components
 #. ``IDirectoryWrapper`` : Interface used to expose **System.IO.File** methods pertaining to Directory manipulation.
 #. ``IFileHandler`` : Interface used for providing the general File manipulation functionalities.
 #. ``IFileWrapper`` : Interface used to expose **System.IO.File** methods pertaining to File manipulation.
-#. ``IFileUtility`` :  Interface used to provide a File read and Write functionalities.
-#. ``FileHandler`` : The concrete implementation of IFileHandler Interface.
-#. ``FileUtility`` : The concrete implementation of the IFileUtility Interface.
-#. ``DirectoryWrapper`` : The concrete implementation of IDirectoryWrapper and IFileWrapper Interfaces.
+#. ``IFileUtility`` :  Interface used to provide File and Directory read and Write functionalities. Iherits the ``IFileHandler`` interface. 
+#. ``FileHandler`` : An abstract class that implements the ``IFileHandler`` Interface.
+#. ``FileUtility`` : The concrete implementation of the ``IFileUtility`` Interface.
+#. ``DirectoryWrapper`` : The concrete implementation of ``IDirectoryWrapper`` and ``IFileWrapper`` Interfaces.
 #. ``BaseInfo`` : An abstract base class that represent the basic information provided by a FileInfo class.
 #. ``FileInfo`` : A custom VersaTul class used to represent a file details and its contents.
 #. ``CsvFileInfo`` : Class that represent a csv file details and its contents.
@@ -54,7 +54,7 @@ Functional Summary
 #. **bool IFileHandler.CheckFileExtensionMatch(string fileName, string extension)** : Checks if the given filename and file extension are the same.
 #. **IEnumerable<string> IFileHandler.FindFilesWithExtension(string path, string extension)** : Returns the names of files (including their paths) that match the specified extension in the specified directory.
 #. **void IFileHandler.CreateDirectoryIfNotExists(string path)** : Determines whether the given path refers to an existing directory on disk and if not creates all the directories in a specified path.
-#. **IEnumerable<string> IFileHandler.FindFiles(string path, string searchPattern)** : Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+#. **IEnumerable<string> IFileHandler.FindFiles()** : Overloaded method that returns the names of files (including their paths) that match the specified search pattern in the specified directory or subdirectories.
 #. **string IFileHandler.EnsureExtension(string fileName, string extension)** : Checks the give fileName contains the given extension, if not then the fileName is updated to match.
 #. **void IFileHandler.ReadLine(string path, Action<string> action)** : Opens the given file and reads the content line by line as string passed into the given action.
 
