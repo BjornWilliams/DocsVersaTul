@@ -55,12 +55,14 @@ Code Examples
 
             builder.RegisterInstance(configSettings);
 
-           // Registering logger to container
-           builder
-             .RegisterType<FileLogger>()
-             .As<IFileLogger>()
-             .As<ILogger>()
-             .SingleInstance();
+            // Registering logger to container
+            builder.RegisterType<FileLogger>().As<IFileLogger>().As<ILogger>().SingleInstance();
+            builder.RegisterType<LogParser>().As<ILogParser>().SingleInstance();
+            builder.RegisterType<LogFileConfiguration>().As<ILogFileConfiguration>().SingleInstance();
+            builder.RegisterType<Archiver>().As<IArchiver>().SingleInstance();
+
+            builder.RegisterType<DirectoryWrapper>().As<IFileWrapper>().As<IDirectoryWrapper>().SingleInstance();
+            builder.RegisterType<FileUtility>().As<IFileUtility>().As<IFileHandler>().SingleInstance();
         }
     }
     
