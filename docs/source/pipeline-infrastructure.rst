@@ -3,8 +3,8 @@ Pipeline Infrastructure
 
 Getting Started
 ----------------
-The VersaTul Pipeline Infrastructure project is designed to provide a very useful and neat pattern in the scenario when a set of filtering (processing) needs to be performed on an object to transform it into a useful state. 
-The project is the complete implementation of Pipeline and Filter pattern in a generic fashion.
+The VersaTul Pipeline Infrastructure project is designed to provide a very useful and neat pattern in the scenario when a set of filtering/processing needs to be performed on an object to transform it into a useful state. 
+The project is the complete implementation of Pipeline pattern in a generic fashion.
 
 Installation
 ------------
@@ -18,21 +18,24 @@ To use VersaTul Caching, first install it using nuget:
 
 Main Components
 ----------------
-#. ``IFilter<T, U>`` : A filter represents the work to be done on a given input with the given return type.
-#. ``Pipeline<T, U> : IFilter<T, U>`` : Represents an accumulative set of steps or filters that can be performed on a given input.
-#. ``PipelineExtensions`` : Provides an easy way of extending objects with pipeline filters.
+#. ``IStep<TIn, TOut>`` : A step represents the work to be done on a given input with the given return type.
+#. ``Pipeline<TIn, TOut> : IStep<TIn, TOut>`` : Represents an accumulative set of steps that can be performed on a given input.
+#. ``PipelineExtensions`` : Provides an easy way of extending objects with pipeline steps.
 
 Functional Summary
 ------------------
-#. **U IFilter<T, U>.Execute(T input);** : Filters implementing this method would perform processing on the input type{T}.
-#. **Func<T, U> Pipeline<T, U>.Filter** : Property on the Pipeline that gets the filter associated with this pipeline.
-#. **U PipelineExtensions.Filter<T, U>(this T input, IFilter<T, U> filter)** : An extension method for Providing an easy way of extending objects with pipeline filters.
+#. **TOut ISteps<TIn, TOut>.Execute(TIn input);** : Steps implementing this method would perform processing on the input type{TIn}.
+#. **Func<TIn, TOut> Pipeline<TIn, TOut>.Pipe** : Property on the Pipeline that gets the starting step associated with this pipeline.
+#. **TOut PipelineExtensions.Pipe<TIn, TOut>(this TIn input, IStep<T, U> step)** : An extension method for Providing an easy way of extending objects with pipeline steps.
 
 Code Examples
 -------------
 
 .. code-block:: c#
     :caption: Simple Example of using Pipeline to Format Input
+
+    // interface for formatters.
+    public interface IFormatter : IStep<PropertyData, PropertyData> { }
 
     // Input model 
     public class PropertyData
@@ -90,9 +93,9 @@ Code Examples
     {
         public FormatPipeline()
         {
-            Filter = input => input
-                .Filter(new DateFormatter())
-                .Filter(new DecimalFormatter());
+            Step = input => input
+                .Pipe(new DateFormatter())
+                .Pipe(new DecimalFormatter());
         }
     }
 
@@ -113,9 +116,9 @@ Code Examples
             if (displayAttribute == null) { return propertyValue; }
 
             // using the pipeline to format the given value.
-            // value PropertyData will be passed through all filters and properly formatted 
-            // by valid filters.
-            propertyValue = formatPipeline.Filter(new PropertyData
+            // value PropertyData will be passed through all steps and properly formatted 
+            // by valid steps.
+            propertyValue = formatPipeline.Pipe(new PropertyData
             {
                 Attribute = displayAttribute,
                 Value = propertyValue
