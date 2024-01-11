@@ -10,7 +10,7 @@ The project uses the repository design pattern to provide the functionality to F
 Installation
 ------------
 
-To use VersaTul.Data.MongoDB, first install it using nuget:
+To use VersaTul Data MongoDB, first install it using nuget:
 
 .. code-block:: console
     
