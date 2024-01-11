@@ -9,7 +9,7 @@ The project is the complete implementation of Pipeline pattern in a generic fash
 Installation
 ------------
 
-To use VersaTul Caching, first install it using nuget:
+To use VersaTul Pipeline Infrastructure, first install it using nuget:
 
 .. code-block:: console
     
