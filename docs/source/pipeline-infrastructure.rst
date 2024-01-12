@@ -33,7 +33,7 @@ Code Examples
 .. code-block:: c#
     :caption: Simple Example of Pipeline Step Setup
 
-    // Pipeline to add 1 to the given input.
+    // Pipeline step to add a number to input.
     public class AddOneStep : IStep<int, int>
     {
         public int Execute(int input)
@@ -42,7 +42,7 @@ Code Examples
         }
     }
 
-    // Pipeline step used for conversion.
+    // Pipeline step to convert the input.
     public class IntToStringStep : IStep<int, string>
     {
         public string Execute(int input)
@@ -51,7 +51,7 @@ Code Examples
         }
     }
 
-    // Creating Optional Step for a pipeline.
+    // Pipeline step that is optional.
     public class OptionalStep<T, U> : IStep<T, U> where T : U
     {
         private readonly IStep<T, U> Step;
@@ -76,7 +76,35 @@ Code Examples
         }
     }
 
+.. code-block:: c#
+    :caption: Simple Example of Pipeline Usage
 
+    // Using nested pipeline to work with different types.
+
+    // Example pipeline with steps setup.
+    public class CompoundPipeline : Pipeline<int, string>
+    {
+        public CompoundPipeline()
+        {
+            Pipe = input => input
+                .Pipe(new AnInitialStep())
+                .Pipe(new InnerPipeline()) //InnerPipeline used by CompoundPipeline
+                .Pipe(new IntToStringStep())
+                .Pipe(new DoSomethingWithAStringStep());
+        }
+    }
+
+    // A Pipeline that's called by another pipeline.
+    public class InnerPipeline : Pipeline<string, int>
+    {
+        public InnerPipeline()
+        {
+            Pipe = input => input
+            .Pipe(new DoSomethingWithAnIntegerStep())
+            .Pipe(new SomethingElseWithAnIntegerStep())
+            .Pipe(new OptionalStep<int, int>(i => i > 5, new AddOneStep()));
+        }
+    }
 
 
 .. code-block:: c#
