@@ -30,6 +30,54 @@ Functional Summary
 
 Code Examples
 -------------
+.. code-block:: c#
+    :caption: Simple Example of Pipeline Step Setup
+
+    // Pipeline to add 1 to the given input.
+    public class AddOneStep : IStep<int, int>
+    {
+        public int Execute(int input)
+        {
+            return input + 1;
+        }
+    }
+
+    // Pipeline step used for conversion.
+    public class IntToStringStep : IStep<int, string>
+    {
+        public string Execute(int input)
+        {
+            return input.ToString();
+        }
+    }
+
+    // Creating Optional Step for a pipeline.
+    public class OptionalStep<T, U> : IStep<T, U> where T : U
+    {
+        private readonly IStep<T, U> Step;
+        private readonly Func<T, bool> choice;
+
+        // passing the optional function during construction for later use.
+        public OptionalStep(Func<T, bool> choice, IStep<T, U> Step)
+        {
+            this.choice = choice;
+            this.Step = Step;
+        }
+
+        public U Execute(T input)
+        {
+            // runing optional check during pipeline processing.
+            if (!choice(input))
+            {
+                return input;
+            }
+
+            return Step.Execute(input);
+        }
+    }
+
+
+
 
 .. code-block:: c#
     :caption: Simple Example of using Pipeline to Format Input
