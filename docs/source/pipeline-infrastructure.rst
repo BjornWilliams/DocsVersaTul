@@ -52,19 +52,19 @@ Code Examples
     }
 
     // Pipeline step that is optional.
-    public class OptionalStep<T, U> : IStep<T, U> where T : U
+    public class OptionalStep<TIn, TOut> : IStep<TIn, TOut> where TIn : TOut
     {
-        private readonly IStep<T, U> Step;
-        private readonly Func<T, bool> choice;
+        private readonly IStep<TIn, TOut> Step;
+        private readonly Func<TIn, bool> choice;
 
         // passing the optional function during construction for later use.
-        public OptionalStep(Func<T, bool> choice, IStep<T, U> Step)
+        public OptionalStep(Func<TIn, bool> choice, IStep<TIn, TOut> Step)
         {
             this.choice = choice;
             this.Step = Step;
         }
 
-        public U Execute(T input)
+        public TOut Execute(TIn input)
         {
             // runing optional check during pipeline processing.
             if (!choice(input))
