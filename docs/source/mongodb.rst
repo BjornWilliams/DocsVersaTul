@@ -23,6 +23,7 @@ Main Components
 #. ``IEntityMap<TEntity>`` : This is a generic interface that can be used to create BsonClassMaps for entities.
 #. ``DataConfiguration<TKey>`` : This is the default implementation of the data configuration interface. 
 #. ``BaseRepository<TEntity, TMap, TKey>`` : This is an abstract class providing common functionality for a MongoDB Database.
+#. ``BaseMap<TEntity>`` : The default implementation of the `IEntityMap<IEntity>` interface. It provides general functionality that all inheriting custom project class maps can use when registering to the BsonClassMap.
 #. ``WherePredicate<TEntity>`` : Thi is a helper class for generating search conditional expressions.
 #. ``Entity`` : This is an abstract entity used for all Business Entities. It provides a default bson document Id property.
 
@@ -34,7 +35,7 @@ Functional Summary
 #. **TEntity IRepository<TEntity, TKey>.GetById(TKey id)** : Gets an entity for the given identifier.
 #. **TEntity IRepository<TEntity, TKey>.Update(TEntity entity)** : Updates a single entity.
 #. **void IRepository<TEntity, TKey>.Update(IEnumerable<TEntity> entities)** : Updates the given list of entities inside a collection.
-#. **void IRepository<TEntity, TKey>.ChangeConnection();** : An overloaded method that can be used to change the underlining database connection of the active repository.
+#. **void IRepository<TEntity, TKey>.ChangeConnection()** : An overloaded method that can be used to change the underlining database connection of the active repository.
 #. See :doc:`configuration-defaults` for more configuration settings.
 
 Code Examples
