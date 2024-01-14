@@ -231,3 +231,58 @@ Code Examples
             // or switch back the connection to default after use.
         }
     }
+
+.. code-block:: c#
+    :caption: Changing database connection on the active repository to another database using connection string.
+
+    // Configure the container using AutoFac Module
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            //Configs
+            var configSettings = new Builder()
+                .AddOrReplace("MongoDb", "mongodb://root:password123@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/DemoDB?replicaSet=replicaset")
+                .BuildConfig();
+
+            builder.RegisterInstance(configSettings);
+
+            //Singletons
+            builder.RegisterGeneric(typeof(DataConfiguration<>)).As(typeof(IDataConfiguration<>)).SingleInstance();
+            builder.RegisterType<CarRepository>().As<ICarRepository>().SingleInstance();
+            builder.RegisterType<CarMap>().As<IEntityMap<Car>>().SingleInstance();
+
+            //Per Dependency
+        }
+    }
+
+    // Repository usage could look like the following:
+    [Route("api/cars")]
+    public class CarController: Controller
+    {
+        private readonly ICarRepository carRepository;
+
+        public CarController(ICarRepository carRepository)
+        {
+            this.carRepository = carRepository;
+        }
+
+        // Get
+        [HttpGet]
+        public IActionResult GetCars()
+        {
+            // What if we wanted to pull the list of cars from another database.
+            // But we done know the connection string until runtime, this would be the ideal way to achieve this.
+            carRepository.ChangeConnection(new MongoConnection("mongodb://root:password123@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/CarsDB?replicaSet=replicaset"))
+
+            var cars = carRepository.ToList();
+
+            return OK(cars);
+
+            // Be mindful here in this example that because the car repository was stored as a SingleInstance
+            // The next time its used it would still be using the MongoCarsDb connection. 
+            // builder.RegisterType<CarRepository>().As<ICarRepository>().SingleInstance();
+            // If this is not a desired behavior then ensure to dispose of the instance on every use 
+            // or switch back the connection to default after use.
+        }
+    }
