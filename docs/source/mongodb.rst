@@ -20,6 +20,7 @@ Main Components
 ----------------
 #. ``IRepository<TEntity, TKey>`` : This is  a generic interface for supporting common CRUD operations.
 #. ``IDataConfiguration<TKey>`` : This is a generic interface for fetching configuration settings. `TKey` represents the identity type of the collection.
+#. ``IEntityMap<TEntity>`` : This is a generic interface that can be used to create BsonClassMaps for entities.
 #. ``DataConfiguration<TKey>`` : This is the default implementation of the data configuration interface. 
 #. ``BaseRepository<TEntity, TMap, TKey>`` : This is an abstract class providing common functionality for a MongoDB Database.
 #. ``WherePredicate<TEntity>`` : Thi is a helper class for generating search conditional expressions.
