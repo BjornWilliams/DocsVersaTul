@@ -33,6 +33,7 @@ Functional Summary
 #. **TEntity IRepository<TEntity, TKey>.GetById(TKey id)** : Gets an entity for the given identifier.
 #. **TEntity IRepository<TEntity, TKey>.Update(TEntity entity)** : Updates a single entity.
 #. **void IRepository<TEntity, TKey>.Update(IEnumerable<TEntity> entities)** : Updates the given list of entities inside a collection.
+#. **void IRepository<TEntity, TKey>.ChangeConnection();** : An overloaded method that can be used to change the underlining database connection of the active repository.
 #. See :doc:`configuration-defaults` for more configuration settings.
 
 Code Examples
@@ -174,4 +175,59 @@ Code Examples
             return OK(car);
         }
 
+    }
+
+.. code-block:: c#
+    :caption: Changing database connection on the active repository to another configured database.
+
+    // Configure the container using AutoFac Module
+    public class AppModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            //Configs
+            var configSettings = new Builder()
+                .AddOrReplace("MongoDb", "mongodb://root:password123@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/DemoDB?replicaSet=replicaset")
+                .AddOrReplace("MongoCarsDb", "mongodb://root:password123@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/CarsDB?replicaSet=replicaset")
+                .BuildConfig();
+
+            builder.RegisterInstance(configSettings);
+
+            //Singletons
+            builder.RegisterGeneric(typeof(DataConfiguration<>)).As(typeof(IDataConfiguration<>)).SingleInstance();
+            builder.RegisterType<CarRepository>().As<ICarRepository>().SingleInstance();
+            builder.RegisterType<CarMap>().As<IEntityMap<Car>>().SingleInstance();
+
+            //Per Dependency
+        }
+    }
+
+    // Repository usage could look like the following:
+    [Route("api/cars")]
+    public class CarController: Controller
+    {
+        private readonly ICarRepository carRepository;
+
+        public CarController(ICarRepository carRepository)
+        {
+            this.carRepository = carRepository;
+        }
+
+        // Get
+        [HttpGet]
+        public IActionResult GetCars()
+        {
+            // What if we wanted to pull the list of cars from another database.
+            carRepository.ChangeConnection("MongoCarsDb")
+
+            var cars = carRepository.ToList();
+
+            return OK(cars);
+
+            // Be mindful here in this example that because the car repository was stored as a SingleInstance
+            // The next time its used it would still be using the MongoCarsDb connection. 
+            // builder.RegisterType<CarRepository>().As<ICarRepository>().SingleInstance();
+            // If this is not a desired behavior then ensure to dispose of the instance on every use 
+            // or switch back the connection to default after use.
+        }
     }
