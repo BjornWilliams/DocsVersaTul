@@ -96,10 +96,12 @@ Changelog
 -------------
 
 V1.0.2
+
 * Minor fixes
-* Code cleanup
+* xml comments
 
 V1.0.1
+
 * Bulk support added 
 
 
