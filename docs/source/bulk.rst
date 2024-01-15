@@ -95,5 +95,4 @@ Code Examples
 Changelog
 -------------
 
-V1.1
--------------
+V1.0.2
