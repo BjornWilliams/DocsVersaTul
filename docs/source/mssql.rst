@@ -303,3 +303,7 @@ Code Examples
 
     // perform bulk uploading.. 
     copy.DoCopy(new[] { copyDetail });
+
+
+Changelog
+-------------

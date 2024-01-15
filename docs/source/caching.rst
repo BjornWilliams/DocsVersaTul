@@ -107,3 +107,8 @@ Code Examples
         // calling the method from the main method
         CachingTest(container.Resolve<ICacheProvider<Person>>());
     }
+
+
+
+Changelog
+-------------

@@ -62,3 +62,8 @@ Code Examples
 
         public bool IsMailSent { get; set; }
     }
+    
+
+
+Changelog
+-------------

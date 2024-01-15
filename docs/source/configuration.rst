@@ -65,3 +65,8 @@ Code Examples
 
     //pulling value from config using property.
     var result = baseConfig.Property1;
+    
+
+
+Changelog
+-------------
