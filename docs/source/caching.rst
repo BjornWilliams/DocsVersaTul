@@ -112,3 +112,25 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.13
+
+* Add Memory Cache Option support
+* Minor fixes
+
+V1.0.12
+
+* Minor fixes
+
+V1.0.11
+
+* Minor fixes
+
+V1.0.10
+
+* Interface improvements 
+
+V1.0.9
+
+* Code ported to dotnet core
+* Documentaion completed
