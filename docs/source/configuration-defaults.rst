@@ -117,3 +117,24 @@ Project Config Settings
 
 Changelog
 -------------
+
+V1.0.15
+
+* Updated default settings 
+* Added more specific setting keys
+
+V1.0.14
+
+* Added dictionary support 
+* Rename project 
+* Added function chaining support
+
+V1.0.13
+
+* Add configuration collection support
+* Minor fixes
+
+V1.0.12
+
+* Interface support added
+* Documentaion completed
