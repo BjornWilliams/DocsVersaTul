@@ -74,3 +74,20 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.8
+
+* Minor fixes
+
+V1.0.7
+
+* Minor fixes
+
+V1.0.6
+
+* Minor fixes
+
+V1.0.5
+
+* Code ported to dotnet core
+* Documentaion completed
