@@ -25,8 +25,8 @@ Main Components
 Functional Summary
 ------------------
 #. **TOut ISteps<TIn, TOut>.Execute(TIn input);** : Steps implementing this method would perform processing on the input type{TIn}.
-#. **Func<TIn, TOut> Pipeline<TIn, TOut>.Pipe** : Property on the Pipeline that gets the starting step associated with this pipeline.
-#. **TOut PipelineExtensions.Pipe<TIn, TOut>(this TIn input, IStep<T, U> step)** : An extension method for Providing an easy way of extending objects with pipeline steps.
+#. **Func<TIn, TOut> Pipeline<TIn, TOut>.Step** : Property on the Pipeline that gets the starting step associated with this pipeline.
+#. **TOut PipelineExtensions.AddStep<TIn, TOut>(this TIn input, IStep<T, U> step)** : An extension method for Providing an easy way of extending objects with pipeline steps.
 
 Code Examples
 -------------
@@ -86,11 +86,11 @@ Code Examples
     {
         public CompoundPipeline()
         {
-            Pipe = input => input
-                .Pipe(new AnInitialStep())
-                .Pipe(new InnerPipeline()) //InnerPipeline used by CompoundPipeline
-                .Pipe(new IntToStringStep())
-                .Pipe(new DoSomethingWithAStringStep());
+            Step = input => input
+                .AddStep(new AnInitialStep())
+                .AddStep(new InnerPipeline()) //InnerPipeline used by CompoundPipeline
+                .AddStep(new IntToStringStep())
+                .AddStep(new DoSomethingWithAStringStep());
         }
     }
 
@@ -99,10 +99,10 @@ Code Examples
     {
         public InnerPipeline()
         {
-            Pipe = input => input
-            .Pipe(new DoSomethingWithAnIntegerStep())
-            .Pipe(new SomethingElseWithAnIntegerStep())
-            .Pipe(new OptionalStep<int, int>(i => i > 5, new AddOneStep()));
+            Step = input => input
+            .AddStep(new DoSomethingWithAnIntegerStep())
+            .AddStep(new SomethingElseWithAnIntegerStep())
+            .AddStep(new OptionalStep<int, int>(i => i > 5, new AddOneStep()));
         }
     }
 
@@ -170,8 +170,8 @@ Code Examples
         public FormatPipeline()
         {
             Step = input => input
-                .Pipe(new DateFormatter())
-                .Pipe(new DecimalFormatter());
+                .AddStep(new DateFormatter())
+                .AddStep(new DecimalFormatter());
         }
     }
 
@@ -194,7 +194,7 @@ Code Examples
             // using the pipeline to format the given value.
             // value PropertyData will be passed through all steps and properly formatted 
             // by valid steps.
-            propertyValue = formatPipeline.Pipe(new PropertyData
+            propertyValue = formatPipeline.Execute(new PropertyData
             {
                 Attribute = displayAttribute,
                 Value = propertyValue
@@ -211,13 +211,16 @@ Changelog
 -------------
 
 V1.0.7
+
 * Added Async support
 
 V1.0.6
+
 * Minor fixes
 * xml comments code
 
 V1.0.5
+
 * Code ported to dotnet core
 * Documentaion completed
     
