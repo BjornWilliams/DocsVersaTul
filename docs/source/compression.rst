@@ -77,10 +77,12 @@ Changelog
 
 V1.0.8
 
+* Dependent package updates
 * Minor fixes
 
 V1.0.7
 
+* Dependent package updates
 * Minor fixes
 
 V1.0.6
