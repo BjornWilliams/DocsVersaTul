@@ -211,16 +211,13 @@ Changelog
 -------------
 
 V1.0.7
-
 * Added Async support
 
 V1.0.6
-
 * Minor fixes
 * xml comments code
 
 V1.0.5
-
 * Code ported to dotnet core
 * Documentaion completed
     
