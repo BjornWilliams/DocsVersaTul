@@ -70,3 +70,18 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.10
+
+* Minor fixes
+* Dependent package updates
+
+V1.0.9
+
+* Base Implementation Refactoring
+* Default key support
+
+V1.0.8
+
+* Code ported to dotnet core
+* Documentaion completed
