@@ -335,3 +335,43 @@ Code Examples
 
 Changelog
 -------------    
+
+V1.0.19
+
+* Dependent package updates
+
+V1.0.18
+
+* Send file as email attachment added
+* Minor fixes
+
+V1.0.17
+
+* Dependent package updates
+* Minor fixes
+
+V1.0.16
+
+* Minor fixes
+
+V1.0.15
+
+* File Compression support
+* Dependent package updates
+* Minor fixes
+
+V1.0.14
+
+* Dependent package updates
+* Minor fixes
+
+V1.0.13
+
+* Interface changes 
+* Add Ability to pass Collection to Streamer Classes
+* Minor fixes
+
+V1.0.12
+
+* Code ported to dotnet core
+* Documentaion completed
