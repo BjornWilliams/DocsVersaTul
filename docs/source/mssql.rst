@@ -307,3 +307,54 @@ Code Examples
 
 Changelog
 -------------
+
+V2.0.8
+
+* Dependent package updates
+
+V2.0.7
+
+* Dependent package updates
+
+V2.0.6
+
+* Dependent package updates
+* Minor fixes
+
+V2.0.5
+
+* Minor fixes
+
+V2.0.4
+
+* Minor fixes
+
+V2.0.3
+
+* Minor fixes
+
+V2.0.2
+
+* Dependent package updates
+* Minor fixes
+
+V2.0.1
+
+* Refactor the Bulk Copy Class.
+* Enhance Custom BulkCopyColumn Classes
+* Encapsulate Sql Namespace
+
+V1.0.13
+
+* Dependent package updates
+* Minor fixes
+
+V1.0.12
+
+* Dependent package updates
+* Minor fixes
+
+V1.0.11
+
+* Code ported to dotnet core
+* Documentation completed
