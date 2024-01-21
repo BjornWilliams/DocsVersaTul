@@ -183,3 +183,31 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.12
+
+* File manipulation improvements 
+* Streamline interfaces 
+* Minor fixes 
+* Dependent package updates
+
+V1.0.11
+
+* Minor fixes
+
+V1.0.10
+
+* Interface refactoring
+* Added more custom user file types
+* Minor fixes
+* Dependent package updates
+
+V1.0.9
+
+* Minor fixes
+* Dependent package updates
+
+V1.0.8
+
+* Code ported to dotnet core
+* Documentation completed
