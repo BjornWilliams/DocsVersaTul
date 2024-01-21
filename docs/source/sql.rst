@@ -293,3 +293,44 @@ Code Examples
 
 Changelog
 -------------
+
+V2.0.6
+
+* Dependent package updates
+* Minor fixes
+
+V2.0.5
+
+* Dependent package updates
+* Minor fixes
+
+V2.0.4
+
+* Bulk copy refactoring 
+* Minor fixes
+
+V2.0.3
+
+* Command factory interface fixes
+* Minor fixes
+
+V2.0.2
+
+* ICommandFactory pattern added 
+* Dependent package updates
+* Minor fixes
+
+V2.0.1
+
+* Improvements to reader processing
+* Data Command interface redesign
+
+V1.0.15
+
+* Dependent package updates
+* Minor fixes
+
+V1.0.14
+
+* Code ported to dotnet core
+* Documentation completed
