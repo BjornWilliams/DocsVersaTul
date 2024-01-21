@@ -195,3 +195,23 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.13
+
+* Minor fixes
+* Dependent package updates
+
+V1.0.12
+
+* Minor fixes
+* Dependent package updates
+
+V1.0.11
+
+* Minor fixes
+* Dependent package updates
+
+V1.0.10
+
+* Code ported to dotnet core
+* Documentation completed
