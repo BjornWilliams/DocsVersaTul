@@ -292,3 +292,44 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.18
+
+* Multiple Database Connection Support
+* Minor fixes
+* Dependent package updates
+
+V1.0.17
+
+* Connection String Database Name Switch Support
+* Minor fixes
+* Dependent package updates
+
+V1.0.16
+
+* Minor fixes
+* Dependent package updates
+
+V1.0.15
+
+* Minor fixes
+* Dependent package updates
+
+V1.0.14
+
+* Minor fixes
+* Dependent package updates
+* Sub Document Class Map Support
+
+V1.0.13
+
+* Minor fixes
+
+V1.0.12
+
+* Minor fixes
+
+V1.0.11
+
+* Code ported to dotnet core
+* Documentation completed
