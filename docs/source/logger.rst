@@ -116,3 +116,9 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.6
+
+* Code Port All Other Loggers [File, Web, Mail]
+* Code ported to dotnet core
+* Documentation completed
