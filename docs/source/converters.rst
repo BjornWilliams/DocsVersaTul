@@ -136,3 +136,18 @@ Code Examples
 
 Changelog
 -------------
+
+V1.0.10
+
+* Class to dictionary support 
+* Minor fixes
+
+V1.0.9
+
+* Dependent package updates
+* Minor fixes
+
+V1.0.8
+
+* Code ported to dotnet core
+* Documentaion completed
