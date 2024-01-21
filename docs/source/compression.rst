@@ -92,4 +92,4 @@ V1.0.6
 V1.0.5
 
 * Code ported to dotnet core
-* Documentaion completed
+* Documentation completed

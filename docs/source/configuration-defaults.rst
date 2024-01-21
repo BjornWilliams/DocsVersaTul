@@ -137,4 +137,4 @@ V1.0.13
 V1.0.12
 
 * Interface support added
-* Documentaion completed
+* Documentation completed

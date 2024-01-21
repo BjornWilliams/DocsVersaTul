@@ -133,4 +133,4 @@ V1.0.10
 V1.0.9
 
 * Code ported to dotnet core
-* Documentaion completed
+* Documentation completed

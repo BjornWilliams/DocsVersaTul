@@ -101,5 +101,5 @@ V1.0.8
 V1.0.7
 
 * Code ported to dotnet core
-* Documentaion completed
+* Documentation completed
     
