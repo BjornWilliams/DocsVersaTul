@@ -95,6 +95,7 @@ Changelog
 V1.0.8
 
 * Dependent package updates
+* Clean up interface
 * Minor fixes
 
 V1.0.7
