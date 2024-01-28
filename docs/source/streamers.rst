@@ -71,17 +71,16 @@ Code Examples
                 var people = GetPeople(1000);
 
                 // Create Needed Instances
-                var iOWrapper = new IOWrapper();
+                var directoryWrapper = new DirectoryWrapper();
                 var utility = new CommonUtility();
-                var handler = new FileHandler(iOWrapper, iOWrapper);
                 var flattener = new Flattener();
                 var zipper = new Zipper(new Archiver());
                 var compressor = new Compressor(zipper);
-                var fileUtil = new FileUtility(handler, iOWrapper);
-                var fileConvert = new FileConverter(fileUtil, handler, compressor);
+                var fileUtil = new FileUtility(directoryWrapper, directoryWrapper);
+                var fileConvert = new FileConverter(fileUtil, fileUtil, compressor);
 
                 // Creating the CsvStreamer Instance
-                var csvStreamer = new CsvStreamer(utility, handler, flattener);
+                var csvStreamer = new CsvStreamer(utility, fileUtil, flattener);
 
                 // Create CSV from given people collection
                 var csv = csvStreamer.Create(people, "people");
@@ -177,9 +176,8 @@ Code Examples
                 // Singletons
 
                 // VersaTul.Handler.File
-                builder.RegisterType<FileHandler>().As<IFileHandler>().SingleInstance();
-                builder.RegisterType<IOWrapper>().As<IDirectoryIO>().As<IFileIO>().SingleInstance();
-                builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
+                builder.RegisterType<DirectoryWrapper>().As<IDirectoryWrapper>().As<IFileWrapper>().SingleInstance();
+                builder.RegisterType<FileUtility>().As<IFileUtility>().As<IFileHandler>().SingleInstance();
 
                 // VersaTul.Compression
                 builder.RegisterType<Compressor>().As<ICompressor>().SingleInstance();
