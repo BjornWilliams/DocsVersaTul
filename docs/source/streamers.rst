@@ -77,7 +77,7 @@ Code Examples
                 var zipper = new Zipper(new Archiver());
                 var compressor = new Compressor(zipper);
                 var fileUtil = new FileUtility(directoryWrapper, directoryWrapper);
-                var fileConvert = new FileConverter(fileUtil, fileUtil, compressor);
+                var fileConvert = new FileConverter(fileUtil, compressor);
 
                 // Creating the CsvStreamer Instance
                 var csvStreamer = new CsvStreamer(utility, fileUtil, flattener);
