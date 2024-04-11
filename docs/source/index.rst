@@ -19,6 +19,9 @@ The library is made up of several packages that provides functionality such as:
 .. note::
 
    This project is under active development.
+   
+   For support, contact us via email. dreamseekers@hotmail.com
+
 
 .. toctree::
    :hidden:
