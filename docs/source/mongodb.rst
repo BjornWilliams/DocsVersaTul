@@ -297,7 +297,9 @@ Lets take a more indept look.
 Configuration Setup
 ^^^^^^^^^^^^^^^^^^^^^^
 
-As stated in the configuration default project, the following settings should be passed into the mongodb project.
+As stated in the :doc:`configuration-defaults` section, the following settings must be passed into the VersaTul Data MongoDB project.
+For a quick setup with predefined values the :doc:`configuration-defaults` package can be used.
+See the table below for predefined values and those that are user defined.
 
 .. _tbl-grid:
 
@@ -319,6 +321,11 @@ As stated in the configuration default project, the following settings should be
 
 
 :MongoDbConnectionName: Gets the Connection string name setting.
+:SocketTimeout: The socket timeout determines how long an operation will wait for a response before timing out.
+:ConnectTimeout: Specifies the maximum time (in milliseconds) to wait for a connection to be established.
+:WorkingDatabaseName: The name of the database to perform transactions on after authenticating. 
+:MaxConnectionIdleTime: The maximum number of milliseconds that a connection can remain idle in the pool before being removed and closed.
+:EnabledSslProtocols: Gets the state for using SSL settings.
 
 Changelog
 -------------
