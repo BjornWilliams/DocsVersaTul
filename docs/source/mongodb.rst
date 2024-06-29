@@ -328,10 +328,27 @@ See the table below for predefined values and those that are user defined.
 :EnabledSslProtocols: Gets the state for using SSL settings.
 
 Code Sample
-^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""
 
 .. code-block:: c#
     :caption: Configuration Setup using app.settings.json.
+
+    {
+    "Logging": {
+        "LogLevel": {
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "AllowedHosts": "*",
+    "ConnectionStrings": {
+        "SqlDb": "Server=WorkStation;Database=DemoDb;Trusted_Connection=True;TrustServerCertificate=True",
+        "MongoDb": "mongodb://root:password123@sumit.local.com:27017,sumit.local.com:27018,sumit.local.com:27019/?replicaSet=replicaset"
+    },
+    "MongoDbConnectionName": "ConnectionStrings:MongoDb",
+    "WorkingDatabaseName": "DemoDb"
+    }
+
 
 
 Changelog
