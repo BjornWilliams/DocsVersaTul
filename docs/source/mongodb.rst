@@ -297,6 +297,28 @@ Lets take a more indept look.
 Configuration Setup
 ^^^^^^^^^^^^^^^^^^^^^^
 
+As stated in the configuration default project, the following settings should be passed into the mongodb project.
+
+.. _tbl-grid:
+
++--------------+-----------------------+------------------+
+| Project Name | Setting Name          | Default Value    |
++==============+=======================+==================+
+| MongoDB      | MongoDbConnectionName | MongoDb          |
++--------------+-----------------------+------------------+
+| MongoDB      | SocketTimeout         | 600000ms         |
++--------------+-----------------------+------------------+
+| MongoDB      | ConnectTimeout        | 600000ms         |
++--------------+-----------------------+------------------+
+| MongoDB      | WorkingDatabaseName   | User-Defined     |
++--------------+-----------------------+------------------+
+| MongoDB      | MaxConnectionIdleTime | 600000ms         |
++--------------+-----------------------+------------------+
+| MongoDB      | EnabledSslProtocols   | false            |
++--------------+-----------------------+------------------+
+
+
+:MongoDbConnectionName: Gets the Connection string name setting.
 
 Changelog
 -------------
