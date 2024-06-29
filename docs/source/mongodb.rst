@@ -366,14 +366,13 @@ Code Sample
     {
         var configSettings = new ConfigSettings();
 
-        //var conStr = context.Configuration.GetConnectionString("MongoDb");
-
         foreach (var keyValuePair in context.Configuration.AsEnumerable())
         {
             // Any special logic to handle building app settings
             configSettings.Add(keyValuePair.Key, keyValuePair.Value);
         }
 
+        // using AutoFac Module to setup container. 
         builder.RegisterModule(new UserManagementModule(configSettings));
     });
 
