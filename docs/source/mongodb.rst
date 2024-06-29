@@ -349,6 +349,38 @@ Code Sample
     "WorkingDatabaseName": "DemoDb"
     }
 
+.. code-block:: c#
+    :caption: Configuration Setup binding settings during app start-up.
+
+    using Autofac;
+    using Autofac.Extensions.DependencyInjection;
+    using VersaTul.Configurations;
+    using VersaTul.User.Management.Modules;
+
+    var builder = WebApplication.CreateBuilder(args);
+
+    // Add services to the container.
+    builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+    builder.Host.ConfigureContainer<ContainerBuilder>((context, builder) =>
+    {
+        var configSettings = new ConfigSettings();
+
+        //var conStr = context.Configuration.GetConnectionString("MongoDb");
+
+        foreach (var keyValuePair in context.Configuration.AsEnumerable())
+        {
+            // Any special logic to handle building app settings
+            configSettings.Add(keyValuePair.Key, keyValuePair.Value);
+        }
+
+        builder.RegisterModule(new UserManagementModule(configSettings));
+    });
+
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    // remainder of program.cs class here ...
 
 
 Changelog
