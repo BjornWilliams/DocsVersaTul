@@ -327,6 +327,13 @@ See the table below for predefined values and those that are user defined.
 :MaxConnectionIdleTime: The maximum number of milliseconds that a connection can remain idle in the pool before being removed and closed.
 :EnabledSslProtocols: Gets the state for using SSL settings.
 
+Code Sample
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: c#
+    :caption: Configuration Setup using app.settings.json.
+
+
 Changelog
 -------------
 
