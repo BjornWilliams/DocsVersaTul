@@ -382,6 +382,32 @@ Code Sample
     builder.Services.AddEndpointsApiExplorer();
     // remainder of program.cs class here ...
 
+.. code-block:: c#
+    :caption: Configuration Setup using autofac module.
+
+    using Autofac;
+    using VersaTul.Configurations;
+    using MongoDBDefaults = VersaTul.Configuration.Defaults;
+
+    namespace VersaTul.User.Management.Modules
+    {
+        public class UserManagementModule(ConfigSettings configSettings) : Module
+        {
+            private readonly ConfigSettings configSettings = configSettings;
+
+            protected override void Load(ContainerBuilder builder)
+            {
+                // Wire up mongo default settings 
+            var configs = new MongoDBDefaults.MongoDB.Builder()
+                    .AddOrReplace(configSettings) // override defaults with settings from app.
+                    .BuildConfig();
+
+                // Register settings with container
+                builder.RegisterInstance(configs);
+            }
+        }
+    }
+
 
 Changelog
 -------------
