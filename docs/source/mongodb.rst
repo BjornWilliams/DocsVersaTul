@@ -364,11 +364,12 @@ Code Sample
 
     builder.Host.ConfigureContainer<ContainerBuilder>((context, builder) =>
     {
+        // VersaTul configuration dictionary class.
         var configSettings = new ConfigSettings();
 
         foreach (var keyValuePair in context.Configuration.AsEnumerable())
         {
-            // Any special logic to handle building app settings
+            // May use any special logic to handle building app settings.
             configSettings.Add(keyValuePair.Key, keyValuePair.Value);
         }
 
@@ -397,7 +398,7 @@ Code Sample
             protected override void Load(ContainerBuilder builder)
             {
                 // Wire up mongo default settings 
-            var configs = new MongoDBDefaults.MongoDB.Builder()
+                var configs = new MongoDBDefaults.MongoDB.Builder()
                     .AddOrReplace(configSettings) // override defaults with settings from app.
                     .BuildConfig();
 
