@@ -416,7 +416,9 @@ When pulling data from a mongo database the collection name must be provided, th
 By default the model name is used, this means that your model name and collection name would have to match. Another way is via a custom attribute.
 The attribute **CollectionName** when added to the model provides the name given and overrides the use of the model name. 
 The final way is through the use of mappings. These are known as Class Maps. Using class maps not only allows for the collection name to be provided but 
-also allow for BsonClassMap to be setup and registered.  
+also allow for BsonClassMap to be setup and registered.
+With class maps a little more is involved. A map must be provided either at design time or at runtime via the repository constructor. see code examples below
+for more information.  
 
 :CollectionName: A Custom Attribute used to annotate entities with the mongo collection name. If the attribute is not specified, the class-name is used.
 :BaseMap<TEntity>: Using mapping classes we can pass the collection name to pull data from, as well as the extra element property where extra data from the collection can be inserted.
@@ -447,6 +449,36 @@ also allow for BsonClassMap to be setup and registered.
 
 .. code-block:: c#
     :caption: Class Map example.
+    
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization;
+    using MongoDB.Bson.Serialization.Serializers;
+    using VersaTul.Data.MongoDB;
+    using VersaTul.Host.Data.MongoDB.DataModels;
+
+    namespace VersaTul.Host.Data.MongoDB.Mappings
+    {
+        // class map - Inherits the BaseMap class.
+        public class UserMap : BaseMap<User>
+        {
+            public UserMap() : base("Users", model => model.ExtraElements) { }
+
+            public override void Register(BsonClassMap<User> classMap)
+            {
+                base.Register(classMap);
+
+                classMap.GetMemberMap(model => model.FriendId)
+                    .SetSerializer(new StringSerializer(BsonType.ObjectId));
+            }
+        }
+    }
+
+    // In this example the UserRepository takes the IEntityMap<User> as a parameter.
+    // This means the map can be provided at runtime from a container when contructing the repository.
+    namespace VersaTul.Host.Data.MongoDB.Repositories
+    {
+        public class UserRepository(IDataConfiguration<string> configuration, IEntityMap<User> entityMap) : BaseRepository<User, IEntityMap<User>>(configuration, entityMap), IUserRepository { }
+    }
 
 Changelog
 -------------
