@@ -408,6 +408,7 @@ Code Sample
         }
     }
 
+
 Attribute Vs Mappings
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -420,6 +421,32 @@ also allow for BsonClassMap to be setup and registered.
 :CollectionName: A Custom Attribute used to annotate entities with the mongo collection name. If the attribute is not specified, the class-name is used.
 :BaseMap<TEntity>: Using mapping classes we can pass the collection name to pull data from, as well as the extra element property where extra data from the collection can be inserted.
 
+.. code-block:: c#
+    :caption: Custom Attribute example.
+
+    using System;
+    using System.Collections.Generic;
+    using VersaTul.Data.MongoDB;
+    using VersaTul.Data.MongoDB.Attributes;
+
+    namespace VersaTul.Host.Data.MongoDB.DataModels
+    {
+        [CollectionName("Employees")] // Points to the Employees collection in the database.
+        public class Employee : Entity
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public string Phone { get; set; }
+            public DateTime HireDate { get; set; }
+            public int? ManagerId { get; set; }
+            public string JobTitle { get; set; }
+            public IDictionary<string, object> ExtraElements { get; set; }
+        }
+    }
+
+.. code-block:: c#
+    :caption: Class Map example.
 
 Changelog
 -------------
