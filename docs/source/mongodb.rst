@@ -483,6 +483,12 @@ Code Samples
         public class UserRepository(IDataConfiguration<string> configuration, IEntityMap<User> entityMap) : BaseRepository<User, IEntityMap<User>>(configuration, entityMap), IUserRepository { }
     }
 
+    // container registration would look something like this.
+    builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
+
+    // registering the map for UserRepository to use. 
+    builder.RegisterType<UserMap>().As<IEntityMap<User>>().SingleInstance();
+
 Changelog
 -------------
 
