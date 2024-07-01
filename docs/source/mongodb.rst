@@ -505,6 +505,29 @@ Code Samples
 
     await repository.FindAsync(new WherePredicate<User>(model => model.Id == "some-value-id"));
 
+Entity base class
+^^^^^^^^^^^^^^^^^^^^^^
+
+The entity base class represents an abstract model for all the desired monog models. 
+It provides the momgo string _id column as the Id property of the class. Essentially this class handles the momgo id mapping to a model for the developer.
+
+Code Samples
+""""""""""""""""""
+
+.. code-block:: c#
+    :caption: Mongo model derived from the Entity class.
+    
+    public class Employee : Entity
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public DateTime HireDate { get; set; }
+        public int? ManagerId { get; set; }
+        public string JobTitle { get; set; }
+        public IDictionary<string, object> ExtraElements { get; set; }
+    }
 
 Changelog
 -------------
