@@ -489,7 +489,7 @@ Code Samples
     // registering the map for UserRepository to use. 
     builder.RegisterType<UserMap>().As<IEntityMap<User>>().SingleInstance();
 
-Attribute Vs Mappings
+Where Predicate
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The where predicate provides a convenient way to pass a conditional expression to the query builder. 
