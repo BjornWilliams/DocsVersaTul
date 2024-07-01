@@ -327,7 +327,7 @@ See the table below for predefined values and those that are user defined.
 :MaxConnectionIdleTime: The maximum number of milliseconds that a connection can remain idle in the pool before being removed and closed.
 :EnabledSslProtocols: Gets the state for using SSL settings.
 
-Code Sample
+Code Samples
 """"""""""""""""""
 
 .. code-block:: c#
@@ -422,6 +422,9 @@ for more information.
 
 :CollectionName: A Custom Attribute used to annotate entities with the mongo collection name. If the attribute is not specified, the class-name is used.
 :BaseMap<TEntity>: Using mapping classes we can pass the collection name to pull data from, as well as the extra element property where extra data from the collection can be inserted.
+
+Code Samples
+""""""""""""""""""
 
 .. code-block:: c#
     :caption: Custom Attribute example.
