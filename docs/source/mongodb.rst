@@ -489,6 +489,23 @@ Code Samples
     // registering the map for UserRepository to use. 
     builder.RegisterType<UserMap>().As<IEntityMap<User>>().SingleInstance();
 
+Attribute Vs Mappings
+^^^^^^^^^^^^^^^^^^^^^^
+
+The where predicate provides a convenient way to pass a conditional expression to the query builder. 
+This class implements the **IPredicate<TEntity>** interface, that is used extensively throughout the project. 
+
+Code Samples
+""""""""""""""""""
+
+.. code-block:: c#
+    :caption: Where predicate on repository methods.
+
+    repository.Exists(new WherePredicate<User>(model => model.Id == "some-value-id"));
+
+    await repository.FindAsync(new WherePredicate<User>(model => model.Id == "some-value-id"));
+
+
 Changelog
 -------------
 
