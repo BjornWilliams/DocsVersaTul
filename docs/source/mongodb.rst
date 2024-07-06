@@ -505,6 +505,8 @@ Code Samples
 
     await repository.FindAsync(new WherePredicate<User>(model => model.Id == "some-value-id"));
 
+    Find(new WherePredicate<UserData>(model => model.Id == userId && model.Roles.Any(model => model.Name == roleName)));
+
 Entity base class
 ^^^^^^^^^^^^^^^^^^^^^^
 
