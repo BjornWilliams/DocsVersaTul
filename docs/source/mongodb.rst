@@ -446,7 +446,7 @@ Code Samples
             public string Email { get; set; }
             public string Phone { get; set; }
             public DateTime HireDate { get; set; }
-            public int? ManagerId { get; set; }
+            public string ManagerId { get; set; }
             public string JobTitle { get; set; }
             public IDictionary<string, object> ExtraElements { get; set; }
         }
@@ -461,35 +461,51 @@ Code Samples
     using VersaTul.Data.MongoDB;
     using VersaTul.Host.Data.MongoDB.DataModels;
 
+    namespace VersaTul.Host.Data.MongoDB.DataModels
+    {
+        public class Employee : Entity
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public string Phone { get; set; }
+            public DateTime HireDate { get; set; }
+            public string ManagerId { get; set; }
+            public string JobTitle { get; set; }
+            public IDictionary<string, object> ExtraElements { get; set; }
+        }
+    }
+
     namespace VersaTul.Host.Data.MongoDB.Mappings
     {
         // class map - Inherits the BaseMap class.
-        public class UserMap : BaseMap<User>
+        public class EmployeeMap : BaseMap<Employee>
         {
-            public UserMap() : base("Users", model => model.ExtraElements) { }
+            // Mapping to Employees Collection. 
+            public EmployeeMap() : base("Employees", model => model.ExtraElements) { }
 
-            public override void Register(BsonClassMap<User> classMap)
+            public override void Register(BsonClassMap<Employee> classMap)
             {
                 base.Register(classMap);
 
-                classMap.GetMemberMap(model => model.FriendId)
+                classMap.GetMemberMap(model => model.ManagerId)
                     .SetSerializer(new StringSerializer(BsonType.ObjectId));
             }
         }
     }
 
-    // In this example the UserRepository takes the IEntityMap<User> as a parameter.
+    // In this example the EmployeeRepository takes the IEntityMap<Employee> as a parameter.
     // This means the map can be provided at runtime from a container when contructing the repository.
     namespace VersaTul.Host.Data.MongoDB.Repositories
     {
-        public class UserRepository(IDataConfiguration<string> configuration, IEntityMap<User> entityMap) : BaseRepository<User, IEntityMap<User>>(configuration, entityMap), IUserRepository { }
+        public class EmployeeRepository(IDataConfiguration<string> configuration, IEntityMap<Employee> entityMap) : BaseRepository<Employee, IEntityMap<Employee>>(configuration, entityMap), IEmployeeRepository { }
     }
 
     // container registration would look something like this.
-    builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
+    builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>().SingleInstance();
 
-    // registering the map for UserRepository to use. 
-    builder.RegisterType<UserMap>().As<IEntityMap<User>>().SingleInstance();
+    // registering the map for EmployeeRepository to use. 
+    builder.RegisterType<EmployeeMap>().As<IEntityMap<Employee>>().SingleInstance();
 
 Where Predicate
 ^^^^^^^^^^^^^^^^^^^^^^
