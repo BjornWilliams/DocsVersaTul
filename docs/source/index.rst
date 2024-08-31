@@ -20,7 +20,7 @@ The library is made up of several packages that provides functionality such as:
 
    This project is under active development.
    
-   For support, contact us via email. dreamseekers@hotmail.com
+   For support, contact us via email. versatul.libraries@outlook.com
 
 
 .. toctree::
