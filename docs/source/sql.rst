@@ -294,6 +294,12 @@ Code Examples
 Changelog
 -------------
 
+V2.0.13
+
+* Added ExecuteScalar support.
+* Added data command timeout overrides.
+* Minor fixes
+
 V2.0.6
 
 * Dependent package updates
