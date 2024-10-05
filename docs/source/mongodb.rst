@@ -579,6 +579,27 @@ To achieve this, derive from the **DataConfiguration** class and override the **
 This method is used internally to create and set up the Mongo client, ultimately returning the **IMongoDatabase** interface. 
 By overriding this method, users gain full control over the creation of the Mongo client and the initialization of its settings.
 
+Code Samples
+""""""""""""""""""
+
+.. code-block:: c#
+    :caption: Customizing Database Initialization
+
+    public class CustomDataConfiguration<TKey>(ConfigSettings configSettings, ILogger logger) : DataConfiguration<TKey>(configSettings)
+    {
+        public override IMongoDatabase GetDatabaseFromUrl(MongoUrl url)
+        {
+            // Customizing Initialization code goes here 
+
+            var settings = MongoClientSettings.FromUrl(url);
+
+            var client = new MongoClient(settings);
+
+            return client.GetDatabase("databaseName");
+        }
+    }
+    
+
 Changelog
 -------------
 
