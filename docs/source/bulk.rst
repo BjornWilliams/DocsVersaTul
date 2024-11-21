@@ -24,8 +24,7 @@ Main Components
 
 Functional Summary
 ------------------
-#. **void IBulkCopy.DoCopy()** : Overloaded method for bulk inserting a given collection of CopyDetail objects.
-#. **bool IBulkCopy.IsAllUploaded** : Get a value indicating if all files are inserted successfully.
+#. **BulkCopyResult IBulkCopy.DoCopy()** : Overloaded method for bulk inserting a given collection of CopyDetail objects.
 #. **int IBulkCopy.BatchSize** : Gets or Sets the number of rows in each batch.
 #. **bool IBulkCopy.EnableStreaming** : Gets or Sets a value enabling or disabling streaming data from an IDataReader object.
 #. **string SourceColumn** : Gets or Sets the string value of the SourceColumn property.
@@ -59,7 +58,13 @@ Code Examples
     copy.EnableStreaming = true;
 
     // perform bulk uploading.. 
-    copy.DoCopy(new[] { copyDetail });
+    var bulkCopyResult = copy.DoCopy(new[] { copyDetail });
+
+    // Indicates if all copyDetail has been sucessfully updated.
+    // bulkCopyResult.Success
+
+    // uploaded list of results
+    // bulkCopyResult.Result
 
 
 .. code-block:: c#
@@ -88,12 +93,23 @@ Code Examples
     copy.EnableStreaming = true;
 
     // perform bulk uploading.. 
-    copy.DoCopy(new[] { copyDetail });
+    var bulkCopyResult = copy.DoCopy(new[] { copyDetail });
+
+    // Indicates if all copyDetail has been sucessfully updated.
+    // bulkCopyResult.Success
+
+    // uploaded list of results
+    // bulkCopyResult.Result
 
 
 
 Changelog
 -------------
+
+V1.0.7
+
+* Refactored the IBulkCopy interface to have a return type BulkCopyResult.
+* This is a breaking change from previous versions.
 
 V1.0.2
 
