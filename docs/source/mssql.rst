@@ -27,8 +27,7 @@ Main Components
 
 Functional Summary
 ------------------
-#. **void BulkCopy.DoCopy()** : Overloaded method for bulk inserting a given collection of CopyDetail objects.
-#. **bool BulkCopy.IsAllUploaded** : Get a value indicating if all files are inserted successfully.
+#. **BulkCopyResult BulkCopy.DoCopy()** : Overloaded method for bulk inserting a given collection of CopyDetail objects.
 #. **int BulkCopy.BatchSize** : Gets or Sets the number of rows in each batch.
 #. **bool BulkCopy.EnableStreaming** : Gets or Sets a value enabling or disabling streaming data from an IDataReader object.
 #. **VersaTul Data MsSql** : shares most of its functionality with :doc:`sql`. See :doc:`sql` for more details on the functionality provided.
@@ -273,7 +272,13 @@ Code Examples
     copy.EnableStreaming = true;
 
     // perform bulk uploading.. 
-    copy.DoCopy(new[] { copyDetail });
+    var bulkCopyResult = copy.DoCopy(new[] { copyDetail });
+
+    // Indicates if all copyDetail has been sucessfully updated.
+    // bulkCopyResult.Success
+
+    // uploaded list of results
+    // bulkCopyResult.Result
 
 
 .. code-block:: c#
@@ -302,7 +307,13 @@ Code Examples
     copy.EnableStreaming = true;
 
     // perform bulk uploading.. 
-    copy.DoCopy(new[] { copyDetail });
+    var bulkCopyResult = copy.DoCopy(new[] { copyDetail });
+
+    // Indicates if all copyDetail has been sucessfully updated.
+    // bulkCopyResult.Success
+
+    // uploaded list of results
+    // bulkCopyResult.Result
 
 
 Changelog
