@@ -50,4 +50,5 @@ The library is made up of several packages that provides functionality such as:
    mailer
    pipeline-infrastructure
    scheduler
+   filereader
    utilities
