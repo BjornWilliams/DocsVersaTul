@@ -117,7 +117,7 @@ Extensibility
 Examples
 --------
 
-1) Print column headings and first N rows::
+Example: Print column headings and first N rows::
 
    var options = new FileOptions { HasHeader = true };
    using var reader = fileReader.Read("C:\\data", "customers.csv", options);
@@ -138,7 +138,7 @@ Examples
        }
    }
 
-2) Using ``DataFileReader`` with a bulk copy operation::
+Example: Using ``DataFileReader`` with a bulk copy operation::
 
    var options = new FileOptions { HasHeader = true };
    using var reader = fileReader.Read("C:\\data", "people.csv", options);
@@ -151,9 +151,11 @@ Examples
    var copyDetail = new CopyDetail("Persons", reader, mappings);
    bulkCopy.DoCopy(copyDetail);
 
-   > Note: ``CopyDetail`` constructors in this solution expect an ``IDataReader`` for source data. Ensure the reader is disposed after the bulk operation completes.
+.. note::
 
-3) Unit test: mock ``ICsvReader`` to return a controlled ``IDataReader``::
+  ``CopyDetail`` constructors in this solution expect an ``IDataReader`` for source data. Ensure the reader is disposed after the bulk operation completes.
+
+Example: Unit test — mock ``ICsvReader`` to return a controlled ``IDataReader``::
 
    var mockCsv = new Mock<ICsvReader>();
    var mockOptions = new FileOptions { HasHeader = true };
