@@ -1,4 +1,4 @@
-VersaTul Data.FileReader
+Data FileReader
 =========================
 
 ``VersaTul.Data.FileReader`` is a small library that provides simple, testable
