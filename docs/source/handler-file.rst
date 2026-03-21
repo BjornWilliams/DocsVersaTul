@@ -1,213 +1,115 @@
 Handler File
-==================
+============
 
-Getting Started
-----------------
-The VersaTul Handler File project provides the functionality needed to work with files on hard-disks. 
-Most notable functionalities are the creating, reading, and deleting of custom file types found in the project. 
-This project, however is simply a wrapper project around the **System.IO.File** namespace and was design to make working with the VersaTul custom FileInfo class much easier.
+Overview
+--------
+
+``VersaTul.Handler.File`` wraps common file-system operations and adds typed file models for working with text, CSV, custom extensions, zip content, and raw streams.
+
+The package is useful when you want file operations behind interfaces for easier testing and when higher-level packages need to persist typed file content rather than manually coordinate paths, extensions, and stream writes.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Read or write files through abstractions instead of calling ``System.IO`` directly.
+2. Save typed file content such as text, CSV, custom files, or zip streams.
+3. Add async wrappers around common file operations.
+4. Reuse path, extension, and directory helpers across the codebase.
+5. Support export workflows from :doc:`streamers` and archive workflows from :doc:`compression`.
 
 Installation
 ------------
 
-To use VersaTul Handler File, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Handler.File -Version latest
 
-Main Components
+   dotnet add package VersaTul.Handler.File
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Handler.File -Version latest
+
+Related Packages
 ----------------
-#. ``IDirectoryWrapper`` : Interface used to expose **System.IO.File** methods pertaining to Directory manipulation.
-#. ``IFileHandler`` : Interface used for providing the general File manipulation functionalities.
-#. ``IFileWrapper`` : Interface used to expose **System.IO.File** methods pertaining to File manipulation.
-#. ``IFileUtility`` :  Interface used to provide File and Directory read and Write functionalities. Iherits the ``IFileHandler`` interface. 
-#. ``FileHandler`` : An abstract class that implements the ``IFileHandler`` Interface.
-#. ``FileUtility`` : The concrete implementation of the ``IFileUtility`` Interface.
-#. ``DirectoryWrapper`` : The concrete implementation of ``IDirectoryWrapper`` and ``IFileWrapper`` Interfaces.
-#. ``BaseInfo`` : An abstract base class that represent the basic information provided by a FileInfo class.
-#. ``FileInfo`` : A custom VersaTul class used to represent a file details and its contents.
-#. ``CsvFileInfo`` : Class that represent a csv file details and its contents.
-#. ``TextFileInfo`` : Class that represent a text file details and its contents.
-#. ``ZipFileInfo`` : Class that represent a zip file details and its contents as a stream.
-#. ``StreamFileInfo`` : Class that represent a file details and its contents as a stream.
-#. ``CustomFileInfo`` : Class used to represent a custom file (maybe a project specific file with its own extension) details and its contents.
 
-Functional Summary
-------------------
-#. **DirectoryInfo IDirectoryWrapper.CreateDirectory(string path)** : Creates all directories and subdirectories in the specified path unless they already exist.
-#. **bool IDirectoryWrapper.Exists(string path)** : Determines whether the given path refers to an existing directory on disk.
-#. **string[] IDirectoryWrapper.GetFiles(string path, string searchPattern)** : Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
-#. **void IFileWrapper.AppendAllLines(string path, IEnumerable<string> contents)** : Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
-#. **void IFileWrapper.Delete(string path)** : Deletes the specified file.
-#. **bool IFileWrapper.Exists(string path)** : Determines whether the specified file exists.
-#. **string[] IFileWrapper.ReadAllLines(string path)** : Opens a text file, reads all lines of the file into a string array, and then closes the file.
-#. **void IFileWrapper.WriteAllLines(string path, IEnumerable<string> contents)** : Creates a new file, write the specified string array to the file, and then closes the file.
-#. **void IFileWrapper.Write(string filePath, MemoryStream content)** : Writes the given memory stream to physical file on disk at the specified path.
-#. **FileResult IFileUtility.ReadAllLines(string path)** : Opens a text file, reads all lines of the file, and then closes the file.
-#. **void IFileUtility.SaveOrUpdate(FileInfo file)** : Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
-#. **void IFileUtility.Save(StreamFileInfo file)** : Writes the given stream to a file. If the specified file does not exist, this method creates the file, writes the specified stream to the file, and then closes the file.
-#. **string IFileHandler.GetFileName(string path)** : Returns the Filename only from a given file path.
-#. **string IFileHandler.GetFileNameWithOutExtension(string path)** : Returns the Filename only from a given file path with the file extension removed.
-#. **void IFileHandler.RemoveFile(string sourceFile)** : Deletes the given file from the hard disc.
-#. **string IFileHandler.GetExtension(string fileName)** : Returns the extension of the given file without the (dot) notation.
-#. **bool IFileHandler.CheckFileExtensionMatch(string fileName, string extension)** : Checks if the given filename and file extension are the same.
-#. **IEnumerable<string> IFileHandler.FindFilesWithExtension(string path, string extension)** : Returns the names of files (including their paths) that match the specified extension in the specified directory.
-#. **void IFileHandler.CreateDirectoryIfNotExists(string path)** : Determines whether the given path refers to an existing directory on disk and if not creates all the directories in a specified path.
-#. **IEnumerable<string> IFileHandler.FindFiles()** : Overloaded method that returns the names of files (including their paths) that match the specified search pattern in the specified directory or subdirectories.
-#. **string IFileHandler.EnsureExtension(string fileName, string extension)** : Checks the give fileName contains the given extension, if not then the fileName is updated to match.
-#. **void IFileHandler.ReadLine(string path, Action<string> action)** : Opens the given file and reads the content line by line as string passed into the given action.
+1. :doc:`streamers` for export generation that can be saved to disk.
+2. :doc:`compression` for zip-based file content.
+3. :doc:`file-reader` for the inverse workflow of turning files back into ``IDataReader`` instances.
 
-Code Examples
--------------
-.. code-block:: c#
-    :caption: File Utility Save Or Update Example
+Core Types And Concepts
+-----------------------
 
-    using VersaTul.Handler.File.Contracts;
-    using VersaTul.Handler.File.Types;
-    using VersaTul.Utilities.Contracts;
+``IFileHandler``
+   Combines file and directory wrappers plus helper operations such as extension handling, file discovery, and line-by-line reading.
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Create instances 
-            var directoryWrapper = new DirectoryWrapper();
-            var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
+``IFileUtility`` and ``FileUtility``
+   Higher-level file service for reading all content, saving typed files, and async wrappers.
 
-            // Text File Info to save 
-            var textFileData = "Large amount of text to save to file";
-            var fileData = new TextFileInfo("c:\some\path\on\disk","data", textFileData);
+``IDirectoryWrapper`` and ``IFileWrapper``
+   Thin abstractions over file-system APIs used by the higher-level handlers.
 
-            //Save or Update 
-            fileUtility.SaveOrUpdate(fileData);
-        }
-        Console.ReadLine();
-    }
+``FileResult``
+   Result model returned by reads, including existence and blank-file flags.
 
-.. code-block:: c#
-    :caption: File Utility Read data Example
+``FileInfo`` and typed variants
+   File models such as ``TextFileInfo``, ``CsvFileInfo``, ``CustomFileInfo``, ``StreamFileInfo``, and ``ZipFileInfo``.
 
-    using VersaTul.Handler.File.Contracts;
-    using VersaTul.Handler.File.Types;
-    using VersaTul.Utilities.Contracts;
+Key Capabilities
+----------------
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Create instances 
-            var directoryWrapper = new DirectoryWrapper();
-            var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
+1. ``ReadAll()`` and ``ReadAllAsync()`` read text files into a ``FileResult``.
+2. ``SaveOrUpdate()`` and ``SaveOrUpdateAsync()`` append or create text-based files.
+3. ``Save()`` and ``SaveAsync()`` persist stream-based files.
+4. Path and extension helpers simplify file naming and discovery.
+5. Directory creation is handled automatically before writes.
 
-            // file to read 
-            var fullFilePath = "c:\some\path\filename.txt";
+Save Text Example
+-----------------
 
-            // Open and read data from file.
-            FileResult data = fileUtility.ReadAllLines(fullFilePath);
+.. code-block:: csharp
 
-            if (data.IsExists)
-            {
-                Print("Here is your file data");
-                Print("=========================");
-                data.Content.ToList().ForEach(val => Print(val));
-            }
-            else
-            {
-                Print($"No file @:'{fullFilePath}'");
-            }
-        }
-        Console.ReadLine();
-    }
+   using VersaTul.Handler.File;
+   using VersaTul.Handler.File.Types;
 
-.. code-block:: c#
-    :caption: File Utility Remove Example
+   var directoryWrapper = new DirectoryWrapper();
+   var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
 
-    using VersaTul.Handler.File.Contracts;
-    using VersaTul.Handler.File.Types;
-    using VersaTul.Utilities.Contracts;
+   var file = new TextFileInfo("C:\\exports", "report", "Large amount of text to save");
+   fileUtility.SaveOrUpdate(file);
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Create instances 
-            var directoryWrapper = new DirectoryWrapper();
-            var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
+Read Example
+------------
 
-            // file to read 
-            var fullFilePath = "c:\some\path\filename.txt";
+.. code-block:: csharp
 
-            // delete file
-            fileUtility.RemoveFile(fullFilePath);
-        }
-        Console.ReadLine();
-    }
+   var result = fileUtility.ReadAll("C:\\exports\\report.txt");
 
-.. code-block:: c#
-    :caption: File Utility Save Or Update IoC Example
+   if (result.IsExists)
+   {
+       foreach (var line in result.Content)
+       {
+           Console.WriteLine(line);
+       }
+   }
 
-    using VersaTul.Handler.File.Contracts;
-    using VersaTul.Handler.File.Types;
-    using VersaTul.Utilities.Contracts;
+Save Stream Example
+-------------------
 
-    public class AppModule : Module
-    {
-        // Setup AutoFac container
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<CommonUtility>().As<IUtility>();
+.. code-block:: csharp
 
-            builder.RegisterType<DirectoryWrapper>().As<IFileWrapper>().As<IDirectoryWrapper>().SingleInstance();
-            builder.RegisterType<FileUtility>().As<IFileHandler>().As<IFileUtility>().SingleInstance(); 
-        }
-    }
+   using var memoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("hello"));
 
-    public class FileManager
-    {
-        // injecting container for simplicity
-        public void Execute(AppContainer appContainer)
-        { 
-            fileUtility = appContainer.Resolve<FileUtility>();
+   var streamFile = new ZipFileInfo("C:\\exports", "archive", memoryStream);
+   await fileUtility.SaveAsync(streamFile);
 
-            // Text File Info to save 
-            var textFileData = "Large amount of text to save to file";
-            var fileData = new TextFileInfo("c:\some\path\on\disk","data", textFileData);
+Notes
+-----
 
-            //Save or Update 
-            fileUtility.SaveOrUpdate(fileData);
-        }
-    }
-
-
-
-Changelog
--------------
-
-V1.0.12
-
-* File manipulation improvements 
-* Streamline interfaces 
-* Minor fixes 
-* Dependent package updates
-
-V1.0.11
-
-* Minor fixes
-
-V1.0.10
-
-* Interface refactoring
-* Added more custom user file types
-* Minor fixes
-* Dependent package updates
-
-V1.0.9
-
-* Minor fixes
-* Dependent package updates
-
-V1.0.8
-
-* Code ported to dotnet core
-* Documentation completed
+1. ``FileUtility`` uses a lock to serialize writes from the same process.
+2. The async methods are wrapper-based async, which is useful for consistency at the service boundary.
+3. The typed file models are the main value-add over direct ``System.IO`` usage.

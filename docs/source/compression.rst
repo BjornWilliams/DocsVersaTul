@@ -1,95 +1,100 @@
 Compression
-====================
+===========
 
-Getting Started
-----------------
-The VersaTul Compression project enables the ability to compress and decompress streams.
-This project is built around the DotNet ``System.IO.Compression`` classes. 
-Using its inbuilt ``ZipStream`` class ``MemoryStreams`` can be quickly compressed into Archive Streams.
+Overview
+--------
+
+``VersaTul.Compression`` provides a small abstraction over ``System.IO.Compression`` for zipping and unzipping in-memory files.
+
+The package centers around ``ZipStream`` objects, which pair a file name, content type, and ``MemoryStream`` so higher-level workflows can archive generated files without dealing directly with zip entry wiring.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Package one or many in-memory files into a zip archive.
+2. Extract zip archives back into named in-memory streams.
+3. Keep compression concerns separate from file generation logic.
+4. Support workflows that generate exports before saving, emailing, or uploading them.
 
 Installation
 ------------
 
-To use VersaTul Compression, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Compression -Version latest
 
+   dotnet add package VersaTul.Compression
 
-Main Components
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Compression -Version latest
+
+Related Packages
 ----------------
-#. ``IArchiver`` : Provides functionality to write ``ZipStream`` to ``ZipArchive`` stream.
-#. ``IZipper`` : Provides functionality to zip ``ZipStream`` into zip up ``MemoryStream``.
-#. ``Archiver`` : Concrete implementation of the ``IArchiver`` interface.
-#. ``Zipper`` : Concrete implementation of the ``IZipper`` interface.
-#. ``ZipStream`` : Represents a class containing the ``MemoryStream`` and meta-data to save stream as.
 
-Functional Summary
-------------------
-#. **MemoryStream IZipper.Zip(ZipStream zipStream)** : Overloaded method for zipping the given ``ZipStream`` into a zipped ``MemoryStream``.
-#. **void IArchiver.Archive(ZipArchive zipArchive, ZipStream zipStream)** : Method for writing the entire contents of a memory stream to a zipArchive stream.
+1. :doc:`streamers` for generating in-memory export streams.
+2. :doc:`handler-file` for persisting compressed output to disk.
 
-Code Examples
---------------
+Core Types And Concepts
+-----------------------
 
-.. code-block:: c#
-    :caption: Simple ZipStream Compressing.
-    :emphasize-lines: 57
+``ZipStream``
+   Carries the file name, content type, and in-memory content to archive.
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            //Contains the ZipArchive to zip given streams.
-            IArchiver archiver = new Archiver();
+``IArchiver`` and ``Archiver``
+   Write individual ``ZipStream`` instances into a ``ZipArchive``.
 
-            IZipper zipper = new Zipper(archiver);
+``IZipper`` and ``Zipper``
+   Create zip archives from one or many ``ZipStream`` objects and can also unzip archive streams.
 
-            var zipStream = new ZipStream
-            {
-                ContentType = "text/csv",
-                Filename = "Bjorn.csv",
-                Stream = GenerateStreamFromString("This is test stream I want to zip up in a folder.")
-            }
+Key Capabilities
+----------------
 
-            //create MemoryStream (archive) to be written out to Storage.
-            var archive = zipper.Zip(zipStream);
+1. Zip a single ``ZipStream`` or a collection of them.
+2. Choose a specific ``CompressionLevel`` when creating the archive.
+3. Unzip archive streams back into ``ZipStream`` instances.
+4. Filter extracted entries during unzip with a predicate.
 
-            //archive can then be written to disk..
-        }
-
-        public static Stream GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
-        }
-    }
-
-
-
-Changelog
+Basic Example
 -------------
 
-V1.0.8
+.. code-block:: csharp
 
-* Dependent package updates
-* Minor fixes
+   using System.IO;
+   using VersaTul.Compression;
 
-V1.0.7
+   IArchiver archiver = new Archiver();
+   IZipper zipper = new Zipper(archiver);
 
-* Dependent package updates
-* Minor fixes
+   var zipStream = new ZipStream
+   {
+       ContentType = "text/csv",
+       FileName = "people.csv",
+       Stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("Name,Age\nJane,42"))
+   };
 
-V1.0.6
+   using var archive = zipper.Zip(zipStream);
 
-* Minor fixes
+Unzip Example
+-------------
 
-V1.0.5
+.. code-block:: csharp
 
-* Code ported to dotnet core
-* Documentation completed
+   using var archiveStream = File.OpenRead("exports.zip");
+
+   var files = zipper.Unzip(archiveStream, entryName => entryName.EndsWith(".csv"));
+
+   foreach (var item in files)
+   {
+       Console.WriteLine(item.FileName);
+   }
+
+Notes
+-----
+
+1. ``ZipStream.Stream`` is a ``MemoryStream``, so this package is best suited to in-memory export workflows.
+2. The package does not decide where archives are stored or sent; pair it with :doc:`handler-file` or :doc:`streamers` depending on your workflow.

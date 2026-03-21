@@ -1,86 +1,91 @@
 Logger Mail
-====================
+===========
 
-Getting Started
-----------------
-The VersaTul Logger Mail project provides the functionality needed to performing logging to a email address or addresses. 
-This project implements the ILogger interface from the VersaTul Logger project.
-There is also a dependency on the VersaTul Mailer project, which is used to send emails.
+Overview
+--------
+
+``VersaTul.Logger.Mail`` implements the shared logger contract by sending log events as email.
+
+It builds on the base logger package and the mailer package, adding throttling, batching, retry behavior, and a dead-letter queue for failed deliveries.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Send important operational events directly to an inbox.
+2. Deliver HTML-formatted exception details.
+3. Throttle bursts of log traffic instead of flooding recipients.
+4. Batch excess messages during a throttle window.
 
 Installation
 ------------
 
-To use VersaTul Logger Mail, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Logger.Mail -Version latest
 
-Main Components
+   dotnet add package VersaTul.Logger.Mail
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Logger.Mail -Version latest
+
+Related Packages
 ----------------
-#. ``IMailLogger`` : Represent functionality need to log to a email source E.g errors@domain.com.
-#. ``MailLogger`` : Default implementation of the Mail Logger interface.
 
-Functional Summary
-------------------
-#. See :doc:`/logger` project for more details.
-#. See :doc:`/mailer` project for more details.
+1. :doc:`logger` for the shared logger contract and parser.
+2. :doc:`mailer` for SMTP delivery.
 
-Code Examples
+Core Types And Concepts
+-----------------------
+
+``IMailLogger`` and ``MailLogger``
+   Email-backed logger implementation.
+
+``IMailConfiguration``
+   Supplies sender, recipient, SMTP, attachment, and retry-related settings.
+
+``ILogParser``
+   Produces the HTML body sent for logged events.
+
+Key Capabilities
+----------------
+
+1. Supports all ``ILogger`` sync and async overloads.
+2. Formats mail bodies as HTML through ``ILogParser``.
+3. Retries transient delivery failures.
+4. Throttles sends within a moving time window.
+5. Batches overflow items and tracks failed sends in a dead-letter queue.
+
+Basic Example
 -------------
-.. code-block:: c#
-    :caption: Implementing a Mail Logger Example
 
-    using VersaTul.Logger.Mail;
-    
-    // Configure the container using AutoFac Module
-    public class AppModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            // Mail logger configs
-            var configSettings = new Builder()
-                    .AddOrReplace("FromAddress", "noreply@domain.com")
-                    .AddOrReplace("ToAddress", "errors@domain.com")
-                    .BuildConfig();
+.. code-block:: csharp
 
-            builder.RegisterInstance(configSettings);
+   using VersaTul.Logger;
+   using VersaTul.Logger.Contracts;
+   using VersaTul.Logger.Mail;
 
-           // Registering logger to container
-           builder
-             .RegisterType<MailLogger>()
-             .As<IMailLogger>()
-             .As<ILogger>()
-             .SingleInstance();
-        }
-    }
-    
-    // Usage catching and logging exceptions...
-    public abstract class BaseController : Controller
-    {
-        private readonly ILogger logger;
-       
-        protected BaseController(ILogger logger)
-        {
-            this.logger = logger;
-        }
+   ILogger logger = new MailLogger(dispatcher, mailConfiguration, new LogParser());
 
-        protected IActionResult FaultHandler(Func<IActionResult> codeToExecute)
-        {
-            try
-            {
-                return codeToExecute();
-            }
-            catch (Exception ex)
-            {
-                logger.Log(ex);
+   await logger.LogAsync(
+       new LogInfo(LogLevel.Error, "Payments", "Payment gateway timeout", traceId: "trace-456"),
+       new TimeoutException("Gateway timeout"));
 
-                return BadRequest();
-            }
-        }
-    }
-    
+Operational Notes
+-----------------
 
+``MailLogger`` exposes two useful counters:
 
-Changelog
--------------
+1. ``DeadLetterCount`` for failed deliveries that exhausted retries.
+2. ``PendingBatchCount`` for throttled items waiting to be batched.
+
+Notes
+-----
+
+1. Throttling and batching are built into the logger implementation, not delegated to the mailer package.
+2. This sink is best for high-value alerts, not high-volume debug traffic.
+3. If send volume exceeds the configured window, messages are queued and later combined into a batched message.

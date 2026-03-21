@@ -1,84 +1,108 @@
 Display Attributes
-===================
+==================
 
-Getting Started
-----------------
-The VersaTul Display Attributes project enables the ability to provide meta-data to the export engine for outputting collections as files.
-This package works with the :doc:`streamers` package.
-Attributes can be applied to the properties of a collection data type in order to manipulate the outputted data.
+Overview
+--------
+
+``VersaTul.Display.Attributes`` lets you annotate model properties with export metadata such as display name, ordering, numeric precision, date formatting, and ignore rules.
+
+The package is most useful when paired with :doc:`streamers`, where those annotations influence the shape and formatting of exported output.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Rename columns during export without renaming your model properties.
+2. Control export column order.
+3. Round decimal values during output generation.
+4. Format date values with a display-specific format string.
+5. Exclude properties from exported output.
 
 Installation
 ------------
 
-To use VersaTul Display Attributes, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Display.Attributes -Version latest
 
+   dotnet add package VersaTul.Display.Attributes
 
-Main Components
----------------
-#. ``IFormatter`` : Specifies the functionality provided by a Display formatter.
-#. ``IDisplayAnalyzer`` : Specifies the functionality provided by a Display analyzer.
-#. ``DisplayAttribute`` : Apply to a property in order to provide meta-data to the export engine for outputting data to files.
-#. ``DateFormatter`` : Represents the formatter for formatting dates, this uses the standard date and time format specifiers.
-#. ``DecimalFormatter`` : Represents the formatter for formatting decimals.
+Or with the Package Manager Console:
 
-Functional Summary
-------------------
-#. **DisplayAttribute.Display(Name = "New-Display-Name")** : Apply to property to change property name on export.
-#. **DisplayAttribute.Display(Decimal = 2)** : Apply to floating point properties to round property value on export.
-#. **DisplayAttribute.Display(DateFormattingString = "D")** : Apply to DateTime properties to format value on export.
-#. **object IDisplayAnalyzer.FormatValue()** : Overloaded method for formatting a given property value base on the Display setting.
-#. **DisplayAttribute IDisplayAnalyzer.GetAttribute(PropertyInfo propertyInfo)** : Gets the DisplayAttribute value added to a given Property.
-#. **string IDisplayAnalyzer.GetName(PropertyInfo propertyInfo)** : Returns the name of the property wither the name of the current member or the overridden name by the Display Attribute.
+.. code-block:: console
 
-Code Examples
--------------
+   PM> NuGet\Install-Package VersaTul.Display.Attributes -Version latest
 
-.. code-block:: c#
-    :caption: Display Attribute Usage
-    :emphasize-lines: 48, 51, 56
+Related Packages
+----------------
 
-    class Order
-    {
-        public int OrderId { get; set; }
+1. :doc:`streamers` for export generation.
+2. :doc:`pipeline-infrastructure` because the built-in formatters run through a formatting pipeline.
 
-        [Display(Name = "Shipping")] //Rename to Shipping
-        public string ShipVia { get; set; }
+Core Types And Concepts
+-----------------------
 
-        [Display(Decimals = 2)] //Round value to 2 decimal places
-        public decimal SubTotal { get; set; }
+``DisplayAttribute``
+   Attribute used to control exported name, sequence, decimal precision, date formatting, culture, and ignore behavior.
 
-        public IEnumerable<OrderItem> Items { get; set; }
+``IDisplayAnalyzer`` and ``DisplayAnalyzer``
+   Read display metadata from reflected properties and format values using registered formatters.
 
-        [Display(DateFormattingString = "D")] //Format to Long date pattern.
-        public DateTime OrderDate { get; set; }
+``IFormatter``
+   Formatter contract used by the display pipeline.
 
-        public Customer Customer { get; set; }
+``DateFormatter`` and ``DecimalFormatter``
+   Built-in formatters for date and numeric output.
 
-        public string OrderNumber { get; set; }
+Key Capabilities
+----------------
 
-        public bool IsMailSent { get; set; }
-    }
-    
+1. Override the exported property name with ``Name``.
+2. Control output order with ``Sequence``.
+3. Round numeric values with ``Decimals``.
+4. Format ``DateTime`` values with ``DateFormattingString`` and optional ``CultureName``.
+5. Exclude members from output with ``Ignore``.
+6. Register additional custom formatters through ``DisplayAnalyzer.RegisterFormatter()``.
 
+Attribute Example
+-----------------
 
-Changelog
--------------
+.. code-block:: csharp
 
-V1.0.6
+   using VersaTul.Display.Attributes;
 
-* Minor fixes
-* Dependent package updates
+   public class Order
+   {
+       public int OrderId { get; set; }
 
-V1.0.5
+       [Display(Name = "Shipping Method", Sequence = 1)]
+       public string ShipVia { get; set; }
 
-* Minor fixes
-* Dependent package updates
+       [Display(Decimals = 2, Sequence = 2)]
+       public decimal SubTotal { get; set; }
 
-V1.0.4
+       [Display(DateFormattingString = "D", Sequence = 3)]
+       public DateTime OrderDate { get; set; }
 
-* Code ported to dotnet core
-* Documentation completed
+       [Display(Ignore = true)]
+       public bool InternalFlag { get; set; }
+   }
+
+Analyzer Example
+----------------
+
+.. code-block:: csharp
+
+   var analyzer = new DisplayAnalyzer();
+
+   var property = typeof(Order).GetProperty(nameof(Order.OrderDate));
+   var display = analyzer.GetAttribute(property);
+   var formatted = analyzer.FormatValue(display, DateTime.UtcNow);
+
+Notes
+-----
+
+1. ``DisplayAnalyzer.PropertyNames`` returns resolved export names ordered by sequence and then name.
+2. The analyzer caches resolved property metadata internally as names are requested.
+3. Custom formatters are the extension point when you need export-specific formatting beyond the built-ins.

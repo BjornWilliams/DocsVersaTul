@@ -1,124 +1,113 @@
 Logger
-================
+======
 
-Getting Started
-----------------
-The VersaTul Logger project provides all the common functionality used by all VersaTul loggers. 
-This project provides the interfaces used in order to keep consistency across all the different logger apps, 
-such as FileLogger, MailLogger, and WebLogger.
+Overview
+--------
+
+``VersaTul.Logger`` provides the core logging abstractions shared by the file, mail, and web logger packages.
+
+It defines a consistent logging contract, a standard log payload model, log levels, and a parser that can turn log events and exceptions into tabular, HTML, or JSON output.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Define your own logger implementation against a common VersaTul contract.
+2. Log both structured ``LogInfo`` entries and exceptions through the same interface.
+3. Reuse shared parsing and formatting logic across multiple log sinks.
+4. Keep application code independent from any single logging transport.
 
 Installation
 ------------
 
-To use VersaTul Logger, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Logger -Version latest
 
+   dotnet add package VersaTul.Logger
 
-Main Components
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Logger -Version latest
+
+Related Packages
 ----------------
-#. ``ILogger`` : Represents the functionality provided by a logger.
-#. ``ILogParser`` : Represents the parsing functionality to use for parsing logged data. 
-#. ``LogInfo`` : Represents information to be sent for logging.
 
-Functional Summary
-------------------
-#. **void ILogger.Log(** : Overloaded method for logging the given Exception or information to the registered loggers.
-#. **string ILogParser.Parse()** : Overloaded method for parsing the given exception and all inner exception into Key/value string format.
+1. :doc:`logger-file` for flat-file logging.
+2. :doc:`logger-mail` for email-based logging.
+3. :doc:`logger-web` for HTTP endpoint logging.
 
-Code Examples
+Core Types And Concepts
+-----------------------
+
+``ILogger``
+   Defines sync and async overloads for logging ``LogInfo``, ``Exception``, or both together.
+
+``LogInfo``
+   Standard log payload containing level, category, date, message, and optional trace identifier.
+
+``ILogParser`` and ``LogParser``
+   Convert log payloads and exception chains into ``Tab``, ``Html``, or ``Json`` output.
+
+``LogLevel``
+   Represents the severity of a log entry.
+
+Key Capabilities
+----------------
+
+1. Log entries can be emitted synchronously or asynchronously.
+2. ``LogInfo`` supports correlation through ``TraceId``.
+3. ``LogParser`` walks inner exceptions and emits multi-depth exception details.
+4. The parser supports output formats suitable for files, emails, and web payloads.
+
+Basic Example
 -------------
-.. code-block:: c#
-    :caption: Implementing a Logger Example
 
-    // Create a project specific interface
-    public interface IDatabaseLogger : ILogger 
-    {
-        // project specific methods can be added here...
-    }
-    
-    // Implementing interface
-    public class DatabaseLogger: IDatabaseLogger
-    {
-        private readonly ILogParser logParser;
-       
-        public DatabaseLogger(ILogParser logParser)
-        {
+.. code-block:: csharp
+
+   using VersaTul.Logger;
+   using VersaTul.Logger.Contracts;
+
+   public class DatabaseLogger : ILogger
+   {
+       private readonly ILogParser logParser;
+
+       public DatabaseLogger(ILogParser logParser)
+       {
            this.logParser = logParser;
-        }
-        
-        // interface methods...
-        public void Log(LogInfo logInfo) => LogAsync(logInfo)
-            .GetAwaiter()
-            .GetResult();
+       }
 
-        public void Log(Exception exception) => LogAsync(exception)
-            .GetAwaiter()
-            .GetResult();
+       public void Log(Exception exception) => LogAsync(exception).GetAwaiter().GetResult();
+       public void Log(LogInfo logInfo) => LogAsync(logInfo).GetAwaiter().GetResult();
+       public void Log(LogInfo logInfo, Exception exception) => LogAsync(logInfo, exception).GetAwaiter().GetResult();
 
-        public void Log(LogInfo logInfo, Exception exception) => LogAsync(logInfo, exception)
-            .GetAwaiter()
-            .GetResult();
+       public Task LogAsync(Exception exception) => LogAsync(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       public Task LogAsync(LogInfo logInfo) => LogAsync(logInfo, null);
 
-        public async Task LogAsync(Exception exception) => await LogAsync(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       public Task LogAsync(LogInfo logInfo, Exception exception)
+       {
+           var payload = logParser.Parse(logInfo, exception, ParseFormat.Json);
+           return SaveToDatabaseAsync(payload);
+       }
+   }
 
-        public async Task LogAsync(LogInfo logInfo) => await LogAsync(logInfo, null);
+Parser Example
+--------------
 
-        public async Task LogAsync(LogInfo logInfo, Exception exception)
-        {
-            var message = logParser.Parse(logInfo, exception, ParseFormat.Tab);
+.. code-block:: csharp
 
-            // send message to database here...
-        }
-    }
+   var parser = new LogParser();
+   var info = new LogInfo(LogLevel.Error, "Orders", "Unable to process order", traceId: "trace-123");
 
-    // Configure the container using AutoFac Module
-    public class AppModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-           // Registering logger to container
-           builder
-             .RegisterType<DatabaseLogger>()
-             .As<IDatabaseLogger>()
-             .As<ILogger>()
-             .SingleInstance();
-        }
-    }
-    
-    // Usage catching and logging exceptions...
-    public abstract class BaseController : Controller
-    {
-        private readonly ILogger logger;
-       
-        protected BaseController(ILogger logger)
-        {
-            this.logger = logger;
-        }
+   var html = parser.Parse(info, new InvalidOperationException("Boom"), ParseFormat.Html);
+   var json = parser.Parse(info, ParseFormat.Json);
 
-        protected IActionResult FaultHandler(Func<IActionResult> codeToExecute)
-        {
-            try
-            {
-                return codeToExecute();
-            }
-            catch (Exception ex)
-            {
-                logger.Log(ex);
+Notes
+-----
 
-                return BadRequest();
-            }
-        }
-    }
-
-
-Changelog
--------------
-
-V1.0.6
-
-* Code Port All Other Loggers [File, Web, Mail]
-* Code ported to dotnet core
-* Documentation completed
+1. ``LogInfo.ToString()`` produces a tab-separated representation, but the parser is the richer integration point.
+2. The base package does not write anywhere by itself; sink packages provide the actual transport.
+3. If you need a custom sink, implement ``ILogger`` and optionally reuse ``ILogParser``.

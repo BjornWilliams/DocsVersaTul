@@ -1,90 +1,93 @@
 Logger Web
-====================
+==========
 
-Getting Started
-----------------
-The VersaTul Logger Web project provides the functionality needed to performing logging to a web address or end point. 
-This project implements the ILogger interface from the VersaTul Logger project.
+Overview
+--------
+
+``VersaTul.Logger.Web`` implements the shared logger contract by POSTing log payloads to an HTTP endpoint.
+
+It is useful when you want centralized logging through an internal API, webhook, or remote collector while keeping application code dependent only on the common ``ILogger`` abstraction.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Send logs to a remote HTTP endpoint.
+2. Emit structured JSON payloads instead of flat text.
+3. Add authentication or payload signing headers.
+4. Prevent repeated failing calls through a simple circuit breaker.
 
 Installation
 ------------
 
-To use VersaTul Logger Web, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Logger.Web -Version latest
 
-Main Components
+   dotnet add package VersaTul.Logger.Web
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Logger.Web -Version latest
+
+Related Packages
 ----------------
-#. ``IWebLogger`` : Represent functionality need to log to an API endpoint.
-#. ``ILogWebConfiguration`` : Represents functionality needed to get settings for the Web logger.
-#. ``WebLogger`` : Default implementation of the Web Logger interface.
-#. ``LogWebConfiguration`` : Default implementation of the Web Logger configuration interface.
 
-Functional Summary
-------------------
-#. **ILogWebConfiguration.BaseUrl** : Property for getting the Base Url of the API E.G http://domain.com.
-#. **ILogWebConfiguration.LogEndPoint** : Property for getting the relative end point to send data to.
-#. See :doc:`/logger` project for more details.
+1. :doc:`logger` for the shared logger abstractions and parser.
+2. :doc:`configuration-defaults` for default web-logger settings.
 
+Core Types And Concepts
+-----------------------
 
-Code Examples
+``IWebLogger`` and ``WebLogger``
+   HTTP-backed logger implementation.
+
+``ILogWebConfiguration`` and ``LogWebConfiguration``
+   Expose endpoint, authentication, signing, and circuit-breaker settings.
+
+``ILogParser``
+   Produces JSON payloads for outbound requests.
+
+Key Capabilities
+----------------
+
+1. Sends log data as JSON over HTTP POST.
+2. Supports optional custom auth headers and tokens.
+3. Supports HMAC-based payload signing through ``WebhookSigningSecret``.
+4. Tracks consecutive failures and opens a circuit breaker temporarily when the threshold is exceeded.
+
+Basic Example
 -------------
-.. code-block:: c#
-    :caption: Implementing a Web Logger Example
 
-    using VersaTul.Logger.Web;
-    
-    // Configure the container using AutoFac Module
-    public class AppModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            // Web logger configs
-            var configSettings = new ConfigSettings
-            {
-                { "BaseUrl", "https://domain.com" }
-                { "LogEndPoint", "/api/logger" }
-            };                  
+.. code-block:: csharp
 
-            builder.RegisterInstance(configSettings);
+   using VersaTul.Logger;
+   using VersaTul.Logger.Contracts;
+   using VersaTul.Logger.Web;
 
-           // Registering logger to container
-           builder
-             .RegisterType<WebLogger>()
-             .As<IWebLogger>()
-             .As<ILogger>()
-             .SingleInstance();
-        }
-    }
-    
-    // Usage catching and logging exceptions...
-    public abstract class BaseController : Controller
-    {
-        private readonly ILogger logger;
-       
-        protected BaseController(ILogger logger)
-        {
-            this.logger = logger;
-        }
+   ILogger logger = new WebLogger(httpClientFactory, webLogConfiguration, new LogParser());
 
-        protected IActionResult FaultHandler(Func<IActionResult> codeToExecute)
-        {
-            try
-            {
-                return codeToExecute();
-            }
-            catch (Exception ex)
-            {
-                logger.Log(ex);
+   await logger.LogAsync(new LogInfo(LogLevel.Warning, "Imports", "Remote sink latency detected"));
 
-                return BadRequest();
-            }
-        }
-    }
-    
+Configuration Notes
+-------------------
 
+``ILogWebConfiguration`` includes:
 
-Changelog
--------------
+1. ``BaseUrl``
+2. ``LogEndPoint``
+3. ``WebhookAuthHeader``
+4. ``WebhookAuthToken``
+5. ``WebhookSigningSecret``
+6. ``CircuitBreakerFailureThreshold``
+7. ``CircuitBreakerCooldownSeconds``
+
+Notes
+-----
+
+1. ``WebLogger`` throws when the circuit breaker is open, so callers should decide whether to swallow or surface sink failures.
+2. Signing is added through an ``X-Webhook-Signature`` header computed from the JSON payload.
+3. This package fits centralized operational logging better than local diagnostics.

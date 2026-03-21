@@ -1,97 +1,107 @@
 Logger File
-====================
+===========
 
-Getting Started
-----------------
-The VersaTul Logger File project provides the functionality needed to performing logging in a flat file. 
-This project implements the ILogger interface from the VersaTul Logger project.
+Overview
+--------
+
+``VersaTul.Logger.File`` implements the shared logging contract by writing parsed log entries to a rolling flat file.
+
+It combines the base logger abstractions with file-system helpers and an archiving policy so applications can log to disk without handling rotation and file growth manually.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Persist logs locally in text form.
+2. Rotate log files when they reach a configured size.
+3. Enable daily rolling archives and retention cleanup.
+4. Keep the logging sink independent from your application code.
 
 Installation
 ------------
 
-To use VersaTul Logger File, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Logger.File -Version latest
 
-Main Components
+   dotnet add package VersaTul.Logger.File
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Logger.File -Version latest
+
+Related Packages
 ----------------
-#. ``IFileLogger`` :  Represent functionality need to log to a flat file source E.g text file.
-#. ``IArchiver`` : Represent functionality need to maintain the log file. Archiving files and starting new log files.
-#. ``ILogFileConfiguration`` : Represents a configuration file that is applicable to the Logger File application.
-#. ``FileLogger`` : Default implementation of the File Logger interface.
-#. ``Archiver`` : Default implementation of the Archiver interface.
-#. ``LogFileConfiguration`` : Default implementation of the Log File Configuration interface.
 
-Functional Summary
-------------------
-#. **void IArchiver.PerformArchiving()** : Checks if the log file has reached N size, and creates a new log file and save the current file with time-stamp added to the name.
-#. **string IArchiver.GenerateFileName()** : Generates a file name with date time stamp for archiving the log file.
-#. **string ILogFileConfiguration.FileName** : Property to get the configured file name.
-#. **string ILogFileConfiguration.FilePath** :  Property to get the configured file path.
-#. **long ILogFileConfiguration.MaxFileSize** :  Property to get the configured max file size.
-#. See :doc:`/logger` project for more details.
+1. :doc:`logger` for the shared logging contracts and parser.
+2. :doc:`handler-file` for file-system abstractions used by the logger.
+3. :doc:`configuration-defaults` for baseline logger settings.
 
+Core Types And Concepts
+-----------------------
 
-Code Examples
+``IFileLogger`` and ``FileLogger``
+   File-backed ``ILogger`` implementation.
+
+``ILogFileConfiguration`` and ``LogFileConfiguration``
+   Expose file path, file name, max size, rolling, and retention settings.
+
+``IArchiver`` and ``Archiver``
+   Handle log-file rollover and archived file naming.
+
+Key Capabilities
+----------------
+
+1. Supports the full sync and async ``ILogger`` contract.
+2. Appends parsed log rows to the configured log file.
+3. Creates the target directory automatically when missing.
+4. Rotates files before append when archiving conditions are met.
+5. Supports daily rolling and retention cleanup through configuration.
+
+Basic Example
 -------------
-.. code-block:: c#
-    :caption: Implementing a File Logger Example
 
-    using VersaTul.Logger.File;
-    
-    // Configure the container using AutoFac Module
-    public class AppModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            // File logger configs
-            var configSettings = new Builder()
-                    .AddOrReplace("MaxFileSize", 10000000)
-                    .AddOrReplace("LogFileName", "app_log")
-                    .AddOrReplace("FilePath", "c:\logs\")
-                    .BuildConfig();
+.. code-block:: csharp
 
-            builder.RegisterInstance(configSettings);
+   using VersaTul.Logger;
+   using VersaTul.Logger.Contracts;
+   using VersaTul.Logger.File;
+   using VersaTul.Logger.File.Contracts;
 
-            // Registering logger to container
-            builder.RegisterType<FileLogger>().As<IFileLogger>().As<ILogger>().SingleInstance();
-            builder.RegisterType<LogParser>().As<ILogParser>().SingleInstance();
-            builder.RegisterType<LogFileConfiguration>().As<ILogFileConfiguration>().SingleInstance();
-            builder.RegisterType<Archiver>().As<IArchiver>().SingleInstance();
+   var configSettings = new Builder()
+       .AddOrReplace("MaxFileSize", 10_000_000)
+       .AddOrReplace("LogFileName", "app_log")
+       .AddOrReplace("FilePath", "C:\\logs")
+       .BuildConfig();
 
-            builder.RegisterType<DirectoryWrapper>().As<IFileWrapper>().As<IDirectoryWrapper>().SingleInstance();
-            builder.RegisterType<FileUtility>().As<IFileUtility>().As<IFileHandler>().SingleInstance();
-        }
-    }
-    
-    // Usage catching and logging exceptions...
-    public abstract class BaseController : Controller
-    {
-        private readonly ILogger logger;
-       
-        protected BaseController(ILogger logger)
-        {
-            this.logger = logger;
-        }
+   ILogFileConfiguration configuration = new LogFileConfiguration(configSettings);
+   ILogParser parser = new LogParser();
+   IFileHandler fileHandler = new FileUtility(new DirectoryWrapper(), new DirectoryWrapper());
+   IArchiver archiver = new Archiver(configuration, fileHandler);
 
-        protected IActionResult FaultHandler(Func<IActionResult> codeToExecute)
-        {
-            try
-            {
-                return codeToExecute();
-            }
-            catch (Exception ex)
-            {
-                logger.Log(ex);
+   ILogger logger = new FileLogger(configuration, archiver, parser, fileHandler);
 
-                return BadRequest();
-            }
-        }
-    }
-    
+   await logger.LogAsync(new LogInfo(LogLevel.Information, "Startup", "Application started"));
 
+Configuration Notes
+-------------------
 
-Changelog
--------------
+``ILogFileConfiguration`` exposes:
+
+1. ``MaxFileSize``
+2. ``LogFileName``
+3. ``FilePath``
+4. ``FullFilePath``
+5. ``FullLogFileName``
+6. ``EnableDailyRolling``
+7. ``RetentionDays``
+
+Notes
+-----
+
+1. ``FileLogger`` serializes concurrent writes with ``SemaphoreSlim``.
+2. Logged rows are written using the parser's tab format.
+3. This package is a good default sink when local operational visibility matters more than centralized transport.

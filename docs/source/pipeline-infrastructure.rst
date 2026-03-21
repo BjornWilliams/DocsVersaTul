@@ -1,226 +1,116 @@
 Pipeline Infrastructure
-================================
+=======================
 
-Getting Started
-----------------
-The VersaTul Pipeline Infrastructure project is designed to provide a very useful and neat pattern in the scenario when a set of filtering/processing needs to be performed on an object to transform it into a useful state. 
-The project is the complete implementation of Pipeline pattern in a generic fashion.
+Overview
+--------
+
+``VersaTul.Pipeline.Infrastructure`` provides a lightweight implementation of the pipeline-and-step pattern for transforming values through composable processing units.
+
+The package is intentionally small: a step interface, a pipeline base class, and extension methods that make chained step composition easy for both synchronous and asynchronous workflows.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Break a multi-stage transformation into explicit reusable steps.
+2. Chain sync or async processing with clear input and output types.
+3. Add optional diagnostics around step execution time and failures.
+4. Reuse the same pipeline pattern across formatters, validation, or normalization flows.
 
 Installation
 ------------
 
-To use VersaTul Pipeline Infrastructure, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Pipeline.Infrastructure -Version latest
 
+   dotnet add package VersaTul.Pipeline.Infrastructure
 
-Main Components
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Pipeline.Infrastructure -Version latest
+
+Related Packages
 ----------------
-#. ``IStep<TIn, TOut>`` : A step represents the work to be done on a given input with the given return type.
-#. ``Pipeline<TIn, TOut> : IStep<TIn, TOut>`` : Represents an accumulative set of steps that can be performed on a given input.
-#. ``PipelineExtensions`` : Provides an easy way of extending objects with pipeline steps.
 
-Functional Summary
-------------------
-#. **TOut ISteps<TIn, TOut>.Execute(TIn input);** : Steps implementing this method would perform processing on the input type{TIn}.
-#. **Func<TIn, TOut> Pipeline<TIn, TOut>.Step** : Property on the Pipeline that gets the starting step associated with this pipeline.
-#. **TOut PipelineExtensions.AddStep<TIn, TOut>(this TIn input, IStep<T, U> step)** : An extension method for Providing an easy way of extending objects with pipeline steps.
+1. :doc:`display-attributes` because its formatting pipeline is built on these step abstractions.
 
-Code Examples
--------------
-.. code-block:: c#
-    :caption: Simple Example of Pipeline Step Setup
+Core Types And Concepts
+-----------------------
 
-    // Pipeline step to add a number to input.
-    public class AddOneStep : IStep<int, int>
-    {
-        public int Execute(int input)
-        {
-            return input + 1;
-        }
-    }
+``IStep<TIn, TOut>``
+   Defines a single unit of work that transforms ``TIn`` into ``TOut``.
 
-    // Pipeline step to convert the input.
-    public class IntToStringStep : IStep<int, string>
-    {
-        public string Execute(int input)
-        {
-            return input.ToString();
-        }
-    }
+``Pipeline<TIn, TOut>``
+   Base class for composing a pipeline through a ``Func<TIn, TOut>`` step chain.
 
-    // Pipeline step that is optional.
-    public class OptionalStep<TIn, TOut> : IStep<TIn, TOut> where TIn : TOut
-    {
-        private readonly IStep<TIn, TOut> Step;
-        private readonly Func<TIn, bool> choice;
+``PipelineExtensions``
+   Extension methods that chain steps fluently and add optional diagnostics.
 
-        // passing the optional function during construction for later use.
-        public OptionalStep(Func<TIn, bool> choice, IStep<TIn, TOut> Step)
-        {
-            this.choice = choice;
-            this.Step = Step;
-        }
+Key Capabilities
+----------------
 
-        public TOut Execute(TIn input)
-        {
-            // runing optional check during pipeline processing.
-            if (!choice(input))
-            {
-                return input;
-            }
+1. Compose nested pipelines with strongly typed step boundaries.
+2. Execute synchronous steps through ``AddStep()``.
+3. Execute asynchronous steps through ``AddStep()`` overloads that return ``Task<TOut>``.
+4. Capture elapsed time and exceptions through diagnostics callbacks.
+5. Fail fast when a pipeline is executed before its step chain is configured.
 
-            return Step.Execute(input);
-        }
-    }
+Step Example
+------------
 
-.. code-block:: c#
-    :caption: Simple Example of Pipeline Usage
+.. code-block:: csharp
 
-    // Using nested pipeline to work with different types.
+   using VersaTul.Pipeline.Infrastructure.Contracts;
 
-    // Example pipeline with steps setup.
-    public class CompoundPipeline : Pipeline<int, string>
-    {
-        public CompoundPipeline()
-        {
-            Step = input => input
-                .AddStep(new AnInitialStep())
-                .AddStep(new InnerPipeline()) //InnerPipeline used by CompoundPipeline
-                .AddStep(new IntToStringStep())
-                .AddStep(new DoSomethingWithAStringStep());
-        }
-    }
+   public class AddOneStep : IStep<int, int>
+   {
+       public int Execute(int input) => input + 1;
+   }
 
-    // A Pipeline that's called by another pipeline.
-    public class InnerPipeline : Pipeline<string, int>
-    {
-        public InnerPipeline()
-        {
-            Step = input => input
-            .AddStep(new DoSomethingWithAnIntegerStep())
-            .AddStep(new SomethingElseWithAnIntegerStep())
-            .AddStep(new OptionalStep<int, int>(i => i > 5, new AddOneStep()));
-        }
-    }
+   public class IntToStringStep : IStep<int, string>
+   {
+       public string Execute(int input) => input.ToString();
+   }
 
+Pipeline Example
+----------------
 
-.. code-block:: c#
-    :caption: Simple Example of using Pipeline to Format Input
+.. code-block:: csharp
 
-    // interface for formatters.
-    public interface IFormatter : IStep<PropertyData, PropertyData> { }
+   using VersaTul.Pipeline.Infrastructure;
+   using VersaTul.Pipeline.Infrastructure.Extensions;
 
-    // Input model 
-    public class PropertyData
-    {
-        // See the display attribute project for more details. 
-        public DisplayAttribute Attribute { get; set; }
+   public class NumberPipeline : Pipeline<int, string>
+   {
+       public NumberPipeline()
+       {
+           Step = input => input
+               .AddStep(new AddOneStep())
+               .AddStep(new IntToStringStep());
+       }
+   }
 
-        public object Value { get; set; }        
-    }
+Diagnostics Example
+-------------------
 
-    // Date formatter - use to format an inputted value to a date string value.
-    public class DateFormatter : IFormatter
-    {
-        public PropertyData Execute(PropertyData input)
-        {
-            if (input == null) { return input; }
+.. code-block:: csharp
 
-            if (input.Value == null) { return input; }
+   var value = 5.AddStep(new AddOneStep(), (elapsed, error) =>
+   {
+       Console.WriteLine($"Elapsed: {elapsed}");
+       if (error != null)
+       {
+           Console.WriteLine(error.Message);
+       }
+   });
 
-            if (string.IsNullOrEmpty(input.Attribute.DateFormattingString)) { return input; }
+Notes
+-----
 
-            var type = input.Value.GetType();
-
-            if (type != typeof(DateTime)) { return input; }
-
-            input.Value = ((DateTime)input.Value).ToString(input.Attribute.DateFormattingString);
-
-            return input;
-        }
-    }
-
-    // Decimal formatter - use to format an inputted value to a rounded decimal value.
-    public class DecimalFormatter : IFormatter
-    {
-        public PropertyData Execute(PropertyData input)
-        {
-            if (input == null) { return input; }
-
-            if (input.Value == null) { return input; }
-
-            if (input.Attribute.Decimals == int.MinValue || input.Attribute.Decimals == int.MaxValue) { return input; }
-
-            var type = input.Value.GetType();
-
-            if (type != typeof(decimal) && type != typeof(double) && type != typeof(float)) { return input; }
-
-            input.Value = decimal.Round((decimal)input.Value, input.Attribute.Decimals);
-
-            return input;
-        }
-    }
-
-    // Format Pipeline used to perform formatting on inputted values.
-    public class FormatPipeline : Pipeline<PropertyData, PropertyData>
-    {
-        public FormatPipeline()
-        {
-            Step = input => input
-                .AddStep(new DateFormatter())
-                .AddStep(new DecimalFormatter());
-        }
-    }
-
-    // Usage could look something like the following:
-    public class DisplayAnalyzer
-    {
-        // store pipeline instance
-        private readonly FormatPipeline formatPipeline;
-       
-        public DisplayAnalyzer()
-        {
-            // setup the pipeline for use
-            formatPipeline = new FormatPipeline();
-        }
-       
-        public object FormatValue(DisplayAttribute displayAttribute, object propertyValue)
-        {
-            if (displayAttribute == null) { return propertyValue; }
-
-            // using the pipeline to format the given value.
-            // value PropertyData will be passed through all steps and properly formatted 
-            // by valid steps.
-            propertyValue = formatPipeline.Execute(new PropertyData
-            {
-                Attribute = displayAttribute,
-                Value = propertyValue
-            })
-            .Value;
-
-            return propertyValue;
-        }
-    }
-
-
-
-Changelog
--------------
-
-V1.0.7
-
-* Added Async support
-
-V1.0.6
-
-* Minor fixes
-* xml comments code
-
-V1.0.5
-
-* Code ported to dotnet core
-* Documentation completed
-    
+1. ``Pipeline<TIn, TOut>.Execute()`` throws if ``Step`` is not configured.
+2. Async support is provided through ``PipelineExtensions`` overloads rather than a separate async pipeline base class.
+3. This package is deliberately minimal, which makes it a good fit for custom domain pipelines without framework overhead.
