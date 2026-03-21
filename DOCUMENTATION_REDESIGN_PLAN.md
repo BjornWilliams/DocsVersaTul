@@ -23,9 +23,9 @@ Status as of 2026-03-21:
 7. Manual QA has been completed for internal `:doc:` links, toctree coverage, install-package naming, and common typo patterns.
 8. Strict Sphinx HTML validation has been completed successfully with a local virtual environment on Python 3.14.
 
-## Current Findings
+## Original Findings
 
-The current documentation already has useful package pages, but it needs structural and editorial modernization.
+This section records the baseline state captured before the modernization work was completed.
 
 ### Issues Identified
 
@@ -264,9 +264,6 @@ An approved documentation set ready for incremental publishing.
 
 ## Remaining Work
 
-The content modernization and validation work are effectively complete.
+The content modernization and validation work are complete.
 
-Any remaining work is optional follow-up:
-
-1. Spot-check the generated HTML in `docs/build/html` for visual polish.
-2. Decide whether to commit the local `.venv` workflow guidance into broader contributor onboarding beyond this repository.
+There is no remaining work tracked in this redesign plan.

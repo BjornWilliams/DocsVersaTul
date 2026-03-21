@@ -33,9 +33,6 @@ Recommended starting points:
 
    These docs focus on the NuGet-distributed VersaTul library packages.
 
-   Host and test projects in the main repository are intentionally excluded from the package reference sections.
-
-
 Start Here
 ----------
 
