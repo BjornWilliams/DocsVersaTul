@@ -5,6 +5,8 @@ This page is the high-level map of the VersaTul library ecosystem.
 
 Use it when you want to understand how the packages are grouped, what each package is for, and which packages are commonly used together.
 
+It is a navigation page first, not a replacement for the package reference pages.
+
 Foundation Packages
 -------------------
 
@@ -71,3 +73,8 @@ Recommended Browsing Paths
 1. New users should start at :doc:`getting-started`.
 2. Users evaluating adoption should read :doc:`package-selection`.
 3. Experienced users can use this page as a jump table into the full package reference.
+
+Scope Reminder
+--------------
+
+This catalog covers the library packages published for reuse. It does not attempt to document the host and test projects that also exist in the main VersaTul repository.

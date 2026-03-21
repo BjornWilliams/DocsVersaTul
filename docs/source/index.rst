@@ -14,7 +14,7 @@ The ecosystem is organized as focused NuGet packages that can be used independen
 3. **File, transformation, and processing workflows** including compression, streamers, file handling, display metadata, and pipelines.
 4. **Operational concerns** such as logging, mail delivery, and task scheduling.
 
-This documentation is being reorganized to support both first-time adopters and experienced users who need deeper package detail.
+The documentation is organized to support both first-time adopters and experienced users who need deeper package detail.
 
 How To Use These Docs
 ---------------------
@@ -31,9 +31,9 @@ Recommended starting points:
 
 .. note::
 
-   This project is under active development.
-   
-   For support, contact us via email. versatul.libraries@outlook.com
+   These docs focus on the NuGet-distributed VersaTul library packages.
+
+   Host and test projects in the main repository are intentionally excluded from the package reference sections.
 
 
 Start Here

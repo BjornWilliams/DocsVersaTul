@@ -5,6 +5,8 @@ VersaTul works best when you approach it as a toolbox.
 
 This page helps you choose the smallest set of packages that solves your current problem while keeping room for later expansion.
 
+The most reliable strategy is to start from the concrete problem, not the full library catalog.
+
 Start With The Problem
 ----------------------
 
@@ -88,6 +90,13 @@ Selection Rules That Usually Help
 3. Prefer one data-access strategy per service unless you have a clear integration need.
 4. Treat logging as a base package plus a delivery implementation.
 5. Treat streamers, converters, and display attributes as complementary packages rather than isolated ones.
+
+Selection Rules That Usually Hurt
+---------------------------------
+
+1. Pulling in multiple data-access packages before the primary storage choice is clear.
+2. Treating every library package as a required foundation.
+3. Mixing package examples from unrelated workflows before one end-to-end path is working.
 
 For Advanced Users
 ------------------

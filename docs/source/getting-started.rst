@@ -3,6 +3,8 @@ Getting Started
 
 This guide is for users who are new to the VersaTul libraries and want a practical starting point.
 
+The goal is to help you choose one useful package, install it, and expand only after the first use case is working.
+
 What VersaTul Gives You
 -----------------------
 
@@ -83,6 +85,13 @@ When starting out:
 2. Add dependencies through dependency injection where the package supports it.
 3. Keep configuration explicit so you can see what each package requires.
 4. Use the related-package sections in each page before adding another package to your project.
+
+What This Documentation Does Not Cover
+--------------------------------------
+
+1. Host application projects from the main VersaTul repository.
+2. Test projects and test-only setup.
+3. One fixed architecture that every project should follow.
 
 What To Read Next
 -----------------

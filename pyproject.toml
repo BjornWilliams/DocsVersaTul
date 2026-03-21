@@ -1,8 +1,10 @@
 [build-system]
-requires = ["flit_core =8.8.1"]
+requires = ["flit_core>=3.8,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "VersaTul"
-authors = [{name = "Bjorn Williams", email = "bjorn.williams@gmail.com"}]
-dynamic = ["version", "description"]
+name = "DocsVersaTul"
+version = "0.0.0"
+description = "Sphinx documentation for the VersaTul .NET library ecosystem."
+authors = [{ name = "Bjorn Williams", email = "bjorn.williams@gmail.com" }]
+requires-python = ">=3.10"
