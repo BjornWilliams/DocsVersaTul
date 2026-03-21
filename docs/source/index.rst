@@ -102,36 +102,3 @@ Operational Packages
    logger-web
    mailer
    scheduler
-
-.. toctree::
-   :hidden:
-
-   Home <self>
-   getting-started
-   package-selection
-   package-catalog
-   caching
-   compression
-   configuration
-   configuration-defaults
-   contracts
-   converters
-   streamers
-   data-contracts
-   bulk
-   sql
-   mssql
-   mongodb
-   display-attributes
-   efcore
-   extensions
-   handler-file
-   logger
-   logger-file
-   logger-mail
-   logger-web
-   mailer
-   pipeline-infrastructure
-   scheduler
-   file-reader
-   utilities

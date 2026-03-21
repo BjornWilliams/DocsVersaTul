@@ -23,6 +23,7 @@ Repository Layout
 3. ``docs/requirements.txt`` defines the Python packages needed to build the site locally.
 4. ``DOCUMENTATION_REDESIGN_PLAN.md`` tracks the modernization work completed and remaining.
 5. ``PACKAGE_DOC_TEMPLATE.md`` captures the structure used for package reference pages.
+6. ``DOCUMENTATION_VALIDATION.md`` captures the recommended local validation flow for Sphinx builds.
 
 Local Build
 -----------
@@ -54,16 +55,27 @@ Build Requirements
 
 The current docs dependencies are:
 
-1. ``sphinx==5.3.0``
-2. ``sphinx_rtd_theme==1.3.0``
-3. ``readthedocs-sphinx-search==0.1.1``
+1. ``sphinx==9.1.0``
+2. ``sphinx_rtd_theme==3.1.0``
+3. ``readthedocs-sphinx-search==0.3.2``
+
+Validation Workflow
+-------------------
+
+Use ``DOCUMENTATION_VALIDATION.md`` for the recommended strict validation commands and post-build checks.
 
 Current Local Validation Status
 -------------------------------
 
-The documentation pages have been validated in-editor, but full local HTML validation depends on Python and Sphinx being available on the machine running the build.
+The documentation pages have been validated in-editor and with a strict local Sphinx HTML build.
 
-In the current development environment used for the recent rewrite work, Python was not installed, so a full Sphinx build could not be executed locally there.
+The current validated path uses a local virtual environment with:
+
+1. ``sphinx==9.1.0``
+2. ``sphinx_rtd_theme==3.1.0``
+3. ``readthedocs-sphinx-search==0.3.2``
+
+On this Windows machine, ``python`` on ``PATH`` still resolves to the Microsoft Store alias, so the working validation flow uses the registered interpreter path to create and invoke the virtual environment.
 
 Writing Guidance
 ----------------

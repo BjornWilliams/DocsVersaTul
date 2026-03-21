@@ -9,7 +9,7 @@ version = release
 extensions = [
     "sphinx.ext.duration",
     "sphinx.ext.intersphinx",
-    "readthedocs_sphinx_search.extension",
+    "sphinx_search.extension",
 ]
 
 intersphinx_mapping = {

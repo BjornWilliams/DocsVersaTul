@@ -66,21 +66,24 @@ Common Package Combinations
 
 These combinations are useful starting points for common scenarios.
 
-+-----------------------------------+-----------------------------------------------------------------------+
-| Scenario                          | Recommended starting packages                                         |
-+===================================+=======================================================================+
-| Basic service application         | ``VersaTul.Configurations``, ``VersaTul.Extensions``, ``VersaTul.Logger`` |
-+-----------------------------------+-----------------------------------------------------------------------+
-| SQL-backed application            | ``VersaTul.Data.Sql`` or ``VersaTul.Data.MsSql``, ``VersaTul.Data.Contracts`` |
-+-----------------------------------+-----------------------------------------------------------------------+
-| File import pipeline              | ``VersaTul.Data.FileReader``, ``VersaTul.Data.Bulk``, ``VersaTul.Handler.File`` |
-+-----------------------------------+-----------------------------------------------------------------------+
-| Export and formatting workflow    | ``VersaTul.Collection.Streamers``, ``VersaTul.Display.Attributes``, ``VersaTul.Object.Converters`` |
-+-----------------------------------+-----------------------------------------------------------------------+
-| Background processing             | ``VersaTul.Task.Scheduler``, ``VersaTul.Logger``, one concrete logger |
-+-----------------------------------+-----------------------------------------------------------------------+
-| Notification workflow             | ``VersaTul.Mailer``, ``VersaTul.Logger.Mail``                         |
-+-----------------------------------+-----------------------------------------------------------------------+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Scenario
+     - Recommended starting packages
+   * - Basic service application
+     - ``VersaTul.Configurations``, ``VersaTul.Extensions``, ``VersaTul.Logger``
+   * - SQL-backed application
+     - ``VersaTul.Data.Sql`` or ``VersaTul.Data.MsSql``, ``VersaTul.Data.Contracts``
+   * - File import pipeline
+     - ``VersaTul.Data.FileReader``, ``VersaTul.Data.Bulk``, ``VersaTul.Handler.File``
+   * - Export and formatting workflow
+     - ``VersaTul.Collection.Streamers``, ``VersaTul.Display.Attributes``, ``VersaTul.Object.Converters``
+   * - Background processing
+     - ``VersaTul.Task.Scheduler``, ``VersaTul.Logger``, one concrete logger
+   * - Notification workflow
+     - ``VersaTul.Mailer``, ``VersaTul.Logger.Mail``
 
 Selection Rules That Usually Help
 ---------------------------------
