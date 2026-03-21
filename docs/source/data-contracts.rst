@@ -1,105 +1,126 @@
 Data Contracts
-==================
+==============
 
-Getting Started
-----------------
-The VersaTul Data Contracts project provides generic interfaces that are supported throughout the Data manipulating projects in the VersaTul ecosystem. 
-These tend to be more database-oriented projects. 
-Developers who may want to change the underline implementation of these contracts can create their own implementation of such contract and supply it to the VersaTul project in which they require to change the behavior. 
+Overview
+--------
+
+``VersaTul.Data.Contracts`` provides shared abstractions for repository-style data access, connection metadata, pagination, and unit-of-work patterns.
+
+It is the base contract layer for data-oriented VersaTul packages such as EF Core and provider-specific access libraries.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Define repository interfaces that stay independent of a concrete data technology.
+2. Standardize unit-of-work behavior across projects.
+3. Pass connection metadata through a common contract.
+4. Represent paged requests and paged results consistently.
+5. Add async stream support to repository abstractions.
 
 Installation
 ------------
 
-To use VersaTul Data Contracts, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Data.Contracts -Version latest
 
+   dotnet add package VersaTul.Data.Contracts
 
-Main Components
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Data.Contracts -Version latest
+
+Related Packages
 ----------------
-#. ``IDataConnection`` : Represent the Database Connection details needed to connect to a database.
-#. ``IRepository<TEntity, TKey>`` : Represents a collection of functionality that can be performed on a data store.
-#. ``IUnitOfWork`` : Represents the absolute unit of work to be sent to a database.
 
-Functional Summary
+1. :doc:`contracts` for more general-purpose abstractions.
+2. :doc:`efcore` for a concrete implementation of repository and unit-of-work patterns.
+3. :doc:`sql` and :doc:`mssql` for connection-oriented relational data access.
+
+Core Types And Concepts
+-----------------------
+
+``IDataConnection``
+   Standardizes how connection strings and provider names are retrieved.
+
+``IRepository<TEntity, TKey>``
+   Defines CRUD-style operations, queryable access, async reads, and range operations for a repository.
+
+``IAsyncStreamRepository<TEntity, TKey>``
+   Extends the repository model with cancellation-aware async streaming.
+
+``IUnitOfWork``
+   Defines transactional save and rollback behavior plus disposal semantics.
+
+``IPagedRequest`` and ``PagedRequest``
+   Represent page number, page size, and derived skip value.
+
+``IPagedResult<T>`` and ``PagedResult<T>``
+   Represent paged items, total count, current page, page size, and total page count.
+
+Key Capabilities
+----------------
+
+1. Repositories support synchronous and asynchronous ``Add``, ``Find``, ``Get``, and range operations.
+2. Repositories expose both ``IQueryable`` and async enumerable access patterns.
+3. Paged request and result models can be reused across APIs and repository layers.
+4. The contracts are flexible enough for EF Core, document databases, and custom persistence layers.
+
+Repository Example
 ------------------
-#. **string IDataConnection.GetConnectionString()** : Overloaded methods for getting the ConnectionString for the current application's default configuration.
-#. **string IDataConnection.GetProviderName()** : Overloaded methods for getting the fully qualified provider name.
-#. **TEntity IRepository<TEntity, TKey>.Add()** : Overloaded methods for adding the given entity to the data store.
-#. **void IRepository<TEntity, TKey>.AddRange()** : Overloaded methods for adding the given entities to the data store.
-#. **TEntity IRepository<TEntity, TKey>.Find()** : Overloaded methods for finding an entity with the given primary key values.
-#. **TEntity IRepository<TEntity, TKey>.Get()** : Overloaded methods for getting entities in the data Store.
-#. **TEntity IRepository<TEntity, TKey>.Update()** : Overloaded methods for updating entities in the data store.
-#. **TEntity IRepository<TEntity, TKey>.Remove()** : Overloaded methods for deleting entities from the data store.
-#. **TEntity IUnitOfWork.Commit()** : Overloaded methods for saving the changes from the DbContext out the database..
-#. **TEntity IUnitOfWork.Rollback()** : Pull data from database and override changes in the Change Tracker. This method is not a true rollback in the database.
 
-Code Examples
--------------
+.. code-block:: csharp
 
-.. code-block:: c#
-    :caption: Example implementation as found in VersaTul.Data.EFCore.
+   using VersaTul.Data.Contracts;
 
-    // code shortened for breviate.
-    public abstract class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, new()
-    {
-        public TEntity Add(TEntity entity)
-        {
-            if (entity == null) { throw new ArgumentNullException(nameof(entity), "Argument cannot be null."); }
+   public interface ICustomerRepository : IRepository<Customer, int>
+   {
+   }
 
-            return this.entity.Add(entity).Entity;
-        }
+   public class CustomerService
+   {
+       private readonly ICustomerRepository repository;
 
-        public void AddRange(IEnumerable<TEntity> entities) => entity.AddRange(entities);
+       public CustomerService(ICustomerRepository repository)
+       {
+           this.repository = repository;
+       }
 
-        public TEntity Find(params object[] keyValues) => entity.Find(keyValues);
-    }
+       public async Task<Customer> GetAsync(int id)
+       {
+           return await repository.GetAsync(id);
+       }
+   }
 
-    // code shortened for breviate.
-    public abstract class BaseUnitOfWork : IUnitOfWork
-    {
-        public int Commit() => DataContext.SaveChanges();
+Paging Example
+--------------
 
-        public void Rollback()
-        {
-            DataContext
-                .ChangeTracker
-                .Entries()
-                .ToList()
-                .ForEach(set => set.Reload());
-        }
-    }
+.. code-block:: csharp
 
-    // code shortened for breviate.
-    public class ConnectionInfo : IConnectionInfo
-    {
-        public ConnectionInfo(string connectionString, string providerName)
-        {
-            ConnectionString = connectionString;
+   using VersaTul.Data.Contracts;
 
-            ProviderName = providerName;
-        }
-       
-        public string ConnectionString { get; }
+   var request = new PagedRequest
+   {
+       PageNumber = 2,
+       PageSize = 25
+   };
 
-        public string ProviderName { get; }        
-    }
+   var result = new PagedResult<Customer>
+   {
+       Items = customers,
+       TotalCount = 240,
+       PageNumber = request.PageNumber,
+       PageSize = request.PageSize
+   };
 
+Notes
+-----
 
-
-Changelog
--------------
-
-V1.0.8
-
-* Dependent package updates
-* Clean up interface
-* Minor fixes
-
-V1.0.7
-
-* Code ported to dotnet core
-* Documentation completed
+1. ``IRepository<TEntity, TKey>`` is intentionally broad enough for multiple backing stores.
+2. ``IAsyncStreamRepository<TEntity, TKey>`` is useful when the consumer prefers stream-first enumeration.
+3. ``IUnitOfWork`` is most relevant in packages such as :doc:`efcore` where change tracking and commit behavior are explicit.
     

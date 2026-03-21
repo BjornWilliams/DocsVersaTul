@@ -1,179 +1,151 @@
 Data FileReader
-=========================
+===============
 
-``VersaTul.Data.FileReader`` is a small library that provides simple, testable
-file-reading helpers to produce ``IDataReader`` instances from common file
-formats. It focuses on CSV and plain text files and exposes a thin
-abstraction so callers can easily obtain forward-only readers that integrate
-with other data-processing or bulk-copy components.
-
-Features
+Overview
 --------
 
-- Read a single file (CSV or text) and obtain an ``IDataReader``.
-- Enumerate and read files from a directory based on extension filters.
-- Pluggable readers via ``ICsvReader`` and ``ITextReader`` interfaces so you
-  can replace or mock readers in tests.
-- Supports options (``IOptions`` / ``FileOptions``) such as whether CSV files
-  contain a header row.
-- Returns readers wrapped so underlying streams are disposed when the reader
-  is disposed.
+``VersaTul.Data.FileReader`` provides simple, testable file-reading helpers that produce ``IDataReader`` instances from common file formats.
 
-Key types
----------
+It is especially useful when your downstream workflow already expects ``IDataReader`` input, such as a bulk-copy pipeline or a tabular import process.
 
-- ``IFileReader`` - high-level API for reading a single file or all files in a
-  directory. Primary members include::
+When To Use This Package
+------------------------
 
-     IDataReader? Read(string directoryPath, string filename, IOptions options)
-     IEnumerable<IDataReader> Read(string directoryPath, IOptions options)
+Use this package when you want to:
 
-- ``ICsvReader`` - CSV-specific reader that returns an ``IDataReader`` for a
-  given file path and options.
-- ``ITextReader`` - Plain-text reader that returns an ``IDataReader`` for a
-  given file path and options.
-- ``IOptions`` / ``FileOptions`` - Options to control reading behavior (for
-  example ``HasHeader`` and ``ExtensionFilters``).
-- ``DisposableDataReader`` - wrapper that ensures both the returned reader and
-  its underlying stream are disposed together.
+1. Read CSV, text, or JSON files through a consistent abstraction.
+2. Enumerate files in a directory by extension and turn each into an ``IDataReader``.
+3. Inject format-specific readers for testing or replacement.
+4. Feed file data directly into :doc:`bulk` or :doc:`mssql` bulk-copy workflows.
 
 Installation
 ------------
 
-This project is typically consumed as part of the larger VersaTul solution.
-If distributed as a NuGet package, install it using::
+Install the package with the .NET CLI:
 
-   dotnet add package VersaTul.Data.FileReader
+.. code-block:: console
 
-Quick usage
------------
+  dotnet add package VersaTul.Data.FileReader
 
-Read a single CSV file::
+Or with the Package Manager Console:
 
-   var fileReader = new DataFileReader(fileUtility, csvReader, textReader);
-   var options = new FileOptions { HasHeader = true };
+.. code-block:: console
 
-   using var reader = fileReader.Read("C:\\path\\to", "file.csv", options);
-   if (reader != null)
-   {
-       while (reader.Read())
-       {
-           // process columns via reader.GetValue(i) or reader.GetString(i)
-       }
-   }
+  PM> NuGet\Install-Package VersaTul.Data.FileReader -Version latest
 
-Read all CSV and text files from a directory (respecting
-``options.ExtensionFilters``)::
+Related Packages
+----------------
 
-   var options = new FileOptions { HasHeader = true, ExtensionFilters = new [] { ExtensionFilters.CSV, ExtensionFilters.TEXT } };
-   var readers = fileReader.Read("C:\\path\\to", options);
+1. :doc:`bulk` for generic bulk-copy contracts built around ``IDataReader`` input.
+2. :doc:`mssql` for SQL Server bulk-copy workflows.
+3. :doc:`handler-file` for broader file-system operations used alongside reader workflows.
 
-   foreach (var r in readers)
-   {
-       using (r)
-       {
-           while (r.Read()) { /* process row */ }
-       }
-   }
+Core Types And Concepts
+-----------------------
+
+``IFileReader`` and ``DataFileReader``
+  The main API for reading a single file or a directory of files into ``IDataReader`` instances.
+
+``ICsvReader`` and ``CsvFileReader``
+  CSV-specific reader abstraction and implementation.
+
+``ITextReader`` and ``TextFileReader``
+  Plain-text reader abstraction and implementation.
+
+``IOptions`` and ``FileOptions``
+  File-reader options for header handling, extension filters, and directory search behavior.
+
+``ExtensionFilters``
+  Enum that describes the supported file types.
+
+``DisposableDataReader``
+  Wrapper that ensures the returned reader and its underlying stream are disposed together.
+
+Key Capabilities
+----------------
+
+1. Read one file by directory and file name.
+2. Read all matching files in a directory based on ``ExtensionFilters``.
+3. Control whether the file contains a header row.
+4. Control directory search behavior with ``SearchOption``.
+5. Swap reader implementations for tests or alternate parsing behavior.
+
+Basic Example
+-------------
+
+.. code-block:: csharp
+
+  using VersaTul.Data.FileReader;
+
+  var fileReader = new DataFileReader(fileUtility, csvReader, textReader);
+  var options = new FileOptions { HasHeader = true };
+
+  using var reader = fileReader.Read("C:\\path\\to", "file.csv", options);
+
+  if (reader != null)
+  {
+     while (reader.Read())
+     {
+        // Consume row data here.
+     }
+  }
+
+Directory Example
+-----------------
+
+.. code-block:: csharp
+
+  var options = new FileOptions
+  {
+     HasHeader = true,
+     ExtensionFilters = new[] { ExtensionFilters.CSV, ExtensionFilters.TEXT },
+     SearchOption = SearchOption.AllDirectories
+  };
+
+  var readers = fileReader.Read("C:\\data", options);
+
+  foreach (var item in readers)
+  {
+     using (item)
+     {
+        while (item.Read())
+        {
+        }
+     }
+  }
+
+Bulk Workflow Example
+---------------------
+
+.. code-block:: csharp
+
+  var options = new FileOptions { HasHeader = true };
+  using var reader = fileReader.Read("C:\\data", "people.csv", options);
+
+  var mappings = new List<IBulkCopyColumnMapping>
+  {
+     new BulkCopyColumnMapping<Person, Person>(p => p.Name, p => p.Name),
+     new BulkCopyColumnMapping<Person, Person>(p => p.Age, p => p.Age)
+  };
+
+  var copyDetail = new CopyDetail("Persons", reader, mappings);
+  await bulkCopy.DoCopyAsync(copyDetail);
+
+Dependency Injection
+--------------------
+
+Typical registrations look like this:
+
+.. code-block:: csharp
+
+  builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
+  builder.RegisterType<CsvFileReader>().As<ICsvReader>().SingleInstance();
+  builder.RegisterType<TextFileReader>().As<ITextReader>().SingleInstance();
+  builder.RegisterType<DataFileReader>().As<IFileReader>().SingleInstance();
 
 Notes
 -----
 
-- ``DataFileReader`` delegates actual parsing to the registered
-  ``ICsvReader``/``ITextReader`` implementations so you can swap in different
-  CSV parsers or mocks for testing.
-- ``CsvFileReader`` in this project uses ``LumenWorks.Framework.IO.Csv``
-  internally and returns an ``IDataReader`` that disposes the underlying
-  stream when the reader is disposed.
-
-Dependency injection
---------------------
-
-When using an IoC container you can register the concrete types used by the
-host. Example using Autofac (similar to the ``AppModule`` used in the sample
-host project)::
-
-   builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
-   builder.RegisterType<CsvFileReader>().As<ICsvReader>().SingleInstance();
-   builder.RegisterType<TextFileReader>().As<ITextReader>().SingleInstance();
-   builder.RegisterType<DataFileReader>().As<IFileReader>().SingleInstance();
-
-Example using ``Microsoft.Extensions.DependencyInjection``::
-
-   services.AddSingleton<IFileUtility, FileUtility>();
-   services.AddSingleton<ICsvReader, CsvFileReader>();
-   services.AddSingleton<ITextReader, TextFileReader>();
-   services.AddSingleton<IFileReader, DataFileReader>();
-
-Extensibility
--------------
-
-- To support additional file formats add a reader that implements ``IReader``
-  (or a format-specific interface) and update ``DataFileReader`` registration to
-  include it.
-- ``FileOptions.ExtensionFilters`` drives directory scanning; add and handle
-  new ``ExtensionFilters`` values when extending supported formats.
-
-Examples
---------
-
-Example: Print column headings and first N rows::
-
-   var options = new FileOptions { HasHeader = true };
-   using var reader = fileReader.Read("C:\\data", "customers.csv", options);
-
-   if (reader != null)
-   {
-       // Print column names
-       var fieldCount = reader.FieldCount;
-       for (int i = 0; i < fieldCount; i++)
-           Console.Write(reader.GetName(i) + (i + 1 < fieldCount ? ", " : "\n"));
-
-       int row = 0;
-       while (reader.Read() && row < 25)
-       {
-           for (int i = 0; i < fieldCount; i++)
-               Console.Write(reader.GetValue(i) + (i + 1 < fieldCount ? " | " : "\n"));
-           row++;
-       }
-   }
-
-Example: Using ``DataFileReader`` with a bulk copy operation::
-
-   var options = new FileOptions { HasHeader = true };
-   using var reader = fileReader.Read("C:\\data", "people.csv", options);
-
-   var mappings = new List<IBulkCopyColumnMapping> {
-       new BulkCopyColumnMapping<Person, Person>(p => p.Name, p => p.Name),
-       new BulkCopyColumnMapping<Person, Person>(p => p.Age, p => p.Age)
-   };
-
-   var copyDetail = new CopyDetail("Persons", reader, mappings);
-   bulkCopy.DoCopy(copyDetail);
-
-.. note::
-
-  ``CopyDetail`` constructors in this solution expect an ``IDataReader`` for source data. Ensure the reader is disposed after the bulk operation completes.
-
-Example: Unit test — mock ``ICsvReader`` to return a controlled ``IDataReader``::
-
-   var mockCsv = new Mock<ICsvReader>();
-   var mockOptions = new FileOptions { HasHeader = true };
-
-   // Build a simple DataTable and return its reader
-   var dt = new DataTable();
-   dt.Columns.Add("Id", typeof(int));
-   dt.Columns.Add("Name", typeof(string));
-   dt.Rows.Add(1, "Alice");
-
-   mockCsv.Setup(c => c.Read(It.IsAny<string>(), It.IsAny<IOptions>())).Returns(dt.CreateDataReader());
-
-   var fileReader = new DataFileReader(fileUtilityMock.Object, mockCsv.Object, textReaderMock.Object);
-   var reader = fileReader.Read("C:\\path", "file.csv", mockOptions);
-   Assert.NotNull(reader);
-
-License
--------
-
-This project follows the same license as the VersaTul solution. See the
-repository ``LICENSE`` file for details.
+1. ``DataFileReader`` delegates parsing to the registered reader implementations.
+2. ``FileOptions`` defaults to common text, CSV, and JSON extension filters.
+3. This package is most valuable when your next processing step wants an ``IDataReader`` instead of raw file lines.

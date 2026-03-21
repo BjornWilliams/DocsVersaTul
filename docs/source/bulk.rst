@@ -1,123 +1,130 @@
 Data Bulk
-==============
+=========
 
-Getting Started
-----------------
-The VersaTul Data Bulk project provides the ability to setup bulk coping functionality for copying data to and from different data sources. 
-This project is designed to provide a set of common interfaces as well as implementation that can be used to build database or data source specific copiers.
+Overview
+--------
+
+``VersaTul.Data.Bulk`` defines the contracts and common models for bulk-copy operations that move tabular data from one source into another destination.
+
+It is the abstraction layer behind concrete implementations such as the SQL Server bulk-copy package.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Describe a bulk import in a transport-neutral way.
+2. Define reusable source-to-destination column mappings.
+3. Work with bulk-copy results and error reporting consistently.
+4. Build data-loading workflows that can be backed by a specific implementation such as :doc:`mssql`.
 
 Installation
 ------------
 
-To use VersaTul Data Bulk, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
+
+    dotnet add package VersaTul.Data.Bulk
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
     PM> NuGet\Install-Package VersaTul.Data.Bulk -Version latest
 
-Main Components
+Related Packages
 ----------------
-#. ``IBulkCopy`` : Represents functionality for bulk uploading data from one data source to another.
-#. ``IBulkCopyColumnMapping`` : Defines the mapping between a column in a Bulk Copy data source and a column in the destination source.
-#. ``CopyDetail`` : Represents the details of the Bulk Copy, how to get the data and where to put it.
-#. ``BulkCopyColumnMapping`` : Implementation of the ``IBulkCopyColumnMapping`` interface.
 
-Functional Summary
-------------------
-#. **BulkCopyResult IBulkCopy.DoCopy()** : Overloaded method for bulk inserting a given collection of CopyDetail objects.
-#. **int IBulkCopy.BatchSize** : Gets or Sets the number of rows in each batch.
-#. **bool IBulkCopy.EnableStreaming** : Gets or Sets a value enabling or disabling streaming data from an IDataReader object.
-#. **string SourceColumn** : Gets or Sets the string value of the SourceColumn property.
-#. **string DestinationColumn** : Gets or Sets the string value of the DestinationColumn property.
-#. **int SourceOrdinal** : Gets or Sets the integer value of the SourceOrdinal property, or -1 if the property has not been set.
-#. **int DestinationOrdinal** : Gets or Sets the integer value of the DestinationOrdinal property, or -1 if the property has not been set.
+1. :doc:`mssql` for a concrete ``IBulkCopy`` implementation backed by SQL Server.
+2. :doc:`file-reader` for producing ``IDataReader`` sources from CSV and text files.
+3. :doc:`streamers` and other reader-producing workflows that can feed bulk operations.
 
-Code Examples
+Core Types And Concepts
+-----------------------
+
+``IBulkCopy``
+    Defines synchronous and asynchronous bulk-copy operations plus options such as batch size and streaming.
+
+``CopyDetail``
+    Describes a single bulk-copy unit: destination name, source ``IDataReader``, and column mappings.
+
+``IBulkCopyColumnMapping`` and ``BulkCopyColumnMapping``
+    Define how source columns map to destination columns by name or ordinal.
+
+``BulkCopyColumnMapping<TSource, TDestination>``
+    Strongly typed mapping helper that extracts property names from expressions.
+
+``BulkCopyResult`` and ``CopyResult``
+    Capture the overall result and per-item outcomes of a bulk operation.
+
+``BulkCopyProgress``
+    Progress payload for async operations that report incremental status.
+
+``BulkCopyException``
+    Wrapper exception used when a copy step fails.
+
+Key Capabilities
+----------------
+
+1. ``IBulkCopy`` supports one or many ``CopyDetail`` items per operation.
+2. Both synchronous and asynchronous APIs are available.
+3. Async overloads can report progress with ``BulkCopyProgress``.
+4. Mappings can be defined by column name, ordinal, or strongly typed expressions.
+5. ``CopyDetail`` validates mappings before execution.
+
+Basic Example
 -------------
 
-.. code-block:: c#
-    :caption: Simple Example using Flat file.
+The abstraction assumes your source data is already available as an ``IDataReader``.
 
-    // Bulk Copy people.csv file to database table Persons
-    var copyDetail = new CopyDetail(destinationName: "Persons", sourceFilePath: @"path\to\csv\people.csv", new[]
-    {
-        // This example showcases using the Source Type to Destination Type support in mapping BulkCopyColumnMapping<Person, Person>
-        // however this could also be achieved by simply typing the string column names or the numerical column position.
-        new BulkCopyColumnMapping<Person, Person>(model => model.AccountBalance, model => model.AccountBalance),
-        new BulkCopyColumnMapping<Person, Person>(model => model.Age, model => model.Age),
-        new BulkCopyColumnMapping<Person, Person>(model => model.BestFriend, model => model.BestFriend),
-        new BulkCopyColumnMapping<Person, Person>(model => model.Friends, model => model.Friends),
-        new BulkCopyColumnMapping<Person, Person>(model => model.Name, model => model.Name)
-    });
+.. code-block:: csharp
 
-    // pulling BulkCopy object from container.
-    var copy = appContainer.Resolve<BulkCopy>();
+    using VersaTul.Data.Bulk;
 
-    // Optionally set properties
-    copy.BatchSize = 200;
-    copy.EnableStreaming = true;
+    var copyDetail = new CopyDetail(
+         destinationName: "Persons",
+         reader: peopleReader,
+         columnMappings: new[]
+         {
+              new BulkCopyColumnMapping<Person, Person>(model => model.Name, model => model.Name),
+              new BulkCopyColumnMapping<Person, Person>(model => model.Age, model => model.Age)
+         });
 
-    // perform bulk uploading.. 
-    var bulkCopyResult = copy.DoCopy(new[] { copyDetail });
+    bulkCopy.BatchSize = 200;
+    bulkCopy.EnableStreaming = true;
 
-    // Indicates if all copyDetail has been sucessfully updated.
-    // bulkCopyResult.Success
+    var result = bulkCopy.DoCopy(copyDetail);
 
-    // uploaded list of results
-    // bulkCopyResult.Result
+Async Progress Example
+----------------------
 
+.. code-block:: csharp
 
-.. code-block:: c#
-    :caption: Simple Example using IDataReader.
+    var result = await bulkCopy.DoCopyAsync(
+         new[] { copyDetail },
+         dBConnectionName: "ImportDb",
+         progressCallback: progress =>
+         {
+              Console.WriteLine($"Processed {progress.ProcessedItems} of {progress.TotalItems}");
+         });
 
-    // See VersaTul.Collection.Streamers for more detail about ToReader() extension method used here.
-    var people = someInternalArray.ToReader();
+Mapping Options
+---------------
 
-    // Bulk Copy IDataReader people to database table Persons
-    var copyDetail = new CopyDetail(destinationName: "Persons", sourceData: people, new[]
-    {
-        // This example showcases using the Source Type to Destination Type support in mapping BulkCopyColumnMapping<Person, Person>
-        // however this could also be achieved by simply typing the string column names or the numerical column position.
-        new BulkCopyColumnMapping<Person, Person>(model => model.AccountBalance, model => model.AccountBalance),
-        new BulkCopyColumnMapping<Person, Person>(model => model.Age, model => model.Age),
-        new BulkCopyColumnMapping<Person, Person>(model => model.BestFriend, model => model.BestFriend),
-        new BulkCopyColumnMapping<Person, Person>(model => model.Friends, model => model.Friends),
-        new BulkCopyColumnMapping<Person, Person>(model => model.Name, model => model.Name)
-    });
+``BulkCopyColumnMapping`` supports multiple styles:
 
-    // pulling BulkCopy object from container.
-    var copy = appContainer.Resolve<BulkCopy>();
+1. Source name to destination name.
+2. Source ordinal to destination ordinal.
+3. Source ordinal to destination name.
+4. Source name to destination ordinal.
+5. Strongly typed expression-to-expression mapping.
 
-    // Optionally set properties
-    copy.BatchSize = 200;
-    copy.EnableStreaming = true;
+Notes
+-----
 
-    // perform bulk uploading.. 
-    var bulkCopyResult = copy.DoCopy(new[] { copyDetail });
-
-    // Indicates if all copyDetail has been sucessfully updated.
-    // bulkCopyResult.Success
-
-    // uploaded list of results
-    // bulkCopyResult.Result
-
-
-
-Changelog
--------------
-
-V1.0.7
-
-* Refactored the IBulkCopy interface to have a return type BulkCopyResult.
-* This is a breaking change from previous versions.
-
-V1.0.2
-
-* Minor fixes
-* xml comments
-
-V1.0.1
-
-* Bulk support added 
+1. ``VersaTul.Data.Bulk`` defines the bulk-copy vocabulary; it does not by itself implement a database-specific uploader.
+2. The source side is ``IDataReader``-based, which makes the package fit naturally with :doc:`file-reader` and stream-based workflows.
+3. Use the concrete implementation from :doc:`mssql` when targeting SQL Server bulk import.
 
 

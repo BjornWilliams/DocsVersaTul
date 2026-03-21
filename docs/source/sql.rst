@@ -1,342 +1,169 @@
 Data Sql
-================
+========
 
-Getting Started
-----------------
-The VersaTul Data Sql project provides the ability to quickly create database access objects, 
-usable on any supporting SQL databases. This project is built on top of the **System.Data.Common** namespace and
-provides the functionality to quickly call stored procedures or plain text sql queries, then map the result into data objects using the provided helper methods.
+Overview
+--------
+
+``VersaTul.Data.Sql`` provides provider-agnostic relational data access built on top of ``System.Data.Common``.
+
+It gives you a consistent way to execute stored procedures and text commands, pass parameters, switch connection names, and map result sets into your own service-layer models.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Support relational databases through standard ADO.NET provider factories.
+2. Execute stored procedures and text commands behind reusable service classes.
+3. Keep SQL access logic in project-specific data services instead of controllers or handlers.
+4. Read connection string and provider metadata from shared configuration.
+5. Reuse synchronous and asynchronous execution patterns across multiple database engines.
 
 Installation
 ------------
 
-To use VersaTul Data Sql, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Data.Sql -Version latest
 
-Main Components
+   dotnet add package VersaTul.Data.Sql
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Data.Sql -Version latest
+
+Related Packages
 ----------------
-#. ``IDataSource`` : Represents a composite of the Data role interfaces that provides read and write capabilities.
-#. ``IProviderFactory`` : Represents a set of methods for creating instances of a provider's implementation of the data source classes.
-#. ``IDataConfiguration`` : Represents a set of methods or properties for getting configuration values from setting store.
-#. ``IParameter`` : Represents the set of properties and methods that describes a parameter passed into the Sql Command.
-#. ``IParameterCollection`` : Represents a collection of IParameter objects.
-#. ``IConnectionInfo`` : Represents a connection string details.
-#. ``SqlDbDataSource`` :  Represent a default implementation of the IDataSource interface.
-#. ``BaseDataService`` : Provides a starting point for custom data services used in projects. Provides all the basic or general database functionality.
-#. ``ConnectionInfo`` : Represents a connection string info.
-#. ``Parameter`` : Represents a parameter to a Command and optionally its mapping to DataSet columns.
-#. ``ProviderFactory`` : Represents a set of methods for creating instances of a provider's implementation of the data source classes.
-#. ``DataConfiguration`` : Provides a set of methods or properties for getting configuration values from setting store.
 
-Functional Summary
-------------------
-#. **DbDataReader BaseDataService.ExecuteReader()** : Overloaded method for reading a forward-only stream of rows from the data source.
-#. **int BaseDataService.ExecuteNonQuery()** : Overloaded method for executing a given stored procedure and returns the affected number of rows count.
-#. **void BaseDataService.ProcessReader(DbDataReader reader, ProccessReaderHandler handler)** : Helper method to iterate the given data reader and provide access to the data at each row via the helper methods. For example GetInt(),GetString(), or Get<TInput, TResult>().
-#. **void ParameterCollection.Add(IParameter parameter)** : Adds the given IParameter object to the end of the parameter collection List.
+1. :doc:`configuration` and :doc:`configuration-defaults` for settings and default SQL configuration keys.
+2. :doc:`data-contracts` for shared connection abstractions.
+3. :doc:`mssql` for SQL Server-specific capabilities built on this base.
+4. :doc:`utilities` and :doc:`extensions` for conversion and mapping helpers commonly used inside data services.
 
-Code Examples
--------------
-.. code-block:: c#
-    :caption: Simple Example Using Oracle as Database.
+Core Types And Concepts
+-----------------------
 
-    using System.Data;
-    using VersaTul.Configuration.Defaults.Sql;
-    using VersaTul.Data.Sql;
-    using VersaTul.Data.Sql.Configurations;
-    using VersaTul.Data.Sql.Contracts;
-    using VersaTul.Extensions;
-    using VersaTul.Utilities;
-    using VersaTul.Utilities.Contracts;
+``IDataSource`` and ``SqlDbDataSource``
+   The execution surface for reads, writes, async operations, and scalar execution.
 
-    namespace SqlDatabaseConnection
-    {
-        public class Program
-        {
-            static void Main(string[] args)
-            {
-                // Supported database engines.
-                //MSSQL ---> System.Data.SqlClient.SqlClientFactory
-                //SQLite ---> System.Data.SQLite.SQLiteFactory
-                //MySql ---> MySql.Data.MySqlClient.MySqlClientFactory
-                //PostgreSql ---> Npgsql.NpgsqlFactory
-                //Oracle ---> Oracle.ManagedDataAccess.Client.OracleClientFactory
+``IDataConfiguration`` and ``DataConfiguration``
+   Configuration types that expose ``SqlDbConnectionName``, ``CommandTimeout``, and connection/provider lookup methods.
 
-                //Register factory
-                DbProviderFactories.RegisterFactory("Oracle.ManagedDataAccess.Client.OracleClientFactory", OracleClientFactory.Instance);
+``ICommandFactory`` and ``CommandFactory``
+   Build the underlying database command objects.
 
-                // Setup configuration for Oracle Database querying
-                var configSettings = new Builder().AddOrReplace(new[]
-                {
-                    //Tested with nuget package Oracle.ManagedDataAccess.Core Version 3.21.90
-                    new KeyValuePair<string, object>("OracleSqlDb", new ConnectionInfo("User Id=SYS;Password=Secretdatabasepassword;Data Source=database-address.local.com/ORCLCDB;DBA Privilege=SYSDBA;", "Oracle.ManagedDataAccess.Client.OracleClientFactory")),
-                    new KeyValuePair<string, object>("SqlDbConnectionName", "OracleSqlDb")
+``IProviderFactory`` and ``ProviderFactory``
+   Create provider-specific ADO.NET objects through registered provider factories.
 
-                }).BuildConfig();
+``DataCommand`` and ``StoredCommand``
+   Represent text commands and stored-procedure commands.
 
-                var dataConfiguration = new DataConfiguration(configSettings);
+``IParameter``, ``Parameter``, ``IParameterCollection``, and ``ParameterCollection``
+   Represent command parameters and parameter collections.
 
-                // Setup needed class instance
-                var providerFactory = new ProviderFactory();
-                var commandFactory = new CommandFactory(dataConfiguration, providerFactory);
-                var sqlDbDataSource = new SqlDbDataSource(commandFactory);
-                var commonUtility = new CommonUtility();
+``BaseDataService``
+   Base class for project-specific data services with helpers for readers, non-queries, scalars, and row mapping.
 
-                // Create our DAL or DataService class
-                var dataService = new ProductDataService(sqlDbDataSource, commonUtility, commonUtility);
+Key Capabilities
+----------------
 
-                // Get all products
-                var products = dataService.Get();
+1. Works with any registered ADO.NET provider that supports ``DbProviderFactories``.
+2. Supports synchronous and asynchronous read, write, and scalar execution paths.
+3. Allows switching to a named connection at call time.
+4. Uses ``BaseDataService.ProcessReader()`` to map one or many result sets into application models.
+5. Supports both stored procedures and plain SQL text commands.
 
-                // get a known product 
-                var product = dataService.Get(100);
-
-                // Add a new product 
-                var newProduct = dataService.Add(new Product
-                {
-                    CategoryId = 1,
-                    Description = "Some product description",
-                    ListPrice = 100.99m,
-                    Name = "A cool Product Name",
-                    StandardCost = 50.99m
-                });
-
-            }
-        }
-
-        // Data Model 
-        public class Product
-        {
-            public int Id { get; set; }
-            public string? Name { get; set; }
-            public string? Description { get; set; }
-            public decimal StandardCost { get; set; }
-            public decimal ListPrice { get; set; }
-            public int CategoryId { get; set; }
-        }
-
-        // DAL Or Data Service layer
-        public interface IProductService
-        {
-            Product Add(Product product);
-            Product? Get(int productId);
-            IEnumerable<Product> Get();
-        }
-
-        // By inheriting from BaseDataService all project specific data service will have the common functionality they need to access the dataSource.        
-        public class ProductDataService : BaseDataService, IProductService
-        {
-            public ProductDataService(IDataSource dataSource, INullFiltering filtering, IUtility utility) : base(dataSource, filtering, utility) { }
-
-            // using stored command example 
-            public IEnumerable<Product> Get()
-            {
-                var products = new List<Product>();
-
-                // using the ProcessReader method to read the return DbDataReader from ExecuteReader.
-                // technique commonly used to populate data models from returned data. 
-                ProcessReader(ExecuteReader(new StoredCommand("GetAllProducts")), (position) =>
-                {
-                    // position parameter: useful for multiple result sets, this value represents which reader is currently being read from in the result set.
-                    // this information can then be used to populate different models in the lambda helper method. 
-                    products.Add(new Product
-                    {
-                        CategoryId = Get((Product prod) => prod.CategoryId),
-                        Description = Get((Product prod) => prod.Description),
-                        Id = Get((Product prod) => prod.Id),
-                        ListPrice = Get((Product prod) => prod.ListPrice),
-                        Name = Get((Product prod) => prod.Name),
-                        StandardCost = Get((Product prod) => prod.StandardCost)
-                    });
-                });
-
-                return products;
-            }
-
-            // using command text example 
-            public Product? Get(int productId)
-            {
-                Product? product = null;
-
-                var commandText = @"select  product_id as Id,
-                                            product_name as Name,
-                                            description as Description,
-                                            standard_cost as StandardCost,
-                                            list_price as ListPrice,
-                                            category_id as CategoryId
-                                    from products
-                                    where product_id = :productId";
-
-                var parameterCollection = new ParameterCollection();
-                parameterCollection.Add(new Parameter("productId", productId, DbType.Int32, 0, ParameterDirection.Input));
-
-                // using the ProcessReader method to read the return DbDataReader from ExecuteReader.
-                // technique commonly used to populate data models from returned data. 
-                ProcessReader(ExecuteReader(new DataCommand(commandText, DataCommandType.Query), parameterCollection), (position) =>
-                {
-                    product = new Product
-                    {
-                        CategoryId = Get((Product prod) => prod.CategoryId),
-                        Description = Get((Product prod) => prod.Description),
-                        Id = Get((Product prod) => prod.Id),
-                        ListPrice = Get((Product prod) => prod.ListPrice),
-                        Name = Get((Product prod) => prod.Name),
-                        StandardCost = Get((Product prod) => prod.StandardCost)
-                    };
-                });
-
-                return product;
-            }
-
-            // using stored procedure to insert data.
-            public Product Add(Product product)
-            {
-                var parameterCollection = new ParameterCollection();
-                parameterCollection.Add(new Parameter("description", product.Description, DbType.String, 500, ParameterDirection.Input));
-                parameterCollection.Add(new Parameter("standard_cost", product.StandardCost, DbType.Decimal, 0, ParameterDirection.Input));
-                parameterCollection.Add(new Parameter("product_name", product.Name, DbType.String, 500, ParameterDirection.Input));
-                parameterCollection.Add(new Parameter("list_price", product.ListPrice, DbType.Decimal, 0, ParameterDirection.Input));
-                parameterCollection.Add(new Parameter("category_id", product.CategoryId, DbType.Int32, 0, ParameterDirection.Input));
-                parameterCollection.Add(new Parameter("product_id", product.Id, DbType.Int32, 0, ParameterDirection.Output));
-
-                ExecuteNonQuery(new StoredCommand("InsertProduct"), parameterCollection);
-
-                product.Id = parameterCollection["product_id"].Value.To<int>();
-
-                return product;
-            }
-        }
-    }
-
-
-.. code-block:: c#
-    :caption: Simple Example Using IoC and Oracle as Database.
-
-    // AutoFac as IoC container
-    public class AppModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            //Configs
-            var configSettings = new Builder().AddOrReplace(new[]
-            {
-                new KeyValuePair<string,object>("OracleSqlDb", new ConnectionInfo("User Id=SYS;Password=Secretdatabasepassword;Data Source=database-address.local.com/ORCLCDB;DBA Privilege=SYSDBA;","Oracle.ManagedDataAccess.Client.OracleClientFactory")),
-                new KeyValuePair<string, object>("SqlDbConnectionName", "OracleSqlDb")
-            }).BuildConfig();
-
-            // Registering config to help with creation of DataConfiguration class.
-            builder.RegisterInstance(configSettings);
-
-            //Singletons
-            builder.RegisterType<CommonUtility>().As<IUtility>().As<INullFiltering>().As<IGenerator>().SingleInstance();
-            builder.RegisterType<SqlDbDataSource>().As<IDataSource>().SingleInstance();
-            builder.RegisterType<CommandFactory>().As<ICommandFactory>().SingleInstance();
-            builder.RegisterType<ProviderFactory>().As<IProviderFactory>().SingleInstance();
-            builder.RegisterType<DataConfiguration>().As<IDataConfiguration>().SingleInstance();
-
-            //Per Dependency
-            builder.RegisterType<EmployeeDataService>().As<IEmployeeService>().InstancePerLifetimeScope();
-            builder.RegisterType<ProductDataService>().As<IProductService>().InstancePerLifetimeScope();
-        }
-    }
-
-    // Data Service usage could look like the following:
-    [Route("api/product")]
-    public class ProductController: Controller
-    {
-        private readonly IProductService productService;
-
-        public ProductController(IProductService productService)
-        {
-            this.productService = productService;
-        }
-
-        // Get
-        [HttpGet]
-        public IActionResult GetProducts()
-        {
-            var products = productService.Get();
-
-            return OK(products);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetProduct(string id)
-        {
-            var product = productService.Get(id);
-
-            if(product == null)
-                return NotFound();
-
-            return OK(product);
-        }
-         
-        [HttpPost]
-        public IActionResult CreateProduct(CreateProductModel model)
-        {
-            var product = productService.Add(new Product
-            {
-                Name = model.Name
-                Description = model.Description
-                StandardCost = model.StandardCost
-                ListPrice = model.ListPrice
-                CategoryId = model.CategoryId
-            });
-
-            return OK(product);
-        }
-    } 
-
-
-Changelog
+Basic Example
 -------------
 
-V2.0.13
+This example shows the typical pattern: configure the provider, build the SQL infrastructure, and implement a project-specific data service.
 
-* Added ExecuteScalar support.
-* Added data command timeout overrides.
-* Minor fixes
+.. code-block:: csharp
 
-V2.0.6
+   using System.Data;
+   using System.Data.Common;
+   using VersaTul.Configuration.Defaults.Sql;
+   using VersaTul.Data.Sql;
+   using VersaTul.Data.Sql.Configurations;
+   using VersaTul.Data.Sql.Contracts;
+   using VersaTul.Utilities;
+   using VersaTul.Utilities.Contracts;
 
-* Dependent package updates
-* Minor fixes
+   DbProviderFactories.RegisterFactory("Oracle.ManagedDataAccess.Client.OracleClientFactory", OracleClientFactory.Instance);
 
-V2.0.5
+   var configSettings = new Builder().AddOrReplace(new[]
+   {
+       new KeyValuePair<string, object>(
+           "OracleSqlDb",
+           new ConnectionInfo(
+               "User Id=SYS;Password=Secret;Data Source=database-address.local.com/ORCLCDB;DBA Privilege=SYSDBA;",
+               "Oracle.ManagedDataAccess.Client.OracleClientFactory")),
+       new KeyValuePair<string, object>("SqlDbConnectionName", "OracleSqlDb")
+   }).BuildConfig();
 
-* Dependent package updates
-* Minor fixes
+   var dataConfiguration = new DataConfiguration(configSettings);
+   var providerFactory = new ProviderFactory();
+   var commandFactory = new CommandFactory(dataConfiguration, providerFactory);
+   var dataSource = new SqlDbDataSource(commandFactory);
+   var utility = new CommonUtility();
 
-V2.0.4
+Command And Mapping Example
+---------------------------
 
-* Bulk copy refactoring 
-* Minor fixes
+``BaseDataService`` is intended to sit underneath a project-specific data service.
 
-V2.0.3
+.. code-block:: csharp
 
-* Command factory interface fixes
-* Minor fixes
+   public class ProductDataService : BaseDataService
+   {
+       public ProductDataService(IDataSource dataSource, INullFiltering filtering, IUtility utility)
+           : base(dataSource, filtering, utility)
+       {
+       }
 
-V2.0.2
+       public Product? Get(int productId)
+       {
+           Product? product = null;
 
-* ICommandFactory pattern added 
-* Dependent package updates
-* Minor fixes
+           var commandText = @"select product_id as Id,
+                                      product_name as Name,
+                                      description as Description
+                               from products
+                               where product_id = :productId";
 
-V2.0.1
+           var parameters = new ParameterCollection();
+           parameters.Add(new Parameter("productId", productId, DbType.Int32, 0, ParameterDirection.Input));
 
-* Improvements to reader processing
-* Data Command interface redesign
+           ProcessReader(ExecuteReader(new DataCommand(commandText, DataCommandType.Query), parameters), _ =>
+           {
+               product = new Product
+               {
+                   Id = Get((Product model) => model.Id),
+                   Name = Get((Product model) => model.Name),
+                   Description = Get((Product model) => model.Description)
+               };
+           });
 
-V1.0.15
+           return product;
+       }
+   }
 
-* Dependent package updates
-* Minor fixes
+Provider Notes
+--------------
 
-V1.0.14
+Common usage patterns include registering provider factories for engines such as:
 
-* Code ported to dotnet core
-* Documentation completed
+1. SQL Server
+2. SQLite
+3. MySQL
+4. PostgreSQL
+5. Oracle
+
+Notes
+-----
+
+1. ``DataConfiguration`` stores both the default connection-name key and the command timeout.
+2. ``BaseDataService`` is the main extension point for application-specific repositories or data services.
+3. Use :doc:`mssql` when you need SQL Server-specific types or bulk-copy integration on top of this base package.
