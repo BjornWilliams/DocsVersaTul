@@ -1,140 +1,131 @@
 Configuration Defaults
-===============================
+======================
 
-Getting Started
-----------------
-The VersaTul Configuration default project enables the ability to quickly setup default settings for VersaTul
-projects. Currently supported projects are:
+Overview
+--------
 
-- Caching - *VersaTul.Configuration.Defaults.Caching*
-- Entity Framework Core - *VersaTul.Configuration.Defaults.EntityFrameworkCore*
-- Mailer - *VersaTul.Configuration.Defaults.Mailer*
-- MongoDb - *VersaTul.Configuration.Defaults.MongoDB*
-- Sql - *VersaTul.Configuration.Defaults.Sql*
-- MsSql - *VersaTul.Configuration.Defaults.MsSql*
-- Logger - *VersaTul.Configuration.Defaults.Logger*
+``VersaTul.Configuration.Defaults`` provides prebuilt configuration builders for common VersaTul packages.
+
+It is designed to reduce setup time by giving you sensible baseline keys and values that you can extend or override before producing a ``ConfigSettings`` instance.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Bootstrap a VersaTul package quickly with known configuration keys.
+2. Keep default values in one place and override only what is environment-specific.
+3. Build configuration dictionaries fluently in code.
+4. Standardize configuration setup across multiple services or projects.
 
 Installation
 ------------
 
-To use VersaTul Configuration Defaults, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Configuration.Defaults -Version latest
 
-Main Components
+   dotnet add package VersaTul.Configuration.Defaults
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Configuration.Defaults -Version latest
+
+Related Packages
 ----------------
-#. ``ConfigurationBuilder`` : Provides the functionality needed to setup default settings. All builder classes are derived from this class.
-#. ``Builder`` : Project specific builders. These can be found under their respective namespaces.
 
-Functional Summary
-------------------
-#. **ConfigurationBuilder ConfigurationBuilder.AddOrReplace()** : Overloaded method for adding or replacing the value at the given key in the configuration dictionary.
-#. **ConfigSettings ConfigurationBuilder.BuildConfig()** : Create a new ConfigSettings dictionary from the underlining dictionary keys and values added during setup.
+1. :doc:`configuration` for consuming the ``ConfigSettings`` values you build here.
+2. :doc:`caching`, :doc:`sql`, :doc:`mssql`, :doc:`mongodb`, :doc:`mailer`, and the logger packages that rely on these keys.
 
-Code Examples
---------------
+Core Types And Concepts
+-----------------------
 
-.. code-block:: c#
-    :caption: Configuration builder MongoDb example.
+``ConfigurationBuilder``
+   Abstract base builder that supports fluent ``AddOrReplace()`` calls and produces ``ConfigSettings``.
 
-    using VersaTul.Configuration.Defaults.MongoDB;
+``ConfigurationEnvironment``
+   Environment enum used to add common environment markers such as development, test, and production.
 
-    public class AppModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            //Default configs with connection name replacement.
-            var configSettings = new Builder()
-                .AddOrReplace("MongoDb", "mongodb://root:password123@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/DemoDB?replicaSet=replicaset")
-                .BuildConfig();
-            
-            // Registering the settings so that it can be used to build DataConfiguration<>.
-            builder.RegisterInstance(configSettings);
+Namespace-specific ``Builder`` classes
+   Each supported package area provides its own builder with package-specific defaults.
 
-            //Singletons
-            builder.RegisterGeneric(typeof(DataConfiguration<>)).As(typeof(IDataConfiguration<>)).SingleInstance();            
-        }
-    }
+Supported Builder Namespaces
+----------------------------
 
-Project Config Settings
-------------------------
+1. ``VersaTul.Configuration.Defaults.Caching``
+2. ``VersaTul.Configuration.Defaults.EntityFrameworkCore``
+3. ``VersaTul.Configuration.Defaults.Logger``
+4. ``VersaTul.Configuration.Defaults.Mailer``
+5. ``VersaTul.Configuration.Defaults.MongoDB``
+6. ``VersaTul.Configuration.Defaults.MsSql``
+7. ``VersaTul.Configuration.Defaults.Sql``
 
-.. _tbl-grid:
+Key Builder Features
+--------------------
 
-+--------------+-----------------------+------------------+
-| Project Name | Setting Name          | Default Value    |
-+==============+=======================+==================+
-| Caching      | CacheDuration         | 60s              |
-+--------------+-----------------------+------------------+
-| efCore       | EfDbConnectionName    | DBCon            |
-+--------------+-----------------------+------------------+
-| Mailer       | SmtpServer            | 127.0.0.1        |
-+--------------+-----------------------+------------------+
-| Mailer       | SmtpPort              | 25               |
-+--------------+-----------------------+------------------+
-| Mailer       | SmtpUserName          | User-Defined     |
-+--------------+-----------------------+------------------+
-| Mailer       | SmtpPassword          | User-Defined     |
-+--------------+-----------------------+------------------+
-| Mailer       | FromAddress           | User-Defined     |
-+--------------+-----------------------+------------------+
-| Mailer       | ToAddress             | User-Defined     |
-+--------------+-----------------------+------------------+
-| Mailer       | MaxAttachmentSize     | 10000000 Bytes   |
-+--------------+-----------------------+------------------+
-| MongoDB      | MongoDbConnectionName | MongoDb          |
-+--------------+-----------------------+------------------+
-| MongoDB      | SocketTimeout         | 600000ms         |
-+--------------+-----------------------+------------------+
-| MongoDB      | ConnectTimeout        | 600000ms         |
-+--------------+-----------------------+------------------+
-| MongoDB      | WorkingDatabaseName   | User-Defined     |
-+--------------+-----------------------+------------------+
-| MongoDB      | MaxConnectionIdleTime | 600000ms         |
-+--------------+-----------------------+------------------+
-| MongoDB      | EnabledSslProtocols   | false            |
-+--------------+-----------------------+------------------+
-| MsSql        | BulkCopyTimeout       | 1800s            |
-+--------------+-----------------------+------------------+
-| Sql          | CommandTimeout        | 600s             |
-+--------------+-----------------------+------------------+
-| Sql          | SqlDbConnectionName   | DBCon            |
-+--------------+-----------------------+------------------+
-| Logger.File  | MaxFileSize           | 2000000000 Bytes |
-+--------------+-----------------------+------------------+
-| Logger.File  | LogFileName           | log              |
-+--------------+-----------------------+------------------+
-| Logger.File  | FilePath              | User-Defined     |
-+--------------+-----------------------+------------------+
-| Logger.Web   | BaseUrl               | User-Defined     |
-+--------------+-----------------------+------------------+
-| Logger.Web   | LogEndPoint           | User-Defined     |
-+--------------+-----------------------+------------------+
+1. ``AddOrReplace(string key, object value)`` updates a single setting.
+2. ``AddOrReplace(IEnumerable<KeyValuePair<string, object>> valuePairs)`` updates many settings at once.
+3. ``AddOrReplace(IDictionary<string, object> keyValuePairs)`` merges an existing dictionary into the builder.
+4. ``AddDevelopmentPreset()``, ``AddTestPreset()``, and ``AddProductionPreset()`` add standard environment markers.
+5. ``BuildConfig()`` returns a ``ConfigSettings`` instance.
+6. ``BuildSnapshot()`` returns a read-only view of the accumulated configuration.
 
-
-
-Changelog
+Basic Example
 -------------
 
-V1.0.15
+This example starts with the MongoDB defaults and overrides the connection string.
 
-* Updated default settings 
-* Added more specific setting keys
+.. code-block:: csharp
 
-V1.0.14
+   using VersaTul.Configuration.Defaults.MongoDB;
 
-* Added dictionary support 
-* Rename project 
-* Added function chaining support
+   var configSettings = new Builder()
+       .AddOrReplace("MongoDb", "mongodb://root:password123@127.0.0.1:27017/DemoDb")
+       .BuildConfig();
 
-V1.0.13
+The MongoDB builder already includes defaults such as:
 
-* Add configuration collection support
-* Minor fixes
+1. ``MongoDbConnectionName``
+2. ``SocketTimeout``
+3. ``ConnectTimeout``
+4. ``MaxConnectionIdleTime``
+5. ``EnabledSslProtocols``
 
-V1.0.12
+Composed Example
+----------------
 
-* Interface support added
-* Documentation completed
+You can combine package defaults with environment metadata and project-specific overrides.
+
+.. code-block:: csharp
+
+   using VersaTul.Configuration.Defaults;
+   using VersaTul.Configuration.Defaults.Sql;
+
+   var builder = new Builder()
+       .AddProductionPreset()
+       .AddOrReplace("DBCon", "Server=.;Database=MainDb;Trusted_Connection=True;")
+       .AddOrReplace("CommandTimeout", 900);
+
+   var settings = builder.BuildConfig();
+   var snapshot = builder.BuildSnapshot();
+
+Typical Default Keys
+--------------------
+
+Some of the most commonly used defaults include:
+
+1. SQL: ``CommandTimeout`` and ``SqlDbConnectionName``.
+2. MS SQL: ``BulkCopyTimeout``.
+3. MongoDB: ``MongoDbConnectionName``, ``SocketTimeout``, ``ConnectTimeout``, and ``MaxConnectionIdleTime``.
+4. Mailer: ``SmtpServer``, ``SmtpPort``, ``FromAddress``, ``ToAddress``, and ``MaxAttachmentSize``.
+5. Logger builders: keys such as file path, file name, endpoint, or base URL depending on the logger implementation.
+
+Notes
+-----
+
+1. Start with the closest builder to your target package instead of building settings entirely by hand.
+2. Override only the values that differ for your environment or application.
+3. Feed the resulting ``ConfigSettings`` directly into your configuration class from :doc:`configuration`.
+4. If you need to audit what a builder produced before runtime wiring, use ``BuildSnapshot()``.

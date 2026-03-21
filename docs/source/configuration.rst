@@ -1,87 +1,144 @@
 Configuration
-======================
+=============
 
-Getting Started
-----------------
-The VersaTul Configuration project enables the ability to get the values of the specified keys stored in the settings dictionary.
-Much like the DOTNET ``IConfiguration`` interface this configuration project provides a way to cleanly pass settings into an application.
-The VersaTul projects that needs settings are built on top of Configuration. However this project can be extended to be used in other custom projects as well.
+Overview
+--------
+
+``VersaTul.Configurations`` provides a lightweight, strongly typed way to work with application settings stored in a simple key/value dictionary.
+
+It is especially useful when you want configuration access that is explicit, easy to test, and simple to pass through your application without taking a dependency on the full .NET configuration stack.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Wrap application settings in strongly typed configuration classes.
+2. Resolve values by property name with minimal boilerplate.
+3. Bind a key/value store into a plain object.
+4. Share one configuration model across multiple VersaTul packages.
 
 Installation
 ------------
 
-To use VersaTul Configuration, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Configuration -Version latest
 
+   dotnet add package VersaTul.Configurations
 
-Main Components
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Configurations -Version latest
+
+Related Packages
 ----------------
-#. ``IConfiguration`` : Represents a configuration file that is applicable to a particular application, or resource.
-#. ``IAppConfiguration`` : Represents the base application configuration.
-#. ``Configuration`` : Abstract class implementing ``IConfiguration``. This class must be inherited.
-#. ``AppConfiguration`` : Abstract class implementing ``IAppConfiguration``. This class must be inherited.
-#. ``ConfigSettings`` : Represents a collection of Key Values. Keys are strings and Values are object.
 
-Functional Summary
-------------------
-#. **T IConfiguration.Get<T>(string name = null)** : Gets the value of the specified key stored in the settings dictionary. *Note:* If no name is supplied the calling property name is used for the setting lookup. 
-#. **T IConfiguration.GetOrDefault<T>(string name = null)** : Get the value of the specified key stored in the settings dictionary. However, if the key is not present then the default of the type T is returned.
+1. :doc:`configuration-defaults` for prebuilt default settings.
+2. :doc:`contracts` for reusable abstractions used elsewhere in the ecosystem.
+3. Data and logging packages that consume configuration values from ``ConfigSettings``.
 
+Core Types And Concepts
+-----------------------
 
-Code Examples
+``IConfiguration``
+   Defines the main configuration API, including ``Get<T>()``, ``GetOrDefault<T>()``, ``TryGetValue()``, and ``Bind<T>()``.
+
+``IAppConfiguration``
+   Extends the base configuration abstraction for application-level configuration types.
+
+``Configuration``
+   Abstract base class that implements ``IConfiguration``. You inherit from this type to create your own strongly typed configuration class.
+
+``AppConfiguration``
+   Abstract application-oriented configuration base type.
+
+``ConfigSettings``
+   A dictionary-based settings store used as the source for configuration lookups.
+
+Key Behaviors
 -------------
 
-.. code-block:: c#
-    :caption: Configuration inherited
-    :emphasize-lines: 64, 67
+1. ``Get<T>()`` uses the calling member name by default, so property-based configuration reads are concise.
+2. ``GetOrDefault<T>()`` returns the default value for ``T`` when a key is missing.
+3. ``TryGetValue()`` lets you inspect presence without throwing.
+4. ``Bind<T>()`` maps matching keys onto a plain object with writable public properties.
+5. The ``Configuration`` base class supports optional case-insensitive key lookup through its constructor.
 
-    // Inherits the Configuration base class and extends its functionality with 
-    // the additional properties.
-    public class BaseConfig : Configuration
-    {
-        public BaseConfig(ConfigSettings configSettings) : base(configSettings) { }
-
-        public int Property1 => Get<int>(); //uses the property name as setting key.
-
-        public string FilePath => Get<string>("FileSourcePath");
-
-        public string Property3 => Get<string>();
-    }
-
-    // configuration settings - This can be from any source e.g app.setting.json, 
-    // app.config ...
-    var configSettings = new ConfigSettings
-    {
-        { "Property1", 100 },
-        { "FileSourcePath", "This is File Source Path" },
-        { "Property3", "This is property 3" }
-    };
-
-    //initializing configuration class
-    var baseConfig = new BaseConfig(configSettings);
-
-    //pulling value from config using property.
-    var result = baseConfig.Property1;
-    
-
-
-Changelog
+Basic Example
 -------------
 
-V1.0.10
+The most common usage pattern is to inherit from ``Configuration`` and expose strongly typed properties.
 
-* Minor fixes
-* Dependent package updates
+.. code-block:: csharp
 
-V1.0.9
+   using VersaTul.Configurations;
 
-* Base Implementation Refactoring
-* Default key support
+   public class StorageConfiguration : Configuration
+   {
+       public StorageConfiguration(ConfigSettings settings) : base(settings)
+       {
+       }
 
-V1.0.8
+       public string ConnectionString => Get<string>();
 
-* Code ported to dotnet core
-* Documentation completed
+       public int TimeoutSeconds => GetOrDefault<int>();
+
+       public string ArchivePath => Get<string>("ArchiveDirectory");
+   }
+
+   var settings = new ConfigSettings
+   {
+       { "ConnectionString", "Server=.;Database=Demo;Trusted_Connection=True;" },
+       { "TimeoutSeconds", 60 },
+       { "ArchiveDirectory", "C:\\Exports" }
+   };
+
+   var configuration = new StorageConfiguration(settings);
+
+   var connectionString = configuration.ConnectionString;
+   var timeout = configuration.TimeoutSeconds;
+   var archivePath = configuration.ArchivePath;
+
+Binding Example
+---------------
+
+``Bind<T>()`` is useful when you want to project settings into a plain model instead of exposing them through an inherited configuration class.
+
+.. code-block:: csharp
+
+   using VersaTul.Configurations;
+
+   public class MailOptions
+   {
+       public string SmtpServer { get; set; }
+       public int SmtpPort { get; set; }
+       public string FromAddress { get; set; }
+   }
+
+   public class MailConfiguration : Configuration
+   {
+       public MailConfiguration(ConfigSettings settings) : base(settings, useCaseInsensitiveKeys: true)
+       {
+       }
+   }
+
+   var settings = new ConfigSettings
+   {
+       { "smtpserver", "127.0.0.1" },
+       { "smtpport", 25 },
+       { "fromaddress", "no-reply@example.com" }
+   };
+
+   var configuration = new MailConfiguration(settings);
+   var options = configuration.Bind<MailOptions>();
+
+Notes
+-----
+
+1. ``Get<T>()`` throws when a key is missing, which is useful for required settings.
+2. ``GetOrDefault<T>()`` is better suited to optional values.
+3. ``ConfigSettings`` is intentionally simple, so it can be populated from JSON, environment variables, a database, or any custom source.
+4. If you need ready-made defaults for VersaTul packages, start with :doc:`configuration-defaults` and then override values as needed.

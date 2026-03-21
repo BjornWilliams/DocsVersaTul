@@ -2,19 +2,32 @@
     :google-site-verification: qzvlosH2brzdVklyvowF3R1QXvefZW6xph30oJPaPNc
 
 
-Welcome to VersaTul documentation!
-===================================
+VersaTul Documentation
+======================
 
-**VersaTul** (/'Versa Tool/) Libraries is a collection of frequently used 
-functionality that can be reused across a multitude of DOTNET projects.
+**VersaTul** is a collection of reusable .NET libraries designed to solve common application concerns without forcing you into a single monolithic framework.
 
-It’s comprised of several NuGet packages that can be used as standalone projects or together to solve software problems. 
-The library is made up of several packages that provides functionality such as:
+The ecosystem is organized as focused NuGet packages that can be used independently or combined to build larger solutions. Across the library set you will find support for:
 
-1.	**Caching** - This package provides a default in-memory cache.
-2.	**Database Access** - There are multiple database access packages included. For example: MongoDb, SQL Server, Oracle, and MySql.
-3.	**Logging** - There are packages for logging either to flat files, APIs, or emails.
-4.	**Data Exporting** - There is a package provided for exporting collections to formats such as CSV, TAB Delimited, or JSON files.  
+1. **Foundational application building blocks** such as contracts, configuration, utilities, and object conversion.
+2. **Data access and data movement** including SQL, SQL Server, MongoDB, EF Core, bulk copy, file readers, and caching.
+3. **File, transformation, and processing workflows** including compression, streamers, file handling, display metadata, and pipelines.
+4. **Operational concerns** such as logging, mail delivery, and task scheduling.
+
+This documentation is being reorganized to support both first-time adopters and experienced users who need deeper package detail.
+
+How To Use These Docs
+---------------------
+
+If you are new to VersaTul, start with the onboarding pages and use the package catalog to find the right entry point.
+
+If you already know the package you need, jump directly to the package reference sections below.
+
+Recommended starting points:
+
+1. Read :doc:`getting-started` for the quickest path from zero context to first package usage.
+2. Read :doc:`package-selection` if you are deciding which packages to adopt.
+3. Use :doc:`package-catalog` to browse the full library surface area by category.
 
 .. note::
 
@@ -23,10 +36,80 @@ The library is made up of several packages that provides functionality such as:
    For support, contact us via email. versatul.libraries@outlook.com
 
 
+Start Here
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   getting-started
+   package-selection
+   package-catalog
+
+
+Package Reference
+-----------------
+
+Foundation Packages
+^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   configuration
+   configuration-defaults
+   contracts
+   data-contracts
+   converters
+   extensions
+   utilities
+
+Data And Storage Packages
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   caching
+   bulk
+   sql
+   mssql
+   mongodb
+   efcore
+   file-reader
+
+File, Processing, And Integration Packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   compression
+   streamers
+   display-attributes
+   handler-file
+   pipeline-infrastructure
+
+Operational Packages
+^^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   logger
+   logger-file
+   logger-mail
+   logger-web
+   mailer
+   scheduler
+
 .. toctree::
    :hidden:
 
    Home <self>
+   getting-started
+   package-selection
+   package-catalog
    caching
    compression
    configuration

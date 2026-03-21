@@ -1,153 +1,140 @@
-Converters
-===================
+Object Converters
+=================
 
-Getting Started
-----------------
-The VersaTul Object Converters project provides the ability to convert objects into key/value pairs dictionary stores.
-For example, converters can be used to convert instance of classes into a dictionary representation of the data from the class.
-This package works with the Collection streamers package.
+Overview
+--------
+
+``VersaTul.Object.Converters`` helps you turn object graphs into dictionary-based representations and flattened outputs that are easier to export, inspect, or transform.
+
+This package is particularly useful in reporting, streaming, and metadata-driven formatting workflows.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Convert an object into a dictionary of property names and values.
+2. Flatten nested dictionaries and enumerable structures into a single key/value view.
+3. Produce flattened string output from nested values.
+4. Respect display metadata while processing object properties for export scenarios.
 
 Installation
 ------------
 
-To use VersaTul Converters, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Object.Converters -Version latest
 
+   dotnet add package VersaTul.Object.Converters
 
-Main Components
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Object.Converters -Version latest
+
+Related Packages
 ----------------
-#. ``IFlattener`` : Describes the functionality needed to successfully convert from a multi-dimensional object to a one-dimensional key/value pair dictionary with flattened keys.
-#. ``IObjectProcessor`` : Represent functionality that can convert an object into a dictionary of string keys and object values.
-#. ``IPropertyProcessor`` : Describes the functionality needed to successfully process the properties of object instances.
-#. ``Flattener`` : The concrete implementation of ``IFlattener``.
-#. ``ObjectProcessor`` : The concrete implementation of ``IObjectProcessor``.
-#. ``PropertyProcessor`` : The concrete implementation of ``IPropertyProcessor``.
 
-Functional Summary
+1. :doc:`streamers` for exporting processed object data.
+2. :doc:`display-attributes` for metadata-driven naming, formatting, and ignore rules.
+3. :doc:`extensions` for extension methods that build on these converters.
+
+Core Types And Concepts
+-----------------------
+
+``IObjectProcessor`` and ``ObjectProcessor``
+   Convert an object into a nested ``IDictionary<string, object>`` structure.
+
+``IFlattener`` and ``Flattener``
+   Flatten nested structures into either a flat dictionary or a flattened string.
+
+``IPropertyProcessor`` and ``PropertyProcessor``
+   Process individual properties with support for nested objects, collections, dictionaries, and display metadata.
+
+``FlattenKeyOptions``
+   Controls how flattened keys are formatted.
+
+Key Capabilities
+----------------
+
+1. ``ObjectProcessor.ToDictionary()`` serializes an object and rebuilds it as a nested dictionary structure.
+2. ``Flattener.AsDictionary()`` flattens nested dictionaries and collections.
+3. ``Flattener.AsString()`` turns nested data into a flattened string representation.
+4. ``PropertyProcessor`` respects display-analyzer formatting and ignore behavior during traversal.
+5. The flattener includes cycle detection so circular references do not recurse forever.
+
+Basic Example
+-------------
+
+Convert a simple object into a dictionary and inspect the generated fields.
+
+.. code-block:: csharp
+
+   using VersaTul.Object.Converters;
+
+   var person = new
+   {
+       Id = 100018,
+       FirstName = "Bjorn",
+       LastName = "Williams",
+       Age = 37
+   };
+
+   var processor = new ObjectProcessor();
+   var dictionary = processor.ToDictionary(person);
+
+   var firstName = dictionary["FirstName"];
+   var age = dictionary["Age"];
+
+Flattening Example
 ------------------
-#. **IDictionary<string, object> IFlattener.AsDictionary(IDictionary<string, object> source)** : Converts the given dictionary of string, objects with different levels of object depth into one level. Essentially create a dictionary flatter dictionary with keys/values.
-#. **string IFlattener.AsString(object source)** : Converts the given object from a multi-dimensional object to one-dimensional string.
-#. **IDictionary<string, object> IObjectProcessor.ToDictionary(object source)** : Converts the given object into a dictionary of String keys and value objects.
-#. **object IPropertyProcessor.Process()** : Overloaded method for analyzing a given property of an object and its values to see if further processing is needed in order to flatten the given object.
 
-Code Examples
--------------
+Use ``Flattener`` when you need a single-level structure for export or diagnostics.
 
-.. code-block:: c#
-    :caption: Flattening multilevel dictionary.
+.. code-block:: csharp
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            IDictionary<string, object> innerDictionary = new Dictionary<string, object>()
-            {
-                { "Age" , 37 },
-                { "FirstName", "Bjorn" },
-            };
+   using VersaTul.Object.Converters;
 
-            IDictionary<string, object> source = new Dictionary<string, object>()
-            {
-               { "Person", innerDictionary }
-            };
+   IDictionary<string, object> source = new Dictionary<string, object>
+   {
+       {
+           "Person",
+           new Dictionary<string, object>
+           {
+               { "Age", 37 },
+               { "FirstName", "Bjorn" }
+           }
+       }
+   };
 
-            var flattener = new Flattener();
+   var flattener = new Flattener();
+   var flattened = flattener.AsDictionary(source);
 
-            var returnedSource = flattener.AsDictionary(source);
+   var age = flattened["[1] Person.Age"];
+   var firstName = flattened["[2] Person.FirstName"];
 
-            //keys are now flattened.
-            var age = returnedSource["[1] Person.Age"];
-            var firstName = returnedSource["[2] Person.FirstName"];
-        }       
-    }
+Property Processing And Display Metadata
+----------------------------------------
 
-.. code-block:: c#
-    :caption: Flattening a list of integers.
+``PropertyProcessor`` is useful when object values need to be formatted or filtered through display metadata before export.
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            List<int> integers = new() { 1, 2, 3, 4, 5 };
+.. code-block:: csharp
 
-            var flattener = new Flattener();
-            
-            //result is now flattened.
-            string result = flattener.AsString(integers);
+   using VersaTul.Display.Attributes;
+   using VersaTul.Object.Converters;
 
-            //outputs: 1||2||3||4||5
-        }       
-    }
+   var displayAnalyzer = new DisplayAnalyzer();
+   var propertyProcessor = new PropertyProcessor(displayAnalyzer);
 
-.. code-block:: c#
-    :caption: Converting object to dictionary.
+   var property = typeof(Person).GetProperty(nameof(Person.Age));
+   var person = new Person { Age = 37 };
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var person = new Person
-            {
-                Age = 37,
-                FirstName = "Bjorn",
-                ID = 100018,
-                LastName = "Williams"
-            }
+   var processedValue = propertyProcessor.Process(property, person.Age, person.Age.GetType());
 
-            var processor = new ObjectProcessor();
+Notes
+-----
 
-            var result = processor.ToDictionary(person);
-
-            //accessing age 
-            var age = result["Age"];
-        }       
-    }
-
-.. code-block:: c#
-    :caption: Processing the value of a given property.
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var person = new Person
-            {
-                Age = 37,
-                FirstName = "Bjorn",
-                ID = 100018,
-                LastName = "Williams"
-            }
-            
-            var propertyInfo = person.GetType().GetProperty("Age");
-
-            var type = person.Age.GetType();
-
-            var propertyProcessor = new PropertyProcessor(new DisplayAnalyzer());
-            
-            //value here will be 37
-            var value = propertyProcessor.Process(propertyInfo, null, type);
-        }       
-    }
-    
-
-
-Changelog
--------------
-
-V1.0.10
-
-* Class to dictionary support 
-* Minor fixes
-
-V1.0.9
-
-* Dependent package updates
-* Minor fixes
-
-V1.0.8
-
-* Code ported to dotnet core
-* Documentation completed
+1. ``ObjectProcessor`` is useful when you want a structured dictionary representation.
+2. ``Flattener`` is better when you need a single-level projection for export, tabular output, or logging.
+3. This package becomes more valuable when combined with display attributes and collection streamers.

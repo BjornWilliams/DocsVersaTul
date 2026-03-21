@@ -1,74 +1,110 @@
 Contracts
-==================
+=========
 
-Getting Started
-----------------
-The VersaTul Contracts project provides generic interfaces that are supported throughout the VersaTul ecosystem. 
-Developers who may want to change the underline implementation of these contracts can create their own implementation of such contract 
-and supply it to the VersaTul project in which they require to change the behavior. 
+Overview
+--------
+
+``VersaTul.Contracts`` contains small, reusable abstractions used across the VersaTul ecosystem.
+
+These contracts are especially valuable when you want to keep higher-level code independent from a concrete implementation, or when you want a consistent shape for predicates, asynchronous commands, and asynchronous queries.
+
+When To Use This Package
+------------------------
+
+Use this package when you want to:
+
+1. Define query and command contracts without coupling to a concrete package.
+2. Pass predicate expressions into repositories or data services.
+3. Standardize asynchronous operations across your own application code.
+4. Reuse the same abstractions that VersaTul data packages already understand.
 
 Installation
 ------------
 
-To use VersaTul Contracts, first install it using nuget:
+Install the package with the .NET CLI:
 
 .. code-block:: console
-    
-    PM> NuGet\Install-Package VersaTul.Contracts -Version latest
 
-Main Components
+   dotnet add package VersaTul.Contracts
+
+Or with the Package Manager Console:
+
+.. code-block:: console
+
+   PM> NuGet\Install-Package VersaTul.Contracts -Version latest
+
+Related Packages
 ----------------
-#. ``IPredicate<T>`` : Represents an expression that can be applied to the type of T.
 
-Functional Summary
-------------------
-#. **Expression<Func<T, bool>> IPredicate<T>.Condition** : Property to get or set an expression for filtering with Func of T.
+1. :doc:`data-contracts` for database-oriented abstractions built on similar design principles.
+2. :doc:`mongodb` and other data packages that can consume predicate-style abstractions.
 
-Code Examples
+Core Types And Concepts
+-----------------------
+
+``IPredicate<T>``
+   Wraps an ``Expression<Func<T, bool>>`` so filtering logic can be passed around as an object.
+
+``IAsyncExecutable`` and ``IAsyncExecutable<TInput>``
+   Represent asynchronous command-style operations with no return value.
+
+``IAsyncQuery<TOutput>`` and ``IAsyncQuery<TInput, TOutput>``
+   Represent asynchronous query-style operations that return a value.
+
+``ICancellableAsyncExecutable`` and ``ICancellableAsyncExecutable<TInput>``
+   Add cancellation-token support to command-style contracts.
+
+``ICancellableAsyncQuery<TOutput>`` and ``ICancellableAsyncQuery<TInput, TOutput>``
+   Add cancellation-token support to query-style contracts.
+
+Basic Example
 -------------
 
-.. code-block:: c#
-    :caption: Example implementation as found in VersaTul.Data.MongoDB.Predicates.
+``IPredicate<T>`` is commonly used to wrap filtering expressions in repository-style code.
 
-    // Used to provide conditional expression to MongoDB engine. 
-    public class WherePredicate<TEntity> : IPredicate<TEntity> where TEntity : IEntity
-    {
-        public WherePredicate(Expression<Func<TEntity, bool>> expression)
-        {
-            Condition = expression;
-        }
-        
-        public Expression<Func<TEntity, bool>> Condition { get; set; }        
-    }
+.. code-block:: csharp
 
-    // sample use case 
-    private void GetUsers(IUserRepository userRepository)
-    {
-        // used to provide filtering on UserName from the User model.
-        var users = userRepository.Find(new WherePredicate<User>(model => model.UserName.Contains(SearchTerm)));
+   using System;
+   using System.Linq.Expressions;
+   using VersaTul.Contracts;
 
-        if (users == null || !users.Any())
-        {
-            Print($"No user with the name {SearchTerm} was found.");
-        }
+   public class WherePredicate<TEntity> : IPredicate<TEntity>
+   {
+       public WherePredicate(Expression<Func<TEntity, bool>> expression)
+       {
+           Condition = expression;
+       }
 
-        foreach (var user in users)
-        {
-            Print($"User {user.UserName} was found with Id:{user.Id}");
-        }
-    }
-    
+       public Expression<Func<TEntity, bool>> Condition { get; set; }
+   }
 
+   var predicate = new WherePredicate<User>(user => user.UserName.Contains(searchTerm));
 
-Changelog
--------------
+That predicate object can then be passed into a repository or data service that expects an ``IPredicate<T>``.
 
-V1.0.6
+Async Contract Example
+----------------------
 
-* Dependent package updates
-* Minor fixes
+The async contracts are useful when you want application services to follow a clear, reusable execution shape.
 
-V1.0.5
+.. code-block:: csharp
 
-* Code ported to dotnet core
-* Documentation completed
+   using System.Threading;
+   using System.Threading.Tasks;
+   using VersaTul.Contracts;
+
+   public class GetCustomerByIdQuery : ICancellableAsyncQuery<int, Customer>
+   {
+       public Task<Customer> ExecuteAsync(int input, CancellationToken cancellationToken = default)
+       {
+           // Query persistence or another service here.
+           return Task.FromResult(new Customer { Id = input, Name = "Sample Customer" });
+       }
+   }
+
+Notes
+-----
+
+1. These interfaces are intentionally small so they are easy to implement in your own services.
+2. ``IPredicate<T>`` is particularly useful when you want to preserve LINQ expression trees instead of passing around compiled delegates.
+3. The cancellable async variants are better when your code may run in web requests, background workers, or any environment where cancellation matters.
