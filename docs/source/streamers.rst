@@ -122,25 +122,25 @@ IDataReader Example
 Direct To Disk Example
 ----------------------
 
-   .. code-block:: csharp
+.. code-block:: csharp
 
-      using VersaTul.Collection.Streamers.Contracts;
+   using VersaTul.Collection.Streamers.Contracts;
 
-      var filePath = ((IFileWritableStreamer)csvStreamer.Create(people, "people"))
-         .WriteToFile("C:\\exports");
+   var filePath = ((IFileWritableStreamer)csvStreamer.Create(people, "people"))
+      .WriteToFile("C:\\exports");
 
 IDataReader To Disk Example
 ---------------------------
 
-   .. code-block:: csharp
+.. code-block:: csharp
 
-      using System.Data;
-      using VersaTul.Collection.Streamers.Contracts;
+   using System.Data;
+   using VersaTul.Collection.Streamers.Contracts;
 
-      IDataReader reader = dataService.ExecuteReader(command);
+   IDataReader reader = dataService.ExecuteReader(command);
 
-      var filePath = ((IFileWritableStreamer)csvStreamer.Create(reader, "orders-export"))
-         .WriteToFile("C:\\exports");
+   var filePath = ((IFileWritableStreamer)csvStreamer.Create(reader, "orders-export"))
+      .WriteToFile("C:\\exports");
 
 Save To Disk Example
 --------------------
