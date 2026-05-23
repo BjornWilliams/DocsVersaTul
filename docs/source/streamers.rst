@@ -4,9 +4,9 @@ Collection Streamers
 Overview
 --------
 
-``VersaTul.Collection.Streamers`` turns in-memory collections into reusable export streams such as CSV, tab-delimited text, and JSON.
+``VersaTul.Collection.Streamers`` turns in-memory collections or forward-only ``IDataReader`` sources into reusable export streams such as CSV, tab-delimited text, JSON, and JSONL.
 
-The package is designed for workflows where a collection needs to be serialized once and then reused for multiple outputs, such as saving to disk, compressing into a zip archive, emailing as attachments, or converting to an ``IDataReader`` for downstream processing.
+The package is designed for workflows where a collection or row reader needs to be serialized once and then reused for multiple outputs, such as saving to disk, compressing into a zip archive, emailing as attachments, or converting to an ``IDataReader`` for downstream processing.
 
 When To Use This Package
 ------------------------
@@ -18,6 +18,7 @@ Use this package when you want to:
 3. Convert collections to ``IDataReader`` form for bulk-processing scenarios.
 4. Apply display metadata from :doc:`display-attributes` during output generation.
 5. Add cancellation-aware stream generation for large exports.
+6. Write very large exports directly to disk without buffering the full file in memory.
 
 Installation
 ------------
@@ -51,11 +52,17 @@ Core Types And Concepts
 ``IStreamCreator``
    Defines the ``Create<T>()`` entry point used to bind a collection to a streamer instance.
 
+``IDataReaderStreamCreator``
+   Adds a ``Create(IDataReader, ...)`` path for binding existing forward-only row readers.
+
+``IFileWritableStreamer``
+   Adds ``WriteToFile()`` for writing export output directly to disk.
+
 ``CsvStreamer``, ``TabStreamer``, and ``JsonStreamer``
    Built-in export implementations for common flat-file formats.
 
 ``BaseStreamer``
-   Common base class that owns the in-memory stream, file name handling, collection reader creation, and cancellation-aware generation.
+   Common base class that owns file name handling, collection and reader binding, and cancellation-aware generation.
 
 ``FileConverter``
    Saves a streamer to disk, optionally as a compressed zip file.
@@ -70,10 +77,12 @@ Key Capabilities
 ----------------
 
 1. ``Create<T>()`` binds a collection to a reusable streamer instance.
-2. ``GetFileStream()`` returns the serialized output as a ``MemoryStream``.
-3. ``GetFileStream(CancellationToken)`` adds cancellation support during generation.
-4. ``CollectionReaderExtensions.ToReader()`` turns collections into ``IDataReader`` instances.
-5. ``FileConverter.Save()`` can persist a streamer as plain output or compressed zip content.
+2. ``Create(IDataReader, ...)`` binds an existing reader directly to a streamer.
+3. ``GetFileStream()`` returns the serialized output as a ``MemoryStream``.
+4. ``GetFileStream(CancellationToken)`` adds cancellation support during generation.
+5. ``WriteToFile()`` writes output directly to disk.
+6. ``CollectionReaderExtensions.ToReader()`` turns collections into ``IDataReader`` instances.
+7. ``FileConverter.Save()`` can persist a streamer as plain output or compressed zip content.
 
 Basic CSV Example
 -----------------
@@ -92,9 +101,9 @@ Basic CSV Example
 
    var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
 
-   var stream = csvStreamer.Create(people, "people");
-
-   using var fileStream = stream.GetFileStream();
+      using var fileStream = csvStreamer
+         .Create(people, "people")
+         .GetFileStream();
 
 IDataReader Example
 -------------------
@@ -109,6 +118,29 @@ IDataReader Example
    {
        Console.WriteLine(reader.GetValue(0));
    }
+
+   Direct To Disk Example
+   ----------------------
+
+   .. code-block:: csharp
+
+      using VersaTul.Collection.Streamers.Contracts;
+
+      var filePath = ((IFileWritableStreamer)csvStreamer.Create(people, "people"))
+         .WriteToFile("C:\\exports");
+
+   IDataReader To Disk Example
+   ---------------------------
+
+   .. code-block:: csharp
+
+      using System.Data;
+      using VersaTul.Collection.Streamers.Contracts;
+
+      IDataReader reader = dataService.ExecuteReader(command);
+
+      var filePath = ((IFileWritableStreamer)csvStreamer.Create(reader, "orders-export"))
+         .WriteToFile("C:\\exports");
 
 Save To Disk Example
 --------------------
@@ -129,6 +161,8 @@ Save To Disk Example
 Notes
 -----
 
-1. ``BaseStreamer`` reinitializes its internal reader and memory stream each time ``Create<T>()`` is called.
+1. ``BaseStreamer`` reinitializes its internal reader and output stream state each time ``Create(...)`` is called.
 2. ``CsvStreamer`` supports a custom encoding strategy for value escaping.
-3. This package works especially well with :doc:`display-attributes` when exported column names and formatted values matter.
+3. ``WriteToFile()`` is the preferred path for very large exports because rows can be written directly to disk.
+4. ``FileConverter.Save()`` uses direct file writing automatically for non-compressed output when the streamer supports it.
+5. This package works especially well with :doc:`display-attributes` when exported column names and formatted values matter.
