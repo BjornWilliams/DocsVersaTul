@@ -119,8 +119,8 @@ IDataReader Example
        Console.WriteLine(reader.GetValue(0));
    }
 
-   Direct To Disk Example
-   ----------------------
+Direct To Disk Example
+----------------------
 
    .. code-block:: csharp
 
@@ -129,8 +129,8 @@ IDataReader Example
       var filePath = ((IFileWritableStreamer)csvStreamer.Create(people, "people"))
          .WriteToFile("C:\\exports");
 
-   IDataReader To Disk Example
-   ---------------------------
+IDataReader To Disk Example
+---------------------------
 
    .. code-block:: csharp
 
