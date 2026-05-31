@@ -8,6 +8,13 @@ Overview
 
 It defines a consistent logging contract, a standard log payload model, log levels, and a parser that can turn log events and exceptions into tabular, HTML, or JSON output.
 
+Why Use This Package
+--------------------
+
+Use this package when you want one logging contract that can survive changes in delivery target.
+
+Its value is the shared model: application code can emit ``LogInfo`` and exceptions once, while sink packages decide where those logs end up.
+
 When To Use This Package
 ------------------------
 
@@ -39,6 +46,28 @@ Related Packages
 1. :doc:`logger-file` for flat-file logging.
 2. :doc:`logger-mail` for email-based logging.
 3. :doc:`logger-web` for HTTP endpoint logging.
+4. :doc:`scenario-guides/logging-setup` for a practical file-logging setup.
+
+Start Here If
+-------------
+
+1. You want application code to depend on a logger contract instead of a concrete sink.
+2. You need shared parsing and payload formatting across several logging outputs.
+3. You may add or change sinks later.
+
+Not The Right First Package If
+------------------------------
+
+1. You need logs written somewhere immediately and have not chosen a sink package.
+2. You are looking for email delivery or file rotation behavior rather than shared logging contracts.
+
+Works Well With
+---------------
+
+1. :doc:`logger-file` for local disk logging.
+2. :doc:`logger-mail` for email-based alerting.
+3. :doc:`logger-web` for HTTP-based transport.
+4. :doc:`scenario-guides/logging-setup` when you want the fastest useful logging workflow.
 
 Core Types And Concepts
 -----------------------
@@ -104,6 +133,22 @@ Parser Example
 
    var html = parser.Parse(info, new InvalidOperationException("Boom"), ParseFormat.Html);
    var json = parser.Parse(info, ParseFormat.Json);
+
+Expected Result
+---------------
+
+When this package is doing its job:
+
+1. application code emits one consistent logging payload model,
+2. exception formatting is handled centrally, and
+3. sink changes do not require broad changes to calling code.
+
+Next Step
+---------
+
+1. Read :doc:`scenario-guides/logging-setup` for the quickest path to a useful file-based logger.
+2. Read :doc:`logger-file` if disk logging is the first sink.
+3. Compare :doc:`logger-mail` and :doc:`logger-web` if the delivery target is operational alerting or remote transport.
 
 Notes
 -----

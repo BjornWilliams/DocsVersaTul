@@ -8,6 +8,19 @@ Overview
 
 It is especially useful when you want configuration access that is explicit, easy to test, and simple to pass through your application without taking a dependency on the full .NET configuration stack.
 
+Why Use This Package
+--------------------
+
+Use this package when configuration should stay obvious and portable instead of disappearing behind a larger application framework.
+
+It is a strong fit when you want to:
+
+1. keep settings access testable,
+2. centralize required and optional configuration values in one type, and
+3. reuse the same configuration model across multiple VersaTul packages.
+
+It is less attractive when your team wants every configuration concern to be driven exclusively by the full ASP.NET Core configuration stack and its conventions.
+
 When To Use This Package
 ------------------------
 
@@ -39,6 +52,26 @@ Related Packages
 1. :doc:`configuration-defaults` for prebuilt default settings.
 2. :doc:`contracts` for reusable abstractions used elsewhere in the ecosystem.
 3. Data and logging packages that consume configuration values from ``ConfigSettings``.
+
+Start Here If
+-------------
+
+1. You want the fastest path from raw settings to a strongly typed configuration class.
+2. You want a simple first VersaTul package that can be evaluated in a console app or service.
+3. You are preparing to add packages such as SQL access, logging, or mail delivery that need explicit settings.
+
+Not The Right First Package If
+------------------------------
+
+1. You are looking for logging, file import, or data access behavior rather than settings access.
+2. You already know you only need built-in framework configuration binding and do not need a reusable VersaTul configuration model.
+
+Works Well With
+---------------
+
+1. :doc:`configuration-defaults` when you want baseline keys and defaults before applying overrides.
+2. :doc:`sql` and :doc:`mssql` when connection metadata needs to stay explicit.
+3. :doc:`logger`, :doc:`logger-file`, and :doc:`mailer` when operational packages need shared settings.
 
 Core Types And Concepts
 -----------------------
@@ -134,6 +167,22 @@ Binding Example
 
    var configuration = new MailConfiguration(settings);
    var options = configuration.Bind<MailOptions>();
+
+Expected Result
+---------------
+
+When this package is working well:
+
+1. required values are obvious because they use ``Get<T>()``,
+2. optional values are obvious because they use ``GetOrDefault<T>()``, and
+3. downstream packages receive a clear configuration object instead of a loosely structured settings bag.
+
+Next Step
+---------
+
+1. Read :doc:`configuration-defaults` if you want reusable defaults layered onto your settings model.
+2. Read :doc:`sql` if your next package needs database configuration.
+3. Read :doc:`mailer` or :doc:`logger-file` if your next concern is outbound mail or operational logging.
 
 Notes
 -----

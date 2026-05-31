@@ -8,6 +8,13 @@ Overview
 
 It gives you a consistent way to execute stored procedures and text commands, pass parameters, switch connection names, and map result sets into your own service-layer models.
 
+Why Use This Package
+--------------------
+
+Use this package when you want a reusable relational data-access shape without locking the application to SQL Server too early.
+
+Its main value is not just executing SQL. Its value is keeping command execution, parameter handling, configuration, and row mapping in one deliberate data-service layer.
+
 When To Use This Package
 ------------------------
 
@@ -41,6 +48,28 @@ Related Packages
 2. :doc:`data-contracts` for shared connection abstractions.
 3. :doc:`mssql` for SQL Server-specific capabilities built on this base.
 4. :doc:`utilities` and :doc:`extensions` for conversion and mapping helpers commonly used inside data services.
+5. :doc:`scenario-guides/sql-data-access` for a practical relational data-service workflow.
+
+Start Here If
+-------------
+
+1. You want relational data access but still care about provider flexibility.
+2. You want to move database code out of controllers and into reusable services.
+3. You want one consistent way to handle commands, parameters, and result mapping.
+
+Not The Right First Package If
+------------------------------
+
+1. You already know the real requirement is SQL Server bulk copy or SQL Server-only parameter features.
+2. You are trying to parse flat files rather than query a relational store.
+
+Works Well With
+---------------
+
+1. :doc:`configuration` and :doc:`configuration-defaults` for connection and timeout settings.
+2. :doc:`data-contracts` for shared database abstractions.
+3. :doc:`mssql` when SQL Server-specific behavior becomes necessary after the base relational workflow is in place.
+4. :doc:`scenario-guides/sql-data-access` when you want the full end-to-end usage path first.
 
 Core Types And Concepts
 -----------------------
@@ -149,6 +178,22 @@ Command And Mapping Example
            return product;
        }
    }
+
+Expected Result
+---------------
+
+When this package is working well:
+
+1. connection setup is centralized,
+2. query execution is hidden behind project-specific services, and
+3. row mapping logic is reused instead of rewritten in each caller.
+
+Next Step
+---------
+
+1. Read :doc:`scenario-guides/sql-data-access` if you want the full workflow around these pieces.
+2. Read :doc:`mssql` when the next requirement is SQL Server-specific parameters or bulk copy.
+3. Read :doc:`file-reader` and :doc:`bulk` if the next workflow is importing flat-file data into a relational database.
 
 Provider Notes
 --------------

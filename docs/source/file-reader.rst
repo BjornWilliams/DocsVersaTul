@@ -8,6 +8,13 @@ Overview
 
 It is especially useful when your downstream workflow already expects ``IDataReader`` input, such as a bulk-copy pipeline or a tabular import process.
 
+Why Use This Package
+--------------------
+
+Use this package when the hard part of the problem is turning flat files into a tabular shape the rest of your pipeline can consume.
+
+Its main value is that it bridges file input into ``IDataReader``-based workflows without forcing you to hand-roll parsing glue for every import job.
+
 When To Use This Package
 ------------------------
 
@@ -39,6 +46,29 @@ Related Packages
 1. :doc:`bulk` for generic bulk-copy contracts built around ``IDataReader`` input.
 2. :doc:`mssql` for SQL Server bulk-copy workflows.
 3. :doc:`handler-file` for broader file-system operations used alongside reader workflows.
+4. :doc:`scenario-guides/file-import` for an end-to-end file-to-database workflow.
+
+Start Here If
+-------------
+
+1. Your source data is in CSV, text, or JSON files.
+2. The next processing step expects ``IDataReader`` input.
+3. You want the import path to remain testable and replaceable.
+
+Not The Right First Package If
+------------------------------
+
+1. Your real need is export generation rather than import parsing.
+2. You need direct SQL Server bulk upload but do not yet have file input in a readable shape.
+3. You only need raw file-system utilities instead of tabular readers.
+
+Works Well With
+---------------
+
+1. :doc:`bulk` when the next step is schema mapping and transport-neutral bulk copy.
+2. :doc:`mssql` when the destination is SQL Server bulk upload.
+3. :doc:`handler-file` when files must be discovered, moved, or archived around the import process.
+4. :doc:`scenario-guides/file-import` when you want the full workflow before going deeper into the reference page.
 
 Core Types And Concepts
 -----------------------
@@ -130,6 +160,22 @@ Bulk Workflow Example
 
   var copyDetail = new CopyDetail("Persons", reader, mappings);
   await bulkCopy.DoCopyAsync(copyDetail);
+
+Expected Result
+---------------
+
+When this package is working well:
+
+1. import code stays focused on workflow instead of parsing details,
+2. files become ``IDataReader`` sources that other VersaTul packages can consume directly, and
+3. one-file and many-file imports follow the same mental model.
+
+Next Step
+---------
+
+1. Read :doc:`scenario-guides/file-import` if you want to connect the reader to a complete database import path.
+2. Read :doc:`bulk` if the next question is column mapping and copy results.
+3. Read :doc:`mssql` if SQL Server bulk upload is the real destination.
 
 Dependency Injection
 --------------------

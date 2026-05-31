@@ -39,6 +39,7 @@ Related Packages
 
 1. :doc:`streamers` for export generation.
 2. :doc:`pipeline-infrastructure` because the built-in formatters run through a formatting pipeline.
+3. :doc:`scenario-guides/data-export` for a realistic export workflow.
 
 Core Types And Concepts
 -----------------------

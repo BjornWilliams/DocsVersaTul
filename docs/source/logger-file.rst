@@ -8,6 +8,13 @@ Overview
 
 It combines the base logger abstractions with file-system helpers and an archiving policy so applications can log to disk without handling rotation and file growth manually.
 
+Why Use This Package
+--------------------
+
+Use this package when you want the simplest practical sink for service diagnostics and batch-job visibility.
+
+Its main value is that it gives you a usable rolling file logger without pushing sink-specific logic into application code.
+
 When To Use This Package
 ------------------------
 
@@ -39,6 +46,27 @@ Related Packages
 1. :doc:`logger` for the shared logging contracts and parser.
 2. :doc:`handler-file` for file-system abstractions used by the logger.
 3. :doc:`configuration-defaults` for baseline logger settings.
+4. :doc:`scenario-guides/logging-setup` for an end-to-end logger setup walkthrough.
+
+Start Here If
+-------------
+
+1. Local files are a sufficient first logging destination.
+2. You want rotation and retention behavior without writing it yourself.
+3. You are adding operational visibility to a service, scheduler, or import process quickly.
+
+Not The Right First Package If
+------------------------------
+
+1. You only need the shared logging contract and have not chosen a sink yet.
+2. Centralized remote delivery matters more than local visibility.
+
+Works Well With
+---------------
+
+1. :doc:`logger` for the shared logging contract and parser.
+2. :doc:`configuration-defaults` when you want baseline logging settings.
+3. :doc:`scenario-guides/logging-setup` when you want the end-to-end setup path first.
 
 Core Types And Concepts
 -----------------------
@@ -85,6 +113,22 @@ Basic Example
    ILogger logger = new FileLogger(configuration, archiver, parser, fileHandler);
 
    await logger.LogAsync(new LogInfo(LogLevel.Information, "Startup", "Application started"));
+
+Expected Result
+---------------
+
+When this package is working well:
+
+1. the target directory is created automatically,
+2. log entries are written through one shared contract, and
+3. rotation behavior happens through configuration instead of custom code in the application.
+
+Next Step
+---------
+
+1. Read :doc:`scenario-guides/logging-setup` for the full service-logging workflow.
+2. Read :doc:`logger` if you want the sink-agnostic contract details behind this implementation.
+3. Compare :doc:`logger-mail` when alerts should be delivered instead of just stored on disk.
 
 Configuration Notes
 -------------------

@@ -8,6 +8,13 @@ Overview
 
 The package is designed for workflows where a collection or row reader needs to be serialized once and then reused for multiple outputs, such as saving to disk, compressing into a zip archive, emailing as attachments, or converting to an ``IDataReader`` for downstream processing.
 
+Why Use This Package
+--------------------
+
+Use this package when export generation is becoming a real application concern instead of a one-off helper method.
+
+Its value is that one streamer can drive multiple destinations such as files, compressed archives, and mail attachments while keeping export formatting and serialization logic in one place.
+
 When To Use This Package
 ------------------------
 
@@ -42,6 +49,30 @@ Related Packages
 2. :doc:`compression` for zip-based export packaging.
 3. :doc:`handler-file` for saving exported streams to disk.
 4. :doc:`bulk` and :doc:`mssql` for ``IDataReader``-driven import workflows.
+5. :doc:`scenario-guides/data-export` for an end-to-end export workflow.
+
+Start Here If
+-------------
+
+1. You need CSV, tab-delimited, JSON, or JSONL exports from collections or readers.
+2. The same export output may be saved, compressed, or emailed.
+3. Column naming and formatting matter to the consumer of the export.
+
+Not The Right First Package If
+------------------------------
+
+1. Your workflow is import-first rather than export-first.
+2. You only need a raw SMTP transport or file utility.
+3. You are looking only for metadata annotations without generating output.
+
+Works Well With
+---------------
+
+1. :doc:`display-attributes` when exported names, ordering, and formatting matter.
+2. :doc:`converters` when nested objects need flattening before output.
+3. :doc:`compression` and :doc:`handler-file` when generated streams must be archived or persisted.
+4. :doc:`mailer` when exports become outbound attachments.
+5. :doc:`scenario-guides/data-export` when you want the complete workflow first.
 
 Core Types And Concepts
 -----------------------
@@ -157,6 +188,22 @@ Save To Disk Example
 
    var streamer = csvStreamer.Create(people, "people");
    fileConverter.Save(streamer, "C:\\exports", compressed: true);
+
+Expected Result
+---------------
+
+When this package is working well:
+
+1. one export definition can drive multiple delivery paths,
+2. formatting rules stay out of ad hoc file-writing code, and
+3. large exports can be written directly to disk without buffering the full file in memory.
+
+Next Step
+---------
+
+1. Read :doc:`scenario-guides/data-export` if you want the complete object-to-file workflow.
+2. Read :doc:`display-attributes` when the next need is column naming, ordering, or value formatting.
+3. Read :doc:`mailer` if export files now need to be delivered as attachments.
 
 Notes
 -----

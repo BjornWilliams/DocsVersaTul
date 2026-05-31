@@ -39,6 +39,7 @@ Related Packages
 1. :doc:`mssql` for a concrete ``IBulkCopy`` implementation backed by SQL Server.
 2. :doc:`file-reader` for producing ``IDataReader`` sources from CSV and text files.
 3. :doc:`streamers` and other reader-producing workflows that can feed bulk operations.
+4. :doc:`scenario-guides/file-import` for a practical import workflow.
 
 Core Types And Concepts
 -----------------------

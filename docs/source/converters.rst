@@ -39,6 +39,7 @@ Related Packages
 1. :doc:`streamers` for exporting processed object data.
 2. :doc:`display-attributes` for metadata-driven naming, formatting, and ignore rules.
 3. :doc:`extensions` for extension methods that build on these converters.
+4. :doc:`scenario-guides/data-export` for a practical export workflow.
 
 Core Types And Concepts
 -----------------------

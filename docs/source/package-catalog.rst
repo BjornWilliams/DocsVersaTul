@@ -1,11 +1,24 @@
 Package Catalog
 ===============
 
-This page is the high-level map of the VersaTul library ecosystem.
+This page is the broad map of the VersaTul library ecosystem.
 
-Use it when you want to understand how the packages are grouped, what each package is for, and which packages are commonly used together.
+Use it after you already know the problem area you are working in and want to discover adjacent packages, not as the first step for adoption.
 
-It is a navigation page first, not a replacement for the package reference pages.
+If you are new to the ecosystem, start with :doc:`getting-started` or :doc:`package-selection` before using this page as a jump table.
+
+How To Use This Page
+--------------------
+
+1. Find the package family closest to your current problem.
+2. Open the package page with the narrowest scope that can solve it.
+3. Use the relationship notes to identify the next companion package only if needed.
+
+Good times to use the catalog:
+
+1. You already know you need data access and want to compare the available data packages.
+2. You already use one VersaTul package and want to see what pairs naturally with it.
+3. You want a full ecosystem map after finishing a quickstart or an initial evaluation.
 
 Foundation Packages
 -------------------
@@ -72,4 +85,6 @@ Recommended Browsing Paths
 
 1. New users should start at :doc:`getting-started`.
 2. Users evaluating adoption should read :doc:`package-selection`.
-3. Experienced users can use this page as a jump table into the full package reference.
+3. Users who want complete workflows should read :doc:`scenario-guides/index`.
+4. Users expanding beyond an initial package should use this page as a discovery map.
+5. Experienced users can use this page as a jump table into the full package reference.
