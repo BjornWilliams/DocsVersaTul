@@ -104,6 +104,11 @@ Key Capabilities
 4. Uses ``BaseDataService.ProcessReader()`` to map one or many result sets into application models.
 5. Supports both stored procedures and plain SQL text commands.
 
+Transaction Lifecycle
+---------------------
+
+``BaseDataService`` owns the connection and transaction created by ``UseTransaction`` and ``UseTransactionAsync``. Use the supplied transaction when creating commands; do not commit or roll it back inside the handler. A successful handler is committed exactly once. If a handler throws, or an asynchronous handler is canceled, the transaction is rolled back and the handler failure is propagated when rollback succeeds. Result-returning overloads return the handler result after the commit succeeds.
+
 Basic Example
 -------------
 
