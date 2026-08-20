@@ -109,6 +109,8 @@ SQL Server bulk-copy operations require a non-null collection containing at leas
 
 Bulk-copy resource wrappers can be disposed safely after partial initialization and can be disposed more than once.
 
+When a bulk-copy operation fails, the returned result keeps the original exception as the first failed result. Exceptions raised while reporting failure progress, rolling back, or disposing resources are recorded as additional failed results and do not replace the original failure.
+
 Basic Data-Service Example
 --------------------------
 
