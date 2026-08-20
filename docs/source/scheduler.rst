@@ -87,6 +87,19 @@ Basic Example
 
    timer.Start();
 
+Task-based Handler Contracts
+----------------------------
+
+Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``ScheduledEventValueTaskHandler`` for a ``ValueTask``-returning handler. Both handlers receive a ``CancellationToken``. ``DelegateMethodCall`` and ``DynamicMethodCall`` implement ``IAsyncMethodCall``; call ``ExecuteAsync`` and await its result so returned Task and ValueTask failures are observable.
+
+.. code-block:: csharp
+
+   ScheduledEventAsyncHandler handler = (_, _, cancellationToken) =>
+       Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+
+   var methodCall = new DelegateMethodCall(handler);
+   await ((IAsyncMethodCall)methodCall).ExecuteAsync(stoppingToken);
+
 Scheduled Event Example
 -----------------------
 
