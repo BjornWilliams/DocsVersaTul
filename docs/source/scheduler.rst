@@ -98,7 +98,7 @@ Scheduled Event Example
 File-backed Checkpoints
 -----------------------
 
-When a file-backed event storage is used, each checkpoint replaces the previous checkpoint value instead of appending another line. The checkpoint file therefore contains one current value and does not grow on every scheduler save. The checkpoint format, restart recovery, and atomic replacement guarantees are part of the scheduler storage contract.
+When a file-backed event storage is used, each checkpoint replaces the previous checkpoint value instead of appending another line. The checkpoint file therefore contains one current value and does not grow on every scheduler save. The stored value is UTC serialized with the invariant round-trip (``O``) format. The checkpoint restart recovery and atomic replacement guarantees are part of the scheduler storage contract.
 
 Notes
 -----
