@@ -65,6 +65,11 @@ Core Types And Concepts
 ``BulkCopyException``
     Wrapper exception used when a copy step fails.
 
+Result Semantics
+----------------
+
+``BulkCopyResult.Results`` is initialized to an empty collection, so a newly constructed result can be queried safely. ``Success`` is ``true`` only when at least one copy result exists and every result completed without an error. An empty or null result collection is not considered a successful upload.
+
 Key Capabilities
 ----------------
 
