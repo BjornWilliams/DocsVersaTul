@@ -107,7 +107,7 @@ Key Capabilities
 Transaction Lifecycle
 ---------------------
 
-``BaseDataService`` owns the connection and transaction created by ``UseTransaction`` and ``UseTransactionAsync``. Use the supplied transaction when creating commands; do not commit or roll it back inside the handler. A successful handler is committed exactly once. If a handler throws, or an asynchronous handler is canceled, the transaction is rolled back and the handler failure is propagated when rollback succeeds. If rollback also fails, the original handler exception is rethrown and the rollback exception is attached to ``Exception.Data`` under ``VersaTul.Data.Sql.Transaction.RollbackException``. Result-returning overloads return the handler result after the commit succeeds.
+``BaseDataService`` owns the connection and transaction created by ``UseTransaction`` and ``UseTransactionAsync``. Use the supplied transaction when creating commands; do not commit or roll it back inside the handler. A successful handler is committed exactly once. If a handler throws, or an asynchronous handler is canceled, the transaction is rolled back and the handler failure is propagated when rollback succeeds. If rollback also fails, the original handler exception is rethrown and the rollback exception is attached to ``Exception.Data`` under ``VersaTul.Data.Sql.Transaction.RollbackException``. Asynchronous overloads dispatch through the provider's ``OpenAsync``, ``CommitAsync``, and ``RollbackAsync`` members; the supplied cancellation token is used for opening and committing, while rollback uses a non-cancelable cleanup token. Result-returning overloads return the handler result after the commit succeeds.
 
 Basic Example
 -------------
