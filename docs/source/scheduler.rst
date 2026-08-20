@@ -100,7 +100,7 @@ Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``Schedul
    var methodCall = new DelegateMethodCall(handler);
    await ((IAsyncMethodCall)methodCall).ExecuteAsync(stoppingToken);
 
-``TimerTask.OverlapPolicy`` controls asynchronous overlap. ``Allow`` starts every invocation and is the default, ``Skip`` drops an invocation while another is active, ``Queue`` runs invocations in FIFO order, and ``CancelPrevious`` requests cancellation of the active invocation before starting the replacement. Queueing is currently unbounded; use the later bounded-concurrency options when available. Synchronized tasks wait for each invocation and therefore do not overlap.
+``TimerTask.OverlapPolicy`` controls asynchronous overlap. ``Allow`` starts every invocation and is the default, ``Skip`` drops an invocation while another is active, ``Queue`` runs invocations in FIFO order, and ``CancelPrevious`` requests cancellation of the active invocation before starting the replacement. ``TimerTask.MaxConcurrency`` is zero by default (unbounded); a positive value caps active ``Allow`` invocations and queues excess arrivals in FIFO order. The other policies already limit active work to one invocation. Synchronized tasks wait for each invocation and therefore do not overlap.
 
 Scheduled Event Example
 -----------------------
