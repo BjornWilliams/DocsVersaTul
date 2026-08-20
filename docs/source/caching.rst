@@ -68,7 +68,7 @@ Key Capabilities
 2. ``Add()`` and ``SetAsync()`` support default duration, explicit duration, and ``CacheExpiration`` overloads.
 3. ``IsExists()`` checks whether a key is present.
 4. ``Remove()`` and ``Clear()`` remove one or all entries.
-5. ``ItemRemoved`` lets you observe cache evictions.
+5. ``ICacheProviderWithEvents<T>.ItemRemovedDetailed`` lets you observe cache evictions with typed key, value, and reason metadata. The legacy ``ItemRemoved`` event remains available for compatibility but is obsolete.
 6. ``MemCacheProvider<T>`` supports injecting ``MemoryCacheOptions``, ``ILoggerFactory``, and a custom ``ICacheClock``.
 
 Basic Example
@@ -121,13 +121,15 @@ Async And Eviction Example
 
 .. code-block:: csharp
 
-   cacheProvider.ItemRemoved += (_, args) =>
+   ICacheProviderWithEvents<Person> eventingCache = new MemCacheProvider<Person>(cacheConfig);
+
+   eventingCache.ItemRemovedDetailed += (_, args) =>
    {
        Console.WriteLine($"Removed cache item {args.Key} because {args.Reason}");
    };
 
-   await cacheProvider.SetAsync("profile:42", person, 120);
-   var cached = await cacheProvider.GetAsync("profile:42");
+   await eventingCache.SetAsync("profile:42", person, 120);
+   var cached = await eventingCache.GetAsync("profile:42");
 
 Notes
 -----
