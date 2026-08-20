@@ -90,7 +90,7 @@ Basic Example
 Task-based Handler Contracts
 ----------------------------
 
-Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``ScheduledEventValueTaskHandler`` for a ``ValueTask``-returning handler. Both handlers receive a ``CancellationToken``. ``DelegateMethodCall`` and ``DynamicMethodCall`` implement ``IAsyncMethodCall``; call ``ExecuteAsync`` and await its result so returned Task and ValueTask failures are observable.
+Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``ScheduledEventValueTaskHandler`` for a ``ValueTask``-returning handler. Both handlers receive a ``CancellationToken``. ``DelegateMethodCall`` and ``DynamicMethodCall`` implement ``IAsyncMethodCall``; call ``ExecuteAsync`` and await its result so returned Task and ValueTask failures are observable. When a ``TimerTask`` executes an async method call, synchronized execution waits for completion and unsynchronized execution dispatches it in the background; either mode routes the original failure to the timer ``Error`` callback.
 
 .. code-block:: csharp
 
