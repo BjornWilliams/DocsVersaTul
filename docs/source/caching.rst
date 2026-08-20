@@ -114,6 +114,8 @@ Expiration Behavior
 
 ``CacheExpiration.Sliding`` uses the cache engine's native sliding expiration, so each access resets the sliding window. ``CacheExpiration.Absolute`` expires at its specified timestamp and is not extended by access. When both values are supplied, the effective expiration is the earlier of the next sliding deadline and the absolute timestamp, so sliding access never extends an entry beyond its absolute deadline.
 
+When an ``ICacheClock`` is injected, the same clock drives expiration validation and the underlying cache engine, so advancing a deterministic test clock changes the actual cache state.
+
 Async And Eviction Example
 --------------------------
 
@@ -132,4 +134,4 @@ Notes
 
 1. The default ``Add(key, value)`` overload uses ``CacheDuration`` from ``ICacheConfiguration``.
 2. ``CacheExpiration`` must contain either an absolute or sliding value.
-3. Inject a custom ``ICacheClock`` when you need deterministic time behavior in tests.
+3. Inject a custom ``ICacheClock`` when you need deterministic time behavior in tests; it controls both validation and actual cache expiration.
