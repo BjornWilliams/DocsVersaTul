@@ -113,6 +113,8 @@ When a bulk-copy operation fails, the returned result keeps the original excepti
 
 The synchronous ``DoCopy`` overloads are compatibility wrappers over the asynchronous implementation. They preserve the original exception type when synchronously waiting, but new code should prefer ``DoCopyAsync`` to avoid blocking.
 
+Each completed or failed copy result includes its elapsed duration. Failed results identify the stage that raised the exception (``Create``, ``DoCopyAsync``, ``ProgressCallback``, ``CommitAsync``, ``RollbackAsync``, or ``Dispose``); secondary rollback, progress, and disposal failures are recorded as separate failed results.
+
 Basic Data-Service Example
 --------------------------
 
