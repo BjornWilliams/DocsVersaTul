@@ -138,3 +138,4 @@ Notes
 2. ``CacheExpiration`` must contain either an absolute or sliding value.
 3. Inject a custom ``ICacheClock`` when you need deterministic time behavior in tests; it controls both validation and actual cache expiration.
 4. ``MemCacheProvider<T>`` owns the ``MemoryCache`` instance it creates and implements ``IDisposable``. Dispose manually created providers; the current constructors do not accept an externally owned cache.
+5. Removal callback exceptions are isolated per subscriber and logged through the optional ``ILoggerFactory``; one failing callback does not prevent later callbacks or destabilize cache eviction.
