@@ -119,7 +119,7 @@ Some of the most commonly used defaults include:
 1. SQL: ``CommandTimeout`` and ``SqlDbConnectionName``.
 2. MS SQL: ``BulkCopyTimeout``.
 3. MongoDB: ``MongoDbConnectionName``, ``SocketTimeout``, ``ConnectTimeout``, and ``MaxConnectionIdleTime``.
-4. Mailer: ``SmtpServer``, ``SmtpPort``, ``FromAddress``, ``ToAddress``, and ``MaxAttachmentSize``.
+4. Mailer: ``SmtpServer``, ``SmtpPort``, ``FromAddress``, ``ToAddress``, and ``MaxAttachmentSize``. ``MailConfiguration`` additionally applies secure defaults of ``EnableSsl=true`` and ``UseDefaultCredentials=false`` when those optional keys are omitted.
 5. Logger builders: keys such as file path, file name, endpoint, or base URL depending on the logger implementation.
 
 Notes

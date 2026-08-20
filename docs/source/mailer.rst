@@ -76,10 +76,13 @@ Core Types And Concepts
    Main delivery abstraction and implementation.
 
 ``IMailConfiguration`` and ``MailConfiguration``
-   Expose SMTP host, credentials, sender/recipient, attachment size, timeout, and retry settings.
+   Expose SMTP host, credentials, sender/recipient, attachment size, timeout, retry, TLS, and credential-policy settings.
 
 ``ISmtpClient`` and ``SmtpClientWrapper``
    Wrapper abstraction around SMTP transport.
+
+``ISmtpClientFactory`` and ``SmtpClientFactory``
+   Create the underlying framework SMTP client. The factory overload makes host, port, TLS, and credential mapping testable without reflection or a live SMTP server.
 
 Key Capabilities
 ----------------
@@ -95,19 +98,25 @@ Basic Example
 
 .. code-block:: csharp
 
+   using System;
    using VersaTul.Configurations;
    using VersaTul.Mailer;
    using VersaTul.Mailer.Configurations;
    using VersaTul.Mailer.SmtpClients;
 
+   var smtpPasswordFromSecretStore = Environment.GetEnvironmentVariable("VERSATUL_SMTP_PASSWORD")
+       ?? throw new InvalidOperationException("Configure VERSATUL_SMTP_PASSWORD before sending mail.");
+
    var configSettings = new ConfigSettings
    {
        { "FromAddress", "alerts@domain.com" },
        { "ToAddress", "ops@domain.com" },
-       { "SmtpServer", "127.0.0.1" },
-       { "SmtpPort", 25 },
+       { "SmtpServer", "smtp.example.com" },
+       { "SmtpPort", 587 },
        { "SmtpUserName", "smtp-user" },
-       { "SmtpPassword", "smtp-password" },
+       { "SmtpPassword", smtpPasswordFromSecretStore },
+       { "UseDefaultCredentials", false },
+       { "EnableSsl", true },
        { "MaxAttachmentSize", 10000000 }
    };
 
@@ -116,6 +125,35 @@ Basic Example
    var dispatcher = new MailDispatcher(smtpClient);
 
    dispatcher.SendMail(configuration.FromAddress, configuration.ToAddress, "Subject", "Body", isHtml: false);
+
+SMTP Security And Validation
+----------------------------
+
+The wrapper applies secure defaults and validates configuration before creating the underlying SMTP client:
+
+1. Omitting ``SmtpUserName`` and ``SmtpPassword`` selects anonymous SMTP. Ambient process or machine credentials are never attached implicitly.
+2. ``UseDefaultCredentials`` is ``false`` unless it is explicitly set to ``true``. It cannot be combined with explicit username/password credentials.
+3. ``SmtpUserName`` and ``SmtpPassword`` must be supplied together.
+4. ``EnableSsl`` defaults to ``true`` and maps to STARTTLS support in ``SmtpClient``. Port 587 is the usual submission port for this mode.
+5. Set ``EnableSsl`` to ``false`` only for a deliberately approved legacy non-TLS server. This opt-out exposes the connection to transport interception.
+6. ``SmtpServer`` is required and ``SmtpPort`` must be between 1 and 65535. Negative timeout values are rejected.
+7. Validation failures use generic messages and never include username or password values.
+
+For Windows or domain-integrated SMTP, opt in explicitly and omit the explicit credential pair:
+
+.. code-block:: csharp
+
+   var integratedConfiguration = new MailConfiguration(new ConfigSettings
+   {
+       { "SmtpServer", "smtp.internal.example.com" },
+       { "SmtpPort", 587 },
+       { "UseDefaultCredentials", true },
+       { "EnableSsl", true },
+       { "FromAddress", "alerts@example.com" },
+       { "ToAddress", "ops@example.com" }
+   });
+
+Tests can supply an ``ISmtpClientFactory`` implementation to capture the created ``SmtpClient`` and verify these settings locally without connecting to an SMTP server.
 
 Template Example
 ----------------
@@ -153,5 +191,6 @@ Notes
 -----
 
 1. ``MailConfiguration`` also exposes ``SmtpTimeoutMilliseconds``, ``RetryCount``, and ``RetryDelayMilliseconds``.
-2. The package focuses on delivery, not mail-template storage or rendering engines.
-3. This package is the transport layer used by :doc:`logger-mail` and mail-based export workflows.
+2. ``EnableSsl`` defaults to ``true`` and ``UseDefaultCredentials`` defaults to ``false`` when their keys are omitted.
+3. The package focuses on delivery, not mail-template storage or rendering engines.
+4. This package is the transport layer used by :doc:`logger-mail` and mail-based export workflows.
