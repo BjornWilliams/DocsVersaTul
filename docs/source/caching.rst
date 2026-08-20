@@ -112,7 +112,7 @@ Use ``CacheExpiration`` when you want explicit absolute or sliding expiration be
 Expiration Behavior
 -------------------
 
-``CacheExpiration.Sliding`` uses the cache engine's native sliding expiration, so each access resets the sliding window. ``CacheExpiration.Absolute`` expires at its specified timestamp and is not extended by access. When both values are supplied, the absolute expiration remains the upper bound for the entry.
+``CacheExpiration.Sliding`` uses the cache engine's native sliding expiration, so each access resets the sliding window. ``CacheExpiration.Absolute`` expires at its specified timestamp and is not extended by access. When both values are supplied, the effective expiration is the earlier of the next sliding deadline and the absolute timestamp, so sliding access never extends an entry beyond its absolute deadline.
 
 Async And Eviction Example
 --------------------------
