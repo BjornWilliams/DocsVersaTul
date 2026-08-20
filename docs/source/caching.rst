@@ -137,3 +137,4 @@ Notes
 1. The default ``Add(key, value)`` overload uses ``CacheDuration`` from ``ICacheConfiguration``.
 2. ``CacheExpiration`` must contain either an absolute or sliding value.
 3. Inject a custom ``ICacheClock`` when you need deterministic time behavior in tests; it controls both validation and actual cache expiration.
+4. ``MemCacheProvider<T>`` owns the ``MemoryCache`` instance it creates and implements ``IDisposable``. Dispose manually created providers; the current constructors do not accept an externally owned cache.
