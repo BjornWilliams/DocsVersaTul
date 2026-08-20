@@ -111,6 +111,8 @@ Bulk-copy resource wrappers can be disposed safely after partial initialization 
 
 When a bulk-copy operation fails, the returned result keeps the original exception as the first failed result. Exceptions raised while reporting failure progress, rolling back, or disposing resources are recorded as additional failed results and do not replace the original failure.
 
+The synchronous ``DoCopy`` overloads are compatibility wrappers over the asynchronous implementation. They preserve the original exception type when synchronously waiting, but new code should prefer ``DoCopyAsync`` to avoid blocking.
+
 Basic Data-Service Example
 --------------------------
 
