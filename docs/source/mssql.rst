@@ -107,6 +107,8 @@ Bulk-Copy Input Validation
 
 SQL Server bulk-copy operations require a non-null collection containing at least one ``CopyDetail``. Each copy detail must be non-null and provide a source reader. Invalid collections or entries are rejected before a database connection or transaction is created, with the zero-based collection index included in entry diagnostics.
 
+Bulk-copy resource wrappers can be disposed safely after partial initialization and can be disposed more than once.
+
 Basic Data-Service Example
 --------------------------
 
