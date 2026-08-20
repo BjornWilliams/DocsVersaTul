@@ -95,6 +95,11 @@ Scheduled Event Example
    var hourlyQuarterPast = new ScheduledEvent(EventTime.Hourly, new TimeSpan(0, 15, 0));
    var nextRun = hourlyQuarterPast.NextEvent(DateTime.Now, includeStartTime: true);
 
+File-backed Checkpoints
+-----------------------
+
+When a file-backed event storage is used, each checkpoint replaces the previous checkpoint value instead of appending another line. The checkpoint file therefore contains one current value and does not grow on every scheduler save. The checkpoint format, restart recovery, and atomic replacement guarantees are part of the scheduler storage contract.
+
 Notes
 -----
 
