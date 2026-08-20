@@ -109,6 +109,11 @@ Use ``CacheExpiration`` when you want explicit absolute or sliding expiration be
            Sliding = TimeSpan.FromMinutes(15)
        });
 
+Expiration Behavior
+-------------------
+
+``CacheExpiration.Sliding`` uses the cache engine's native sliding expiration, so each access resets the sliding window. ``CacheExpiration.Absolute`` expires at its specified timestamp and is not extended by access. When both values are supplied, the absolute expiration remains the upper bound for the entry.
+
 Async And Eviction Example
 --------------------------
 
