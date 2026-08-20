@@ -102,6 +102,8 @@ Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``Schedul
 
 ``TimerTask.OverlapPolicy`` controls asynchronous overlap. ``Allow`` starts every invocation and is the default, ``Skip`` drops an invocation while another is active, ``Queue`` runs invocations in FIFO order, and ``CancelPrevious`` requests cancellation of the active invocation before starting the replacement. ``TimerTask.MaxConcurrency`` is zero by default (unbounded); a positive value caps active ``Allow`` invocations and queues excess arrivals in FIFO order. The other policies already limit active work to one invocation. Synchronized tasks wait for each invocation and therefore do not overlap.
 
+The legacy ``IMethodCall.BeginExecute`` overloads remain available for source and binary compatibility but are obsolete. Migrate to ``IAsyncMethodCall.ExecuteAsync(...)``; the legacy members are retained until the next major version.
+
 Scheduled Event Example
 -----------------------
 
