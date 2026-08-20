@@ -102,6 +102,11 @@ Key Capabilities
 4. Supports async bulk copy and optional progress callbacks.
 5. Uses ``BulkCopyTimeout`` from configuration during upload operations.
 
+Bulk-Copy Input Validation
+--------------------------
+
+SQL Server bulk-copy operations require a non-null collection containing at least one ``CopyDetail``. Null or empty collections are rejected before a database connection or transaction is created.
+
 Basic Data-Service Example
 --------------------------
 
