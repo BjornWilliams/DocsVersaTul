@@ -47,7 +47,7 @@ Core Types And Concepts
    Reusable EF Core repository base class with sync and async CRUD support.
 
 ``BaseUnitOfWork``
-   Reusable unit-of-work base class that wraps a ``DbContext`` and provides ``Commit()``, ``CommitAsync()``, and ``Rollback()``.
+   Reusable unit-of-work base class that wraps a ``DbContext`` and provides ``Commit()``, ``CommitAsync()``, ``DiscardChanges()``, and the compatibility alias ``Rollback()``.
 
 ``IUnitOfWork``
    EF Core unit-of-work contract extending the broader data contract model.
@@ -65,6 +65,11 @@ Key Capabilities
 2. Repositories expose ``AsQueryable()``, ``AsNoTrackingQueryable()``, and async enumeration.
 3. Query specifications can be applied to queryable and async read methods.
 4. ``BaseUnitOfWork`` centralizes save and rollback behavior over the EF Core change tracker.
+
+Transaction And Change-Tracker Reset
+------------------------------------
+
+``DiscardChanges()`` resets pending EF Core change-tracker state: added entities are detached, modified and deleted entities are reloaded, and unchanged or detached entities are left untouched. ``Rollback()`` remains a compatibility alias for this tracker reset. It does not undo a database transaction. For transaction ownership, use EF Core's native ``unitOfWork.DataContext.Database.BeginTransaction()`` and commit or roll back the returned ``IDbContextTransaction``.
 
 Basic Example
 -------------
