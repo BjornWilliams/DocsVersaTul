@@ -133,6 +133,8 @@ The repository base supports connection override patterns, which are useful when
 
 When using a singleton repository, select the override within the operation that needs it and keep subsequent work in that async flow. Do not treat a connection override as a process-wide repository setting.
 
+Query and callback methods reject null predicates and callbacks with ``ArgumentNullException`` before contacting MongoDB. Async query methods honor a pre-cancelled ``CancellationToken``. ``ForEachAsync`` also checks cancellation before each callback, so cancellation cannot start another callback in the same cursor batch.
+
 Notes
 -----
 
