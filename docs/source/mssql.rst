@@ -115,6 +115,8 @@ The synchronous ``DoCopy`` overloads are compatibility wrappers over the asynchr
 
 Each completed or failed copy result includes its elapsed duration. Failed results identify the stage that raised the exception (``Create``, ``DoCopyAsync``, ``ProgressCallback``, ``CommitAsync``, ``RollbackAsync``, or ``Dispose``); secondary rollback, progress, and disposal failures are recorded as separate failed results.
 
+Before the upload starts, ``SqlBulkCopyValidator.Validate`` checks every configured source and destination mapping. If one or more mappings cannot be resolved, it throws ``BulkCopyValidationException``, which remains an ``InvalidOperationException`` for compatibility and exposes all errors through its read-only ``Errors`` list. Errors are ordered by mapping index, with the source error before the destination error for each mapping. Each ``BulkCopyMappingError`` includes the configured source and destination names/ordinals, the validation target, a diagnostic message, and a corrective action. ``SqlBulkCopyValidator.ValidateMappings`` returns the same structured list without throwing.
+
 Basic Data-Service Example
 --------------------------
 
