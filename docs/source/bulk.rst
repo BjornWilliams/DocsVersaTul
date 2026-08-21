@@ -126,6 +126,8 @@ Mapping Options
 4. Source name to destination ordinal.
 5. Strongly typed expression-to-expression mapping.
 
+Each mapping side has one active identifier: a name or a nonnegative ordinal. Setting a name clears the corresponding ordinal, and setting a nonnegative ordinal clears the corresponding name. The ``-1`` ordinal value means that no ordinal is selected, so a mapping cannot retain both a name and an ordinal for the same side.
+
 Notes
 -----
 
