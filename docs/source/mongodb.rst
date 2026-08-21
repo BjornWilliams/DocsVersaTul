@@ -76,6 +76,8 @@ MongoDB Client Configuration
 
 ``DataConfiguration<TKey>`` composes TCP socket keep-alive setup and command-started event subscriptions in the same MongoDB cluster configurator. Registering command-event logging therefore preserves the configured socket behavior.
 
+Within a ``DataConfiguration<TKey>`` instance, database resolution reuses one ``MongoClient`` for each normalized set of effective client settings. Repeated collection resolution therefore shares the driver's connection pool.
+
 Basic Repository Example
 ------------------------
 
