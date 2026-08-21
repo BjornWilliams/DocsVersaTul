@@ -107,7 +107,7 @@ The legacy ``IMethodCall.BeginExecute`` overloads remain available for source an
 Scheduler Time Representation
 -----------------------------
 
-Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Existing ``DateTime`` values are converted at the public boundary: UTC values are preserved, local values are converted through their local offset, and ``DateTimeKind.Unspecified`` values are explicitly treated as UTC. Storage implementations continue to expose the legacy ``DateTime`` contract, but return and persist UTC values for consistent scheduler comparisons. Convert a time from a known ``TimeZoneInfo`` to UTC before passing it to a schedule; daylight-saving-specific behavior is covered by the scheduler's time-zone policy.
+Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Existing ``DateTime`` values are converted at the public boundary: UTC values are preserved, local values are converted through their local offset, and ``DateTimeKind.Unspecified`` values are explicitly treated as UTC. Storage implementations continue to expose the legacy ``DateTime`` contract, but return and persist UTC values for consistent scheduler comparisons. Use ``SchedulerTime.ConvertToUtc(localTime, timeZone)`` when a wall-clock value comes from a known ``TimeZoneInfo``: valid values are converted to UTC, spring-forward gaps are rejected, and fall-back ambiguities are rejected until the caller chooses an explicit offset. Pass the resulting UTC value to a schedule.
 
 Scheduled Event Example
 -----------------------
