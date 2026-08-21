@@ -141,6 +141,8 @@ Directory Example
      }
   }
 
+Directory reads are lazy: files are opened as the returned sequence is enumerated. When enumeration completes successfully, the caller owns each yielded reader and must dispose it. If enumeration fails or is abandoned, readers opened by the sequence are disposed automatically.
+
 Bulk Workflow Example
 ---------------------
 
