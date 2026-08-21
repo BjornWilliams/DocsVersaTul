@@ -130,6 +130,11 @@ Output Paths
 
 ``WriteToFile(path)`` treats a path with an extension as an exact file path, whether it is absolute or relative. A path ending in a directory separator, or a path without an extension, is treated as a directory and uses the streamer's ``FileName``.
 
+Content Types And Encoding
+--------------------------
+
+The built-in streamers expose the standard content type for their format: ``text/csv``, ``text/tab-separated-values``, ``application/json``, or ``application/x-ndjson``. Both ``GetFileStream()`` and ``WriteToFile()`` produce UTF-8 text without a byte-order mark (BOM).
+
 Basic CSV Example
 -----------------
 
