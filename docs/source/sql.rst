@@ -145,6 +145,11 @@ The following ownership rules apply to the synchronous and asynchronous executio
 
 ``SqlDbDataSource.Read`` and ``ReadAsync`` transfer a reader whose command remains alive until the reader is closed or disposed. ``BaseDataService.ProcessReader`` closes readers it processes; callers using ``IDataSource.Read`` directly are responsible for reader disposal. When calling ``CommandFactory.ExecuteReader`` directly, the caller owns the command passed in and must keep it alive until the reader is closed, then dispose the command.
 
+Parameter Naming
+----------------
+
+``Parameter.Name`` retains the legacy ``@``-prefixed public value for compatibility. When a parameter is mapped to a provider ``DbParameter``, VersaTul removes common SQL markers (``@``, ``:``, ``?``, or ``$``) and passes the raw identifier to the provider. Keep the provider's marker in the command text: for example, use ``@customerId`` for SQL Server or SQLite and ``:customerId`` for Oracle while constructing the parameter as ``new Parameter("customerId", ...)``. Provider-specific adapters may apply their own native convention.
+
 Basic Example
 -------------
 
