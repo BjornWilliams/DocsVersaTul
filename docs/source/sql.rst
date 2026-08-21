@@ -148,7 +148,7 @@ The following ownership rules apply to the synchronous and asynchronous executio
 Parameter Naming
 ----------------
 
-``Parameter.Name`` retains the legacy ``@``-prefixed public value for compatibility. When a parameter is mapped to a provider ``DbParameter``, VersaTul removes common SQL markers (``@``, ``:``, ``?``, or ``$``) and passes the raw identifier to the provider. Keep the provider's marker in the command text: for example, use ``@customerId`` for SQL Server or SQLite and ``:customerId`` for Oracle while constructing the parameter as ``new Parameter("customerId", ...)``. Provider-specific adapters may apply their own native convention.
+``Parameter.Name`` retains the legacy ``@``-prefixed public value for compatibility. When a parameter is mapped to a provider ``DbParameter``, VersaTul removes common SQL markers (``@``, ``:``, ``?``, or ``$``) and passes the raw identifier to the provider. Keep the provider's marker in the command text: for example, use ``@customerId`` for SQL Server or SQLite and ``:customerId`` for Oracle while constructing the parameter as ``new Parameter("customerId", ...)``. Provider-specific adapters may apply their own native convention. Parameter-name lookup is ordinal case-insensitive and does not depend on the current culture.
 
 Basic Example
 -------------
