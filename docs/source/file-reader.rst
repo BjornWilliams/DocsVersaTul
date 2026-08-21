@@ -112,12 +112,9 @@ Basic Example
 
   using var reader = fileReader.Read("C:\\path\\to", "file.csv", options);
 
-  if (reader != null)
+  while (reader.Read())
   {
-     while (reader.Read())
-     {
-        // Consume row data here.
-     }
+     // Consume row data here.
   }
 
 Directory Example
