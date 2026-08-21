@@ -90,7 +90,7 @@ Why The Companion Packages Matter
 
 ``Object.Converters`` helps flatten nested values and respects display-driven behavior during processing.
 
-``Collection.Streamers`` provides the reusable export engine.
+``Collection.Streamers`` provides the one-destination-per-reader-binding export engine.
 
 Together, they give you a path from domain object to export file without hand-writing CSV headers, formatting logic, and flattening rules.
 

@@ -4,16 +4,16 @@ Collection Streamers
 Overview
 --------
 
-``VersaTul.Collection.Streamers`` turns in-memory collections or forward-only ``IDataReader`` sources into reusable export streams such as CSV, tab-delimited text, JSON, and JSONL.
+``VersaTul.Collection.Streamers`` turns in-memory collections or forward-only ``IDataReader`` sources into export streams such as CSV, tab-delimited text, JSON, and JSONL.
 
-The package is designed for workflows where a collection or row reader needs to be serialized once and then reused for multiple outputs, such as saving to disk, compressing into a zip archive, emailing as attachments, or converting to an ``IDataReader`` for downstream processing.
+The package is designed for workflows where a collection or row reader needs to be serialized to one destination, such as saving to disk, compressing into a zip archive, emailing as an attachment, or converting to an ``IDataReader`` for downstream processing. Each forward-only reader binding is single-use; materialize the source and create separate streamer bindings when the same data must be sent to multiple destinations.
 
 Why Use This Package
 --------------------
 
 Use this package when export generation is becoming a real application concern instead of a one-off helper method.
 
-Its value is that one streamer can drive multiple destinations such as files, compressed archives, and mail attachments while keeping export formatting and serialization logic in one place.
+Its value is that one streamer can drive a chosen destination while keeping export formatting and serialization logic in one place. A forward-only reader cannot be replayed by the same binding.
 
 When To Use This Package
 ------------------------
@@ -21,7 +21,7 @@ When To Use This Package
 Use this package when you want to:
 
 1. Export collections to CSV, tab-delimited, or JSON files.
-2. Reuse the same serialized output for file, email, and compression workflows.
+2. Send an export to a selected file, email, or compression workflow.
 3. Convert collections to ``IDataReader`` form for bulk-processing scenarios.
 4. Apply display metadata from :doc:`display-attributes` during output generation.
 5. Add cancellation-aware stream generation for large exports.
@@ -55,7 +55,7 @@ Start Here If
 -------------
 
 1. You need CSV, tab-delimited, JSON, or JSONL exports from collections or readers.
-2. The same export output may be saved, compressed, or emailed.
+2. An export should be saved, compressed, or emailed to one selected destination per reader binding.
 3. Column naming and formatting matter to the consumer of the export.
 
 Not The Right First Package If
@@ -78,7 +78,7 @@ Core Types And Concepts
 -----------------------
 
 ``IStreamer``
-   Represents an export stream with file metadata, headings, an ``IDataReader``, and ``GetFileStream()`` methods.
+   Represents an export stream with file metadata, headings, an ``IDataReader``, and ``GetFileStream()`` methods. The current reader binding is consumed by its first output.
 
 ``IStreamCreator``
    Defines the ``Create<T>()`` entry point used to bind a collection to a streamer instance.
@@ -107,9 +107,9 @@ Core Types And Concepts
 Key Capabilities
 ----------------
 
-1. ``Create<T>()`` binds a collection to a reusable streamer instance.
-2. ``Create(IDataReader, ...)`` binds an existing reader directly to a streamer.
-3. ``GetFileStream()`` returns the serialized output as a ``MemoryStream``.
+1. ``Create<T>()`` binds a collection to a streamer for one output.
+2. ``Create(IDataReader, ...)`` binds an existing reader directly to a streamer for one output.
+3. ``GetFileStream()`` returns the serialized output as a ``MemoryStream`` and consumes the current reader binding.
 4. ``GetFileStream(CancellationToken)`` adds cancellation support during generation.
 5. ``WriteToFile()`` writes output directly to disk.
 6. ``CollectionReaderExtensions.ToReader()`` turns collections into ``IDataReader`` instances.
@@ -194,7 +194,7 @@ Expected Result
 
 When this package is working well:
 
-1. one export definition can drive multiple delivery paths,
+1. each reader binding produces one clearly defined delivery output,
 2. formatting rules stay out of ad hoc file-writing code, and
 3. large exports can be written directly to disk without buffering the full file in memory.
 
@@ -208,7 +208,7 @@ Next Step
 Notes
 -----
 
-1. ``BaseStreamer`` reinitializes its internal reader and output stream state each time ``Create(...)`` is called.
+1. ``BaseStreamer`` reinitializes its internal reader and output stream state each time ``Create(...)`` is called; a binding cannot produce a second output after its reader is consumed.
 2. ``CsvStreamer`` supports a custom encoding strategy for value escaping.
 3. ``WriteToFile()`` is the preferred path for very large exports because rows can be written directly to disk.
 4. ``FileConverter.Save()`` uses direct file writing automatically for non-compressed output when the streamer supports it.
