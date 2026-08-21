@@ -150,6 +150,11 @@ Parameter Naming
 
 ``Parameter.Name`` retains the legacy ``@``-prefixed public value for compatibility. When a parameter is mapped to a provider ``DbParameter``, VersaTul removes common SQL markers (``@``, ``:``, ``?``, or ``$``) and passes the raw identifier to the provider. Keep the provider's marker in the command text: for example, use ``@customerId`` for SQL Server or SQLite and ``:customerId`` for Oracle while constructing the parameter as ``new Parameter("customerId", ...)``. Provider-specific adapters may apply their own native convention. Parameter-name lookup is ordinal case-insensitive and does not depend on the current culture.
 
+Retry Safety
+------------
+
+``SqlDbDataSource`` does not retry by default. If ``RetryPolicy`` returns ``true``, the failed operation is attempted again for reads, writes, and scalar commands; attempt numbering starts at ``1`` for the failed attempt. A provider exception can be raised after the database has accepted or committed a command, so a retry can duplicate inserts, updates, stored-procedure side effects, or any other non-idempotent work. Enable retries only for operations that are read-only or explicitly idempotent, or that carry an application-level idempotency key or equivalent deduplication guarantee. Return ``false`` for cancellation and errors that are not known to be transient. Each retry creates and disposes a fresh command and package-owned connection; ``RetryDelayProvider`` supplies the delay and ``Retrying`` runs before the next attempt. Async cancellation also applies while waiting for a retry delay.
+
 Basic Example
 -------------
 
