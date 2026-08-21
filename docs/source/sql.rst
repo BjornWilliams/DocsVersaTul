@@ -143,7 +143,7 @@ The following ownership rules apply to the synchronous and asynchronous executio
      - One package-created connection and one transaction.
      - ``BaseDataService`` owns both for the whole handler scope, commits on success or rolls back on failure/cancellation, then disposes both. The handler borrows the transaction and must dispose any readers before returning; it must not commit or roll back the transaction.
 
-``CommandFactory`` execution methods follow the same boundaries. A returned reader is the hand-off point: do not dispose its command or package-created connection before the reader is closed. ``BaseDataService.ProcessReader`` closes readers it processes; callers using ``IDataSource.Read`` directly are responsible for reader disposal.
+``SqlDbDataSource.Read`` and ``ReadAsync`` transfer a reader whose command remains alive until the reader is closed or disposed. ``BaseDataService.ProcessReader`` closes readers it processes; callers using ``IDataSource.Read`` directly are responsible for reader disposal. When calling ``CommandFactory.ExecuteReader`` directly, the caller owns the command passed in and must keep it alive until the reader is closed, then dispose the command.
 
 Basic Example
 -------------
