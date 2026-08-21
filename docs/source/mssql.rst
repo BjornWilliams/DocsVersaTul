@@ -123,6 +123,8 @@ Implicit ordinal definitions are built only for the common source/destination or
 
 The validator's ``ColumnException`` event is forwarded to the validated reader used for the upload. Subscribe to it before validation to inspect oversized values and, when a correction policy allows it, replace ``ColumnExceptionEventArgs.Value`` with the value that should be written. If no handler is subscribed, an oversized string value remains a validation failure.
 
+Validated readers apply the same column-size checks through indexed access, named indexers, ``GetValue``, and ``GetValues``. ``GetValues`` returns the number of values copied and uses the same correction callback for each value; unmapped source slots are returned without a null-definition failure.
+
 Basic Data-Service Example
 --------------------------
 
