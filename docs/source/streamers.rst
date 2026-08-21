@@ -125,6 +125,11 @@ Delimited Escaping
 
 CSV and tab-delimited output quotes headers and values containing the format delimiter, quotes, tabs, or CR/LF characters, and doubles embedded quotes. ``null`` and ``DBNull.Value`` become empty fields. This keeps headers and values parseable when they contain delimiters or line breaks.
 
+Output Paths
+------------
+
+``WriteToFile(path)`` treats a path with an extension as an exact file path, whether it is absolute or relative. A path ending in a directory separator, or a path without an extension, is treated as a directory and uses the streamer's ``FileName``.
+
 Basic CSV Example
 -----------------
 
