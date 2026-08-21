@@ -137,6 +137,6 @@ Specification Example
 Notes
 -----
 
-1. ``Rollback()`` reloads tracked entities from the database; it is not a database transaction rollback abstraction by itself.
+1. ``Rollback()`` resets pending change-tracker state: added entities are detached, modified and deleted entities are reloaded from the database, and unchanged or detached entities are left untouched. It is not a database transaction rollback abstraction by itself.
 2. ``AsNoTrackingQueryable()`` and ``GetNoTrackingAsync()`` are useful for read-only paths.
 3. This package is a good fit when you want to enforce repository patterns consistently around EF Core rather than expose raw ``DbContext`` everywhere.

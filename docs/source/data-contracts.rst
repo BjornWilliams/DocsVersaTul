@@ -54,7 +54,7 @@ Core Types And Concepts
    Extends the repository model with cancellation-aware async streaming.
 
 ``IUnitOfWork``
-   Defines transactional save and rollback behavior plus disposal semantics.
+   Defines commit and implementation-specific pending-change reset behavior plus disposal semantics. ``Rollback()`` is not necessarily a database transaction rollback.
 
 ``IPagedRequest`` and ``PagedRequest``
    Represent page number, page size, and derived skip value.
@@ -122,5 +122,4 @@ Notes
 
 1. ``IRepository<TEntity, TKey>`` is intentionally broad enough for multiple backing stores.
 2. ``IAsyncStreamRepository<TEntity, TKey>`` is useful when the consumer prefers stream-first enumeration.
-3. ``IUnitOfWork`` is most relevant in packages such as :doc:`efcore` where change tracking and commit behavior are explicit.
-    
+3. ``IUnitOfWork`` is most relevant in packages such as :doc:`efcore` where change tracking and commit behavior are explicit. In the EF Core implementation, ``Rollback()`` detaches added entities, reloads modified and deleted entities, and leaves unchanged or detached entities untouched; it does not reverse a transaction that was already committed.
