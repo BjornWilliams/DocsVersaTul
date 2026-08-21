@@ -4,6 +4,8 @@
 
 This documentation repository is hosted on GitHub and its approved work is tracked in Azure Boards. The authoritative imported User Story and Task IDs are annotated in the sibling VersaTul repository under `../VersaTul/Work.Tasks`.
 
+For cross-repository audit work, also review `../VersaTul/Work.Tasks/IMPLEMENTATION_AGENT_NOTES.md` for the current branch handoff and shared workflow conventions.
+
 Before implementing approved documentation work, locate the exact Azure User Story and Task IDs in:
 
 - `../VersaTul/Work.Tasks/DOCUMENTATION_ADOPTION_TASKS_2026-08.md`
