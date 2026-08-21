@@ -120,6 +120,11 @@ Source Fields And Display Headings
 
 The optional ``columnHeadings`` passed to ``Create(IDataReader, fileName, columnHeadings)`` are output labels only. Values remain mapped to the corresponding source reader ordinals, so renaming a heading does not change which field is exported.
 
+Delimited Escaping
+------------------
+
+CSV and tab-delimited output quotes headers and values containing the format delimiter, quotes, tabs, or CR/LF characters, and doubles embedded quotes. ``null`` and ``DBNull.Value`` become empty fields. This keeps headers and values parseable when they contain delimiters or line breaks.
+
 Basic CSV Example
 -----------------
 
