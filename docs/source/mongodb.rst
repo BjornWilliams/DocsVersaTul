@@ -125,9 +125,9 @@ Filtering Example
 Connection Override Notes
 -------------------------
 
-The repository base supports connection override patterns, which are useful when the same repository shape needs to target another configured database.
+The repository base supports connection override patterns, which are useful when the same repository shape needs to target another configured database. An override applies to the current async execution context; the repository's default collection remains unchanged, and concurrent contexts can select different connections without changing one another's active collection.
 
-This is powerful, but it also means lifetime management matters. If you register repositories as singletons and change the active connection, that change can persist longer than you intended.
+When using a singleton repository, select the override within the operation that needs it and keep subsequent work in that async flow. Do not treat a connection override as a process-wide repository setting.
 
 Notes
 -----
