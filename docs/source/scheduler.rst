@@ -113,6 +113,8 @@ Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Exis
 
 ``CronEvent`` uses a five-field cron dialect: minute ``0-59``, hour ``0-23``, day-of-month ``1-31``, month ``1-12``, and day-of-week ``0-6`` with Sunday represented by ``0``. Sunday may also be written as ``7``; ranges containing that alias are inclusive and wrap through Sunday (``0-7`` matches every day and ``5-7`` matches Friday through Sunday). If both day-of-month and day-of-week are restricted, the event matches when either field matches.
 
+Cron next-event searches are bounded to five years of minute-by-minute candidates and return ``DateTime.MaxValue`` when no match or later representable time exists. Cron and interval event-list expansion is bounded to 100,000 occurrences; exceeding that limit raises ``InvalidOperationException`` instead of allowing an unbounded catch-up loop. Timer execution expands only the persisted last-run through the current signal window, so missed work is retried on restart within that window.
+
 Built-in events implement ``IEventCollection.AddEvent(..., IList[DateTime])`` for mutable event output. The legacy ``IEvent.AddEvent(..., IEnumerable[DateTime])`` contract remains for compatibility; passing a non-list enumerable to that legacy overload produces a clear ``ArgumentException``, while scheduler execution uses the list-based contract.
 
 Scheduled Event Example
