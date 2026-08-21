@@ -104,6 +104,11 @@ Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``Schedul
 
 The legacy ``IMethodCall.BeginExecute`` overloads remain available for source and binary compatibility but are obsolete. Migrate to ``IAsyncMethodCall.ExecuteAsync(...)``; the legacy members are retained until the next major version.
 
+Scheduler Time Representation
+-----------------------------
+
+Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Existing ``DateTime`` values are converted at the public boundary: UTC values are preserved, local values are converted through their local offset, and ``DateTimeKind.Unspecified`` values are explicitly treated as UTC. Storage implementations continue to expose the legacy ``DateTime`` contract, but return and persist UTC values for consistent scheduler comparisons. Convert a time from a known ``TimeZoneInfo`` to UTC before passing it to a schedule; daylight-saving-specific behavior is covered by the scheduler's time-zone policy.
+
 Scheduled Event Example
 -----------------------
 
