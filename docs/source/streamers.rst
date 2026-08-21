@@ -125,6 +125,11 @@ CollectionReader IDataReader Contract
 
 Collection-backed ``IDataReader`` views omit properties marked ``[Display(Ignore = true)]`` and expose the remaining display names and order consistently through ``FieldNames``, ``GetName(...)``, ``GetOrdinal(...)``, and ``GetSchemaTable()``. ``Close()`` is idempotent and sets ``IsClosed``; row access and other open-reader operations then fail with ``InvalidOperationException``.
 
+Reader Ownership
+----------------
+
+``Create(IDataReader, ...)`` transfers ownership of the external reader to the streamer. Replacing the binding or disposing the streamer closes and disposes that reader. There is no ``leaveOpen`` option; create a separate reader or materialize the source when the caller must retain independent reader lifetime.
+
 Delimited Escaping
 ------------------
 
