@@ -71,6 +71,11 @@ Key Capabilities
 4. Configuration can create typed collections from connection strings or ``MongoUrl`` instances.
 5. Connection overrides let one repository shape target a different configured database.
 
+MongoDB Client Configuration
+----------------------------
+
+``DataConfiguration<TKey>`` composes TCP socket keep-alive setup and command-started event subscriptions in the same MongoDB cluster configurator. Registering command-event logging therefore preserves the configured socket behavior.
+
 Basic Repository Example
 ------------------------
 
