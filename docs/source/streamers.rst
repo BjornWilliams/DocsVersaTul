@@ -120,6 +120,11 @@ Source Fields And Display Headings
 
 The optional ``columnHeadings`` passed to ``Create(IDataReader, fileName, columnHeadings)`` are output labels only. Values remain mapped to the corresponding source reader ordinals, so renaming a heading does not change which field is exported.
 
+CollectionReader IDataReader Contract
+-------------------------------------
+
+Collection-backed ``IDataReader`` views omit properties marked ``[Display(Ignore = true)]`` and expose the remaining display names and order consistently through ``FieldNames``, ``GetName(...)``, ``GetOrdinal(...)``, and ``GetSchemaTable()``. ``Close()`` is idempotent and sets ``IsClosed``; row access and other open-reader operations then fail with ``InvalidOperationException``.
+
 Delimited Escaping
 ------------------
 
