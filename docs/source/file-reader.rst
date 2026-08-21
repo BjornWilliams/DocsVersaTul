@@ -80,7 +80,7 @@ Core Types And Concepts
   CSV-specific reader abstraction and implementation.
 
 ``ITextReader`` and ``TextFileReader``
-  Plain-text reader abstraction and implementation.
+  Plain-text reader abstraction and implementation. The built-in implementation intentionally buffers the complete file into one ``Line`` column before returning.
 
 ``IOptions`` and ``FileOptions``
   File-reader options for header handling, extension filters, and directory search behavior.
@@ -142,6 +142,8 @@ Directory Example
   }
 
 Directory reads are lazy: files are opened as the returned sequence is enumerated. Repeated extension filters are ignored while preserving the first-seen order. When enumeration completes successfully, the caller owns each yielded reader and must dispose it. If enumeration fails or is abandoned, readers opened by the sequence are disposed automatically.
+
+The built-in ``TextFileReader`` buffers the complete file with one ``Line`` column before returning, so the source file is closed before the reader is returned and memory use scales with file size. Use a custom ``ITextReader`` when a large file requires forward-only streaming. ``CsvFileReader`` is the streaming alternative and keeps its underlying stream owned by the returned reader until disposal.
 
 Bulk Workflow Example
 ---------------------
