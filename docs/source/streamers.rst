@@ -115,6 +115,11 @@ Key Capabilities
 6. ``CollectionReaderExtensions.ToReader()`` turns collections into ``IDataReader`` instances.
 7. ``FileConverter.Save()`` can persist a streamer as plain output or compressed zip content.
 
+Source Fields And Display Headings
+----------------------------------
+
+The optional ``columnHeadings`` passed to ``Create(IDataReader, fileName, columnHeadings)`` are output labels only. Values remain mapped to the corresponding source reader ordinals, so renaming a heading does not change which field is exported.
+
 Basic CSV Example
 -----------------
 
