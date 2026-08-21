@@ -117,6 +117,11 @@ Paging Example
        PageSize = request.PageSize
    };
 
+Paging Validation
+-----------------
+
+``PagedRequest`` and ``PagedResult<T>`` require positive page numbers and page sizes, and reject negative total counts. ``PagedRequest.Skip`` uses checked arithmetic and ``PagedResult<T>.TotalPages`` checks its existing ``int`` return boundary; both raise ``OverflowException`` instead of returning wrapped values when the result cannot fit.
+
 Notes
 -----
 
