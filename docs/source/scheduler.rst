@@ -109,6 +109,8 @@ Scheduler Time Representation
 
 Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Existing ``DateTime`` values are converted at the public boundary: UTC values are preserved, local values are converted through their local offset, and ``DateTimeKind.Unspecified`` values are explicitly treated as UTC. Storage implementations continue to expose the legacy ``DateTime`` contract, but return and persist UTC values for consistent scheduler comparisons. Event arguments and unbound ``DateTime`` parameters also expose UTC values. Use ``SchedulerTime.ConvertToUtc(localTime, timeZone)`` when a wall-clock value comes from a known ``TimeZoneInfo``: valid values are converted to UTC, spring-forward gaps are rejected, and fall-back ambiguities are rejected until the caller chooses an explicit offset. Pass the resulting UTC value to a schedule.
 
+``IntervalEvent`` validates its schedule at construction: intervals and finite counts must be greater than zero, an explicit end must be after the start, and the resulting schedule must remain within the supported ``DateTime`` range.
+
 Scheduled Event Example
 -----------------------
 
