@@ -125,6 +125,8 @@ The validator's ``ColumnException`` event is forwarded to the validated reader u
 
 Validated readers apply the same column-size checks through indexed access, named indexers, ``GetValue``, and ``GetValues``. ``GetValues`` returns the number of values copied and uses the same correction callback for each value; unmapped source slots are returned without a null-definition failure.
 
+Validated readers use the standard explicit-disposal pattern. Dispose the returned reader when the bulk-copy operation is complete; it releases the wrapped source reader once. The wrapper has no finalizer, so garbage collection does not dispose a caller's source reader unexpectedly.
+
 Basic Data-Service Example
 --------------------------
 
