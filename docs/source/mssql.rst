@@ -119,6 +119,8 @@ Before the upload starts, ``SqlBulkCopyValidator.Validate`` checks every configu
 
 Named source columns are resolved without leaking provider ``GetOrdinal`` exceptions. A missing named source or invalid source ordinal passed directly to ``PopulateColumnDefinitions`` produces the same structured validation exception.
 
+Implicit ordinal definitions are built only for the common source/destination ordinal range and are resolved by the schema's ``ColumnOrdinal``; they do not return trailing null definition slots. Explicit mappings also fail with a structured validation error when their destination definition cannot be resolved.
+
 The validator's ``ColumnException`` event is forwarded to the validated reader used for the upload. Subscribe to it before validation to inspect oversized values and, when a correction policy allows it, replace ``ColumnExceptionEventArgs.Value`` with the value that should be written. If no handler is subscribed, an oversized string value remains a validation failure.
 
 Basic Data-Service Example
