@@ -20,7 +20,7 @@ When To Use This Package
 
 Use this package when you want to:
 
-1. Read CSV, text, or JSON files through a consistent abstraction.
+1. Read CSV or text files through a consistent abstraction.
 2. Enumerate files in a directory by extension and turn each into an ``IDataReader``.
 3. Inject format-specific readers for testing or replacement.
 4. Feed file data directly into :doc:`bulk` or :doc:`mssql` bulk-copy workflows.
@@ -51,7 +51,7 @@ Related Packages
 Start Here If
 -------------
 
-1. Your source data is in CSV, text, or JSON files.
+1. Your source data is in CSV or text files.
 2. The next processing step expects ``IDataReader`` input.
 3. You want the import path to remain testable and replaceable.
 
@@ -86,7 +86,7 @@ Core Types And Concepts
   File-reader options for header handling, extension filters, and directory search behavior.
 
 ``ExtensionFilters``
-  Enum that describes the supported file types.
+  Enum that describes file filters. Text and CSV are supported; the legacy JSON value is retained for compatibility but raises ``NotSupportedException`` when selected.
 
 ``DisposableDataReader``
   Wrapper that ensures the returned reader and its underlying stream are disposed together.
@@ -193,5 +193,5 @@ Notes
 -----
 
 1. ``DataFileReader`` delegates parsing to the registered reader implementations.
-2. ``FileOptions`` defaults to common text, CSV, and JSON extension filters.
+2. ``FileOptions`` defaults to text and CSV extension filters. JSON is not supported; selecting the legacy JSON filter or reading a ``.json`` file raises ``NotSupportedException``.
 3. This package is most valuable when your next processing step wants an ``IDataReader`` instead of raw file lines.
