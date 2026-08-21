@@ -66,6 +66,11 @@ Key Capabilities
 3. Query specifications can be applied to queryable and async read methods.
 4. ``BaseUnitOfWork`` centralizes save and rollback behavior over the EF Core change tracker.
 
+Configuration Fields
+--------------------
+
+``DataConfiguration`` keeps provider identity separate from connection strings. Set ``EfDbConnectionName`` to the key containing the default connection string and, when provider metadata is needed, set ``EfDbProviderName`` to the provider name. A named connection can use a ``{connectionName}:ProviderName`` setting. EF Core itself selects its provider through the application's ``DbContext`` configuration.
+
 Transaction And Change-Tracker Reset
 ------------------------------------
 
