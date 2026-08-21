@@ -73,6 +73,7 @@ Key Capabilities
 3. Collection name resolution supports attributes and base-entity conventions.
 4. Configuration can create typed collections from connection strings or ``MongoUrl`` instances.
 5. Connection overrides let one repository shape target a different configured database.
+6. Repository predicates use MongoDB's native LINQ provider without an EF Core-specific expression dependency.
 
 MongoDB Client Configuration
 ----------------------------
