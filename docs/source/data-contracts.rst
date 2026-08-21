@@ -48,13 +48,13 @@ Core Types And Concepts
    Standardizes how connection strings and provider names are retrieved.
 
 ``IRepository<TEntity, TKey>``
-   Defines CRUD-style operations, queryable access, async reads, and range operations for a repository.
+   Defines CRUD-style operations, queryable access, async reads, and range operations for a repository. ``Find``, ``FindAsync``, ``Get``, and ``GetAsync`` report possibly absent entities with nullable result annotations.
 
 ``IAsyncStreamRepository<TEntity, TKey>``
    Extends the repository model with cancellation-aware async streaming.
 
 ``IUnitOfWork``
-   Defines commit and implementation-specific pending-change reset behavior plus disposal semantics. ``Rollback()`` is not necessarily a database transaction rollback.
+   Defines commit and implementation-specific pending-change reset behavior plus disposal semantics. It retains ``CommitAsync()`` and also exposes ``CommitAsync(CancellationToken)`` for cancellation-aware persistence. ``Rollback()`` is not necessarily a database transaction rollback.
 
 ``IPagedRequest`` and ``PagedRequest``
    Represent page number, page size, and derived skip value.
@@ -90,11 +90,16 @@ Repository Example
            this.repository = repository;
        }
 
-       public async Task<Customer> GetAsync(int id)
+       public async Task<Customer?> GetAsync(int id)
        {
            return await repository.GetAsync(id);
        }
    }
+
+Nullable Read Results And Commit Cancellation
+----------------------------------------------
+
+Repository lookups can legitimately find no entity. Treat the results of ``Find``, ``FindAsync``, ``Get``, and ``GetAsync`` as nullable and handle ``null`` before using the entity. Unit-of-work callers that need cancellation can pass a token to ``CommitAsync(cancellationToken)``; the implementation observes it while saving changes.
 
 Paging Example
 --------------

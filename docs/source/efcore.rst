@@ -44,10 +44,10 @@ Core Types And Concepts
 -----------------------
 
 ``BaseRepository<TEntity, TKey>``
-   Reusable EF Core repository base class with sync and async CRUD support.
+   Reusable EF Core repository base class with sync and async CRUD support. Lookup methods return nullable entity results when no matching row exists.
 
 ``BaseUnitOfWork``
-   Reusable unit-of-work base class that wraps a ``DbContext`` and provides ``Commit()``, ``CommitAsync()``, ``DiscardChanges()``, and the compatibility alias ``Rollback()``.
+   Reusable unit-of-work base class that wraps a ``DbContext`` and provides ``Commit()``, ``CommitAsync()``, cancellation-aware ``CommitAsync(cancellationToken)``, ``DiscardChanges()``, and the compatibility alias ``Rollback()``.
 
 ``IUnitOfWork``
    EF Core unit-of-work contract extending the broader data contract model.
@@ -65,6 +65,7 @@ Key Capabilities
 2. Repositories expose ``AsQueryable()``, ``AsNoTrackingQueryable()``, and async enumeration.
 3. Query specifications can be applied to queryable and async read methods.
 4. ``BaseUnitOfWork`` centralizes save and rollback behavior over the EF Core change tracker.
+5. ``CommitAsync(cancellationToken)`` forwards cancellation to EF Core's ``SaveChangesAsync``.
 
 Configuration Fields
 --------------------
@@ -75,6 +76,11 @@ Transaction And Change-Tracker Reset
 ------------------------------------
 
 ``DiscardChanges()`` resets pending EF Core change-tracker state: added entities are detached, modified and deleted entities are reloaded, and unchanged or detached entities are left untouched. ``Rollback()`` remains a compatibility alias for this tracker reset. It does not undo a database transaction. For transaction ownership, use EF Core's native ``unitOfWork.DataContext.Database.BeginTransaction()`` and commit or roll back the returned ``IDbContextTransaction``.
+
+Nullable Lookup Results
+-----------------------
+
+``Find``, ``FindAsync``, ``Get``, and ``GetAsync`` return nullable entity results when no matching row exists. Check the result for ``null`` before accessing entity members.
 
 Basic Example
 -------------
