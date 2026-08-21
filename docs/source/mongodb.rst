@@ -56,6 +56,9 @@ Core Types And Concepts
 ``IEntityMap<TEntity>`` and ``BaseMap<TEntity>``
    Mapping abstractions for collection registration and BSON class-map configuration.
 
+``NoMap<TEntity>``
+   A valid no-op map for repositories that rely on entity attributes or conventions. It exposes no extra-elements accessor and performs no class-map registration.
+
 ``WherePredicate<TEntity>``
    Predicate wrapper for repository filtering.
 
