@@ -78,6 +78,8 @@ MongoDB Client Configuration
 
 Within a ``DataConfiguration<TKey>`` instance, database resolution reuses one ``MongoClient`` for each normalized set of effective client settings. Repeated collection resolution therefore shares the driver's connection pool.
 
+Command names remain available to ``LogCommand``, while payload logging is disabled by default. Set ``LogCommandPayload`` to ``true`` to include a sanitized payload; credential and common personal-data fields are always redacted, and additional comma-separated names can be supplied through ``CommandLogRedactedFields``.
+
 Basic Repository Example
 ------------------------
 
