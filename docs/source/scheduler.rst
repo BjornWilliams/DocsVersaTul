@@ -111,6 +111,8 @@ Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Exis
 
 ``IntervalEvent`` validates its schedule at construction: intervals and finite counts must be greater than zero, an explicit end must be after the start, and the resulting schedule must remain within the supported ``DateTime`` range.
 
+Built-in events implement ``IEventCollection.AddEvent(..., IList[DateTime])`` for mutable event output. The legacy ``IEvent.AddEvent(..., IEnumerable[DateTime])`` contract remains for compatibility; passing a non-list enumerable to that legacy overload produces a clear ``ArgumentException``, while scheduler execution uses the list-based contract.
+
 Scheduled Event Example
 -----------------------
 
