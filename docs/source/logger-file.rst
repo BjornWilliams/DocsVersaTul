@@ -147,5 +147,5 @@ Notes
 -----
 
 1. ``FileLogger`` serializes concurrent writes with ``SemaphoreSlim``.
-2. Logged rows are written using the parser's tab format.
+2. Logged rows are written using the parser's single-line escaped tab format; backslashes are escaped as ``\\`` and tabs, carriage returns, and line feeds in fields are represented as ``\t``, ``\r``, and ``\n``.
 3. This package is a good default sink when local operational visibility matters more than centralized transport.

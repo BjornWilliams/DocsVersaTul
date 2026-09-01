@@ -91,6 +91,13 @@ Key Capabilities
 2. ``LogInfo`` supports correlation through ``TraceId``.
 3. ``LogParser`` walks inner exceptions and emits multi-depth exception details.
 4. The parser supports output formats suitable for files, emails, and web payloads.
+5. HTML keys and values are encoded before they are placed in table cells.
+6. Tab output escapes backslashes, tabs, carriage returns, and line feeds so field boundaries and physical log records cannot be injected by data.
+
+Output Safety
+-------------
+
+``LogParser`` HTML output encodes every key and value before writing it into an HTML cell. Tab output and ``LogInfo.ToString()`` keep their tab-separated layout while escaping backslashes as ``\\`` and representing tabs, carriage returns, and line feeds as ``\t``, ``\r``, and ``\n``. Consumers that need the original field text should reverse these escapes after splitting the fields.
 
 Basic Example
 -------------
@@ -153,6 +160,6 @@ Next Step
 Notes
 -----
 
-1. ``LogInfo.ToString()`` produces a tab-separated representation, but the parser is the richer integration point.
+1. ``LogInfo.ToString()`` produces a single-line escaped tab-separated representation, but the parser is the richer integration point.
 2. The base package does not write anywhere by itself; sink packages provide the actual transport.
 3. If you need a custom sink, implement ``ILogger`` and optionally reuse ``ILogParser``.
