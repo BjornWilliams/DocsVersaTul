@@ -80,7 +80,7 @@ Operational Notes
 
 ``MailLogger`` exposes two useful counters:
 
-1. ``DeadLetterCount`` for failed deliveries that exhausted retries.
+1. ``DeadLetterCount`` for currently retained failed deliveries.
 2. ``PendingBatchCount`` for throttled items waiting to be batched.
 
 Notes
@@ -133,8 +133,8 @@ flush/disposal does not throw merely because a delivery exhausted its retries.
 Neither operation disposes the dispatcher or transport.
 
 ``PendingBatchCount`` excludes a batch already in flight. ``DeadLetterCount`` counts
-exhausted deliveries/batches, so one failed batch contributes one entry. Both queues
-remain in memory; process termination loses them and dead letters are not persisted
+retained failed deliveries/batches, so one failed batch contributes one entry. Both queues
+remain in memory; process termination loses them and dead letters are not automatically persisted
 or exported. Shutdown has no separate timeout/cancellation option: an unresponsive
 custom transport can delay completion. The built-in wrapper retains its per-attempt
 SMTP timeout.
@@ -159,3 +159,46 @@ Throttling counts successful logical deliveries, including one per batch, rather
 than individual SMTP attempts. Failures do not consume this success budget, so it
 is not a failure-rate limiter. Window checks, rotation, sends, and counter updates
 share one per-logger async lock. Explicit flush/shutdown bypasses the throttle.
+
+Dead-Letter Inspection and Retention
+----------------------------------------
+
+**Major-version behavior change:** bounded retention replaces the previous unbounded default.
+
+``MailLogger`` implements ``IMailDeadLetterSource``. The default capacity is 1,000
+entries, retaining the newest failed logical deliveries. A constructor overload
+accepts a positive ``deadLetterCapacity``. When full, the oldest entry is evicted
+and ``DroppedDeadLetterCount`` increases. Logging, timer, and shutdown failures
+all use this bound; one failed batch is one entry.
+
+.. code-block:: csharp
+
+   await using var boundedLogger = new MailLogger(
+       dispatcher, mailConfiguration, new LogParser(), deadLetterCapacity: 200);
+   await boundedLogger.LogAsync(new LogInfo(LogLevel.Error, "Payments", "Failure"));
+   await boundedLogger.DisposeAsync(); // Finish shutdown before retrieving final failures.
+   foreach (var entry in boundedLogger.GetDeadLetters())
+       Console.WriteLine(entry.Subject);
+   while (boundedLogger.TryDequeueDeadLetter(out var entry))
+   {
+       // Persist/inspect according to your application's failure-handling policy.
+   }
+
+``GetDeadLetters`` returns a read-only FIFO snapshot without removal.
+``TryDequeueDeadLetter`` atomically removes the oldest entry without resending it;
+when empty it returns false with a null out value. Both operations remain available
+after disposal. Entry properties include subject, rendered body, original log
+information, logged exception, and the last thrown delivery exception (null for
+false-only failures). Batches retain their combined body, batch subject, synthetic
+log information, and no individual exception objects. Referenced objects are not
+deep-cloned even though entry properties and snapshot collections are read-only.
+
+``DeadLetterCount`` means retained entries, not lifetime failures; it decreases on
+retrieval and is capped by ``DeadLetterCapacity``. ``DroppedDeadLetterCount`` counts
+only capacity evictions. Update monitoring that previously expected an ever-growing
+count, and retrieve regularly if failure history must be preserved.
+
+Retention is bounded by entry count, not bytes; bodies, exception graphs, and
+caller-held snapshots may still be large. Storage and replay are application
+responsibilities. Payloads can include secrets or personal data; apply the same
+access and storage controls as for the underlying logs.
