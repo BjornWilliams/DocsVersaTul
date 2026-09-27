@@ -69,7 +69,7 @@ Basic Example
    using VersaTul.Logger.Contracts;
    using VersaTul.Logger.Mail;
 
-   ILogger logger = new MailLogger(dispatcher, mailConfiguration, new LogParser());
+   await using var logger = new MailLogger(dispatcher, mailConfiguration, new LogParser());
 
    await logger.LogAsync(
        new LogInfo(LogLevel.Error, "Payments", "Payment gateway timeout", traceId: "trace-456"),
@@ -103,6 +103,42 @@ logging tasks complete, and serialize calls sharing one SMTP client.
 
 Current limits: logger retries and dispatcher retries are still separate;
 ``LogAsync`` has no cancellation-token overload. Throttled calls complete after
-queueing, not delivery. A later logging call after the throttle window rotates
-triggers batching. There is not yet a background timer or shutdown flush, so a
-final partial batch can remain queued. These are separate stabilization Tasks.
+queueing, not delivery.
+
+Background Flush and Shutdown
+-----------------------------
+
+The first throttled event starts a background loop that checks once per throttle
+window (one minute by default). It rotates the window and sends batches within
+the remaining budget, including a final partial batch without another log call.
+The loop exits when the queue empties and restarts when needed. Defaults are 25
+successful sends per window and at most ten events per batch. Slow delivery may
+delay subsequent checks; one logger never overlaps its own sends.
+
+``MailLogger`` implements the additive ``IFlushableMailLogger`` interface, extending
+``IMailLogger`` and ``IAsyncDisposable``. Resolve the new interface or the concrete
+class to access lifecycle methods. Existing ``IMailLogger`` implementers do not
+need new members.
+
+.. code-block:: csharp
+
+   await logger.FlushAsync(); // Attempts every queued batch, bypassing throttling.
+
+Use ``await using`` as in the example, or await ``DisposeAsync`` during shutdown
+before disposing the externally owned dispatcher/SMTP transport. Disposal rejects
+new log/flush calls with ``ObjectDisposedException``, waits for active delivery,
+stops the background loop, and drains remaining batches without the throttle.
+Repeated disposal awaits the same task. Failed batches become dead-letter entries;
+flush/disposal does not throw merely because a delivery exhausted its retries.
+Neither operation disposes the dispatcher or transport.
+
+``PendingBatchCount`` excludes a batch already in flight. ``DeadLetterCount`` counts
+exhausted deliveries/batches, so one failed batch contributes one entry. Both queues
+remain in memory; process termination loses them and dead letters are not persisted
+or exported. Shutdown has no separate timeout/cancellation option: an unresponsive
+custom transport can delay completion. The built-in wrapper retains its per-attempt
+SMTP timeout.
+
+Calls on one logger are serialized. Avoid sharing the transport with other logger
+instances unless it supports concurrent sends. Dispatcher callbacks must not
+re-enter the same logger while delivery is in progress.
