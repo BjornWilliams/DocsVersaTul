@@ -99,6 +99,33 @@ Output Safety
 
 ``LogParser`` HTML output encodes every key and value before writing it into an HTML cell. Tab output and ``LogInfo.ToString()`` keep their tab-separated layout while escaping backslashes as ``\\`` and representing tabs, carriage returns, and line feeds as ``\t``, ``\r``, and ``\n``. Consumers that need the original field text should reverse these escapes after splitting the fields.
 
+Timestamp Format and Migration
+------------------------------
+
+``LogParser.Parse`` emits ``LogDate`` in invariant ISO 8601 round-trip format in
+HTML, tab, and JSON output. ``LogInfo.ToString()`` uses the same format. Timestamps
+include seven fractional-second digits; UTC inputs end in ``Z`` (for example,
+``2026-01-15T12:30:45.1234567Z``), while local inputs include the local UTC offset.
+Unspecified ``DateTime`` inputs are interpreted as local wall times and include
+the local offset. ``LogInfo.Date`` retains its supplied value and kind, and the
+default constructor continues to capture local time.
+
+This is a **major-version output-format change**. Update ingestion rules that
+expect culture-specific long date/time text to accept ISO 8601 with either ``Z``
+or a numeric offset. After extracting the timestamp, use
+``DateTimeOffset.Parse(value, CultureInfo.InvariantCulture)``. JSON retains its
+string-valued ``LogDate`` property and existing schema; tab field positions do
+not change. Existing historical records need a separate legacy parsing path
+using the original writer's culture and time zone.
+
+Prefer UTC inputs for unambiguous timestamps across machines and daylight-saving
+transitions. Local and unspecified values follow .NET's local offset rules,
+including ambiguous or invalid wall times; formatting does not validate those
+times. File, mail, and web sinks using the built-in parser inherit this format
+when consuming the updated Logger package. Custom parsers control their own
+output. Arbitrary dictionary values and archive filenames are outside this
+timestamp policy. Constructor and interface signatures are unchanged.
+
 Basic Example
 -------------
 
