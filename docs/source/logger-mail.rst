@@ -89,3 +89,20 @@ Notes
 1. Throttling and batching are built into the logger implementation, not delegated to the mailer package.
 2. This sink is best for high-value alerts, not high-volume debug traffic.
 3. If send volume exceeds the configured window, messages are queued and later combined into a batched message.
+
+Asynchronous Delivery
+---------------------
+
+``LogAsync`` awaits ``IAsyncMailDispatcher.SendMailAsync`` when supported. The
+built-in ``MailDispatcher`` and ``SmtpClientWrapper`` perform native asynchronous
+SMTP with nonblocking retry delays. Legacy custom ``IMailDispatcher`` instances
+remain supported through a worker-thread fallback; implement
+``IAsyncMailDispatcher`` to avoid blocked workers. Synchronous ``Log`` calls remain
+blocking compatibility wrappers. Keep the dispatcher and transport alive until
+logging tasks complete, and serialize calls sharing one SMTP client.
+
+Current limits: logger retries and dispatcher retries are still separate;
+``LogAsync`` has no cancellation-token overload. Throttled calls complete after
+queueing, not delivery. A later logging call after the throttle window rotates
+triggers batching. There is not yet a background timer or shutdown flush, so a
+final partial batch can remain queued. These are separate stabilization Tasks.

@@ -194,3 +194,36 @@ Notes
 2. ``EnableSsl`` defaults to ``true`` and ``UseDefaultCredentials`` defaults to ``false`` when their keys are omitted.
 3. The package focuses on delivery, not mail-template storage or rendering engines.
 4. This package is the transport layer used by :doc:`logger-mail` and mail-based export workflows.
+
+Asynchronous Delivery
+---------------------
+
+``MailDispatcher`` implements the additive ``IAsyncMailDispatcher`` contract and
+``SmtpClientWrapper`` implements ``IAsyncSmtpClient``. Existing synchronous APIs
+remain available. Built-in async SMTP uses native I/O; transient retry delays use
+cancellable ``Task.Delay``.
+
+.. code-block:: csharp
+
+   using var cancellation = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(30));
+   await dispatcher.SendMailAsync(configuration.FromAddress, configuration.ToAddress,
+       "Subject", "Body", cancellationToken: cancellation.Token);
+
+The optional ``isHtml`` and ``IEnumerable<Attachment>`` parameters support HTML
+and attachments. Await the task before disposing transport resources. The dispatcher
+owns its message and added attachments until completion, then disposes them on
+success, failure, or cancellation. Direct ``IAsyncSmtpClient.SendAsync`` calls do
+not transfer message ownership.
+
+Authentication/connectivity exception mappings and attempt counts match synchronous
+delivery. ``RetryCount`` is the maximum total attempts; delay increases by
+``RetryDelayMilliseconds`` per failed attempt. The wrapper applies its configured
+SMTP timeout (or framework default) per attempt; timeout is a retryable connectivity
+failure. Caller cancellation is propagated without retry, but cannot prove that a
+server has not already accepted a message.
+
+Legacy custom ``ISmtpClient`` implementations run on a worker thread and cannot be
+interrupted once their synchronous send starts. Awaiting still waits for that send
+before disposing resources. Implement ``IAsyncSmtpClient`` for native async I/O and
+cancellation. Serialize sends on one SMTP wrapper. Async template and abstract
+attachment convenience overloads are outside this change.
