@@ -91,3 +91,52 @@ Notes
 1. ``WebLogger`` throws when the circuit breaker is open, so callers should decide whether to swallow or surface sink failures.
 2. Signing is added through an ``X-Webhook-Signature`` header computed from the JSON payload.
 3. This package fits centralized operational logging better than local diagnostics.
+
+Cancellation, Ownership, and Circuit Concurrency
+------------------------------------------------------------
+
+``WebLogger`` implements the additive ``ICancellableWebLogger`` interface. Existing
+``IWebLogger`` members remain supported; overloads accept cancellation with log
+information, an exception, or both.
+
+.. code-block:: csharp
+
+   var cancellableLogger = new WebLogger(httpClientFactory, webLogConfiguration, new LogParser());
+   using var cancellation = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(10));
+   await cancellableLogger.LogAsync(
+       new LogInfo(LogLevel.Warning, "Imports", "Remote sink latency"), cancellation.Token);
+
+Cancellation covers waiting for the per-instance request gate and HTTP delivery,
+including response buffering. Caller cancellation does not count as an endpoint
+failure. Timeouts without caller cancellation and unsuccessful HTTP responses do.
+Cancellation cannot guarantee the remote endpoint has not accepted the payload.
+
+Requests are serialized per logger, including in the closed state. Circuit checks,
+window transitions, and result updates share the gate. After cooldown only one
+request probes recovery: success closes the circuit; failure immediately reopens
+it for another cooldown. A canceled probe leaves the previous open state and
+allows a later probe. Defaults remain three failures and 30 seconds of cooldown.
+Different instances have independent circuit state. Cancel waiting callers to
+bound their wait behind a slow request; custom handlers must cooperate with
+cancellation. Do not re-enter a logger from its own delivery callbacks.
+
+Every call disposes its request/content, response/content, and factory-created
+client, including failure/cancellation paths. The factory owns pooled handler
+lifetimes. Custom factories must return clients suitable for per-call disposal.
+Synchronous Log methods remain blocking compatibility wrappers.
+
+Endpoint URI Rules
+------------------
+
+``BaseUrl`` must be absolute HTTP(S) without a query or fragment. ``LogEndPoint``
+is relative; a single leading slash appends to the base path rather than replacing
+it. ``https://host/api`` plus either ``events`` or ``/events`` produces
+``https://host/api/events``. Boundary slashes are normalized; ordinary URI escaping
+and dot-segment normalization apply. Query parameters belong in the endpoint.
+Absolute endpoints, network authorities, backslashes, and fragments are rejected
+before client creation with ``ArgumentException``.
+
+Review configurations that relied on concatenated missing/duplicate slashes or
+query/fragment-bearing base URLs. Configuration remains trusted input: this is
+not an SSRF destination allowlist, and redirects follow the factory handler's
+policy. Payload signing is unchanged; replay-protection guidance is separate.
