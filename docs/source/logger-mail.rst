@@ -101,7 +101,7 @@ remain supported through a worker-thread fallback; implement
 blocking compatibility wrappers. Keep the dispatcher and transport alive until
 logging tasks complete, and serialize calls sharing one SMTP client.
 
-Current limits: logger retries and dispatcher retries are still separate;
+Retry ownership is described below;
 ``LogAsync`` has no cancellation-token overload. Throttled calls complete after
 queueing, not delivery.
 
@@ -142,3 +142,20 @@ SMTP timeout.
 Calls on one logger are serialized. Avoid sharing the transport with other logger
 instances unless it supports concurrent sends. Dispatcher callbacks must not
 re-enter the same logger while delivery is in progress.
+
+Retry Ownership and Window Accounting
+-------------------------------------
+
+``IRetryingMailDispatcher`` identifies dispatchers that own their complete retry
+policy. The built-in ``MailDispatcher`` implements it. Logger.Mail invokes these
+dispatchers once per message or batch; a final false result or exception becomes
+a dead letter without another logger retry loop. Custom dispatchers without the
+capability retain the legacy three-attempt fallback. Retrying custom dispatchers
+and decorators should implement the capability to prevent attempt multiplication.
+
+A configured Mailer ``RetryCount`` of three permits at most three transient SMTP
+attempts per logical delivery; authentication failures receive one attempt.
+Throttling counts successful logical deliveries, including one per batch, rather
+than individual SMTP attempts. Failures do not consume this success budget, so it
+is not a failure-rate limiter. Window checks, rotation, sends, and counter updates
+share one per-logger async lock. Explicit flush/shutdown bypasses the throttle.

@@ -227,3 +227,13 @@ interrupted once their synchronous send starts. Awaiting still waits for that se
 before disposing resources. Implement ``IAsyncSmtpClient`` for native async I/O and
 cancellation. Serialize sends on one SMTP wrapper. Async template and abstract
 attachment convenience overloads are outside this change.
+
+Retry Ownership
+---------------
+
+``MailDispatcher`` implements the additive ``IRetryingMailDispatcher`` capability
+for synchronous and asynchronous delivery. It owns the complete retry policy;
+callers should invoke it once per message and treat final failure as final.
+Logger.Mail recognizes it so configured SMTP attempts are not multiplied by a
+second retry loop. Custom retrying dispatchers and decorators can implement the
+same capability without changing existing dispatcher interface members.
