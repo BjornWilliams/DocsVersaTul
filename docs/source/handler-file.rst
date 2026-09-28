@@ -110,7 +110,7 @@ Save Stream Example
 Notes
 -----
 
-1. ``FileUtility`` uses a lock to serialize writes from the same process.
+1. ``FileUtility`` coordinates participating writes by normalized destination path within one loaded assembly instance.
 2. The async methods use the IAsyncFileWrapper capability for native asynchronous payload I/O.
 3. The typed file models are the main value-add over direct ``System.IO`` usage.
 
@@ -194,8 +194,34 @@ platform newlines and UTF-8 without a BOM.
 
 .. code-block:: csharp
 
+   using VersaTul.Handler.File.Contracts;
+
    IExplicitFileUtility files = new FileUtility(directoryWrapper, directoryWrapper);
    await files.ReplaceAtomicallyAsync(new TextFileInfo("reports", "daily", "data")
    {
        BaseDirectory = trustedRoot
    });
+
+Concurrency boundary and multiple processes
+--------------------------------------------
+
+The former global write semaphore is removed. A short registry lock only manages gate
+references; no I/O occurs while holding it. Sync/async FileUtility instances share gates
+for the same normalized path, and different files can progress independently. Canceled
+waiters and failed writes release their references. Wrappers must complete I/O before
+returning; never re-enter the same path from an iterator or callback.
+
+* Append, overwrite and stream Save are serialized only among participating FileUtility
+  calls. External writers have no record-order or transactional guarantee and may cause
+  sharing errors.
+* Create-new uses OS exclusive creation across processes, but a newly created file can
+  be partially written if an operation fails.
+* Atomic replacement publishes a complete sibling file under filesystem rename rules;
+  concurrent processes are last-writer-wins, not compare-and-swap.
+* Reads are not gated. Non-atomic writes may be partially visible; readers already holding
+  a handle may continue to see the old file after atomic replacement.
+
+There is no cross-process/distributed lock. Use a single-writer service or external lock
+when ordering matters. Gate scope is one loaded assembly instance; links, filesystem
+aliases, other AssemblyLoadContexts, and FileLogger's independent coordination are outside
+this guarantee. Avoid mixing unrelated writers on the same file.
