@@ -15,7 +15,7 @@ Use this package when you want to:
 
 1. Read or write files through abstractions instead of calling ``System.IO`` directly.
 2. Save typed file content such as text, CSV, custom files, or zip streams.
-3. Add async wrappers around common file operations.
+3. Use native async I/O for common file operations.
 4. Reuse path, extension, and directory helpers across the codebase.
 5. Support export workflows from :doc:`streamers` and archive workflows from :doc:`compression`.
 
@@ -48,7 +48,7 @@ Core Types And Concepts
    Combines file and directory wrappers plus helper operations such as extension handling, file discovery, and line-by-line reading.
 
 ``IFileUtility`` and ``FileUtility``
-   Higher-level file service for reading all content, saving typed files, and async wrappers.
+   Higher-level file service for reading all content, saving typed files, and native async I/O.
 
 ``IDirectoryWrapper`` and ``IFileWrapper``
    Thin abstractions over file-system APIs used by the higher-level handlers.
@@ -111,7 +111,7 @@ Notes
 -----
 
 1. ``FileUtility`` uses a lock to serialize writes from the same process.
-2. The async methods are wrapper-based async, which is useful for consistency at the service boundary.
+2. The async methods use the IAsyncFileWrapper capability for native asynchronous payload I/O.
 3. The typed file models are the main value-add over direct ``System.IO`` usage.
 
 Stream ownership
@@ -123,3 +123,14 @@ responsibility, including write failures. DirectoryWrapper.Write always leaves t
 caller stream open. Custom IFileWrapper implementations must honor this contract.
 This is a Major ownership change: dispose streams explicitly or opt into disposal.
 Do not share or mutate a stream while a write is in progress.
+
+Native asynchronous operations
+------------------------------
+
+FileUtility async methods require ``IAsyncFileWrapper``; DirectoryWrapper supplies
+native File/FileStream async I/O with cancellation. Synchronous-only custom wrappers
+remain usable for sync calls; async calls throw NotSupportedException. Implement the
+additive capability when migrating (Major change). Missing files/directories return
+an absent FileResult; permission and other errors propagate. Directory creation/open
+are synchronous metadata operations; payload I/O is asynchronous. Cancellation of
+non-atomic writes can leave partial content. Ownership applies on cancellation too.
