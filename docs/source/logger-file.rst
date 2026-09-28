@@ -94,24 +94,22 @@ Basic Example
 
 .. code-block:: csharp
 
+   using VersaTul.Configurations;
+   using VersaTul.Handler.File;
    using VersaTul.Logger;
-   using VersaTul.Logger.Contracts;
    using VersaTul.Logger.File;
-   using VersaTul.Logger.File.Contracts;
+   using VersaTul.Logger.File.Configurations;
+   using VersaTul.Utilities.Contracts;
 
-   var configSettings = new Builder()
-       .AddOrReplace("MaxFileSize", 10_000_000)
-       .AddOrReplace("LogFileName", "app_log")
-       .AddOrReplace("FilePath", "C:\\logs")
-       .BuildConfig();
-
-   ILogFileConfiguration configuration = new LogFileConfiguration(configSettings);
-   ILogParser parser = new LogParser();
-   IFileHandler fileHandler = new FileUtility(new DirectoryWrapper(), new DirectoryWrapper());
-   IArchiver archiver = new Archiver(configuration, fileHandler);
-
-   ILogger logger = new FileLogger(configuration, archiver, parser, fileHandler);
-
+   // utility is your application's IUtility implementation.
+   var configuration = new LogFileConfiguration(new ConfigSettings
+   {
+       { "FilePath", "logs" },
+       { "LogFileName", "app.txt" },
+       { "MaxFileSize", 10_000_000L }
+   }, utility);
+   var handler = new FileUtility(new DirectoryWrapper(), new DirectoryWrapper());
+   var logger = new FileLogger(configuration, new Archiver(configuration, handler), new LogParser(), handler);
    await logger.LogAsync(new LogInfo(LogLevel.Information, "Startup", "Application started"));
 
 Expected Result
@@ -149,3 +147,34 @@ Notes
 1. ``FileLogger`` serializes concurrent writes with ``SemaphoreSlim``.
 2. Logged rows are written using the parser's single-line escaped tab format; backslashes are escaped as ``\\`` and tabs, carriage returns, and line feeds in fields are represented as ``\t``, ``\r``, and ``\n``.
 3. This package is a good default sink when local operational visibility matters more than centralized transport.
+
+Paths, concurrency, and ownership
+----------------------------------------
+
+Relative FilePath values resolve against IUtility.GetExecutingPath; rooted paths use
+platform path rules. Use Path.Combine to construct nested paths and provide a simple
+LogFileName. Active logs, archives, and retention scans use the resolved directory.
+On Unix, backslashes are ordinary filename characters; migrate any files previously
+created with a literal backslash, and review archives previously written relative to
+the process working directory. Paths/configuration are trusted and must remain stable
+during delivery. This API does not provide directory containment for untrusted names.
+
+Logger instances in the same process coordinate by Path.GetFullPath of the destination.
+Comparison is case-insensitive on Windows and ordinal on other platforms. Rotation,
+retention, append, flush, and disposal share the same gate. Idle gates are removed;
+different paths can proceed independently. Symbolic links, hard links, filesystem case
+aliases on non-Windows systems, separate assembly load contexts, and other processes
+are not coordinated. Use one canonical spelling and a single writer process for each
+file. Standalone Archiver calls and external writers must not race logger delivery.
+All logger instances for a file must use consistent rotation/retention settings and
+an archiver configured for that same file. Custom callbacks must not re-enter logging
+for the same path.
+
+LogAsync schedules synchronous directory/rotation/open operations on the thread pool,
+then awaits asynchronous writing and disposal. It does not block the caller on file
+maintenance, but slow maintenance occupies a worker thread. Await every call; completion
+means the writer has flushed and closed, not that storage has performed a durable fsync.
+Exceptions propagate through the returned task and release the path gate. There is no
+background queue to flush on logger disposal. Synchronous Log methods remain blocking
+compatibility wrappers. Rotation checks run before append, so a single record may exceed
+the configured size. Retention cleanup happens during rotation.
