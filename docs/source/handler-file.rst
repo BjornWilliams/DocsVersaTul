@@ -113,3 +113,13 @@ Notes
 1. ``FileUtility`` uses a lock to serialize writes from the same process.
 2. The async methods are wrapper-based async, which is useful for consistency at the service boundary.
 3. The typed file models are the main value-add over direct ``System.IO`` usage.
+
+Stream ownership
+----------------
+
+Save and SaveAsync leave StreamFileInfo.Content open by default and write the entire
+MemoryStream, preserving its position. Set ``LeaveOpen = false`` to transfer disposal
+responsibility, including write failures. DirectoryWrapper.Write always leaves the
+caller stream open. Custom IFileWrapper implementations must honor this contract.
+This is a Major ownership change: dispose streams explicitly or opt into disposal.
+Do not share or mutate a stream while a write is in progress.
