@@ -134,3 +134,21 @@ additive capability when migrating (Major change). Missing files/directories ret
 an absent FileResult; permission and other errors propagate. Directory creation/open
 are synchronous metadata operations; payload I/O is asynchronous. Cancellation of
 non-atomic writes can leave partial content. Ownership applies on cancellation too.
+
+Coordinated and atomic writes
+-----------------------------
+
+FileUtility writes coordinate by normalized absolute path across instances, using
+case-insensitive comparison on Windows and ordinal comparison elsewhere. Idle gates
+are removed; cancellation while waiting releases references. Different paths are
+independent. Custom wrappers receive absolute write paths. Aliases/links, standalone
+wrapper/FileHandler calls, FileLogger's separate gate, and other processes are outside
+this coordination boundary; use consistent paths and stable models.
+
+``ReplaceAtomicallyAsync(file, token)`` requires ``IAtomicFileWrapper``. DirectoryWrapper
+writes and closes a unique CreateNew temporary sibling, then renames over the target.
+On filesystems supporting atomic same-volume rename, readers see old or complete new
+content. Cancellation/errors before publication preserve the target and attempt cleanup;
+a cancellation racing publication may commit and a crash may leave a temporary file.
+No fsync durability, metadata/ACL preservation, cross-volume transaction, or network
+filesystem guarantee is promised. Other-process writes are last-writer-wins.
