@@ -152,3 +152,23 @@ content. Cancellation/errors before publication preserve the target and attempt 
 a cancellation racing publication may commit and a crash may leave a temporary file.
 No fsync durability, metadata/ACL preservation, cross-volume transaction, or network
 filesystem guarantee is promised. Other-process writes are last-writer-wins.
+
+Optional base-directory containment
+------------------------------------
+
+Set ``BaseInfo.BaseDirectory`` to an absolute trusted directory. ``Path`` becomes a
+relative subdirectory (empty allowed); ``Name`` is a simple filename, and the extension
+cannot introduce path components. Rooted/drive/UNC names, either slash style of traversal,
+and ambiguous trailing dot/space segments are rejected before FileUtility side effects.
+Unset BaseDirectory preserves unrestricted legacy path behavior.
+
+Existing links/reparse points at or below the base are rejected. Protect the base and
+its ancestors from concurrent rename/link substitution: validation is not an OS sandbox
+against hostile filesystem races or hard-link aliases. Use filesystem permissions or
+a sandbox for hostile local users. Do not mutate models during delivery. The policy
+applies to typed models, not arbitrary string-path wrapper calls.
+
+.. code-block:: csharp
+
+   var file = new TextFileInfo("reports", "daily", "data") { BaseDirectory = trustedRoot };
+   await fileUtility.SaveOrUpdateAsync(file);
