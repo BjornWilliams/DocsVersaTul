@@ -172,3 +172,30 @@ applies to typed models, not arbitrary string-path wrapper calls.
 
    var file = new TextFileInfo("reports", "daily", "data") { BaseDirectory = trustedRoot };
    await fileUtility.SaveOrUpdateAsync(file);
+
+Explicit text write modes
+--------------------------
+
+``IExplicitFileUtility`` adds named methods without changing the old IFileUtility contract:
+
+* ``AppendAsync`` appends, creating a missing file.
+* ``OverwriteAsync`` truncates, creating a missing file.
+* ``CreateNewAsync`` fails if the destination exists, leaving existing bytes unchanged.
+* ``ReplaceAtomicallyAsync`` publishes a completed replacement, or creates a missing target.
+
+All accept cancellation. DirectoryWrapper implements ``ITextWriteFileWrapper`` for overwrite
+and exclusive creation. Append/overwrite may leave partial writes on error/cancellation;
+create-new can leave a partial new file, but never truncates an existing destination.
+Exclusive creation applies across processes; atomic replacement is last-writer-wins.
+
+Legacy SaveOrUpdate/SaveOrUpdateAsync always append. Save/SaveAsync overwrite stream data
+and honor LeaveOpen. New text callers should choose an explicit method. Text writes use
+platform newlines and UTF-8 without a BOM.
+
+.. code-block:: csharp
+
+   IExplicitFileUtility files = new FileUtility(directoryWrapper, directoryWrapper);
+   await files.ReplaceAtomicallyAsync(new TextFileInfo("reports", "daily", "data")
+   {
+       BaseDirectory = trustedRoot
+   });
