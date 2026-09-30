@@ -51,7 +51,7 @@ Core Types And Concepts
     Includes string helpers such as ``ToCamelCase()``, ``ToCamelCaseSpan()``, ``ToTitleCase()``, and ``ToTitleCaseSpan()``.
 
 ``ConvertExtensions``
-    Includes conversion helpers such as ``To<T>()``, collection conversion overloads, ``AsDictionary()``, and ``AsFlattened()``.
+    Includes conversion helpers such as ``To<T>()``, collection conversion overloads, ``AsDictionary()``, ``AsDictionaries()``, and ``AsFlattened()``.
 
 ``CurrencyExtensions``
     Includes ``RoundTo()``, ``ToCurrency()``, ``ToMicron()``, and ``FromMicron()``.
@@ -93,6 +93,50 @@ Dictionary And Flattening Example
 
     var dictionary = person.AsDictionary();
     var flattened = dictionary.AsFlattened();
+
+Collection Dictionaries And Migration
+-------------------------------------
+
+``AsDictionary()`` accepts a single non-null object. All enumerable sources,
+including empty and primitive collections, throw ``NotSupportedException`` with
+guidance to use ``AsDictionaries()``. The single-object method retains its
+``class, new()`` generic constraint and its property-processing behavior.
+
+For a collection of reference-type object rows, use ``AsDictionaries()``. It
+enumerates the source once and eagerly returns a read-only list of dictionaries
+in source order. Each dictionary remains mutable. Repeated reads of the returned
+list do not read the source again. The collection method has a ``class``
+constraint, so it also supports anonymous rows.
+
+.. code-block:: csharp
+
+    using VersaTul.Extensions;
+
+    var people = new[]
+    {
+        new { Name = "Ada", Age = 37 },
+        new { Name = "Grace", Age = 42 }
+    };
+
+    var rows = people.AsDictionaries();
+    var firstName = rows[0]["Name"]; // "Ada"
+
+An empty source returns an empty list. A null source throws
+``ArgumentNullException``; a null element throws ``ArgumentException``. An element
+that is itself enumerable throws ``NotSupportedException``. Primitive sequences
+are not object rows; use the scalar conversion methods for them.
+
+Both methods use each object's runtime type with default property flags
+``DeclaredOnly | Public | Instance``. Pass ``BindingFlags.Public |
+BindingFlags.Instance`` to include inherited properties. Nested property values
+retain the existing object processor behavior.
+
+This is a major-release migration: replace collection calls such as
+``people.AsDictionary()`` with ``people.AsDictionaries()`` and consume one
+dictionary per row. Previously, empty and primitive collections returned an empty
+dictionary while ordinary object collections could fail during reflection.
+Collection input is now rejected consistently. A null single-object source now
+throws ``ArgumentNullException`` rather than an accidental null-reference failure.
 
 Currency Example
 ----------------
