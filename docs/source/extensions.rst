@@ -138,6 +138,18 @@ dictionary while ordinary object collections could fail during reflection.
 Collection input is now rejected consistently. A null single-object source now
 throws ``ArgumentNullException`` rather than an accidental null-reference failure.
 
+Scalar Conversion
+-----------------
+
+``value.To<T>()`` and the new ``value.ConvertTo(typeof(T))`` use the
+:ref:`scalar-conversion-matrix`, including nullable targets. Text uses current
+culture. Use CommonUtility's invariant overload when input requires invariant parsing.
+
+ConvertTo has a distinct name from the existing enumerable To(Type) overload, so
+strings are treated as scalars. Generic null/DBNull input returns default(T);
+runtime-type conversion returns null. Malformed inputs throw parser/conversion
+exceptions; use Utilities' TryTransform APIs when failure should return false.
+
 Random Selection
 ----------------
 

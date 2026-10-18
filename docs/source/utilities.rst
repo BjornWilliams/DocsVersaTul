@@ -166,6 +166,58 @@ Import System, VersaTul.Utilities and VersaTul.Utilities.Contracts. Scheduler's
 EventTime callers remain valid because EventTime is an enum; dependent-package
 minimum versions still require a separate release/dependency review.
 
+.. _scalar-conversion-matrix:
+
+Scalar Conversion Matrix
+-------------------------
+
+Generic Transform, runtime-type Transform, Extensions conversions and configuration
+binding use the same scalar parsers before falling back to IConvertible.
+
+.. list-table:: Supported target types
+   :header-rows: 1
+
+   * - Target
+     - Text conversion
+     - Nullable support
+     - Conversion to string
+   * - Boolean, Char, signed/unsigned 8/16/32/64-bit integers, Single, Double, Decimal, DateTime
+     - Existing IConvertible rules
+     - All value types
+     - Existing culture-sensitive rules
+   * - Enum
+     - Case-insensitive names or numeric text
+     - Yes
+     - Existing enum text
+   * - Guid
+     - Guid.Parse formats
+     - Yes
+     - D format
+   * - Uri
+     - Relative or absolute URI
+     - Reference type
+     - OriginalString
+   * - TimeSpan
+     - Duration using the selected culture
+     - Yes
+     - c format
+   * - DateOnly, TimeOnly
+     - Date/time using the selected culture
+     - Yes
+     - O format
+   * - DateTimeOffset
+     - Date/time with offset retained
+     - Yes
+     - O format with offset
+
+Assignable values pass through. Current culture is the default; the Transform
+overloads accepting ``useInvariantCulture: true`` select invariant parsing.
+Generic null/DBNull input returns default(T); runtime-type conversion returns null.
+Binding uses default(T) for a non-nullable value property and null for a nullable
+or reference property. TryTransform returns false for unsupported or malformed
+conversions without leaking cast exceptions; generic null/default conversion succeeds.
+Arbitrary custom parsers are not inferred.
+
 Notes
 -----
 

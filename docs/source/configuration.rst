@@ -184,6 +184,20 @@ Next Step
 2. Read :doc:`sql` if your next package needs database configuration.
 3. Read :doc:`mailer` or :doc:`logger-file` if your next concern is outbound mail or operational logging.
 
+Scalar Binding
+--------------
+
+Get, GetOrDefault and Bind use the same :ref:`scalar-conversion-matrix`, including
+Guid, Uri, TimeSpan, DateOnly, TimeOnly, DateTimeOffset, enums and nullable value
+variants. Assignable values pass through; text uses current culture and explicit
+DateTimeOffset offsets are retained. Null/DBNull becomes default(T) for non-nullable
+value properties or null for nullable/reference properties. Malformed or unsupported
+values throw conversion exceptions; arbitrary custom parsers are not inferred.
+
+Use the compatible new Extensions release providing ConvertTo; older versions
+lack this API. Requiring that new Extensions major makes this a Major
+Configurations release.
+
 Notes
 -----
 
