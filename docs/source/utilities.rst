@@ -147,6 +147,25 @@ lists still return default(T); null sources or random instances are rejected.
 Injected random instances must support the caller's concurrency pattern. The
 existing ICollectionUtility interface is unchanged.
 
+Enum-Only Contract Migration
+----------------------------
+
+``EnumParser<T>`` and ``IEnumParser<T>`` now require ``where T : struct, Enum``.
+This requires a Major Utilities release. Existing enum methods and parsing behavior
+remain available. Non-enum arguments such as int fail compilation or reflective
+generic construction. Use numeric conversion helpers for non-enum values.
+
+Generic wrappers and factories must also carry the Enum constraint:
+
+.. code-block:: csharp
+
+    public static IEnumParser<T> CreateParser<T>() where T : struct, Enum
+        => new EnumParser<T>();
+
+Import System, VersaTul.Utilities and VersaTul.Utilities.Contracts. Scheduler's
+EventTime callers remain valid because EventTime is an enum; dependent-package
+minimum versions still require a separate release/dependency review.
+
 Notes
 -----
 
