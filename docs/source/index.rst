@@ -93,6 +93,7 @@ Start Here
    scenario-guides/index
    recommended-paths
    compatibility
+   api-contract-policy
    faq
    package-catalog
 
