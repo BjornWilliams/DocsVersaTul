@@ -101,6 +101,37 @@ Analyzer Example
    var display = analyzer.GetAttribute(property);
    var formatted = analyzer.FormatValue(display, DateTime.UtcNow);
 
+Member Identity And Concurrent Use
+----------------------------------
+
+Metadata is cached by declaring type, module and member token. Inherited views
+reuse the declaring member, while constructed generic declaring types remain
+distinct. All display settings, including date format and culture, are preserved.
+Formatting receives a copy of cached settings so a custom formatter cannot alter
+metadata used by later calls.
+
+Use the concrete analyzer's member-aware method for precise formatting:
+
+.. code-block:: csharp
+
+   var property = typeof(Order).GetProperty(nameof(Order.SubTotal));
+   var formatted = analyzer.FormatPropertyValue(property, 12.345m);
+
+The existing ``FormatValue(value, propertyName)`` method remains valid for a unique
+registered member name. If different declaring members share that name, it now
+throws ``InvalidOperationException`` instead of silently reusing the first
+member's metadata. Unknown names still throw ``KeyNotFoundException``. This is a
+Major release migration: use ``FormatPropertyValue(property, value)`` when member
+names can be ambiguous. Existing IDisplayAnalyzer implementations do not need a
+new member; interface callers can use
+``FormatValue(analyzer.GetAttribute(property), value)``.
+
+Metadata caching, heading snapshots and formatter registration support concurrent
+use. Each operation captures a stable formatter snapshot, so registration during
+execution affects subsequent snapshots. Registered formatter instances may run
+concurrently and must synchronize their own mutable state. Built-in formatters
+keep per-operation state in PropertyData rather than on the formatter instance.
+
 Notes
 -----
 
