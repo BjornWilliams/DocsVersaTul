@@ -133,6 +133,20 @@ Property Mapping Example
 
     utility.PropertyMap(source, destination);
 
+Batches And Random Sampling
+---------------------------
+
+``MakeBatches(source, batchSize)`` requires a strictly positive size, even for an
+empty source. Invalid sizes throw ``ArgumentOutOfRangeException`` for batchSize
+before input enumeration. Positive sizes preserve ordering and the existing
+materialized-source behavior, including one-shot inputs and large batch sizes.
+
+``CollectionUtility<T>.RandomSampler(source)`` uses ``Random.Shared``. Its new
+concrete overload accepts a ``Random`` instance for deterministic tests. Empty
+lists still return default(T); null sources or random instances are rejected.
+Injected random instances must support the caller's concurrency pattern. The
+existing ICollectionUtility interface is unchanged.
+
 Notes
 -----
 

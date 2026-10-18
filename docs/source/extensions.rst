@@ -138,6 +138,18 @@ dictionary while ordinary object collections could fail during reflection.
 Collection input is now rejected consistently. A null single-object source now
 throws ``ArgumentNullException`` rather than an accidental null-reference failure.
 
+Random Selection
+----------------
+
+``Pick(amount)`` uses ``Random.Shared``. Null input and negative amounts are
+rejected; amounts above the source count are capped. A zero amount does not
+enumerate the source. Other selections materialize the source once without
+modifying it. Positions are selected without replacement; duplicate input values
+can still appear in the result.
+
+Use ``source.Pick(amount, new Random(seed))`` for repeatable tests. An injected
+random instance must support the caller's concurrency pattern.
+
 Currency Example
 ----------------
 
