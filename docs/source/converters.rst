@@ -133,6 +133,31 @@ Property Processing And Display Metadata
 
    var processedValue = propertyProcessor.Process(property, person.Age, person.Age.GetType());
 
+Reference Cycles
+----------------
+
+``PropertyProcessor`` and ``Flattener`` share reference-identity tracking local to
+each operation. A reference encountered on the current recursion path is a cycle;
+the same object on two separate branches is processed twice normally.
+
+The default replaces a cyclic edge with ``[CYCLE]``, preserving the existing
+Flattener marker. Configure either concrete class through its new constructor:
+
+.. code-block:: csharp
+
+   var options = new ReferenceCycleOptions(ReferenceCycleBehavior.Skip);
+   var processor = new PropertyProcessor(new DisplayAnalyzer(), options);
+   var flattener = new Flattener(options);
+
+``Skip`` omits cyclic members or entries while retaining ordinary nulls.
+``Throw`` reports ``InvalidOperationException``. ``Sentinel`` uses the optional
+sentinel text supplied to ``ReferenceCycleOptions``. Settings are immutable and
+existing constructors and interfaces remain available.
+
+The dictionary flattener retains its existing key and opaque-leaf conventions;
+process arbitrary object graphs with PropertyProcessor before flattening them.
+AsString recursively walks supported dictionary and list containers.
+
 Notes
 -----
 
