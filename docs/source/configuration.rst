@@ -184,6 +184,18 @@ Next Step
 2. Read :doc:`sql` if your next package needs database configuration.
 3. Read :doc:`mailer` or :doc:`logger-file` if your next concern is outbound mail or operational logging.
 
+Mutable Settings
+----------------
+
+Configuration retains the supplied ``ConfigSettings``. Get, GetOrDefault,
+TryGetValue and Bind observe later additions, updates and removals. Exact keys
+take precedence. With case-insensitive lookup enabled, a missing exact key uses
+the first ordinal case-insensitive match in the dictionary's current enumeration
+order. Avoid keys differing only in case when that fallback would be ambiguous.
+
+Callers must synchronize reads and writes when sharing settings between threads.
+Bind does not take an atomic snapshot during concurrent mutation.
+
 Scalar Binding
 --------------
 
