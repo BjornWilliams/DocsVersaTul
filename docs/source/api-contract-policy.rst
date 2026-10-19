@@ -86,6 +86,16 @@ service bases. Supply valid data sources, conversion helpers, configuration and
 bulk services during construction, including in test doubles. A later operation
 is not the place to discover that one of these required services was null.
 
+File rotation's ``Archiver`` also requires its configuration and file handler at
+construction; null dependencies raise ``ArgumentNullException`` with their
+parameter names.
+
+Scheduler method-call constructors require their delegate or method metadata and
+any supplied parameter setter. Named/order setters require their collection or
+array. An empty bound-parameter array uses ``ArgumentException``; select the
+action-only overload for no bound parameters. Use an explicit no-op delegate for
+a placeholder and assign a non-null ``Action`` when replacing it.
+
 Cancellation
 ------------
 
