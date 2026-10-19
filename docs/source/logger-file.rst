@@ -175,6 +175,7 @@ then awaits asynchronous writing and disposal. It does not block the caller on f
 maintenance, but slow maintenance occupies a worker thread. Await every call; completion
 means the writer has flushed and closed, not that storage has performed a durable fsync.
 Exceptions propagate through the returned task and release the path gate. There is no
-background queue to flush on logger disposal. Synchronous Log methods remain blocking
-compatibility wrappers. Rotation checks run before append, so a single record may exceed
+background queue to flush on logger disposal. Synchronous Log methods use native file
+operations and run maintenance and parsing on the caller thread. Sync and async writes
+share the path gate. Rotation checks run before append, so a single record may exceed
 the configured size. Retention cleanup happens during rotation.

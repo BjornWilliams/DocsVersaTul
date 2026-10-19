@@ -97,13 +97,15 @@ Asynchronous Delivery
 built-in ``MailDispatcher`` and ``SmtpClientWrapper`` perform native asynchronous
 SMTP with nonblocking retry delays. Legacy custom ``IMailDispatcher`` instances
 remain supported through a worker-thread fallback; implement
-``IAsyncMailDispatcher`` to avoid blocked workers. Synchronous ``Log`` calls remain
-blocking compatibility wrappers. Keep the dispatcher and transport alive until
+``IAsyncMailDispatcher`` to avoid blocked workers. Synchronous ``Log`` calls use the
+required ``IMailDispatcher.SendMail`` directly, including on async-capable dispatchers.
+Both paths share serialization, throttling, retry ownership and dead-letter retention.
+Keep the dispatcher and transport alive until
 logging tasks complete, and serialize calls sharing one SMTP client.
 
-Retry ownership is described below;
-``LogAsync`` has no cancellation-token overload. Throttled calls complete after
-queueing, not delivery.
+Retry ownership is described below. Use ``ICancellableMailLogger`` for token-aware
+calls. Throttled calls complete after queueing, not delivery; cancelling an enqueue
+call does not cancel accepted work.
 
 Background Flush and Shutdown
 -----------------------------

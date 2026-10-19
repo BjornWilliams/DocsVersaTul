@@ -129,31 +129,61 @@ timestamp policy. Constructor and interface signatures are unchanged.
 Basic Example
 -------------
 
+Supply separate native synchronous and asynchronous database callbacks. Keep their
+dependencies alive through each call; the sink borrows them. The synchronous
+callback must use the provider's native synchronous API. It must not block the
+asynchronous callback. An async-only provider can reject synchronous logging and
+direct callers to ``LogAsync`` instead.
+
 .. code-block:: csharp
 
+   using System;
+   using System.Threading.Tasks;
    using VersaTul.Logger;
    using VersaTul.Logger.Contracts;
 
-   public class DatabaseLogger : ILogger
+   public sealed class DatabaseLogger : ILogger
    {
-       private readonly ILogParser logParser;
+       private readonly ILogParser parser;
+       private readonly Action<string> save;
+       private readonly Func<string, Task> saveAsync;
 
-       public DatabaseLogger(ILogParser logParser)
+       public DatabaseLogger(ILogParser parser, Action<string> save, Func<string, Task> saveAsync)
        {
-           this.logParser = logParser;
+           ArgumentNullException.ThrowIfNull(parser);
+           ArgumentNullException.ThrowIfNull(save);
+           ArgumentNullException.ThrowIfNull(saveAsync);
+           this.parser = parser;
+           this.save = save;
+           this.saveAsync = saveAsync;
        }
 
-       public void Log(Exception exception) => LogAsync(exception).GetAwaiter().GetResult();
-       public void Log(LogInfo logInfo) => LogAsync(logInfo).GetAwaiter().GetResult();
-       public void Log(LogInfo logInfo, Exception exception) => LogAsync(logInfo, exception).GetAwaiter().GetResult();
+       public void Log(Exception exception)
+       {
+           ArgumentNullException.ThrowIfNull(exception);
+           Log(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       }
 
-       public Task LogAsync(Exception exception) => LogAsync(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       public void Log(LogInfo logInfo) => Log(logInfo, null);
+
+       public void Log(LogInfo logInfo, Exception? exception)
+       {
+           ArgumentNullException.ThrowIfNull(logInfo);
+           save(parser.Parse(logInfo, exception, ParseFormat.Json));
+       }
+
+       public Task LogAsync(Exception exception)
+       {
+           ArgumentNullException.ThrowIfNull(exception);
+           return LogAsync(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       }
+
        public Task LogAsync(LogInfo logInfo) => LogAsync(logInfo, null);
 
-       public Task LogAsync(LogInfo logInfo, Exception exception)
+       public Task LogAsync(LogInfo logInfo, Exception? exception)
        {
-           var payload = logParser.Parse(logInfo, exception, ParseFormat.Json);
-           return SaveToDatabaseAsync(payload);
+           ArgumentNullException.ThrowIfNull(logInfo);
+           return saveAsync(parser.Parse(logInfo, exception, ParseFormat.Json));
        }
    }
 
