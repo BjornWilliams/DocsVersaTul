@@ -103,6 +103,12 @@ Both paths share serialization, throttling, retry ownership and dead-letter rete
 Keep the dispatcher and transport alive until
 logging tasks complete, and serialize calls sharing one SMTP client.
 
+Migration: dual-capability dispatchers must support their required native
+``SendMail`` implementation for synchronous logging. Use ``LogAsync`` for
+async-only delivery. Single-Exception overloads now reject null with
+``ArgumentNullException`` instead of ``NullReferenceException``. These changes
+require Major compatibility review.
+
 Retry ownership is described below. Use ``ICancellableMailLogger`` for token-aware
 calls. Throttled calls complete after queueing, not delivery; cancelling an enqueue
 call does not cancel accepted work.

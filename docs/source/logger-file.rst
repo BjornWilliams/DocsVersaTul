@@ -179,3 +179,8 @@ background queue to flush on logger disposal. Synchronous Log methods use native
 operations and run maintenance and parsing on the caller thread. Sync and async writes
 share the path gate. Rotation checks run before append, so a single record may exceed
 the configured size. Retention cleanup happens during rotation.
+
+Migration: review custom callback thread assumptions for synchronous calls.
+Single-Exception overloads require a non-null exception and now raise
+``ArgumentNullException`` for null; replace catches of the prior
+``NullReferenceException``. These changes require Major compatibility review.
