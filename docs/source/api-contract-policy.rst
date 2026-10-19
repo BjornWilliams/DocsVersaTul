@@ -140,3 +140,49 @@ its existing null-descriptor rejection. Concrete ``FileLogger`` and ``WebLogger`
 helpers additionally retain their null-normalization convenience, and
 ``LogParser`` can render an absent descriptor. Nullable annotations follow those
 individual contracts rather than advertising every sink as accepting null.
+
+Resource Ownership
+------------------
+
+Ownership follows the concrete API. Keep borrowed dependencies alive until all
+active operations complete; disposing a container of referenced values does not
+automatically dispose those values.
+
+Streams and files
+~~~~~~~~~~~~~~~~~
+
+* ``VersaTul.Compression``: Zipper borrows ZipStream input streams and returns new compressed or extracted MemoryStreams owned by the caller. Dispose every returned stream. Archiver borrows both the ZipArchive and input stream; the injected archiver is borrowed. Input positions are preserved by archive writes.
+* ``VersaTul.Handler.File``: FileUtility borrows injected file and directory wrappers. StreamFileInfo.LeaveOpen defaults to true: the caller retains its Content stream. Set LeaveOpen to false to transfer cleanup to Save/SaveAsync, including failure and cancellation. Returned text/results contain no open file handle.
+* ``VersaTul.Collection.Streamers``: BaseStreamer owns its bound reader and backing output stream. Rebinding or disposing it releases those resources; there is no reader leave-open option. GetFileStream returns that shared backing stream, borrowed until reset, rebinding or disposal. Collection elements are borrowed; their enumerator is owned. Compressor borrows inputs and returns a caller-owned compressed stream. StreamContainer only borrows stream references. FileConverter.Save consumes and disposes the supplied streamer after argument validation. Raw attachments returned by CompressTransport are caller-owned until transferred to a MailDispatcher; each attachment owns its content stream.
+
+Readers and database resources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* ``VersaTul.Data.FileReader``: A CSV reader owns its CsvReader and opened StreamReader. Dispose the returned reader. Text readers buffer input and return a caller-owned DataTableReader. A lazy directory read retains cleanup responsibility until enumeration completes: failure or early abandonment closes readers opened so far, including already yielded readers. After successful enumeration the caller owns all returned readers.
+* ``VersaTul.Data.EFCore``: BaseUnitOfWork owns its injected DbContext and disposes it. BaseRepository borrows the unit of work and context; it does not dispose either. Keep the unit of work alive while using deferred queries; returned entities are not automatically disposed.
+* ``VersaTul.Data.Sql``: SqlDbDataSource borrows its command factory and retry callbacks. A reader it returns owns the created command and non-transaction connection; the caller must dispose the reader. An externally supplied transaction retains its connection ownership. CommandFactory execution borrows supplied commands. BaseDataService transaction callbacks borrow the scoped transaction. ProcessReader currently closes its reader after successful processing; callers must still scope reader disposal, including callback failures.
+* ``VersaTul.Data.MsSql``: BulkCopy consumes its service for each started transaction attempt and disposes the service afterward. The default service owns the connection, bulk-copy wrapper, transaction and consumed source reader; its validator is borrowed. The default ValidDataReader owns its wrapped reader. Custom validator wrappers must document whether they own the source. Dispose is an operation-cycle cleanup; default service wrappers can be initialized again with Create for a later copy.
+* ``VersaTul.Data.MongoDB``: The default repository creates a MongoClient and collection using driver-managed client/pool lifetimes; it has no Dispose contract. Configuration, class maps and entity values are borrowed. Dispose query enumerators you create and keep their backing driver resources available through enumeration.
+
+Messages and clients
+~~~~~~~~~~~~~~~~~~~~
+
+* ``VersaTul.Mailer``: MailDispatcher borrows its SMTP client and template renderer. It owns one MailMessage per logical send; each raw Attachment transfers to that message when added and is disposed with it on success or failure. Retries reuse the same message and attachments. Never-attached attachments remain caller-owned. IMailAttachment payloads are borrowed and mapped to new message-owned attachments. Pre-cancelled async sends do not transfer attachments. SmtpClientWrapper owns its factory-created SmtpClient, borrows the factory and caller MailMessage, and must outlive active sends.
+* ``VersaTul.Logger.Web``: WebLogger borrows its factory, parser, configuration and clock callback. Each send owns and disposes its factory-created HttpClient, request and response. Factories must return clients safe for per-operation disposal. Complete active calls before releasing borrowed dependencies.
+* ``VersaTul.Logger.File``: FileLogger borrows configuration, parser and file utility. Each append owns its path-gate lease, FileStream and writer and releases them when the operation ends. Keep borrowed dependencies alive through awaited calls.
+* ``VersaTul.Logger.Mail``: MailLogger borrows its dispatcher, parser and configuration; it does not dispose the dispatcher or SMTP client. It owns its queue, worker and cancellation state. DisposeAsync drains accepted events before releasing owned worker resources; await it and active operations before disposing borrowed dependencies. Accepted queued events remain the logger responsibility independently of the enqueue call token.
+
+Callbacks and referenced values
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* ``VersaTul.Caching``: MemCacheProvider owns its internal MemoryCache. It borrows configuration, clock, logger factory, removal callbacks and cached values; expiration, removal and provider disposal do not dispose cached values. Await active operations before disposing the provider.
+* ``VersaTul.Task.Scheduler``: BaseTimer owns its System.Timers.Timer and subscription. Clock, storage, scheduled task objects and caller delegates are borrowed; disposing the timer does not dispose them. TimerTask owns active cancellation state and borrows its event, method and filter/callback targets. Callers manage their subscriptions and callback-resource lifetimes.
+* ``VersaTul.Pipeline.Infrastructure``: Pipeline steps, delegates and their captured values are borrowed and are not disposed by the pipeline. Keep them alive through execution; callers own any subscriptions, resources and concurrency coordination needed by their callbacks.
+* ``VersaTul.Display.Attributes``: Registered formatter delegates and objects are borrowed. Registration does not transfer disposal responsibility for a formatter or its captured resources. Keep those resources alive for every formatting call.
+* ``VersaTul.Configurations``: Configuration values are borrowed references. Snapshots copy the mapping, not the referenced objects, and do not acquire disposal responsibility for IDisposable values. Factories and callbacks remain caller-owned.
+* ``VersaTul.Configuration.Defaults``: Default configuration entries and referenced values are borrowed. Read-only snapshots do not clone or dispose referenced objects. Callers retain ownership of disposable values and resources captured by callbacks.
+
+Core contracts, converters, utilities and extension helpers borrow their inputs
+and referenced elements. They do not acquire disposal responsibility for those
+objects. Concrete resource implementations and their packed READMEs define any
+transfer. Always dispose enumerators and I/O resources you create.
