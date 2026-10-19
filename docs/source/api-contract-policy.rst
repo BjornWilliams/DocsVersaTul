@@ -221,3 +221,28 @@ the scheduler callback boundary when the unbound parameter is DateTimeOffset.
 * ``VersaTul.Task.Scheduler``: Unbound DateTimeOffset callback parameters receive the normalized UTC event instant. Framework parameters use exact type identity; a user type with the same short name is not a framework parameter. Existing DateTime APIs, unspecified-as-UTC boundary policy, local input parsing and calendar behavior remain unchanged. Scheduler persistence already writes invariant round-trip timestamps and accepts its documented legacy read formats.
 * ``VersaTul.Data.MsSql``: SQL identifier hints use ordinal case-insensitive matching while exact destination lookup remains ordinal and case sensitive. SQL error 208 identifies a missing table across server languages; the legacy English prefix remains an ordinal fallback. Command elapsed diagnostics use a monotonic stopwatch rather than wall-clock subtraction.
 * ``VersaTul.Collection.Streamers``: Compressed attachment labels retain their existing local date/time name shape. A DateTimeOffset sample and invariant numeric formatting define that label independently of culture. Output paths retain platform Path.Combine behavior; display formatting remains explicitly culture-selectable.
+
+SQL DateOnly values
+~~~~~~~~~~~~~~~~~~~
+
+``ParameterRules.DateOnly`` retains a string ``Value`` and now writes invariant
+Gregorian ``yyyy-MM-dd``. The SQL Server ``SqlParameter`` inherits the same rule.
+For example:
+
+.. code-block:: csharp
+
+   using System;
+   using System.Data;
+   using VersaTul.Data.Sql;
+
+   var parameter = new Parameter("when", new DateTime(2031, 4, 5),
+       DbType.Date, 0, ParameterDirection.Input, ParameterRules.DateOnly);
+   // parameter.Value is the string "2031-04-05" under every culture.
+
+Update exact-format comparisons and parsers that expected the former
+``ToShortDateString`` output. Read old persisted strings using their original
+culture; read new output using ``yyyy-MM-dd`` and invariant culture. Typed
+``DateTime`` input bypasses the display calendar. Legacy string input still parses
+with the current culture. This rule strips time without converting time zones.
+The output-format migration requires the Major compatibility review for
+``VersaTul.Data.Sql`` and independently for ``VersaTul.Data.MsSql``.
