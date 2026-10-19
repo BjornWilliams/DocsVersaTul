@@ -80,3 +80,52 @@ strings or a generic exception for unsupported operations. Check exception type
 and ``ParamName`` for argument failures; do not match localized framework message
 text. Required dependency guards run during construction or before operation
 enumeration, rather than allowing a delayed null-reference failure.
+
+Cancellation
+------------
+
+Existing signatures remain available. Select the token-aware overload or optional
+capability when an operation should observe cancellation:
+
+* ``ICancellableFileLogger`` covers the file path gate and asynchronous append.
+  Synchronous rotation is observed at operation boundaries and cannot be
+  interrupted after it starts. A cancelled append can leave partial output.
+* ``ICancellableMailLogger`` passes tokens to asynchronous dispatch and explicit
+  flushing. Unstarted batches stay queued; an interrupted attempted batch is
+  retained as a dead letter without retrying with the cancelled token. Once a
+  log call queues an event, the logger owns its eventual delivery independently
+  of that call's token. Disposing the logger drains accepted work.
+* ``ICancellableBulkCopy`` passes tokens through token-aware services, connection
+  opening, bulk writes and commit. Cancellation attempts rollback with an
+  uncancelled token and still disposes resources. The rethrown cancellation's
+  ``Data["BulkCopyResult"]`` contains failure and cleanup diagnostics.
+* ``ICancellableQueryRepository<TEntity>`` offers ``GetAllAsync`` and
+  ``GetAllNoTrackingAsync``. Distinct names avoid a collision with key lookup when
+  a repository's key type is ``CancellationToken``. Existing EF, MongoDB and SQL
+  token APIs remain available; derived SQL services also have token overloads
+  for reader, nonquery and scalar execution.
+* ``ICancellableZipper``, ``ICancellableArchiver`` and ``ICancellableCompressor``
+  cover archive chunks and streamer generation. Inputs remain borrowed and
+  failed output streams are cleaned up. Callers own successful compressed and
+  extracted streams.
+
+For example, the following helper uses the optional file capability:
+
+.. code-block:: csharp
+
+   using System.Threading;
+   using System.Threading.Tasks;
+   using VersaTul.Logger;
+   using VersaTul.Logger.File.Contracts;
+
+   static Task WriteLogAsync(ICancellableFileLogger logger, LogInfo entry,
+       CancellationToken cancellationToken)
+       => logger.LogAsync(entry, cancellationToken);
+
+Legacy injected services remain usable. When they have no token capability,
+cancellation is cooperative between calls; it cannot interrupt their in-flight
+synchronous or tokenless work. Cancellation is not a guarantee that a server
+did not accept a write or message. Completed in-memory task adapters, including
+the cache facade, do not acquire a new asynchronous lifetime merely because
+their return type is ``Task``. Framework disposal APIs retain their normal
+uncancelled cleanup contract.
