@@ -81,6 +81,11 @@ and ``ParamName`` for argument failures; do not match localized framework messag
 text. Required dependency guards run during construction or before operation
 enumeration, rather than allowing a delayed null-reference failure.
 
+This includes dependencies passed through primary constructors and abstract data
+service bases. Supply valid data sources, conversion helpers, configuration and
+bulk services during construction, including in test doubles. A later operation
+is not the place to discover that one of these required services was null.
+
 Cancellation
 ------------
 
