@@ -206,3 +206,18 @@ The optional ``ISourceReaderOwner`` capability adds no obligation to an existing
 validator implementation. For an owning wrapper, return its exact wrapped reader
 from ``SourceReader`` and implement idempotent disposal. A wrapper that borrows a
 source should keep the existing unmarked contract.
+
+Paths, Identifiers and Time Boundaries
+--------------------------------------
+
+Use platform path composition and ordinal comparison for machine identifiers.
+Human input/display culture is a separate contract from persisted formats.
+Legacy DateTime APIs remain available; an offset-bearing instant is supplied at
+the scheduler callback boundary when the unbound parameter is DateTimeOffset.
+
+* ``VersaTul.Handler.File``: File extensions are machine identifiers and use ordinal case-insensitive matching, including under Turkish culture. Paths continue to use platform path APIs and the existing contained-path rules.
+* ``VersaTul.Utilities``: PropertyMap exclusions use ordinal case-insensitive identifier matching. Human text conversion and explicitly culture-selectable scalar conversion keep their existing culture contracts.
+* ``VersaTul.Logger.File``: Archive names use one DateTimeOffset sample and invariant Gregorian yyyy_MM_dd-HH_mm_ss_fff formatting. Local daily rolling and local retention dates remain unchanged. Existing archives remain discoverable; new names no longer use a culture-specific calendar year.
+* ``VersaTul.Task.Scheduler``: Unbound DateTimeOffset callback parameters receive the normalized UTC event instant. Framework parameters use exact type identity; a user type with the same short name is not a framework parameter. Existing DateTime APIs, unspecified-as-UTC boundary policy, local input parsing and calendar behavior remain unchanged. Scheduler persistence already writes invariant round-trip timestamps and accepts its documented legacy read formats.
+* ``VersaTul.Data.MsSql``: SQL identifier hints use ordinal case-insensitive matching while exact destination lookup remains ordinal and case sensitive. SQL error 208 identifies a missing table across server languages; the legacy English prefix remains an ordinal fallback. Command elapsed diagnostics use a monotonic stopwatch rather than wall-clock subtraction.
+* ``VersaTul.Collection.Streamers``: Compressed attachment labels retain their existing local date/time name shape. A DateTimeOffset sample and invariant numeric formatting define that label independently of culture. Output paths retain platform Path.Combine behavior; display formatting remains explicitly culture-selectable.
