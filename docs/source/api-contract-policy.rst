@@ -129,3 +129,9 @@ did not accept a write or message. Completed in-memory task adapters, including
 the cache facade, do not acquire a new asynchronous lifetime merely because
 their return type is ``Task``. Framework disposal APIs retain their normal
 uncancelled cleanup contract.
+
+The common ``ILogger`` contract requires a log descriptor. ``MailLogger`` retains
+its existing null-descriptor rejection. Concrete ``FileLogger`` and ``WebLogger``
+helpers additionally retain their null-normalization convenience, and
+``LogParser`` can render an absent descriptor. Nullable annotations follow those
+individual contracts rather than advertising every sink as accepting null.
