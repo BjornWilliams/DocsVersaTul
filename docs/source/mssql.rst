@@ -111,7 +111,21 @@ Bulk-copy resource wrappers can be disposed safely after partial initialization 
 
 When a bulk-copy operation fails, the returned result keeps the original exception as the first failed result. Exceptions raised while reporting failure progress, rolling back, or disposing resources are recorded as additional failed results and do not replace the original failure.
 
-The synchronous ``DoCopy`` overloads are compatibility wrappers over the asynchronous implementation. They preserve the original exception type when synchronously waiting, but new code should prefer ``DoCopyAsync`` to avoid blocking.
+Synchronous DoCopy requires ISynchronousBulkCopyService with
+CanExecuteSynchronously = true. The default BulkCopyService supports it when its
+connection implements ISynchronousDatabaseConnection and its copy wrapper implements
+ISynchronousSqlBulkCopyWrapper. Default DatabaseConnection and SqlBulkCopyWrapper
+provide these native capabilities. CreateSynchronously, DoCopy, Commit and Rollback
+use native provider calls; no Tasks are blocked. Transaction result diagnostics keep
+their existing stage names, including DoCopyAsync/CommitAsync/RollbackAsync.
+
+Major migration: call DoCopyAsync for legacy async-only services/providers, or
+implement the optional capabilities with actual synchronous provider operations.
+Old interfaces and async/cancellation APIs are retained. Inputs are validated first;
+unsupported native capability raises NotSupportedException before starting an attempt,
+opening or disposing injected resources, or transferring source-reader ownership.
+Once an attempt starts, existing rollback, diagnostic and per-cycle cleanup rules
+apply. Native capability implementations must not conceal Task blocking.
 
 Each completed or failed copy result includes its elapsed duration. Failed results identify the stage that raised the exception (``Create``, ``DoCopyAsync``, ``ProgressCallback``, ``CommitAsync``, ``RollbackAsync``, or ``Dispose``); secondary rollback, progress, and disposal failures are recorded as separate failed results.
 

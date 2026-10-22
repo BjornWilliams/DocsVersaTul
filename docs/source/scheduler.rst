@@ -90,7 +90,23 @@ Basic Example
 Task-based Handler Contracts
 ----------------------------
 
-Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``ScheduledEventValueTaskHandler`` for a ``ValueTask``-returning handler. Both handlers receive a ``CancellationToken``. ``DelegateMethodCall`` and ``DynamicMethodCall`` implement ``IAsyncMethodCall``; call ``ExecuteAsync`` and await its result so returned Task and ValueTask failures are observable. Their ``IsAsync`` property identifies the Task/ValueTask path; synchronous delegates remain on the existing ``IMethodCall.Execute`` path. When a ``TimerTask`` executes an async method call, synchronized execution waits for completion and unsynchronized execution dispatches it in the background; either mode routes the original failure to the timer ``Error`` callback.
+Use ``ScheduledEventAsyncHandler`` for a ``Task``-returning handler or ``ScheduledEventValueTaskHandler`` for a ``ValueTask``-returning handler. Both handlers receive a ``CancellationToken``. ``DelegateMethodCall`` and ``DynamicMethodCall`` implement ``IAsyncMethodCall``; call ``ExecuteAsync`` and await its result so returned Task and ValueTask failures are observable. Their ``IsAsync`` property identifies the Task/ValueTask path; synchronous delegates remain on the existing ``IMethodCall.Execute`` path. TimerTask synchronized execution (SyncronizedEvent = true, the default) now
+requires ISynchronousMethodCall and invokes native synchronous work on the caller
+thread. Unsupported handlers report NotSupportedException through the existing
+isolated Error callback before invocation. DelegateMethodCall and DynamicMethodCall
+provide this capability for concrete non-awaitable return declarations. Task,
+ValueTask, async-void, object, ValueType and interface-returning handlers are rejected
+on this path because they cannot guarantee native synchronous completion.
+
+Major migration: set SyncronizedEvent = false for scheduled async/opaque-return
+handlers, or await TimerTask.ExecuteInternalAsync directly. It awaits returned Task
+and ValueTask completion and reports failures/cancellation through the supplied
+isolated error callback. Custom synchronous IMethodCall implementations must opt into
+ISynchronousMethodCall and guarantee native completion without starting hidden
+async work. Use Task/ValueTask signatures instead of async void, whose completion
+cannot be awaited. Existing IMethodCall.Execute APIs retain their raw return values.
+The legacy AddSyncronized spelling still selects the asynchronous scheduling path;
+its name and the default SyncronizedEvent value are retained.
 
 .. code-block:: csharp
 

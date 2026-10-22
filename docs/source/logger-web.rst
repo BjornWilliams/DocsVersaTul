@@ -123,7 +123,18 @@ cancellation. Do not re-enter a logger from its own delivery callbacks.
 Every call disposes its request/content, response/content, and factory-created
 client, including failure/cancellation paths. The factory owns pooled handler
 lifetimes. Custom factories must return clients suitable for per-call disposal.
-Synchronous Log methods remain blocking compatibility wrappers.
+Synchronous Log requires ISynchronousHttpClientFactory.CreateSynchronousClient
+and uses native HttpClient.Send. Ordinary IHttpClientFactory implementations remain
+supported by LogAsync. Unsupported synchronous factories raise NotSupportedException
+before creating a client, parsing or sending; no blocking fallback is used. Both
+paths share the request gate, signing/authentication and circuit-breaker state.
+
+Major migration: use LogAsync for async-only handler chains, or implement the new
+capability only after every handler supports native synchronous Send with equivalent
+authentication and policy behavior. Do not merely wrap an existing async-only
+factory: synchronous forwarding can bypass an async-only delegating handler.
+The logger owns each returned client, request and response. Single-Exception
+overloads reject null with ArgumentNullException instead of NullReferenceException.
 
 Endpoint URI Rules
 ------------------
@@ -208,3 +219,21 @@ duplicate headers, stale and future timestamps at window boundaries, concurrent 
 across receiver instances, store exhaustion/outage/restart, key rotation, and a lost
 response followed by retry. A repeated valid current-format body still verifies;
 receivers must not mistake that for replay resistance.
+
+Native synchronous factory example
+----------------------------------
+
+This minimal factory creates a native handler per call. Production factories can
+manage pooling while honoring per-client disposal and the complete handler policy.
+
+.. code-block:: csharp
+
+   using System.Net.Http;
+   using VersaTul.Logger.Web.Contracts;
+
+   public sealed class NativeLogClientFactory : ISynchronousHttpClientFactory
+   {
+       public HttpClient CreateClient(string name) => new HttpClient();
+       public HttpClient CreateSynchronousClient(string name)
+           => new HttpClient(new SocketsHttpHandler());
+   }
