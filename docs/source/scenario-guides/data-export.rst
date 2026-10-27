@@ -63,9 +63,9 @@ Create a streamer for the target format.
 
    using VersaTul.Collection.Streamers;
 
-   var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
+   using var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
 
-   using var fileStream = csvStreamer
+   var fileStream = csvStreamer
        .Create(orderRows, "orders-export")
        .GetFileStream();
 

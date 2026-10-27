@@ -160,11 +160,11 @@ Basic CSV Example
    var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
    var flattener = new Flattener();
 
-   var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
+   using var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
 
-      using var fileStream = csvStreamer
-         .Create(people, "people")
-         .GetFileStream();
+   var fileStream = csvStreamer
+      .Create(people, "people")
+      .GetFileStream();
 
 IDataReader Example
 -------------------
