@@ -8,6 +8,8 @@ Overview
 
 It is especially useful when your downstream workflow already expects ``IDataReader`` input, such as a bulk-copy pipeline or a tabular import process.
 
+The built-in readers support CSV and plain text. They do not parse JSON into tabular rows; reading a ``.json`` file or selecting the legacy JSON filter raises ``NotSupportedException``.
+
 Why Use This Package
 --------------------
 
