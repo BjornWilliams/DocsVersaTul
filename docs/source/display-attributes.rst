@@ -28,11 +28,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Display.Attributes
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Display.Attributes -Version latest
 
 Related Packages
 ----------------

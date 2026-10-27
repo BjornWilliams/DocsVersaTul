@@ -27,11 +27,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Pipeline.Infrastructure
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Pipeline.Infrastructure -Version latest
 
 Related Packages
 ----------------

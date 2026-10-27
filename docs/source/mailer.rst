@@ -35,11 +35,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Mailer
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Mailer -Version latest
 
 Related Packages
 ----------------

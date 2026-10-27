@@ -34,11 +34,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Logger.File
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Logger.File -Version latest
 
 Related Packages
 ----------------

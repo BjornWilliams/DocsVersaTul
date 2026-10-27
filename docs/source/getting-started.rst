@@ -68,11 +68,6 @@ Example using the .NET CLI:
 
    dotnet add package VersaTul.Configurations
 
-Example using the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Configurations -Version latest
 
 Paste This Example
 ------------------

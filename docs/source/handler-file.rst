@@ -28,11 +28,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Handler.File
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Handler.File -Version latest
 
 Related Packages
 ----------------

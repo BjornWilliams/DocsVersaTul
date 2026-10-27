@@ -28,11 +28,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Data.EFCore
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Data.EFCore -Version latest
 
 Related Packages
 ----------------

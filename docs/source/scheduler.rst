@@ -27,11 +27,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Task.Scheduler
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Task.Scheduler -Version latest
 
 Core Types And Concepts
 -----------------------
