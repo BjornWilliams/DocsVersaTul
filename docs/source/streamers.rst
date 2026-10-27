@@ -6,7 +6,7 @@ Overview
 
 ``VersaTul.Collection.Streamers`` turns in-memory collections or forward-only ``IDataReader`` sources into export streams such as CSV, tab-delimited text, JSON, and JSONL.
 
-The package is designed for workflows where a collection or row reader needs to be serialized to one destination, such as saving to disk, compressing into a zip archive, emailing as an attachment, or converting to an ``IDataReader`` for downstream processing. Each forward-only reader binding is single-use; materialize the source and create separate streamer bindings when the same data must be sent to multiple destinations.
+The package is designed for workflows where a collection or row reader needs to be serialized to one destination, such as saving to disk, compressing into a zip archive, emailing as an attachment, or converting to an ``IDataReader`` for downstream processing. Each forward-only reader binding is single-use: its first output consumes it. To send the same rows to several destinations, materialize the source or create a fresh reader and streamer binding for each output.
 
 Why Use This Package
 --------------------
