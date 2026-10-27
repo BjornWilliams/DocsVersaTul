@@ -84,19 +84,21 @@ Basic Repository Example
 
 .. code-block:: csharp
 
+   using System.Collections.Generic;
    using VersaTul.Data.MongoDB;
    using VersaTul.Data.MongoDB.Contracts;
 
    public class Car : Entity
    {
-       public string Make { get; set; }
-       public string Model { get; set; }
+       public string Make { get; set; } = string.Empty;
+       public string Model { get; set; } = string.Empty;
        public int Year { get; set; }
+       public IDictionary<string, object> ExtraElements { get; set; } = new Dictionary<string, object>();
    }
 
    public class CarMap : BaseMap<Car>
    {
-       public CarMap() : base("cars")
+        public CarMap() : base("cars", car => car.ExtraElements)
        {
        }
    }
@@ -112,6 +114,8 @@ Basic Repository Example
        {
        }
    }
+
+``BaseMap<TEntity>`` requires both a collection name and an accessor for an extra-elements member. The member captures BSON fields that are not represented by the current entity model, which is useful when documents can contain fields added by newer application versions. If that behavior is not needed, provide a custom ``IEntityMap<TEntity>`` implementation instead of mapping an unrelated property as extra elements.
 
 Filtering Example
 -----------------
