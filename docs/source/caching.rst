@@ -116,7 +116,8 @@ Async And Eviction Example
 
 .. code-block:: csharp
 
-   ICacheProviderWithEvents<Person> eventingCache = new MemCacheProvider<Person>(cacheConfig);
+   using var cacheOwner = new MemCacheProvider<Person>(cacheConfig);
+   ICacheProviderWithEvents<Person> eventingCache = cacheOwner;
 
    eventingCache.ItemRemovedDetailed += (_, args) =>
    {
@@ -125,6 +126,8 @@ Async And Eviction Example
 
    await eventingCache.SetAsync("profile:42", person, 120);
    var cached = await eventingCache.GetAsync("profile:42");
+
+The legacy ``ICacheProvider.ItemRemoved`` event uses a non-generic ``EventHandler`` and does not expose a key or removal reason. Use ``ItemRemovedDetailed`` when those typed values are needed.
 
 Notes
 -----
