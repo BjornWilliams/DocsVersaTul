@@ -122,9 +122,32 @@ Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Exis
 
 ``IntervalEvent`` validates its schedule at construction: intervals and finite counts must be greater than zero, an explicit end must be after the start, and the resulting schedule must remain within the supported ``DateTime`` range.
 
-``CronEvent`` uses a five-field cron dialect: minute ``0-59``, hour ``0-23``, day-of-month ``1-31``, month ``1-12``, and day-of-week ``0-6`` with Sunday represented by ``0``. Sunday may also be written as ``7``; ranges containing that alias are inclusive and wrap through Sunday (``0-7`` matches every day and ``5-7`` matches Friday through Sunday). If both day-of-month and day-of-week are restricted, the event matches when either field matches.
+``CronEvent`` uses a five-field cron dialect, in this order: minute ``0-59``, hour ``0-23``, day-of-month ``1-31``, month ``1-12``, and day-of-week ``0-7``. Fields support ``*`` wildcards, comma-separated values, ascending ranges, and positive ``/step`` values such as ``*/5`` or ``1-10/2``. Seconds, named months, and named weekdays are not supported. Sunday is ``0`` and the alias ``7`` also means Sunday; ranges containing ``7`` are inclusive (``0-7`` matches every day and ``5-7`` matches Friday through Sunday). If both day-of-month and day-of-week are restricted, they use OR semantics: either field may match.
 
-Cron next-event searches are bounded to five years of minute-by-minute candidates and return ``DateTime.MaxValue`` when no match or later representable time exists. Cron and interval event-list expansion is bounded to 100,000 occurrences; exceeding that limit raises ``InvalidOperationException`` instead of allowing an unbounded catch-up loop. Timer execution expands only the persisted last-run through the current signal window, so missed work is retried on restart within that window.
+``CronEvent`` has no time-zone setting and evaluates UTC schedule instants. UTC ``DateTime`` inputs stay UTC, local inputs are converted using the machine's local zone, and ``DateTimeKind.Unspecified`` inputs are treated as UTC. Convert a known wall-clock value with ``SchedulerTime.ConvertToUtc(localTime, timeZone)`` before passing it to the scheduler; invalid daylight-saving times and ambiguous repeated times are rejected.
+
+.. code-block:: csharp
+
+   using System;
+   using System.Globalization;
+   using VersaTul.Task.Scheduler.Events;
+
+   var weekdaysAtNineUtc = new CronEvent("0 9 * * 1-5");
+   var nextRunUtc = weekdaysAtNineUtc.NextEvent(
+       new DateTime(2026, 10, 26, 8, 59, 0, DateTimeKind.Utc),
+       includeStartTime: false);
+
+   Console.WriteLine(nextRunUtc.ToString("O", CultureInfo.InvariantCulture));
+
+Expected output:
+
+.. code-block:: text
+
+   2026-10-26T09:00:00.0000000Z
+
+Cron next-event searches are bounded to five years of minute-by-minute candidates and return ``DateTime.MaxValue`` when no match or later representable time exists. Cron and interval event-list expansion is bounded to 100,000 occurrences; exceeding that limit raises ``InvalidOperationException`` instead of allowing an unbounded catch-up loop. The timer expands scheduled occurrences from its last checkpoint through the current signal time; there is no separate configurable misfire policy that coalesces or drops that interval. ``LocalEventStorage`` is the default and keeps its checkpoint only in memory, so it cannot recover missed events after the process exits. Use durable ``FileEventStorage`` when restart catch-up is required; if its checkpoint is missing or invalid, it starts from the current UTC time rather than replaying older occurrences.
+
+When ``TimerTask.SyncronizedEvent`` is ``true`` (the default), a timer waits for each handler and invocations do not overlap. For asynchronous scheduling with ``SyncronizedEvent = false``, ``OverlapPolicy`` defaults to ``Allow``; ``Skip`` drops arrivals while work is active, ``Queue`` runs them in FIFO order, and ``CancelPrevious`` requests cancellation from the active handler and starts the replacement without waiting for that handler to finish. Cancellation is cooperative, so the handler must observe its token to stop promptly. ``MaxConcurrency`` can cap ``Allow`` and queue excess arrivals. These options control concurrent handler execution, not cron matching or which occurrences are generated.
 
 Built-in events implement ``IEventCollection.AddEvent(..., IList[DateTime])`` for mutable event output. The legacy ``IEvent.AddEvent(..., IEnumerable[DateTime])`` contract remains for compatibility; passing a non-list enumerable to that legacy overload produces a clear ``ArgumentException``, while scheduler execution uses the list-based contract.
 
