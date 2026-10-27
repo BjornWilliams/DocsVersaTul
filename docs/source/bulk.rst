@@ -65,6 +65,8 @@ Result Semantics
 
 ``BulkCopyResult.Results`` is initialized to an empty collection, so a newly constructed result can be queried safely. ``Success`` is ``true`` only when at least one copy result exists and every result completed without an error. An empty or null result collection is not considered a successful upload.
 
+These result types are data models; creating or populating them does not measure elapsed time or infer a failed stage. ``CopyResult.Elapsed`` defaults to zero and ``FailedStage`` defaults to ``null``. The SQL Server implementation in :doc:`mssql` fills elapsed time for its copy results and records the stage on failures. Other ``BulkCopy`` implementations must populate these fields themselves if they provide the same diagnostics.
+
 Key Capabilities
 ----------------
 
