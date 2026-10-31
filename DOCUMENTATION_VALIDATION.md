@@ -8,6 +8,14 @@ The content rewrite, internal link audit, and strict Sphinx HTML validation have
 
 Use this checklist when you want to validate the documentation end to end after content changes.
 
+## Pull request validation
+
+The `.github/workflows/documentation-samples.yml` workflow runs for every pull
+request. Its required `Build, run, and check sample output` job validates the
+snippet inventory, installs the exact dependencies in `docs/requirements.txt`,
+runs the strict Sphinx command below, then builds and checks the published-package
+samples. The `main` branch requires this status check before merge.
+
 ## Prerequisites
 
 1. Python 3.10 or later installed. If `python` is not on `PATH`, use the full interpreter path when creating the virtual environment.
