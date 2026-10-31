@@ -68,6 +68,19 @@ foreach ($entry in $entries) {
     }
 
     $pageText = [System.IO.File]::ReadAllText($pagePath)
+    $badgeBeginCount = [regex]::Matches($pageText, '(?m)^\.\. BEGIN VERSATUL GENERATED PACKAGE BADGES\r?$').Count
+    $badgeEndCount = [regex]::Matches($pageText, '(?m)^\.\. END VERSATUL GENERATED PACKAGE BADGES\r?$').Count
+    $expectedVersionBadge = "https://img.shields.io/nuget/v/${packageId}?logo=nuget&label=NuGet%20version"
+    $expectedDownloadsBadge = "https://img.shields.io/nuget/dt/${packageId}?logo=nuget&label=NuGet%20downloads"
+    $expectedNuGetTarget = "   :target: $expectedNuGetUrl"
+    if ($badgeBeginCount -ne 1 -or $badgeEndCount -ne 1 -or
+        -not $pageText.Contains($expectedVersionBadge, [System.StringComparison]::Ordinal) -or
+        -not $pageText.Contains($expectedDownloadsBadge, [System.StringComparison]::Ordinal) -or
+        -not $pageText.Contains('https://img.shields.io/badge/license-MIT-blue.svg', [System.StringComparison]::Ordinal) -or
+        ([regex]::Matches($pageText, [regex]::Escape($expectedNuGetTarget))).Count -ne 3) {
+        throw "Package page '$expectedPageName' is missing a version, download, or MIT badge with its NuGet target."
+    }
+
     $programInclude = ".. literalinclude:: ../samples/Packages/$packageId/Program.cs"
     $outputInclude = ".. literalinclude:: ../samples/Packages/$packageId/ExpectedOutput.txt"
     if ([regex]::Matches($pageText, '(?m)^\.\. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART\r?$').Count -ne 1 -or

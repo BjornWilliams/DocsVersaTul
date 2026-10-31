@@ -1,6 +1,22 @@
 Data Bulk
 =========
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Data.Bulk?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Data.Bulk
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Data.Bulk?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Data.Bulk
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Data.Bulk
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
 Overview
 --------
 

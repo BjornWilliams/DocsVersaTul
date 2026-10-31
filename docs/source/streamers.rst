@@ -1,6 +1,22 @@
 Collection Streamers
 ====================
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Collection.Streamers?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Collection.Streamers
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Collection.Streamers?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Collection.Streamers
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Collection.Streamers
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
 Overview
 --------
 

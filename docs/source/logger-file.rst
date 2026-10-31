@@ -1,6 +1,22 @@
 Logger File
 ===========
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Logger.File?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Logger.File
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Logger.File?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Logger.File
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Logger.File
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
 Overview
 --------
 

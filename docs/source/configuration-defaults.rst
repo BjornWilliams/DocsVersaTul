@@ -1,6 +1,22 @@
 Configuration Defaults
 ======================
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Configuration.Defaults?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Configuration.Defaults
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Configuration.Defaults?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Configuration.Defaults
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Configuration.Defaults
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
 Overview
 --------
 
