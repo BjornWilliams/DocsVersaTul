@@ -10,6 +10,10 @@ organization membership or sign-in may be required. The public
 contains the documentation and sample-validation workflow; it is not a public
 mirror of the library source.
 
+Use :doc:`support` for the public issue forms for bug reports, usage questions,
+and feature proposals. The public issue tracker accepts feedback about the
+packages; it does not provide access to the library source.
+
 Do not interpret a NuGet package's Source Link metadata as a promise that the
 code repository is anonymously browsable. Use the package's NuGet page for the
 published package and its symbols.

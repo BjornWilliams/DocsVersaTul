@@ -1,0 +1,35 @@
+name: Feature proposal
+description: Propose a capability or improvement for VersaTul.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Feature proposals are public. Describe the user problem without sharing private application data or vulnerability details.
+  - type: input
+    id: package
+    attributes:
+      label: Related package
+      description: Name a package or enter "ecosystem" if this affects several packages.
+      placeholder: VersaTul.Collection.Streamers
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the workflow or limitation you encountered.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to see?
+      description: Explain the desired outcome. A proposed API is optional.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility considerations
+      description: Mention migration, framework, or backward-compatibility requirements if known.

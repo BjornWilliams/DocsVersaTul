@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support and feedback guide
+    url: https://docsversatul.readthedocs.io/en/latest/support.html
+    about: Choose a public route for bugs, usage questions, and feature proposals.
+  - name: Security disclosure guidance
+    url: https://docsversatul.readthedocs.io/en/latest/security.html
+    about: Do not disclose vulnerability details publicly; request a private channel.

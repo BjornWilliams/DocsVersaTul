@@ -1,0 +1,53 @@
+name: Usage question
+description: Ask a public question about using a VersaTul package.
+title: "[Question]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This creates a public issue. Remove credentials, personal information, and private application data before posting.
+        Do not use public issues for vulnerability reports; follow https://docsversatul.readthedocs.io/en/latest/security.html.
+  - type: input
+    id: package
+    attributes:
+      label: NuGet package
+      description: Which package are you using?
+      placeholder: VersaTul.Caching
+    validations:
+      required: true
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: target-framework
+    attributes:
+      label: Target framework
+      options:
+        - .NET 8
+        - .NET 9
+        - .NET 10
+        - Other
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: What are you trying to do?
+      description: Describe your goal and the point where you are stuck.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Relevant code or configuration
+      description: Include a minimal example with secrets and private data removed.
+      render: csharp
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?

@@ -13,15 +13,15 @@ details there.
      - Visibility
      - What to include
    * - Bug report
-     - `Open a public bug report <https://github.com/BjornWilliams/DocsVersaTul/issues/new/choose>`_
+     - `Open a public bug report <https://github.com/BjornWilliams/DocsVersaTul/issues/new?template=bug_report.yml>`_
      - Public
      - Affected package and version, target framework, expected and actual result, and a minimal reproduction without secrets.
    * - Usage question
-     - `Ask a public usage question <https://github.com/BjornWilliams/DocsVersaTul/issues/new/choose>`_
+     - `Ask a public usage question <https://github.com/BjornWilliams/DocsVersaTul/issues/new?template=usage_question.yml>`_
      - Public
      - Package and version, relevant code/configuration with secrets removed, and the result you expected.
    * - Feature proposal
-     - `Propose a feature <https://github.com/BjornWilliams/DocsVersaTul/issues/new/choose>`_
+     - `Propose a feature <https://github.com/BjornWilliams/DocsVersaTul/issues/new?template=feature_request.yml>`_
      - Public
      - User problem, the desired outcome, and any compatibility constraints.
    * - Security disclosure
