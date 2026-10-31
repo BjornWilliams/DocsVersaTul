@@ -36,6 +36,11 @@ Install the package with the .NET CLI:
 
   dotnet add package VersaTul.Data.FileReader
 
+Framework assets
+----------------
+
+As checked on 2026-10-31, the latest published ``VersaTul.Data.FileReader`` package is version 1.0.9 and contains a ``net8.0`` asset only. NuGet lists ``net9.0`` and ``net10.0`` as computed-compatible from that lower asset; they are not direct assets in version 1.0.9. The current source branch targets and tests all three TFMs, but that source matrix is not part of the published 1.0.9 package. Check the exact `NuGet version page <https://www.nuget.org/packages/VersaTul.Data.FileReader/1.0.9>`_ and the :doc:`compatibility` page before selecting a target.
+
 
 Related Packages
 ----------------

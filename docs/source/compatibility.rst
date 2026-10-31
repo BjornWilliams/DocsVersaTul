@@ -63,6 +63,25 @@ Framework and package wording
 
 Use the exact package version's included assets to decide whether that package is directly targeted for your runtime. A NuGet ``computed-compatible`` result alone is not evidence that the package version contains a native TFM asset or was directly tested for it.
 
+Package-version exceptions
+--------------------------
+
+Published package assets can lag behind the current source TFM matrix. The following exception was checked against NuGet on 2026-10-31:
+
+.. list-table:: Verified published package asset exception
+   :header-rows: 1
+
+   * - Package version
+     - Included target framework assets
+     - NuGet computed compatibility
+     - Current VersaTul source
+   * - ``VersaTul.Data.FileReader`` 1.0.9, the latest published version shown on the review date
+     - ``net8.0`` only
+     - ``net9.0`` and ``net10.0`` are computed from the lower ``net8.0`` asset
+     - The current source branch directly targets and tests ``net8.0``, ``net9.0``, and ``net10.0``; those newer assets are not in published version 1.0.9
+
+See the exact `NuGet Gallery page for VersaTul.Data.FileReader 1.0.9 <https://www.nuget.org/packages/VersaTul.Data.FileReader/1.0.9>`_ before choosing an asset. NuGet's compatibility list is not a substitute for the package page's ``Included target framework(s)`` list. Check the exact version of every package you install because asset sets can change between versions.
+
 VersaTul transition support
 ---------------------------
 
@@ -93,7 +112,7 @@ Practical guidance
 2. When upgrading Entity Framework, upgrade EF Core and its provider packages together and review the `EF Core 10 changes <https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-10.0/whatsnew>`_.
 3. For SQL Server-specific features, prefer :doc:`mssql` over trying to stretch :doc:`sql` into a SQL Server-only role.
 4. For provider flexibility, prefer :doc:`sql` first and move to :doc:`mssql` only when the requirement becomes SQL Server-specific.
-5. If your workflow depends on file-based import, check :doc:`file-reader`; FileReader now follows the same target matrix as the other packages.
+5. If your workflow depends on file-based import, check :doc:`file-reader` and the exact NuGet version's included target frameworks; published ``VersaTul.Data.FileReader`` 1.0.9 contains only ``net8.0``.
 
 Compatibility expectations by package style
 --------------------------------------------
