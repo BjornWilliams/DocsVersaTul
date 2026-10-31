@@ -1,9 +1,16 @@
 # Configuration file for the Sphinx documentation builder.
 
+from pathlib import Path
+
 project = "VersaTul Documentation"
 copyright = "2026, VersaTul"
 author = "Bjorn Williams"
-release = "Current"
+# DocsVersaTul owns one docs release identifier; NuGet packages keep their
+# independent package-family versions. Update docs/RELEASE for a docs release.
+release_file = Path(__file__).resolve().parents[1] / "RELEASE"
+release = release_file.read_text(encoding="utf-8").strip()
+if not release or release.casefold() in {"current", "latest"}:
+    raise ValueError(f"Set a dated docs release in {release_file}")
 version = release
 
 extensions = [
