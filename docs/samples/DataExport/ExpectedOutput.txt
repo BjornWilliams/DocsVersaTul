@@ -1,0 +1,5 @@
+people.csv:
+Name,Age
+Ada,37
+people.json:
+[{"name":"Ada","age":37}]

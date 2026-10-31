@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks></PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VersaTul.Data.FileReader" />
+    <PackageReference Include="VersaTul.Data.Bulk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures\people.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
