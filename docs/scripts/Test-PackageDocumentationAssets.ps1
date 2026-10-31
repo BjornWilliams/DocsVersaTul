@@ -9,18 +9,23 @@ $root = (Resolve-Path -LiteralPath $DocsRoot).Path
 $sourceRoot = Join-Path $root 'docs/source'
 $samplesRoot = Join-Path $root 'docs/samples/Packages'
 $inventoryPath = Join-Path $sourceRoot 'package-inventory.json'
+$versionStatusPath = Join-Path $sourceRoot 'package-version-status.json'
 $inventoryPagePath = Join-Path $sourceRoot 'package-inventory.rst'
 $indexPath = Join-Path $sourceRoot 'index.rst'
 
-foreach ($path in @($sourceRoot, $samplesRoot, $inventoryPath, $inventoryPagePath, $indexPath)) {
+foreach ($path in @($sourceRoot, $samplesRoot, $inventoryPath, $versionStatusPath, $inventoryPagePath, $indexPath)) {
     if (-not (Test-Path -LiteralPath $path)) {
         throw "Required package documentation asset was not found: $path"
     }
 }
 
 $entries = @([System.IO.File]::ReadAllText($inventoryPath) | ConvertFrom-Json)
+$versionStatusEntries = @([System.IO.File]::ReadAllText($versionStatusPath) | ConvertFrom-Json)
 if ($entries.Count -ne 25) {
     throw "Expected 25 package inventory entries; found $($entries.Count)."
+}
+if ($versionStatusEntries.Count -ne $entries.Count) {
+    throw "Expected one package version status entry per package; found $($versionStatusEntries.Count)."
 }
 
 $packageIds = @($entries | ForEach-Object { [string]$_.PackageId })
@@ -30,9 +35,37 @@ if (@($packageIds | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count -gt
 }
 
 $expectedPages = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+$versionStatusByPackage = @{}
+foreach ($statusEntry in $versionStatusEntries) {
+    $packageId = [string]$statusEntry.PackageId
+    $version = [string]$statusEntry.LastVerifiedVersion
+    $verifiedOn = [string]$statusEntry.VerifiedOn
+    $source = [string]$statusEntry.VerificationSource
+    $verifiedDate = [DateTime]::MinValue
+    if ([string]::IsNullOrWhiteSpace($packageId) -or $versionStatusByPackage.ContainsKey($packageId) -or
+        $version -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$' -or
+        -not [DateTime]::TryParseExact($verifiedOn, 'yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::None, [ref]$verifiedDate) -or
+        [string]::IsNullOrWhiteSpace($source)) {
+        throw "Package version status metadata is invalid or duplicated for '$packageId'."
+    }
+    if ($source -ceq 'NuGet Gallery') {
+        if ([string]$statusEntry.VersionPageUrl -cne "https://www.nuget.org/packages/$packageId/$version") {
+            throw "Package '$packageId' has an invalid NuGet version page URL."
+        }
+    }
+    elseif ($null -ne $statusEntry.VersionPageUrl) {
+        throw "Package '$packageId' must not link to an unverified version page."
+    }
+    $versionStatusByPackage[$packageId] = $statusEntry
+}
+
 $inventoryPage = [System.IO.File]::ReadAllText($inventoryPagePath)
 foreach ($entry in $entries) {
     $packageId = [string]$entry.PackageId
+    if (-not $versionStatusByPackage.ContainsKey($packageId)) {
+        throw "Package '$packageId' is missing last-verified version metadata."
+    }
+    $versionStatus = $versionStatusByPackage[$packageId]
     $expectedProjectPath = "$packageId/$packageId.csproj"
     $expectedReadmePath = "$packageId/Assets/README.md"
     $expectedSamplePath = "docs/samples/Packages/$packageId/Program.cs"
@@ -81,6 +114,34 @@ foreach ($entry in $entries) {
         throw "Package page '$expectedPageName' is missing a version, download, or MIT badge with its NuGet target."
     }
 
+    $statusBeginCount = [regex]::Matches($pageText, '(?m)^\.\. BEGIN VERSATUL GENERATED PACKAGE STATUS\r?$').Count
+    $statusEndCount = [regex]::Matches($pageText, '(?m)^\.\. END VERSATUL GENERATED PACKAGE STATUS\r?$').Count
+    $expectedMaintenance = '**Maintenance:** Community maintained; support is best-effort with no published response SLA.'
+    $version = [string]$versionStatus.LastVerifiedVersion
+    $verifiedOn = [string]$versionStatus.VerifiedOn
+    $versionLine = if ([string]$versionStatus.VersionPageUrl) {
+        "**Last verified published version:** ``$version`` on ``$verifiedOn`` (NuGet Gallery)."
+    }
+    else {
+        "**Last version found in the local NuGet cache:** ``$version`` (checked ``$verifiedOn``)."
+    }
+    if ($statusBeginCount -ne 1 -or $statusEndCount -ne 1 -or
+        -not $pageText.Contains($expectedMaintenance, [System.StringComparison]::Ordinal) -or
+        -not $pageText.Contains($versionLine, [System.StringComparison]::Ordinal)) {
+        throw "Package page '$expectedPageName' is missing its maintenance status or last-verified version."
+    }
+    $expectedVersionDetails = if ([string]$versionStatus.VersionPageUrl) {
+        ('`NuGet version details <{0}>`_.' -f $versionStatus.VersionPageUrl)
+    }
+    if ([string]$versionStatus.VersionPageUrl -and
+        -not $pageText.Contains($expectedVersionDetails, [System.StringComparison]::Ordinal)) {
+        throw "Package page '$expectedPageName' is missing its verified NuGet version link."
+    }
+    if (-not [string]$versionStatus.VersionPageUrl -and
+        -not $pageText.Contains("Verification note: $($versionStatus.VerificationSource). Use the NuGet badge above for the current listing.", [System.StringComparison]::Ordinal)) {
+        throw "Package page '$expectedPageName' is missing the version verification limitation."
+    }
+
     $programInclude = ".. literalinclude:: ../samples/Packages/$packageId/Program.cs"
     $outputInclude = ".. literalinclude:: ../samples/Packages/$packageId/ExpectedOutput.txt"
     if ([regex]::Matches($pageText, '(?m)^\.\. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART\r?$').Count -ne 1 -or
@@ -122,4 +183,4 @@ if ([System.IO.File]::ReadAllText($indexPath) -notmatch '(?m)^\s+package-invento
     throw 'The public Sphinx index does not link to package-inventory.'
 }
 
-Write-Output "Package documentation assets passed: $($entries.Count) package mappings, pages, samples, framework lists, and NuGet links; no orphaned pages or samples."
+Write-Output "Package documentation assets passed: $($entries.Count) package mappings, badges, verified-version status, pages, samples, and NuGet links; no orphaned pages or samples."

@@ -17,6 +17,16 @@ Logger Mail
 
 .. END VERSATUL GENERATED PACKAGE BADGES
 
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last version found in the local NuGet cache:** `1.0.19` (checked `2026-10-31`).
+
+Verification note: Local NuGet cache; live NuGet lookup was unavailable. Use the NuGet badge above for the current listing.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
