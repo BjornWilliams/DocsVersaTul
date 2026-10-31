@@ -95,9 +95,16 @@ listener.Stop();
 var messageText = await capturedMessage.Task.WaitAsync(TimeSpan.FromSeconds(10));
 await server;
 
-if (!sent || !messageText.Contains("Subject: Sample notice", StringComparison.Ordinal))
+var expectedMessageFields = new[]
 {
-    throw new InvalidOperationException("The SMTP server did not capture the expected message.");
+    "From: alerts@example.test",
+    "To: ops@example.test",
+    "Subject: Sample notice",
+    "The local SMTP sample is working."
+};
+if (!sent || expectedMessageFields.Any(field => !messageText.Contains(field, StringComparison.Ordinal)))
+{
+    throw new InvalidOperationException("The SMTP server did not capture the expected sender, recipient, subject, and body.");
 }
 
 Console.WriteLine("SMTP test server accepted the message.");

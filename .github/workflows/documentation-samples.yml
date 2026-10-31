@@ -1,0 +1,32 @@
+name: Documentation samples
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/documentation-samples.yml'
+      - 'docs/samples/**'
+      - 'docs/source/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  samples:
+    name: Build, run, and check sample output
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out documentation
+        uses: actions/checkout@v7
+
+      - name: Set up directly supported .NET SDKs
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Validate published-package samples
+        shell: pwsh
+        run: ./docs/samples/Invoke-PublishedSampleValidation.ps1

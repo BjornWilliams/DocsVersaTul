@@ -23,10 +23,13 @@ try
 
     await logger.LogAsync(new LogInfo(LogLevel.Information, "Startup", "Application started"));
 
-    var contents = await File.ReadAllTextAsync(configuration.FullLogFileName);
-    if (!contents.Contains("Application started", StringComparison.Ordinal))
+    var logLines = await File.ReadAllLinesAsync(configuration.FullLogFileName);
+    if (logLines.Length != 1 ||
+        !logLines[0].Contains("LogLevel\tInformation", StringComparison.Ordinal) ||
+        !logLines[0].Contains("CategoryName\tStartup", StringComparison.Ordinal) ||
+        !logLines[0].Contains("LogMessage\tApplication started", StringComparison.Ordinal))
     {
-        throw new InvalidOperationException("The file did not contain the written log record.");
+        throw new InvalidOperationException("The file did not contain exactly the expected log record.");
     }
 
     Console.WriteLine("Wrote one log record.");

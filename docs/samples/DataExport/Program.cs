@@ -33,10 +33,12 @@ try
 
     var savedCsv = (await File.ReadAllTextAsync(csvPath)).TrimEnd();
     var savedJson = await File.ReadAllTextAsync(jsonPath);
-    if (!savedCsv.Contains("Ada", StringComparison.Ordinal) ||
-        !savedJson.Contains("\"name\":\"Ada\"", StringComparison.Ordinal))
+    var expectedCsv = string.Join(Environment.NewLine, "Age,Name", "37,Ada");
+    const string expectedJson = "[{\"name\":\"Ada\",\"age\":37}]";
+    if (!string.Equals(savedCsv, expectedCsv, StringComparison.Ordinal) ||
+        !string.Equals(savedJson, expectedJson, StringComparison.Ordinal))
     {
-        throw new InvalidOperationException("The export files did not contain the expected person.");
+        throw new InvalidOperationException("The export files did not match the expected CSV and JSON content.");
     }
 
     Console.WriteLine("people.csv:");
