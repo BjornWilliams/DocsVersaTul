@@ -23,7 +23,7 @@ so an unavailable external site does not block documentation authoring.
 
 ## Prerequisites
 
-1. Python 3.10 or later installed. If `python` is not on `PATH`, use the full interpreter path when creating the virtual environment.
+1. Python 3.12 installed. Read the Docs and the pull-request workflow both select Python 3.12.
 2. `pip` available.
 3. The dependencies from `docs/requirements.txt` installed in the active environment.
 
@@ -32,6 +32,7 @@ so an unavailable external site does not block documentation authoring.
 From the repository root:
 
 ```console
+python --version
 python -m venv .venv
 .venv\Scripts\activate
 python -m pip install --upgrade pip
@@ -102,9 +103,12 @@ When the build fails:
 3. Fix malformed tables and literal blocks after that.
 4. Re-run the strict build until it completes cleanly.
 
-## Current Environment Note
+## Toolchain parity
 
-During the recent modernization work, strict validation completed successfully after using the real Python interpreter path directly and upgrading the docs toolchain to Python 3.14-compatible versions.
+The hosted build and pull-request workflow both use Python 3.12. The exact Sphinx
+version, 9.1.0, and the theme/search extensions are pinned in
+`docs/requirements.txt`. Use Python 3.12 locally and install that requirements
+file to validate with the same toolchain.
 
 If `python` resolves only to the Microsoft Store alias on Windows, use the registered interpreter path instead of the alias when creating or invoking the local virtual environment.
 
