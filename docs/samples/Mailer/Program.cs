@@ -36,6 +36,7 @@ var server = Task.Run(async () =>
                 readingMessage = false;
                 capturedMessage.TrySetResult(message.ToString());
                 await writer.WriteLineAsync("250 Message accepted");
+                break;
             }
             else
             {
