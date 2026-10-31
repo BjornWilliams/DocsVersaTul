@@ -93,6 +93,7 @@ Start Here
    scenario-guides/index
    recommended-paths
    compatibility
+   dotnet-10-upgrade
    api-contract-policy
    snippet-inventory
    faq

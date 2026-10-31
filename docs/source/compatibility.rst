@@ -92,11 +92,7 @@ VersaTul will directly target, build, and test ``net8.0`` and ``net9.0`` transit
 Migration before .NET 8/9 support ends
 --------------------------------------
 
-1. Install the latest serviced .NET 10 SDK and runtime. If the repository pins an SDK in ``global.json``, update that pin.
-2. Change application and test projects from ``net8.0`` or ``net9.0`` to ``net10.0``.
-3. Upgrade Entity Framework Core and all provider packages together to the 10.x line. Review the `EF Core 10 changes <https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-10.0/whatsnew>`_.
-4. Restore and build the application, run its tests on .NET 10, and smoke its database providers and hosting/deployment paths.
-5. Choose VersaTul packages that directly target ``net10.0``. Check each package's dependency graph and migration notes; a lower TFM asset being compatible with .NET 10 is not proof that the package was directly tested there.
+Follow the :doc:`dotnet-10-upgrade` guide to update the SDK, target framework, framework-specific dependencies, package assets, tests, and deployment runtime. Move production applications to ``net10.0`` before .NET 8 and .NET 9 reach Microsoft's end of support on 2026-11-10.
 
 Package and dependency notes
 ----------------------------
