@@ -8,9 +8,10 @@ questions, and feature proposals.
 The repository's private vulnerability-reporting setting could not be verified
 with the available read-only repository connection. Open the affected
 package's page from the :doc:`package-catalog` and use its **Contact owners**
-route to ask the maintainer for a private disclosure channel. Do not include
+route only to request a private disclosure channel. Share vulnerability details
+only after the maintainer confirms that the channel is private. Do not include
 exploit details, credentials, or sensitive data in a public issue or in a
-request that is not private.
+contact request whose privacy is unknown.
 
 The documentation repository is public, while the library source repository is
 hosted separately in Azure Repos; access to that repository may require sign-in.
