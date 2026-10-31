@@ -44,6 +44,7 @@ Step 1: Read The File
 Start by turning the CSV file into an ``IDataReader``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.FileReader;
 
@@ -63,6 +64,7 @@ Step 2: Define Column Mappings
 Map the incoming columns to the destination table.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Bulk;
 
@@ -83,6 +85,7 @@ Step 3: Execute The Upload
 If the destination is SQL Server, hand the prepared copy detail to the ``VersaTul.Data.MsSql`` bulk uploader.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.MsSql.Bulk;
 
@@ -102,6 +105,27 @@ When this workflow is wired correctly:
 1. The file-reader step opens the file without custom parsing code in your service layer.
 2. The bulk-copy step validates the mapping shape before upload.
 3. The SQL Server upload reports progress and completes as one deliberate import operation.
+
+Runnable Sample
+---------------
+
+The complete sample is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../../samples/FileImport/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+The sample reads this checked-in CSV fixture:
+
+.. literalinclude:: ../../samples/FileImport/Fixtures/people.csv
+   :language: text
+   :caption: people.csv
+
+Its expected console output is:
+
+.. literalinclude:: ../../samples/FileImport/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
 
 Why This Workflow Helps Adoption
 --------------------------------

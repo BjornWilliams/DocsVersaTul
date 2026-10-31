@@ -28,11 +28,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Data.EFCore
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Data.EFCore -Version latest
 
 Related Packages
 ----------------
@@ -44,10 +39,10 @@ Core Types And Concepts
 -----------------------
 
 ``BaseRepository<TEntity, TKey>``
-   Reusable EF Core repository base class with sync and async CRUD support.
+   Reusable EF Core repository base class with sync and async CRUD support. Lookup methods return nullable entity results when no matching row exists.
 
 ``BaseUnitOfWork``
-   Reusable unit-of-work base class that wraps a ``DbContext`` and provides ``Commit()``, ``CommitAsync()``, and ``Rollback()``.
+   Reusable unit-of-work base class that wraps a ``DbContext`` and provides ``Commit()``, ``CommitAsync()``, cancellation-aware ``CommitAsync(cancellationToken)``, ``DiscardChanges()``, and the compatibility alias ``Rollback()``.
 
 ``IUnitOfWork``
    EF Core unit-of-work contract extending the broader data contract model.
@@ -65,11 +60,28 @@ Key Capabilities
 2. Repositories expose ``AsQueryable()``, ``AsNoTrackingQueryable()``, and async enumeration.
 3. Query specifications can be applied to queryable and async read methods.
 4. ``BaseUnitOfWork`` centralizes save and rollback behavior over the EF Core change tracker.
+5. ``CommitAsync(cancellationToken)`` forwards cancellation to EF Core's ``SaveChangesAsync``.
+
+Configuration Fields
+--------------------
+
+``DataConfiguration`` keeps provider identity separate from connection strings. Set ``EfDbConnectionName`` to the key containing the default connection string and, when provider metadata is needed, set ``EfDbProviderName`` to the provider name. A named connection can use a ``{connectionName}:ProviderName`` setting. EF Core itself selects its provider through the application's ``DbContext`` configuration.
+
+Transaction And Change-Tracker Reset
+------------------------------------
+
+``DiscardChanges()`` resets pending EF Core change-tracker state: added entities are detached, modified and deleted entities are reloaded, and unchanged or detached entities are left untouched. ``Rollback()`` remains a compatibility alias for this tracker reset. It does not undo a database transaction. For transaction ownership, use EF Core's native ``unitOfWork.DataContext.Database.BeginTransaction()`` and commit or roll back the returned ``IDbContextTransaction``.
+
+Nullable Lookup Results
+-----------------------
+
+``Find``, ``FindAsync``, ``Get``, and ``GetAsync`` return nullable entity results when no matching row exists. Check the result for ``null`` before accessing entity members.
 
 Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using Microsoft.EntityFrameworkCore;
    using VersaTul.Data.Contracts;
@@ -121,6 +133,7 @@ Specification Example
 ---------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using System.Linq.Expressions;
@@ -137,6 +150,42 @@ Specification Example
 Notes
 -----
 
-1. ``Rollback()`` reloads tracked entities from the database; it is not a database transaction rollback abstraction by itself.
+1. ``Rollback()`` resets pending change-tracker state: added entities are detached, modified and deleted entities are reloaded from the database, and unchanged or detached entities are left untouched. It is not a database transaction rollback abstraction by itself.
 2. ``AsNoTrackingQueryable()`` and ``GetNoTrackingAsync()`` are useful for read-only paths.
 3. This package is a good fit when you want to enforce repository patterns consistently around EF Core rather than expose raw ``DbContext`` everywhere.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Repository and unit-of-work abstractions for Entity Framework Core, with synchronous and asynchronous data operations.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.EFCore
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.EFCore/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.EFCore minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.EFCore/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -35,11 +35,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Data.Sql
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Data.Sql -Version latest
 
 Related Packages
 ----------------
@@ -104,12 +99,64 @@ Key Capabilities
 4. Uses ``BaseDataService.ProcessReader()`` to map one or many result sets into application models.
 5. Supports both stored procedures and plain SQL text commands.
 
+Transaction Lifecycle
+---------------------
+
+``BaseDataService`` owns the connection and transaction created by ``UseTransaction`` and ``UseTransactionAsync``. It is the single transaction owner: use the supplied transaction when creating commands, and do not commit or roll it back inside the handler. Manually committing or rolling back inside the handler is unsupported; the implementation does not inspect provider-specific transaction state to accommodate a second owner. A successful handler is committed exactly once. If a handler throws, or an asynchronous handler is canceled, the transaction is rolled back and the handler failure is propagated when rollback succeeds. If rollback also fails, the original handler exception is rethrown and the rollback exception is attached to ``Exception.Data`` under ``VersaTul.Data.Sql.Transaction.RollbackException``. Asynchronous overloads dispatch through the provider's ``OpenAsync``, ``CommitAsync``, and ``RollbackAsync`` members; the supplied cancellation token is used for opening and committing, while rollback uses a non-cancelable cleanup token. Result-returning overloads return the handler result after the commit succeeds.
+
+Resource Lifecycle Matrix
+-------------------------
+
+The following ownership rules apply to the synchronous and asynchronous execution paths:
+
+.. list-table:: SQL resource ownership
+   :header-rows: 1
+   :widths: 22 32 46
+
+   * - Operation
+     - Resources created or used
+     - Ownership and disposal boundary
+   * - ``CreateConnection``
+     - A new provider connection; it is initially unopened.
+     - The caller owns the returned connection and must dispose it. The package does not open, close, or dispose it.
+   * - ``CreateCommand``
+     - A command and, when the ``DataCommand`` has no transaction, a new connection. A transaction-bound command uses the transaction's connection.
+     - The caller owns a directly created command. The caller also owns and must dispose its non-transaction connection; a transaction scope owns a transaction-bound connection.
+   * - ``Read``
+     - A command, connection, and forward-only ``DbDataReader``.
+     - The caller owns the returned reader and must dispose it. The command and package-created connection remain alive until reader disposal, which releases them exactly once. A reader using a supplied transaction must be disposed before the transaction scope ends.
+   * - ``ReadAsync``
+     - The same resources as ``Read``, opened and executed through provider async APIs.
+     - The caller owns and must dispose the returned reader. The cancellation token applies to the asynchronous open/execute operation; reader disposal releases the command and package-created connection.
+   * - ``Write`` / ``ExecuteScalar``
+     - A command and package-created connection, unless a transaction supplies the connection.
+     - The package opens, executes, and disposes the command and any package-created connection before returning. A supplied transaction and its connection remain owned by the transaction scope.
+   * - ``WriteAsync`` / ``ExecuteScalarAsync``
+     - The same resources as the synchronous write and scalar paths.
+     - The package uses provider async execution with the supplied cancellation token and disposes the command and any package-created connection before the task completes. A supplied transaction and its connection remain owned by the transaction scope.
+   * - ``UseTransaction`` / ``UseTransactionAsync``
+     - One package-created connection and one transaction.
+     - ``BaseDataService`` owns both for the whole handler scope, commits on success or rolls back on failure/cancellation, then disposes both. The handler borrows the transaction and must dispose any readers before returning; it must not commit or roll back the transaction.
+
+``SqlDbDataSource.Read`` and ``ReadAsync`` transfer a reader whose command remains alive until the reader is closed or disposed. ``BaseDataService.ProcessReader`` closes readers it processes; callers using ``IDataSource.Read`` directly are responsible for reader disposal. When calling ``CommandFactory.ExecuteReader`` directly, the caller owns the command passed in and must keep it alive until the reader is closed, then dispose the command.
+
+Parameter Naming
+----------------
+
+``Parameter.Name`` retains the legacy ``@``-prefixed public value for compatibility. When a parameter is mapped to a provider ``DbParameter``, VersaTul removes common SQL markers (``@``, ``:``, ``?``, or ``$``) and passes the raw identifier to the provider. Keep the provider's marker in the command text: for example, use ``@customerId`` for SQL Server or SQLite and ``:customerId`` for Oracle while constructing the parameter as ``new Parameter("customerId", ...)``. Provider-specific adapters may apply their own native convention. Parameter-name lookup is ordinal case-insensitive and does not depend on the current culture.
+
+Retry Safety
+------------
+
+``SqlDbDataSource`` does not retry by default. If ``RetryPolicy`` returns ``true``, the failed operation is attempted again for reads, writes, and scalar commands; attempt numbering starts at ``1`` for the failed attempt. A provider exception can be raised after the database has accepted or committed a command, so a retry can duplicate inserts, updates, stored-procedure side effects, or any other non-idempotent work. Enable retries only for operations that are read-only or explicitly idempotent, or that carry an application-level idempotency key or equivalent deduplication guarantee. Return ``false`` for cancellation and errors that are not known to be transient. Each retry creates and disposes a fresh command and package-owned connection; ``RetryDelayProvider`` supplies the delay and ``Retrying`` runs before the next attempt. Async cancellation also applies while waiting for a retry delay.
+
 Basic Example
 -------------
 
 This example shows the typical pattern: configure the provider, build the SQL infrastructure, and implement a project-specific data service.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data;
    using System.Data.Common;
@@ -144,6 +191,7 @@ Command And Mapping Example
 ``BaseDataService`` is intended to sit underneath a project-specific data service.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    public class ProductDataService : BaseDataService
    {
@@ -212,3 +260,39 @@ Notes
 1. ``DataConfiguration`` stores both the default connection-name key and the command timeout.
 2. ``BaseDataService`` is the main extension point for application-specific repositories or data services.
 3. Use :doc:`mssql` when you need SQL Server-specific types or bulk-copy integration on top of this base package.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Provider-agnostic ADO.NET helpers for SQL connections, stored procedures, SQL commands, and mapping results to objects.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.Sql
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Sql/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.Sql minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Sql/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

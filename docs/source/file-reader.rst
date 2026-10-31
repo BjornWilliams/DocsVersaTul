@@ -8,6 +8,8 @@ Overview
 
 It is especially useful when your downstream workflow already expects ``IDataReader`` input, such as a bulk-copy pipeline or a tabular import process.
 
+The built-in readers support CSV and plain text. They do not parse JSON into tabular rows; reading a ``.json`` file or selecting the legacy JSON filter raises ``NotSupportedException``.
+
 Why Use This Package
 --------------------
 
@@ -20,7 +22,7 @@ When To Use This Package
 
 Use this package when you want to:
 
-1. Read CSV, text, or JSON files through a consistent abstraction.
+1. Read CSV or text files through a consistent abstraction.
 2. Enumerate files in a directory by extension and turn each into an ``IDataReader``.
 3. Inject format-specific readers for testing or replacement.
 4. Feed file data directly into :doc:`bulk` or :doc:`mssql` bulk-copy workflows.
@@ -34,11 +36,6 @@ Install the package with the .NET CLI:
 
   dotnet add package VersaTul.Data.FileReader
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-  PM> NuGet\Install-Package VersaTul.Data.FileReader -Version latest
 
 Related Packages
 ----------------
@@ -51,7 +48,7 @@ Related Packages
 Start Here If
 -------------
 
-1. Your source data is in CSV, text, or JSON files.
+1. Your source data is in CSV or text files.
 2. The next processing step expects ``IDataReader`` input.
 3. You want the import path to remain testable and replaceable.
 
@@ -80,13 +77,13 @@ Core Types And Concepts
   CSV-specific reader abstraction and implementation.
 
 ``ITextReader`` and ``TextFileReader``
-  Plain-text reader abstraction and implementation.
+  Plain-text reader abstraction and implementation. The built-in implementation intentionally buffers the complete file into one ``Line`` column before returning.
 
 ``IOptions`` and ``FileOptions``
   File-reader options for header handling, extension filters, and directory search behavior.
 
 ``ExtensionFilters``
-  Enum that describes the supported file types.
+  Enum that describes file filters. Text and CSV are supported; the legacy JSON value is retained for compatibility but raises ``NotSupportedException`` when selected.
 
 ``DisposableDataReader``
   Wrapper that ensures the returned reader and its underlying stream are disposed together.
@@ -104,62 +101,66 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  using VersaTul.Data.FileReader;
+   using VersaTul.Data.FileReader;
 
-  var fileReader = new DataFileReader(fileUtility, csvReader, textReader);
-  var options = new FileOptions { HasHeader = true };
+   var fileReader = new DataFileReader(fileUtility, csvReader, textReader);
+   var options = new FileOptions { HasHeader = true };
 
-  using var reader = fileReader.Read("C:\\path\\to", "file.csv", options);
+   using var reader = fileReader.Read("C:\\path\\to", "file.csv", options);
 
-  if (reader != null)
-  {
-     while (reader.Read())
-     {
-        // Consume row data here.
-     }
-  }
+   while (reader.Read())
+   {
+      // Consume row data here.
+   }
 
 Directory Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  var options = new FileOptions
-  {
-     HasHeader = true,
-     ExtensionFilters = new[] { ExtensionFilters.CSV, ExtensionFilters.TEXT },
-     SearchOption = SearchOption.AllDirectories
-  };
+   var options = new FileOptions
+   {
+      HasHeader = true,
+      ExtensionFilters = new[] { ExtensionFilters.CSV, ExtensionFilters.TEXT },
+      SearchOption = SearchOption.AllDirectories
+   };
 
-  var readers = fileReader.Read("C:\\data", options);
+   var readers = fileReader.Read("C:\\data", options);
 
-  foreach (var item in readers)
-  {
-     using (item)
-     {
-        while (item.Read())
-        {
-        }
-     }
-  }
+   foreach (var item in readers)
+   {
+      using (item)
+      {
+         while (item.Read())
+         {
+         }
+      }
+   }
+
+Directory reads are lazy: files are opened as the returned sequence is enumerated. Repeated extension filters are ignored while preserving the first-seen order. When enumeration completes successfully, the caller owns each yielded reader and must dispose it. If enumeration fails or is abandoned, readers opened by the sequence are disposed automatically.
+
+The built-in ``TextFileReader`` buffers the complete file with one ``Line`` column before returning, so the source file is closed before the reader is returned and memory use scales with file size. Use a custom ``ITextReader`` when a large file requires forward-only streaming. ``CsvFileReader`` is the streaming alternative and keeps its underlying stream owned by the returned reader until disposal.
 
 Bulk Workflow Example
 ---------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  var options = new FileOptions { HasHeader = true };
-  using var reader = fileReader.Read("C:\\data", "people.csv", options);
+   var options = new FileOptions { HasHeader = true };
+   using var reader = fileReader.Read("C:\\data", "people.csv", options);
 
-  var mappings = new List<IBulkCopyColumnMapping>
-  {
-     new BulkCopyColumnMapping<Person, Person>(p => p.Name, p => p.Name),
-     new BulkCopyColumnMapping<Person, Person>(p => p.Age, p => p.Age)
-  };
+   var mappings = new List<IBulkCopyColumnMapping>
+   {
+      new BulkCopyColumnMapping<Person, Person>(p => p.Name, p => p.Name),
+      new BulkCopyColumnMapping<Person, Person>(p => p.Age, p => p.Age)
+   };
 
-  var copyDetail = new CopyDetail("Persons", reader, mappings);
-  await bulkCopy.DoCopyAsync(copyDetail);
+   var copyDetail = new CopyDetail("Persons", reader, mappings);
+   await bulkCopy.DoCopyAsync(copyDetail);
 
 Expected Result
 ---------------
@@ -183,15 +184,52 @@ Dependency Injection
 Typical registrations look like this:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
-  builder.RegisterType<CsvFileReader>().As<ICsvReader>().SingleInstance();
-  builder.RegisterType<TextFileReader>().As<ITextReader>().SingleInstance();
-  builder.RegisterType<DataFileReader>().As<IFileReader>().SingleInstance();
+   builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
+   builder.RegisterType<CsvFileReader>().As<ICsvReader>().SingleInstance();
+   builder.RegisterType<TextFileReader>().As<ITextReader>().SingleInstance();
+   builder.RegisterType<DataFileReader>().As<IFileReader>().SingleInstance();
 
 Notes
 -----
 
 1. ``DataFileReader`` delegates parsing to the registered reader implementations.
-2. ``FileOptions`` defaults to common text, CSV, and JSON extension filters.
+2. ``FileOptions`` defaults to text and CSV extension filters. JSON is not supported; selecting the legacy JSON filter or reading a ``.json`` file raises ``NotSupportedException``.
 3. This package is most valuable when your next processing step wants an ``IDataReader`` instead of raw file lines.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Read CSV and plain-text files into IDataReader instances. CSV input streams from the source; the built-in plain-text reader buffers the complete file.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.FileReader
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.FileReader/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.FileReader minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.FileReader/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

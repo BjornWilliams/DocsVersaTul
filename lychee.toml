@@ -1,0 +1,12 @@
+# Keep external link checks separate from the required sample-build status.
+scheme = ["http", "https"]
+max_retries = 4
+retry_wait_time = 2
+timeout = 20
+max_concurrency = 8
+no_progress = true
+# These literal endpoints in logger-web.rst are illustrative, not public URLs.
+exclude = [
+    '^https://host/api$',
+    '^https://host/api/events$',
+]

@@ -27,11 +27,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Object.Converters
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Object.Converters -Version latest
 
 Related Packages
 ----------------
@@ -71,6 +66,7 @@ Basic Example
 Convert a simple object into a dictionary and inspect the generated fields.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Object.Converters;
 
@@ -94,6 +90,7 @@ Flattening Example
 Use ``Flattener`` when you need a single-level structure for export or diagnostics.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Object.Converters;
 
@@ -121,6 +118,7 @@ Property Processing And Display Metadata
 ``PropertyProcessor`` is useful when object values need to be formatted or filtered through display metadata before export.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Display.Attributes;
    using VersaTul.Object.Converters;
@@ -133,9 +131,71 @@ Property Processing And Display Metadata
 
    var processedValue = propertyProcessor.Process(property, person.Age, person.Age.GetType());
 
+Reference Cycles
+----------------
+
+``PropertyProcessor`` and ``Flattener`` share reference-identity tracking local to
+each operation. A reference encountered on the current recursion path is a cycle;
+the same object on two separate branches is processed twice normally.
+
+The default replaces a cyclic edge with ``[CYCLE]``, preserving the existing
+Flattener marker. Configure either concrete class through its new constructor:
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+   var options = new ReferenceCycleOptions(ReferenceCycleBehavior.Skip);
+   var processor = new PropertyProcessor(new DisplayAnalyzer(), options);
+   var flattener = new Flattener(options);
+
+``Skip`` omits cyclic members or entries while retaining ordinary nulls.
+``Throw`` reports ``InvalidOperationException``. ``Sentinel`` uses the optional
+sentinel text supplied to ``ReferenceCycleOptions``. Settings are immutable and
+existing constructors and interfaces remain available.
+
+The dictionary flattener retains its existing key and opaque-leaf conventions;
+process arbitrary object graphs with PropertyProcessor before flattening them.
+AsString recursively walks supported dictionary and list containers.
+
 Notes
 -----
 
 1. ``ObjectProcessor`` is useful when you want a structured dictionary representation.
 2. ``Flattener`` is better when you need a single-level projection for export, tabular output, or logging.
 3. This package becomes more valuable when combined with display attributes and collection streamers.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Convert objects into key/value dictionaries with configurable flattening, property processing, and reference-cycle behavior.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Object.Converters
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Object.Converters/Program.cs
+   :language: csharp
+   :caption: VersaTul.Object.Converters minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Object.Converters/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

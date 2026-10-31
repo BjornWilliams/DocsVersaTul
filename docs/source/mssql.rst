@@ -35,11 +35,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Data.MsSql
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Data.MsSql -Version latest
 
 Related Packages
 ----------------
@@ -102,10 +97,52 @@ Key Capabilities
 4. Supports async bulk copy and optional progress callbacks.
 5. Uses ``BulkCopyTimeout`` from configuration during upload operations.
 
+Bulk-Copy Input Validation
+--------------------------
+
+SQL Server bulk-copy operations require a non-null collection containing at least one ``CopyDetail``. Each copy detail must be non-null and provide a source reader. Invalid collections or entries are rejected before a database connection or transaction is created, with the zero-based collection index included in entry diagnostics.
+
+Bulk-copy resource wrappers can be disposed safely after partial initialization and can be disposed more than once.
+
+When a bulk-copy operation fails, the returned result keeps the original exception as the first failed result. Exceptions raised while reporting failure progress, rolling back, or disposing resources are recorded as additional failed results and do not replace the original failure.
+
+Synchronous DoCopy requires ISynchronousBulkCopyService with
+CanExecuteSynchronously = true. The default BulkCopyService supports it when its
+connection implements ISynchronousDatabaseConnection and its copy wrapper implements
+ISynchronousSqlBulkCopyWrapper. Default DatabaseConnection and SqlBulkCopyWrapper
+provide these native capabilities. CreateSynchronously, DoCopy, Commit and Rollback
+use native provider calls; no Tasks are blocked. Transaction result diagnostics keep
+their existing stage names, including DoCopyAsync/CommitAsync/RollbackAsync.
+
+Major migration: call DoCopyAsync for legacy async-only services/providers, or
+implement the optional capabilities with actual synchronous provider operations.
+Old interfaces and async/cancellation APIs are retained. Inputs are validated first;
+unsupported native capability raises NotSupportedException before starting an attempt,
+opening or disposing injected resources, or transferring source-reader ownership.
+Once an attempt starts, existing rollback, diagnostic and per-cycle cleanup rules
+apply. Native capability implementations must not conceal Task blocking.
+
+Each completed or failed copy result includes its elapsed duration. Failed results identify the stage that raised the exception (``Create``, ``DoCopyAsync``, ``ProgressCallback``, ``CommitAsync``, ``RollbackAsync``, or ``Dispose``); secondary rollback, progress, and disposal failures are recorded as separate failed results.
+
+Before the upload starts, ``SqlBulkCopyValidator.Validate`` checks every configured source and destination mapping. If one or more mappings cannot be resolved, it throws ``BulkCopyValidationException``, which remains an ``InvalidOperationException`` for compatibility and exposes all errors through its read-only ``Errors`` list. Errors are ordered by mapping index, with the source error before the destination error for each mapping. Each ``BulkCopyMappingError`` includes the configured source and destination names/ordinals, the validation target, a diagnostic message, and a corrective action. ``SqlBulkCopyValidator.ValidateMappings`` returns the same structured list without throwing.
+
+Named source columns are resolved without leaking provider ``GetOrdinal`` exceptions. A missing named source or invalid source ordinal passed directly to ``PopulateColumnDefinitions`` produces the same structured validation exception.
+
+Implicit ordinal definitions are built only for the common source/destination ordinal range and are resolved by the schema's ``ColumnOrdinal``; they do not return trailing null definition slots. Explicit mappings also fail with a structured validation error when their destination definition cannot be resolved.
+
+The validator's ``ColumnException`` event is forwarded to the validated reader used for the upload. Subscribe to it before validation to inspect oversized values and, when a correction policy allows it, replace ``ColumnExceptionEventArgs.Value`` with the value that should be written. If no handler is subscribed, an oversized string value remains a validation failure.
+
+Progress and correction callback exceptions are isolated from the transaction by default. A progress callback exception is recorded at the ``ProgressCallback`` stage but does not roll back or prevent commit; a correction callback exception retains the original value and does not escape value access. Set ``BulkCopy.AbortOnCallbackException = true`` (or ``SqlBulkCopyValidator.AbortOnCallbackException = true`` when configuring the validator directly) to make callback exceptions abort the transaction.
+
+Validated readers apply the same column-size checks through indexed access, named indexers, ``GetValue``, and ``GetValues``. ``GetValues`` returns the number of values copied and uses the same correction callback for each value; unmapped source slots are returned without a null-definition failure.
+
+Validated readers use the standard explicit-disposal pattern. Dispose the returned reader when the bulk-copy operation is complete; it releases the wrapped source reader once. The wrapper has no finalizer, so garbage collection does not dispose a caller's source reader unexpectedly.
+
 Basic Data-Service Example
 --------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data.Common;
    using System.Data.SqlClient;
@@ -137,6 +174,7 @@ Bulk Copy Example
 The bulk-copy path is the main reason to choose this package over the provider-agnostic SQL package alone.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Bulk;
    using VersaTul.Data.MsSql.Bulk;
@@ -177,3 +215,39 @@ Notes
 1. If you only need generic relational access, start with :doc:`sql`.
 2. Choose ``VersaTul.Data.MsSql`` when you need SQL Server-specific parameters or bulk import.
 3. ``BulkCopy`` is designed as an all-or-nothing upload path and will attempt rollback on failure.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Microsoft SQL Server access helpers for stored procedures, SQL commands, object mapping, and bulk copy.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.MsSql
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MsSql/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.MsSql minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MsSql/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

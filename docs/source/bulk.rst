@@ -27,11 +27,6 @@ Install the package with the .NET CLI:
 
     dotnet add package VersaTul.Data.Bulk
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-    PM> NuGet\Install-Package VersaTul.Data.Bulk -Version latest
 
 Related Packages
 ----------------
@@ -65,6 +60,13 @@ Core Types And Concepts
 ``BulkCopyException``
     Wrapper exception used when a copy step fails.
 
+Result Semantics
+----------------
+
+``BulkCopyResult.Results`` is initialized to an empty collection, so a newly constructed result can be queried safely. ``Success`` is ``true`` only when at least one copy result exists and every result completed without an error. An empty or null result collection is not considered a successful upload.
+
+These result types are data models; creating or populating them does not measure elapsed time or infer a failed stage. ``CopyResult.Elapsed`` defaults to zero and ``FailedStage`` defaults to ``null``. The SQL Server implementation in :doc:`mssql` fills elapsed time for its copy results and records the stage on failures. Other ``BulkCopy`` implementations must populate these fields themselves if they provide the same diagnostics.
+
 Key Capabilities
 ----------------
 
@@ -80,6 +82,7 @@ Basic Example
 The abstraction assumes your source data is already available as an ``IDataReader``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Data.Bulk;
 
@@ -101,6 +104,7 @@ Async Progress Example
 ----------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     var result = await bulkCopy.DoCopyAsync(
          new[] { copyDetail },
@@ -121,6 +125,8 @@ Mapping Options
 4. Source name to destination ordinal.
 5. Strongly typed expression-to-expression mapping.
 
+Each mapping side has one active identifier: a name or a nonnegative ordinal. Setting a name clears the corresponding ordinal, and setting a nonnegative ordinal clears the corresponding name. The ``-1`` ordinal value means that no ordinal is selected, so a mapping cannot retain both a name and an ordinal for the same side.
+
 Notes
 -----
 
@@ -128,4 +134,38 @@ Notes
 2. The source side is ``IDataReader``-based, which makes the package fit naturally with :doc:`file-reader` and stream-based workflows.
 3. Use the concrete implementation from :doc:`mssql` when targeting SQL Server bulk import.
 
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
 
+Canonical package quickstart
+----------------------------
+
+Shared types and abstractions for implementing batch and bulk-copy operations across database providers.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.Bulk
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.Bulk minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

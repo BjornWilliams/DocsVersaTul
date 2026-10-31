@@ -1,0 +1,1920 @@
+{
+  "schemaVersion": 1,
+  "scope": "All code-block, sourcecode, code, literalinclude, and parsed-literal directives under docs/source.",
+  "classifications": {
+    "compiled": "A code sample that builds successfully but is not run by validation.",
+    "executed": "A canonical sample or its expected output is built/run and checked on each directly supported target framework.",
+    "pseudocode": "An illustrative API fragment with a visible Pseudocode caption; it is not a standalone program or part of the Getting Started copy-paste quickstart.",
+    "configuration-only": "Commands, fixture data, or static text/output that is not compiled as C# source."
+  },
+  "snippets": [
+    {
+      "id": "api-contract-policy.rst#1",
+      "file": "api-contract-policy.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "api-contract-policy.rst#2",
+      "file": "api-contract-policy.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "api-contract-policy.rst#3",
+      "file": "api-contract-policy.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "bulk.rst#1",
+      "file": "bulk.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "bulk.rst#2",
+      "file": "bulk.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "bulk.rst#3",
+      "file": "bulk.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "bulk.rst#4",
+      "file": "bulk.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "bulk.rst#5",
+      "file": "bulk.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Bulk/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "bulk.rst#6",
+      "file": "bulk.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Bulk/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "caching.rst#1",
+      "file": "caching.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "caching.rst#2",
+      "file": "caching.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "caching.rst#3",
+      "file": "caching.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "caching.rst#4",
+      "file": "caching.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "caching.rst#5",
+      "file": "caching.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Caching/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "caching.rst#6",
+      "file": "caching.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Caching/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "caching.rst#7",
+      "file": "caching.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "caching.rst#8",
+      "file": "caching.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Caching/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "caching.rst#9",
+      "file": "caching.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Caching/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "compression.rst#1",
+      "file": "compression.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "compression.rst#2",
+      "file": "compression.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "compression.rst#3",
+      "file": "compression.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "compression.rst#4",
+      "file": "compression.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "compression.rst#5",
+      "file": "compression.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Compression/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "compression.rst#6",
+      "file": "compression.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Compression/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "configuration-defaults.rst#1",
+      "file": "configuration-defaults.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "configuration-defaults.rst#2",
+      "file": "configuration-defaults.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration-defaults.rst#3",
+      "file": "configuration-defaults.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration-defaults.rst#4",
+      "file": "configuration-defaults.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "configuration-defaults.rst#5",
+      "file": "configuration-defaults.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configuration.Defaults/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "configuration-defaults.rst#6",
+      "file": "configuration-defaults.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configuration.Defaults/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "configuration.rst#1",
+      "file": "configuration.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "configuration.rst#2",
+      "file": "configuration.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration.rst#3",
+      "file": "configuration.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration.rst#4",
+      "file": "configuration.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "configuration.rst#5",
+      "file": "configuration.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configurations/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "configuration.rst#6",
+      "file": "configuration.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configurations/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "contracts.rst#1",
+      "file": "contracts.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "contracts.rst#2",
+      "file": "contracts.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "contracts.rst#3",
+      "file": "contracts.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "contracts.rst#4",
+      "file": "contracts.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "contracts.rst#5",
+      "file": "contracts.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Contracts/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "contracts.rst#6",
+      "file": "contracts.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Contracts/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "converters.rst#1",
+      "file": "converters.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "converters.rst#2",
+      "file": "converters.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#3",
+      "file": "converters.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#4",
+      "file": "converters.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#5",
+      "file": "converters.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#6",
+      "file": "converters.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "converters.rst#7",
+      "file": "converters.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Object.Converters/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "converters.rst#8",
+      "file": "converters.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Object.Converters/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "data-contracts.rst#1",
+      "file": "data-contracts.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "data-contracts.rst#2",
+      "file": "data-contracts.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "data-contracts.rst#3",
+      "file": "data-contracts.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "data-contracts.rst#4",
+      "file": "data-contracts.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "data-contracts.rst#5",
+      "file": "data-contracts.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Contracts/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "data-contracts.rst#6",
+      "file": "data-contracts.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Contracts/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "display-attributes.rst#1",
+      "file": "display-attributes.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "display-attributes.rst#2",
+      "file": "display-attributes.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "display-attributes.rst#3",
+      "file": "display-attributes.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "display-attributes.rst#4",
+      "file": "display-attributes.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "display-attributes.rst#5",
+      "file": "display-attributes.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "display-attributes.rst#6",
+      "file": "display-attributes.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Display.Attributes/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "display-attributes.rst#7",
+      "file": "display-attributes.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Display.Attributes/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "efcore.rst#1",
+      "file": "efcore.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "efcore.rst#2",
+      "file": "efcore.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "efcore.rst#3",
+      "file": "efcore.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "efcore.rst#4",
+      "file": "efcore.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "efcore.rst#5",
+      "file": "efcore.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.EFCore/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "efcore.rst#6",
+      "file": "efcore.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.EFCore/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "extensions.rst#1",
+      "file": "extensions.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "extensions.rst#2",
+      "file": "extensions.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#3",
+      "file": "extensions.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#4",
+      "file": "extensions.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#5",
+      "file": "extensions.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#6",
+      "file": "extensions.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "extensions.rst#7",
+      "file": "extensions.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Extensions/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "extensions.rst#8",
+      "file": "extensions.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Extensions/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "file-reader.rst#1",
+      "file": "file-reader.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "file-reader.rst#2",
+      "file": "file-reader.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#3",
+      "file": "file-reader.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#4",
+      "file": "file-reader.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#5",
+      "file": "file-reader.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#6",
+      "file": "file-reader.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "file-reader.rst#7",
+      "file": "file-reader.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.FileReader/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "file-reader.rst#8",
+      "file": "file-reader.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.FileReader/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "getting-started.rst#1",
+      "file": "getting-started.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "getting-started.rst#2",
+      "file": "getting-started.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "getting-started.rst#3",
+      "file": "getting-started.rst",
+      "ordinal": 3,
+      "directive": "literalinclude",
+      "argument": "../samples/GettingStarted/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "getting-started.rst#4",
+      "file": "getting-started.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "getting-started.rst#5",
+      "file": "getting-started.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/GettingStarted/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "handler-file.rst#1",
+      "file": "handler-file.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "handler-file.rst#2",
+      "file": "handler-file.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#3",
+      "file": "handler-file.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#4",
+      "file": "handler-file.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#5",
+      "file": "handler-file.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#6",
+      "file": "handler-file.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#7",
+      "file": "handler-file.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "handler-file.rst#8",
+      "file": "handler-file.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Handler.File/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "handler-file.rst#9",
+      "file": "handler-file.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Handler.File/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "logger-file.rst#1",
+      "file": "logger-file.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger-file.rst#2",
+      "file": "logger-file.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-file.rst#3",
+      "file": "logger-file.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger-file.rst#4",
+      "file": "logger-file.rst",
+      "ordinal": 4,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.File/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger-file.rst#5",
+      "file": "logger-file.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.File/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "logger-mail.rst#1",
+      "file": "logger-mail.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger-mail.rst#2",
+      "file": "logger-mail.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-mail.rst#3",
+      "file": "logger-mail.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-mail.rst#4",
+      "file": "logger-mail.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-mail.rst#5",
+      "file": "logger-mail.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger-mail.rst#6",
+      "file": "logger-mail.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Mail/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger-mail.rst#7",
+      "file": "logger-mail.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Mail/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "logger-web.rst#1",
+      "file": "logger-web.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger-web.rst#2",
+      "file": "logger-web.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-web.rst#3",
+      "file": "logger-web.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-web.rst#4",
+      "file": "logger-web.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-web.rst#5",
+      "file": "logger-web.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger-web.rst#6",
+      "file": "logger-web.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Web/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger-web.rst#7",
+      "file": "logger-web.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Web/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "logger.rst#1",
+      "file": "logger.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger.rst#2",
+      "file": "logger.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger.rst#3",
+      "file": "logger.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger.rst#4",
+      "file": "logger.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger.rst#5",
+      "file": "logger.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger.rst#6",
+      "file": "logger.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "mailer.rst#1",
+      "file": "mailer.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "mailer.rst#2",
+      "file": "mailer.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#3",
+      "file": "mailer.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#4",
+      "file": "mailer.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#5",
+      "file": "mailer.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#6",
+      "file": "mailer.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Mailer/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "mailer.rst#7",
+      "file": "mailer.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Mailer/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "mailer.rst#8",
+      "file": "mailer.rst",
+      "ordinal": 8,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "mailer.rst#9",
+      "file": "mailer.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Mailer/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "mailer.rst#10",
+      "file": "mailer.rst",
+      "ordinal": 10,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Mailer/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "mongodb.rst#1",
+      "file": "mongodb.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "mongodb.rst#2",
+      "file": "mongodb.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mongodb.rst#3",
+      "file": "mongodb.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mongodb.rst#4",
+      "file": "mongodb.rst",
+      "ordinal": 4,
+      "directive": "literalinclude",
+      "argument": "../samples/MongoDB/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "mongodb.rst#5",
+      "file": "mongodb.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/MongoDB/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "mongodb.rst#6",
+      "file": "mongodb.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "mongodb.rst#7",
+      "file": "mongodb.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MongoDB/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "mongodb.rst#8",
+      "file": "mongodb.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MongoDB/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "mssql.rst#1",
+      "file": "mssql.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "mssql.rst#2",
+      "file": "mssql.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mssql.rst#3",
+      "file": "mssql.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mssql.rst#4",
+      "file": "mssql.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "mssql.rst#5",
+      "file": "mssql.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MsSql/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "mssql.rst#6",
+      "file": "mssql.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MsSql/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#1",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#2",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#3",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#4",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#5",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#6",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Pipeline.Infrastructure/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#7",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Pipeline.Infrastructure/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#1",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#2",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#3",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#4",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#5",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/DataExport/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#6",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/DataExport/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#1",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#2",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#3",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#4",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#5",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileImport/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#6",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileImport/Fixtures/people.csv",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#7",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileImport/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#1",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#2",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#3",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#4",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#5",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileLogging/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#6",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileLogging/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#1",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#2",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#3",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#4",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#5",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/SqlDataAccess/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#6",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/SqlDataAccess/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scheduler.rst#1",
+      "file": "scheduler.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scheduler.rst#2",
+      "file": "scheduler.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scheduler.rst#3",
+      "file": "scheduler.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scheduler.rst#4",
+      "file": "scheduler.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scheduler.rst#5",
+      "file": "scheduler.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "text",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scheduler.rst#6",
+      "file": "scheduler.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scheduler.rst#7",
+      "file": "scheduler.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "scheduler.rst#8",
+      "file": "scheduler.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Task.Scheduler/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "scheduler.rst#9",
+      "file": "scheduler.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Task.Scheduler/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "sql.rst#1",
+      "file": "sql.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "sql.rst#2",
+      "file": "sql.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "sql.rst#3",
+      "file": "sql.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "sql.rst#4",
+      "file": "sql.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "sql.rst#5",
+      "file": "sql.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Sql/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "sql.rst#6",
+      "file": "sql.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Sql/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "streamers.rst#1",
+      "file": "streamers.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "streamers.rst#2",
+      "file": "streamers.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#3",
+      "file": "streamers.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#4",
+      "file": "streamers.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#5",
+      "file": "streamers.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#6",
+      "file": "streamers.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#7",
+      "file": "streamers.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "streamers.rst#8",
+      "file": "streamers.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Collection.Streamers/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "streamers.rst#9",
+      "file": "streamers.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Collection.Streamers/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "utilities.rst#1",
+      "file": "utilities.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "utilities.rst#2",
+      "file": "utilities.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#3",
+      "file": "utilities.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#4",
+      "file": "utilities.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#5",
+      "file": "utilities.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#6",
+      "file": "utilities.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "utilities.rst#7",
+      "file": "utilities.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Utilities/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "utilities.rst#8",
+      "file": "utilities.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Utilities/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    }
+  ]
+}

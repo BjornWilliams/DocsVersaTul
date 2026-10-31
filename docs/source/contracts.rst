@@ -27,11 +27,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Contracts
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Contracts -Version latest
 
 Related Packages
 ----------------
@@ -63,6 +58,7 @@ Basic Example
 ``IPredicate<T>`` is commonly used to wrap filtering expressions in repository-style code.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using System.Linq.Expressions;
@@ -88,6 +84,7 @@ Async Contract Example
 The async contracts are useful when you want application services to follow a clear, reusable execution shape.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Threading;
    using System.Threading.Tasks;
@@ -108,3 +105,39 @@ Notes
 1. These interfaces are intentionally small so they are easy to implement in your own services.
 2. ``IPredicate<T>`` is particularly useful when you want to preserve LINQ expression trees instead of passing around compiled delegates.
 3. The cancellable async variants are better when your code may run in web requests, background workers, or any environment where cancellation matters.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Shared interfaces for asynchronous execution, querying, and cancellation across VersaTul libraries.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Contracts
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Contracts/Program.cs
+   :language: csharp
+   :caption: VersaTul.Contracts minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Contracts/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

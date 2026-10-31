@@ -15,7 +15,7 @@ Use this package when you want to:
 
 1. Read or write files through abstractions instead of calling ``System.IO`` directly.
 2. Save typed file content such as text, CSV, custom files, or zip streams.
-3. Add async wrappers around common file operations.
+3. Use native async I/O for common file operations.
 4. Reuse path, extension, and directory helpers across the codebase.
 5. Support export workflows from :doc:`streamers` and archive workflows from :doc:`compression`.
 
@@ -28,11 +28,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Handler.File
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Handler.File -Version latest
 
 Related Packages
 ----------------
@@ -48,7 +43,7 @@ Core Types And Concepts
    Combines file and directory wrappers plus helper operations such as extension handling, file discovery, and line-by-line reading.
 
 ``IFileUtility`` and ``FileUtility``
-   Higher-level file service for reading all content, saving typed files, and async wrappers.
+   Higher-level file service for reading all content, saving typed files, and native async I/O.
 
 ``IDirectoryWrapper`` and ``IFileWrapper``
    Thin abstractions over file-system APIs used by the higher-level handlers.
@@ -72,6 +67,7 @@ Save Text Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Handler.File;
    using VersaTul.Handler.File.Types;
@@ -86,6 +82,7 @@ Read Example
 ------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var result = fileUtility.ReadAll("C:\\exports\\report.txt");
 
@@ -101,6 +98,7 @@ Save Stream Example
 -------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using var memoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("hello"));
 
@@ -110,6 +108,156 @@ Save Stream Example
 Notes
 -----
 
-1. ``FileUtility`` uses a lock to serialize writes from the same process.
-2. The async methods are wrapper-based async, which is useful for consistency at the service boundary.
+1. ``FileUtility`` coordinates participating writes by normalized destination path within one loaded assembly instance.
+2. The async methods use the IAsyncFileWrapper capability for native asynchronous payload I/O.
 3. The typed file models are the main value-add over direct ``System.IO`` usage.
+
+Stream ownership
+----------------
+
+Save and SaveAsync leave StreamFileInfo.Content open by default and write the entire
+MemoryStream, preserving its position. Set ``LeaveOpen = false`` to transfer disposal
+responsibility, including write failures. DirectoryWrapper.Write always leaves the
+caller stream open. Custom IFileWrapper implementations must honor this contract.
+This is a Major ownership change: dispose streams explicitly or opt into disposal.
+Do not share or mutate a stream while a write is in progress.
+
+Native asynchronous operations
+------------------------------
+
+FileUtility async methods require ``IAsyncFileWrapper``; DirectoryWrapper supplies
+native File/FileStream async I/O with cancellation. Synchronous-only custom wrappers
+remain usable for sync calls; async calls throw NotSupportedException. Implement the
+additive capability when migrating (Major change). Missing files/directories return
+an absent FileResult; permission and other errors propagate. Directory creation/open
+are synchronous metadata operations; payload I/O is asynchronous. Cancellation of
+non-atomic writes can leave partial content. Ownership applies on cancellation too.
+
+Coordinated and atomic writes
+-----------------------------
+
+FileUtility writes coordinate by normalized absolute path across instances, using
+case-insensitive comparison on Windows and ordinal comparison elsewhere. Idle gates
+are removed; cancellation while waiting releases references. Different paths are
+independent. Custom wrappers receive absolute write paths. Aliases/links, standalone
+wrapper/FileHandler calls, FileLogger's separate gate, and other processes are outside
+this coordination boundary; use consistent paths and stable models.
+
+``ReplaceAtomicallyAsync(file, token)`` requires ``IAtomicFileWrapper``. DirectoryWrapper
+writes and closes a unique CreateNew temporary sibling, then renames over the target.
+On filesystems supporting atomic same-volume rename, readers see old or complete new
+content. Cancellation/errors before publication preserve the target and attempt cleanup;
+a cancellation racing publication may commit and a crash may leave a temporary file.
+No fsync durability, metadata/ACL preservation, cross-volume transaction, or network
+filesystem guarantee is promised. Other-process writes are last-writer-wins.
+
+Optional base-directory containment
+------------------------------------
+
+Set ``BaseInfo.BaseDirectory`` to an absolute trusted directory. ``Path`` becomes a
+relative subdirectory (empty allowed); ``Name`` is a simple filename, and the extension
+cannot introduce path components. Rooted/drive/UNC names, either slash style of traversal,
+and ambiguous trailing dot/space segments are rejected before FileUtility side effects.
+Unset BaseDirectory preserves unrestricted legacy path behavior.
+
+Existing links/reparse points at or below the base are rejected. Protect the base and
+its ancestors from concurrent rename/link substitution: validation is not an OS sandbox
+against hostile filesystem races or hard-link aliases. Use filesystem permissions or
+a sandbox for hostile local users. Do not mutate models during delivery. The policy
+applies to typed models, not arbitrary string-path wrapper calls.
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+   var file = new TextFileInfo("reports", "daily", "data") { BaseDirectory = trustedRoot };
+   await fileUtility.SaveOrUpdateAsync(file);
+
+Explicit text write modes
+--------------------------
+
+``IExplicitFileUtility`` adds named methods without changing the old IFileUtility contract:
+
+* ``AppendAsync`` appends, creating a missing file.
+* ``OverwriteAsync`` truncates, creating a missing file.
+* ``CreateNewAsync`` fails if the destination exists, leaving existing bytes unchanged.
+* ``ReplaceAtomicallyAsync`` publishes a completed replacement, or creates a missing target.
+
+All accept cancellation. DirectoryWrapper implements ``ITextWriteFileWrapper`` for overwrite
+and exclusive creation. Append/overwrite may leave partial writes on error/cancellation;
+create-new can leave a partial new file, but never truncates an existing destination.
+Exclusive creation applies across processes; atomic replacement is last-writer-wins.
+
+Legacy SaveOrUpdate/SaveOrUpdateAsync always append. Save/SaveAsync overwrite stream data
+and honor LeaveOpen. New text callers should choose an explicit method. Text writes use
+platform newlines and UTF-8 without a BOM.
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+   using VersaTul.Handler.File.Contracts;
+
+   IExplicitFileUtility files = new FileUtility(directoryWrapper, directoryWrapper);
+   await files.ReplaceAtomicallyAsync(new TextFileInfo("reports", "daily", "data")
+   {
+       BaseDirectory = trustedRoot
+   });
+
+Concurrency boundary and multiple processes
+--------------------------------------------
+
+The former global write semaphore is removed. A short registry lock only manages gate
+references; no I/O occurs while holding it. Sync/async FileUtility instances share gates
+for the same normalized path, and different files can progress independently. Canceled
+waiters and failed writes release their references. Wrappers must complete I/O before
+returning; never re-enter the same path from an iterator or callback.
+
+* Append, overwrite and stream Save are serialized only among participating FileUtility
+  calls. External writers have no record-order or transactional guarantee and may cause
+  sharing errors.
+* Create-new uses OS exclusive creation across processes, but a newly created file can
+  be partially written if an operation fails.
+* Atomic replacement publishes a complete sibling file under filesystem rename rules;
+  concurrent processes are last-writer-wins, not compare-and-swap.
+* Reads are not gated. Non-atomic writes may be partially visible; readers already holding
+  a handle may continue to see the old file after atomic replacement.
+
+There is no cross-process/distributed lock. Use a single-writer service or external lock
+when ordering matters. Gate scope is one loaded assembly instance; links, filesystem
+aliases, other AssemblyLoadContexts, and FileLogger's independent coordination are outside
+this guarantee. Avoid mixing unrelated writers on the same file.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Use System.IO-based file and directory wrappers for creating, reading, writing, and deleting files with typed file-result models.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Handler.File
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Handler.File/Program.cs
+   :language: csharp
+   :caption: VersaTul.Handler.File minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Handler.File/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

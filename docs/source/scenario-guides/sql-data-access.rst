@@ -35,6 +35,7 @@ Step 1: Configure The Connection
 Register the provider and build the configuration source.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data.Common;
    using VersaTul.Configuration.Defaults.Sql;
@@ -55,6 +56,7 @@ Step 2: Build The Data Source
 -----------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Sql;
    using VersaTul.Data.Sql.Configurations;
@@ -72,6 +74,7 @@ Step 3: Put Mapping In A Service Layer
 Implement a project-specific data service on top of ``BaseDataService``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data;
    using VersaTul.Data.Sql.Contracts;
@@ -129,6 +132,21 @@ When this workflow is working:
 1. Connection and provider settings stay explicit and centralized.
 2. SQL execution stays behind a reusable service abstraction.
 3. Mapping logic stays consistent across queries instead of being rewritten in each caller.
+
+Runnable Sample
+---------------
+
+The complete sample creates and queries an ephemeral SQLite database, and is maintained as a buildable project included here directly.
+
+.. literalinclude:: ../../samples/SqlDataAccess/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../../samples/SqlDataAccess/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
 
 Common Mistakes
 ---------------

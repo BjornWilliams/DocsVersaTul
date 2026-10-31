@@ -93,6 +93,8 @@ Start Here
    scenario-guides/index
    recommended-paths
    compatibility
+   api-contract-policy
+   snippet-inventory
    faq
    package-catalog
 

@@ -4,16 +4,16 @@ Collection Streamers
 Overview
 --------
 
-``VersaTul.Collection.Streamers`` turns in-memory collections or forward-only ``IDataReader`` sources into reusable export streams such as CSV, tab-delimited text, JSON, and JSONL.
+``VersaTul.Collection.Streamers`` turns in-memory collections or forward-only ``IDataReader`` sources into export streams such as CSV, tab-delimited text, JSON, and JSONL.
 
-The package is designed for workflows where a collection or row reader needs to be serialized once and then reused for multiple outputs, such as saving to disk, compressing into a zip archive, emailing as attachments, or converting to an ``IDataReader`` for downstream processing.
+The package is designed for workflows where a collection or row reader needs to be serialized to one destination, such as saving to disk, compressing into a zip archive, emailing as an attachment, or converting to an ``IDataReader`` for downstream processing. Each forward-only reader binding is single-use: its first output consumes it. To send the same rows to several destinations, materialize the source or create a fresh reader and streamer binding for each output.
 
 Why Use This Package
 --------------------
 
 Use this package when export generation is becoming a real application concern instead of a one-off helper method.
 
-Its value is that one streamer can drive multiple destinations such as files, compressed archives, and mail attachments while keeping export formatting and serialization logic in one place.
+Its value is that one streamer can drive a chosen destination while keeping export formatting and serialization logic in one place. A forward-only reader cannot be replayed by the same binding.
 
 When To Use This Package
 ------------------------
@@ -21,7 +21,7 @@ When To Use This Package
 Use this package when you want to:
 
 1. Export collections to CSV, tab-delimited, or JSON files.
-2. Reuse the same serialized output for file, email, and compression workflows.
+2. Send an export to a selected file, email, or compression workflow.
 3. Convert collections to ``IDataReader`` form for bulk-processing scenarios.
 4. Apply display metadata from :doc:`display-attributes` during output generation.
 5. Add cancellation-aware stream generation for large exports.
@@ -36,11 +36,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Collection.Streamers
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Collection.Streamers -Version latest
 
 Related Packages
 ----------------
@@ -55,7 +50,7 @@ Start Here If
 -------------
 
 1. You need CSV, tab-delimited, JSON, or JSONL exports from collections or readers.
-2. The same export output may be saved, compressed, or emailed.
+2. An export should be saved, compressed, or emailed to one selected destination per reader binding.
 3. Column naming and formatting matter to the consumer of the export.
 
 Not The Right First Package If
@@ -78,7 +73,7 @@ Core Types And Concepts
 -----------------------
 
 ``IStreamer``
-   Represents an export stream with file metadata, headings, an ``IDataReader``, and ``GetFileStream()`` methods.
+   Represents an export stream with file metadata, headings, an ``IDataReader``, and ``GetFileStream()`` methods. The current reader binding is consumed by its first output.
 
 ``IStreamCreator``
    Defines the ``Create<T>()`` entry point used to bind a collection to a streamer instance.
@@ -107,18 +102,49 @@ Core Types And Concepts
 Key Capabilities
 ----------------
 
-1. ``Create<T>()`` binds a collection to a reusable streamer instance.
-2. ``Create(IDataReader, ...)`` binds an existing reader directly to a streamer.
-3. ``GetFileStream()`` returns the serialized output as a ``MemoryStream``.
+1. ``Create<T>()`` binds a collection to a streamer for one output.
+2. ``Create(IDataReader, ...)`` binds an existing reader directly to a streamer for one output.
+3. ``GetFileStream()`` returns the serialized output as a ``MemoryStream`` and consumes the current reader binding.
 4. ``GetFileStream(CancellationToken)`` adds cancellation support during generation.
 5. ``WriteToFile()`` writes output directly to disk.
 6. ``CollectionReaderExtensions.ToReader()`` turns collections into ``IDataReader`` instances.
 7. ``FileConverter.Save()`` can persist a streamer as plain output or compressed zip content.
 
+Source Fields And Display Headings
+----------------------------------
+
+The optional ``columnHeadings`` passed to ``Create(IDataReader, fileName, columnHeadings)`` are output labels only. Values remain mapped to the corresponding source reader ordinals, so renaming a heading does not change which field is exported.
+
+CollectionReader IDataReader Contract
+-------------------------------------
+
+Collection-backed ``IDataReader`` views omit properties marked ``[Display(Ignore = true)]`` and expose the remaining display names and order consistently through ``FieldNames``, ``GetName(...)``, ``GetOrdinal(...)``, and ``GetSchemaTable()``. ``Close()`` is idempotent and sets ``IsClosed``; row access and other open-reader operations then fail with ``InvalidOperationException``.
+
+Reader Ownership
+----------------
+
+``Create(IDataReader, ...)`` transfers ownership of the external reader to the streamer. Replacing the binding or disposing the streamer closes and disposes that reader. There is no ``leaveOpen`` option; create a separate reader or materialize the source when the caller must retain independent reader lifetime.
+
+Delimited Escaping
+------------------
+
+CSV and tab-delimited output quotes headers and values containing the format delimiter, quotes, tabs, or CR/LF characters, and doubles embedded quotes. ``null`` and ``DBNull.Value`` become empty fields. This keeps headers and values parseable when they contain delimiters or line breaks.
+
+Output Paths
+------------
+
+``WriteToFile(path)`` treats a path with an extension as an exact file path, whether it is absolute or relative. A path ending in a directory separator, or a path without an extension, is treated as a directory and uses the streamer's ``FileName``.
+
+Content Types And Encoding
+--------------------------
+
+The built-in streamers expose the standard content type for their format: ``text/csv``, ``text/tab-separated-values``, ``application/json``, or ``application/x-ndjson``. Both ``GetFileStream()`` and ``WriteToFile()`` produce UTF-8 text without a byte-order mark (BOM).
+
 Basic CSV Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers;
    using VersaTul.Handler.File;
@@ -130,16 +156,17 @@ Basic CSV Example
    var fileUtility = new FileUtility(directoryWrapper, directoryWrapper);
    var flattener = new Flattener();
 
-   var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
+   using var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
 
-      using var fileStream = csvStreamer
-         .Create(people, "people")
-         .GetFileStream();
+   var fileStream = csvStreamer
+      .Create(people, "people")
+      .GetFileStream();
 
 IDataReader Example
 -------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Extensions;
 
@@ -154,6 +181,7 @@ Direct To Disk Example
 ----------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Contracts;
 
@@ -164,6 +192,7 @@ IDataReader To Disk Example
 ---------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data;
    using VersaTul.Collection.Streamers.Contracts;
@@ -177,6 +206,7 @@ Save To Disk Example
 --------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Compressions;
    using VersaTul.Collection.Streamers.Converters;
@@ -194,7 +224,7 @@ Expected Result
 
 When this package is working well:
 
-1. one export definition can drive multiple delivery paths,
+1. each reader binding produces one clearly defined delivery output,
 2. formatting rules stay out of ad hoc file-writing code, and
 3. large exports can be written directly to disk without buffering the full file in memory.
 
@@ -208,8 +238,44 @@ Next Step
 Notes
 -----
 
-1. ``BaseStreamer`` reinitializes its internal reader and output stream state each time ``Create(...)`` is called.
+1. ``BaseStreamer`` reinitializes its internal reader and output stream state each time ``Create(...)`` is called; a binding cannot produce a second output after its reader is consumed.
 2. ``CsvStreamer`` supports a custom encoding strategy for value escaping.
 3. ``WriteToFile()`` is the preferred path for very large exports because rows can be written directly to disk.
 4. ``FileConverter.Save()`` uses direct file writing automatically for non-compressed output when the streamer supports it.
 5. This package works especially well with :doc:`display-attributes` when exported column names and formatted values matter.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Export collections and forward-only IDataReader sources as CSV, tab-delimited text, JSON, and JSON Lines. Supports property formatting, ZIP compression, and email delivery.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Collection.Streamers
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Collection.Streamers/Program.cs
+   :language: csharp
+   :caption: VersaTul.Collection.Streamers minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Collection.Streamers/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -34,11 +34,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Logger
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Logger -Version latest
 
 Related Packages
 ----------------
@@ -91,35 +86,100 @@ Key Capabilities
 2. ``LogInfo`` supports correlation through ``TraceId``.
 3. ``LogParser`` walks inner exceptions and emits multi-depth exception details.
 4. The parser supports output formats suitable for files, emails, and web payloads.
+5. HTML keys and values are encoded before they are placed in table cells.
+6. Tab output escapes backslashes, tabs, carriage returns, and line feeds so field boundaries and physical log records cannot be injected by data.
+
+Output Safety
+-------------
+
+``LogParser`` HTML output encodes every key and value before writing it into an HTML cell. Tab output and ``LogInfo.ToString()`` keep their tab-separated layout while escaping backslashes as ``\\`` and representing tabs, carriage returns, and line feeds as ``\t``, ``\r``, and ``\n``. Consumers that need the original field text should reverse these escapes after splitting the fields.
+
+Timestamp Format and Migration
+------------------------------
+
+``LogParser.Parse`` emits ``LogDate`` in invariant ISO 8601 round-trip format in
+HTML, tab, and JSON output. ``LogInfo.ToString()`` uses the same format. Timestamps
+include seven fractional-second digits; UTC inputs end in ``Z`` (for example,
+``2026-01-15T12:30:45.1234567Z``), while local inputs include the local UTC offset.
+Unspecified ``DateTime`` inputs are interpreted as local wall times and include
+the local offset. ``LogInfo.Date`` retains its supplied value and kind, and the
+default constructor continues to capture local time.
+
+This is a **major-version output-format change**. Update ingestion rules that
+expect culture-specific long date/time text to accept ISO 8601 with either ``Z``
+or a numeric offset. After extracting the timestamp, use
+``DateTimeOffset.Parse(value, CultureInfo.InvariantCulture)``. JSON retains its
+string-valued ``LogDate`` property and existing schema; tab field positions do
+not change. Existing historical records need a separate legacy parsing path
+using the original writer's culture and time zone.
+
+Prefer UTC inputs for unambiguous timestamps across machines and daylight-saving
+transitions. Local and unspecified values follow .NET's local offset rules,
+including ambiguous or invalid wall times; formatting does not validate those
+times. File, mail, and web sinks using the built-in parser inherit this format
+when consuming the updated Logger package. Custom parsers control their own
+output. Arbitrary dictionary values and archive filenames are outside this
+timestamp policy. Constructor and interface signatures are unchanged.
 
 Basic Example
 -------------
 
-.. code-block:: csharp
+Supply separate native synchronous and asynchronous database callbacks. Keep their
+dependencies alive through each call; the sink borrows them. The synchronous
+callback must use the provider's native synchronous API. It must not block the
+asynchronous callback. An async-only provider can reject synchronous logging and
+direct callers to ``LogAsync`` instead.
 
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+   using System;
+   using System.Threading.Tasks;
    using VersaTul.Logger;
    using VersaTul.Logger.Contracts;
 
-   public class DatabaseLogger : ILogger
+   public sealed class DatabaseLogger : ILogger
    {
-       private readonly ILogParser logParser;
+       private readonly ILogParser parser;
+       private readonly Action<string> save;
+       private readonly Func<string, Task> saveAsync;
 
-       public DatabaseLogger(ILogParser logParser)
+       public DatabaseLogger(ILogParser parser, Action<string> save, Func<string, Task> saveAsync)
        {
-           this.logParser = logParser;
+           ArgumentNullException.ThrowIfNull(parser);
+           ArgumentNullException.ThrowIfNull(save);
+           ArgumentNullException.ThrowIfNull(saveAsync);
+           this.parser = parser;
+           this.save = save;
+           this.saveAsync = saveAsync;
        }
 
-       public void Log(Exception exception) => LogAsync(exception).GetAwaiter().GetResult();
-       public void Log(LogInfo logInfo) => LogAsync(logInfo).GetAwaiter().GetResult();
-       public void Log(LogInfo logInfo, Exception exception) => LogAsync(logInfo, exception).GetAwaiter().GetResult();
+       public void Log(Exception exception)
+       {
+           ArgumentNullException.ThrowIfNull(exception);
+           Log(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       }
 
-       public Task LogAsync(Exception exception) => LogAsync(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       public void Log(LogInfo logInfo) => Log(logInfo, null);
+
+       public void Log(LogInfo logInfo, Exception? exception)
+       {
+           ArgumentNullException.ThrowIfNull(logInfo);
+           save(parser.Parse(logInfo, exception, ParseFormat.Json));
+       }
+
+       public Task LogAsync(Exception exception)
+       {
+           ArgumentNullException.ThrowIfNull(exception);
+           return LogAsync(new LogInfo(LogLevel.Error, string.Empty, exception.Message), exception);
+       }
+
        public Task LogAsync(LogInfo logInfo) => LogAsync(logInfo, null);
 
-       public Task LogAsync(LogInfo logInfo, Exception exception)
+       public Task LogAsync(LogInfo logInfo, Exception? exception)
        {
-           var payload = logParser.Parse(logInfo, exception, ParseFormat.Json);
-           return SaveToDatabaseAsync(payload);
+           ArgumentNullException.ThrowIfNull(logInfo);
+           return saveAsync(parser.Parse(logInfo, exception, ParseFormat.Json));
        }
    }
 
@@ -127,6 +187,7 @@ Parser Example
 --------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var parser = new LogParser();
    var info = new LogInfo(LogLevel.Error, "Orders", "Unable to process order", traceId: "trace-123");
@@ -153,6 +214,42 @@ Next Step
 Notes
 -----
 
-1. ``LogInfo.ToString()`` produces a tab-separated representation, but the parser is the richer integration point.
+1. ``LogInfo.ToString()`` produces a single-line escaped tab-separated representation, but the parser is the richer integration point.
 2. The base package does not write anywhere by itself; sink packages provide the actual transport.
 3. If you need a custom sink, implement ``ILogger`` and optionally reuse ``ILogParser``.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Shared logging interfaces, log models, and parsing support for VersaTul file, email, and web logger packages.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Logger
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger/Program.cs
+   :language: csharp
+   :caption: VersaTul.Logger minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

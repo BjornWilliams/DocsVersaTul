@@ -35,11 +35,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Mailer
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Mailer -Version latest
 
 Related Packages
 ----------------
@@ -76,10 +71,13 @@ Core Types And Concepts
    Main delivery abstraction and implementation.
 
 ``IMailConfiguration`` and ``MailConfiguration``
-   Expose SMTP host, credentials, sender/recipient, attachment size, timeout, and retry settings.
+   Expose SMTP host, credentials, sender/recipient, attachment size, timeout, retry, TLS, and credential-policy settings.
 
 ``ISmtpClient`` and ``SmtpClientWrapper``
    Wrapper abstraction around SMTP transport.
+
+``ISmtpClientFactory`` and ``SmtpClientFactory``
+   Create the underlying framework SMTP client. The factory overload makes host, port, TLS, and credential mapping testable without reflection or a live SMTP server.
 
 Key Capabilities
 ----------------
@@ -94,20 +92,27 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
+   using System;
    using VersaTul.Configurations;
    using VersaTul.Mailer;
    using VersaTul.Mailer.Configurations;
    using VersaTul.Mailer.SmtpClients;
 
+   var smtpPasswordFromSecretStore = Environment.GetEnvironmentVariable("VERSATUL_SMTP_PASSWORD")
+       ?? throw new InvalidOperationException("Configure VERSATUL_SMTP_PASSWORD before sending mail.");
+
    var configSettings = new ConfigSettings
    {
        { "FromAddress", "alerts@domain.com" },
        { "ToAddress", "ops@domain.com" },
-       { "SmtpServer", "127.0.0.1" },
-       { "SmtpPort", 25 },
+       { "SmtpServer", "smtp.example.com" },
+       { "SmtpPort", 587 },
        { "SmtpUserName", "smtp-user" },
-       { "SmtpPassword", "smtp-password" },
+       { "SmtpPassword", smtpPasswordFromSecretStore },
+       { "UseDefaultCredentials", false },
+       { "EnableSsl", true },
        { "MaxAttachmentSize", 10000000 }
    };
 
@@ -117,10 +122,41 @@ Basic Example
 
    dispatcher.SendMail(configuration.FromAddress, configuration.ToAddress, "Subject", "Body", isHtml: false);
 
+SMTP Security And Validation
+----------------------------
+
+The wrapper applies secure defaults and validates configuration before creating the underlying SMTP client:
+
+1. Omitting ``SmtpUserName`` and ``SmtpPassword`` selects anonymous SMTP. Ambient process or machine credentials are never attached implicitly.
+2. ``UseDefaultCredentials`` is ``false`` unless it is explicitly set to ``true``. It cannot be combined with explicit username/password credentials.
+3. ``SmtpUserName`` and ``SmtpPassword`` must be supplied together.
+4. ``EnableSsl`` defaults to ``true`` and maps to STARTTLS support in ``SmtpClient``. Port 587 is the usual submission port for this mode.
+5. Set ``EnableSsl`` to ``false`` only for a deliberately approved legacy non-TLS server. This opt-out exposes the connection to transport interception.
+6. ``SmtpServer`` is required and ``SmtpPort`` must be between 1 and 65535. Negative timeout values are rejected.
+7. Validation failures use generic messages and never include username or password values.
+
+For Windows or domain-integrated SMTP, opt in explicitly and omit the explicit credential pair:
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+   var integratedConfiguration = new MailConfiguration(new ConfigSettings
+   {
+       { "SmtpServer", "smtp.internal.example.com" },
+       { "SmtpPort", 587 },
+       { "UseDefaultCredentials", true },
+       { "EnableSsl", true },
+       { "FromAddress", "alerts@example.com" },
+       { "ToAddress", "ops@example.com" }
+   });
+
+Tests can supply an ``ISmtpClientFactory`` implementation to capture the created ``SmtpClient`` and verify these settings locally without connecting to an SMTP server.
+
 Template Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    dispatcher.SendTemplatedMail(
        configuration.FromAddress,
@@ -153,5 +189,101 @@ Notes
 -----
 
 1. ``MailConfiguration`` also exposes ``SmtpTimeoutMilliseconds``, ``RetryCount``, and ``RetryDelayMilliseconds``.
-2. The package focuses on delivery, not mail-template storage or rendering engines.
-3. This package is the transport layer used by :doc:`logger-mail` and mail-based export workflows.
+2. ``EnableSsl`` defaults to ``true`` and ``UseDefaultCredentials`` defaults to ``false`` when their keys are omitted.
+3. The package focuses on delivery, not mail-template storage or rendering engines.
+4. This package is the transport layer used by :doc:`logger-mail` and mail-based export workflows.
+
+Asynchronous Delivery
+---------------------
+
+``MailDispatcher`` implements the additive ``IAsyncMailDispatcher`` contract and
+``SmtpClientWrapper`` implements ``IAsyncSmtpClient``. Existing synchronous APIs
+remain available. Built-in async SMTP uses native I/O; transient retry delays use
+cancellable ``Task.Delay``.
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+   using var cancellation = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(30));
+   await dispatcher.SendMailAsync(configuration.FromAddress, configuration.ToAddress,
+       "Subject", "Body", cancellationToken: cancellation.Token);
+
+The optional ``isHtml`` and ``IEnumerable<Attachment>`` parameters support HTML
+and attachments. Await the task before disposing transport resources. The dispatcher
+owns its message and added attachments until completion, then disposes them on
+success, failure, or cancellation. Direct ``IAsyncSmtpClient.SendAsync`` calls do
+not transfer message ownership.
+
+Authentication/connectivity exception mappings and attempt counts match synchronous
+delivery. ``RetryCount`` is the maximum total attempts; delay increases by
+``RetryDelayMilliseconds`` per failed attempt. The wrapper applies its configured
+SMTP timeout (or framework default) per attempt; timeout is a retryable connectivity
+failure. Caller cancellation is propagated without retry, but cannot prove that a
+server has not already accepted a message.
+
+Legacy custom ``ISmtpClient`` implementations run on a worker thread and cannot be
+interrupted once their synchronous send starts. Awaiting still waits for that send
+before disposing resources. Implement ``IAsyncSmtpClient`` for native async I/O and
+cancellation. Serialize sends on one SMTP wrapper. Async template and abstract
+attachment convenience overloads are outside this change.
+
+Retry Ownership
+---------------
+
+``MailDispatcher`` implements the additive ``IRetryingMailDispatcher`` capability
+for synchronous and asynchronous delivery. It owns the complete retry policy;
+callers should invoke it once per message and treat final failure as final.
+Logger.Mail recognizes it so configured SMTP attempts are not multiplied by a
+second retry loop. Custom retrying dispatchers and decorators can implement the
+same capability without changing existing dispatcher interface members.
+
+Runnable Sample
+---------------
+
+The complete delivery example uses a local fake SMTP server and is maintained as a buildable project included here directly.
+
+.. literalinclude:: ../samples/Mailer/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../samples/Mailer/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Send email through SMTP using testable dispatch abstractions, with configuration, templates, and attachment support.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Mailer
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Mailer/Program.cs
+   :language: csharp
+   :caption: VersaTul.Mailer minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Mailer/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

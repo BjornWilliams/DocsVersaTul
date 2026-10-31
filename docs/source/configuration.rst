@@ -40,11 +40,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Configurations
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Configurations -Version latest
 
 Related Packages
 ----------------
@@ -106,6 +101,7 @@ Basic Example
 The most common usage pattern is to inherit from ``Configuration`` and expose strongly typed properties.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configurations;
 
@@ -141,6 +137,7 @@ Binding Example
 ``Bind<T>()`` is useful when you want to project settings into a plain model instead of exposing them through an inherited configuration class.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configurations;
 
@@ -184,6 +181,32 @@ Next Step
 2. Read :doc:`sql` if your next package needs database configuration.
 3. Read :doc:`mailer` or :doc:`logger-file` if your next concern is outbound mail or operational logging.
 
+Mutable Settings
+----------------
+
+Configuration retains the supplied ``ConfigSettings``. Get, GetOrDefault,
+TryGetValue and Bind observe later additions, updates and removals. Exact keys
+take precedence. With case-insensitive lookup enabled, a missing exact key uses
+the first ordinal case-insensitive match in the dictionary's current enumeration
+order. Avoid keys differing only in case when that fallback would be ambiguous.
+
+Callers must synchronize reads and writes when sharing settings between threads.
+Bind does not take an atomic snapshot during concurrent mutation.
+
+Scalar Binding
+--------------
+
+Get, GetOrDefault and Bind use the same :ref:`scalar-conversion-matrix`, including
+Guid, Uri, TimeSpan, DateOnly, TimeOnly, DateTimeOffset, enums and nullable value
+variants. Assignable values pass through; text uses current culture and explicit
+DateTimeOffset offsets are retained. Null/DBNull becomes default(T) for non-nullable
+value properties or null for nullable/reference properties. Malformed or unsupported
+values throw conversion exceptions; arbitrary custom parsers are not inferred.
+
+Use the compatible new Extensions release providing ConvertTo; older versions
+lack this API. Requiring that new Extensions major makes this a Major
+Configurations release.
+
 Notes
 -----
 
@@ -191,3 +214,39 @@ Notes
 2. ``GetOrDefault<T>()`` is better suited to optional values.
 3. ``ConfigSettings`` is intentionally simple, so it can be populated from JSON, environment variables, a database, or any custom source.
 4. If you need ready-made defaults for VersaTul packages, start with :doc:`configuration-defaults` and then override values as needed.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Read named settings through VersaTul configuration abstractions and integrate them with the .NET IConfiguration model.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Configurations
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configurations/Program.cs
+   :language: csharp
+   :caption: VersaTul.Configurations minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configurations/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -28,11 +28,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Data.MongoDB
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Data.MongoDB -Version latest
 
 Related Packages
 ----------------
@@ -56,6 +51,9 @@ Core Types And Concepts
 ``IEntityMap<TEntity>`` and ``BaseMap<TEntity>``
    Mapping abstractions for collection registration and BSON class-map configuration.
 
+``NoMap<TEntity>``
+   A valid no-op map for repositories that rely on entity attributes or conventions. It exposes no extra-elements accessor and performs no class-map registration.
+
 ``WherePredicate<TEntity>``
    Predicate wrapper for repository filtering.
 
@@ -70,25 +68,38 @@ Key Capabilities
 3. Collection name resolution supports attributes and base-entity conventions.
 4. Configuration can create typed collections from connection strings or ``MongoUrl`` instances.
 5. Connection overrides let one repository shape target a different configured database.
+6. Repository predicates use MongoDB's native LINQ provider without an EF Core-specific expression dependency.
+
+MongoDB Client Configuration
+----------------------------
+
+``DataConfiguration<TKey>`` composes TCP socket keep-alive setup and command-started event subscriptions in the same MongoDB cluster configurator. Registering command-event logging therefore preserves the configured socket behavior.
+
+Within a ``DataConfiguration<TKey>`` instance, database resolution reuses one ``MongoClient`` for each normalized set of effective client settings. Repeated collection resolution therefore shares the driver's connection pool.
+
+Command names remain available to ``LogCommand``, while payload logging is disabled by default. Set ``LogCommandPayload`` to ``true`` to include a sanitized payload; credential and common personal-data fields are always redacted, and additional comma-separated names can be supplied through ``CommandLogRedactedFields``.
 
 Basic Repository Example
 ------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
+   using System.Collections.Generic;
    using VersaTul.Data.MongoDB;
    using VersaTul.Data.MongoDB.Contracts;
 
    public class Car : Entity
    {
-       public string Make { get; set; }
-       public string Model { get; set; }
+       public string Make { get; set; } = string.Empty;
+       public string Model { get; set; } = string.Empty;
        public int Year { get; set; }
+       public IDictionary<string, object> ExtraElements { get; set; } = new Dictionary<string, object>();
    }
 
    public class CarMap : BaseMap<Car>
    {
-       public CarMap() : base("cars")
+        public CarMap() : base("cars", car => car.ExtraElements)
        {
        }
    }
@@ -105,10 +116,13 @@ Basic Repository Example
        }
    }
 
+``BaseMap<TEntity>`` requires both a collection name and an accessor for an extra-elements member. The member captures BSON fields that are not represented by the current entity model, which is useful when documents can contain fields added by newer application versions. If that behavior is not needed, provide a custom ``IEntityMap<TEntity>`` implementation instead of mapping an unrelated property as extra elements.
+
 Filtering Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var cars = carRepository.Find(
        new WherePredicate<Car>(model => model.Make.Contains(searchTerm) || model.Model.Contains(searchTerm)));
@@ -116,9 +130,11 @@ Filtering Example
 Connection Override Notes
 -------------------------
 
-The repository base supports connection override patterns, which are useful when the same repository shape needs to target another configured database.
+The repository base supports connection override patterns, which are useful when the same repository shape needs to target another configured database. An override applies to the current async execution context; the repository's default collection remains unchanged, and concurrent contexts can select different connections without changing one another's active collection.
 
-This is powerful, but it also means lifetime management matters. If you register repositories as singletons and change the active connection, that change can persist longer than you intended.
+When using a singleton repository, select the override within the operation that needs it and keep subsequent work in that async flow. Do not treat a connection override as a process-wide repository setting.
+
+Query and callback methods reject null predicates and callbacks with ``ArgumentNullException`` before contacting MongoDB. Async query methods honor a pre-cancelled ``CancellationToken``. ``ForEachAsync`` also checks cancellation before each callback, so cancellation cannot start another callback in the same cursor batch.
 
 Notes
 -----
@@ -126,3 +142,54 @@ Notes
 1. ``DataConfiguration<TKey>`` centralizes collection naming, timeouts, and connection-string access.
 2. ``BaseMap<TEntity>`` is the right place for BSON class-map customization and nested serializer setup.
 3. ``WherePredicate<TEntity>`` keeps filtering expressions explicit and reusable.
+
+Runnable Sample
+---------------
+
+The complete map and repository example is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../samples/MongoDB/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../samples/MongoDB/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+MongoDB repository abstractions for common data-access operations, including create, read, update, and delete.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.MongoDB
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MongoDB/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.MongoDB minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MongoDB/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

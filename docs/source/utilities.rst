@@ -29,11 +29,6 @@ Install the package with the .NET CLI:
 
     dotnet add package VersaTul.Utilities
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-    PM> NuGet\Install-Package VersaTul.Utilities -Version latest
 
 Related Packages
 ----------------
@@ -77,6 +72,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Utilities;
     using VersaTul.Utilities.Contracts;
@@ -94,6 +90,7 @@ Enum And Collection Example
 ---------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Utilities;
 
@@ -117,6 +114,7 @@ Property Mapping Example
 ------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Utilities;
 
@@ -133,6 +131,92 @@ Property Mapping Example
 
     utility.PropertyMap(source, destination);
 
+Batches And Random Sampling
+---------------------------
+
+``MakeBatches(source, batchSize)`` requires a strictly positive size, even for an
+empty source. Invalid sizes throw ``ArgumentOutOfRangeException`` for batchSize
+before input enumeration. Positive sizes preserve ordering and the existing
+materialized-source behavior, including one-shot inputs and large batch sizes.
+
+``CollectionUtility<T>.RandomSampler(source)`` uses ``Random.Shared``. Its new
+concrete overload accepts a ``Random`` instance for deterministic tests. Empty
+lists still return default(T); null sources or random instances are rejected.
+Injected random instances must support the caller's concurrency pattern. The
+existing ICollectionUtility interface is unchanged.
+
+Enum-Only Contract Migration
+----------------------------
+
+``EnumParser<T>`` and ``IEnumParser<T>`` now require ``where T : struct, Enum``.
+This requires a Major Utilities release. Existing enum methods and parsing behavior
+remain available. Non-enum arguments such as int fail compilation or reflective
+generic construction. Use numeric conversion helpers for non-enum values.
+
+Generic wrappers and factories must also carry the Enum constraint:
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+    public static IEnumParser<T> CreateParser<T>() where T : struct, Enum
+        => new EnumParser<T>();
+
+Import System, VersaTul.Utilities and VersaTul.Utilities.Contracts. Scheduler's
+EventTime callers remain valid because EventTime is an enum; dependent-package
+minimum versions still require a separate release/dependency review.
+
+.. _scalar-conversion-matrix:
+
+Scalar Conversion Matrix
+-------------------------
+
+Generic Transform, runtime-type Transform, Extensions conversions and configuration
+binding use the same scalar parsers before falling back to IConvertible.
+
+.. list-table:: Supported target types
+   :header-rows: 1
+
+   * - Target
+     - Text conversion
+     - Nullable support
+     - Conversion to string
+   * - Boolean, Char, signed/unsigned 8/16/32/64-bit integers, Single, Double, Decimal, DateTime
+     - Existing IConvertible rules
+     - All value types
+     - Existing culture-sensitive rules
+   * - Enum
+     - Case-insensitive names or numeric text
+     - Yes
+     - Existing enum text
+   * - Guid
+     - Guid.Parse formats
+     - Yes
+     - D format
+   * - Uri
+     - Relative or absolute URI
+     - Reference type
+     - OriginalString
+   * - TimeSpan
+     - Duration using the selected culture
+     - Yes
+     - c format
+   * - DateOnly, TimeOnly
+     - Date/time using the selected culture
+     - Yes
+     - O format
+   * - DateTimeOffset
+     - Date/time with offset retained
+     - Yes
+     - O format with offset
+
+Assignable values pass through. Current culture is the default; the Transform
+overloads accepting ``useInvariantCulture: true`` select invariant parsing.
+Generic null/DBNull input returns default(T); runtime-type conversion returns null.
+Binding uses default(T) for a non-nullable value property and null for a nullable
+or reference property. TryTransform returns false for unsupported or malformed
+conversions without leaking cast exceptions; generic null/default conversion succeeds.
+Arbitrary custom parsers are not inferred.
+
 Notes
 -----
 
@@ -140,3 +224,39 @@ Notes
 2. ``RandomString()`` uses ``RandomNumberGenerator`` rather than ``Random``.
 3. ``MakeBatches()`` is useful for bulk operations and throttled processing.
 4. If you primarily want fluent syntax, use :doc:`extensions`, which builds on several of these helpers.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+General-purpose helpers for collection operations, enum parsing, conversions, and common application tasks.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Utilities
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Utilities/Program.cs
+   :language: csharp
+   :caption: VersaTul.Utilities minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Utilities/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -26,6 +26,7 @@ Step 1: Define The File Logger Configuration
 --------------------------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configuration.Defaults;
    using VersaTul.Logger.File.Contracts;
@@ -42,6 +43,7 @@ Step 2: Build The Logger
 ------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Handler.File;
    using VersaTul.Logger;
@@ -60,6 +62,7 @@ Step 3: Log Useful Events
 Log both normal application activity and failures through the same interface.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    await logger.LogAsync(new LogInfo(LogLevel.Information, "Startup", "Application started"));
 
@@ -80,6 +83,21 @@ When this workflow is working:
 1. The target log directory is created automatically if it does not exist.
 2. Log rows are appended in the configured file format.
 3. Exception details are captured through the shared parser and file sink.
+
+Runnable Sample
+---------------
+
+The complete sample writes to a temporary directory, reads the resulting log record, and is maintained as a buildable project included here directly.
+
+.. literalinclude:: ../../samples/FileLogging/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../../samples/FileLogging/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
 
 Why This Workflow Helps
 -----------------------

@@ -27,11 +27,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Compression
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Compression -Version latest
 
 Related Packages
 ----------------
@@ -63,6 +58,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.IO;
    using VersaTul.Compression;
@@ -83,6 +79,7 @@ Unzip Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using var archiveStream = File.OpenRead("exports.zip");
 
@@ -98,3 +95,39 @@ Notes
 
 1. ``ZipStream.Stream`` is a ``MemoryStream``, so this package is best suited to in-memory export workflows.
 2. The package does not decide where archives are stored or sent; pair it with :doc:`handler-file` or :doc:`streamers` depending on your workflow.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Compress and decompress streams and memory streams using .NET System.IO.Compression APIs, with ZIP archive helpers.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Compression
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Compression/Program.cs
+   :language: csharp
+   :caption: VersaTul.Compression minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Compression/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -33,6 +33,7 @@ Step 1: Annotate The Export Model
 Use display metadata to control how the export appears.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Display.Attributes;
 
@@ -60,12 +61,13 @@ Step 2: Create The Stream
 Create a streamer for the target format.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers;
 
-   var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
+   using var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
 
-   using var fileStream = csvStreamer
+   var fileStream = csvStreamer
        .Create(orderRows, "orders-export")
        .GetFileStream();
 
@@ -77,6 +79,7 @@ Step 3: Save The Export
 For large exports, write directly to disk.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Contracts;
 
@@ -90,7 +93,7 @@ Why The Companion Packages Matter
 
 ``Object.Converters`` helps flatten nested values and respects display-driven behavior during processing.
 
-``Collection.Streamers`` provides the reusable export engine.
+``Collection.Streamers`` provides the one-destination-per-reader-binding export engine.
 
 Together, they give you a path from domain object to export file without hand-writing CSV headers, formatting logic, and flattening rules.
 
@@ -102,6 +105,21 @@ When this workflow is working:
 1. The output columns reflect display names rather than raw property names.
 2. Values such as decimals and dates follow the export formatting rules.
 3. Ignored properties do not appear in the final export.
+
+Runnable Sample
+---------------
+
+The complete sample is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../../samples/DataExport/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output and generated-file contents are:
+
+.. literalinclude:: ../../samples/DataExport/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
 
 Common Mistakes
 ---------------
