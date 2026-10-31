@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Standardize asynchronous operations across your own application code.
 4. Reuse the same abstractions that VersaTul data packages already understand.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Contracts on NuGet <https://www.nuget.org/packages/VersaTul.Contracts>`_
+`VersaTul.Contracts versions and release notes <https://www.nuget.org/packages/VersaTul.Contracts#versions-body-tab>`_
+
 Installation
 ------------
 

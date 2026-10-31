@@ -31,6 +31,12 @@ Use this package when you want to:
 3. Bind a key/value store into a plain object.
 4. Share one configuration model across multiple VersaTul packages.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Configurations on NuGet <https://www.nuget.org/packages/VersaTul.Configurations>`_
+`VersaTul.Configurations versions and release notes <https://www.nuget.org/packages/VersaTul.Configurations#versions-body-tab>`_
+
 Installation
 ------------
 

@@ -27,6 +27,12 @@ Use this package when you want to:
 5. Add cancellation-aware stream generation for large exports.
 6. Write very large exports directly to disk without buffering the full file in memory.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Collection.Streamers on NuGet <https://www.nuget.org/packages/VersaTul.Collection.Streamers>`_
+`VersaTul.Collection.Streamers versions and release notes <https://www.nuget.org/packages/VersaTul.Collection.Streamers#versions-body-tab>`_
+
 Installation
 ------------
 

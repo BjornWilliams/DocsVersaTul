@@ -26,6 +26,12 @@ Use this package when you want to:
 4. Bulk import ``IDataReader`` data into SQL Server tables.
 5. Validate and upload multiple bulk-copy items in a single transaction.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.MsSql on NuGet <https://www.nuget.org/packages/VersaTul.Data.MsSql>`_
+`VersaTul.Data.MsSql versions and release notes <https://www.nuget.org/packages/VersaTul.Data.MsSql#versions-body-tab>`_
+
 Installation
 ------------
 

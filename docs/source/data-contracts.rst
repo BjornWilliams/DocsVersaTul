@@ -19,6 +19,12 @@ Use this package when you want to:
 4. Represent paged requests and paged results consistently.
 5. Add async stream support to repository abstractions.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.Contracts on NuGet <https://www.nuget.org/packages/VersaTul.Data.Contracts>`_
+`VersaTul.Data.Contracts versions and release notes <https://www.nuget.org/packages/VersaTul.Data.Contracts#versions-body-tab>`_
+
 Installation
 ------------
 

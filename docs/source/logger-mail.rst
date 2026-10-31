@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Throttle bursts of log traffic instead of flooding recipients.
 4. Batch excess messages during a throttle window.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Logger.Mail on NuGet <https://www.nuget.org/packages/VersaTul.Logger.Mail>`_
+`VersaTul.Logger.Mail versions and release notes <https://www.nuget.org/packages/VersaTul.Logger.Mail#versions-body-tab>`_
+
 Installation
 ------------
 

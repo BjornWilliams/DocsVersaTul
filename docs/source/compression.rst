@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Keep compression concerns separate from file generation logic.
 4. Support workflows that generate exports before saving, emailing, or uploading them.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Compression on NuGet <https://www.nuget.org/packages/VersaTul.Compression>`_
+`VersaTul.Compression versions and release notes <https://www.nuget.org/packages/VersaTul.Compression#versions-body-tab>`_
+
 Installation
 ------------
 

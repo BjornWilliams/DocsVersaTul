@@ -26,6 +26,12 @@ Use this package when you want to:
 4. Generate outbound mail from a tokenized template.
 5. Reuse one dispatcher across notifications, export delivery, and alerting flows.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Mailer on NuGet <https://www.nuget.org/packages/VersaTul.Mailer>`_
+`VersaTul.Mailer versions and release notes <https://www.nuget.org/packages/VersaTul.Mailer#versions-body-tab>`_
+
 Installation
 ------------
 

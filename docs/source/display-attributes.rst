@@ -19,6 +19,12 @@ Use this package when you want to:
 4. Format date values with a display-specific format string.
 5. Exclude properties from exported output.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Display.Attributes on NuGet <https://www.nuget.org/packages/VersaTul.Display.Attributes>`_
+`VersaTul.Display.Attributes versions and release notes <https://www.nuget.org/packages/VersaTul.Display.Attributes#versions-body-tab>`_
+
 Installation
 ------------
 

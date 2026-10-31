@@ -19,6 +19,12 @@ Use this package when you want to:
 4. Reuse path, extension, and directory helpers across the codebase.
 5. Support export workflows from :doc:`streamers` and archive workflows from :doc:`compression`.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Handler.File on NuGet <https://www.nuget.org/packages/VersaTul.Handler.File>`_
+`VersaTul.Handler.File versions and release notes <https://www.nuget.org/packages/VersaTul.Handler.File#versions-body-tab>`_
+
 Installation
 ------------
 

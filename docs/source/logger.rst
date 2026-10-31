@@ -25,6 +25,12 @@ Use this package when you want to:
 3. Reuse shared parsing and formatting logic across multiple log sinks.
 4. Keep application code independent from any single logging transport.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Logger on NuGet <https://www.nuget.org/packages/VersaTul.Logger>`_
+`VersaTul.Logger versions and release notes <https://www.nuget.org/packages/VersaTul.Logger#versions-body-tab>`_
+
 Installation
 ------------
 

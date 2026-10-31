@@ -25,6 +25,12 @@ Use this package when you want to:
 3. Enable daily rolling archives and retention cleanup.
 4. Keep the logging sink independent from your application code.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Logger.File on NuGet <https://www.nuget.org/packages/VersaTul.Logger.File>`_
+`VersaTul.Logger.File versions and release notes <https://www.nuget.org/packages/VersaTul.Logger.File#versions-body-tab>`_
+
 Installation
 ------------
 

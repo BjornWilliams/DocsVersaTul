@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Build configuration dictionaries fluently in code.
 4. Standardize configuration setup across multiple services or projects.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Configuration.Defaults on NuGet <https://www.nuget.org/packages/VersaTul.Configuration.Defaults>`_
+`VersaTul.Configuration.Defaults versions and release notes <https://www.nuget.org/packages/VersaTul.Configuration.Defaults#versions-body-tab>`_
+
 Installation
 ------------
 

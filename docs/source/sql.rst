@@ -26,6 +26,12 @@ Use this package when you want to:
 4. Read connection string and provider metadata from shared configuration.
 5. Reuse synchronous and asynchronous execution patterns across multiple database engines.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.Sql on NuGet <https://www.nuget.org/packages/VersaTul.Data.Sql>`_
+`VersaTul.Data.Sql versions and release notes <https://www.nuget.org/packages/VersaTul.Data.Sql#versions-body-tab>`_
+
 Installation
 ------------
 

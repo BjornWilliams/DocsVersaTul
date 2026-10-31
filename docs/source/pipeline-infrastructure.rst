@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Add optional diagnostics around step execution time and failures.
 4. Reuse the same pipeline pattern across formatters, validation, or normalization flows.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Pipeline.Infrastructure on NuGet <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure>`_
+`VersaTul.Pipeline.Infrastructure versions and release notes <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure#versions-body-tab>`_
+
 Installation
 ------------
 

@@ -19,6 +19,12 @@ Use this package when you want to:
 4. Override connection targets dynamically for the same repository shape.
 5. Keep MongoDB configuration concerns separated from business logic.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.MongoDB on NuGet <https://www.nuget.org/packages/VersaTul.Data.MongoDB>`_
+`VersaTul.Data.MongoDB versions and release notes <https://www.nuget.org/packages/VersaTul.Data.MongoDB#versions-body-tab>`_
+
 Installation
 ------------
 

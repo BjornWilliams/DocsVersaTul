@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Add authentication or payload signing headers.
 4. Prevent repeated failing calls through a simple circuit breaker.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Logger.Web on NuGet <https://www.nuget.org/packages/VersaTul.Logger.Web>`_
+`VersaTul.Logger.Web versions and release notes <https://www.nuget.org/packages/VersaTul.Logger.Web#versions-body-tab>`_
+
 Installation
 ------------
 

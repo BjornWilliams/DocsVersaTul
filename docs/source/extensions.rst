@@ -19,6 +19,12 @@ Use this package when you want to:
 4. Convert objects into dictionaries or flattened representations.
 5. Perform small currency-related transformations.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Extensions on NuGet <https://www.nuget.org/packages/VersaTul.Extensions>`_
+`VersaTul.Extensions versions and release notes <https://www.nuget.org/packages/VersaTul.Extensions#versions-body-tab>`_
+
 Installation
 ------------
 

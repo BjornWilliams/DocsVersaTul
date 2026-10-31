@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Produce flattened string output from nested values.
 4. Respect display metadata while processing object properties for export scenarios.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Object.Converters on NuGet <https://www.nuget.org/packages/VersaTul.Object.Converters>`_
+`VersaTul.Object.Converters versions and release notes <https://www.nuget.org/packages/VersaTul.Object.Converters#versions-body-tab>`_
+
 Installation
 ------------
 

@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Restrict schedules to a time window.
 4. Run background work through a timer abstraction that tracks missed time through stored state.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Task.Scheduler on NuGet <https://www.nuget.org/packages/VersaTul.Task.Scheduler>`_
+`VersaTul.Task.Scheduler versions and release notes <https://www.nuget.org/packages/VersaTul.Task.Scheduler#versions-body-tab>`_
+
 Installation
 ------------
 

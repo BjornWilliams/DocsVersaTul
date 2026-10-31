@@ -18,6 +18,12 @@ Use this package when you want to:
 3. Work with bulk-copy results and error reporting consistently.
 4. Build data-loading workflows that can be backed by a specific implementation such as :doc:`mssql`.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.Bulk on NuGet <https://www.nuget.org/packages/VersaTul.Data.Bulk>`_
+`VersaTul.Data.Bulk versions and release notes <https://www.nuget.org/packages/VersaTul.Data.Bulk#versions-body-tab>`_
+
 Installation
 ------------
 

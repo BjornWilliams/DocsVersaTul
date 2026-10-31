@@ -20,6 +20,12 @@ Use this package when you want to:
 5. Split collections into batches.
 6. Map properties between objects with similar shapes.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Utilities on NuGet <https://www.nuget.org/packages/VersaTul.Utilities>`_
+`VersaTul.Utilities versions and release notes <https://www.nuget.org/packages/VersaTul.Utilities#versions-body-tab>`_
+
 Installation
 ------------
 

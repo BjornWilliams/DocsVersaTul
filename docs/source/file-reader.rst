@@ -27,6 +27,12 @@ Use this package when you want to:
 3. Inject format-specific readers for testing or replacement.
 4. Feed file data directly into :doc:`bulk` or :doc:`mssql` bulk-copy workflows.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.FileReader on NuGet <https://www.nuget.org/packages/VersaTul.Data.FileReader>`_
+`VersaTul.Data.FileReader versions and release notes <https://www.nuget.org/packages/VersaTul.Data.FileReader#versions-body-tab>`_
+
 Installation
 ------------
 

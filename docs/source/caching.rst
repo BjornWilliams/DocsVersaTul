@@ -19,6 +19,12 @@ Use this package when you want to:
 4. Use absolute or sliding expiration policies.
 5. React to cache item eviction events.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Caching on NuGet <https://www.nuget.org/packages/VersaTul.Caching>`_
+`VersaTul.Caching versions and release notes <https://www.nuget.org/packages/VersaTul.Caching#versions-body-tab>`_
+
 Installation
 ------------
 

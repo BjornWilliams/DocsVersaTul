@@ -19,6 +19,12 @@ Use this package when you want to:
 4. Add query specifications for reusable filtering logic.
 5. Expose no-tracking query paths when read-only performance matters.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.EFCore on NuGet <https://www.nuget.org/packages/VersaTul.Data.EFCore>`_
+`VersaTul.Data.EFCore versions and release notes <https://www.nuget.org/packages/VersaTul.Data.EFCore#versions-body-tab>`_
+
 Installation
 ------------
 
