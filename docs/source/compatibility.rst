@@ -66,7 +66,9 @@ Use the exact package version's included assets to decide whether that package i
 VersaTul transition support
 ---------------------------
 
-VersaTul will keep the ``net8.0`` and ``net9.0`` assets in its transition target matrix through 2027-11-10. They are compatibility targets after Microsoft's support ends on 2026-11-10. Their removal is planned for the first approved major package release on or after 2027-11-10. See the source repository's ``DOTNET_FRAMEWORK_SUPPORT_POLICY.md`` for the exact policy and migration steps.
+Microsoft support for .NET 8 and .NET 9 ends on 2026-11-10. VersaTul's continued builds and tests do not extend Microsoft's runtime or dependency servicing, and do not promise security fixes or support for applications that remain on those end-of-support runtimes. Production applications should migrate to .NET 10 before that date.
+
+VersaTul will directly target, build, and test ``net8.0`` and ``net9.0`` transition assets through 2027-11-10, one year after Microsoft's end-of-support date. This is a time-limited compatibility-validation window, not a promise that Microsoft or third-party dependencies will continue servicing .NET 8 or .NET 9. After 2027-11-10, VersaTul makes no support or validation promise for those targets. If no major release is ready on that date, assets may remain temporarily for best-effort compatibility; their removal is planned for the first approved major package release on or after 2027-11-10. Removing a TFM is a breaking package change. See the source repository's ``DOTNET_FRAMEWORK_SUPPORT_POLICY.md`` for the policy and migration steps.
 
 Migration before .NET 8/9 support ends
 --------------------------------------
