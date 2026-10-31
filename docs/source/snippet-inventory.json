@@ -1,0 +1,1245 @@
+{
+  "schemaVersion": 1,
+  "scope": "All code-block, sourcecode, code, literalinclude, and parsed-literal directives under docs/source.",
+  "classifications": {
+    "compiled": "A code sample that builds successfully but is not run by validation.",
+    "executed": "A canonical sample or its expected output is built/run and checked on each directly supported target framework.",
+    "pseudocode": "An illustrative API fragment that is not a standalone program and is verified through its visible pseudocode caption.",
+    "configuration-only": "Commands, fixture data, or static text/output that is not compiled as C# source."
+  },
+  "snippets": [
+    {
+      "id": "api-contract-policy.rst#1",
+      "file": "api-contract-policy.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "api-contract-policy.rst#2",
+      "file": "api-contract-policy.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "api-contract-policy.rst#3",
+      "file": "api-contract-policy.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "bulk.rst#1",
+      "file": "bulk.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "bulk.rst#2",
+      "file": "bulk.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "bulk.rst#3",
+      "file": "bulk.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "caching.rst#1",
+      "file": "caching.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "caching.rst#2",
+      "file": "caching.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "caching.rst#3",
+      "file": "caching.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "caching.rst#4",
+      "file": "caching.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "caching.rst#5",
+      "file": "caching.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Caching/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "caching.rst#6",
+      "file": "caching.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Caching/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "compression.rst#1",
+      "file": "compression.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "compression.rst#2",
+      "file": "compression.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "compression.rst#3",
+      "file": "compression.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration-defaults.rst#1",
+      "file": "configuration-defaults.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "configuration-defaults.rst#2",
+      "file": "configuration-defaults.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration-defaults.rst#3",
+      "file": "configuration-defaults.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration.rst#1",
+      "file": "configuration.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "configuration.rst#2",
+      "file": "configuration.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "configuration.rst#3",
+      "file": "configuration.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "contracts.rst#1",
+      "file": "contracts.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "contracts.rst#2",
+      "file": "contracts.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "contracts.rst#3",
+      "file": "contracts.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#1",
+      "file": "converters.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "converters.rst#2",
+      "file": "converters.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#3",
+      "file": "converters.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#4",
+      "file": "converters.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "converters.rst#5",
+      "file": "converters.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "data-contracts.rst#1",
+      "file": "data-contracts.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "data-contracts.rst#2",
+      "file": "data-contracts.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "data-contracts.rst#3",
+      "file": "data-contracts.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "display-attributes.rst#1",
+      "file": "display-attributes.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "display-attributes.rst#2",
+      "file": "display-attributes.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "display-attributes.rst#3",
+      "file": "display-attributes.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "display-attributes.rst#4",
+      "file": "display-attributes.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "efcore.rst#1",
+      "file": "efcore.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "efcore.rst#2",
+      "file": "efcore.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "efcore.rst#3",
+      "file": "efcore.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#1",
+      "file": "extensions.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "extensions.rst#2",
+      "file": "extensions.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#3",
+      "file": "extensions.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#4",
+      "file": "extensions.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "extensions.rst#5",
+      "file": "extensions.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#1",
+      "file": "file-reader.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "file-reader.rst#2",
+      "file": "file-reader.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#3",
+      "file": "file-reader.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#4",
+      "file": "file-reader.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#5",
+      "file": "file-reader.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "getting-started.rst#1",
+      "file": "getting-started.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "getting-started.rst#2",
+      "file": "getting-started.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "getting-started.rst#3",
+      "file": "getting-started.rst",
+      "ordinal": 3,
+      "directive": "literalinclude",
+      "argument": "../samples/GettingStarted/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "getting-started.rst#4",
+      "file": "getting-started.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "getting-started.rst#5",
+      "file": "getting-started.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/GettingStarted/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "handler-file.rst#1",
+      "file": "handler-file.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "handler-file.rst#2",
+      "file": "handler-file.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#3",
+      "file": "handler-file.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#4",
+      "file": "handler-file.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#5",
+      "file": "handler-file.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "handler-file.rst#6",
+      "file": "handler-file.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-file.rst#1",
+      "file": "logger-file.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger-file.rst#2",
+      "file": "logger-file.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-mail.rst#1",
+      "file": "logger-mail.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger-mail.rst#2",
+      "file": "logger-mail.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-mail.rst#3",
+      "file": "logger-mail.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-mail.rst#4",
+      "file": "logger-mail.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-web.rst#1",
+      "file": "logger-web.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger-web.rst#2",
+      "file": "logger-web.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-web.rst#3",
+      "file": "logger-web.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-web.rst#4",
+      "file": "logger-web.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger.rst#1",
+      "file": "logger.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "logger.rst#2",
+      "file": "logger.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger.rst#3",
+      "file": "logger.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#1",
+      "file": "mailer.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "mailer.rst#2",
+      "file": "mailer.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#3",
+      "file": "mailer.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#4",
+      "file": "mailer.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#5",
+      "file": "mailer.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mailer.rst#6",
+      "file": "mailer.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Mailer/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "mailer.rst#7",
+      "file": "mailer.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Mailer/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "mongodb.rst#1",
+      "file": "mongodb.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "mongodb.rst#2",
+      "file": "mongodb.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mongodb.rst#3",
+      "file": "mongodb.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mongodb.rst#4",
+      "file": "mongodb.rst",
+      "ordinal": 4,
+      "directive": "literalinclude",
+      "argument": "../samples/MongoDB/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "mongodb.rst#5",
+      "file": "mongodb.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/MongoDB/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "mssql.rst#1",
+      "file": "mssql.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "mssql.rst#2",
+      "file": "mssql.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mssql.rst#3",
+      "file": "mssql.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#1",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#2",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#3",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#4",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#1",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#2",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#3",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#4",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#5",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/DataExport/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#6",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/DataExport/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#1",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#2",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#3",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#4",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#5",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileImport/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#6",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileImport/Fixtures/people.csv",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/file-import.rst#7",
+      "file": "scenario-guides/file-import.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileImport/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#1",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#2",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#3",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#4",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#5",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileLogging/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#6",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/FileLogging/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#1",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#2",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#3",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#4",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#5",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../../samples/SqlDataAccess/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#6",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../../samples/SqlDataAccess/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
+    },
+    {
+      "id": "scheduler.rst#1",
+      "file": "scheduler.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scheduler.rst#2",
+      "file": "scheduler.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scheduler.rst#3",
+      "file": "scheduler.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scheduler.rst#4",
+      "file": "scheduler.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "scheduler.rst#5",
+      "file": "scheduler.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "text",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "scheduler.rst#6",
+      "file": "scheduler.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "sql.rst#1",
+      "file": "sql.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "sql.rst#2",
+      "file": "sql.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "sql.rst#3",
+      "file": "sql.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#1",
+      "file": "streamers.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "streamers.rst#2",
+      "file": "streamers.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#3",
+      "file": "streamers.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#4",
+      "file": "streamers.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#5",
+      "file": "streamers.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "streamers.rst#6",
+      "file": "streamers.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#1",
+      "file": "utilities.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+    },
+    {
+      "id": "utilities.rst#2",
+      "file": "utilities.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#3",
+      "file": "utilities.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#4",
+      "file": "utilities.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#5",
+      "file": "utilities.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    }
+  ]
+}

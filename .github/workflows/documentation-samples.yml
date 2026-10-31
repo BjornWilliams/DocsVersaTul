@@ -27,6 +27,10 @@ jobs:
             9.0.x
             10.0.x
 
+      - name: Validate documentation snippet inventory
+        shell: pwsh
+        run: ./docs/scripts/Test-DocumentationSnippetInventory.ps1
+
       - name: Validate published-package samples
         shell: pwsh
         run: ./docs/samples/Invoke-PublishedSampleValidation.ps1

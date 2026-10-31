@@ -94,6 +94,7 @@ Start Here
    recommended-paths
    compatibility
    api-contract-policy
+   snippet-inventory
    faq
    package-catalog
 
