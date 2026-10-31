@@ -94,6 +94,10 @@ Start Here
    recommended-paths
    compatibility
    dotnet-10-upgrade
+   support
+   security
+   repository-access
+   release-notes
    api-contract-policy
    snippet-inventory
    faq

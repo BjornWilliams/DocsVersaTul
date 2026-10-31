@@ -1,0 +1,38 @@
+{% extends "!layout.html" %}
+
+{% block navigation %}
+  {{ super() }}
+  {% include "project-links.html" %}
+{% endblock %}
+
+{% block content %}
+  <header class="versatul-header-routes">
+    <nav aria-label="VersaTul primary links">
+    <strong>VersaTul:</strong>
+    <a href="{{ pathto('package-catalog') }}">Package catalog</a> ·
+    <a href="https://www.nuget.org/profiles/bwiliams256">NuGet packages</a> ·
+    <a href="{{ pathto('support') }}">Support</a> ·
+    <a href="{{ pathto('release-notes') }}">Versions and changes</a> ·
+    <a href="https://technojam.visualstudio.com/VersaTul/_git/VersaTul">Code repository (sign-in may be required)</a> ·
+    <a href="{{ pathto('repository-access') }}">Repository access notes</a> ·
+    <a href="https://github.com/BjornWilliams/DocsVersaTul/issues/new/choose">Issues</a> ·
+    <a href="{{ pathto('security') }}">Security</a>
+    </nav>
+  </header>
+  {{ super() }}
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+  <div class="versatul-footer-routes">
+    <strong>VersaTul:</strong>
+    <a href="{{ pathto('package-catalog') }}">Package catalog</a> ·
+    <a href="https://www.nuget.org/profiles/bwiliams256">NuGet packages</a> ·
+    <a href="{{ pathto('support') }}">Support</a> ·
+    <a href="{{ pathto('release-notes') }}">Versions and changes</a> ·
+    <a href="https://technojam.visualstudio.com/VersaTul/_git/VersaTul">Code repository (sign-in may be required)</a> ·
+    <a href="{{ pathto('repository-access') }}">Repository access notes</a> ·
+    <a href="https://github.com/BjornWilliams/DocsVersaTul/issues/new/choose">Issues</a> ·
+    <a href="{{ pathto('security') }}">Security</a>
+  </div>
+{% endblock %}
