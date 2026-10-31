@@ -1,0 +1,352 @@
+[
+  {
+    "PackageId": "VersaTul.Caching",
+    "ProjectPath": "VersaTul.Caching/VersaTul.Caching.csproj",
+    "ReadmePath": "VersaTul.Caching/Assets/README.md",
+    "PageName": "caching",
+    "SamplePath": "docs/samples/Packages/VersaTul.Caching/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/caching.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Caching"
+  },
+  {
+    "PackageId": "VersaTul.Collection.Streamers",
+    "ProjectPath": "VersaTul.Collection.Streamers/VersaTul.Collection.Streamers.csproj",
+    "ReadmePath": "VersaTul.Collection.Streamers/Assets/README.md",
+    "PageName": "streamers",
+    "SamplePath": "docs/samples/Packages/VersaTul.Collection.Streamers/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/streamers.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Collection.Streamers"
+  },
+  {
+    "PackageId": "VersaTul.Compression",
+    "ProjectPath": "VersaTul.Compression/VersaTul.Compression.csproj",
+    "ReadmePath": "VersaTul.Compression/Assets/README.md",
+    "PageName": "compression",
+    "SamplePath": "docs/samples/Packages/VersaTul.Compression/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/compression.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Compression"
+  },
+  {
+    "PackageId": "VersaTul.Configuration.Defaults",
+    "ProjectPath": "VersaTul.Configuration.Defaults/VersaTul.Configuration.Defaults.csproj",
+    "ReadmePath": "VersaTul.Configuration.Defaults/Assets/README.md",
+    "PageName": "configuration-defaults",
+    "SamplePath": "docs/samples/Packages/VersaTul.Configuration.Defaults/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/configuration-defaults.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Configuration.Defaults"
+  },
+  {
+    "PackageId": "VersaTul.Configurations",
+    "ProjectPath": "VersaTul.Configurations/VersaTul.Configurations.csproj",
+    "ReadmePath": "VersaTul.Configurations/Assets/README.md",
+    "PageName": "configuration",
+    "SamplePath": "docs/samples/Packages/VersaTul.Configurations/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/configuration.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Configurations"
+  },
+  {
+    "PackageId": "VersaTul.Contracts",
+    "ProjectPath": "VersaTul.Contracts/VersaTul.Contracts.csproj",
+    "ReadmePath": "VersaTul.Contracts/Assets/README.md",
+    "PageName": "contracts",
+    "SamplePath": "docs/samples/Packages/VersaTul.Contracts/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/contracts.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Contracts"
+  },
+  {
+    "PackageId": "VersaTul.Data.Bulk",
+    "ProjectPath": "VersaTul.Data.Bulk/VersaTul.Data.Bulk.csproj",
+    "ReadmePath": "VersaTul.Data.Bulk/Assets/README.md",
+    "PageName": "bulk",
+    "SamplePath": "docs/samples/Packages/VersaTul.Data.Bulk/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/bulk.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Data.Bulk"
+  },
+  {
+    "PackageId": "VersaTul.Data.Contracts",
+    "ProjectPath": "VersaTul.Data.Contracts/VersaTul.Data.Contracts.csproj",
+    "ReadmePath": "VersaTul.Data.Contracts/Assets/README.md",
+    "PageName": "data-contracts",
+    "SamplePath": "docs/samples/Packages/VersaTul.Data.Contracts/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/data-contracts.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Data.Contracts"
+  },
+  {
+    "PackageId": "VersaTul.Data.EFCore",
+    "ProjectPath": "VersaTul.Data.EFCore/VersaTul.Data.EFCore.csproj",
+    "ReadmePath": "VersaTul.Data.EFCore/Assets/README.md",
+    "PageName": "efcore",
+    "SamplePath": "docs/samples/Packages/VersaTul.Data.EFCore/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/efcore.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Data.EFCore"
+  },
+  {
+    "PackageId": "VersaTul.Data.FileReader",
+    "ProjectPath": "VersaTul.Data.FileReader/VersaTul.Data.FileReader.csproj",
+    "ReadmePath": "VersaTul.Data.FileReader/Assets/README.md",
+    "PageName": "file-reader",
+    "SamplePath": "docs/samples/Packages/VersaTul.Data.FileReader/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/file-reader.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Data.FileReader"
+  },
+  {
+    "PackageId": "VersaTul.Data.MongoDB",
+    "ProjectPath": "VersaTul.Data.MongoDB/VersaTul.Data.MongoDB.csproj",
+    "ReadmePath": "VersaTul.Data.MongoDB/Assets/README.md",
+    "PageName": "mongodb",
+    "SamplePath": "docs/samples/Packages/VersaTul.Data.MongoDB/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/mongodb.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Data.MongoDB"
+  },
+  {
+    "PackageId": "VersaTul.Data.MsSql",
+    "ProjectPath": "VersaTul.Data.MsSql/VersaTul.Data.MsSql.csproj",
+    "ReadmePath": "VersaTul.Data.MsSql/Assets/README.md",
+    "PageName": "mssql",
+    "SamplePath": "docs/samples/Packages/VersaTul.Data.MsSql/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/mssql.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Data.MsSql"
+  },
+  {
+    "PackageId": "VersaTul.Data.Sql",
+    "ProjectPath": "VersaTul.Data.Sql/VersaTul.Data.Sql.csproj",
+    "ReadmePath": "VersaTul.Data.Sql/Assets/README.md",
+    "PageName": "sql",
+    "SamplePath": "docs/samples/Packages/VersaTul.Data.Sql/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/sql.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Data.Sql"
+  },
+  {
+    "PackageId": "VersaTul.Display.Attributes",
+    "ProjectPath": "VersaTul.Display.Attributes/VersaTul.Display.Attributes.csproj",
+    "ReadmePath": "VersaTul.Display.Attributes/Assets/README.md",
+    "PageName": "display-attributes",
+    "SamplePath": "docs/samples/Packages/VersaTul.Display.Attributes/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/display-attributes.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Display.Attributes"
+  },
+  {
+    "PackageId": "VersaTul.Extensions",
+    "ProjectPath": "VersaTul.Extensions/VersaTul.Extensions.csproj",
+    "ReadmePath": "VersaTul.Extensions/Assets/README.md",
+    "PageName": "extensions",
+    "SamplePath": "docs/samples/Packages/VersaTul.Extensions/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/extensions.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Extensions"
+  },
+  {
+    "PackageId": "VersaTul.Handler.File",
+    "ProjectPath": "VersaTul.Handler.File/VersaTul.Handler.File.csproj",
+    "ReadmePath": "VersaTul.Handler.File/Assets/README.md",
+    "PageName": "handler-file",
+    "SamplePath": "docs/samples/Packages/VersaTul.Handler.File/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/handler-file.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Handler.File"
+  },
+  {
+    "PackageId": "VersaTul.Logger",
+    "ProjectPath": "VersaTul.Logger/VersaTul.Logger.csproj",
+    "ReadmePath": "VersaTul.Logger/Assets/README.md",
+    "PageName": "logger",
+    "SamplePath": "docs/samples/Packages/VersaTul.Logger/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/logger.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Logger"
+  },
+  {
+    "PackageId": "VersaTul.Logger.File",
+    "ProjectPath": "VersaTul.Logger.File/VersaTul.Logger.File.csproj",
+    "ReadmePath": "VersaTul.Logger.File/Assets/README.md",
+    "PageName": "logger-file",
+    "SamplePath": "docs/samples/Packages/VersaTul.Logger.File/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/logger-file.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Logger.File"
+  },
+  {
+    "PackageId": "VersaTul.Logger.Mail",
+    "ProjectPath": "VersaTul.Logger.Mail/VersaTul.Logger.Mail.csproj",
+    "ReadmePath": "VersaTul.Logger.Mail/Assets/README.md",
+    "PageName": "logger-mail",
+    "SamplePath": "docs/samples/Packages/VersaTul.Logger.Mail/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/logger-mail.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Logger.Mail"
+  },
+  {
+    "PackageId": "VersaTul.Logger.Web",
+    "ProjectPath": "VersaTul.Logger.Web/VersaTul.Logger.Web.csproj",
+    "ReadmePath": "VersaTul.Logger.Web/Assets/README.md",
+    "PageName": "logger-web",
+    "SamplePath": "docs/samples/Packages/VersaTul.Logger.Web/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/logger-web.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Logger.Web"
+  },
+  {
+    "PackageId": "VersaTul.Mailer",
+    "ProjectPath": "VersaTul.Mailer/VersaTul.Mailer.csproj",
+    "ReadmePath": "VersaTul.Mailer/Assets/README.md",
+    "PageName": "mailer",
+    "SamplePath": "docs/samples/Packages/VersaTul.Mailer/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/mailer.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Mailer"
+  },
+  {
+    "PackageId": "VersaTul.Object.Converters",
+    "ProjectPath": "VersaTul.Object.Converters/VersaTul.Object.Converters.csproj",
+    "ReadmePath": "VersaTul.Object.Converters/Assets/README.md",
+    "PageName": "converters",
+    "SamplePath": "docs/samples/Packages/VersaTul.Object.Converters/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/converters.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Object.Converters"
+  },
+  {
+    "PackageId": "VersaTul.Pipeline.Infrastructure",
+    "ProjectPath": "VersaTul.Pipeline.Infrastructure/VersaTul.Pipeline.Infrastructure.csproj",
+    "ReadmePath": "VersaTul.Pipeline.Infrastructure/Assets/README.md",
+    "PageName": "pipeline-infrastructure",
+    "SamplePath": "docs/samples/Packages/VersaTul.Pipeline.Infrastructure/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/pipeline-infrastructure.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure"
+  },
+  {
+    "PackageId": "VersaTul.Task.Scheduler",
+    "ProjectPath": "VersaTul.Task.Scheduler/VersaTul.Task.Scheduler.csproj",
+    "ReadmePath": "VersaTul.Task.Scheduler/Assets/README.md",
+    "PageName": "scheduler",
+    "SamplePath": "docs/samples/Packages/VersaTul.Task.Scheduler/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/scheduler.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Task.Scheduler"
+  },
+  {
+    "PackageId": "VersaTul.Utilities",
+    "ProjectPath": "VersaTul.Utilities/VersaTul.Utilities.csproj",
+    "ReadmePath": "VersaTul.Utilities/Assets/README.md",
+    "PageName": "utilities",
+    "SamplePath": "docs/samples/Packages/VersaTul.Utilities/Program.cs",
+    "DocumentationUrl": "https://docsversatul.readthedocs.io/en/latest/utilities.html",
+    "TargetFrameworks": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "NuGetUrl": "https://www.nuget.org/packages/VersaTul.Utilities"
+  }
+]

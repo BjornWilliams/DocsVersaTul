@@ -1,0 +1,112 @@
+param(
+    [string]$DocsRoot = (Split-Path -Parent (Split-Path -Parent $PSScriptRoot))
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+$root = (Resolve-Path -LiteralPath $DocsRoot).Path
+$sourceRoot = Join-Path $root 'docs/source'
+$samplesRoot = Join-Path $root 'docs/samples/Packages'
+$inventoryPath = Join-Path $sourceRoot 'package-inventory.json'
+$inventoryPagePath = Join-Path $sourceRoot 'package-inventory.rst'
+$indexPath = Join-Path $sourceRoot 'index.rst'
+
+foreach ($path in @($sourceRoot, $samplesRoot, $inventoryPath, $inventoryPagePath, $indexPath)) {
+    if (-not (Test-Path -LiteralPath $path)) {
+        throw "Required package documentation asset was not found: $path"
+    }
+}
+
+$entries = @([System.IO.File]::ReadAllText($inventoryPath) | ConvertFrom-Json)
+if ($entries.Count -ne 25) {
+    throw "Expected 25 package inventory entries; found $($entries.Count)."
+}
+
+$packageIds = @($entries | ForEach-Object { [string]$_.PackageId })
+if (@($packageIds | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count -gt 0 -or
+    @($packageIds | Select-Object -Unique).Count -ne $packageIds.Count) {
+    throw 'The package inventory contains a missing or duplicate PackageId.'
+}
+
+$expectedPages = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+$inventoryPage = [System.IO.File]::ReadAllText($inventoryPagePath)
+foreach ($entry in $entries) {
+    $packageId = [string]$entry.PackageId
+    $expectedProjectPath = "$packageId/$packageId.csproj"
+    $expectedReadmePath = "$packageId/Assets/README.md"
+    $expectedSamplePath = "docs/samples/Packages/$packageId/Program.cs"
+    $expectedNuGetUrl = "https://www.nuget.org/packages/$packageId"
+    if ($entry.ProjectPath -cne $expectedProjectPath -or $entry.ReadmePath -cne $expectedReadmePath -or
+        $entry.SamplePath -cne $expectedSamplePath -or $entry.NuGetUrl -cne $expectedNuGetUrl) {
+        throw "Package inventory paths or NuGet URL are inconsistent for '$packageId'."
+    }
+
+    $documentationUri = $null
+    if (-not [uri]::TryCreate([string]$entry.DocumentationUrl, [System.UriKind]::Absolute, [ref]$documentationUri) -or
+        $documentationUri.Scheme -ne 'https') {
+        throw "Package '$packageId' has an invalid HTTPS documentation URL."
+    }
+    $expectedPageName = [System.IO.Path]::GetFileNameWithoutExtension($documentationUri.AbsolutePath)
+    if ($entry.PageName -cne $expectedPageName -or -not $expectedPages.Add($expectedPageName)) {
+        throw "Package '$packageId' maps to a missing or duplicate documentation page name '$($entry.PageName)'."
+    }
+
+    $frameworks = @($entry.TargetFrameworks | ForEach-Object { [string]$_ })
+    if ($frameworks.Count -eq 0 -or @($frameworks | Where-Object { $_ -notmatch '^net\d+\.\d+$' }).Count -gt 0 -or
+        @($frameworks | Select-Object -Unique).Count -ne $frameworks.Count) {
+        throw "Package '$packageId' has a missing, malformed, or duplicated target framework list."
+    }
+
+    $pagePath = Join-Path $sourceRoot ($expectedPageName + '.rst')
+    $programPath = Join-Path (Join-Path $samplesRoot $packageId) 'Program.cs'
+    $outputPath = Join-Path (Join-Path $samplesRoot $packageId) 'ExpectedOutput.txt'
+    foreach ($path in @($pagePath, $programPath, $outputPath)) {
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+            throw "Package '$packageId' is missing a public documentation page or sample file: $path"
+        }
+    }
+
+    $pageText = [System.IO.File]::ReadAllText($pagePath)
+    $programInclude = ".. literalinclude:: ../samples/Packages/$packageId/Program.cs"
+    $outputInclude = ".. literalinclude:: ../samples/Packages/$packageId/ExpectedOutput.txt"
+    if ([regex]::Matches($pageText, '(?m)^\.\. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART\r?$').Count -ne 1 -or
+        [regex]::Matches($pageText, '(?m)^\.\. END VERSATUL GENERATED PACKAGE QUICKSTART\r?$').Count -ne 1 -or
+        -not $pageText.Contains($programInclude, [System.StringComparison]::Ordinal) -or
+        -not $pageText.Contains($outputInclude, [System.StringComparison]::Ordinal) -or
+        -not $pageText.Contains("dotnet add package $packageId", [System.StringComparison]::Ordinal)) {
+        throw "Package page '$expectedPageName' is missing its generated install command or canonical sample includes."
+    }
+
+    foreach ($expectedValue in @($packageId, $expectedProjectPath, $expectedReadmePath, $expectedPageName, $expectedSamplePath, ($frameworks -join ', '), $expectedNuGetUrl)) {
+        if (-not $inventoryPage.Contains($expectedValue, [System.StringComparison]::Ordinal)) {
+            throw "The public package matrix is missing '$expectedValue' for '$packageId'."
+        }
+    }
+}
+
+$actualSampleDirectories = @(
+    Get-ChildItem -LiteralPath $samplesRoot -Directory | ForEach-Object { $_.Name } | Sort-Object
+)
+$expectedSampleDirectories = @($packageIds | Sort-Object)
+$missingSamples = @($expectedSampleDirectories | Where-Object { $_ -notin $actualSampleDirectories })
+$orphanSamples = @($actualSampleDirectories | Where-Object { $_ -notin $expectedSampleDirectories })
+if ($missingSamples.Count -gt 0 -or $orphanSamples.Count -gt 0) {
+    throw "Package sample directories do not match the inventory (missing: $($missingSamples -join ', '); orphaned: $($orphanSamples -join ', '))."
+}
+
+$orphanedPages = @(
+    Get-ChildItem -LiteralPath $sourceRoot -File -Filter '*.rst' | Where-Object {
+        $pageText = [System.IO.File]::ReadAllText($_.FullName)
+        $pageText -match '(?m)^\.\. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART\r?$' -and -not $expectedPages.Contains($_.BaseName)
+    } | ForEach-Object { $_.Name } | Sort-Object
+)
+if ($orphanedPages.Count -gt 0) {
+    throw "Sphinx contains orphaned generated package pages: $($orphanedPages -join ', ')."
+}
+
+if ([System.IO.File]::ReadAllText($indexPath) -notmatch '(?m)^\s+package-inventory\s*$') {
+    throw 'The public Sphinx index does not link to package-inventory.'
+}
+
+Write-Output "Package documentation assets passed: $($entries.Count) package mappings, pages, samples, framework lists, and NuGet links; no orphaned pages or samples."

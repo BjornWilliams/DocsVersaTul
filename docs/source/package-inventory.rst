@@ -3,6 +3,8 @@ Package Documentation Inventory
 
 This matrix maps each NuGet package to its project, packed README, public documentation page, compiler-verified sample, directly targeted frameworks, and NuGet package page.
 
+Download the machine-readable :download:`package inventory <package-inventory.json>`.
+
 .. list-table:: VersaTul package assets
    :header-rows: 1
 
