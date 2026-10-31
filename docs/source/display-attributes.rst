@@ -136,3 +136,39 @@ Notes
 1. ``DisplayAnalyzer.PropertyNames`` returns resolved export names ordered by sequence and then name.
 2. The analyzer caches resolved property metadata internally as names are requested.
 3. Custom formatters are the extension point when you need export-specific formatting beyond the built-ins.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Control exported property names, order, precision, date formats, culture, and ignored fields with attributes and configurable formatters.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Display.Attributes
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Display.Attributes/Program.cs
+   :language: csharp
+   :caption: VersaTul.Display.Attributes minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Display.Attributes/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

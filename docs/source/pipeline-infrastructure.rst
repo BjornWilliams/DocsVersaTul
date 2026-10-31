@@ -112,3 +112,39 @@ Notes
 1. ``Pipeline<TIn, TOut>.Execute()`` throws if ``Step`` is not configured.
 2. Async support is provided through ``PipelineExtensions`` overloads rather than a separate async pipeline base class.
 3. This package is deliberately minimal, which makes it a good fit for custom domain pipelines without framework overhead.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Compose ordered processing pipelines from reusable steps and filters to transform objects through multiple stages.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Pipeline.Infrastructure
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Pipeline.Infrastructure/Program.cs
+   :language: csharp
+   :caption: VersaTul.Pipeline.Infrastructure minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Pipeline.Infrastructure/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

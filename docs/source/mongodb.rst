@@ -157,3 +157,39 @@ Its expected console output is:
 .. literalinclude:: ../samples/MongoDB/ExpectedOutput.txt
    :language: text
    :caption: Expected output
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+MongoDB repository abstractions for common data-access operations, including create, read, update, and delete.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.MongoDB
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MongoDB/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.MongoDB minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MongoDB/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

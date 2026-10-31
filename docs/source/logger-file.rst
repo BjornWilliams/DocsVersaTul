@@ -180,3 +180,39 @@ Migration: review custom callback thread assumptions for synchronous calls.
 Single-Exception overloads require a non-null exception and now raise
 ``ArgumentNullException`` for null; replace catches of the prior
 ``NullReferenceException``. These changes require Major compatibility review.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Write escaped tab-delimited log records to files with size-based or daily rotation and optional retention.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Logger.File
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger.File/Program.cs
+   :language: csharp
+   :caption: VersaTul.Logger.File minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger.File/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -1,0 +1,1 @@
+Prepared Int parameter for @customerId.

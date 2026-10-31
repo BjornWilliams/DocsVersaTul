@@ -126,3 +126,39 @@ Notes
 2. Override only the values that differ for your environment or application.
 3. Feed the resulting ``ConfigSettings`` directly into your configuration class from :doc:`configuration`.
 4. If you need to audit what a builder produced before runtime wiring, use ``BuildSnapshot()``.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Ready-made configuration builders for VersaTul projects that use Entity Framework Core or MongoDB.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Configuration.Defaults
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configuration.Defaults/Program.cs
+   :language: csharp
+   :caption: VersaTul.Configuration.Defaults minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configuration.Defaults/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

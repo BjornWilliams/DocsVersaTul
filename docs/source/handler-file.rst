@@ -225,3 +225,39 @@ There is no cross-process/distributed lock. Use a single-writer service or exter
 when ordering matters. Gate scope is one loaded assembly instance; links, filesystem
 aliases, other AssemblyLoadContexts, and FileLogger's independent coordination are outside
 this guarantee. Avoid mixing unrelated writers on the same file.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Use System.IO-based file and directory wrappers for creating, reading, writing, and deleting files with typed file-result models.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Handler.File
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Handler.File/Program.cs
+   :language: csharp
+   :caption: VersaTul.Handler.File minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Handler.File/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -224,3 +224,39 @@ Notes
 2. ``RandomString()`` uses ``RandomNumberGenerator`` rather than ``Random``.
 3. ``MakeBatches()`` is useful for bulk operations and throttled processing.
 4. If you primarily want fluent syntax, use :doc:`extensions`, which builds on several of these helpers.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+General-purpose helpers for collection operations, enum parsing, conversions, and common application tasks.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Utilities
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Utilities/Program.cs
+   :language: csharp
+   :caption: VersaTul.Utilities minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Utilities/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -63,6 +63,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "bulk.rst#4",
+      "file": "bulk.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "bulk.rst#5",
+      "file": "bulk.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Bulk/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "bulk.rst#6",
+      "file": "bulk.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Bulk/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "caching.rst#1",
       "file": "caching.rst",
       "ordinal": 1,
@@ -117,6 +144,33 @@
       "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
     },
     {
+      "id": "caching.rst#7",
+      "file": "caching.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "caching.rst#8",
+      "file": "caching.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Caching/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "caching.rst#9",
+      "file": "caching.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Caching/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "compression.rst#1",
       "file": "compression.rst",
       "ordinal": 1,
@@ -142,6 +196,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "compression.rst#4",
+      "file": "compression.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "compression.rst#5",
+      "file": "compression.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Compression/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "compression.rst#6",
+      "file": "compression.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Compression/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "configuration-defaults.rst#1",
@@ -171,6 +252,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "configuration-defaults.rst#4",
+      "file": "configuration-defaults.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "configuration-defaults.rst#5",
+      "file": "configuration-defaults.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configuration.Defaults/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "configuration-defaults.rst#6",
+      "file": "configuration-defaults.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configuration.Defaults/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "configuration.rst#1",
       "file": "configuration.rst",
       "ordinal": 1,
@@ -198,6 +306,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "configuration.rst#4",
+      "file": "configuration.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "configuration.rst#5",
+      "file": "configuration.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configurations/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "configuration.rst#6",
+      "file": "configuration.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Configurations/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "contracts.rst#1",
       "file": "contracts.rst",
       "ordinal": 1,
@@ -223,6 +358,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "contracts.rst#4",
+      "file": "contracts.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "contracts.rst#5",
+      "file": "contracts.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Contracts/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "contracts.rst#6",
+      "file": "contracts.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Contracts/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "converters.rst#1",
@@ -270,6 +432,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "converters.rst#6",
+      "file": "converters.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "converters.rst#7",
+      "file": "converters.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Object.Converters/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "converters.rst#8",
+      "file": "converters.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Object.Converters/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "data-contracts.rst#1",
       "file": "data-contracts.rst",
       "ordinal": 1,
@@ -295,6 +484,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "data-contracts.rst#4",
+      "file": "data-contracts.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "data-contracts.rst#5",
+      "file": "data-contracts.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Contracts/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "data-contracts.rst#6",
+      "file": "data-contracts.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Contracts/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "display-attributes.rst#1",
@@ -333,6 +549,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "display-attributes.rst#5",
+      "file": "display-attributes.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "display-attributes.rst#6",
+      "file": "display-attributes.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Display.Attributes/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "display-attributes.rst#7",
+      "file": "display-attributes.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Display.Attributes/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "efcore.rst#1",
       "file": "efcore.rst",
       "ordinal": 1,
@@ -358,6 +601,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "efcore.rst#4",
+      "file": "efcore.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "efcore.rst#5",
+      "file": "efcore.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.EFCore/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "efcore.rst#6",
+      "file": "efcore.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.EFCore/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "extensions.rst#1",
@@ -405,6 +675,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "extensions.rst#6",
+      "file": "extensions.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "extensions.rst#7",
+      "file": "extensions.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Extensions/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "extensions.rst#8",
+      "file": "extensions.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Extensions/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "file-reader.rst#1",
       "file": "file-reader.rst",
       "ordinal": 1,
@@ -448,6 +745,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "file-reader.rst#6",
+      "file": "file-reader.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "file-reader.rst#7",
+      "file": "file-reader.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.FileReader/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "file-reader.rst#8",
+      "file": "file-reader.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.FileReader/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "getting-started.rst#1",
@@ -549,6 +873,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "handler-file.rst#7",
+      "file": "handler-file.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "handler-file.rst#8",
+      "file": "handler-file.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Handler.File/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "handler-file.rst#9",
+      "file": "handler-file.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Handler.File/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "logger-file.rst#1",
       "file": "logger-file.rst",
       "ordinal": 1,
@@ -565,6 +916,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger-file.rst#3",
+      "file": "logger-file.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger-file.rst#4",
+      "file": "logger-file.rst",
+      "ordinal": 4,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.File/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger-file.rst#5",
+      "file": "logger-file.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.File/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "logger-mail.rst#1",
@@ -603,6 +981,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "logger-mail.rst#5",
+      "file": "logger-mail.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger-mail.rst#6",
+      "file": "logger-mail.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Mail/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger-mail.rst#7",
+      "file": "logger-mail.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Mail/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "logger-web.rst#1",
       "file": "logger-web.rst",
       "ordinal": 1,
@@ -639,6 +1044,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "logger-web.rst#5",
+      "file": "logger-web.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger-web.rst#6",
+      "file": "logger-web.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Web/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger-web.rst#7",
+      "file": "logger-web.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger.Web/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "logger.rst#1",
       "file": "logger.rst",
       "ordinal": 1,
@@ -664,6 +1096,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "logger.rst#4",
+      "file": "logger.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "logger.rst#5",
+      "file": "logger.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "logger.rst#6",
+      "file": "logger.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Logger/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "mailer.rst#1",
@@ -729,6 +1188,33 @@
       "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
     },
     {
+      "id": "mailer.rst#8",
+      "file": "mailer.rst",
+      "ordinal": 8,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "mailer.rst#9",
+      "file": "mailer.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Mailer/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "mailer.rst#10",
+      "file": "mailer.rst",
+      "ordinal": 10,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Mailer/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "mongodb.rst#1",
       "file": "mongodb.rst",
       "ordinal": 1,
@@ -774,6 +1260,33 @@
       "verification": "Compared with the corresponding executed sample stdout on all directly supported TFMs."
     },
     {
+      "id": "mongodb.rst#6",
+      "file": "mongodb.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "mongodb.rst#7",
+      "file": "mongodb.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MongoDB/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "mongodb.rst#8",
+      "file": "mongodb.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MongoDB/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "mssql.rst#1",
       "file": "mssql.rst",
       "ordinal": 1,
@@ -799,6 +1312,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "mssql.rst#4",
+      "file": "mssql.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "mssql.rst#5",
+      "file": "mssql.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MsSql/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "mssql.rst#6",
+      "file": "mssql.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.MsSql/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "pipeline-infrastructure.rst#1",
@@ -835,6 +1375,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#5",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 5,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#6",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Pipeline.Infrastructure/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "pipeline-infrastructure.rst#7",
+      "file": "pipeline-infrastructure.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Pipeline.Infrastructure/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "scenario-guides/data-export.rst#1",
@@ -1116,6 +1683,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "scheduler.rst#7",
+      "file": "scheduler.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "scheduler.rst#8",
+      "file": "scheduler.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Task.Scheduler/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "scheduler.rst#9",
+      "file": "scheduler.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Task.Scheduler/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "sql.rst#1",
       "file": "sql.rst",
       "ordinal": 1,
@@ -1141,6 +1735,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "sql.rst#4",
+      "file": "sql.rst",
+      "ordinal": 4,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "sql.rst#5",
+      "file": "sql.rst",
+      "ordinal": 5,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Sql/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "sql.rst#6",
+      "file": "sql.rst",
+      "ordinal": 6,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Data.Sql/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
       "id": "streamers.rst#1",
@@ -1197,6 +1818,33 @@
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
+      "id": "streamers.rst#7",
+      "file": "streamers.rst",
+      "ordinal": 7,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "streamers.rst#8",
+      "file": "streamers.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Collection.Streamers/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "streamers.rst#9",
+      "file": "streamers.rst",
+      "ordinal": 9,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Collection.Streamers/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
       "id": "utilities.rst#1",
       "file": "utilities.rst",
       "ordinal": 1,
@@ -1240,6 +1888,33 @@
       "argument": "csharp",
       "classification": "pseudocode",
       "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+    },
+    {
+      "id": "utilities.rst#6",
+      "file": "utilities.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Canonical dotnet install command displayed in the package quickstart; not compiled as C# source."
+    },
+    {
+      "id": "utilities.rst#7",
+      "file": "utilities.rst",
+      "ordinal": 7,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Utilities/Program.cs",
+      "classification": "executed",
+      "verification": "Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "utilities.rst#8",
+      "file": "utilities.rst",
+      "ordinal": 8,
+      "directive": "literalinclude",
+      "argument": "../samples/Packages/VersaTul.Utilities/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     }
   ]
 }

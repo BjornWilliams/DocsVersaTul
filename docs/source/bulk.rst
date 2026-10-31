@@ -134,4 +134,38 @@ Notes
 2. The source side is ``IDataReader``-based, which makes the package fit naturally with :doc:`file-reader` and stream-based workflows.
 3. Use the concrete implementation from :doc:`mssql` when targeting SQL Server bulk import.
 
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
 
+Canonical package quickstart
+----------------------------
+
+Shared types and abstractions for implementing batch and bulk-copy operations across database providers.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.Bulk
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.Bulk minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

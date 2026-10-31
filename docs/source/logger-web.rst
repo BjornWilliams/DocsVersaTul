@@ -235,3 +235,39 @@ manage pooling while honoring per-client disposal and the complete handler polic
        public HttpClient CreateSynchronousClient(string name)
            => new HttpClient(new SocketsHttpHandler());
    }
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Post structured log payloads to HTTP endpoints using IHttpClientFactory, with cancellable logging operations.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Logger.Web
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger.Web/Program.cs
+   :language: csharp
+   :caption: VersaTul.Logger.Web minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger.Web/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -217,3 +217,39 @@ Notes
 1. ``LogInfo.ToString()`` produces a single-line escaped tab-separated representation, but the parser is the richer integration point.
 2. The base package does not write anywhere by itself; sink packages provide the actual transport.
 3. If you need a custom sink, implement ``ILogger`` and optionally reuse ``ILogParser``.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Shared logging interfaces, log models, and parsing support for VersaTul file, email, and web logger packages.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Logger
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger/Program.cs
+   :language: csharp
+   :caption: VersaTul.Logger minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

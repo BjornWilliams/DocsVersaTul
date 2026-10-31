@@ -180,3 +180,39 @@ Notes
 1. ``To<T>()`` and related conversion helpers delegate to ``CommonUtility`` under the hood.
 2. ``AsDictionary()`` and ``AsFlattened()`` are especially useful with export, reporting, and logging workflows.
 3. The span-based string helpers provide alternate implementations for text normalization scenarios.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Extension methods for arrays, conversions, and other common operations used in .NET applications.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Extensions
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Extensions/Program.cs
+   :language: csharp
+   :caption: VersaTul.Extensions minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Extensions/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -163,3 +163,39 @@ Notes
 1. ``ObjectProcessor`` is useful when you want a structured dictionary representation.
 2. ``Flattener`` is better when you need a single-level projection for export, tabular output, or logging.
 3. This package becomes more valuable when combined with display attributes and collection streamers.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Convert objects into key/value dictionaries with configurable flattening, property processing, and reference-cycle behavior.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Object.Converters
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Object.Converters/Program.cs
+   :language: csharp
+   :caption: VersaTul.Object.Converters minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Object.Converters/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

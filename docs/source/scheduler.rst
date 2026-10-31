@@ -174,3 +174,39 @@ Notes
 1. ``BaseTimer`` uses a non-autoresetting internal timer and continually queues the next interval itself.
 2. ``Storage`` defaults to ``LocalEventStorage`` but can be replaced.
 3. The scheduler is a good fit for service-style orchestration, not full workflow persistence.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Schedule and execute tasks at configured times or intervals, with event metadata and overlap policies.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Task.Scheduler
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Task.Scheduler/Program.cs
+   :language: csharp
+   :caption: VersaTul.Task.Scheduler minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Task.Scheduler/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -243,3 +243,39 @@ Notes
 3. ``WriteToFile()`` is the preferred path for very large exports because rows can be written directly to disk.
 4. ``FileConverter.Save()`` uses direct file writing automatically for non-compressed output when the streamer supports it.
 5. This package works especially well with :doc:`display-attributes` when exported column names and formatted values matter.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Export collections and forward-only IDataReader sources as CSV, tab-delimited text, JSON, and JSON Lines. Supports property formatting, ZIP compression, and email delivery.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Collection.Streamers
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Collection.Streamers/Program.cs
+   :language: csharp
+   :caption: VersaTul.Collection.Streamers minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Collection.Streamers/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

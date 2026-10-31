@@ -130,3 +130,39 @@ Notes
 1. ``IRepository<TEntity, TKey>`` is intentionally broad enough for multiple backing stores.
 2. ``IAsyncStreamRepository<TEntity, TKey>`` is useful when the consumer prefers stream-first enumeration.
 3. ``IUnitOfWork`` is most relevant in packages such as :doc:`efcore` where change tracking and commit behavior are explicit. In the EF Core implementation, ``Rollback()`` detaches added entities, reloads modified and deleted entities, and leaves unchanged or detached entities untouched; it does not reverse a transaction that was already committed.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Reusable data-access contracts for connections, repositories, queries, cancellation, and paged results across data providers.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.Contracts
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Contracts/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.Contracts minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Contracts/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

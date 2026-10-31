@@ -214,3 +214,39 @@ Notes
 2. ``GetOrDefault<T>()`` is better suited to optional values.
 3. ``ConfigSettings`` is intentionally simple, so it can be populated from JSON, environment variables, a database, or any custom source.
 4. If you need ready-made defaults for VersaTul packages, start with :doc:`configuration-defaults` and then override values as needed.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Read named settings through VersaTul configuration abstractions and integrate them with the .NET IConfiguration model.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Configurations
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configurations/Program.cs
+   :language: csharp
+   :caption: VersaTul.Configurations minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configurations/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

@@ -197,3 +197,39 @@ Notes
 1. ``DataFileReader`` delegates parsing to the registered reader implementations.
 2. ``FileOptions`` defaults to text and CSV extension filters. JSON is not supported; selecting the legacy JSON filter or reading a ``.json`` file raises ``NotSupportedException``.
 3. This package is most valuable when your next processing step wants an ``IDataReader`` instead of raw file lines.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Read CSV and plain-text files into IDataReader instances. CSV input streams from the source; the built-in plain-text reader buffers the complete file.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.FileReader
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.FileReader/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.FileReader minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.FileReader/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

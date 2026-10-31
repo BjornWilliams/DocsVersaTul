@@ -1,0 +1,1 @@
+Skip 40 rows; take 20.

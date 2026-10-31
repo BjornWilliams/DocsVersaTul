@@ -215,3 +215,39 @@ Notes
 1. If you only need generic relational access, start with :doc:`sql`.
 2. Choose ``VersaTul.Data.MsSql`` when you need SQL Server-specific parameters or bulk import.
 3. ``BulkCopy`` is designed as an all-or-nothing upload path and will attempt rollback on failure.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Microsoft SQL Server access helpers for stored procedures, SQL commands, object mapping, and bulk copy.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.MsSql
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MsSql/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.MsSql minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.MsSql/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

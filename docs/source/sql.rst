@@ -260,3 +260,39 @@ Notes
 1. ``DataConfiguration`` stores both the default connection-name key and the command timeout.
 2. ``BaseDataService`` is the main extension point for application-specific repositories or data services.
 3. Use :doc:`mssql` when you need SQL Server-specific types or bulk-copy integration on top of this base package.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Provider-agnostic ADO.NET helpers for SQL connections, stored procedures, SQL commands, and mapping results to objects.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.Sql
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Sql/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.Sql minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Sql/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

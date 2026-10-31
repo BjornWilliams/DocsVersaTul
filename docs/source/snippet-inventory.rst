@@ -48,6 +48,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``bulk.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``bulk.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``bulk.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``caching.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -72,6 +84,18 @@ Inventory
      - ``literalinclude:: ../samples/Caching/ExpectedOutput.txt``
      - **Executed**
      - Compared with the corresponding executed sample stdout on all directly supported TFMs.
+   * - ``caching.rst#7``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``caching.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Caching/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``caching.rst#9``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Caching/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``compression.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -84,6 +108,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``compression.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``compression.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Compression/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``compression.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Compression/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``configuration-defaults.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -96,6 +132,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``configuration-defaults.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``configuration-defaults.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Configuration.Defaults/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``configuration-defaults.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Configuration.Defaults/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``configuration.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -108,6 +156,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``configuration.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``configuration.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Configurations/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``configuration.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Configurations/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``contracts.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -120,6 +180,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``contracts.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``contracts.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Contracts/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``contracts.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Contracts/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``converters.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -140,6 +212,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``converters.rst#6``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``converters.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Object.Converters/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``converters.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Object.Converters/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``data-contracts.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -152,6 +236,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``data-contracts.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``data-contracts.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.Contracts/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``data-contracts.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.Contracts/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``display-attributes.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -168,6 +264,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``display-attributes.rst#5``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``display-attributes.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Display.Attributes/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``display-attributes.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Display.Attributes/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``efcore.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -180,6 +288,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``efcore.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``efcore.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.EFCore/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``efcore.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.EFCore/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``extensions.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -200,6 +320,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``extensions.rst#6``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``extensions.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Extensions/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``extensions.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Extensions/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``file-reader.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -220,6 +352,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``file-reader.rst#6``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``file-reader.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.FileReader/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``file-reader.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.FileReader/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``getting-started.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -264,6 +408,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``handler-file.rst#7``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``handler-file.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Handler.File/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``handler-file.rst#9``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Handler.File/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``logger-file.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -272,6 +428,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``logger-file.rst#3``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``logger-file.rst#4``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger.File/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``logger-file.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger.File/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``logger-mail.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -288,6 +456,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``logger-mail.rst#5``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``logger-mail.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger.Mail/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``logger-mail.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger.Mail/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``logger-web.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -304,6 +484,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``logger-web.rst#5``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``logger-web.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger.Web/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``logger-web.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger.Web/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``logger.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -316,6 +508,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``logger.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``logger.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``logger.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Logger/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``mailer.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -344,6 +548,18 @@ Inventory
      - ``literalinclude:: ../samples/Mailer/ExpectedOutput.txt``
      - **Executed**
      - Compared with the corresponding executed sample stdout on all directly supported TFMs.
+   * - ``mailer.rst#8``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``mailer.rst#9``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Mailer/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``mailer.rst#10``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Mailer/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``mongodb.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -364,6 +580,18 @@ Inventory
      - ``literalinclude:: ../samples/MongoDB/ExpectedOutput.txt``
      - **Executed**
      - Compared with the corresponding executed sample stdout on all directly supported TFMs.
+   * - ``mongodb.rst#6``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``mongodb.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.MongoDB/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``mongodb.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.MongoDB/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``mssql.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -376,6 +604,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``mssql.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``mssql.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.MsSql/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``mssql.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.MsSql/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``pipeline-infrastructure.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -392,6 +632,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``pipeline-infrastructure.rst#5``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``pipeline-infrastructure.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Pipeline.Infrastructure/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``pipeline-infrastructure.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Pipeline.Infrastructure/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``scenario-guides/data-export.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -516,6 +768,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``scheduler.rst#7``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``scheduler.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Task.Scheduler/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``scheduler.rst#9``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Task.Scheduler/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``sql.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -528,6 +792,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``sql.rst#4``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``sql.rst#5``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.Sql/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``sql.rst#6``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Data.Sql/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``streamers.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -552,6 +828,18 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``streamers.rst#7``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``streamers.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Collection.Streamers/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``streamers.rst#9``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Collection.Streamers/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``utilities.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -572,3 +860,15 @@ Inventory
      - ``code-block:: csharp``
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
+   * - ``utilities.rst#6``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Canonical dotnet install command displayed in the package quickstart; not compiled as C# source.
+   * - ``utilities.rst#7``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Utilities/Program.cs``
+     - **Executed**
+     - Canonical package README sample is built and run for every supported framework; stdout is checked against ExpectedOutput.txt.
+   * - ``utilities.rst#8``
+     - ``literalinclude:: ../samples/Packages/VersaTul.Utilities/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.

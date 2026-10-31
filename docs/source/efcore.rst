@@ -153,3 +153,39 @@ Notes
 1. ``Rollback()`` resets pending change-tracker state: added entities are detached, modified and deleted entities are reloaded from the database, and unchanged or detached entities are left untouched. It is not a database transaction rollback abstraction by itself.
 2. ``AsNoTrackingQueryable()`` and ``GetNoTrackingAsync()`` are useful for read-only paths.
 3. This package is a good fit when you want to enforce repository patterns consistently around EF Core rather than expose raw ``DbContext`` everywhere.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Repository and unit-of-work abstractions for Entity Framework Core, with synchronous and asynchronous data operations.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.EFCore
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.EFCore/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.EFCore minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.EFCore/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART

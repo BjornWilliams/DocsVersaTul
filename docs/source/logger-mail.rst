@@ -208,3 +208,39 @@ Retention is bounded by entry count, not bytes; bodies, exception graphs, and
 caller-held snapshots may still be large. Storage and replay are application
 responsibilities. Payloads can include secrets or personal data; apply the same
 access and storage controls as for the underlying logs.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Send HTML log events by email through VersaTul.Mailer, with cancellable logging, flush support, and dead-letter inspection.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Logger.Mail
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger.Mail/Program.cs
+   :language: csharp
+   :caption: VersaTul.Logger.Mail minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Logger.Mail/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
