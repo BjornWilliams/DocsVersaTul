@@ -16,6 +16,11 @@ snippet inventory, installs the exact dependencies in `docs/requirements.txt`,
 runs the strict Sphinx command below, then builds and checks the published-package
 samples. The `main` branch requires this status check before merge.
 
+The independent `Check external documentation links` job checks external HTTP
+and HTTPS links in `README.rst` and `docs/source`. It uses lychee v0.24.2 with
+retry settings from `lychee.toml`; it is not a required branch-protection check,
+so an unavailable external site does not block documentation authoring.
+
 ## Prerequisites
 
 1. Python 3.10 or later installed. If `python` is not on `PATH`, use the full interpreter path when creating the virtual environment.
