@@ -33,6 +33,7 @@ Step 1: Annotate The Export Model
 Use display metadata to control how the export appears.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Display.Attributes;
 
@@ -60,6 +61,7 @@ Step 2: Create The Stream
 Create a streamer for the target format.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers;
 
@@ -77,6 +79,7 @@ Step 3: Save The Export
 For large exports, write directly to disk.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Contracts;
 

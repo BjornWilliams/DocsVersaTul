@@ -156,6 +156,7 @@ Basic Example
 This example shows the typical pattern: configure the provider, build the SQL infrastructure, and implement a project-specific data service.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data;
    using System.Data.Common;
@@ -190,6 +191,7 @@ Command And Mapping Example
 ``BaseDataService`` is intended to sit underneath a project-specific data service.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    public class ProductDataService : BaseDataService
    {

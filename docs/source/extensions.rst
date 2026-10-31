@@ -57,6 +57,7 @@ Basic Example
 These helpers are designed for direct, low-friction use in application code.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Extensions;
 
@@ -76,6 +77,7 @@ Dictionary And Flattening Example
 ``ConvertExtensions`` can project objects into dictionaries and flatten those dictionaries for export-style scenarios.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Extensions;
 
@@ -104,6 +106,7 @@ list do not read the source again. The collection method has a ``class``
 constraint, so it also supports anonymous rows.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Extensions;
 
@@ -161,6 +164,7 @@ Currency Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Extensions;
 

@@ -83,6 +83,7 @@ Basic Repository Example
 ------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Collections.Generic;
    using VersaTul.Data.MongoDB;
@@ -121,6 +122,7 @@ Filtering Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var cars = carRepository.Find(
        new WherePredicate<Car>(model => model.Make.Contains(searchTerm) || model.Model.Contains(searchTerm)));

@@ -112,6 +112,35 @@ foreach ($snippet in $actualSnippets) {
         $snippet.Caption -notmatch '^Pseudocode:') {
         throw "Pseudocode snippet '$($snippet.Id)' needs a visible 'Pseudocode:' code-block caption."
     }
+    if ($RequirePseudocodeCaptions -and $expected.classification -eq 'pseudocode' -and
+        $snippet.File -ceq 'getting-started.rst') {
+        throw "Copy-paste quickstart '$($snippet.File)' must use its canonical runnable sample instead of pseudocode ('$($snippet.Id)')."
+    }
+}
+
+if ($RequirePseudocodeCaptions) {
+    $quickstartPseudocode = @(
+        $manifest.snippets | Where-Object {
+            $_.file -ceq 'getting-started.rst' -and
+            $_.directive -ceq 'code-block' -and
+            $_.argument -ceq 'csharp'
+        }
+    )
+    if ($quickstartPseudocode.Count -gt 0) {
+        throw 'The Getting Started copy-paste quickstart must not contain C# pseudocode code blocks.'
+    }
+
+    $quickstartProgram = @(
+        $manifest.snippets | Where-Object {
+            $_.file -ceq 'getting-started.rst' -and
+            $_.classification -ceq 'executed' -and
+            $_.directive -ceq 'literalinclude' -and
+            $_.argument -match 'samples/GettingStarted/Program\.cs$'
+        }
+    )
+    if ($quickstartProgram.Count -ne 1) {
+        throw 'The Getting Started copy-paste quickstart must include its canonical, executed GettingStarted/Program.cs sample exactly once.'
+    }
 }
 
 $inventoryPage = [System.IO.File]::ReadAllText($inventoryPagePath)

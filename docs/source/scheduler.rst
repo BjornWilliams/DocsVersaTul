@@ -65,6 +65,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Task.Scheduler.Events;
    using VersaTul.Task.Scheduler.Timers;
@@ -104,6 +105,7 @@ The legacy AddSyncronized spelling still selects the asynchronous scheduling pat
 its name and the default SyncronizedEvent value are retained.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    ScheduledEventAsyncHandler handler = (_, _, cancellationToken) =>
        Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
@@ -127,6 +129,7 @@ Scheduler timestamps use an internal UTC ``DateTimeOffset`` representation. Exis
 ``CronEvent`` has no time-zone setting and evaluates UTC schedule instants. UTC ``DateTime`` inputs stay UTC, local inputs are converted using the machine's local zone, and ``DateTimeKind.Unspecified`` inputs are treated as UTC. Convert a known wall-clock value with ``SchedulerTime.ConvertToUtc(localTime, timeZone)`` before passing it to the scheduler; invalid daylight-saving times and ambiguous repeated times are rejected.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using System.Globalization;
@@ -155,6 +158,7 @@ Scheduled Event Example
 -----------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var hourlyQuarterPast = new ScheduledEvent(EventTime.Hourly, new TimeSpan(0, 15, 0));
    var nextRun = hourlyQuarterPast.NextEvent(DateTime.Now, includeStartTime: true);

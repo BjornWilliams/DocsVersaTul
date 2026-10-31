@@ -58,6 +58,7 @@ Basic Example
 ``IPredicate<T>`` is commonly used to wrap filtering expressions in repository-style code.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using System.Linq.Expressions;
@@ -83,6 +84,7 @@ Async Contract Example
 The async contracts are useful when you want application services to follow a clear, reusable execution shape.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Threading;
    using System.Threading.Tasks;

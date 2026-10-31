@@ -10,7 +10,7 @@ Classifications
 
 * **Compiled**: builds successfully, but validation does not run the code.
 * **Executed**: the canonical sample is built and run for each directly supported framework; the expected output is checked.
-* **Pseudocode**: an illustrative API fragment, not a standalone program. Task validation requires a visible ``Pseudocode:`` caption.
+* **Pseudocode**: an illustrative API fragment, not a standalone program. Every block is visibly captioned and excluded from the Getting Started copy-paste quickstart.
 * **Configuration-only**: a command, fixture, or static text/output block; it is not compiled as C# source.
 
 Inventory

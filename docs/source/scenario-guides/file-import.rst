@@ -44,6 +44,7 @@ Step 1: Read The File
 Start by turning the CSV file into an ``IDataReader``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.FileReader;
 
@@ -63,6 +64,7 @@ Step 2: Define Column Mappings
 Map the incoming columns to the destination table.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Bulk;
 
@@ -83,6 +85,7 @@ Step 3: Execute The Upload
 If the destination is SQL Server, hand the prepared copy detail to the ``VersaTul.Data.MsSql`` bulk uploader.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.MsSql.Bulk;
 

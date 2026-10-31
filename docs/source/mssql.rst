@@ -142,6 +142,7 @@ Basic Data-Service Example
 --------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data.Common;
    using System.Data.SqlClient;
@@ -173,6 +174,7 @@ Bulk Copy Example
 The bulk-copy path is the main reason to choose this package over the provider-agnostic SQL package alone.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Bulk;
    using VersaTul.Data.MsSql.Bulk;

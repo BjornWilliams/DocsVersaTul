@@ -58,6 +58,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.IO;
    using VersaTul.Compression;
@@ -78,6 +79,7 @@ Unzip Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using var archiveStream = File.OpenRead("exports.zip");
 

@@ -70,6 +70,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Caching;
    using VersaTul.Caching.Configurations;
@@ -93,6 +94,7 @@ Expiration Example
 Use ``CacheExpiration`` when you want explicit absolute or sliding expiration behavior.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Caching;
 
@@ -115,6 +117,7 @@ Async And Eviction Example
 --------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using var cacheOwner = new MemCacheProvider<Person>(cacheConfig);
    ICacheProviderWithEvents<Person> eventingCache = cacheOwner;

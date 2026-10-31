@@ -144,6 +144,7 @@ Basic CSV Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers;
    using VersaTul.Handler.File;
@@ -165,6 +166,7 @@ IDataReader Example
 -------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Extensions;
 
@@ -179,6 +181,7 @@ Direct To Disk Example
 ----------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Contracts;
 
@@ -189,6 +192,7 @@ IDataReader To Disk Example
 ---------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data;
    using VersaTul.Collection.Streamers.Contracts;
@@ -202,6 +206,7 @@ Save To Disk Example
 --------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Compressions;
    using VersaTul.Collection.Streamers.Converters;

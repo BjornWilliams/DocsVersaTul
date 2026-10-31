@@ -59,6 +59,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Logger;
    using VersaTul.Logger.Contracts;
@@ -124,6 +125,7 @@ class to access lifecycle methods. Existing ``IMailLogger`` implementers do not
 need new members.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    await logger.FlushAsync(); // Attempts every queued batch, bypassing throttling.
 
@@ -175,6 +177,7 @@ and ``DroppedDeadLetterCount`` increases. Logging, timer, and shutdown failures
 all use this bound; one failed batch is one entry.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    await using var boundedLogger = new MailLogger(
        dispatcher, mailConfiguration, new LogParser(), deadLetterCapacity: 200);

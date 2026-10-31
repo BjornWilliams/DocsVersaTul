@@ -101,6 +101,7 @@ Basic Example
 The most common usage pattern is to inherit from ``Configuration`` and expose strongly typed properties.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configurations;
 
@@ -136,6 +137,7 @@ Binding Example
 ``Bind<T>()`` is useful when you want to project settings into a plain model instead of exposing them through an inherited configuration class.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configurations;
 

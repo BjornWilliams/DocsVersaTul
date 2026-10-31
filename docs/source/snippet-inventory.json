@@ -4,7 +4,7 @@
   "classifications": {
     "compiled": "A code sample that builds successfully but is not run by validation.",
     "executed": "A canonical sample or its expected output is built/run and checked on each directly supported target framework.",
-    "pseudocode": "An illustrative API fragment that is not a standalone program and is verified through its visible pseudocode caption.",
+    "pseudocode": "An illustrative API fragment with a visible Pseudocode caption; it is not a standalone program or part of the Getting Started copy-paste quickstart.",
     "configuration-only": "Commands, fixture data, or static text/output that is not compiled as C# source."
   },
   "snippets": [

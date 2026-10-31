@@ -58,6 +58,7 @@ Step Example
 ------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Pipeline.Infrastructure.Contracts;
 
@@ -75,6 +76,7 @@ Pipeline Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Pipeline.Infrastructure;
    using VersaTul.Pipeline.Infrastructure.Extensions;
@@ -93,6 +95,7 @@ Diagnostics Example
 -------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var value = 5.AddStep(new AddOneStep(), (elapsed, error) =>
    {

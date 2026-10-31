@@ -66,6 +66,7 @@ Basic Example
 Convert a simple object into a dictionary and inspect the generated fields.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Object.Converters;
 
@@ -89,6 +90,7 @@ Flattening Example
 Use ``Flattener`` when you need a single-level structure for export or diagnostics.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Object.Converters;
 
@@ -116,6 +118,7 @@ Property Processing And Display Metadata
 ``PropertyProcessor`` is useful when object values need to be formatted or filtered through display metadata before export.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Display.Attributes;
    using VersaTul.Object.Converters;
@@ -139,6 +142,7 @@ The default replaces a cyclic edge with ``[CYCLE]``, preserving the existing
 Flattener marker. Configure either concrete class through its new constructor:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var options = new ReferenceCycleOptions(ReferenceCycleBehavior.Skip);
    var processor = new PropertyProcessor(new DisplayAnalyzer(), options);

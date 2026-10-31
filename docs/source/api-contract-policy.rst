@@ -40,6 +40,7 @@ The annotations preserve the existing runtime outcomes:
 Check the result before dereferencing it. For example:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using VersaTul.Utilities;
@@ -127,6 +128,7 @@ capability when an operation should observe cancellation:
 For example, the following helper uses the optional file capability:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Threading;
    using System.Threading.Tasks;
@@ -240,6 +242,7 @@ Gregorian ``yyyy-MM-dd``. The SQL Server ``SqlParameter`` inherits the same rule
 For example:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using System.Data;

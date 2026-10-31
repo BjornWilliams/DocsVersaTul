@@ -67,6 +67,7 @@ Save Text Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Handler.File;
    using VersaTul.Handler.File.Types;
@@ -81,6 +82,7 @@ Read Example
 ------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var result = fileUtility.ReadAll("C:\\exports\\report.txt");
 
@@ -96,6 +98,7 @@ Save Stream Example
 -------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using var memoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("hello"));
 
@@ -164,6 +167,7 @@ a sandbox for hostile local users. Do not mutate models during delivery. The pol
 applies to typed models, not arbitrary string-path wrapper calls.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var file = new TextFileInfo("reports", "daily", "data") { BaseDirectory = trustedRoot };
    await fileUtility.SaveOrUpdateAsync(file);
@@ -188,6 +192,7 @@ and honor LeaveOpen. New text callers should choose an explicit method. Text wri
 platform newlines and UTF-8 without a BOM.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Handler.File.Contracts;
 

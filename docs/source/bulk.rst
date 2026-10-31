@@ -82,6 +82,7 @@ Basic Example
 The abstraction assumes your source data is already available as an ``IDataReader``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Data.Bulk;
 
@@ -103,6 +104,7 @@ Async Progress Example
 ----------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     var result = await bulkCopy.DoCopyAsync(
          new[] { copyDetail },

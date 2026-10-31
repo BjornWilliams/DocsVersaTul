@@ -92,6 +92,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using VersaTul.Configurations;
@@ -137,6 +138,7 @@ The wrapper applies secure defaults and validates configuration before creating 
 For Windows or domain-integrated SMTP, opt in explicitly and omit the explicit credential pair:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var integratedConfiguration = new MailConfiguration(new ConfigSettings
    {
@@ -154,6 +156,7 @@ Template Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    dispatcher.SendTemplatedMail(
        configuration.FromAddress,
@@ -199,6 +202,7 @@ remain available. Built-in async SMTP uses native I/O; transient retry delays us
 cancellable ``Task.Delay``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using var cancellation = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(30));
    await dispatcher.SendMailAsync(configuration.FromAddress, configuration.ToAddress,

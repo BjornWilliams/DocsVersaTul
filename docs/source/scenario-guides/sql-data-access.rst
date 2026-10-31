@@ -35,6 +35,7 @@ Step 1: Configure The Connection
 Register the provider and build the configuration source.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data.Common;
    using VersaTul.Configuration.Defaults.Sql;
@@ -55,6 +56,7 @@ Step 2: Build The Data Source
 -----------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Sql;
    using VersaTul.Data.Sql.Configurations;
@@ -72,6 +74,7 @@ Step 3: Put Mapping In A Service Layer
 Implement a project-specific data service on top of ``BaseDataService``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data;
    using VersaTul.Data.Sql.Contracts;

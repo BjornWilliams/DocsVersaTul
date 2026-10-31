@@ -72,6 +72,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Utilities;
     using VersaTul.Utilities.Contracts;
@@ -89,6 +90,7 @@ Enum And Collection Example
 ---------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Utilities;
 
@@ -112,6 +114,7 @@ Property Mapping Example
 ------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Utilities;
 
@@ -153,6 +156,7 @@ generic construction. Use numeric conversion helpers for non-enum values.
 Generic wrappers and factories must also carry the Enum constraint:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     public static IEnumParser<T> CreateParser<T>() where T : struct, Enum
         => new EnumParser<T>();

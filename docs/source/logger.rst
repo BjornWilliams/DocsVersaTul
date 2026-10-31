@@ -131,6 +131,7 @@ asynchronous callback. An async-only provider can reject synchronous logging and
 direct callers to ``LogAsync`` instead.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using System.Threading.Tasks;
@@ -186,6 +187,7 @@ Parser Example
 --------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var parser = new LogParser();
    var info = new LogInfo(LogLevel.Error, "Orders", "Unable to process order", traceId: "trace-123");

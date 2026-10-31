@@ -101,6 +101,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
   using VersaTul.Data.FileReader;
 
@@ -118,6 +119,7 @@ Directory Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
   var options = new FileOptions
   {
@@ -146,6 +148,7 @@ Bulk Workflow Example
 ---------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
   var options = new FileOptions { HasHeader = true };
   using var reader = fileReader.Read("C:\\data", "people.csv", options);
@@ -181,6 +184,7 @@ Dependency Injection
 Typical registrations look like this:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
   builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
   builder.RegisterType<CsvFileReader>().As<ICsvReader>().SingleInstance();

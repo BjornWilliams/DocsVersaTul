@@ -73,6 +73,7 @@ Basic Example
 This example starts with the MongoDB defaults and overrides the connection string.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configuration.Defaults.MongoDB;
 
@@ -94,6 +95,7 @@ Composed Example
 You can combine package defaults with environment metadata and project-specific overrides.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configuration.Defaults;
    using VersaTul.Configuration.Defaults.Sql;

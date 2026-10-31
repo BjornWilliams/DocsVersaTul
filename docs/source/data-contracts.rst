@@ -69,6 +69,7 @@ Repository Example
 ------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Contracts;
 
@@ -100,6 +101,7 @@ Paging Example
 --------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Contracts;
 

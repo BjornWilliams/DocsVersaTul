@@ -74,6 +74,8 @@ var configuration = new MailConfiguration(new ConfigSettings
 {
     ["SmtpServer"] = "127.0.0.1",
     ["SmtpPort"] = port,
+    ["SmtpUserName"] = "",
+    ["SmtpPassword"] = "",
     ["EnableSsl"] = false,
     ["UseDefaultCredentials"] = false,
     ["FromAddress"] = "alerts@example.test",
@@ -85,7 +87,7 @@ var configuration = new MailConfiguration(new ConfigSettings
 
 using var smtpClient = new SmtpClientWrapper(configuration);
 var dispatcher = new MailDispatcher(smtpClient, configuration);
-var sent = await dispatcher.SendMailAsync(
+var sent = dispatcher.SendMail(
     configuration.FromAddress!,
     configuration.ToAddress!,
     "Sample notice",

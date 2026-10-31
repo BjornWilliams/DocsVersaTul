@@ -26,6 +26,7 @@ Step 1: Define The File Logger Configuration
 --------------------------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configuration.Defaults;
    using VersaTul.Logger.File.Contracts;
@@ -42,6 +43,7 @@ Step 2: Build The Logger
 ------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Handler.File;
    using VersaTul.Logger;
@@ -60,6 +62,7 @@ Step 3: Log Useful Events
 Log both normal application activity and failures through the same interface.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    await logger.LogAsync(new LogInfo(LogLevel.Information, "Startup", "Application started"));
 

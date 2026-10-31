@@ -65,6 +65,7 @@ Attribute Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Display.Attributes;
 
@@ -89,6 +90,7 @@ Analyzer Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var analyzer = new DisplayAnalyzer();
 
@@ -108,6 +110,7 @@ metadata used by later calls.
 Use the concrete analyzer's member-aware method for precise formatting:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var property = typeof(Order).GetProperty(nameof(Order.SubTotal));
    var formatted = analyzer.FormatPropertyValue(property, 12.345m);

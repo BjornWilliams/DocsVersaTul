@@ -81,6 +81,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using Microsoft.EntityFrameworkCore;
    using VersaTul.Data.Contracts;
@@ -132,6 +133,7 @@ Specification Example
 ---------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System;
    using System.Linq.Expressions;

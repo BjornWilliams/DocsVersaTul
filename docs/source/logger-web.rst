@@ -58,6 +58,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Logger;
    using VersaTul.Logger.Contracts;
@@ -95,6 +96,7 @@ Cancellation, Ownership, and Circuit Concurrency
 information, an exception, or both.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var cancellableLogger = new WebLogger(httpClientFactory, webLogConfiguration, new LogParser());
    using var cancellation = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(10));
@@ -222,6 +224,7 @@ This minimal factory creates a native handler per call. Production factories can
 manage pooling while honoring per-client disposal and the complete handler policy.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Net.Http;
    using VersaTul.Logger.Web.Contracts;

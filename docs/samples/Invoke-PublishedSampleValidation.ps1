@@ -53,7 +53,7 @@ foreach ($sample in $projects) {
     }
 
     Write-Host "Building $($sample.Name) for all declared target frameworks..."
-    & dotnet build $sample.Project --configuration $Configuration --no-restore --nologo --verbosity quiet
+    & dotnet build $sample.Project --configuration $Configuration --no-restore --nologo --verbosity quiet -m:1
     if ($LASTEXITCODE -ne 0) {
         throw "Build failed for '$($sample.Name)' (exit code $LASTEXITCODE)."
     }
