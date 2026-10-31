@@ -97,6 +97,7 @@ Start Here
    snippet-inventory
    faq
    package-catalog
+   package-inventory
 
 
 Package Reference
