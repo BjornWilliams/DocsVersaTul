@@ -165,6 +165,6 @@ Expected output
 Support
 ^^^^^^^
 
-Documentation FAQ <https://docsversatul.readthedocs.io/en/latest/faq.html>_.
+Support and feedback matrix <https://docsversatul.readthedocs.io/en/latest/support.html>_.
 
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
