@@ -140,3 +140,18 @@ Notes
 1. ``DataConfiguration<TKey>`` centralizes collection naming, timeouts, and connection-string access.
 2. ``BaseMap<TEntity>`` is the right place for BSON class-map customization and nested serializer setup.
 3. ``WherePredicate<TEntity>`` keeps filtering expressions explicit and reusable.
+
+Runnable Sample
+---------------
+
+The complete map and repository example is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../samples/MongoDB/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../samples/MongoDB/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output

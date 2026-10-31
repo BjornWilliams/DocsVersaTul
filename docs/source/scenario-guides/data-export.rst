@@ -103,6 +103,21 @@ When this workflow is working:
 2. Values such as decimals and dates follow the export formatting rules.
 3. Ignored properties do not appear in the final export.
 
+Runnable Sample
+---------------
+
+The complete sample is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../../samples/DataExport/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output and generated-file contents are:
+
+.. literalinclude:: ../../samples/DataExport/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
 Common Mistakes
 ---------------
 

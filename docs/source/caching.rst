@@ -137,3 +137,18 @@ Notes
 3. Inject a custom ``ICacheClock`` when you need deterministic time behavior in tests; it controls both validation and actual cache expiration.
 4. ``MemCacheProvider<T>`` owns the ``MemoryCache`` instance it creates and implements ``IDisposable``. Dispose manually created providers; the current constructors do not accept an externally owned cache.
 5. Removal callback exceptions are isolated per subscriber and logged through the optional ``ILoggerFactory``; one failing callback does not prevent later callbacks or destabilize cache eviction.
+
+Runnable Sample
+---------------
+
+The complete cache removal-event example is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../samples/Caching/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../samples/Caching/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output

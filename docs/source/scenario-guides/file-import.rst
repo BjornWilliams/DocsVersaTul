@@ -103,6 +103,27 @@ When this workflow is wired correctly:
 2. The bulk-copy step validates the mapping shape before upload.
 3. The SQL Server upload reports progress and completes as one deliberate import operation.
 
+Runnable Sample
+---------------
+
+The complete sample is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../../samples/FileImport/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+The sample reads this checked-in CSV fixture:
+
+.. literalinclude:: ../../samples/FileImport/Fixtures/people.csv
+   :language: text
+   :caption: people.csv
+
+Its expected console output is:
+
+.. literalinclude:: ../../samples/FileImport/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
 Why This Workflow Helps Adoption
 --------------------------------
 

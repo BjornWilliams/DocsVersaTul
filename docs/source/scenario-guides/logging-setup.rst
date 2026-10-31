@@ -81,6 +81,21 @@ When this workflow is working:
 2. Log rows are appended in the configured file format.
 3. Exception details are captured through the shared parser and file sink.
 
+Runnable Sample
+---------------
+
+The complete sample writes to a temporary directory, reads the resulting log record, and is maintained as a buildable project included here directly.
+
+.. literalinclude:: ../../samples/FileLogging/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../../samples/FileLogging/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
 Why This Workflow Helps
 -----------------------
 

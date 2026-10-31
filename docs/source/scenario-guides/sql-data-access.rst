@@ -130,6 +130,21 @@ When this workflow is working:
 2. SQL execution stays behind a reusable service abstraction.
 3. Mapping logic stays consistent across queries instead of being rewritten in each caller.
 
+Runnable Sample
+---------------
+
+The complete sample creates and queries an ephemeral SQLite database, and is maintained as a buildable project included here directly.
+
+.. literalinclude:: ../../samples/SqlDataAccess/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../../samples/SqlDataAccess/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
 Common Mistakes
 ---------------
 
