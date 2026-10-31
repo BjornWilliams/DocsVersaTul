@@ -1,24 +1,70 @@
 Compatibility And Support
 =========================
 
-This page separates three facts that can differ: the frameworks in a VersaTul package, the framework asset NuGet selects, and the runtime versions Microsoft still services.
+**Last checked:** 2026-10-31 (Microsoft policy updated 2026-10-25)
 
-Transition target frameworks
-----------------------------
+**Page owner:** VersaTul maintainers
 
-The VersaTul transition plan directly targets and tests ``net8.0``, ``net9.0``, and ``net10.0`` for all 25 library packages, including ``VersaTul.Data.FileReader``. Host and test projects use the same matrix.
+**Next scheduled review:** 2026-11-09
 
-.. list-table:: Framework wording
+Framework support as of 2026-10-31
+----------------------------------
+
+The Microsoft status and patches below are taken from the official `.NET support policy <https://dotnet.microsoft.com/en-us/platform/support/policy>`_. The current VersaTul source branch directly targets and tests all three listed TFMs for its 25 library packages. The TFM assets inside a published NuGet package are version-specific and may differ from current source.
+
+.. list-table:: .NET runtime support and VersaTul framework state
    :header-rows: 1
 
-   * - Term
+   * - Runtime and TFM
+     - Microsoft servicing state on 2026-10-31
+     - Latest Microsoft patch (released)
+     - Microsoft end of support
+     - Current VersaTul source
+     - Published NuGet asset state
+   * - .NET 8 / ``net8.0``
+     - LTS; Maintenance
+     - ``8.0.33`` (2026-10-25)
+     - 2026-11-10
+     - Directly targeted and tested for all 25 library packages
+     - Version-specific: direct only when that package version contains a ``net8.0`` asset
+   * - .NET 9 / ``net9.0``
+     - STS; Maintenance
+     - ``9.0.22`` (2026-10-25)
+     - 2026-11-10
+     - Directly targeted and tested for all 25 library packages
+     - Version-specific: direct only when that package version contains a ``net9.0`` asset; otherwise NuGet may report computed compatibility from a lower TFM
+   * - .NET 10 / ``net10.0``
+     - LTS; Active
+     - ``10.0.14`` (2026-10-25)
+     - 2028-11-14
+     - Directly targeted and tested for all 25 library packages
+     - Version-specific: direct only when that package version contains a ``net10.0`` asset; otherwise NuGet may report computed compatibility from a lower TFM
+
+**Production runtime choice:** target .NET 10 and keep it on the latest serviced patch. .NET 8 and .NET 9 reach Microsoft's end of support on 2026-11-10. VersaTul's source build and test coverage does not extend Microsoft runtime or dependency servicing.
+
+Framework and package wording
+-----------------------------
+
+.. list-table:: How to read framework and package states
+   :header-rows: 1
+
+   * - State
      - Meaning
    * - **Directly targeted and tested**
-     - The project declares that exact TFM. The transition CI builds and tests it, and package validation packs and consumes the matching NuGet asset.
-   * - **Compatible with**
-     - NuGet can select another compatible asset when the package has no exact TFM asset. This does not mean the package was built or tested for that exact runtime.
+     - The VersaTul source project declares that exact TFM and the audit validation builds and tests it.
+   * - **Direct NuGet asset**
+     - The exact package version contains an asset for that TFM. Check the version-specific ``Included target framework(s)`` list on NuGet.
+   * - **Computed-compatible**
+     - NuGet can select a lower-TFM asset for the requested framework. This is not a direct asset, direct build, or test for that framework, and does not establish runtime support.
+   * - **Maintenance / Active**
+     - Microsoft's servicing phase for the runtime on the date above. Use the latest Microsoft patch while the runtime remains in support.
+   * - **End of support**
+     - Microsoft's servicing end date. After it, Microsoft no longer provides routine runtime security fixes or servicing for that release.
 
-Applications should target ``net10.0`` for a supported Microsoft runtime. The official `.NET support policy <https://dotnet.microsoft.com/en-us/platform/support/policy>`_ lists .NET 8 and .NET 9 support through 2026-11-10 and .NET 10 LTS support through 2028-11-14. VersaTul's additional build and test coverage for ``net8.0`` and ``net9.0`` does not extend Microsoft's runtime or dependency servicing.
+Use the exact package version's included assets to decide whether that package is directly targeted for your runtime. A NuGet ``computed-compatible`` result alone is not evidence that the package version contains a native TFM asset or was directly tested for it.
+
+VersaTul transition support
+---------------------------
 
 VersaTul will keep the ``net8.0`` and ``net9.0`` assets in its transition target matrix through 2027-11-10. They are compatibility targets after Microsoft's support ends on 2026-11-10. Their removal is planned for the first approved major package release on or after 2027-11-10. See the source repository's ``DOTNET_FRAMEWORK_SUPPORT_POLICY.md`` for the exact policy and migration steps.
 
