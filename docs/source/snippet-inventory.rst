@@ -1,5 +1,5 @@
 Documentation Snippet Verification Inventory
-===========================================
+============================================
 
 This inventory covers every reStructuredText source directive that displays a code block or literal file under `docs/source`. Each location uses a stable ordinal within its source file, for example `getting-started.rst#1` is its first such directive.
 

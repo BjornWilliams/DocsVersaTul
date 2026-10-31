@@ -103,17 +103,17 @@ Basic Example
 .. code-block:: csharp
    :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  using VersaTul.Data.FileReader;
+   using VersaTul.Data.FileReader;
 
-  var fileReader = new DataFileReader(fileUtility, csvReader, textReader);
-  var options = new FileOptions { HasHeader = true };
+   var fileReader = new DataFileReader(fileUtility, csvReader, textReader);
+   var options = new FileOptions { HasHeader = true };
 
-  using var reader = fileReader.Read("C:\\path\\to", "file.csv", options);
+   using var reader = fileReader.Read("C:\\path\\to", "file.csv", options);
 
-  while (reader.Read())
-  {
-     // Consume row data here.
-  }
+   while (reader.Read())
+   {
+      // Consume row data here.
+   }
 
 Directory Example
 -----------------
@@ -121,24 +121,24 @@ Directory Example
 .. code-block:: csharp
    :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  var options = new FileOptions
-  {
-     HasHeader = true,
-     ExtensionFilters = new[] { ExtensionFilters.CSV, ExtensionFilters.TEXT },
-     SearchOption = SearchOption.AllDirectories
-  };
+   var options = new FileOptions
+   {
+      HasHeader = true,
+      ExtensionFilters = new[] { ExtensionFilters.CSV, ExtensionFilters.TEXT },
+      SearchOption = SearchOption.AllDirectories
+   };
 
-  var readers = fileReader.Read("C:\\data", options);
+   var readers = fileReader.Read("C:\\data", options);
 
-  foreach (var item in readers)
-  {
-     using (item)
-     {
-        while (item.Read())
-        {
-        }
-     }
-  }
+   foreach (var item in readers)
+   {
+      using (item)
+      {
+         while (item.Read())
+         {
+         }
+      }
+   }
 
 Directory reads are lazy: files are opened as the returned sequence is enumerated. Repeated extension filters are ignored while preserving the first-seen order. When enumeration completes successfully, the caller owns each yielded reader and must dispose it. If enumeration fails or is abandoned, readers opened by the sequence are disposed automatically.
 
@@ -150,17 +150,17 @@ Bulk Workflow Example
 .. code-block:: csharp
    :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  var options = new FileOptions { HasHeader = true };
-  using var reader = fileReader.Read("C:\\data", "people.csv", options);
+   var options = new FileOptions { HasHeader = true };
+   using var reader = fileReader.Read("C:\\data", "people.csv", options);
 
-  var mappings = new List<IBulkCopyColumnMapping>
-  {
-     new BulkCopyColumnMapping<Person, Person>(p => p.Name, p => p.Name),
-     new BulkCopyColumnMapping<Person, Person>(p => p.Age, p => p.Age)
-  };
+   var mappings = new List<IBulkCopyColumnMapping>
+   {
+      new BulkCopyColumnMapping<Person, Person>(p => p.Name, p => p.Name),
+      new BulkCopyColumnMapping<Person, Person>(p => p.Age, p => p.Age)
+   };
 
-  var copyDetail = new CopyDetail("Persons", reader, mappings);
-  await bulkCopy.DoCopyAsync(copyDetail);
+   var copyDetail = new CopyDetail("Persons", reader, mappings);
+   await bulkCopy.DoCopyAsync(copyDetail);
 
 Expected Result
 ---------------
@@ -186,10 +186,10 @@ Typical registrations look like this:
 .. code-block:: csharp
    :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-  builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
-  builder.RegisterType<CsvFileReader>().As<ICsvReader>().SingleInstance();
-  builder.RegisterType<TextFileReader>().As<ITextReader>().SingleInstance();
-  builder.RegisterType<DataFileReader>().As<IFileReader>().SingleInstance();
+   builder.RegisterType<FileUtility>().As<IFileUtility>().SingleInstance();
+   builder.RegisterType<CsvFileReader>().As<ICsvReader>().SingleInstance();
+   builder.RegisterType<TextFileReader>().As<ITextReader>().SingleInstance();
+   builder.RegisterType<DataFileReader>().As<IFileReader>().SingleInstance();
 
 Notes
 -----
