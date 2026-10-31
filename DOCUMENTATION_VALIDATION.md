@@ -21,6 +21,10 @@ and HTTPS links in `README.rst` and `docs/source`. It uses lychee v0.24.2 with
 retry settings from `lychee.toml`; it is not a required branch-protection check,
 so an unavailable external site does not block documentation authoring.
 
+If the strict Sphinx step fails, the workflow uploads the captured output as the
+`sphinx-html-build-log` artifact for 14 days. Other validation failures do not
+upload this Sphinx-specific log.
+
 ## Prerequisites
 
 1. Python 3.12 installed. Read the Docs and the pull-request workflow both select Python 3.12.

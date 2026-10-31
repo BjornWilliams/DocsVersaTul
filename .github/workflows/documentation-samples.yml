@@ -37,8 +37,22 @@ jobs:
         working-directory: docs
 
       - name: Build documentation with warnings as errors
-        run: python -m sphinx -n -W --keep-going -b html source build/html
+        id: sphinx_build
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p build
+          python -m sphinx -n -W --keep-going -b html source build/html 2>&1 | tee build/sphinx-html-build.log
         working-directory: docs
+
+      - name: Archive the strict Sphinx log on failure
+        if: failure() && steps.sphinx_build.outcome == 'failure'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sphinx-html-build-log
+          path: docs/build/sphinx-html-build.log
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Validate published-package samples
         shell: pwsh
