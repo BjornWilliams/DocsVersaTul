@@ -58,6 +58,11 @@ Meaning of the flags:
 2. `-W` turns warnings into build failures.
 3. `--keep-going` reports more than the first warning.
 
+Read the Docs uses the same warning policy. The root `.readthedocs.yaml` enables
+`sphinx.fail_on_warning`, which adds `-W --keep-going`; `nitpicky = True` in
+`docs/source/conf.py` supplies the cross-reference checks enabled locally by `-n`.
+This keeps missing references and other Sphinx warnings fatal in both builds.
+
 ## What To Check
 
 After the build:

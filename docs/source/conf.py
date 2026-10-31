@@ -12,6 +12,9 @@ extensions = [
     "sphinx_search.extension",
 ]
 
+# Match the local strict build's `-n` cross-reference validation.
+nitpicky = True
+
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
     "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
