@@ -2,10 +2,6 @@ name: Documentation samples
 
 on:
   pull_request:
-    paths:
-      - '.github/workflows/documentation-samples.yml'
-      - 'docs/samples/**'
-      - 'docs/source/**'
   workflow_dispatch:
 
 permissions:
