@@ -21,9 +21,9 @@ Logger Mail
 
 **Maintenance:** Community maintained; support is best-effort with no published response SLA.
 
-**Last version found in the local NuGet cache:** `1.0.19` (checked `2026-10-31`).
+**Last verified published version:** `1.0.19` on `2026-11-01` (NuGet Gallery).
 
-Verification note: Local NuGet cache; live NuGet lookup was unavailable. Use the NuGet badge above for the current listing.
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Logger.Mail/1.0.19>`_.
 
 .. END VERSATUL GENERATED PACKAGE STATUS
 
@@ -273,7 +273,7 @@ Expected output
 Support
 ^^^^^^^
 
-Support and feedback matrix <https://docsversatul.readthedocs.io/en/latest/support.html>_.
+:doc:`Support and feedback matrix <support>`.
 
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
 

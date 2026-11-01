@@ -201,7 +201,7 @@ Expected output
 Support
 ^^^^^^^
 
-Support and feedback matrix <https://docsversatul.readthedocs.io/en/latest/support.html>_.
+:doc:`Support and feedback matrix <support>`.
 
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
 
