@@ -9,6 +9,31 @@ VersaTul Documentation
 
 It is designed for teams that want reusable building blocks without committing to one large framework. For a first evaluation, choose one problem below and follow its guide; add adjacent packages only when the workflow needs them.
 
+Start In 5 Minutes
+------------------
+
+**Before:** application code reads settings by string key and must remember which values are required or optional. **After:** define that contract once in a small ``Configuration`` type, then read ``ConnectionString``, ``TimeoutSeconds``, and ``ArchivePath`` as C# properties. The example uses ``VersaTul.Configurations`` and does not connect to a database or service.
+
+Run the tested sample from the DocsVersaTul repository root:
+
+.. code-block:: console
+
+   dotnet run --project docs/samples/GettingStarted/GettingStarted.csproj --framework net8.0
+
+The sample also targets ``net9.0`` and ``net10.0``. Its direct package version is pinned in ``docs/samples/Directory.Packages.props``.
+
+.. literalinclude:: ../samples/GettingStarted/Program.cs
+   :language: csharp
+   :caption: Strongly typed settings sample
+
+Expected output:
+
+.. literalinclude:: ../samples/GettingStarted/ExpectedOutput.txt
+   :language: text
+   :caption: Output checked by the sample validator
+
+For a new console app, follow :doc:`getting-started`.
+
 Start By Problem
 ----------------
 
@@ -20,11 +45,6 @@ Use these paths if you want the quickest route to a relevant package.
 4. I need export or formatting helpers: start with :doc:`scenario-guides/data-export`.
 5. I need logging in a service or background process: start with :doc:`scenario-guides/logging-setup`.
 6. I need a package starting set for my application type: start with :doc:`recommended-paths`.
-
-Start In 5 Minutes
-------------------
-
-Choose a problem above and follow its linked guide to a first working result. Use :doc:`package-catalog` when you are ready to compare related packages.
 
 Package Selection Notes
 -----------------------
