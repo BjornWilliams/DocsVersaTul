@@ -25,7 +25,11 @@ html_baseurl = (
 
 seo_metadata_path = Path(__file__).with_name("seo-metadata.json")
 versatul_page_metadata = json.loads(seo_metadata_path.read_text(encoding="utf-8"))
-html_context = {"versatul_page_metadata": versatul_page_metadata}
+versatul_social_image_url = html_baseurl + "_static/versatul-social-preview.png"
+html_context = {
+    "versatul_page_metadata": versatul_page_metadata,
+    "versatul_social_image_url": versatul_social_image_url,
+}
 
 extensions = [
     "sphinx.ext.duration",
@@ -43,6 +47,7 @@ intersphinx_mapping = {
 intersphinx_disabled_domains = ["std"]
 
 templates_path = ["_templates"]
+html_static_path = ["_static"]
 exclude_patterns = [
     "_build",
     "_api_ref",

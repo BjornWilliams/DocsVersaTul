@@ -11,6 +11,10 @@ if (-not $PSBoundParameters.ContainsKey('HtmlRoot')) {
 
 $inventoryPath = Join-Path $repositoryRoot 'docs/source/package-inventory.json'
 $metadataPath = Join-Path $repositoryRoot 'docs/source/seo-metadata.json'
+$socialImagePath = Join-Path $repositoryRoot 'docs/source/_static/versatul-social-preview.png'
+if (-not (Test-Path -LiteralPath $socialImagePath)) {
+    throw "Social preview image does not exist: $socialImagePath"
+}
 foreach ($requiredPath in @($HtmlRoot, $inventoryPath, $metadataPath)) {
     if (-not (Test-Path -LiteralPath $requiredPath)) {
         throw "Required search metadata input does not exist: $requiredPath"
@@ -41,8 +45,14 @@ foreach ($package in $packages) {
     $html = [System.IO.File]::ReadAllText($pagePath)
     $titleMatch = [regex]::Match($html, '<title>(?<value>.*?)</title>', [System.Text.RegularExpressions.RegexOptions]::Singleline)
     $descriptionMatch = [regex]::Match($html, '<meta\s+name="description"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
-    if (-not $titleMatch.Success -or -not $descriptionMatch.Success) {
-        throw "Rendered package page is missing a title or description: $pagePath"
+    $ogTitleMatch = [regex]::Match($html, '<meta\s+property="og:title"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $ogDescriptionMatch = [regex]::Match($html, '<meta\s+property="og:description"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $ogUrlMatch = [regex]::Match($html, '<meta\s+property="og:url"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $ogImageMatch = [regex]::Match($html, '<meta\s+property="og:image"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $canonicalMatch = [regex]::Match($html, '<link\s+rel="canonical"\s+href="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $twitterCardMatch = [regex]::Match($html, '<meta\s+name="twitter:card"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    if (-not $titleMatch.Success -or -not $descriptionMatch.Success -or -not $ogTitleMatch.Success -or -not $ogDescriptionMatch.Success -or -not $ogUrlMatch.Success -or -not $ogImageMatch.Success -or -not $canonicalMatch.Success -or -not $twitterCardMatch.Success) {
+        throw "Rendered package page is missing search or social metadata: $pagePath"
     }
 
     $title = [System.Net.WebUtility]::HtmlDecode($titleMatch.Groups['value'].Value)
@@ -53,6 +63,20 @@ foreach ($package in $packages) {
     }
     if ($description -ne $pageMetadata.description) {
         throw "Unexpected description for $($package.PageName)."
+    }
+    if ([System.Net.WebUtility]::HtmlDecode($ogTitleMatch.Groups['value'].Value) -ne $pageMetadata.title -or
+        [System.Net.WebUtility]::HtmlDecode($ogDescriptionMatch.Groups['value'].Value) -ne $pageMetadata.description) {
+        throw "Open Graph title or description differs from the page metadata for $($package.PageName)."
+    }
+    if ([System.Net.WebUtility]::HtmlDecode($ogUrlMatch.Groups['value'].Value) -ne [System.Net.WebUtility]::HtmlDecode($canonicalMatch.Groups['value'].Value)) {
+        throw "Open Graph URL does not match the canonical URL for $($package.PageName)."
+    }
+    $socialImage = [System.Net.WebUtility]::HtmlDecode($ogImageMatch.Groups['value'].Value)
+    if ($socialImage -notmatch '^https://[^/]+/.+/_static/versatul-social-preview\.png$') {
+        throw "Open Graph image is not an absolute HTTPS brand asset for $($package.PageName): $socialImage"
+    }
+    if ([System.Net.WebUtility]::HtmlDecode($twitterCardMatch.Groups['value'].Value) -ne 'summary_large_image') {
+        throw "Twitter card type is not summary_large_image for $($package.PageName)."
     }
     if ($title -notmatch [regex]::Escape($package.PackageId) -or $description -notmatch [regex]::Escape($package.PackageId)) {
         throw "The title and description must both include the exact package ID $($package.PackageId)."
@@ -65,4 +89,4 @@ foreach ($package in $packages) {
     }
 }
 
-Write-Output "Search title and description metadata passed for $($packages.Count) package pages."
+Write-Output "Search and social metadata passed for $($packages.Count) package pages."
