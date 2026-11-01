@@ -23,6 +23,8 @@ It is designed for teams that want reusable building blocks without committing t
      - **Source and support**
        :doc:`repository-access` (sign-in may be required); :doc:`support` (public issue forms).
 
+**Primary next step:** :doc:`getting-started` · **Secondary:** :doc:`package-catalog`
+
 Start In 5 Minutes
 ------------------
 
@@ -46,14 +48,12 @@ Expected output:
    :language: text
    :caption: Output checked by the sample validator
 
-For a new console app, follow :doc:`getting-started`.
-
 Start By Problem
 ----------------
 
 Use these paths if you want the quickest route to a relevant package.
 
-1. I need strongly typed application settings: start with :doc:`getting-started`.
+1. I need strongly typed application settings: try the tested example above.
 2. I need relational data access: start with :doc:`scenario-guides/sql-data-access`.
 3. I need to import CSV or text data: start with :doc:`scenario-guides/file-import`.
 4. I need export or formatting helpers: start with :doc:`scenario-guides/data-export`.
