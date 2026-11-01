@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urljoin, urlsplit, urlunsplit
 from xml.etree import ElementTree
 
 from sphinx.application import Sphinx
@@ -46,6 +46,23 @@ def _write_search_files(app: Sphinx, exception: Exception | None) -> None:
         encoding="utf-8",
         xml_declaration=True,
     )
+
+    # Read the Docs serves robots.txt from the project root using the default
+    # version's build output. Preserve its generated root sitemap and point to
+    # the per-version page sitemap under this build's canonical URL.
+    site_root = urlunsplit((parsed_base.scheme, parsed_base.netloc, "", "", ""))
+    robots = "\n".join(
+        (
+            "User-agent: *",
+            "Allow: /",
+            "",
+            f"Sitemap: {site_root}/sitemap.xml",
+            f"Sitemap: {base_url}sitemap-pages.xml",
+            "",
+        )
+    )
+    (output_dir / "robots.txt").write_text(robots, encoding="utf-8", newline="\n")
+
 
 def setup(app: Sphinx) -> dict[str, object]:
     app.connect("build-finished", _write_search_files)

@@ -15,11 +15,12 @@ $metadataPath = Join-Path $repositoryRoot 'docs/source/seo-metadata.json'
 $socialImagePath = Join-Path $repositoryRoot 'docs/source/_static/versatul-social-preview.png'
 $socialImageOutputPath = Join-Path $HtmlRoot '_static/versatul-social-preview.png'
 $sitemapPath = Join-Path $HtmlRoot 'sitemap-pages.xml'
+$robotsPath = Join-Path $HtmlRoot 'robots.txt'
 $ExpectedBaseUrl = $ExpectedBaseUrl.TrimEnd('/') + '/'
 if (-not (Test-Path -LiteralPath $socialImagePath)) {
     throw "Social preview image does not exist: $socialImagePath"
 }
-foreach ($requiredPath in @($HtmlRoot, $inventoryPath, $metadataPath, $socialImageOutputPath, $sitemapPath)) {
+foreach ($requiredPath in @($HtmlRoot, $inventoryPath, $metadataPath, $socialImageOutputPath, $sitemapPath, $robotsPath)) {
     if (-not (Test-Path -LiteralPath $requiredPath)) {
         throw "Required search metadata input does not exist: $requiredPath"
     }
@@ -137,4 +138,17 @@ if ($uniqueSitemapUrls.Contains($ExpectedBaseUrl) -or $uniqueSitemapUrls.Contain
     throw 'The documentation sitemap must leave the root document to Read the Docs and use its canonical URL.'
 }
 
-Write-Output "Search metadata, social previews, structured data, and sitemap passed for $($packages.Count) package pages across $($sitemapUrls.Count) documentation URLs."
+$robots = [System.IO.File]::ReadAllText($robotsPath)
+if ($robots -notmatch '(?m)^User-agent: \*\s*$' -or $robots -notmatch '(?m)^Allow: /\s*$') {
+    throw 'Generated robots.txt must allow crawlers to index documentation.'
+}
+$baseUri = [Uri]$ExpectedBaseUrl
+$expectedRootSitemap = '{0}://{1}/sitemap.xml' -f $baseUri.Scheme, $baseUri.Authority
+$expectedPageSitemap = $ExpectedBaseUrl + 'sitemap-pages.xml'
+foreach ($expectedSitemap in @($expectedRootSitemap, $expectedPageSitemap)) {
+    if ($robots -notmatch ('(?m)^Sitemap: ' + [regex]::Escape($expectedSitemap) + '\s*$')) {
+        throw "Generated robots.txt is missing sitemap URL $expectedSitemap."
+    }
+}
+
+Write-Output "Search metadata, social previews, structured data, robots.txt, and sitemap passed for $($packages.Count) package pages across $($sitemapUrls.Count) documentation URLs."
