@@ -20,14 +20,29 @@ Use this workflow when you need to:
 2. Standardize how commands, parameters, and mapping are handled.
 3. Stay provider-agnostic unless a SQL Server-specific need is proven.
 
-Packages To Install
--------------------
+Prerequisites and Tested Versions
+---------------------------------
 
-.. code-block:: console
+- Install a .NET SDK that supports the target framework. The sample projects target ``net8.0``, ``net9.0``, and ``net10.0``; the documentation workflow validates all three.
+- The runnable sample uses a shared in-memory SQLite database. No database server, credentials, or network service is required.
 
-   dotnet add package VersaTul.Data.Sql
-   dotnet add package VersaTul.Configurations
-   dotnet add package VersaTul.Configuration.Defaults
+The runnable sample's pinned package versions are:
+
+.. list-table:: Tested SQL data-access sample packages
+   :header-rows: 1
+
+   * - Package
+     - Version
+     - Role
+   * - ``VersaTul.Data.Sql``
+     - ``2.0.21``
+     - Provider-agnostic command execution
+   * - ``VersaTul.Configurations``
+     - ``1.0.18``
+     - Typed configuration settings
+   * - ``Microsoft.Data.Sqlite``
+     - ``10.0.13``
+     - In-memory ADO.NET provider used by the sample
 
 Step 1: Configure The Connection
 --------------------------------

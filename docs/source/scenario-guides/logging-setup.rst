@@ -14,13 +14,35 @@ Use this workflow when you need to:
 2. Capture exceptions and normal events through one shared contract.
 3. Persist logs locally with rolling and retention support.
 
-Packages To Install
--------------------
+Prerequisites and Tested Versions
+---------------------------------
 
-.. code-block:: console
+- Install a .NET SDK that supports the target framework. The sample projects target ``net8.0``, ``net9.0``, and ``net10.0``; the documentation workflow validates all three.
+- The runnable sample writes to a temporary local directory. It needs no logging service, credentials, or production filesystem path.
 
-   dotnet add package VersaTul.Logger
-   dotnet add package VersaTul.Logger.File
+The runnable sample pins these package versions:
+
+.. list-table:: Tested file-logging sample packages
+   :header-rows: 1
+
+   * - Package
+     - Version
+     - Role
+   * - ``VersaTul.Logger``
+     - ``1.0.11``
+     - Shared logging contract, payload, and parser
+   * - ``VersaTul.Logger.File``
+     - ``1.0.32``
+     - File sink
+   * - ``VersaTul.Configurations``
+     - ``1.0.18``
+     - File logger settings
+   * - ``VersaTul.Handler.File``
+     - ``1.0.21``
+     - File and directory operations
+   * - ``VersaTul.Utilities``
+     - ``1.0.16``
+     - Shared formatting utilities
 
 Step 1: Define The File Logger Configuration
 --------------------------------------------

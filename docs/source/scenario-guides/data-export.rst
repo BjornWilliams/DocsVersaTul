@@ -18,14 +18,32 @@ Use this workflow when you need to:
 2. Control the shape of exported columns without renaming your model properties.
 3. Keep export formatting decisions near the model instead of scattering them through file-writing code.
 
-Packages To Install
--------------------
+Prerequisites and Tested Versions
+---------------------------------
 
-.. code-block:: console
+- Install a .NET SDK that supports the target framework. The sample projects target ``net8.0``, ``net9.0``, and ``net10.0``; the documentation workflow validates all three.
+- The runnable sample writes files under a unique temporary directory and removes it when finished. It needs no external service or credentials.
 
-   dotnet add package VersaTul.Collection.Streamers
-   dotnet add package VersaTul.Display.Attributes
-   dotnet add package VersaTul.Object.Converters
+The runnable sample's direct package dependencies use these released versions:
+
+.. list-table:: Tested data-export sample packages
+   :header-rows: 1
+
+   * - Package
+     - Version
+     - Role
+   * - ``VersaTul.Collection.Streamers``
+     - ``1.0.36``
+     - CSV streaming and file creation
+   * - ``VersaTul.Object.Converters``
+     - ``1.0.15``
+     - Object flattening and display-aware conversion
+   * - ``VersaTul.Handler.File``
+     - ``1.0.21``
+     - File utilities used by the streamer
+   * - ``VersaTul.Utilities``
+     - ``1.0.16``
+     - Shared escaping and formatting utilities
 
 Step 1: Annotate The Export Model
 ---------------------------------

@@ -18,14 +18,28 @@ Use this workflow when you need to:
 2. Reuse the same import approach for one file or many files.
 3. Keep parsing concerns separate from database upload concerns.
 
-Packages To Install
--------------------
+Prerequisites and Tested Versions
+---------------------------------
 
-.. code-block:: console
+- Install a .NET SDK that supports the target framework. The sample projects target ``net8.0``, ``net9.0``, and ``net10.0``; the documentation workflow validates all three.
+- The runnable sample reads a checked-in CSV and prepares a ``CopyDetail`` mapping. It deliberately does not connect to SQL Server, so it needs no server or credentials.
 
-   dotnet add package VersaTul.Data.FileReader
-   dotnet add package VersaTul.Data.Bulk
-   dotnet add package VersaTul.Data.MsSql
+The runnable sample pins these package versions:
+
+.. list-table:: Tested file-import sample packages
+   :header-rows: 1
+
+   * - Package
+     - Version
+     - Role
+   * - ``VersaTul.Data.FileReader``
+     - ``1.0.9``
+     - CSV reader
+   * - ``VersaTul.Data.Bulk``
+     - ``1.0.11``
+     - Copy detail and column mapping
+
+For an actual SQL Server upload, add ``VersaTul.Data.MsSql`` version ``2.0.20`` and configure a connection outside source control. That optional upload package is not used by the runnable sample.
 
 Why These Packages Together
 ---------------------------
