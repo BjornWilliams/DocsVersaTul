@@ -432,6 +432,18 @@ Inventory
      - ``literalinclude:: ../samples/Packages/VersaTul.Handler.File/ExpectedOutput.txt``
      - **Executed**
      - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
+   * - ``index.rst#1``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - The command is built and run as the GettingStarted sample on net8.0, net9.0, and net10.0; console instructions are not compiled as C# source.
+   * - ``index.rst#2``
+     - ``literalinclude:: ../samples/GettingStarted/Program.cs``
+     - **Executed**
+     - The canonical GettingStarted program is built and run on net8.0, net9.0, and net10.0; stdout is checked against ExpectedOutput.txt.
+   * - ``index.rst#3``
+     - ``literalinclude:: ../samples/GettingStarted/ExpectedOutput.txt``
+     - **Executed**
+     - Compared with stdout from the canonical GettingStarted sample after it is built and run on net8.0, net9.0, and net10.0.
    * - ``logger-file.rst#1``
      - ``code-block:: console``
      - **Configuration-only**

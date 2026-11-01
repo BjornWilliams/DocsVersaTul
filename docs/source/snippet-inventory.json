@@ -927,6 +927,33 @@
       "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
+      "id": "index.rst#1",
+      "file": "index.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "The command is built and run as the GettingStarted sample on net8.0, net9.0, and net10.0; console instructions are not compiled as C# source."
+    },
+    {
+      "id": "index.rst#2",
+      "file": "index.rst",
+      "ordinal": 2,
+      "directive": "literalinclude",
+      "argument": "../samples/GettingStarted/Program.cs",
+      "classification": "executed",
+      "verification": "The canonical GettingStarted program is built and run on net8.0, net9.0, and net10.0; stdout is checked against ExpectedOutput.txt."
+    },
+    {
+      "id": "index.rst#3",
+      "file": "index.rst",
+      "ordinal": 3,
+      "directive": "literalinclude",
+      "argument": "../samples/GettingStarted/ExpectedOutput.txt",
+      "classification": "executed",
+      "verification": "Compared with stdout from the canonical GettingStarted sample after it is built and run on net8.0, net9.0, and net10.0."
+    },
+    {
       "id": "logger-file.rst#1",
       "file": "logger-file.rst",
       "ordinal": 1,
