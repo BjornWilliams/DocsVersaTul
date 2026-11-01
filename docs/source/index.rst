@@ -7,14 +7,7 @@ VersaTul Documentation
 
 **VersaTul** is a collection of focused .NET libraries for common application work such as configuration, data access, import and export flows, logging, mail delivery, and scheduled processing.
 
-It is designed for teams that want reusable building blocks without committing to one large framework. You can start with a single NuGet package for one concrete problem and add adjacent packages only when you need them.
-
-If you are evaluating the library for the first time, the fastest path is:
-
-1. Pick the developer job you need to solve.
-2. Start with one package or one small package combination.
-3. Follow a short quickstart or scenario path.
-4. Expand into the package reference only after the first workflow is working.
+It is designed for teams that want reusable building blocks without committing to one large framework. For a first evaluation, choose one problem below and follow its guide; add adjacent packages only when the workflow needs them.
 
 Start By Problem
 ----------------
@@ -31,42 +24,15 @@ Use these paths if you want the quickest route to a relevant package.
 Start In 5 Minutes
 ------------------
 
-If you want a fast first win, start with the onboarding path instead of browsing the full catalog.
+Choose a problem above and follow its linked guide to a first working result. Use :doc:`package-catalog` when you are ready to compare related packages.
 
-1. Read :doc:`getting-started` for a copy-paste configuration quickstart.
-2. Read :doc:`package-selection` for an intent-first guide to the package ecosystem.
-3. Use :doc:`scenario-guides/index` for end-to-end workflows that combine multiple packages.
-4. Use :doc:`package-catalog` after you know the workflow or package family you want.
+Package Selection Notes
+-----------------------
 
-Adoption FAQ
-------------
+Keep the first workflow small:
 
-Common evaluation answers:
-
-1. Start with one package, not the whole ecosystem.
-2. Prefer :doc:`sql` when provider flexibility matters and :doc:`mssql` when SQL Server-specific behavior is the real requirement.
-3. Use :doc:`logger` with a sink package such as :doc:`logger-file`; the base logger package is not a sink by itself.
-4. Use :doc:`recommended-paths` if you want a package starting set by app type.
-5. Use :doc:`faq` if you want the broader adoption and selection guidance in one place.
-
-What To Read Next
------------------
-
-1. Read :doc:`getting-started` if you want the smallest copy-paste success case first.
-2. Read :doc:`recommended-paths` if you already know your application shape.
-3. Read :doc:`scenario-guides/index` if your main question is how packages combine in a real workflow.
-4. Read :doc:`package-selection` if you still need help narrowing the first package family.
-
-Popular Workflows
------------------
-
-These are the highest-value package combinations for first-time adopters.
-
-1. Configuration bootstrap: start with :doc:`getting-started` and then add ``VersaTul.Configuration.Defaults``.
-2. SQL-backed service: follow :doc:`scenario-guides/sql-data-access`.
-3. File import pipeline: follow :doc:`scenario-guides/file-import`.
-4. Export pipeline: follow :doc:`scenario-guides/data-export`.
-5. Logging setup: follow :doc:`scenario-guides/logging-setup`.
+1. Prefer :doc:`sql` when provider flexibility matters and :doc:`mssql` when SQL Server-specific behavior is required.
+2. Pair :doc:`logger` with a sink package such as :doc:`logger-file`; the base logger package is not a sink by itself.
 
 How VersaTul Is Organized
 -------------------------
