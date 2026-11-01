@@ -121,11 +121,11 @@ Cleanup, Cancellation, and Production Notes
 Runnable Sample
 ---------------
 
-The complete `FileLogging project <https://github.com/BjornWilliams/DocsVersaTul/tree/main/docs/samples/FileLogging>`_ writes to a temporary directory and reads the resulting log record. Clone the repository and run it from the repository root:
+The complete `FileLogging project <https://github.com/BjornWilliams/DocsVersaTul/tree/VT-Upgrade-And-Revisions/docs/samples/FileLogging>`_ writes to a temporary directory and reads the resulting log record. Clone the audit branch and run it from the repository root:
 
 .. code-block:: console
 
-   git clone https://github.com/BjornWilliams/DocsVersaTul.git
+   git clone --branch VT-Upgrade-And-Revisions https://github.com/BjornWilliams/DocsVersaTul.git
    cd DocsVersaTul
    dotnet run --project docs/samples/FileLogging/FileLogging.csproj --framework net8.0
 
@@ -134,6 +134,7 @@ The project also targets ``net9.0`` and ``net10.0``; substitute either framework
 The sample logs this input event:
 
 .. code-block:: csharp
+   :caption: Input event for the runnable sample.
 
    new LogInfo(LogLevel.Information, "Startup", "Application started")
 
@@ -182,15 +183,7 @@ Common Mistakes
 2. Mixing sink-specific behavior directly into application code instead of relying on the shared contract.
 3. Waiting to add logging until after background jobs, imports, or scheduled tasks are already hard to debug.
 
-Related Package Pages
----------------------
+Next Step
+---------
 
-1. :doc:`/logger`
-2. :doc:`/logger-file`
-
-What To Read Next
------------------
-
-1. Read :doc:`/logger` for the shared contracts and parser details.
-2. Read :doc:`/logger-file` for configuration properties and rolling behavior.
-3. If email or HTTP delivery matters more than local files, compare :doc:`/logger-mail` and :doc:`/logger-web`.
+For the shared logger contracts and parser details, continue with :doc:`/logger`.

@@ -133,11 +133,11 @@ Cleanup, Cancellation, and Production Notes
 Runnable Sample
 ---------------
 
-The complete `DataExport project <https://github.com/BjornWilliams/DocsVersaTul/tree/main/docs/samples/DataExport>`_ creates CSV and JSON files from a sample object. Clone the repository and run it from the repository root:
+The complete `DataExport project <https://github.com/BjornWilliams/DocsVersaTul/tree/VT-Upgrade-And-Revisions/docs/samples/DataExport>`_ creates CSV and JSON files from a sample object. Clone the audit branch and run it from the repository root:
 
 .. code-block:: console
 
-   git clone https://github.com/BjornWilliams/DocsVersaTul.git
+   git clone --branch VT-Upgrade-And-Revisions https://github.com/BjornWilliams/DocsVersaTul.git
    cd DocsVersaTul
    dotnet run --project docs/samples/DataExport/DataExport.csproj --framework net8.0
 
@@ -146,6 +146,7 @@ The project also targets ``net9.0`` and ``net10.0``; substitute either framework
 The deterministic input is one person object:
 
 .. code-block:: csharp
+   :caption: Input fixture for the runnable sample.
 
    new Person
    {
@@ -181,16 +182,7 @@ Common Mistakes
 2. Encoding formatting rules in ad hoc exporter code instead of display metadata.
 3. Forgetting that direct-to-disk writing is often the better choice for large files.
 
-Related Package Pages
----------------------
+Next Step
+---------
 
-1. :doc:`/streamers`
-2. :doc:`/display-attributes`
-3. :doc:`/converters`
-
-What To Read Next
------------------
-
-1. Read :doc:`/streamers` for format and file-writing options.
-2. Read :doc:`/display-attributes` for metadata and custom formatter details.
-3. Read :doc:`/converters` if your export input contains nested objects or collections that must be flattened first.
+For supported export formats and direct-to-file options, continue with :doc:`/streamers`.

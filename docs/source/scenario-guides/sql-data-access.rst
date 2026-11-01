@@ -165,11 +165,11 @@ Cleanup, Cancellation, and Production Notes
 Runnable Sample
 ---------------
 
-The complete `SqlDataAccess project <https://github.com/BjornWilliams/DocsVersaTul/tree/main/docs/samples/SqlDataAccess>`_ creates and queries an ephemeral SQLite database. Clone the repository and run it from the repository root:
+The complete `SqlDataAccess project <https://github.com/BjornWilliams/DocsVersaTul/tree/VT-Upgrade-And-Revisions/docs/samples/SqlDataAccess>`_ creates and queries an ephemeral SQLite database. Clone the audit branch and run it from the repository root:
 
 .. code-block:: console
 
-   git clone https://github.com/BjornWilliams/DocsVersaTul.git
+   git clone --branch VT-Upgrade-And-Revisions https://github.com/BjornWilliams/DocsVersaTul.git
    cd DocsVersaTul
    dotnet run --project docs/samples/SqlDataAccess/SqlDataAccess.csproj --framework net8.0
 
@@ -206,17 +206,7 @@ Common Mistakes
 2. Keeping SQL statements in controllers, handlers, or unrelated service layers.
 3. Treating connection configuration as an incidental detail instead of part of the data-access contract.
 
-Related Package Pages
----------------------
+Next Step
+---------
 
-1. :doc:`/sql`
-2. :doc:`/mssql`
-3. :doc:`/configuration`
-4. :doc:`/configuration-defaults`
-
-What To Read Next
------------------
-
-1. Read :doc:`/sql` for the full relational package surface.
-2. Read :doc:`/mssql` if SQL Server-specific behavior is the next requirement.
-3. Read :doc:`file-import` if the next step is ingesting flat-file data into a relational store.
+When you need SQL Server-specific behavior, continue with :doc:`/mssql`.

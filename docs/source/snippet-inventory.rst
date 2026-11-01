@@ -276,6 +276,18 @@ Inventory
      - ``literalinclude:: ../samples/Packages/VersaTul.Display.Attributes/ExpectedOutput.txt``
      - **Executed**
      - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
+   * - ``dotnet-10-upgrade.rst#1``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - SDK and runtime inspection commands; not compiled as C# source.
+   * - ``dotnet-10-upgrade.rst#2``
+     - ``code-block:: xml``
+     - **Configuration-only**
+     - Target-framework configuration snippet; not compiled as C# source.
+   * - ``dotnet-10-upgrade.rst#3``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Standard restore, build, and test commands; not compiled as C# source.
    * - ``efcore.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -645,9 +657,9 @@ Inventory
      - **Executed**
      - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
    * - ``scenario-guides/data-export.rst#1``
-     - ``code-block:: console``
-     - **Configuration-only**
-     - Command, fixture data, or static text/output; not compiled as C# source.
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/data-export.rst#2``
      - ``code-block:: csharp``
      - **Pseudocode**
@@ -657,21 +669,25 @@ Inventory
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/data-export.rst#4``
-     - ``code-block:: csharp``
-     - **Pseudocode**
-     - Illustrative C# API fragment; intentionally not independently compiled or run.
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Command, fixture data, or static text/output; not compiled as C# source.
    * - ``scenario-guides/data-export.rst#5``
+     - ``code-block:: csharp``
+     - **Configuration-only**
+     - Object initializer fixture matches the canonical DataExport sample input; the sample output is checked on each supported TFM.
+   * - ``scenario-guides/data-export.rst#6``
      - ``literalinclude:: ../../samples/DataExport/Program.cs``
      - **Executed**
      - Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked.
-   * - ``scenario-guides/data-export.rst#6``
+   * - ``scenario-guides/data-export.rst#7``
      - ``literalinclude:: ../../samples/DataExport/ExpectedOutput.txt``
      - **Executed**
      - Compared with the corresponding executed sample stdout on all directly supported TFMs.
    * - ``scenario-guides/file-import.rst#1``
-     - ``code-block:: console``
-     - **Configuration-only**
-     - Command, fixture data, or static text/output; not compiled as C# source.
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/file-import.rst#2``
      - ``code-block:: csharp``
      - **Pseudocode**
@@ -681,9 +697,9 @@ Inventory
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/file-import.rst#4``
-     - ``code-block:: csharp``
-     - **Pseudocode**
-     - Illustrative C# API fragment; intentionally not independently compiled or run.
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Command, fixture data, or static text/output; not compiled as C# source.
    * - ``scenario-guides/file-import.rst#5``
      - ``literalinclude:: ../../samples/FileImport/Program.cs``
      - **Executed**
@@ -697,9 +713,9 @@ Inventory
      - **Executed**
      - Compared with the corresponding executed sample stdout on all directly supported TFMs.
    * - ``scenario-guides/logging-setup.rst#1``
-     - ``code-block:: console``
-     - **Configuration-only**
-     - Command, fixture data, or static text/output; not compiled as C# source.
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/logging-setup.rst#2``
      - ``code-block:: csharp``
      - **Pseudocode**
@@ -709,21 +725,29 @@ Inventory
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/logging-setup.rst#4``
-     - ``code-block:: csharp``
-     - **Pseudocode**
-     - Illustrative C# API fragment; intentionally not independently compiled or run.
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Command, fixture data, or static text/output; not compiled as C# source.
    * - ``scenario-guides/logging-setup.rst#5``
+     - ``code-block:: csharp``
+     - **Configuration-only**
+     - Log event fixture matches the canonical FileLogging sample input; the sample output is checked on each supported TFM.
+   * - ``scenario-guides/logging-setup.rst#6``
+     - ``code-block:: text``
+     - **Configuration-only**
+     - Stable log fields asserted by the canonical FileLogging sample; the sample output is checked on each supported TFM.
+   * - ``scenario-guides/logging-setup.rst#7``
      - ``literalinclude:: ../../samples/FileLogging/Program.cs``
      - **Executed**
      - Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked.
-   * - ``scenario-guides/logging-setup.rst#6``
+   * - ``scenario-guides/logging-setup.rst#8``
      - ``literalinclude:: ../../samples/FileLogging/ExpectedOutput.txt``
      - **Executed**
      - Compared with the corresponding executed sample stdout on all directly supported TFMs.
    * - ``scenario-guides/sql-data-access.rst#1``
-     - ``code-block:: console``
-     - **Configuration-only**
-     - Command, fixture data, or static text/output; not compiled as C# source.
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/sql-data-access.rst#2``
      - ``code-block:: csharp``
      - **Pseudocode**
@@ -733,14 +757,18 @@ Inventory
      - **Pseudocode**
      - Illustrative C# API fragment; intentionally not independently compiled or run.
    * - ``scenario-guides/sql-data-access.rst#4``
-     - ``code-block:: csharp``
-     - **Pseudocode**
-     - Illustrative C# API fragment; intentionally not independently compiled or run.
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Command, fixture data, or static text/output; not compiled as C# source.
    * - ``scenario-guides/sql-data-access.rst#5``
+     - ``code-block:: sql``
+     - **Configuration-only**
+     - SQL input fixture matches the commands executed by the canonical SqlDataAccess sample; the sample output is checked on each supported TFM.
+   * - ``scenario-guides/sql-data-access.rst#6``
      - ``literalinclude:: ../../samples/SqlDataAccess/Program.cs``
      - **Executed**
      - Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked.
-   * - ``scenario-guides/sql-data-access.rst#6``
+   * - ``scenario-guides/sql-data-access.rst#7``
      - ``literalinclude:: ../../samples/SqlDataAccess/ExpectedOutput.txt``
      - **Executed**
      - Compared with the corresponding executed sample stdout on all directly supported TFMs.

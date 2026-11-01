@@ -126,11 +126,11 @@ Cleanup, Cancellation, and Production Notes
 Runnable Sample
 ---------------
 
-The complete `FileImport project <https://github.com/BjornWilliams/DocsVersaTul/tree/main/docs/samples/FileImport>`_ reads its checked-in fixture and prepares the column mapping. Clone the repository and run it from the repository root:
+The complete `FileImport project <https://github.com/BjornWilliams/DocsVersaTul/tree/VT-Upgrade-And-Revisions/docs/samples/FileImport>`_ reads its checked-in fixture and prepares the column mapping. Clone the audit branch and run it from the repository root:
 
 .. code-block:: console
 
-   git clone https://github.com/BjornWilliams/DocsVersaTul.git
+   git clone --branch VT-Upgrade-And-Revisions https://github.com/BjornWilliams/DocsVersaTul.git
    cd DocsVersaTul
    dotnet run --project docs/samples/FileImport/FileImport.csproj --framework net8.0
 
@@ -177,16 +177,7 @@ Common Mistakes
 2. Starting with ``VersaTul.Data.FileReader`` but not planning the upload target.
 3. Choosing ``VersaTul.Data.Sql`` instead of ``VersaTul.Data.MsSql`` when SQL Server bulk upload is the real requirement.
 
-Related Package Pages
----------------------
+Next Step
+---------
 
-1. :doc:`/file-reader`
-2. :doc:`/bulk`
-3. :doc:`/mssql`
-
-What To Read Next
------------------
-
-1. Read :doc:`/file-reader` if you need more detail on file options and directory reads.
-2. Read :doc:`/bulk` if you want deeper mapping and result-model detail.
-3. Read :doc:`sql-data-access` if your next step is building a reusable relational data-service layer around the import workflow.
+To upload the mapped rows to SQL Server, continue with :doc:`/mssql`.

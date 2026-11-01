@@ -576,6 +576,33 @@
       "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
+      "id": "dotnet-10-upgrade.rst#1",
+      "file": "dotnet-10-upgrade.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "SDK and runtime inspection commands; not compiled as C# source."
+    },
+    {
+      "id": "dotnet-10-upgrade.rst#2",
+      "file": "dotnet-10-upgrade.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "xml",
+      "classification": "configuration-only",
+      "verification": "Target-framework configuration snippet; not compiled as C# source."
+    },
+    {
+      "id": "dotnet-10-upgrade.rst#3",
+      "file": "dotnet-10-upgrade.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Standard restore, build, and test commands; not compiled as C# source."
+    },
+    {
       "id": "efcore.rst#1",
       "file": "efcore.rst",
       "ordinal": 1,
@@ -1408,9 +1435,9 @@
       "file": "scenario-guides/data-export.rst",
       "ordinal": 1,
       "directive": "code-block",
-      "argument": "console",
-      "classification": "configuration-only",
-      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
       "id": "scenario-guides/data-export.rst#2",
@@ -1435,23 +1462,32 @@
       "file": "scenario-guides/data-export.rst",
       "ordinal": 4,
       "directive": "code-block",
-      "argument": "csharp",
-      "classification": "pseudocode",
-      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
     },
     {
       "id": "scenario-guides/data-export.rst#5",
       "file": "scenario-guides/data-export.rst",
       "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "configuration-only",
+      "verification": "Object initializer fixture matches the canonical DataExport sample input; the sample output is checked on each supported TFM."
+    },
+    {
+      "id": "scenario-guides/data-export.rst#6",
+      "file": "scenario-guides/data-export.rst",
+      "ordinal": 6,
       "directive": "literalinclude",
       "argument": "../../samples/DataExport/Program.cs",
       "classification": "executed",
       "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
     },
     {
-      "id": "scenario-guides/data-export.rst#6",
+      "id": "scenario-guides/data-export.rst#7",
       "file": "scenario-guides/data-export.rst",
-      "ordinal": 6,
+      "ordinal": 7,
       "directive": "literalinclude",
       "argument": "../../samples/DataExport/ExpectedOutput.txt",
       "classification": "executed",
@@ -1462,9 +1498,9 @@
       "file": "scenario-guides/file-import.rst",
       "ordinal": 1,
       "directive": "code-block",
-      "argument": "console",
-      "classification": "configuration-only",
-      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
       "id": "scenario-guides/file-import.rst#2",
@@ -1489,9 +1525,9 @@
       "file": "scenario-guides/file-import.rst",
       "ordinal": 4,
       "directive": "code-block",
-      "argument": "csharp",
-      "classification": "pseudocode",
-      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
     },
     {
       "id": "scenario-guides/file-import.rst#5",
@@ -1525,9 +1561,9 @@
       "file": "scenario-guides/logging-setup.rst",
       "ordinal": 1,
       "directive": "code-block",
-      "argument": "console",
-      "classification": "configuration-only",
-      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
       "id": "scenario-guides/logging-setup.rst#2",
@@ -1552,23 +1588,41 @@
       "file": "scenario-guides/logging-setup.rst",
       "ordinal": 4,
       "directive": "code-block",
-      "argument": "csharp",
-      "classification": "pseudocode",
-      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
     },
     {
       "id": "scenario-guides/logging-setup.rst#5",
       "file": "scenario-guides/logging-setup.rst",
       "ordinal": 5,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "configuration-only",
+      "verification": "Log event fixture matches the canonical FileLogging sample input; the sample output is checked on each supported TFM."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#6",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 6,
+      "directive": "code-block",
+      "argument": "text",
+      "classification": "configuration-only",
+      "verification": "Stable log fields asserted by the canonical FileLogging sample; the sample output is checked on each supported TFM."
+    },
+    {
+      "id": "scenario-guides/logging-setup.rst#7",
+      "file": "scenario-guides/logging-setup.rst",
+      "ordinal": 7,
       "directive": "literalinclude",
       "argument": "../../samples/FileLogging/Program.cs",
       "classification": "executed",
       "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
     },
     {
-      "id": "scenario-guides/logging-setup.rst#6",
+      "id": "scenario-guides/logging-setup.rst#8",
       "file": "scenario-guides/logging-setup.rst",
-      "ordinal": 6,
+      "ordinal": 8,
       "directive": "literalinclude",
       "argument": "../../samples/FileLogging/ExpectedOutput.txt",
       "classification": "executed",
@@ -1579,9 +1633,9 @@
       "file": "scenario-guides/sql-data-access.rst",
       "ordinal": 1,
       "directive": "code-block",
-      "argument": "console",
-      "classification": "configuration-only",
-      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
     },
     {
       "id": "scenario-guides/sql-data-access.rst#2",
@@ -1606,23 +1660,32 @@
       "file": "scenario-guides/sql-data-access.rst",
       "ordinal": 4,
       "directive": "code-block",
-      "argument": "csharp",
-      "classification": "pseudocode",
-      "verification": "Illustrative C# API fragment; intentionally not independently compiled or run."
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Command, fixture data, or static text/output; not compiled as C# source."
     },
     {
       "id": "scenario-guides/sql-data-access.rst#5",
       "file": "scenario-guides/sql-data-access.rst",
       "ordinal": 5,
+      "directive": "code-block",
+      "argument": "sql",
+      "classification": "configuration-only",
+      "verification": "SQL input fixture matches the commands executed by the canonical SqlDataAccess sample; the sample output is checked on each supported TFM."
+    },
+    {
+      "id": "scenario-guides/sql-data-access.rst#6",
+      "file": "scenario-guides/sql-data-access.rst",
+      "ordinal": 6,
       "directive": "literalinclude",
       "argument": "../../samples/SqlDataAccess/Program.cs",
       "classification": "executed",
       "verification": "Canonical sample project is built and run on all directly supported TFMs; expected stdout is checked."
     },
     {
-      "id": "scenario-guides/sql-data-access.rst#6",
+      "id": "scenario-guides/sql-data-access.rst#7",
       "file": "scenario-guides/sql-data-access.rst",
-      "ordinal": 6,
+      "ordinal": 7,
       "directive": "literalinclude",
       "argument": "../../samples/SqlDataAccess/ExpectedOutput.txt",
       "classification": "executed",
