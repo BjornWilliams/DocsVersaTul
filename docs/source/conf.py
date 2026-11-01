@@ -28,6 +28,7 @@ versatul_page_metadata = json.loads(seo_metadata_path.read_text(encoding="utf-8"
 versatul_social_image_url = html_baseurl + "_static/versatul-social-preview.png"
 html_context = {
     "versatul_page_metadata": versatul_page_metadata,
+    "versatul_site_baseurl": html_baseurl,
     "versatul_social_image_url": versatul_social_image_url,
 }
 

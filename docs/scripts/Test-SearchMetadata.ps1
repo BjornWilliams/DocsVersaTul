@@ -51,7 +51,8 @@ foreach ($package in $packages) {
     $ogImageMatch = [regex]::Match($html, '<meta\s+property="og:image"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
     $canonicalMatch = [regex]::Match($html, '<link\s+rel="canonical"\s+href="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
     $twitterCardMatch = [regex]::Match($html, '<meta\s+name="twitter:card"\s+content="(?<value>[^"]*)"\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
-    if (-not $titleMatch.Success -or -not $descriptionMatch.Success -or -not $ogTitleMatch.Success -or -not $ogDescriptionMatch.Success -or -not $ogUrlMatch.Success -or -not $ogImageMatch.Success -or -not $canonicalMatch.Success -or -not $twitterCardMatch.Success) {
+    $structuredDataMatch = [regex]::Match($html, '<script\s+type="application/ld\+json">(?<value>.*?)</script>', [System.Text.RegularExpressions.RegexOptions]::Singleline -bor [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    if (-not $titleMatch.Success -or -not $descriptionMatch.Success -or -not $ogTitleMatch.Success -or -not $ogDescriptionMatch.Success -or -not $ogUrlMatch.Success -or -not $ogImageMatch.Success -or -not $canonicalMatch.Success -or -not $twitterCardMatch.Success -or -not $structuredDataMatch.Success) {
         throw "Rendered package page is missing search or social metadata: $pagePath"
     }
 
@@ -70,6 +71,15 @@ foreach ($package in $packages) {
     }
     if ([System.Net.WebUtility]::HtmlDecode($ogUrlMatch.Groups['value'].Value) -ne [System.Net.WebUtility]::HtmlDecode($canonicalMatch.Groups['value'].Value)) {
         throw "Open Graph URL does not match the canonical URL for $($package.PageName)."
+    }
+    $structuredData = $structuredDataMatch.Groups['value'].Value | ConvertFrom-Json
+    if ($structuredData.'@context' -ne 'https://schema.org' -or $structuredData.'@type' -ne 'BreadcrumbList' -or $structuredData.itemListElement.Count -ne 2) {
+        throw "Expected a two-level schema.org BreadcrumbList for $($package.PageName)."
+    }
+    if ($structuredData.itemListElement[0].position -ne 1 -or $structuredData.itemListElement[0].name -ne 'Home' -or
+        $structuredData.itemListElement[1].position -ne 2 -or
+        $structuredData.itemListElement[1].item -ne [System.Net.WebUtility]::HtmlDecode($canonicalMatch.Groups['value'].Value)) {
+        throw "Breadcrumb structured data does not match the visible route and canonical URL for $($package.PageName)."
     }
     $socialImage = [System.Net.WebUtility]::HtmlDecode($ogImageMatch.Groups['value'].Value)
     if ($socialImage -notmatch '^https://[^/]+/.+/_static/versatul-social-preview\.png$') {
