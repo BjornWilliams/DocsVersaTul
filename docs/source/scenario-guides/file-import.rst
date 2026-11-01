@@ -123,7 +123,15 @@ When this workflow is wired correctly:
 Runnable Sample
 ---------------
 
-The complete sample is maintained as a buildable project and included here directly.
+The complete `FileImport project <https://github.com/BjornWilliams/DocsVersaTul/tree/main/docs/samples/FileImport>`_ reads its checked-in fixture and prepares the column mapping. Clone the repository and run it from the repository root:
+
+.. code-block:: console
+
+   git clone https://github.com/BjornWilliams/DocsVersaTul.git
+   cd DocsVersaTul
+   dotnet run --project docs/samples/FileImport/FileImport.csproj --framework net8.0
+
+The project also targets ``net9.0`` and ``net10.0``; substitute either framework in the command to run those targets. The sample source is included below for reference.
 
 .. literalinclude:: ../../samples/FileImport/Program.cs
    :language: csharp
