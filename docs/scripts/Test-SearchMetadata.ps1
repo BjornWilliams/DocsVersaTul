@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$HtmlRoot
+    [string]$HtmlRoot,
+    [string]$ExpectedBaseUrl = 'https://docsversatul.readthedocs.io/en/latest/'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -12,10 +13,13 @@ if (-not $PSBoundParameters.ContainsKey('HtmlRoot')) {
 $inventoryPath = Join-Path $repositoryRoot 'docs/source/package-inventory.json'
 $metadataPath = Join-Path $repositoryRoot 'docs/source/seo-metadata.json'
 $socialImagePath = Join-Path $repositoryRoot 'docs/source/_static/versatul-social-preview.png'
+$socialImageOutputPath = Join-Path $HtmlRoot '_static/versatul-social-preview.png'
+$sitemapPath = Join-Path $HtmlRoot 'sitemap-pages.xml'
+$ExpectedBaseUrl = $ExpectedBaseUrl.TrimEnd('/') + '/'
 if (-not (Test-Path -LiteralPath $socialImagePath)) {
     throw "Social preview image does not exist: $socialImagePath"
 }
-foreach ($requiredPath in @($HtmlRoot, $inventoryPath, $metadataPath)) {
+foreach ($requiredPath in @($HtmlRoot, $inventoryPath, $metadataPath, $socialImageOutputPath, $sitemapPath)) {
     if (-not (Test-Path -LiteralPath $requiredPath)) {
         throw "Required search metadata input does not exist: $requiredPath"
     }
@@ -31,6 +35,7 @@ if (Compare-Object -ReferenceObject $packagePages -DifferenceObject $metadataPag
 
 $titles = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 $descriptions = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+$packageUrls = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($package in $packages) {
     $pagePath = Join-Path $HtmlRoot ($package.PageName + '.html')
     if (-not (Test-Path -LiteralPath $pagePath)) {
@@ -72,6 +77,11 @@ foreach ($package in $packages) {
     if ([System.Net.WebUtility]::HtmlDecode($ogUrlMatch.Groups['value'].Value) -ne [System.Net.WebUtility]::HtmlDecode($canonicalMatch.Groups['value'].Value)) {
         throw "Open Graph URL does not match the canonical URL for $($package.PageName)."
     }
+    $canonicalUrl = [System.Net.WebUtility]::HtmlDecode($canonicalMatch.Groups['value'].Value)
+    $expectedCanonicalUrl = $ExpectedBaseUrl + $package.PageName + '.html'
+    if ($canonicalUrl -ne $expectedCanonicalUrl) {
+        throw "Unexpected canonical URL for $($package.PageName): $canonicalUrl"
+    }
     $structuredData = $structuredDataMatch.Groups['value'].Value | ConvertFrom-Json
     if ($structuredData.'@context' -ne 'https://schema.org' -or $structuredData.'@type' -ne 'BreadcrumbList' -or $structuredData.itemListElement.Count -ne 2) {
         throw "Expected a two-level schema.org BreadcrumbList for $($package.PageName)."
@@ -82,7 +92,8 @@ foreach ($package in $packages) {
         throw "Breadcrumb structured data does not match the visible route and canonical URL for $($package.PageName)."
     }
     $socialImage = [System.Net.WebUtility]::HtmlDecode($ogImageMatch.Groups['value'].Value)
-    if ($socialImage -notmatch '^https://[^/]+/.+/_static/versatul-social-preview\.png$') {
+    $expectedSocialImage = $ExpectedBaseUrl + '_static/versatul-social-preview.png'
+    if ($socialImage -ne $expectedSocialImage) {
         throw "Open Graph image is not an absolute HTTPS brand asset for $($package.PageName): $socialImage"
     }
     if ([System.Net.WebUtility]::HtmlDecode($twitterCardMatch.Groups['value'].Value) -ne 'summary_large_image') {
@@ -97,6 +108,33 @@ foreach ($package in $packages) {
     if (-not $descriptions.Add($description)) {
         throw "Duplicate search description for $($package.PageName)."
     }
+    if (-not $packageUrls.Add($canonicalUrl)) {
+        throw "Duplicate package canonical URL: $canonicalUrl"
+    }
 }
 
-Write-Output "Search and social metadata passed for $($packages.Count) package pages."
+$sitemap = [System.Xml.XmlDocument]::new()
+$sitemap.Load($sitemapPath)
+$sitemapUrls = @($sitemap.SelectNodes('/*[local-name()="urlset"]/*[local-name()="url"]/*[local-name()="loc"]') | ForEach-Object { $_.InnerText })
+if ($sitemapUrls.Count -eq 0) {
+    throw 'Generated sitemap contains no URLs.'
+}
+$uniqueSitemapUrls = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+foreach ($url in $sitemapUrls) {
+    if (-not $url.StartsWith($ExpectedBaseUrl, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Sitemap URL is outside the expected canonical base URL: $url"
+    }
+    if (-not $uniqueSitemapUrls.Add($url)) {
+        throw "Generated sitemap contains a duplicate URL: $url"
+    }
+}
+foreach ($url in $packageUrls) {
+    if (-not $uniqueSitemapUrls.Contains($url)) {
+        throw "Package page is missing from the generated sitemap: $url"
+    }
+}
+if ($uniqueSitemapUrls.Contains($ExpectedBaseUrl) -or $uniqueSitemapUrls.Contains($ExpectedBaseUrl + 'index.html')) {
+    throw 'The documentation sitemap must leave the root document to Read the Docs and use its canonical URL.'
+}
+
+Write-Output "Search metadata, social previews, structured data, and sitemap passed for $($packages.Count) package pages across $($sitemapUrls.Count) documentation URLs."

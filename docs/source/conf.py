@@ -2,6 +2,7 @@
 
 import json
 import os
+import sys
 from pathlib import Path
 
 project = "VersaTul Documentation"
@@ -32,10 +33,13 @@ html_context = {
     "versatul_social_image_url": versatul_social_image_url,
 }
 
+sys.path.insert(0, str(Path(__file__).resolve().parent / "_ext"))
+
 extensions = [
     "sphinx.ext.duration",
     "sphinx.ext.intersphinx",
     "sphinx_search.extension",
+    "versatul_sitemap",
 ]
 
 # Match the local strict build's `-n` cross-reference validation.
