@@ -137,13 +137,13 @@ The project also targets ``net9.0`` and ``net10.0``; substitute either framework
    :language: csharp
    :caption: Program.cs
 
-The sample reads this checked-in CSV fixture:
+The sample input fixture is the checked-in ``people.csv`` file:
 
 .. literalinclude:: ../../samples/FileImport/Fixtures/people.csv
    :language: text
    :caption: people.csv
 
-Its expected console output is:
+The exact expected console output is:
 
 .. literalinclude:: ../../samples/FileImport/ExpectedOutput.txt
    :language: text

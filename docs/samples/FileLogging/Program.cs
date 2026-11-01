@@ -32,7 +32,10 @@ try
         throw new InvalidOperationException("The file did not contain exactly the expected log record.");
     }
 
-    Console.WriteLine("Wrote one log record.");
+    Console.WriteLine("Verified log record fields:");
+    Console.WriteLine("LogLevel: Information");
+    Console.WriteLine("CategoryName: Startup");
+    Console.WriteLine("LogMessage: Application started");
 }
 finally
 {

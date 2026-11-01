@@ -1,1 +1,4 @@
-Wrote one log record.
+Verified log record fields:
+LogLevel: Information
+CategoryName: Startup
+LogMessage: Application started

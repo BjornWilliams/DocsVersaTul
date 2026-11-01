@@ -119,6 +119,20 @@ The complete `FileLogging project <https://github.com/BjornWilliams/DocsVersaTul
 
 The project also targets ``net9.0`` and ``net10.0``; substitute either framework in the command to run those targets. The sample source is included below for reference.
 
+The sample logs this input event:
+
+.. code-block:: csharp
+
+   new LogInfo(LogLevel.Information, "Startup", "Application started")
+
+The log record includes a timestamp, so the sample asserts and prints these stable fields as its deterministic result:
+
+.. code-block:: text
+
+   LogLevel: Information
+   CategoryName: Startup
+   LogMessage: Application started
+
 .. literalinclude:: ../../samples/FileLogging/Program.cs
    :language: csharp
    :caption: Program.cs

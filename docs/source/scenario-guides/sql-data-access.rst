@@ -161,6 +161,13 @@ The complete `SqlDataAccess project <https://github.com/BjornWilliams/DocsVersaT
 
 The project also targets ``net9.0`` and ``net10.0``; substitute either framework in the command to run those targets. The sample source is included below for reference.
 
+The deterministic input fixture creates a ``people`` table and inserts one row:
+
+.. code-block:: sql
+
+   CREATE TABLE people (name TEXT NOT NULL);
+   INSERT INTO people (name) VALUES ('Ada');
+
 .. literalinclude:: ../../samples/SqlDataAccess/Program.cs
    :language: csharp
    :caption: Program.cs

@@ -137,11 +137,17 @@ The complete `DataExport project <https://github.com/BjornWilliams/DocsVersaTul/
 
 The project also targets ``net9.0`` and ``net10.0``; substitute either framework in the command to run those targets. The sample source is included below for reference.
 
+The deterministic input is one person object:
+
+.. code-block:: csharp
+
+   new Person { Name = "Ada", Age = 37 }
+
 .. literalinclude:: ../../samples/DataExport/Program.cs
    :language: csharp
    :caption: Program.cs
 
-Its expected console output and generated-file contents are:
+The exact expected console output, including both generated-file contents, is:
 
 .. literalinclude:: ../../samples/DataExport/ExpectedOutput.txt
    :language: text
