@@ -9,6 +9,20 @@ VersaTul Documentation
 
 It is designed for teams that want reusable building blocks without committing to one large framework. For a first evaluation, choose one problem below and follow its guide; add adjacent packages only when the workflow needs them.
 
+.. list-table:: Package proof at a glance
+   :widths: 23 12 22 23 20
+
+   * - **Targets**
+       Current source directly builds and tests ``net8.0``, ``net9.0``, and ``net10.0``; .NET 10 is recommended for production. :doc:`compatibility` explains the assets in each published version.
+     - **License**
+       `MIT <https://licenses.nuget.org/MIT>`_
+     - **Latest quickstart package**
+       `VersaTul.Configurations 1.0.18 <https://www.nuget.org/packages/VersaTul.Configurations/1.0.18>`_
+     - **Sample and build checks**
+       The `pull-request workflow <https://github.com/BjornWilliams/DocsVersaTul/actions/workflows/documentation-samples.yml>`_ builds the docs and runs output-checked samples on all three target frameworks.
+     - **Source and support**
+       :doc:`repository-access` (sign-in may be required); :doc:`support` (public issue forms).
+
 Start In 5 Minutes
 ------------------
 
