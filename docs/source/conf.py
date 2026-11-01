@@ -1,5 +1,6 @@
 # Configuration file for the Sphinx documentation builder.
 
+import os
 from pathlib import Path
 
 project = "VersaTul Documentation"
@@ -12,6 +13,14 @@ release = release_file.read_text(encoding="utf-8").strip()
 if not release or release.casefold() in {"current", "latest"}:
     raise ValueError(f"Set a dated docs release in {release_file}")
 version = release
+
+# Read the Docs supplies the canonical URL for the version being built. Keep
+# the production URL as the local-build fallback so generated links remain
+# canonical outside Read the Docs too.
+html_baseurl = (
+    os.environ.get("READTHEDOCS_CANONICAL_URL")
+    or "https://docsversatul.readthedocs.io/en/latest/"
+).rstrip("/") + "/"
 
 extensions = [
     "sphinx.ext.duration",
