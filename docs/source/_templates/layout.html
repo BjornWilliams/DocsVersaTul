@@ -1,5 +1,22 @@
 {% extends "!layout.html" %}
 
+{% block htmltitle %}
+  {% set page_metadata = versatul_page_metadata.get(pagename) %}
+  {% if page_metadata %}
+    <title>{{ page_metadata.title|e }}{{ titlesuffix }}</title>
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% set page_metadata = versatul_page_metadata.get(pagename) %}
+  {% if page_metadata %}
+    <meta name="description" content="{{ page_metadata.description|e }}" />
+  {% endif %}
+{% endblock %}
+
 {% block navigation %}
   {{ super() }}
   {% include "project-links.html" %}

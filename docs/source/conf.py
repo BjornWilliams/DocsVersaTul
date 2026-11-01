@@ -1,5 +1,6 @@
 # Configuration file for the Sphinx documentation builder.
 
+import json
 import os
 from pathlib import Path
 
@@ -21,6 +22,10 @@ html_baseurl = (
     os.environ.get("READTHEDOCS_CANONICAL_URL")
     or "https://docsversatul.readthedocs.io/en/latest/"
 ).rstrip("/") + "/"
+
+seo_metadata_path = Path(__file__).with_name("seo-metadata.json")
+versatul_page_metadata = json.loads(seo_metadata_path.read_text(encoding="utf-8"))
+html_context = {"versatul_page_metadata": versatul_page_metadata}
 
 extensions = [
     "sphinx.ext.duration",
