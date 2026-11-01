@@ -167,6 +167,13 @@ The exact expected console output, including both generated-file contents, is:
    :language: text
    :caption: Expected output
 
+Likely Failure Messages and Fixes
+---------------------------------
+
+1. ``error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0.`` — Install the .NET 10 SDK, or run the sample with ``--framework net8.0`` or ``net9.0``.
+2. ``error NU1301: Unable to load the service index for source https://api.nuget.org/v3/index.json.`` — Restore network access or configure the NuGet feed that contains the pinned packages, then rerun ``dotnet restore``.
+3. ``InvalidOperationException: The export files did not match the expected CSV and JSON content.`` — Compare both generated files with the included expected output; check the package pins, display attributes, and JSON options before changing the expected file.
+
 Common Mistakes
 ---------------
 

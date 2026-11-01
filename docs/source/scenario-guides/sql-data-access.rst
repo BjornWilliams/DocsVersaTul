@@ -192,6 +192,13 @@ Its expected console output is:
    :language: text
    :caption: Expected output
 
+Likely Failure Messages and Fixes
+---------------------------------
+
+1. ``error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0.`` — Install the .NET 10 SDK, or run the sample with ``--framework net8.0`` or ``net9.0``.
+2. ``error NU1301: Unable to load the service index for source https://api.nuget.org/v3/index.json.`` — Restore network access or configure the NuGet feed that contains the pinned packages, then rerun ``dotnet restore``.
+3. ``InvalidOperationException: The SQLite round trip returned an unexpected result.`` — Keep the registered SQLite provider and shared in-memory connection string from the sample, and check that the create, insert, and select commands run against the same database.
+
 Common Mistakes
 ---------------
 

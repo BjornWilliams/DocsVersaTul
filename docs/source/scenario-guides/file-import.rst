@@ -163,6 +163,13 @@ You avoid writing:
 2. a custom tabular-to-database mapper, and
 3. a custom SQL Server bulk import wrapper.
 
+Likely Failure Messages and Fixes
+---------------------------------
+
+1. ``error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0.`` — Install the .NET 10 SDK, or run the sample with ``--framework net8.0`` or ``net9.0``.
+2. ``error NU1301: Unable to load the service index for source https://api.nuget.org/v3/index.json.`` — Restore network access or configure the NuGet feed that contains the pinned packages, then rerun ``dotnet restore``.
+3. ``FileNotFoundException: The checked-in people.csv fixture was not copied to the sample output.`` — Run the project file from the sample link and confirm its ``Fixtures/people.csv`` item is copied to the output directory.
+
 Common Mistakes
 ---------------
 

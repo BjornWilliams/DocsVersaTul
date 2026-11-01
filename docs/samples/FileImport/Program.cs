@@ -3,6 +3,13 @@ using VersaTul.Data.FileReader.Readers;
 using ReaderOptions = VersaTul.Data.FileReader.FileOptions;
 
 var fixturePath = Path.Combine(AppContext.BaseDirectory, "Fixtures", "people.csv");
+if (!File.Exists(fixturePath))
+{
+    throw new FileNotFoundException(
+        "The checked-in people.csv fixture was not copied to the sample output.",
+        fixturePath);
+}
+
 using var reader = new CsvFileReader().Read(fixturePath, new ReaderOptions(hasHeader: true));
 
 var mappings = new[]
