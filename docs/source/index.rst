@@ -60,23 +60,14 @@ Use these paths if you want the quickest route to a relevant package.
 5. I need logging in a service or background process: start with :doc:`scenario-guides/logging-setup`.
 6. I need a package starting set for my application type: start with :doc:`recommended-paths`.
 
-Package Selection Notes
------------------------
-
-Keep the first workflow small:
-
-1. Prefer :doc:`sql` when provider flexibility matters and :doc:`mssql` when SQL Server-specific behavior is required.
-2. Pair :doc:`logger` with a sink package such as :doc:`logger-file`; the base logger package is not a sink by itself.
-
-How VersaTul Is Organized
+Why VersaTul Is Different
 -------------------------
 
-The ecosystem is organized as focused NuGet packages that can be used independently or combined to build larger solutions. Across the library set you will find support for:
+VersaTul uses focused packages that teams can combine as a workflow grows:
 
-1. **Foundational application building blocks** such as contracts, configuration, utilities, and object conversion.
-2. **Data access and data movement** including SQL, SQL Server, MongoDB, EF Core, bulk copy, file readers, and caching.
-3. **File, transformation, and processing workflows** including compression, streamers, file handling, display metadata, and pipelines.
-4. **Operational concerns** such as logging, mail delivery, and task scheduling.
+1. **Choose the parts you need.** Start with one package and add adjacent packages only when useful. For logging, :doc:`logger` supplies shared contracts while :doc:`logger-file` adds a concrete file sink.
+2. **Keep contracts separate from implementations.** :doc:`data-contracts` defines repository and unit-of-work contracts. Pair them with :doc:`efcore` when EF Core fits, use :doc:`sql` for provider-agnostic SQL commands, or choose :doc:`mssql` when SQL Server-specific behavior is required.
+3. **Follow practical workflows.** The :doc:`scenario-guides/sql-data-access` sample uses shared in-memory SQLite, :doc:`scenario-guides/file-import` maps a checked-in CSV, and :doc:`scenario-guides/logging-setup` writes to a temporary directory. Their expected outputs are checked by the sample workflow across the three target frameworks.
 
 .. note::
 
