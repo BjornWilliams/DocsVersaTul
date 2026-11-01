@@ -1,0 +1,1052 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Data.MongoDB</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Data.MongoDB.Attributes.CollectionName">
+            <summary>
+            Attribute used to annotate Entities with to override mongo collection name. By default, when this attribute
+            is not specified, the class-name will be used.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Attributes.CollectionName.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the CollectionName class attribute with the desired name.
+            </summary>
+            <param name="name">Name of the collection</param>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Attributes.CollectionName.Name">
+            <summary>
+            Gets the name of the collection.
+            </summary>
+            <value>The name of the collection.</value>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.BaseMap`1">
+            <summary>
+            Represents a set of generic functionality for registering to MongoDB class map.
+            </summary>
+            <typeparam name="TEntity">The entity type of the mapping class.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseMap`1.#ctor(System.String,System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Creates an instance of the <seealso cref="T:VersaTul.Data.MongoDB.BaseMap`1"/>.
+            </summary>
+            <param name="extraElementsAccessor">The property of the derived class to register for holding extra elements.</param>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.BaseMap`1.ExtraElementsAccessor">
+            <summary>
+            Get the object for storing extra elements from mongo database.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.BaseMap`1.CollectionName">
+            <summary>
+            Gets the name of the MongoDb Collection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseMap`1.Register(MongoDB.Bson.Serialization.BsonClassMap{`0})">
+            <summary>
+            Creates and Registers a class map, as well as automaps the class.
+            Also maps for extra elements.
+            </summary>
+            <param name="classMap">The class map object to register to.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseMap`1.RegisterSub``1(System.Action{MongoDB.Bson.Serialization.BsonClassMap{``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Creates and Register a class map for a sub document. With or  without extra element accessors.
+            </summary>
+            <typeparam name="SubEntity">The sub document type of the mapping class.</typeparam>
+            <param name="action">The class mapping method to call.</param>
+            <param name="extraElementsAccessor">Any optional extra element mapping to be added.</param>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.BaseRepository`4">
+            <summary>
+            Represents a set of functionality for working with a MongoDB Database.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+            <typeparam name="TMap">The type used for the Generic class map interface.</typeparam>
+            <typeparam name="TKey">The type used for the entity's Id.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.#ctor(VersaTul.Data.MongoDB.Contracts.IDataConfiguration{`2},`1,`3)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Data.MongoDB.BaseRepository`3"/>
+            </summary>
+            <param name="configuration">The database configuration settings to use.</param>
+            <param name="entityMap">The BsonClass map to use.</param>
+            <param name="conOverride">A database connection string name to use override the default.</param>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.BaseRepository`4.Collection">
+            <summary>
+            Gets the typed collection in MongoDb.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.BaseRepository`4.ElementType">
+            <summary>
+            Gets the type of the element being returned.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.BaseRepository`4.Expression">
+            <summary>
+            Gets the expression tree of the instance.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.BaseRepository`4.Provider">
+            <summary>
+            Gets the query provider of the instance.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Add(`0)">
+            <summary>
+            Adds a single document.
+            </summary>
+            <param name="entity">The instance of the entity to be added.</param>
+            <returns>The updated entity</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Add(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the list of entities to the collection.
+            </summary>
+            <param name="entities">The list of entities to be added</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.AddAsync(`0)">
+            <summary>
+            Adds a single document.
+            </summary>
+            <param name="entity">The instance of the entity to be added.</param>
+            <returns>The task with updated entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.AddAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the list of entities to the collection.
+            </summary>
+            <param name="entities">The list of entities to be added</param>
+            <returns>The awaited task</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Count">
+            <summary>
+            Gets the number of entities in the collection.
+            </summary>
+            <returns>A numeric value.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.CountAsync">
+            <summary>
+            Gets the number of entities in the collection.
+            </summary>
+            <returns>A numeric value.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Delete(`2)">
+            <summary>
+            Deletes a single entity from collection.
+            </summary>
+            <param name="id">The unique key identifier of the entity.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Delete(`0)">
+            <summary>
+            Deletes a single entity from collection.
+            </summary>
+            <param name="entity">The entity to be deleted</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Delete(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Deletes multiple entities from the collection.
+            </summary>
+            <param name="predicate">The condiction on which elements are deleted.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.DeleteAll">
+            <summary>
+            Deletes an entire collection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.DeleteAllAsync">
+            <summary>
+            Deletes an entire collection.
+            </summary>
+            <returns>The result of the delete operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.DeleteAsync(`2)">
+            <summary>
+            Deletes a single entity from collection.
+            </summary>
+            <param name="id">The unique key identifier of the entity.</param>
+            <returns>The result of the delete operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.DeleteAsync(`0)">
+            <summary>
+            Deletes a single entity from collection.
+            </summary>
+            <param name="entity">The entity to be deleted</param>
+            <returns>The result of the delete operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.DeleteAsync(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Deletes multiple entities from the collection.
+            </summary>
+            <param name="predicate">The condiction on which elements are deleted.</param>
+            <returns>The result of the delete operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Exists(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Check if any entity match the given condition.
+            </summary>
+            <param name="predicate">The condiction on which elements are matched</param>
+            <returns>True if found otherwise False.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.ExistsAsync(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Check if any entity match the given condition.
+            </summary>
+            <param name="predicate">The condiction on which elements are matched</param>
+            <returns>The result of the operation,True if found otherwise False.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Find(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Lazy loads any entity that matches given condiction.
+            </summary>
+            <param name="predicate">The condiction by which elements are matched.</param>
+            <returns>A list of matched entities.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Find``1(VersaTul.Contracts.IPredicate{`0},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Returns a projected list for any entity that matches given condition.
+            </summary>
+            <typeparam name="TProjection">The projected output type.</typeparam>
+            <param name="predicate">The condition by which elements are matched.</param>
+            <param name="projection">The projection expression.</param>
+            <returns>A list of projected values.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.FindAsync(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Gets a list containing all the entities matched.
+            </summary>
+            <param name="predicate">The condiction by which elements are matched.</param>
+            <returns>The result of the Find operation.</returns>
+            <remarks>This will pull the entire collection into memory. For Large collection we recommend using <see cref="M:VersaTul.Data.MongoDB.BaseRepository`4.ForEachAsync(VersaTul.Contracts.IPredicate{`0},System.Action{`0})"/> method.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.FindAsync``1(VersaTul.Contracts.IPredicate{`0},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Returns a projected list by the given condition and projection expression.
+            </summary>
+            <typeparam name="TProjection">The projected output type.</typeparam>
+            <param name="predicate">The condition by which elements are matched.</param>
+            <param name="projection">The projection expression.</param>
+            <returns>The projected result of the find operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.ForEachAsync(VersaTul.Contracts.IPredicate{`0},System.Action{`0})">
+            <summary>
+            Finds the entities matching the given condition then loops over the result using the
+            <seealso cref="T:MongoDB.Driver.IAsyncCursor`1"/> internally passing each entity to the given action.
+            </summary>
+            <param name="predicate">The condiction by which elements are matched.</param>
+            <param name="action">The action to be performed on each entity.</param>
+            <returns>The result of the operation as a count of the number of entities found.</returns>
+            <remarks>This is ideal for processing large collections without bring the entire collection into memory.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.GetById(`2)">
+            <summary>
+            Gets an entity for the given identifier.
+            </summary>
+            <param name="id">The unique identifier for the entity.</param>
+            <returns>The matched entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.GetByIdAsync(`2)">
+            <summary>
+            Gets an entity for the given identifier.
+            </summary>
+            <param name="id">The unique identifier for the entity.</param>
+            <returns>The result of the operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.GetEnumerator">
+            <summary>
+            Gets an enumerator that iterates through the collection.
+            </summary>
+            <returns>Returns an enumerator that can be used to iterates through the collection.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Update(`0)">
+            <summary>
+            Updates a single entity.
+            </summary>
+            <param name="entity">The entity to be updated.</param>
+            <returns>The updated entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.Update(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Updates a collection with the given list of entities.
+            </summary>
+            <param name="entities">The entities to update the collection with.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.UpdateAsync(`0)">
+            <summary>
+            Updates a single entity.
+            </summary>
+            <param name="entity">The entity to be updated.</param>
+            <returns>The result of the update operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.UpdateAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Updates a collection with the given list of entities.
+            </summary>
+            <param name="entities">The entities to update the collection with.</param>
+            <returns>The result of the update operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Gets an enumerator that iterates through the collection.
+            </summary>
+            <returns>A simple enumerator.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.GetWriteModels(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Given a list of entities generate a list of ReplaceOneModel update statements.
+            </summary>
+            <param name="entities">The entities to update the collection with.</param>
+            <returns>A list of <seealso cref="T:MongoDB.Driver.WriteModel`1"/> operations.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.ChangeConnection(System.String)">
+            <summary>
+            Update the underlining database collection property to use a different database base on the given connection name.
+            </summary>
+            <param name="connectionName">The connection name that can be found in the underlining configuration.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.ChangeConnection(VersaTul.Data.MongoDB.Connections.MongoConnection)">
+            <summary>
+            Update the underlining database collection property to use a different database base on the given connection string.
+            </summary>
+            <param name="connectionString">The new connection string to use when connecting to database.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`4.SetCollection(System.String)">
+            <summary>
+            Sets the <seealso cref="P:VersaTul.Data.MongoDB.BaseRepository`4.Collection"/> property base on given connection string.
+            </summary>
+            <param name="connectionString"></param>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.BaseRepository`3">
+            <summary>
+            Represents a set of functionality for working with a MongoDB Database.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+            <typeparam name="TMap">The map to used for the entity's bson mappings.</typeparam>
+            <typeparam name="TConOverride">The connection name to use for overriding default connection name.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`3.#ctor(VersaTul.Data.MongoDB.Contracts.IDataConfiguration{System.String},`1,`2)">
+            <summary>
+            Represents a set of functionality for working with a MongoDB Database.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+            <typeparam name="TMap">The map to used for the entity's bson mappings.</typeparam>
+            <typeparam name="TConOverride">The connection name to use for overriding default connection name.</typeparam>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.BaseRepository`2">
+            <summary>
+            Represents a set of functionality for working with a MongoDB Database.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+            <typeparam name="TMap">The map to be used for the entity's bson mappings.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`2.#ctor(VersaTul.Data.MongoDB.Contracts.IDataConfiguration{System.String},`1)">
+            <summary>
+            Represents a set of functionality for working with a MongoDB Database.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+            <typeparam name="TMap">The map to be used for the entity's bson mappings.</typeparam>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.BaseRepository`1">
+            <summary>
+            Represents a set of functionality for working with a MongoDB Database.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.BaseRepository`1.#ctor(VersaTul.Data.MongoDB.Contracts.IDataConfiguration{System.String})">
+            <summary>
+            Represents a set of functionality for working with a MongoDB Database.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1">
+            <summary>
+            Represents the configuration setup needed to connect to a mongoDb.
+            </summary>
+            <typeparam name="TKey">The type of the key used for the mongoDb collection.</typeparam>
+            <param name="configSettings">The key value pair dictionary containing app settings <seealso cref="T:VersaTul.Configurations.ConfigSettings"/>.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.#ctor(VersaTul.Configurations.ConfigSettings)">
+            <summary>
+            Represents the configuration setup needed to connect to a mongoDb.
+            </summary>
+            <typeparam name="TKey">The type of the key used for the mongoDb collection.</typeparam>
+            <param name="configSettings">The key value pair dictionary containing app settings <seealso cref="T:VersaTul.Configurations.ConfigSettings"/>.</param>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.MongoDbConnectionName">
+            <summary>
+            Gets the Connection string name setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.SocketTimeout">
+            <summary>
+            Gets the Socket Timeout setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.ConnectTimeout">
+            <summary>
+            Gets Connection Timeout setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.MaxConnectionIdleTime">
+            <summary>
+            Gets Max Connection Idle Time setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.EnabledSslProtocols">
+            <summary>
+            Gets the default state for using SSL settings.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.WorkingDatabaseName">
+            <summary>
+            Gets the (optional) name of the database on which quires are to be executed.
+            </summary>
+            <remarks>If no value is specified, then the Database name provided in the connection string will be used.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.DbConnectionString">
+            <summary>
+            Gets the ConnectionString for the current application's default configuration.
+            </summary>
+            <returns>The connection string.</returns>
+            <remarks>Uses the default connection name <c>MongoServerSettings.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.DbConnectionString(System.String)">
+            <summary>
+            Gets the ConnectionString for the current application's for the given connection name configuration.
+            </summary>
+            <param name="dBConnectionName">The name of the connection string. Maps to the name attribute.</param>
+            <returns>The connection string.</returns>
+            <remarks>If an empty string is passed then method will default to the classes default connection name <c>DBCon.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetCollection``1(System.String)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and connection string.
+            </summary>
+            <typeparam name="T">The type to get the collection of.</typeparam>
+            <param name="connectionString">The connection string to use to get the collection from.</param>
+            <returns>Returns a MongoCollection from the specified type and connection string</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetCollection``1(System.String,System.String)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and connection string.
+            </summary>
+            <typeparam name="T">The type to get the collection of</typeparam>
+            <param name="connectionString">The connection string to use to get the collection from.</param>
+            <param name="collectionName">The name of the collection to use</param>
+            <returns>Returns a MongoCollection from the specified type and connection string.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetCollection``1(MongoDB.Driver.MongoUrl)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and URL.
+            </summary>
+            <typeparam name="T">The type to get the collection of.</typeparam>
+            <param name="url">The URL to use to get the collection from.</param>
+            <returns>Returns a MongoCollection from the specified type and URL.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetCollection``1(MongoDB.Driver.MongoUrl,System.String)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and URL.
+            </summary>
+            <typeparam name="T">The type to get the collection of.</typeparam>
+            <param name="url">The URL to use to get the collection from.</param>
+            <param name="collectionName">The name of the collection to use.</param>
+            <returns>Returns a MongoCollection from the specified type and URL.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetCollectionName``1">
+            <summary>
+            Determines the collection name for T and assures it is not empty
+            </summary>
+            <typeparam name="T">The type to determine the collection name for.</typeparam>
+            <returns>Returns the collection name for T.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetCollectionNameFromInterface``1">
+            <summary>
+            Determines the collection name from the specified type.
+            </summary>
+            <typeparam name="T">The type to get the collection name from</typeparam>
+            <returns>Returns the collection name from the specified type.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetCollectionNameFromType(System.Type)">
+            <summary>
+            Determines the collection name from the specified type.
+            </summary>
+            <param name="entitytype">The type of the entity to get the collection name from.</param>
+            <returns>Returns the collection name from the specified type.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.GetDatabaseFromUrl(MongoDB.Driver.MongoUrl)">
+            <summary>
+            Creates and returns a MongoDatabase from the specified URL.
+            </summary>
+            <param name="url">The URL to use to get the database from</param>
+            <returns>Returns a MongoDatabase from the specified URL.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Configurations.DataConfiguration`1.LogCommand(VersaTul.Data.MongoDB.Logging.Command)">
+            <summary>
+            Logs the given <seealso cref="T:VersaTul.Data.MongoDB.Logging.Command"/>.
+            </summary>
+            <param name="command">The command to be logged.</param>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Connections.ConnectionNameOverride`1">
+            <summary>
+            Implementation for supporting mongo database connection string override.
+            </summary>
+            <typeparam name="TEnity">The type of the supporting connection</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Connections.ConnectionNameOverride`1.#ctor(System.String)">
+            <summary>
+            Implementation for supporting mongo database connection string override.
+            </summary>
+            <typeparam name="TEnity">The type of the supporting connection</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Connections.ConnectionNameOverride`1.ConnectionName">
+            <summary>
+            Gets the name of the Mongo Database Connection that will be used to override the current database connection.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Connections.MongoConnection">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Data.MongoDB.Connections.MongoConnection"/> class.
+            </summary>
+            <param name="connectionString">The mongo connection string for connecting to the database.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Connections.MongoConnection.#ctor(System.String)">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Data.MongoDB.Connections.MongoConnection"/> class.
+            </summary>
+            <param name="connectionString">The mongo connection string for connecting to the database.</param>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Connections.MongoConnection.ConnectionString">
+            <summary>
+            Gets the mongo database string.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IConnectionOverride`1">
+            <summary>
+            Generic interface for supporting mongo database connection string override.
+            </summary>
+            <typeparam name="TEnity">The supported type for the connection.</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IConnectionOverride`1.ConnectionName">
+            <summary>
+            Gets the name of the MongoDb Connection.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1">
+            <summary>
+            Represents the configuration settings.
+            </summary>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.MongoDbConnectionName">
+            <summary>
+            Gets the Connection string name setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.SocketTimeout">
+            <summary>
+            Gets the Socket Timeout setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.ConnectTimeout">
+            <summary>
+            Gets Connection Timeout setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.MaxConnectionIdleTime">
+            <summary>
+            Gets Max Connection Idle Time setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.EnabledSslProtocols">
+            <summary>
+            Gets the state for using SSL settings.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.WorkingDatabaseName">
+            <summary>
+            Gets the (optional) name of the database on which quires are to be executed.
+            </summary>
+            <remarks>If no value is specified, then the Database name provided in the connection string will be used.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.DbConnectionString">
+            <summary>
+            Gets the ConnectionString for the current application's default configuration.
+            </summary>
+            <returns>The connection string.</returns>
+            <remarks>Uses the default connection name <c>MongoServerSettings.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.DbConnectionString(System.String)">
+            <summary>
+            Gets the ConnectionString for the current application's for the given connection name configuration.
+            </summary>
+            <param name="dBConnectionName">The name of the connection string. Maps to the name attribute.</param>
+            <returns>The connection string.</returns>
+            <remarks>If an empty string is passed then method will default to the classes default connection name <c>DBCon.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetDatabaseFromUrl(MongoDB.Driver.MongoUrl)">
+            <summary>
+            Creates and returns a MongoDatabase from the specified URL.
+            </summary>
+            <param name="url">The URL to use to get the database from</param>
+            <returns>Returns a MongoDatabase from the specified URL</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetCollection``1(System.String)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and connection string.
+            </summary>
+            <typeparam name="T">The type to get the collection of.</typeparam>
+            <param name="connectionString">The connection string to use to get the collection from.</param>
+            <returns>Returns a MongoCollection from the specified type and connection string</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetCollection``1(System.String,System.String)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and connection string.
+            </summary>
+            <typeparam name="T">The type to get the collection of</typeparam>
+            <param name="connectionString">The connection string to use to get the collection from.</param>
+            <param name="collectionName">The name of the collection to use</param>
+            <returns>Returns a MongoCollection from the specified type and connection string.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetCollection``1(MongoDB.Driver.MongoUrl)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and URL.
+            </summary>
+            <typeparam name="T">The type to get the collection of.</typeparam>
+            <param name="url">The URL to use to get the collection from.</param>
+            <returns>Returns a MongoCollection from the specified type and URL.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetCollection``1(MongoDB.Driver.MongoUrl,System.String)">
+            <summary>
+            Creates and returns a MongoCollection from the specified type and URL.
+            </summary>
+            <typeparam name="T">The type to get the collection of.</typeparam>
+            <param name="url">The URL to use to get the collection from.</param>
+            <param name="collectionName">The name of the collection to use.</param>
+            <returns>Returns a MongoCollection from the specified type and URL.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetCollectionName``1">
+            <summary>
+            Determines the collection name for T and assures it is not empty
+            </summary>
+            <typeparam name="T">The type to determine the collection name for.</typeparam>
+            <returns>Returns the collection name for T.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetCollectionNameFromInterface``1">
+            <summary>
+            Determines the collection name from the specified type.
+            </summary>
+            <typeparam name="T">The type to get the collection name from</typeparam>
+            <returns>Returns the collection name from the specified type.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IDataConfiguration`1.GetCollectionNameFromType(System.Type)">
+            <summary>
+            Determines the collection name from the specified type.
+            </summary>
+            <param name="entitytype">The type of the entity to get the collection name from.</param>
+            <returns>Returns the collection name from the specified type.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IEntity`1">
+            <summary>
+            Generic Entity interface.
+            </summary>
+            <typeparam name="TKey">The type used for the entity's Id.</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IEntity`1.Id">
+            <summary>
+            Gets or sets the Id of the Entity.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IEntity">
+            <summary>
+            "Default" Entity interface.
+            </summary>
+            <remarks>Entities are assumed to use strings for Id's.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IEntityMap`1">
+            <summary>
+            Generic class map interface.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IEntityMap`1.CollectionName">
+            <summary>
+            Gets the name of the MongoDb Collection.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IEntityMap`1.ExtraElementsAccessor">
+            <summary>
+            Get the object for storing extra elements from mongo database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IEntityMap`1.Register(MongoDB.Bson.Serialization.BsonClassMap{`0})">
+            <summary>
+            Creates and Registers a class map, as well as automaps the class.
+            Also maps for extra elements.
+            </summary>
+            <param name="classMap">The class map object to register to.</param>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IReader`2">
+            <summary>
+            IReader definition.
+            </summary>
+            <typeparam name="T">The type contained in the repository.</typeparam>
+            <typeparam name="TKey">The type used for the entity's Id.</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Contracts.IReader`2.Collection">
+            <summary>
+            Gets the MongoDB collection (to perform advanced operations).
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReader`2.GetById(`1)">
+            <summary>
+            Returns the T by its given id.
+            </summary>
+            <param name="id">The value representing the ObjectId of the entity to retrieve.</param>
+            <returns>The Entity T</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReader`2.Count">
+            <summary>
+            Counts the total entities in the repository.
+            </summary>
+            <returns>Count of entities in the repository.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReader`2.Exists(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Checks if the entity exists for given predicate.
+            </summary>
+            <param name="predicate">The expression.</param>
+            <returns>True when an entity matching the predicate exists, false otherwise.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReader`2.Find(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Returns a collection of T by its given search criteria.
+            </summary>
+            <param name="predicate">The search criteria to perform.</param>
+            <returns>Collection of T</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReader`2.Find``1(VersaTul.Contracts.IPredicate{`0},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Returns a projected collection by the given search criteria and projection expression.
+            </summary>
+            <typeparam name="TProjection">The projected output type.</typeparam>
+            <param name="predicate">The search criteria to perform.</param>
+            <param name="projection">The projection expression.</param>
+            <returns>Collection of projected values.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IReaderAsync`2">
+            <summary>
+            IReaderAsync definition.
+            </summary>
+            <typeparam name="T">The type contained in the repository.</typeparam>
+            <typeparam name="TKey">The type used for the entity's Id.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReaderAsync`2.GetByIdAsync(`1)">
+            <summary>
+            Returns the T by its given id.
+            </summary>
+            <param name="id">The value representing the ObjectId of the entity to retrieve.</param>
+            <returns>The Task Entity T</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReaderAsync`2.CountAsync">
+            <summary>
+            Counts the total entities in the repository.
+            </summary>
+            <returns>Task long.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReaderAsync`2.ExistsAsync(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Checks if the entity exists for given predicate.
+            </summary>
+            <param name="predicate"> expression.</param>
+            <returns>Task bool</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReaderAsync`2.FindAsync(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+             Returns a collection of T by its given search criteria.
+            </summary>
+            <param name="predicate">The search criteria to perform.</param>
+            <returns>Task collection of T.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReaderAsync`2.FindAsync``1(VersaTul.Contracts.IPredicate{`0},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Returns a projected collection by the given search criteria and projection expression.
+            </summary>
+            <typeparam name="TProjection">The projected output type.</typeparam>
+            <param name="predicate">The search criteria to perform.</param>
+            <param name="projection">The projection expression.</param>
+            <returns>Task collection of projected values.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IReaderAsync`2.ForEachAsync(VersaTul.Contracts.IPredicate{`0},System.Action{`0})">
+            <summary>
+            Finds documents base on the given search criteria.
+            </summary>
+            <param name="predicate">The search criteria to perform.</param>
+            <param name="action">A method that accepts the type of T.</param>
+            <returns>The number of rows processed.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IRepository`2">
+            <summary>
+            IRepository definition.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+            <typeparam name="TKey">The type used for the entity's Id.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IRepository`2.ChangeConnection(System.String)">
+            <summary>
+            Update the underlining database collection property to use a different database base on the given connection name.
+            </summary>
+            <param name="connectionName">The connection name that can be found in the underlining configuration.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IRepository`2.ChangeConnection(VersaTul.Data.MongoDB.Connections.MongoConnection)">
+            <summary>
+            Update the underlining database collection property to use a different database base on the given connection string.
+            </summary>
+            <param name="mongoConnection">The new connection string to use when connecting to database.</param>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IRepository`1">
+            <summary>
+            IRepository definition.
+            </summary>
+            <typeparam name="TEntity">The type contained in the repository.</typeparam>
+            <remarks>Entities are assumed to use strings for Id's.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IWriter`2">
+            <summary>
+            IWriter definition.
+            </summary>
+            <typeparam name="T">The type contained in the repository.</typeparam>
+            <typeparam name="TKey">The type used for the entity's Id.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.Add(`0)">
+            <summary>
+            Adds the new entity in the repository.
+            </summary>
+            <param name="entity">The entity to add.</param>
+            <returns>The added entity including its new ObjectId.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.Add(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the new entities in the repository.
+            </summary>
+            <param name="entities">The entities of type T.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.Update(`0)">
+            <summary>
+            Upserts an entity.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns>The updated entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.Update(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Upserts the entities.
+            </summary>
+            <param name="entities">The entities to update.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.Delete(`1)">
+            <summary>
+            Deletes an entity from the repository by its id.
+            </summary>
+            <param name="id">The entity's id.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.Delete(`0)">
+            <summary>
+            Deletes the given entity.
+            </summary>
+            <param name="entity">The entity to delete.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.Delete(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Deletes the entities matching the predicate.
+            </summary>
+            <param name="predicate">The expression.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriter`2.DeleteAll">
+            <summary>
+            Deletes all entities in the repository.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2">
+            <summary>
+            IWriterAsync definition.
+            </summary>
+            <typeparam name="T">The type contained in the repository.</typeparam>
+            <typeparam name="TKey">The type used for the entity's Id.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.AddAsync(`0)">
+            <summary>
+            Adds the new entity in the repository.
+            </summary>
+            <param name="entity">The entity to add.</param>
+            <returns>The added entity including its new ObjectId.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.AddAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the new entities in the repository.
+            </summary>
+            <param name="entities">The entities of type T.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.UpdateAsync(`0)">
+            <summary>
+            Upserts an entity.
+            </summary>
+            <param name="entity"></param>
+            <returns>Task of T.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.UpdateAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Upserts the entities.
+            </summary>
+            <param name="entities">The entities to update.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.DeleteAsync(`1)">
+            <summary>
+            Deletes an entity from the repository by its id.
+            </summary>
+            <param name="id">The entity to delete.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.DeleteAsync(`0)">
+            <summary>
+            Deletes the given entity.
+            </summary>
+            <param name="entity">The entity to delete.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.DeleteAsync(VersaTul.Contracts.IPredicate{`0})">
+            <summary>
+            Deletes the entities matching the predicate.
+            </summary>
+            <param name="predicate">The expression.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Contracts.IWriterAsync`2.DeleteAllAsync">
+            <summary>
+            Deletes all entities in the repository.
+            </summary>
+            <returns>Task</returns>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Entity">
+            <summary>
+            Abstract Entity for all the Business Entities.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Entity.Id">
+            <summary>
+            Gets or sets the id for this object (the primary record for an entity).
+            </summary>
+            <value>The id for this object (the primary record for an entity).</value>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Logging.Command">
+            <summary>
+            Represents the MongoDb command sent to the DB server.
+            </summary>
+            <param name="name">The name of the command.</param>
+            <param name="text">The Json string of the command.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Logging.Command.#ctor(System.String,System.String)">
+            <summary>
+            Represents the MongoDb command sent to the DB server.
+            </summary>
+            <param name="name">The name of the command.</param>
+            <param name="text">The Json string of the command.</param>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Logging.Command.Name">
+            <summary>
+            Gets the name of the mongoDb Command.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Logging.Command.JsonText">
+            <summary>
+            Gets the mongoDb Json command string.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Mappings.NoMap`1">
+            <summary>
+            Represents a MongoDB class map used to indicate that mappings are to located using attributes.
+            This Map does not get registerd by the BsonClassMap Class.
+            </summary>
+            <typeparam name="TEntity">The entity type of the mapping class.</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Mappings.NoMap`1.CollectionName">
+            <summary>
+            Gets the default collection name of "NoMap".
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Mappings.NoMap`1.ExtraElementsAccessor">
+            <summary>
+            Get the object for storing extra elements from mongo database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Mappings.NoMap`1.Register(MongoDB.Bson.Serialization.BsonClassMap{`0})">
+            <summary>
+            Gets the name of the MongoDb Collection.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Predicates.WherePredicate`1">
+            <summary>
+            Represent a search conditional expression.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <remarks>
+            Creates an instance of <see cref="T:VersaTul.Data.MongoDB.Predicates.WherePredicate`1"/>
+            </remarks>
+            <param name="expression">The expression to be applied to the entity.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Predicates.WherePredicate`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Represent a search conditional expression.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <remarks>
+            Creates an instance of <see cref="T:VersaTul.Data.MongoDB.Predicates.WherePredicate`1"/>
+            </remarks>
+            <param name="expression">The expression to be applied to the entity.</param>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Predicates.WherePredicate`1.Condition">
+            <summary>
+            Gets or Sets the expression to be applied to the object.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MongoDB.Serializers.MicronSerializer">
+            <summary>
+            Serialize a decimal value to and from Microns.
+            Multiple or divide the value by one million.
+            This is useful when transfering currency across the wire.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MongoDB.Serializers.MicronSerializer.ValueType">
+            <summary>
+            Gets the value type this Serialize supports.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Serializers.MicronSerializer.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)">
+            <summary>
+            Converts the given value from Microns back to decimal.
+            </summary>
+            <param name="context">The contextual information needed to Serialize or De-serialize the value.</param>
+            <param name="args">Arguments common to all Serialize.</param>
+            <returns>object</returns>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Serializers.MicronSerializer.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,System.Object)">
+            <summary>
+            Converts the given value from decimal to Microns.
+            </summary>
+            <param name="context">The contextual information needed to Serialize or De-serialize the value.</param>
+            <param name="args">Arguments common to all Serialize.</param>
+            <param name="value">The value to convert.</param>
+        </member>
+        <member name="M:VersaTul.Data.MongoDB.Serializers.MicronSerializer.ReadBsonData(MongoDB.Bson.IO.IBsonReader)">
+            <summary>
+            Check if the value is Int32 or Int64 to ensure that conversion occurs on the correct data-type.
+            </summary>
+            <param name="bsonReader"></param>
+            <returns>long</returns>
+        </member>
+    </members>
+</doc>

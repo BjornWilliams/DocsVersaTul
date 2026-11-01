@@ -77,6 +77,8 @@ Core Types And Concepts
 ``IRepository<TEntity, TKey>``
    Defines CRUD-style operations, queryable access, async reads, and range operations for a repository. ``Find``, ``FindAsync``, ``Get``, and ``GetAsync`` report possibly absent entities with nullable result annotations.
 
+For common write and read paths, see the generated ``AddAsync``, ``GetAsync``, and ``Remove`` member links below; the reference shows the exact released overloads.
+
 ``IAsyncStreamRepository<TEntity, TKey>``
    Extends the repository model with cancellation-aware async streaming.
 
@@ -198,3 +200,5 @@ Support
 Support and feedback matrix <https://docsversatul.readthedocs.io/en/latest/support.html>_.
 
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/data-contracts.rst

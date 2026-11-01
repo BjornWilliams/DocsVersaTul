@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Caching</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Caching.CacheExpiration">
+            <summary>
+            Represents the timing strategy to used when caching an item.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.CacheExpiration.Sliding">
+            <summary>
+             Gets or sets a value that indicates whether a cache entry should be evicted
+             if it has not been accessed in a given span of time.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.CacheExpiration.Absolute">
+            <summary>
+            Gets or sets a value that indicates whether a cache entry should be evicted
+            at a specified point in time.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Caching.Configurations.CacheConfiguration">
+            <summary>
+            Represents a configuration file that is applicable to the Caching application. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.Configurations.CacheConfiguration.CacheDuration">
+            <summary>
+            Gets the length of time, in seconds, that the cache data is stored in the cache.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Caching.Contracts.ICacheClock">
+            <summary>
+            Represents a clock abstraction used by cache expiration logic.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Caching.Contracts.ICacheConfiguration">
+            <summary>
+            Represents a configuration file that is applicable to the Caching application.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.Contracts.ICacheConfiguration.CacheDuration">
+            <summary>
+            Gets the length of time, in seconds, that the cache data is stored in the cache.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Caching.Contracts.ICacheProvider">
+            <summary>
+            Represents the type that implements an in-memory cache.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="E:VersaTul.Caching.Contracts.ICacheProvider.ItemRemoved">
+            <summary>
+            Gets or sets a reference to a delegate that is called after an entry is removed from the cache.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.Contracts.ICacheProvider.Count">
+            <summary>
+            Gets the count of the current entries.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.Contracts.ICacheProvider.IsEmpty">
+            <summary>
+            Indicates if the cache is currently empty.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider.Clear">
+            <summary>
+            Removes all entries from the cache.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider.IsExists(System.String)">
+            <summary>
+            Indicates if there is a cache entry for the key.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider.Remove(System.String)">
+            <summary>
+            Removes the cache entry from the cache for the given key.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+        </member>
+        <member name="T:VersaTul.Caching.Contracts.ICacheProvider`1">
+            <summary>
+            Represents the type that implements an in-memory cache.
+            </summary>
+            <typeparam name="T">The type of cache entry to store.</typeparam>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.Get(System.String)">
+            <summary>
+            Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <remarks>In case of a cache miss this method will return the default of T.</remarks>
+            <returns>The type of cache entry.</returns>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.GetAsync(System.String)">
+            <summary>
+            Retrieves the cache entry for the given key asynchronously.
+            If the cache entry is not found then the default of T is returned.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <returns>A task containing the cache entry value.</returns>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.Add(System.String,`0)">
+            <summary>
+            Inserts the cache entry using the key for a default duration of 60 minutes.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.SetAsync(System.String,`0)">
+            <summary>
+            Inserts the cache entry using the key for a default duration asynchronously.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.Add(System.String,`0,System.Int32)">
+            <summary>
+            Inserts the given item into the Cache using the given key for a the specified duration in minutes.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+            <param name="cacheTime">The duration in seconds to keep the item in the cache. This duration is an Absolute Expiration.</param>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.SetAsync(System.String,`0,System.Int32)">
+            <summary>
+            Inserts the given item into the cache asynchronously using the given key for the specified duration in seconds.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+            <param name="cacheTime">The duration in seconds to keep the item in the cache.</param>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.Add(System.String,`0,VersaTul.Caching.CacheExpiration)">
+            <summary>
+            Inserts the given item into the Cache using the given key for a the specified <see cref="T:VersaTul.Caching.CacheExpiration"/>.
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+            <param name="expiration"></param>
+        </member>
+        <member name="M:VersaTul.Caching.Contracts.ICacheProvider`1.SetAsync(System.String,`0,VersaTul.Caching.CacheExpiration)">
+            <summary>
+            Inserts the given item into the cache asynchronously using the given key and expiration strategy.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+            <param name="expiration">The duration to keep the item in the cache.</param>
+        </member>
+        <member name="T:VersaTul.Caching.MemCacheEventArgs">
+            <summary>
+            Represents Cache Events occuring inside the caching engine.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.MemCacheEventArgs.Key">
+            <summary>
+            Gets or Sets the unique string identifier for the cache item involved in the event.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.MemCacheEventArgs.Value">
+            <summary>
+            Gets or Sets the value for the cache item involved in the event.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.MemCacheEventArgs.Reason">
+            <summary>
+            Gets or Sets the reason for the event.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Caching.MemCacheProvider`1">
+            <summary>
+            Represents the type that implements an in-memory cache.
+            </summary>
+            <typeparam name="T">The type of cache entry to store.</typeparam>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration,VersaTul.Caching.Contracts.ICacheClock)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+            <param name="cacheClock">The clock abstraction for expiration calculations.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration,Microsoft.Extensions.Caching.Memory.MemoryCacheOptions)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+            <param name="options">The Memory Cache Options settings to use setup <see cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/> Instance.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration,Microsoft.Extensions.Caching.Memory.MemoryCacheOptions,VersaTul.Caching.Contracts.ICacheClock)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+            <param name="options">The Memory Cache Options settings to use setup <see cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/> Instance.</param>
+            <param name="cacheClock">The clock abstraction for expiration calculations.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration,Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+            <param name="options">The Memory Cache Options settings to use setup <see cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/> Instance.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration,Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions},VersaTul.Caching.Contracts.ICacheClock)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+            <param name="options">The Memory Cache Options settings to use setup <see cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/> Instance.</param>
+            <param name="cacheClock">The clock abstraction for expiration calculations.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration,Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+            <param name="options">he Memory Cache Options settings to use setup <see cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/> Instance.</param>
+            <param name="loggerFactory">The factory used to create loggers.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.#ctor(VersaTul.Caching.Contracts.ICacheConfiguration,Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions},Microsoft.Extensions.Logging.ILoggerFactory,VersaTul.Caching.Contracts.ICacheClock)">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Caching.MemCacheProvider`1"/> with all default settings for <seealso cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/>.
+            </summary>
+            <param name="cacheConfiguration">The instance of the cache configuration provider to use.</param>
+            <param name="options">The Memory Cache Options settings to use setup <see cref="T:Microsoft.Extensions.Caching.Memory.MemoryCache"/> Instance.</param>
+            <param name="loggerFactory">The factory used to create loggers.</param>
+            <param name="cacheClock">The clock abstraction for expiration calculations.</param>
+        </member>
+        <member name="P:VersaTul.Caching.MemCacheProvider`1.Count">
+            <summary>
+            Gets the count of the current entries.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Caching.MemCacheProvider`1.IsEmpty">
+            <summary>
+            Indicates if the cache is currently empty.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.Get(System.String)">
+            <summary>
+            Retrieves the cache entry for the given key. If the cache entry is not found then the default of T is returned.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <remarks>In case of a cache miss this method will return the default of T.</remarks>
+            <returns>The type of cache entry.</returns>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.GetAsync(System.String)">
+            <summary>
+            Retrieves the cache entry for the given key asynchronously. If the cache entry is not found then the default of T is returned.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <returns>A task containing the cache entry value.</returns>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.Add(System.String,`0)">
+            <summary>
+            Inserts the cache entry using the key for a default duration of 60 minutes.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.SetAsync(System.String,`0)">
+            <summary>
+            Inserts the cache entry using the key for a default duration asynchronously.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.Add(System.String,`0,System.Int32)">
+            <summary>
+            Inserts the given item into the Cache using the given key for a the specified duration in minutes.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+            <param name="cacheTime">The duration in seconds to keep the item in the cache. This duration is an Absolute Expiration.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.SetAsync(System.String,`0,System.Int32)">
+            <summary>
+            Inserts the given item into the cache asynchronously using the given key for the specified duration in seconds.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+            <param name="cacheTime">The duration in seconds to keep the item in the cache.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.Add(System.String,`0,VersaTul.Caching.CacheExpiration)">
+            <summary>
+            Inserts the given item into the Cache using the given key and cache duration specified.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+            <param name="expiration">The duration to keep the item in the cache. This duration can be either Absolute  or Sliding Expiration.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.SetAsync(System.String,`0,VersaTul.Caching.CacheExpiration)">
+            <summary>
+            Inserts the given item into the cache asynchronously using the given key and expiration strategy.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <param name="data">The cache entry to store.</param>
+            <param name="expiration">The duration to keep the item in the cache.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.IsExists(System.String)">
+            <summary>
+            Indicates if there is a cache entry for the key.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.Remove(System.String)">
+            <summary>
+            Removes the cache entry from the cache for the given key.
+            </summary>
+            <param name="key">The string identifier for the cache entry.</param>
+        </member>
+        <member name="M:VersaTul.Caching.MemCacheProvider`1.Clear">
+            <summary>
+            Removes all Keys and Values from the cache.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Caching.SystemCacheClock">
+            <summary>
+            Default cache clock implementation based on system local time.
+            </summary>
+        </member>
+    </members>
+</doc>

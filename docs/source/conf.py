@@ -29,7 +29,17 @@ intersphinx_mapping = {
 intersphinx_disabled_domains = ["std"]
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = [
+    "_build",
+    "_api_ref",
+    "_generated_api_links",
+    "_generated_api_versions.rst",
+    "Thumbs.db",
+    ".DS_Store",
+]
+
+# The released API sites are generated before Sphinx and copied as static HTML.
+html_extra_path = ["_api_ref"]
 
 html_theme = "sphinx_rtd_theme"
 html_title = "VersaTul Documentation"

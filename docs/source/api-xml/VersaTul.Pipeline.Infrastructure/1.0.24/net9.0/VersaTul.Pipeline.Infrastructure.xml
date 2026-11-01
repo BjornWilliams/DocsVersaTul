@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Pipeline.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Pipeline.Infrastructure.Contracts.IStep`2">
+            <summary>
+            A step represents the work to be done on a given input with the given return type.
+            </summary>
+            <typeparam name="TIn">The type of the object to input</typeparam>
+            <typeparam name="TOut">The type to be returned.</typeparam>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Contracts.IStep`2.Execute(`0)">
+            <summary>
+            Steps implementing this method would perform processing on the input type{TIn}.
+            </summary>
+            <param name="input">The type{TIn} inputted into the method.</param>
+            <returns>Returns the output type{TOut} specified after processing.</returns>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Extensions.PipelineExtensions.AddStep``2(``0,VersaTul.Pipeline.Infrastructure.Contracts.IStep{``0,``1})">
+            <summary>
+            Provides an easy way of extending objects with pipeline steps.
+            </summary>
+            <typeparam name="TIn">The type of the input into the step.</typeparam>
+            <typeparam name="TOut">The type if the output from the step.</typeparam>
+            <param name="input">The instance of the type being inputted into the step.</param>
+            <param name="step">The step to use and process the input.</param>
+            <returns>The output from the step.</returns>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Extensions.PipelineExtensions.AddStep``2(``0,VersaTul.Pipeline.Infrastructure.Contracts.IStep{``0,``1},System.Action{System.TimeSpan,System.Exception})">
+            <summary>
+            Provides an easy way of extending objects with pipeline steps and optional diagnostics.
+            </summary>
+            <typeparam name="TIn">The type of the input into the step.</typeparam>
+            <typeparam name="TOut">The type if the output from the step.</typeparam>
+            <param name="input">The instance of the type being inputted into the step.</param>
+            <param name="step">The step to use and process the input.</param>
+            <param name="diagnostics">Optional callback for elapsed step time and any thrown exception.</param>
+            <returns>The output from the step.</returns>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Extensions.PipelineExtensions.AddStep``2(``0,VersaTul.Pipeline.Infrastructure.Contracts.IStep{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            Provides an easy way of extending objects with asynchronous pipeline steps.
+            </summary>
+            <typeparam name="TIn">The type of the input into the step.</typeparam>
+            <typeparam name="TOut">The type if the output from the step.</typeparam>
+            <param name="input">The instance of the type being inputted into the step.</param>
+            <param name="step">The asynchronous step to use and process the input.</param>
+            <returns>The asynchronous output from the step.</returns>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Extensions.PipelineExtensions.AddStep``2(``0,VersaTul.Pipeline.Infrastructure.Contracts.IStep{``0,System.Threading.Tasks.Task{``1}},System.Action{System.TimeSpan,System.Exception})">
+            <summary>
+            Provides an easy way of extending objects with asynchronous pipeline steps and optional diagnostics.
+            </summary>
+            <typeparam name="TIn">The type of the input into the step.</typeparam>
+            <typeparam name="TOut">The type if the output from the step.</typeparam>
+            <param name="input">The instance of the type being inputted into the step.</param>
+            <param name="step">The asynchronous step to use and process the input.</param>
+            <param name="diagnostics">Optional callback for elapsed step time and any thrown exception.</param>
+            <returns>The asynchronous output from the step.</returns>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Extensions.PipelineExtensions.AddStep``2(System.Threading.Tasks.Task{``0},VersaTul.Pipeline.Infrastructure.Contracts.IStep{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            Provides an easy way of extending objects with pipeline steps.
+            </summary>
+            <typeparam name="TIn">The type of the input into the step.</typeparam>
+            <typeparam name="TOut">The type if the output from the step.</typeparam>
+            <param name="input">The instance of the type being inputted into the step.</param>
+            <param name="step">The step to use and process the input.</param>
+            <returns>The output from the step.</returns>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Extensions.PipelineExtensions.AddStep``2(System.Threading.Tasks.Task{``0},VersaTul.Pipeline.Infrastructure.Contracts.IStep{``0,System.Threading.Tasks.Task{``1}},System.Action{System.TimeSpan,System.Exception})">
+            <summary>
+            Provides an easy way of extending objects with asynchronous pipeline steps and optional diagnostics.
+            </summary>
+            <typeparam name="TIn">The type of the input into the step.</typeparam>
+            <typeparam name="TOut">The type if the output from the step.</typeparam>
+            <param name="input">The instance of the type being inputted into the step.</param>
+            <param name="step">The step to use and process the input.</param>
+            <param name="diagnostics">Optional callback for elapsed step time and any thrown exception.</param>
+            <returns>The output from the step.</returns>
+        </member>
+        <member name="T:VersaTul.Pipeline.Infrastructure.Pipeline`2">
+            <summary>
+            Represents an accumulative set of steps that can be performed on a given input.
+            </summary>
+            <typeparam name="TIn">The type of the object to input</typeparam>
+            <typeparam name="TOut">The type to be returned.</typeparam>
+        </member>
+        <member name="M:VersaTul.Pipeline.Infrastructure.Pipeline`2.Execute(`0)">
+            <summary>
+            Performs the execution of the step.
+            </summary>
+            <param name="input">The type given to the step.</param>
+            <returns>The output from the processing of the step.</returns>
+        </member>
+        <member name="P:VersaTul.Pipeline.Infrastructure.Pipeline`2.Step">
+            <summary>
+            Gets the step associated with this pipeline.
+            </summary>
+        </member>
+    </members>
+</doc>

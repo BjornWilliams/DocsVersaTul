@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Object.Converters</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Object.Converters.Contracts.IFlattener">
+            <summary>
+            Describes the contract needed to successfully convert from multi-dimensional to one demension with flattened keys.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Contracts.IFlattener.AsDictionary(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Converts the given dictionary of string, objects with differernt level to one level.
+            </summary>
+            <param name="source">The source dictionary to flatten</param>
+            <returns>A new dictionary containing all the values of the given dictionary with flattened keys.</returns>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Contracts.IFlattener.AsDictionary(System.Collections.Generic.IDictionary{System.String,System.Object},VersaTul.Object.Converters.FlattenKeyOptions)">
+            <summary>
+            Converts the given dictionary of string, objects with differernt level to one level using key strategy options.
+            </summary>
+            <param name="source">The source dictionary to flatten.</param>
+            <param name="options">The key formatting options.</param>
+            <returns>A new dictionary containing all the values of the given dictionary with flattened keys.</returns>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Contracts.IFlattener.AsString(System.Object)">
+            <summary>
+            Converts the given object from a multi-dimensional to one-dimensional string.
+            </summary>
+            <param name="source">The source object to flatten</param>
+            <returns>A string containing combined values.</returns>
+        </member>
+        <member name="T:VersaTul.Object.Converters.Contracts.IObjectProcessor">
+            <summary>
+            Represent functionality that can convert an object into dictionary of string, object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Contracts.IObjectProcessor.ToDictionary(System.Object)">
+            <summary>
+            Converts the given object into a dictionary of String,Object
+            </summary>
+            <param name="source">The object to be converted</param>
+            <returns>A dictionary of string, object.</returns>
+            <exception cref="!:ArgumentNullException">Thrown if source is null.</exception>
+        </member>
+        <member name="T:VersaTul.Object.Converters.Contracts.IPropertyProcessor">
+            <summary>
+            Describes the contract needed to successfully process the properties of object instances.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Contracts.IPropertyProcessor.Process(System.Reflection.PropertyInfo,System.Object,System.Type)">
+            <summary>
+            Analyze the given property and its value to see if further processing is needed in order to flatten a given object.
+            </summary>
+            <param name="propertyInfo">The property meta data.</param>
+            <param name="propertyValue">The value of the property</param>
+            <param name="propertyType">The data type of the property value.</param>
+            <returns>An object that represent the given properties value.</returns>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Contracts.IPropertyProcessor.Process(System.Reflection.PropertyInfo,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Analyze the given property and its value to see if further processing is needed in order to flatten a given object.
+            </summary>
+            <param name="propertyInfo">The property meta data.</param>
+            <param name="propertyValue">The value of the property</param>
+            <param name="dictionary">The storage media for the property info.</param>
+            <returns>An object that represent the given properties value.</returns>
+        </member>
+        <member name="T:VersaTul.Object.Converters.Flattener">
+            <summary>
+            Represents a convert for a dictionary of multi-dimensional to one-dimensional with flattened keys.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Flattener.AsDictionary(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Converts the given dictionary of string, objects with different level to one level.
+            </summary>
+            <param name="source">The source dictionary to flatten</param>
+            <returns>A new dictionary containing all the values of the given dictionary with flattened keys.</returns>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Flattener.AsDictionary(System.Collections.Generic.IDictionary{System.String,System.Object},VersaTul.Object.Converters.FlattenKeyOptions)">
+            <summary>
+            Converts the given dictionary of string, objects with different level to one level using key options.
+            </summary>
+            <param name="source">The source dictionary to flatten</param>
+            <param name="options">The key formatting options.</param>
+            <returns>A new dictionary containing all the values of the given dictionary with flattened keys.</returns>
+        </member>
+        <member name="M:VersaTul.Object.Converters.Flattener.AsString(System.Object)">
+            <summary>
+            Converts the given object from a multi-dimensional to one-dimensional string.
+            </summary>
+            <param name="source">The source object to flatten</param>
+            <returns>A string containing combined values.</returns>
+        </member>
+        <member name="T:VersaTul.Object.Converters.FlattenKeyOptions">
+            <summary>
+            Represents flatten key formatting options.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Object.Converters.ObjectProcessor">
+            <summary>
+            Represent functionality that can convert an object into dictionary of string, object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Object.Converters.ObjectProcessor.ToDictionary(System.Object)">
+            <summary>
+            Converts the given object into a dictionary of String,Object
+            </summary>
+            <param name="source">The object to be converted</param>
+            <returns>A dictionary of string, object.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if source is null.</exception>
+        </member>
+        <member name="T:VersaTul.Object.Converters.PropertyProcessor">
+            <summary>
+            A class that analyzes a given property and its value and creates a Dictionary or List of the values of the property or simple returns the value of the property.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Object.Converters.PropertyProcessor.#ctor(VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer)">
+            <summary>
+            Creates a new instance of the <see cref="T:VersaTul.Object.Converters.PropertyProcessor"/> class.
+            </summary>
+            <param name="displayAnalyzer">The analyzer used for analyzing Display attributes during property processing.</param>
+        </member>
+        <member name="M:VersaTul.Object.Converters.PropertyProcessor.Process(System.Reflection.PropertyInfo,System.Object,System.Type)">
+            <summary>
+            Analyze the given property and its value to see if further processing is needed in order to flatten a given object.
+            </summary>
+            <param name="propertyInfo">The property meta data.</param>
+            <param name="propertyValue">The value of the property</param>
+            <param name="propertyType">The data type of the property value.</param>
+            <returns>An object that represent the given properties value.</returns>
+        </member>
+        <member name="M:VersaTul.Object.Converters.PropertyProcessor.Process(System.Reflection.PropertyInfo,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Analyze the given property and its value to see if further processing is needed in order to flatten a given object.
+            </summary>
+            <param name="propertyInfo">The property meta data.</param>
+            <param name="propertyValue">The value of the property</param>
+            <param name="dictionary">The storage media for the property info.</param>
+            <returns>An object that represent the given properties value.</returns>
+        </member>
+    </members>
+</doc>

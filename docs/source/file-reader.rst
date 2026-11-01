@@ -270,3 +270,5 @@ Support
 Support and feedback matrix <https://docsversatul.readthedocs.io/en/latest/support.html>_.
 
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/file-reader.rst

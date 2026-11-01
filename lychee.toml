@@ -9,4 +9,5 @@ no_progress = true
 exclude = [
     '^https://host/api$',
     '^https://host/api/events$',
+    '^https://docsversatul\.readthedocs\.io/en/latest/_api_ref/',
 ]

@@ -1,0 +1,651 @@
+{
+  "schemaVersion": 1,
+  "generatedOn": "2026-11-01",
+  "sourceRepository": "VersaTul Azure Repos",
+  "generator": "scripts/Export-ReleasedPackageXmlDocumentation.ps1",
+  "dotnetSdk": "10.0.402",
+  "packages": [
+    {
+      "packageId": "VersaTul.Compression",
+      "version": "1.0.17",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Compression/1.0.17",
+      "packageSha256": "959bb5a899f22002338a1946035142deb4cb81c87691768d72050d62bb425392",
+      "repositoryCommit": "28e01808381c84ac60f3a986f2f60e223a9725d6",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Compression.dll",
+          "assemblySha256": "5692888b768199cefc80318eecb66866d6cc90513abed39039a1609ad2105851",
+          "xmlFile": "docs/source/api-xml/VersaTul.Compression/1.0.17/net8.0/VersaTul.Compression.xml",
+          "xmlSha256": "642d0e74880c17f3d82b691d7386412e7fa6fc134c0320a355be0d26e1804da1",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Compression.dll",
+          "assemblySha256": "72a045376eded804653ac82992ae57465c2bc85bf4b6bfac503767c39701d7d4",
+          "xmlFile": "docs/source/api-xml/VersaTul.Compression/1.0.17/net9.0/VersaTul.Compression.xml",
+          "xmlSha256": "642d0e74880c17f3d82b691d7386412e7fa6fc134c0320a355be0d26e1804da1",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Contracts",
+      "version": "1.0.11",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Contracts/1.0.11",
+      "packageSha256": "fbe633b67ea2f8aeb67167768d38f616e0a07d3bf6e7332b9a675dc515746441",
+      "repositoryCommit": "28e01808381c84ac60f3a986f2f60e223a9725d6",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Contracts.dll",
+          "assemblySha256": "0c6789f7741f347b735058f938a88aa54f800cf82eb8ca3fe774b3e069d41160",
+          "xmlFile": "docs/source/api-xml/VersaTul.Contracts/1.0.11/net8.0/VersaTul.Contracts.xml",
+          "xmlSha256": "ada1eab55e485f5da3bd9f876006446e2a958a7f26b26622c2ada28fbc82b489",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Contracts.dll",
+          "assemblySha256": "141d2284ea9d8164a02ea257d145a27a80000b3f22ddabe5558d1348f74c7dd4",
+          "xmlFile": "docs/source/api-xml/VersaTul.Contracts/1.0.11/net9.0/VersaTul.Contracts.xml",
+          "xmlSha256": "ada1eab55e485f5da3bd9f876006446e2a958a7f26b26622c2ada28fbc82b489",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Data.Bulk",
+      "version": "1.0.11",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.Bulk/1.0.11",
+      "packageSha256": "507cdffc322f38709590b1227f7fcacf70882502f655c8e4fb09ffc0dba7d1b1",
+      "repositoryCommit": "28e01808381c84ac60f3a986f2f60e223a9725d6",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Data.Bulk.dll",
+          "assemblySha256": "4ad8d2e31db11d32dc1e223af60ca9be47e2e8767d3ebfe18b6b20c6ad19d0b8",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.Bulk/1.0.11/net8.0/VersaTul.Data.Bulk.xml",
+          "xmlSha256": "fd71f97d90589851f714ff38a6305306ab1d3d767aab8af9f551e4db1fcd7471",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Data.Bulk.dll",
+          "assemblySha256": "67ece8563c099058c60e59dbe32f0212c36f5bd8ab47d8fb386bedcb189323de",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.Bulk/1.0.11/net9.0/VersaTul.Data.Bulk.xml",
+          "xmlSha256": "fd71f97d90589851f714ff38a6305306ab1d3d767aab8af9f551e4db1fcd7471",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Data.Contracts",
+      "version": "1.0.14",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.Contracts/1.0.14",
+      "packageSha256": "6dcad5359cc1eba40bb8164b6daa01c37dba49da26017dd78fe99a5f945c5a63",
+      "repositoryCommit": "28e01808381c84ac60f3a986f2f60e223a9725d6",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Data.Contracts.dll",
+          "assemblySha256": "7e20db363dfffa64e060d5763bf00245facb2b17f6c57927e15eae8400c0063c",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.Contracts/1.0.14/net8.0/VersaTul.Data.Contracts.xml",
+          "xmlSha256": "a093ef8bd8f03139795c914bd843d65476f302ca4413ebf574206f126157aefe",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Data.Contracts.dll",
+          "assemblySha256": "621642fae87e70f983595984715ee5d70bbcf769bd939242ef1ecad122cf3c5e",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.Contracts/1.0.14/net9.0/VersaTul.Data.Contracts.xml",
+          "xmlSha256": "a093ef8bd8f03139795c914bd843d65476f302ca4413ebf574206f126157aefe",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Handler.File",
+      "version": "1.0.21",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Handler.File/1.0.21",
+      "packageSha256": "2e65a201c5e0b83ad1f0df41a5dbc95059720b0ea1fdfbe0835f5faa7892f18b",
+      "repositoryCommit": "df71bad5d59c568a7a7ef01e8529fe329df813b0",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Handler.File.dll",
+          "assemblySha256": "86b6f6bc6104a38c1d14227388a80b96cfef57f7d6f3be5d9e82d5440e142ae2",
+          "xmlFile": "docs/source/api-xml/VersaTul.Handler.File/1.0.21/net8.0/VersaTul.Handler.File.xml",
+          "xmlSha256": "2d84317115496d59114053d1a0ef92742c09382aa051c1cac991dfde81de902e",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Handler.File.dll",
+          "assemblySha256": "b75a0a871fdc1ddf2e9894508a38e920f86ca6c70294b4088e5cd4b13fca2e45",
+          "xmlFile": "docs/source/api-xml/VersaTul.Handler.File/1.0.21/net9.0/VersaTul.Handler.File.xml",
+          "xmlSha256": "2d84317115496d59114053d1a0ef92742c09382aa051c1cac991dfde81de902e",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Logger",
+      "version": "1.0.11",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Logger/1.0.11",
+      "packageSha256": "bd79e150011db6802e6fb985b3b96bc4cb1e633b07d15c52049921d00a8acc64",
+      "repositoryCommit": "28e01808381c84ac60f3a986f2f60e223a9725d6",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Logger.dll",
+          "assemblySha256": "c4bb0c2c027a2748cb762776678f1e1c85317f2615afbb852cc8c079e2cfb4cb",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger/1.0.11/net8.0/VersaTul.Logger.xml",
+          "xmlSha256": "111e73157006e18f2e64f38fa333b9d88918040712509baeb82c80a097976715",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Logger.dll",
+          "assemblySha256": "3348d471ba2ca02ab7ae36d1188519f66e7649ff31a421f20bfbdc2dcd70ebcd",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger/1.0.11/net9.0/VersaTul.Logger.xml",
+          "xmlSha256": "111e73157006e18f2e64f38fa333b9d88918040712509baeb82c80a097976715",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Pipeline.Infrastructure",
+      "version": "1.0.24",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure/1.0.24",
+      "packageSha256": "8582b5ed7b4fd5c86f99cd171d91a094a5c1b88ceca9a4ae0ba8d8d94bd32da8",
+      "repositoryCommit": "28e01808381c84ac60f3a986f2f60e223a9725d6",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Pipeline.Infrastructure.dll",
+          "assemblySha256": "116415be291011a41a31290314b724d87fdd2d4d0a3cd8e42ad698023e6346b8",
+          "xmlFile": "docs/source/api-xml/VersaTul.Pipeline.Infrastructure/1.0.24/net8.0/VersaTul.Pipeline.Infrastructure.xml",
+          "xmlSha256": "0e85fb1e0e2ba5e2729ae8261cc6a676befb8c8390f0ba56a268c784f1b999b5",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Pipeline.Infrastructure.dll",
+          "assemblySha256": "7537919d2276f35e3d4331d1a644fb8d3c9d2b19f1a959fe0c3c094705584db3",
+          "xmlFile": "docs/source/api-xml/VersaTul.Pipeline.Infrastructure/1.0.24/net9.0/VersaTul.Pipeline.Infrastructure.xml",
+          "xmlSha256": "0e85fb1e0e2ba5e2729ae8261cc6a676befb8c8390f0ba56a268c784f1b999b5",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Utilities",
+      "version": "1.0.16",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Utilities/1.0.16",
+      "packageSha256": "dc4f823c095e30a875702139117a581b9b091d5632441577f7827fd0877f457b",
+      "repositoryCommit": "28e01808381c84ac60f3a986f2f60e223a9725d6",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Utilities.dll",
+          "assemblySha256": "ef357f850c977f53c3fe6a1e952fb95a61bb588ea3aef4786286c28a02718323",
+          "xmlFile": "docs/source/api-xml/VersaTul.Utilities/1.0.16/net8.0/VersaTul.Utilities.xml",
+          "xmlSha256": "ab22a8aee427a1169887ce590e93afa31dc7a9f14455599fbb5619dd45d57181",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Utilities.dll",
+          "assemblySha256": "8e80f1505554788f1a1d1517e963bf7aeee05cee350a43ea330ae25dfcd02c6c",
+          "xmlFile": "docs/source/api-xml/VersaTul.Utilities/1.0.16/net9.0/VersaTul.Utilities.xml",
+          "xmlSha256": "ab22a8aee427a1169887ce590e93afa31dc7a9f14455599fbb5619dd45d57181",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Display.Attributes",
+      "version": "1.0.12",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Display.Attributes/1.0.12",
+      "packageSha256": "c0171b5fa79e2d656ecc6f24f913f12d488271164ddf568ef4309b4729f3e1be",
+      "repositoryCommit": "071a2cc8132b47b19e31d78279b29988cbcab68b",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Display.Attributes.dll",
+          "assemblySha256": "e70466a671fc0a429d43c667308902c900e6584625795517e1c3f2d74074ed6b",
+          "xmlFile": "docs/source/api-xml/VersaTul.Display.Attributes/1.0.12/net8.0/VersaTul.Display.Attributes.xml",
+          "xmlSha256": "7e4f9a62b4d8c2a5094553b47c0bec9f0af73bea67c4606970bb1de3d804636e",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Display.Attributes.dll",
+          "assemblySha256": "9db7b01ccd6d43c2a6db3ff06a2cb494ae573cce273be09138f8cd8e7315642a",
+          "xmlFile": "docs/source/api-xml/VersaTul.Display.Attributes/1.0.12/net9.0/VersaTul.Display.Attributes.xml",
+          "xmlSha256": "7e4f9a62b4d8c2a5094553b47c0bec9f0af73bea67c4606970bb1de3d804636e",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Object.Converters",
+      "version": "1.0.15",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Object.Converters/1.0.15",
+      "packageSha256": "e111ac1c804f2068a973d1a5ab6c39be69bea92246ec2ca6b061f3836343bb31",
+      "repositoryCommit": "aa8d10fa1f95647007d4fded4b97d55f150d3211",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Object.Converters.dll",
+          "assemblySha256": "7ba15b28d244a4d6f92e7398a245dbb45104dd1d3c769fe7d741ff96abcc3419",
+          "xmlFile": "docs/source/api-xml/VersaTul.Object.Converters/1.0.15/net8.0/VersaTul.Object.Converters.xml",
+          "xmlSha256": "5c09d662d49a578d22789a6b548c199b532039158aa172f56feca221b6775b18",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Object.Converters.dll",
+          "assemblySha256": "fe061b316bc0e25d0d361ef504b9bb95efca0d511930c34c918418c98602fb56",
+          "xmlFile": "docs/source/api-xml/VersaTul.Object.Converters/1.0.15/net9.0/VersaTul.Object.Converters.xml",
+          "xmlSha256": "5c09d662d49a578d22789a6b548c199b532039158aa172f56feca221b6775b18",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Extensions",
+      "version": "1.0.16",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Extensions/1.0.16",
+      "packageSha256": "78582dbb2b899bdc820edad8110b58729051441aab3ff371a31c8861a25f2791",
+      "repositoryCommit": "ae5cbfaa0b37c7d9fd07c35bdf85a41303e6d0be",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Extensions.dll",
+          "assemblySha256": "bb647d07167de73387724f12577b09e7f68e0528e6c5b93651e9a1e66e4f83f0",
+          "xmlFile": "docs/source/api-xml/VersaTul.Extensions/1.0.16/net8.0/VersaTul.Extensions.xml",
+          "xmlSha256": "3d170837595a364bd1545d936ba42ce014ee62a4cecc33823d34193eadf9322c",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Extensions.dll",
+          "assemblySha256": "d37d8c32790caba0fe41824b2581adda813aa089f1799210018268c0c2e2340f",
+          "xmlFile": "docs/source/api-xml/VersaTul.Extensions/1.0.16/net9.0/VersaTul.Extensions.xml",
+          "xmlSha256": "3d170837595a364bd1545d936ba42ce014ee62a4cecc33823d34193eadf9322c",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Configurations",
+      "version": "1.0.18",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Configurations/1.0.18",
+      "packageSha256": "8e128c09601b617a95f6beac1eae859e5eabd962f6021f512e7ed0ed87535d5b",
+      "repositoryCommit": "940d43a03cc0e0edcb9242639b58e88a2c087fe7",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Configurations.dll",
+          "assemblySha256": "f4d71211459045cdfc1b78c9933c8fa84b69bbe88e4a079773c03d7a48519c0d",
+          "xmlFile": "docs/source/api-xml/VersaTul.Configurations/1.0.18/net8.0/VersaTul.Configurations.xml",
+          "xmlSha256": "17267143a1b221c19ac65273f5251e8f2c914cef43282b4695b8043c36410ba9",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Configurations.dll",
+          "assemblySha256": "de21cc4c86f777819d2523e60ac93e2b6c42722902fac8f320d93bddd4566312",
+          "xmlFile": "docs/source/api-xml/VersaTul.Configurations/1.0.18/net9.0/VersaTul.Configurations.xml",
+          "xmlSha256": "17267143a1b221c19ac65273f5251e8f2c914cef43282b4695b8043c36410ba9",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Caching",
+      "version": "1.0.24",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Caching/1.0.24",
+      "packageSha256": "40f3d216d034ab6633d368d853c26c2e57a23c09894e513bbb20479a592d5a2e",
+      "repositoryCommit": "b748b828681dd8d5ff38a1685a0677dbe811a3bb",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Caching.dll",
+          "assemblySha256": "d915e6b2f6f4e0da277e2b99a44cb1fa9b79e6492fb9b4b5eda86a9ab7f949b0",
+          "xmlFile": "docs/source/api-xml/VersaTul.Caching/1.0.24/net8.0/VersaTul.Caching.xml",
+          "xmlSha256": "b75279fa06b8b491df50a8673867e01fde9ac3087d6c9525379b86fb9364bd47",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Caching.dll",
+          "assemblySha256": "54526ecd02c14995daf70a041349b0a1cd5fbb705c9f68d54e7a67d18afbb2db",
+          "xmlFile": "docs/source/api-xml/VersaTul.Caching/1.0.24/net9.0/VersaTul.Caching.xml",
+          "xmlSha256": "b75279fa06b8b491df50a8673867e01fde9ac3087d6c9525379b86fb9364bd47",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Configuration.Defaults",
+      "version": "1.0.23",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Configuration.Defaults/1.0.23",
+      "packageSha256": "5180cb883b0a07324ba169959f9c86ffb5b5cafa2aaea74c061adf06eaabab14",
+      "repositoryCommit": "b748b828681dd8d5ff38a1685a0677dbe811a3bb",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Configuration.Defaults.dll",
+          "assemblySha256": "10d61f67d88c1724005e54f68246f9b0a7ed316616779771e42b014079101aac",
+          "xmlFile": "docs/source/api-xml/VersaTul.Configuration.Defaults/1.0.23/net8.0/VersaTul.Configuration.Defaults.xml",
+          "xmlSha256": "d3f602a98626b9bdf6cb946574aa8838143ed0d4e7ea5f0ef25076a90aecdb37",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Configuration.Defaults.dll",
+          "assemblySha256": "f696d8b90261beab329ded5c88403fdbe4298905f0f1c04c9a1e243c6f0131f3",
+          "xmlFile": "docs/source/api-xml/VersaTul.Configuration.Defaults/1.0.23/net9.0/VersaTul.Configuration.Defaults.xml",
+          "xmlSha256": "d3f602a98626b9bdf6cb946574aa8838143ed0d4e7ea5f0ef25076a90aecdb37",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Mailer",
+      "version": "1.0.17",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Mailer/1.0.17",
+      "packageSha256": "4bb92a412f738d6db657c97e66d33448fd3ea399c083f6ae0620fce65968f442",
+      "repositoryCommit": "b748b828681dd8d5ff38a1685a0677dbe811a3bb",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Mailer.dll",
+          "assemblySha256": "a920c189f523c51ceee0eac4de6dea62af23026abbfbc0fa5b75ed2993fb0d83",
+          "xmlFile": "docs/source/api-xml/VersaTul.Mailer/1.0.17/net8.0/VersaTul.Mailer.xml",
+          "xmlSha256": "90cf911b1d439cd78ad6f52358a5521df8467c92d32c9d3cc934bea5533f8c8d",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Mailer.dll",
+          "assemblySha256": "7e3ef16755319e30204c6fdf99f19b0a44728c2a5aafe0538f821119dda93b28",
+          "xmlFile": "docs/source/api-xml/VersaTul.Mailer/1.0.17/net9.0/VersaTul.Mailer.xml",
+          "xmlSha256": "90cf911b1d439cd78ad6f52358a5521df8467c92d32c9d3cc934bea5533f8c8d",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Data.EFCore",
+      "version": "1.0.23",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.EFCore/1.0.23",
+      "packageSha256": "297662b2e462cff2cf48527ffbaa84335ecc943eff1e23708ae75cfe6d7ac3fe",
+      "repositoryCommit": "b748b828681dd8d5ff38a1685a0677dbe811a3bb",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Data.EFCore.dll",
+          "assemblySha256": "0091d862b29cc58e0418fbf1071bbae90232c8c5d487c740217b975513743c44",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.EFCore/1.0.23/net8.0/VersaTul.Data.EFCore.xml",
+          "xmlSha256": "19c2cc92cb1e906cccf4c205b7046d52935df1e548b9bb5a0e3f5856414ed08a",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Data.EFCore.dll",
+          "assemblySha256": "fac67ad36158f2f17af26a2c397de8030549017d413b14747b4f794c1e629564",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.EFCore/1.0.23/net9.0/VersaTul.Data.EFCore.xml",
+          "xmlSha256": "19c2cc92cb1e906cccf4c205b7046d52935df1e548b9bb5a0e3f5856414ed08a",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Data.FileReader",
+      "version": "1.0.9",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.FileReader/1.0.9",
+      "packageSha256": "2130b43a2ae25bcb8e13eda107e872ca181aa94819ab391f26889d8b63967c86",
+      "repositoryCommit": "8c1bfd906212ed50f30225a10f48ceb7e8e51baf",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Data.FileReader.dll",
+          "assemblySha256": "ebffc0e3f38cb66ade015af67663fd474458c4c6dab2fb6d3873974e789eceaa",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.FileReader/1.0.9/net8.0/VersaTul.Data.FileReader.xml",
+          "xmlSha256": "86dcb4545a8f3d924aabaa16d2cbc7e76f55f1b57583ab845bd4e65987b926f9",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Data.MongoDB",
+      "version": "1.0.29",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.MongoDB/1.0.29",
+      "packageSha256": "574f30a96020f641e7b3bdc3b8751b4106b1241bed235277c65fd17d1393503f",
+      "repositoryCommit": "b748b828681dd8d5ff38a1685a0677dbe811a3bb",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Data.MongoDB.dll",
+          "assemblySha256": "55ea15a653c76fb96a2b4002a1891879ecfc71afe95d789c951dd85544d3529f",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.MongoDB/1.0.29/net8.0/VersaTul.Data.MongoDB.xml",
+          "xmlSha256": "b80f6e63157269af34a6b3b547076e1fd54ab41f1a3cf44da039856b6f5e5e80",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Data.MongoDB.dll",
+          "assemblySha256": "1f9af7ed4a33001802ee4e7f087d9526ab6c8246767b5b2e2cecdb98f6b2574f",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.MongoDB/1.0.29/net9.0/VersaTul.Data.MongoDB.xml",
+          "xmlSha256": "b80f6e63157269af34a6b3b547076e1fd54ab41f1a3cf44da039856b6f5e5e80",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Data.Sql",
+      "version": "2.0.21",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.Sql/2.0.21",
+      "packageSha256": "9824fdbbf6bba794441400d56915d65be35bc34c9af48bebef8d363518d57d72",
+      "repositoryCommit": "b748b828681dd8d5ff38a1685a0677dbe811a3bb",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Data.Sql.dll",
+          "assemblySha256": "e2ae99ab1a098c335106418b1ed6aa40a7bb66bc6a16db38bde505579c6a0b9d",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.Sql/2.0.21/net8.0/VersaTul.Data.Sql.xml",
+          "xmlSha256": "4d83db62e1297f508ed56f5072790e54349f39168c669bd2e3e08e7e9a4962e8",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Data.Sql.dll",
+          "assemblySha256": "52754a54d55aa31880b672035e0adc0218fa8edf1592d1ce64aed6d353640e24",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.Sql/2.0.21/net9.0/VersaTul.Data.Sql.xml",
+          "xmlSha256": "4d83db62e1297f508ed56f5072790e54349f39168c669bd2e3e08e7e9a4962e8",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Logger.Web",
+      "version": "1.0.21",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Logger.Web/1.0.21",
+      "packageSha256": "515d8c2b5f593517cfed100fd264ca3dda3883ea6e94c3db773e0160ac087190",
+      "repositoryCommit": "b748b828681dd8d5ff38a1685a0677dbe811a3bb",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Logger.Web.dll",
+          "assemblySha256": "c9d967cff74eacb2e9cfbe175f57f5d29c9efad29c0aa17f3d309a88a68ce778",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger.Web/1.0.21/net8.0/VersaTul.Logger.Web.xml",
+          "xmlSha256": "e27e7fb170606837ad66aa175568477e8b87d17a5527a20e374c6235c39a081c",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Logger.Web.dll",
+          "assemblySha256": "c6afae11b8170497a73c8dba6c8094a0044a7a5b2d25ee70495273cfe818cfcb",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger.Web/1.0.21/net9.0/VersaTul.Logger.Web.xml",
+          "xmlSha256": "e27e7fb170606837ad66aa175568477e8b87d17a5527a20e374c6235c39a081c",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Logger.File",
+      "version": "1.0.32",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Logger.File/1.0.32",
+      "packageSha256": "4f18c5804c85e6d6fb94402137cd064024517933a4cedf2562e10e115cb40138",
+      "repositoryCommit": "8c1bfd906212ed50f30225a10f48ceb7e8e51baf",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Logger.File.dll",
+          "assemblySha256": "4bd1397fe541e05a3df85d189a41b9afb8153f63bbe70bd5a6cdc92767cb1aca",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger.File/1.0.32/net8.0/VersaTul.Logger.File.xml",
+          "xmlSha256": "748416f40674e95ce80abd42ba8641c5e6dd30c4742d0503533457000b8d3124",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Logger.File.dll",
+          "assemblySha256": "0cadf33a9a53bff755ee80e45b6e0fc2507c9ba445a7b8dd30abebef06e3d5b0",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger.File/1.0.32/net9.0/VersaTul.Logger.File.xml",
+          "xmlSha256": "748416f40674e95ce80abd42ba8641c5e6dd30c4742d0503533457000b8d3124",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Task.Scheduler",
+      "version": "1.0.28",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Task.Scheduler/1.0.28",
+      "packageSha256": "69dde0d1c084957c9fd466febc4124e659a0f81fdfd7b145fd5792aa3b00d757",
+      "repositoryCommit": "8c1bfd906212ed50f30225a10f48ceb7e8e51baf",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Task.Scheduler.dll",
+          "assemblySha256": "0b57ee208095255bed377dcf2d4887b7ebb1d4b0ebbe0c09e8cd32b6fa2aa2fb",
+          "xmlFile": "docs/source/api-xml/VersaTul.Task.Scheduler/1.0.28/net8.0/VersaTul.Task.Scheduler.xml",
+          "xmlSha256": "145fef35469e88149418913dbcd4ed0594b80e2164bc248d4308414247d1b224",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Task.Scheduler.dll",
+          "assemblySha256": "05e4bb8780832f0a6caf784fca72982d3af2a39058e2466573a5023590e592c8",
+          "xmlFile": "docs/source/api-xml/VersaTul.Task.Scheduler/1.0.28/net9.0/VersaTul.Task.Scheduler.xml",
+          "xmlSha256": "145fef35469e88149418913dbcd4ed0594b80e2164bc248d4308414247d1b224",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Logger.Mail",
+      "version": "1.0.19",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Logger.Mail/1.0.19",
+      "packageSha256": "cbd5d97767bea0c6a7d6579390ddfcba85d03b0301e842302393f99b0ea16fac",
+      "repositoryCommit": "afa948a723c0bc1140b66d4abdf644ba4a2c2e5c",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Logger.Mail.dll",
+          "assemblySha256": "9d3ca676170d40a3b7baf946e4d97a5483e1d0fcda9da4e6604f9080007d16fb",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger.Mail/1.0.19/net8.0/VersaTul.Logger.Mail.xml",
+          "xmlSha256": "eef571a3d92d91b16af2c7bbfbc620779a6eb52099bdfa61abee0d4ab16a62f0",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Logger.Mail.dll",
+          "assemblySha256": "d5f8dcccb44c57b44a87f00bd129e8e964410b0b68b7e09b78d0e920f4a8fc0b",
+          "xmlFile": "docs/source/api-xml/VersaTul.Logger.Mail/1.0.19/net9.0/VersaTul.Logger.Mail.xml",
+          "xmlSha256": "eef571a3d92d91b16af2c7bbfbc620779a6eb52099bdfa61abee0d4ab16a62f0",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Data.MsSql",
+      "version": "2.0.20",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.MsSql/2.0.20",
+      "packageSha256": "cf0f790b4cfbccf0da969d7ef40a4d8e31f60d86f6d9bceed79d0042d777b3a1",
+      "repositoryCommit": "afa948a723c0bc1140b66d4abdf644ba4a2c2e5c",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Data.MsSql.dll",
+          "assemblySha256": "b4325dd8b97be37cb47c518f05960727e479c3951f6179c6992cc3887cb0f3ad",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.MsSql/2.0.20/net8.0/VersaTul.Data.MsSql.xml",
+          "xmlSha256": "e8d4afc7a4cdfb3f8aa82ab6d1cc2ffa5e2e34451d2beb0445292549abd6d376",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Data.MsSql.dll",
+          "assemblySha256": "24fae71b8295b6564db54402e372bd63f1e6d4f185abd7e18347244a44752c3e",
+          "xmlFile": "docs/source/api-xml/VersaTul.Data.MsSql/2.0.20/net9.0/VersaTul.Data.MsSql.xml",
+          "xmlSha256": "e8d4afc7a4cdfb3f8aa82ab6d1cc2ffa5e2e34451d2beb0445292549abd6d376",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    },
+    {
+      "packageId": "VersaTul.Collection.Streamers",
+      "version": "1.0.36",
+      "verifiedOn": "2026-10-31",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Collection.Streamers/1.0.36",
+      "packageSha256": "c2f25584016299f7d799b0f01f126767a35398f6b1f44a63631278d944529788",
+      "repositoryCommit": "8c1bfd906212ed50f30225a10f48ceb7e8e51baf",
+      "assets": [
+        {
+          "targetFramework": "net8.0",
+          "assemblyFile": "lib/net8.0/VersaTul.Collection.Streamers.dll",
+          "assemblySha256": "a9087918c5a96149c1c197de4acdec747e0e0b8e0876e5058f48933a0539b0dd",
+          "xmlFile": "docs/source/api-xml/VersaTul.Collection.Streamers/1.0.36/net8.0/VersaTul.Collection.Streamers.xml",
+          "xmlSha256": "7b5c05eef8d74a18387f38fb30de6aa1f107492ce019706baf93617c7164a335",
+          "xmlSource": "exact RepositoryCommit source build"
+        },
+        {
+          "targetFramework": "net9.0",
+          "assemblyFile": "lib/net9.0/VersaTul.Collection.Streamers.dll",
+          "assemblySha256": "b76324afce36e985ea83fc3982482e2dbe32e2e24161e1acb313c675f2486721",
+          "xmlFile": "docs/source/api-xml/VersaTul.Collection.Streamers/1.0.36/net9.0/VersaTul.Collection.Streamers.xml",
+          "xmlSha256": "7b5c05eef8d74a18387f38fb30de6aa1f107492ce019706baf93617c7164a335",
+          "xmlSource": "exact RepositoryCommit source build"
+        }
+      ]
+    }
+  ]
+}

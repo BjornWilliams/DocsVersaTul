@@ -129,6 +129,8 @@ Key Capabilities
 4. Supports async bulk copy and optional progress callbacks.
 5. Uses ``BulkCopyTimeout`` from configuration during upload operations.
 
+The generated API links below cover ``SqlDataSource.CreateCommand``, ``SqlParameter.Type``, and ``SqlParameter.TypeName``. Async upload uses ``IBulkCopy.DoCopyAsync`` from the shared bulk-copy contract.
+
 Bulk-Copy Input Validation
 --------------------------
 
@@ -283,3 +285,5 @@ Support
 Support and feedback matrix <https://docsversatul.readthedocs.io/en/latest/support.html>_.
 
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/mssql.rst

@@ -1,0 +1,891 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Collection.Streamers</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Collection.Streamers.BaseStreamer">
+            <summary>
+            Represents the shared streaming behavior for collection-backed and <see cref="T:System.Data.IDataReader"/>-backed exports.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.BaseStreamer.ColumnHeadings">
+            <summary>
+            Gets the list of column names in the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.BaseStreamer.ContentType">
+            <summary>
+            Gets the type of content in the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.BaseStreamer.FileName">
+            <summary>
+            Gets or sets the name of the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.BaseStreamer.Reader">
+            <summary>
+            Gets a forward-only streams of result sets obtained by executing a command at a data source.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.BaseStreamer.MemoryStream">
+            <summary>
+            The in memory store containing the data to be streamed.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.BaseStreamer.StreamWriter">
+            <summary>
+            The TextWriter for writing characters to the memory stream in a particular encoding.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.BaseStreamer.StreamCancellationToken">
+            <summary>
+            Gets the cancellation token used for current stream generation operation.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.GetFileStream">
+            <summary>
+            Returns the file data as a stream whose backing store is memory.
+            </summary>
+            <returns>A <seealso cref="P:VersaTul.Collection.Streamers.BaseStreamer.MemoryStream"/> containing the serialize collection.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.WriteToFile(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Writes the current reader contents directly to a file on disk.
+            </summary>
+            <param name="directoryPath">The directory where the file should be created, or an absolute file path to write to directly.</param>
+            <param name="cancellationToken">A token used to cancel the write operation.</param>
+            <returns>The full path to the created file.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.WriteTo(System.IO.TextWriter)">
+            <summary>
+            Writes the current stream output to the given text writer.
+            </summary>
+            <param name="writer">The writer that should receive the stream content.</param>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.WriteTo(System.IO.TextWriter,System.Threading.CancellationToken)">
+            <summary>
+            Writes the current stream output to the given text writer with cancellation support.
+            </summary>
+            <param name="writer">The writer that should receive the stream content.</param>
+            <param name="cancellationToken">Token used to cancel stream generation.</param>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.BuildMemoryStream">
+            <summary>
+            Builds the in-memory file stream by writing the current output to the backing writer.
+            </summary>
+            <returns>A <seealso cref="P:VersaTul.Collection.Streamers.BaseStreamer.MemoryStream"/> containing the current stream content.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.GetFileStream(System.Threading.CancellationToken)">
+            <summary>
+            Returns the file data as a stream whose backing store is memory with cancellation support.
+            </summary>
+            <param name="cancellationToken">Token used to cancel stream generation.</param>
+            <returns>A <seealso cref="P:VersaTul.Collection.Streamers.BaseStreamer.MemoryStream"/> containing the serialized collection.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.Dispose">
+            <summary>
+            Closes the underlining StreamWriter and MemoryStream.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.Create``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Creates a streamer from the given collection.
+            </summary>
+            <typeparam name="T">The type of the data contained in the stream.</typeparam>
+            <param name="source">The data to be converted into streamer.</param>
+            <param name="fileName">The name to be used when saving file to disk.</param>
+            <returns>the current instance of the streamer.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.Create(System.Data.IDataReader,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a streamer from the given data reader.
+            </summary>
+            <param name="reader">The forward-only reader to bind to the streamer.</param>
+            <param name="fileName">The name to be used when saving file to disk.</param>
+            <param name="columnHeadings">Optional explicit column headings. When null, headings are resolved from the reader.</param>
+            <returns>The current instance of the streamer.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.ResolveColumnHeadings(System.Data.IDataReader,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Resolves the column headings for the supplied reader.
+            </summary>
+            <param name="reader">The reader whose headings should be used.</param>
+            <param name="columnHeadings">Optional explicit headings.</param>
+            <returns>The resolved headings.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.Dispose(System.Boolean)">
+            <summary>
+            Closes the underlining StreamWriter and MemoryStream.
+            </summary>
+            <param name="disposing">Indicate the state of the instance.</param>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.ResetCurrentState">
+            <summary>
+            Resets the current reader and backing stream resources.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.ResetOutputStream">
+            <summary>
+            Resets only the backing output stream resources while keeping the current reader binding.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.BaseStreamer.EnsureReaderCreated(System.Boolean)">
+            <summary>
+            Check the Reader property to ensure that the create method has been called, otherwise raise an exception.
+            </summary>
+            <param name="throwException">Value indicating of error should be thrown.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if reader is null.</exception>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Compressions.Compressor">
+            <summary>
+            Represents a set functions that can used to compress streamers for transportation via a network.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Compressions.Compressor.#ctor(VersaTul.Compression.Contracts.IZipper)">
+            <summary>
+            Creates a new instance of the <see cref="T:VersaTul.Collection.Streamers.Compressions.Compressor"/> class.
+            </summary>
+            <param name="zipper"></param>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Compressions.Compressor.Compress(System.Collections.Generic.IEnumerable{VersaTul.Collection.Streamers.Contracts.IStreamer})">
+            <summary>
+            Wraps the given list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> and returns the compress streams.
+            </summary>
+            <param name="streamers">The collection of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>.</param>
+            <returns>The Compressed stream.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Compressions.Compressor.Compress(VersaTul.Collection.Streamers.StreamContainer)">
+            <summary>
+            Wraps the given list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> in the <see cref="T:VersaTul.Collection.Streamers.StreamContainer"/> and returns the compress streams.
+            </summary>
+            <param name="streamContainer">The container that contains the list of streams to compress.</param>
+            <returns>The Compressed stream.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Compressions.Compressor.Compress(VersaTul.Compression.ZipStream)">
+            <summary>
+            Wraps the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> and returns the compress stream.
+            </summary>
+            <param name="zipStream">The stream to be compressed.</param>
+            <returns>The Compressed stream.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Compressions.Compressor.CreateContainer(System.Collections.Generic.IEnumerable{VersaTul.Collection.Streamers.Contracts.IStreamer})">
+            <summary>
+            Creates a <see cref="T:VersaTul.Collection.Streamers.StreamContainer"/> containing the list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>.
+            </summary>
+            <param name="streamers">The list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> to be added to the container.</param>
+            <returns>A Container of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> objects.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.ICompressor.Compress(System.Collections.Generic.IEnumerable{VersaTul.Collection.Streamers.Contracts.IStreamer})">
+            <summary>
+            Wraps the given list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> and returns the compress streams.
+            </summary>
+            <param name="streamers">The collection of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>.</param>
+            <returns>The Compressed stream.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.ICompressor.Compress(VersaTul.Collection.Streamers.StreamContainer)">
+            <summary>
+            Wraps the given list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> in the <see cref="T:VersaTul.Collection.Streamers.StreamContainer"/> and returns the compress streams.
+            </summary>
+            <param name="streamContainer">The container that contains the list of streams to compress.</param>
+            <returns>The Compressed stream.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.ICompressor.Compress(VersaTul.Compression.ZipStream)">
+            <summary>
+            Wraps the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> and returns the compress stream.
+            </summary>
+            <param name="zipStream">The stream to be compressed.</param>
+            <returns>The Compressed stream.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.ICompressor.CreateContainer(System.Collections.Generic.IEnumerable{VersaTul.Collection.Streamers.Contracts.IStreamer})">
+            <summary>
+            Creates a <see cref="T:VersaTul.Collection.Streamers.StreamContainer"/> containing the list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>.
+            </summary>
+            <param name="streamers">The list of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> to be added to the container.</param>
+            <returns>A Container of <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> objects.</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.ICompressTransport">
+            <summary>
+            Represents a set of functionality to reduce streamers for transport over the network.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.ICompressTransport.GetAttachments(System.Int64,VersaTul.Collection.Streamers.StreamContainer)">
+            <summary>
+            Creates a list of <see cref="T:System.Net.Mail.Attachment"/> from the given <see cref="T:VersaTul.Collection.Streamers.StreamContainer"/>.
+            </summary>
+            <param name="maxAttachmentSize">The maximum size allowed for mailing attachments.</param>
+            <param name="streamContainer">The collection of streams to be converted to attachments.</param>
+            <returns>A collection of Mailing <see cref="T:System.Net.Mail.Attachment"/></returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.ICsvStreamer">
+            <summary>
+            Represents functionality for creating csv streamers.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IDataReaderStreamCreator">
+            <summary>
+            Represents functionality for creating streamers from forward-only row readers.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IDataReaderStreamCreator.Create(System.Data.IDataReader,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a streamer from the given data reader.
+            </summary>
+            <param name="reader">The forward-only data reader that supplies rows.</param>
+            <param name="fileName">The target file name.</param>
+            <param name="columnHeadings">Optional explicit column headings. When null, headings are resolved from the reader.</param>
+            <returns>The configured streamer instance.</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IFileWritableStreamer">
+            <summary>
+            Represents a streamer that can write formatted output directly to a file.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IFileWritableStreamer.WriteToFile(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Writes the current reader contents directly to a file on disk.
+            </summary>
+            <param name="directoryPath">The directory where the file should be created.</param>
+            <param name="cancellationToken">A token used to cancel the write operation.</param>
+            <returns>The full path to the created file.</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IJsonLineStreamer">
+            <summary>
+            Represents functionality for creating JSON line-delimited streamers.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IJsonStreamer">
+            <summary>
+            Represents functionality for creating json streamers.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IMailTransporter">
+            <summary>
+            Represents a set of functionality to send streamers via email attachments.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IMailTransporter.Transport(System.String,System.String,System.String,System.String,VersaTul.Collection.Streamers.Contracts.IStreamer)">
+            <summary>
+            Transfer the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> via email to given receipient.
+            </summary>
+            <param name="fromAddress">The email address from which email is sent.</param>
+            <param name="toAddress">The email address to where email is sent.</param>
+            <param name="subject">The subject of the email.</param>
+            <param name="body">The body of the email.</param>
+            <param name="streamer">The streamer to be attached to the email.</param>
+            <returns>A value indicating success or failer.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IMailTransporter.Transport(System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{VersaTul.Collection.Streamers.Contracts.IStreamer})">
+            <summary>
+            Transfer the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>s via email to given receipient.
+            </summary>
+            <param name="fromAddress">The email address from which email is sent.</param>
+            <param name="toAddress">The email address to where email is sent.</param>
+            <param name="subject">The subject of the email.</param>
+            <param name="body">The body of the email.</param>
+            <param name="streamers">Teh collection of streamers to be attached</param>
+            <returns>A value indicating success or failer.</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IStreamCreator">
+            <summary>
+            Represents functionality for creating streamers.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IStreamCreator.Create``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Creates a Memory Stream from the given collection.
+            </summary>
+            <typeparam name="T">The type of the data contained in the stream.</typeparam>
+            <param name="source">The data to be converted into streamer.</param>
+            <param name="fileName">The name to be used when saving file to disk.</param>
+            <returns>the current instance of the streamer.</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IStreamer">
+            <summary>
+            Represents the data hold in the stream and functionality than can be applied to it.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Contracts.IStreamer.FileName">
+            <summary>
+            Gets or sets the name of the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Contracts.IStreamer.ContentType">
+            <summary>
+            Gets the type of content in the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Contracts.IStreamer.ColumnHeadings">
+            <summary>
+            Gets the list of column names in the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Contracts.IStreamer.Reader">
+            <summary>
+            Gets a forward-only streams of result sets obtained by executing a command at a data source.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IStreamer.GetFileStream">
+            <summary>
+            Returns the file data as a stream whose backing store is memory.
+            </summary>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IStreamer.GetFileStream(System.Threading.CancellationToken)">
+            <summary>
+            Returns the file data as a stream whose backing store is memory with cancellation support.
+            </summary>
+            <param name="cancellationToken">Token used to cancel stream generation.</param>
+            <returns>A <seealso cref="T:System.IO.MemoryStream"/> containing the serialized collection.</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.IStreamFileConverter">
+            <summary>
+            Represent a set of conversion techniques that can be applied to a <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Contracts.IStreamFileConverter.Save(VersaTul.Collection.Streamers.Contracts.IStreamer,System.String,System.Boolean)">
+            <summary>
+            Convert the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> to a physical file on disc at the given path.
+            </summary>
+            <param name="streamer">The stream containing the data to be converted.</param>
+            <param name="filePath">The path at which the file should be saved.</param>
+            <param name="compressed"></param>
+            <exception cref="T:System.ArgumentNullException">This is thrown if <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> or FilePath is null.</exception>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.ITabStreamer">
+            <summary>
+            Represents functionality for creating tab delimited streamers.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Contracts.ITextStreamer">
+            <summary>
+            Represents functionality for creating text streamers.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Converters.FileConverter">
+            <summary>
+            Represent a set of conversion techniques that can be applied to a <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Converters.FileConverter.Save(VersaTul.Collection.Streamers.Contracts.IStreamer,System.String,System.Boolean)">
+            <summary>
+            Convert the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> to a physical file on disc at the given path.
+            </summary>
+            <param name="streamer">The stream containing the data to be converted.</param>
+            <param name="filePath">The path at which the file should be saved.</param>
+            <param name="compressed">When true, compresses the streamer output before saving it.</param>
+            <exception cref="T:System.ArgumentNullException">This is thrown if <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> or FilePath is null.</exception>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.CsvStreamer">
+            <summary>
+            Represents a class that can be converted to a stream for a CSV File.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.CsvStreamer.#ctor(VersaTul.Utilities.Contracts.IUtility,VersaTul.Handler.File.Contracts.IFileUtility,VersaTul.Object.Converters.Contracts.IFlattener,System.String,System.Func{System.String,System.String})">
+            <summary>
+            Represents a class that can be converted to a stream for a CSV File.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.CsvStreamer.Encode(System.String)">
+            <summary>
+            Implement special handling for values that contain comma or quote.
+            This function will enclose in quotes and double up any double quotes.
+            </summary>
+            <param name="value">String value to check</param>
+            <returns>The encoded value as string</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.DelimeterStreamer">
+            <summary>
+            Represents the data hold in the stream and functionality than can be applied to it.
+            In this case converting to a delimited stream. TAB, CSV etc...
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.DelimeterStreamer.#ctor(System.String,System.String,System.String,VersaTul.Handler.File.Contracts.IFileUtility,VersaTul.Object.Converters.Contracts.IFlattener,VersaTul.Utilities.Contracts.INullFiltering)">
+            <summary>
+            Represents the data hold in the stream and functionality than can be applied to it.
+            In this case converting to a delimited stream. TAB, CSV etc...
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.DelimeterStreamer.GetFileStream">
+            <summary>
+            Returns the file data as a stream whose backing store is memory.
+            </summary>
+            <returns>A <seealso cref="T:System.IO.MemoryStream"/> containing the serialize collection.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.DelimeterStreamer.WriteTo(System.IO.TextWriter)">
+            <summary>
+            Writes the current delimited output to the supplied writer.
+            </summary>
+            <param name="writer">The writer that should receive the formatted output.</param>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.DelimeterStreamer.Encode(System.String)">
+            <summary>
+            Encodes the given string.
+            </summary>
+            <param name="value">String value to check</param>
+            <returns>The encoded value as string</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Extensions.CollectionReaderExtensions">
+            <summary>
+            The <seealso cref="T:VersaTul.Collection.Streamers.Readers.CollectionReader`1"/> class implements a simple IDataReader using reflection to allow
+            SqlBulkCopy access to all public properties that are cast-able to SQL Server data types.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Extensions.CollectionReaderExtensions.ToReader``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Convert the given collection into a <seealso cref="T:VersaTul.Collection.Streamers.Readers.CollectionReader`1"/>.
+            </summary>
+            <typeparam name="T">The type in the collection.</typeparam>
+            <param name="collection">The Collection of specific types.</param>
+            <returns>An <seealso cref="T:VersaTul.Collection.Streamers.Readers.CollectionReader`1"/> which implements the IDataReader interface.</returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.JsonLineStreamer">
+            <summary>
+            Represents the data hold in the stream and functionality than can be applied to it.
+            In this case converts to JSON line-delimited format (.jsonl).
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.JsonLineStreamer.#ctor(VersaTul.Handler.File.Contracts.IFileUtility)">
+            <summary>
+            Represents the data hold in the stream and functionality than can be applied to it.
+            In this case converts to JSON line-delimited format (.jsonl).
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.JsonLineStreamer.GetFileStream">
+            <summary>
+            Returns the file data as a stream whose backing store is memory.
+            </summary>
+            <returns>A <seealso cref="T:System.IO.MemoryStream"/> containing the serialized collection in line-delimited JSON format.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.JsonLineStreamer.WriteTo(System.IO.TextWriter)">
+            <summary>
+            Writes the current output as line-delimited JSON to the supplied writer.
+            </summary>
+            <param name="writer">The writer that should receive the formatted output.</param>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.JsonStreamer">
+            <summary>
+            Represents the data hold in the stream and functionality than can be applied to it.
+            In this case converts to JSON.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.JsonStreamer.#ctor(VersaTul.Handler.File.Contracts.IFileUtility)">
+            <summary>
+            Represents the data hold in the stream and functionality than can be applied to it.
+            In this case converts to JSON.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.JsonStreamer.GetFileStream">
+            <summary>
+            Returns the file data as a stream whose backing store is memory.
+            </summary>
+            <returns>A <seealso cref="T:System.IO.MemoryStream"/> containing the serialize collection.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.JsonStreamer.WriteTo(System.IO.TextWriter)">
+            <summary>
+            Writes the current output as a JSON array to the supplied writer.
+            </summary>
+            <param name="writer">The writer that should receive the formatted output.</param>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Readers.CollectionReader`1">
+            <summary>
+            The <seealso cref="T:VersaTul.Collection.Streamers.Readers.CollectionReader`1"/> class implements a simple IDataReader using reflection to allow
+            SqlBulkCopy access to all public properties that are cast-able to SQL Server data types.
+            </summary>
+            <typeparam name="T">Generic type implementing IEnumerable{T}</typeparam>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.#ctor(System.Collections.Generic.IEnumerable{`0},VersaTul.Object.Converters.Contracts.IPropertyProcessor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Core.Collection.Streamer.Reader.CollectionReader`1">CollectionReader</see> class.
+            </summary>
+            <param name="list"></param>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.Close">
+            <summary>
+            Closes the <see cref="T:System.Data.IDataReader" /> Object.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Readers.CollectionReader`1.Depth">
+            <summary>
+            Gets a value indicating the depth of nesting for the current row.
+            </summary>
+            <returns>
+            The level of nesting.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetSchemaTable">
+            <summary>
+            Returns a <see cref="T:System.Data.DataTable" /> that describes the column
+            meta-data of the <see cref="T:System.Data.IDataReader" />.
+            </summary>
+            <returns>
+            A <see cref="T:System.Data.DataTable" /> that describes the column meta-data.
+            </returns>
+            <filterpriority>2</filterpriority>
+            <exception cref="T:System.InvalidOperationException">The <see cref="T:System.Data.IDataReader" /> is closed. </exception>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Readers.CollectionReader`1.IsClosed">
+            <summary>
+            Gets a value indicating whether the data reader is closed.
+            </summary>
+            <returns>
+            true if the data reader is closed; otherwise, false.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.NextResult">
+            <summary>
+            Advances the data reader to the next result, when reading the results of batch
+            SQL statements.
+            </summary>
+            <returns>
+            true if there are more rows; otherwise, false.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.Read">
+            <summary>
+            Advances the <see cref="T:System.Data.IDataReader" /> to the next record.
+            </summary>
+            <returns>
+            true if there are more rows; otherwise, false.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Readers.CollectionReader`1.RecordsAffected">
+            <summary>
+            Gets the number of rows changed, inserted, or deleted by execution of the SQL
+            statement.
+            </summary>
+            <returns>
+            The number of rows changed, inserted, or deleted; 0 if no rows were affected or
+            the statement failed; and -1 for SELECT statements.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.Dispose">
+            <summary>
+            Releases all resources used by the.
+            <see cref="T:Core.Common.Types.Readers.CollectionReader`1">CollectionReader</see>.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Readers.CollectionReader`1.FieldNames">
+            <summary>
+            Gets a list of the readers column names.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Readers.CollectionReader`1.FieldCount">
+            <summary>
+            Gets the number of columns in the reader.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetBoolean(System.Int32)">
+            <summary>
+            Gets the value at the given index as a  bool.
+            </summary>
+            <param name="i">The index position to look.</param>
+            <returns>The value at the position as a bool.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetByte(System.Int32)">
+            <summary>
+            Gets the 8-bit unsigned integer value of the specified column.
+            </summary>
+            <param name="i">The zero-based column ordinal.</param>
+            <returns>The 8-bit unsigned integer value of the specified column.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a stream of bytes from the specified column offset into the buffer as an array, starting at the given buffer offset.
+            </summary>
+            <param name="i">The zero-based column ordinal.</param>
+            <param name="fieldOffset">The index within the field from which to start the read operation.</param>
+            <param name="buffer">The buffer into which to read the stream of bytes.</param>
+            <param name="bufferoffset">The index for buffer to start the read operation.</param>
+            <param name="length">The number of bytes to read.</param>
+            <returns>The actual number of bytes read.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetChar(System.Int32)">
+            <summary>
+            Gets the character value of the specified column.
+            </summary>
+            <param name="i">The zero-based column ordinal.</param>
+            <returns>The character value of the specified column.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)">
+            <summary>
+            Reads a stream of characters from the specified column offset into the buffer as an array, starting at the given buffer offset.
+            </summary>
+            <param name="i">The zero-based column ordinal.</param>
+            <param name="fieldoffset">The index within the row from which to start the read operation.</param>
+            <param name="buffer">The buffer into which to read the stream of bytes.</param>
+            <param name="bufferoffset">The index for buffer to start the read operation.</param>
+            <param name="length">The number of bytes to read.</param>
+            <returns>The actual number of characters read.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetData(System.Int32)">
+            <summary>
+            Returns an <seealso cref="T:System.Data.IDataReader"/> for the specified column ordinal.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The IDataReader for the specified column ordinal.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetDataTypeName(System.Int32)">
+            <summary>
+            Gets the data type information for the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The data type information for the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetDateTime(System.Int32)">
+            <summary>
+            Gets the date and time data value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The date and time data value of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetDecimal(System.Int32)">
+            <summary>
+            Gets the fixed-position numeric value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The fixed-position numeric value of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetDouble(System.Int32)">
+            <summary>
+            Gets the double-precision floating point number of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The double-precision floating point number of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetFieldType(System.Int32)">
+            <summary>
+            Gets the Type information corresponding to the type of Object that would be returned from GetValue(Int32).
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The Type information corresponding to the type of Object that would be returned from GetValue(Int32).</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetFloat(System.Int32)">
+            <summary>
+            Gets the single-precision floating point number of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The single-precision floating point number of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetGuid(System.Int32)">
+            <summary>
+            Returns the GUID value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The GUID value of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetInt16(System.Int32)">
+            <summary>
+            Gets the 16-bit signed integer value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The 16-bit signed integer value of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetInt32(System.Int32)">
+            <summary>
+            Gets the 32-bit signed integer value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The 32-bit signed integer value of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetInt64(System.Int32)">
+            <summary>
+            Gets the 64-bit signed integer value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The 64-bit signed integer value of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetName(System.Int32)">
+            <summary>
+            Gets the name for the field to find.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The name of the field or the empty string (""), if there is no value to return.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetOrdinal(System.String)">
+            <summary>
+            Return the index of the named field.
+            </summary>
+            <param name="name">The name of the columns to lookup.</param>
+            <returns>The index of the named field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetString(System.Int32)">
+            <summary>
+            Gets the string value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The string value of the specified field.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetValue(System.Int32)">
+            <summary>
+            Return the value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The Object which will contain the field value upon return.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.GetValues(System.Object[])">
+            <summary>
+            Populates an array of objects with the column values of the current record.
+            </summary>
+            <param name="values">An array of Object to copy the attribute fields into.</param>
+            <returns>The number of instances of Object in the array.</returns>
+            <remarks>
+            For most applications, the GetValues method provides an efficient means for retrieving all columns, instead of retrieving each column individually.
+            You can pass an Object array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the
+            Object array holds is copied to the array. You can also pass an Object array whose length is more than the number of columns that are contained in the resulting row.
+            </remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Readers.CollectionReader`1.IsDBNull(System.Int32)">
+            <summary>
+            Checks if the value at the given position is null.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>true if the specified field is set to null; otherwise, false.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Readers.CollectionReader`1.Item(System.String)">
+            <summary>
+            Gets the value at the given column as object.
+            </summary>
+            <param name="name">The name of the field </param>
+            <returns></returns>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.Readers.CollectionReader`1.Item(System.Int32)">
+            <summary>
+            Gets the value at the given index as a object.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.StreamContainer">
+            <summary>
+            Represents a container for holding <seealso cref="T:VersaTul.Compression.ZipStream"/>s.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.StreamContainer.ZipStreams">
+            <summary>
+            Gets the collection of zip streams in the container.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Collection.Streamers.StreamContainer.Size">
+            <summary>
+            Gets the Total bytes of the container.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.StreamContainer.Add(VersaTul.Compression.ZipStream)">
+            <summary>
+            Adds the given zip stream to the container.
+            </summary>
+            <param name="zipStream">The instance of the zip stream to add.</param>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.StreamContainer.Add(System.Collections.Generic.IEnumerable{VersaTul.Compression.ZipStream})">
+            <summary>
+            Adds the given collection of zip streams to the container.
+            </summary>
+            <param name="zipStreams">The list of the zip streams to added.</param>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.TabStreamer">
+            <summary>
+            Represents a class that can be converted to a stream for a TAB File.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.TabStreamer.#ctor(VersaTul.Handler.File.Contracts.IFileUtility,VersaTul.Object.Converters.Contracts.IFlattener,System.String,System.Func{System.String,System.String})">
+            <summary>
+            Represents a class that can be converted to a stream for a TAB File.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Transporters.CompressTransport">
+            <summary>
+            Represents a set of functionality to reduce streamers for transport over the network.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Transporters.CompressTransport.GetAttachments(System.Int64,VersaTul.Collection.Streamers.StreamContainer)">
+            <summary>
+            Creates a list of <see cref="T:System.Net.Mail.Attachment"/> from the given <see cref="T:VersaTul.Collection.Streamers.StreamContainer"/>.
+            </summary>
+            <param name="maxAttachmentSize">The maximum size allowed for mailing attachments.</param>
+            <param name="streamContainer">The collection of streams to be converted to attachments.</param>
+            <returns>A collection of Mailing <see cref="T:System.Net.Mail.Attachment"/></returns>
+        </member>
+        <member name="T:VersaTul.Collection.Streamers.Transporters.MailTransporter">
+            <summary>
+            Represents a set of functionality to send streamers via email attachments.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Transporters.MailTransporter.Transport(System.String,System.String,System.String,System.String,VersaTul.Collection.Streamers.Contracts.IStreamer)">
+            <summary>
+            Transfer the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/> via email to given receipient.
+            </summary>
+            <param name="fromAddress">The email address from which email is sent.</param>
+            <param name="toAddress">The email address to where email is sent.</param>
+            <param name="subject">The subject of the email.</param>
+            <param name="body">The body of the email.</param>
+            <param name="streamer">The streamer to be attached to the email.</param>
+            <returns>A value indicating success or failer.</returns>
+        </member>
+        <member name="M:VersaTul.Collection.Streamers.Transporters.MailTransporter.Transport(System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{VersaTul.Collection.Streamers.Contracts.IStreamer})">
+            <summary>
+            Transfer the given <see cref="T:VersaTul.Collection.Streamers.Contracts.IStreamer"/>s via email to given receipient.
+            </summary>
+            <param name="fromAddress">The email address from which email is sent.</param>
+            <param name="toAddress">The email address to where email is sent.</param>
+            <param name="subject">The subject of the email.</param>
+            <param name="body">The body of the email.</param>
+            <param name="streamers">Teh collection of streamers to be attached</param>
+            <returns>A value indicating success or failer.</returns>
+        </member>
+    </members>
+</doc>

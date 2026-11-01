@@ -1,0 +1,845 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Data.MsSql</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Data.MsSql.Bulk.BulkCopy">
+            <summary>
+            Lets you efficiently bulk load a SQL Server table with data from another source.
+            Designed to be a all or nothing upload, it will fail and rollback all uploaded files in a given transaction.
+            </summary>
+            <remarks>
+            Creates a new instance of the <see cref="T:VersaTul.Data.MsSql.Bulk.BulkCopy"/> class.
+            </remarks>
+            <param name="dataConfiguration">The configuration details needt to connect to the database.</param>
+            <param name="logger">The logger to use for logging errors.</param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.#ctor(VersaTul.Data.MsSql.Contracts.IDataConfiguration,VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyService)">
+            <summary>
+            Lets you efficiently bulk load a SQL Server table with data from another source.
+            Designed to be a all or nothing upload, it will fail and rollback all uploaded files in a given transaction.
+            </summary>
+            <remarks>
+            Creates a new instance of the <see cref="T:VersaTul.Data.MsSql.Bulk.BulkCopy"/> class.
+            </remarks>
+            <param name="dataConfiguration">The configuration details needt to connect to the database.</param>
+            <param name="logger">The logger to use for logging errors.</param>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.BulkCopy.BatchSize">
+            <summary>
+            Gets or Sets the number of rows in each batch.
+            </summary>
+            <remarks>At the end of each batch, the rows in the batch are sent to the server.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.BulkCopy.EnableStreaming">
+            <summary>
+            Gets or Sets a value enabling or disabling streaming data from an <see cref="T:System.Data.IDataReader"/> object.
+            </summary>
+            <remarks>
+            True if a SqlBulkCopy object can stream data from an IDataReader object; otherwise, false. The default is false.
+            </remarks>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopy(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail})">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <remarks>All Implementation must set the IsAllUploaded property to indicate success or failure. The Process is considered successful if all files given are inserted successfully.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopy(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail},System.String)">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <param name="dBConnectionName">Connection string name to use instead of Default.</param>
+            <remarks>All Implementation must set the IsAllUploaded property to indicate success or failure. The Process is considered successful if all files given are inserted successfully.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopy(VersaTul.Data.Bulk.CopyDetail)">
+            <summary>
+             Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopy(VersaTul.Data.Bulk.CopyDetail,System.String)">
+            <summary>
+            Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <param name="dBConnectionName">Connection string name to use instead of any defaults that were provided.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopyAsync(VersaTul.Data.Bulk.CopyDetail)">
+            <summary>
+             Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopyAsync(VersaTul.Data.Bulk.CopyDetail,System.String)">
+            <summary>
+             Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <param name="dBConnectionName">Connection string name to use instead of any defaults that were provided.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopyAsync(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail})">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopyAsync(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail},System.String)">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <param name="dBConnectionName">Connection string name to use instead of Default.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopy.DoCopyAsync(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail},System.String,System.Action{VersaTul.Data.Bulk.Results.BulkCopyProgress})">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <param name="dBConnectionName">Connection string name to use instead of Default.</param>
+            <param name="progressCallback">Optional callback invoked after each item is processed.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.BulkCopyService">
+            <summary>
+            Represents the functionality needed to setup and run the <see cref="T:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopyService.#ctor(VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyValidator,VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection,VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper)">
+            <summary>
+            Represents the functionality needed to setup and run the <see cref="T:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopyService.Create(System.String)">
+            <summary>
+            Create new instances of the underlining <seealso cref="T:Microsoft.Data.SqlClient.SqlConnection"/>, the <seealso cref="T:System.Data.Common.DbTransaction"/> and <seealso cref="T:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper"/> classes.
+            </summary>
+            <param name="connectionName">Optional connection name to be used and override the default db connection.</param>
+            <returns>A task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopyService.Dispose">
+            <summary>
+            Dispose of the internal <seealso cref="T:Microsoft.Data.SqlClient.SqlConnection"/>, the <seealso cref="T:System.Data.Common.DbTransaction"/> and <seealso cref="T:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper"/> objects.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopyService.DoCopyAsync(VersaTul.Data.MsSql.Bulk.Data.BulkCopyData)">
+            <summary>
+            Copies all rows from the supplied DbDataReader array to a destination table specified by the DestinationTableName property of the SqlBulkCopy object.
+            </summary>
+            <param name="bulkCopyData">The associated information and configuration about data to be copied.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopyService.CommitAsync">
+            <summary>
+            Asynchronously commits the database transaction.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopyService.RollbackAsync">
+            <summary>
+            Asynchronously rolls back a transaction from a pending state.
+            </summary>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.BulkCopyService.Map(VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping)">
+            <summary>
+            Converts <seealso cref="T:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping"/> to <seealso cref="T:Microsoft.Data.SqlClient.SqlBulkCopyColumnMapping"/>.
+            </summary>
+            <param name="bulkCopyColumnMapping">The column mapping to convert</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Thrown if no matching constructor can be found based on the given data.</exception>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyService">
+            <summary>
+            Represents the functionality needed to setup and run the <see cref="T:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyService.Create(System.String)">
+            <summary>
+            Create new instances of the underlining <seealso cref="T:Microsoft.Data.SqlClient.SqlConnection"/>, the <seealso cref="!:DbTransaction"/> and <seealso cref="T:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper"/> classes.
+            </summary>
+            <param name="connectionName">Optional connection name to be used and override the default db connection.</param>
+            <returns>A task representing the asynchronous operation..</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyService.DoCopyAsync(VersaTul.Data.MsSql.Bulk.Data.BulkCopyData)">
+            <summary>
+            Copies all rows from the supplied DbDataReader array to a destination table specified by the DestinationTableName property of the SqlBulkCopy object.
+            </summary>
+            <param name="bulkCopyData">The associated information and configuration about data to be copied.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyService.CommitAsync">
+            <summary>
+            Asynchronously commits the database transaction.
+            </summary>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyService.RollbackAsync">
+            <summary>
+            Asynchronously rolls back a transaction from a pending state.
+            </summary>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyService.Map(VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping)">
+            <summary>
+            Map a <seealso cref="T:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping"/> to <seealso cref="T:Microsoft.Data.SqlClient.SqlBulkCopyColumnMapping"/>.
+            </summary>
+            <param name="bulkCopyColumnMapping">The column mapping to convert</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Thrown if no matching constructor can be found based on the given data.</exception>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyValidator">
+            <summary>
+            Represents a BulkCopyValidator intended to provide a detailed error messages for SqlBulkCopy in both invalid mappings and when data is too large for the destination column.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyValidator.Validate(System.Data.IDataReader,VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection,VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper)">
+            <summary>
+            Validates the mappings and data to column size in the given IDataReader.
+            </summary>
+            <param name="reader">The data to be validated</param>
+            <param name="dbConnection">The database connection to use get schema info for the upload.</param>
+            <param name="sqlBulkCopyWrapper">The instance of the sqlbulkcopy to get upload info from.</param>
+            <returns>The validated Data Reader.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyValidator.ValidateSource(System.Data.IDataReader,Microsoft.Data.SqlClient.SqlBulkCopyColumnMappingCollection)">
+            <summary>
+            Check if all source column names in the bulk copy column mappings are present in the source data.
+            Method throws exeception for any failed columns.
+            </summary>
+            <param name="reader">The source data to validate.</param>
+            <param name="columnMappings">Sql Bulk Copy column collection.</param>
+            <exception cref="!:InvalidOperationException">Thrown if mismatch columns info is found.</exception>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyValidator.ValidateDestination(System.Data.DataTable,Microsoft.Data.SqlClient.SqlBulkCopyColumnMappingCollection,System.String,System.String,System.String)">
+            <summary>
+            Check if all destination column names in the bulk copy column mappings are present in the destination table.
+            Method throws exeception for failed columns.
+            </summary>
+            <param name="schemaTable">The destination table schema info.</param>
+            <param name="columnMappings">Sql Bulk Copy column collection.</param>
+            <param name="databaseName">The name of the database to upload to.</param>
+            <param name="dataSourceName">The name fo the host server of the database.</param>
+            <param name="destinationTableName">The name of the sql table to upload data to.</param>
+            <exception cref="!:InvalidOperationException">Thrown if mismatch columns info is found.</exception>
+            <returns>An array of DataRow objects.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyValidator.PopulateColumnDefinitions(System.Data.DataTable,System.Data.IDataReader,Microsoft.Data.SqlClient.SqlBulkCopyColumnMappingCollection)">
+            <summary>
+            Populate the array of column definitions for later usage.
+            </summary>
+            <param name="schemaTable">The destination table schema info.</param>
+            <param name="reader">The data to be validated.</param>
+            <param name="columnMappings">The Sql Bulk Copy column collection.</param>
+            <returns>An array of DataRow objects.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IBulkCopyValidator.GetSchemaTable(VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection,System.String)">
+            <summary>
+            Returns a DataTable that describes the column metadata of the DbDataReader.
+            Returns null if the executed command returned no resultset, or after NextResult() returns false.
+            </summary>
+            <param name="dbConnection">The database connection to use get schema info for the upload.</param>
+            <param name="destinationTableName">The name of the table from which to generate schema.</param>
+            <returns>A DataTable that describes the column metadata.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection">
+            <summary>
+            Represent a wrapper around the <see cref="T:Microsoft.Data.SqlClient.SqlConnection"/> class.
+            This is used so the code can be unit testable without a hard dependency on SqlConnection.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.State">
+            <summary>
+            Indicates the state of the SqlConnection during the most recent network operation performed on the connection.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.Database">
+            <summary>
+            Gets the name of the current database or the database to be used after a connection is opened.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.DataSource">
+            <summary>
+            Gets the name of the instance of SQL Server to which to connect.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.Instance">
+            <summary>
+            Gets the current instance of the connection to a SQL Server database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.Create(System.String)">
+            <summary>
+            Creates a new instance of the <seealso cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> class.
+            </summary>
+            <param name="connectionName"></param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.Open">
+            <summary>
+            Opens a database connection with the property settings specified by the ConnectionString.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.Close">
+            <summary>
+            Closes the connection to the database. This is the preferred method of closing any open connection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.OpenAsync">
+            <summary>
+            An asynchronous version of Open(), which opens a database connection with the property settings specified by the ConnectionString.
+            The cancellation token can be used to request that the operation be abandoned before the connection timeout elapses.
+            Exceptions will be propagated via the returned Task. If the connection timeout time elapses without successfully connecting, the returned Task will be marked as faulted with an Exception.
+            The implementation returns a Task without blocking the calling thread for both pooled and non-pooled connections.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection.BeginTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Starts a database transaction.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper">
+            <summary>
+            Represents a wrapper class for the <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> class.
+            This helps with unit testing and reducing dependency.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.BatchSize">
+            <summary>
+            Gets or Sets the number of rows in each batch.
+            At the end of each batch, the rows in the batch are sent to the server.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.BulkCopyTimeout">
+            <summary>
+            Gets or Sets the number of seconds for the operation to complete before it times out.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.DestinationTableName">
+            <summary>
+            Gets or Sets the name of the destination table on the server.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.EnableStreaming">
+            <summary>
+            Gets or Sets the boolean to enables or disables a SqlBulkCopy object to stream data from an IDataReader object.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.ColumnMappings">
+            <summary>
+            Gets a collection of SqlBulkCopyColumnMapping items.
+            Column mappings define the relationships between columns in the data source and columns in the destination.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.Instance">
+            <summary>
+            Gets the underlining instance of the internal <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.Create(VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection,System.Data.Common.DbTransaction)">
+            <summary>
+            Creates a new instance of the <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> class using the given connectioin and transaction.
+            </summary>
+            <param name="databaseConnection">The databse connection to use.</param>
+            <param name="dbTransaction">The database transaction to use.</param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper.WriteToServerAsync(System.Data.IDataReader)">
+            <summary>
+            The asynchronous version of WriteToServer(IDataReader), which copies all rows in the supplied IDataReader to a destination table specified by the DestinationTableName property of the SqlBulkCopy object.
+            </summary>
+            <param name="dataReader">A IDataReader whose rows will be copied to the destination table.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Contracts.IValidDataReader">
+            <summary>
+            Represent a wrapper for the <see cref="T:System.Data.IDataReader"/> used as part of the bulk copy code.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.DatabaseConnection.State">
+            <summary>
+            Indicates the state of the SqlConnection during the most recent network operation performed on the connection.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.DatabaseConnection.Database">
+            <summary>
+            Gets the name of the current database or the database to be used after a connection is opened.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.DatabaseConnection.DataSource">
+            <summary>
+            Gets the name of the instance of SQL Server to which to connect.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.DatabaseConnection.Instance">
+            <summary>
+            Gets the current instance of the connection to a SQL Server database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DatabaseConnection.Create(System.String)">
+            <summary>
+            Creates a new instance of the <seealso cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> class.
+            </summary>
+            <param name="connectionName"></param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DatabaseConnection.Close">
+            <summary>
+            Closes the connection to the database. This is the preferred method of closing any open connection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DatabaseConnection.Open">
+            <summary>
+            Opens a database connection with the property settings specified by the ConnectionString.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DatabaseConnection.OpenAsync">
+            <summary>
+            An asynchronous version of Open(), which opens a database connection with the property settings specified by the ConnectionString.
+            The cancellation token can be used to request that the operation be abandoned before the connection timeout elapses.
+            Exceptions will be propagated via the returned Task. If the connection timeout time elapses without successfully connecting, the returned Task will be marked as faulted with an Exception.
+            The implementation returns a Task without blocking the calling thread for both pooled and non-pooled connections.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DatabaseConnection.BeginTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Starts a database transaction.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DatabaseConnection.Dispose">
+            <summary>
+            Releases all resources used by the Component.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.DataServices.BulkDataService">
+            <summary>
+            Data service class for supporting the bulk copy upload process.
+            </summary>
+            <param name="dataSource">The datasource thats used by the service.</param>
+            <param name="filtering">The filtering that's used by the service</param>
+            <param name="utility">The common functionality needed by the service.</param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DataServices.BulkDataService.#ctor(VersaTul.Data.Sql.Contracts.IDataSource,VersaTul.Utilities.Contracts.INullFiltering,VersaTul.Utilities.Contracts.IUtility)">
+            <summary>
+            Data service class for supporting the bulk copy upload process.
+            </summary>
+            <param name="dataSource">The datasource thats used by the service.</param>
+            <param name="filtering">The filtering that's used by the service</param>
+            <param name="utility">The common functionality needed by the service.</param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.DataServices.BulkDataService.GetSchemaTable(System.String)">
+            <summary>
+            Gets the schema table for the given table from the underlining data source.
+            </summary>
+            <param name="tableName">The name of the table whoes schema to get.</param>
+            <returns>A data table containing the schema info.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData">
+            <summary>
+            Represents the details that will be used by the <see cref="T:VersaTul.Data.MsSql.Bulk.BulkCopy"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData.#ctor(System.Int32,System.Boolean,System.Int32,System.String,System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping},System.Data.IDataReader)">
+            <summary>
+            Represents the details that will be used by the <see cref="T:VersaTul.Data.MsSql.Bulk.BulkCopy"/>.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData.BatchSize">
+            <summary>
+             Gets or Sets the number of rows in each batch.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData.EnableStreaming">
+            <summary>
+            Gets or Sets a value enabling or disabling streaming data from an <see cref="T:System.Data.IDataReader"/> object.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData.BulkCopyTimeout">
+            <summary>
+            Gets or Sets the number of seconds for the operation to complete before it times out.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData.DestinationTableName">
+            <summary>
+            Gets or Sets the name of th destination sql table.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData.ColumnMappings">
+            <summary>
+            Gets or Sets the source to destination column mappings.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.Data.BulkCopyData.SourceData">
+            <summary>
+            Gets or Sets the source data to be copied.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper">
+            <summary>
+            Represents a wrapper class for the <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> class.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.#ctor">
+            <summary>
+            Represents a wrapper class for the <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> class.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.DestinationTableName">
+            <summary>
+            Gets or Sets the name of the destination table on the server.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.ColumnMappings">
+            <summary>
+            Gets a collection of SqlBulkCopyColumnMapping items.
+            Column mappings define the relationships between columns in the data source and columns in the destination.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.BatchSize">
+            <summary>
+            Gets or Sets the number of rows in each batch.
+            At the end of each batch, the rows in the batch are sent to the server.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.BulkCopyTimeout">
+            <summary>
+            Gets or Sets the number of seconds for the operation to complete before it times out.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.EnableStreaming">
+            <summary>
+            Gets or Sets the boolean to enables or disables a SqlBulkCopy object to stream data from an IDataReader object.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.Instance">
+            <summary>
+            Gets the underlining instance of the internal <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.Create(VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection,System.Data.Common.DbTransaction)">
+            <summary>
+            Creates a new instance of the <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> class using the given connectioin and transaction.
+            </summary>
+            <param name="databaseConnection">The databse connection to use.</param>
+            <param name="dbTransaction">The database transaction to use.</param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.WriteToServerAsync(System.Data.IDataReader)">
+            <summary>
+            The asynchronous version of WriteToServer(IDataReader), which copies all rows in the supplied IDataReader to a destination table specified by the DestinationTableName property of the SqlBulkCopy object.
+            </summary>
+            <param name="dataReader">A IDataReader whose rows will be copied to the destination table.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.SqlBulkCopyWrapper.Dispose">
+            <summary>
+            Close the bulkCopy and set intance to null.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Validation.SqlBulkCopyValidator">
+            <summary>
+            Represents a BulkCopyValidator intended to provide a detailed error messages for SqlBulkCopy in both invalid mappings and when data is too large for the destination column.
+            </summary>
+            <param name="bulkDataService"></param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Validation.SqlBulkCopyValidator.#ctor(VersaTul.Data.MsSql.Bulk.DataServices.BulkDataService)">
+            <summary>
+            Represents a BulkCopyValidator intended to provide a detailed error messages for SqlBulkCopy in both invalid mappings and when data is too large for the destination column.
+            </summary>
+            <param name="bulkDataService"></param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Validation.SqlBulkCopyValidator.Validate(System.Data.IDataReader,VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection,VersaTul.Data.MsSql.Bulk.Contracts.ISqlBulkCopyWrapper)">
+            <summary>
+            Validates the mappings and data to column size in the given IDataReader.
+            </summary>
+            <param name="reader">The data to be validated</param>
+            <param name="dbConnection">The database connection to use get schema info for the upload.</param>
+            <param name="sqlBulkCopyWrapper">The instance of the sqlbulkcopy to get upload info from.</param>
+            <returns>The validated Data Reader.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Validation.SqlBulkCopyValidator.ValidateSource(System.Data.IDataReader,Microsoft.Data.SqlClient.SqlBulkCopyColumnMappingCollection)">
+            <summary>
+            Check if all source column names in the bulk copy column mappings are present in the source data.
+            Method throws exeception for any failed columns.
+            </summary>
+            <param name="reader">The source data to validate.</param>
+            <param name="columnMappings">Sql Bulk Copy column collection.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if mismatch columns info is found.</exception>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Validation.SqlBulkCopyValidator.ValidateDestination(System.Data.DataTable,Microsoft.Data.SqlClient.SqlBulkCopyColumnMappingCollection,System.String,System.String,System.String)">
+            <summary>
+            Check if all destination column names in the bulk copy column mappings are present in the destination table.
+            Method throws exeception for failed columns.
+            </summary>
+            <param name="schemaTable">The destination table schema info.</param>
+            <param name="columnMappings">Sql Bulk Copy column collection.</param>
+            <param name="databaseName">The name of the database to upload to.</param>
+            <param name="dataSourceName">The name fo the host server of the database.</param>
+            <param name="destinationTableName">The name of the sql table to upload data to.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if mismatch columns info is found.</exception>
+            <returns>An array of DataRow objects.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Validation.SqlBulkCopyValidator.PopulateColumnDefinitions(System.Data.DataTable,System.Data.IDataReader,Microsoft.Data.SqlClient.SqlBulkCopyColumnMappingCollection)">
+            <summary>
+            Populate the array of column definitions for later usage.
+            </summary>
+            <param name="schemaTable">The destination table schema info.</param>
+            <param name="reader">The data to be validated.</param>
+            <param name="columnMappings">The Sql Bulk Copy column collection.</param>
+            <returns>An array of DataRow objects.</returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Validation.SqlBulkCopyValidator.GetSchemaTable(VersaTul.Data.MsSql.Bulk.Contracts.IDatabaseConnection,System.String)">
+            <summary>
+            Returns a DataTable that describes the column metadata of the DbDataReader.
+            Returns null if the executed command returned no resultset, or after NextResult() returns false.
+            </summary>
+            <param name="dbConnection">The database connection to use get schema info for the upload.</param>
+            <param name="destinationTableName">The name of the table from which to generate schema.</param>
+            <returns>A DataTable that describes the column metadata.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Bulk.Validation.ValidDataReader">
+            <summary>
+            Customer <see cref="T:System.Data.IDataReader"/> class to support bulk upload with detail error message.
+            </summary>
+            <param name="reader">The source data.</param>
+            <param name="columnDefinitions">Collection of destination column definitions.</param>
+            <param name="tableName">The name of the table from which to generate schema.</param>
+            <param name="databaseName">The destination database name</param>
+            <param name="serverName">The destination dataSource server name.</param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Bulk.Validation.ValidDataReader.#ctor(System.Data.IDataReader,System.Data.DataRow[],System.String,System.String,System.String)">
+            <summary>
+            Customer <see cref="T:System.Data.IDataReader"/> class to support bulk upload with detail error message.
+            </summary>
+            <param name="reader">The source data.</param>
+            <param name="columnDefinitions">Collection of destination column definitions.</param>
+            <param name="tableName">The name of the table from which to generate schema.</param>
+            <param name="databaseName">The destination database name</param>
+            <param name="serverName">The destination dataSource server name.</param>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Configurations.DataConfiguration">
+            <summary>
+            MsSql specific configuration settings.
+            </summary>
+            <param name="configSettings"></param>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.Configurations.DataConfiguration.#ctor(VersaTul.Configurations.ConfigSettings)">
+            <summary>
+            MsSql specific configuration settings.
+            </summary>
+            <param name="configSettings"></param>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Configurations.DataConfiguration.BulkCopyTimeout">
+            <summary>
+            Gets the number of seconds for the operation to complete before it times out.
+            </summary>
+            <remarks>If the operation does time out, the transaction is not committed and all copied rows are removed from the destination table.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Contracts.IDataConfiguration">
+            <summary>
+            Represents MsSql specific configuration settings.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Contracts.IDataConfiguration.BulkCopyTimeout">
+            <summary>
+            Gets the number of seconds for the operation to complete before it times out.
+            </summary>
+            <remarks>If the operation does time out, the transaction is not committed and all copied rows are removed from the destination table.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Contracts.ISqlDataSource">
+            <summary>
+            Represent funcationality to get connect to a MSSQL Database and perform CRUD operations.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Contracts.ISqlDataSource.CommandDiagnostics">
+            <summary>
+            Optional hook for command timing/exception diagnostics.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Contracts.ISqlDataSource.ParameterDiagnostics">
+            <summary>
+            Optional hook for SQL parameter tracing diagnostics.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Contracts.ISqlParameter">
+            <summary>
+            Represents a parameter to a Command object, and optionally, its mapping to DataSet columns; and is implemented by .NET Framework data providers that access data sources.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Contracts.ISqlParameter.Type">
+            <summary>
+             Gets or sets the <see cref="T:System.Data.SqlDbType"/> of the parameter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Contracts.ISqlParameter.TypeName">
+            <summary>
+            Gets or sets the SQL user-defined table type name for structured parameters.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs">
+            <summary>
+            Represents event data about the column that generated the exception during bulk copy validation.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.DataTypeName">
+            <summary>
+            Gets column data type name identifier.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.DataType">
+            <summary>
+            Gets the column actual data type.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.Value">
+            <summary>
+            Gets the column value.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.SourceIndex">
+            <summary>
+            Gets the column numeric index value.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.SourceColumn">
+            <summary>
+            Gets the column name identifier.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.DestIndex">
+            <summary>
+            Gets the column destination column index.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.DestColumn">
+            <summary>
+            Gets the column destination column name identifier.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.ColumnSize">
+            <summary>
+            Gets the column size.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.RecordIndex">
+            <summary>
+            Gets the ordinal position of the current record.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.TableName">
+            <summary>
+            Gets the destination table name identifier.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.DatabaseName">
+            <summary>
+            Gets the name identifer of the destination database.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.ServerName">
+            <summary>
+            Gets the name idenfier of the server where the database is located.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.Exceptions.ColumnExceptionEventArgs.Message">
+            <summary>
+            Gets the error message associated to the column.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.SqlDataSource">
+            <summary>
+            Represent funcationality to get connect to a MSSQL Database and perform CRUD operations.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.SqlDataSource.#ctor(VersaTul.Data.Sql.Contracts.ICommandFactory)">
+            <summary>
+            Represent funcationality to get connect to a MSSQL Database and perform CRUD operations.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.SqlDataSource.CreateCommand(VersaTul.Data.Sql.DataCommand,System.String,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Create a <see cref="T:Microsoft.Data.SqlClient.SqlCommand"/> with given procedure, connection and parameter.
+            </summary>
+            <param name="dataCommand">The stored procedure to call.</param>
+            <param name="dBConnectionName">The connection string to the database.</param>
+            <param name="parameters">The parameters to pass in with stored procedure.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.SqlDataSource.GetSqlParameter(VersaTul.Data.Sql.Contracts.IParameter)">
+            <summary>
+            Used to convert <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> to a <see cref="T:VersaTul.Data.MsSql.Contracts.ISqlParameter"/>.
+            </summary>
+            <param name="parameter">The parameter to convert.</param>
+            <returns>Returns the <see cref="T:VersaTul.Data.MsSql.Contracts.ISqlParameter"/> equivalent.</returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.SqlParameter">
+            <summary>
+            Represents a parameter to a <see cref="!:SqlCommand"/> and optionally its mapping to DataSet columns.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.SqlParameter.Type">
+            <summary>
+            Gets or sets the SqlDbType of the parameter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.MsSql.SqlParameter.TypeName">
+            <summary>
+            Gets or sets the SQL user-defined table type name for structured parameters.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.SqlParameter.ConvertToDbType(System.Data.SqlDbType)">
+            <summary>
+            Converts the <see cref="T:System.Data.SqlDbType"/> to <see cref="T:System.Data.DbType"/>.
+            </summary>
+            <param name="sqlDbType">The type to be converted.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Data.MsSql.TableValuedParameter">
+            <summary>
+            Helper factory APIs for SQL table-valued parameters.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.TableValuedParameter.FromDataTable(System.String,System.Data.DataTable,System.String)">
+            <summary>
+            Creates a table-valued parameter from a DataTable source.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.MsSql.TableValuedParameter.FromRecords(System.String,System.Collections.Generic.IEnumerable{Microsoft.Data.SqlClient.Server.SqlDataRecord},System.String)">
+            <summary>
+            Creates a table-valued parameter from a sequence of SqlDataRecord values.
+            </summary>
+        </member>
+    </members>
+</doc>

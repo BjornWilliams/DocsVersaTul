@@ -1,0 +1,1811 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Data.Sql</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Data.Sql.BaseDataService">
+            <summary>
+            Represents a basic implmentation for the <seealso cref="T:VersaTul.Data.Sql.Contracts.IDataSource"/> interface.
+            Use this as a starting point for Custom data services used in projects.
+            All basic and general database functionality are supported in this implementation.
+            </summary>
+            <remarks>
+            Creates a new instance of <see cref="T:VersaTul.Data.Sql.BaseDataService"/>.
+            </remarks>
+            <param name="dataSource">The data source exposed by this service.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.#ctor(VersaTul.Data.Sql.Contracts.IDataSource,VersaTul.Utilities.Contracts.INullFiltering,VersaTul.Utilities.Contracts.IUtility)">
+            <summary>
+            Represents a basic implmentation for the <seealso cref="T:VersaTul.Data.Sql.Contracts.IDataSource"/> interface.
+            Use this as a starting point for Custom data services used in projects.
+            All basic and general database functionality are supported in this implementation.
+            </summary>
+            <remarks>
+            Creates a new instance of <see cref="T:VersaTul.Data.Sql.BaseDataService"/>.
+            </remarks>
+            <param name="dataSource">The data source exposed by this service.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReader(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReader(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReader(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReader(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReaderAsync(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReaderAsync(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReaderAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteReaderAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQuery(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQuery(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQuery(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQuery(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQueryAsync(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQueryAsync(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQueryAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteNonQueryAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.ProcessReader(System.Data.Common.DbDataReader,VersaTul.Data.Sql.BaseDataService.ProccessReaderHandler)">
+            <summary>
+            Iterate the given data reader and provide access to the data at each row via the helper methods.
+            </summary>
+            <param name="reader">The reader dataSource to iterate.</param>
+            <param name="handler">The delegate method to call for each row processed.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.GetLong(System.String)">
+            <summary>
+            Gets the value of the specified column as a Long(Int64).
+            </summary>
+            <param name="name">The name of the column.</param>
+            <returns>The value of the column expressed as a long(Int64).</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.GetInt(System.String)">
+            <summary>
+            Gets the value of the specified column as a Int32
+            </summary>
+            <param name="name">The name of the column.</param>
+            <returns>The value of the column expressed as a Int32</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.GetString(System.String)">
+            <summary>
+            Gets the value of the specified column as a String
+            </summary>
+            <param name="name">The name of the column.</param>
+            <returns>The value of the column expressed as a String.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.GetDate(System.String)">
+            <summary>
+            Gets the value of the specified column as a DateTime
+            </summary>
+            <param name="name">The name of the column.</param>
+            <returns>The value of the column expressed as a DateTime.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.GetBool(System.String)">
+            <summary>
+            Gets the value of the specified column as a Bool
+            </summary>
+            <param name="name">The name of the column.</param>
+            <returns>The value of the column expressed as a Boolean</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.GetDouble(System.String)">
+            <summary>
+            Gets the value of the specified column as a Double
+            </summary>
+            <param name="name">The name of the column.</param>
+            <returns>The value of the column expressed as a Double.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.GetDecimal(System.String)">
+            <summary>
+            Gets the value of the specified column as a Decimal.
+            </summary>
+            <param name="name">The name of the column.</param>
+            <returns>The value of the column expressed as a Decimal.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.Get``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets the value of the specified column as the specified type.
+            </summary>
+            <typeparam name="TInput">The type from which property name will be taken.</typeparam>
+            <typeparam name="TResult">The return type of the expected data.</typeparam>
+            <param name="expression">The lambda expression as a data structure.</param>
+            <returns>The value of the column expressed as a expected type.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction(System.Action{System.Data.IDbTransaction})">
+            <summary>
+            Starts a database transaction.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction``1(System.Func{System.Data.IDbTransaction,``0})">
+            <summary>
+            Starts a database transaction.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction(System.Action{System.Data.IDbTransaction},System.Data.IsolationLevel)">
+            <summary>
+            Starts a database transaction with the specified isolation level.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction``1(System.Func{System.Data.IDbTransaction,``0},System.Data.IsolationLevel)">
+            <summary>
+            Starts a database transaction with the specified isolation level.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction(System.Action{System.Data.IDbTransaction},System.String)">
+            <summary>
+            Starts a database transaction on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction``1(System.Func{System.Data.IDbTransaction,``0},System.String)">
+            <summary>
+            Starts a database transaction on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction(System.Action{System.Data.IDbTransaction},System.Data.IsolationLevel,System.String)">
+            <summary>
+            Starts a database transaction with the specified isolation level on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransaction``1(System.Func{System.Data.IDbTransaction,``0},System.Data.IsolationLevel,System.String)">
+            <summary>
+            Starts a database transaction with the specified isolation level on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync``1(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task},System.Data.IsolationLevel,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction with the specified isolation level.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync``1(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task{``0}},System.Data.IsolationLevel,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction with the specified isolation level.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync``1(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task{``0}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task},System.Data.IsolationLevel,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction with the specified isolation level on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.UseTransactionAsync``1(System.Func{System.Data.IDbTransaction,System.Threading.Tasks.Task{``0}},System.Data.IsolationLevel,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously begins a database transaction with the specified isolation level on the overriden database.
+            </summary>
+            <param name="handler">A method that takes a <see cref="T:System.Data.IDbTransaction"/>.</param>
+            <param name="isolationLevel">One of the enumeration values that specifies the isolation level for the transaction to use.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <param name="cancellationToken">An optional token to cancel the asynchronous operation. The default value is None.</param>
+            <returns>A task whose Result property is an object representing the new transaction.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.IsReaderValid(System.Data.Common.DbDataReader)">
+            <summary>
+            Check if the given <see cref="T:System.Data.Common.DbDataReader"/> is not null or if it has rows.
+            </summary>
+            <param name="reader">The reader instance to check.</param>
+            <returns>True, if reader is valid otherwise False.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.BaseDataService.CloseReader(System.Data.Common.DbDataReader)">
+            <summary>
+            Safetly calls the close method on the given <see cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="T:VersaTul.Data.Sql.CommandFactory">
+            <summary>
+             Contains a collection of functionality that can be performed on any SQL database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.CreateCommand(VersaTul.Data.Sql.DataCommand,System.String,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Action{VersaTul.Data.Sql.Contracts.IParameter,System.Data.Common.DbCommand})">
+            <summary>
+            Creates a <seealso cref="T:System.Data.Common.DbCommand"/> from the given details.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <param name="parameters">The parameters to pass on to stored procedure.</param>
+            <param name="mapParameter">The action method to help with parameter mapping.</param>
+            <returns>Created <seealso cref="T:System.Data.Common.DbCommand"/></returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteNonQuery(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute a SQL statement against a connection object.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <returns>The number of affected rows.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteNonQueryAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute a SQL statement against a connection object.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <returns>The number of affected rows wrapped in a Task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteNonQueryAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Execute a SQL statement against a connection object.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>The number of affected rows wrapped in a Task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteReader(System.Data.Common.DbCommand)">
+            <summary>
+            Executes the <seealso cref="T:System.Data.Common.DbCommand"/> against the Connection and returns a <seealso cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <returns>An <seealso cref="T:System.Data.Common.DbDataReader"/> object.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteReaderAsync(System.Data.Common.DbCommand)">
+            <summary>
+            Executes the <seealso cref="T:System.Data.Common.DbCommand"/> against the Connection and returns a <seealso cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <returns>An <seealso cref="T:System.Data.Common.DbDataReader"/> object wrapped in a task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteReaderAsync(System.Data.Common.DbCommand,System.Threading.CancellationToken)">
+            <summary>
+            Executes the <seealso cref="T:System.Data.Common.DbCommand"/> against the Connection and returns a <seealso cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>An <seealso cref="T:System.Data.Common.DbDataReader"/> object wrapped in a task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteScalar(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown of <see cref="T:System.Data.Common.DbCommand"/> is null.</exception>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteScalarAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Implements the asynchronous version of ExecuteScalar(), but returns a Task synchronously, blocking the calling thread.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown of <see cref="T:System.Data.Common.DbCommand"/> is null.</exception>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.ExecuteScalarAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Implements the asynchronous version of ExecuteScalar(), but returns a Task synchronously, blocking the calling thread.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown of <see cref="T:System.Data.Common.DbCommand"/> is null.</exception>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.CreateConnection(System.String)">
+            <summary>
+            Returns a new instance of the provider's class that implements the DbConnection class.
+            </summary>
+            <param name="dBConnectionName">The name of connection to use as an overrider of the default.</param>
+            <returns>A new instance of DbConnection and the connection name used..</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.Create(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+             Creates a <seealso cref="T:System.Data.Common.DbCommand"/> from the given details.
+            <paramref name="dataCommand"/></summary>        ///
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <returns>A created <seealso cref="T:System.Data.Common.DbCommand"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.CommandFactory.SetOutputParameters(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Update Output parameters using values returned from database.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Configurations.DataConfiguration">
+            <summary>
+            Provides a set of methods or properties for getting configuration values from setting store.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Configurations.DataConfiguration.#ctor(VersaTul.Configurations.ConfigSettings)">
+            <summary>
+            Provides a set of methods or properties for getting configuration values from setting store.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Configurations.DataConfiguration.CommandTimeout">
+            <summary>
+            Gets the time in seconds to wait for the command to execute.
+            </summary>
+            <remarks>A value of 0 indicates no limit (an attempt to execute a command will wait indefinitely).</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Configurations.DataConfiguration.SqlDbConnectionName">
+            <summary>
+            Gets the Connection string name setting.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Configurations.DataConfiguration.GetConnectionString">
+            <summary>
+            Gets the ConnectionString for the current application's default configuration.
+            </summary>
+            <returns>The connection string.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Configurations.DataConfiguration.GetConnectionString(System.String)">
+            <summary>
+            Gets the ConnectionString for the current application's for the given connection name configuration.
+            </summary>
+            <param name="name">The name of the connection string. Maps to the name attribute.</param>
+            <returns>The connection string.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Configurations.DataConfiguration.GetProviderName">
+            <summary>
+            Gets the fully qualified provider name.
+            </summary>
+            <returns>The providerName as string</returns>
+            <remarks>Uses the default connection name <c>DBCon.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Configurations.DataConfiguration.GetProviderName(System.String)">
+            <summary>
+            Gets the fully qualified provider name for the given connection name.
+            </summary>
+            <param name="name">The name of the connection string. Maps to the name attribute.</param>
+            <returns>The connection providerName as string</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Configurations.DataConfiguration.GetConnectionInfo(System.String)">
+            <summary>
+            Gets the fully qualified provider name for the given connection name.
+            </summary>
+            <param name="name">The name of the connection string. Maps to the name attribute.</param>
+            <returns>The connection providerName as string</returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:VersaTul.Data.Sql.ConnectionInfo">
+            <summary>
+            Represents a connection string info.
+            </summary>
+            <remarks>
+            Creates a new instance of the <seealso cref="T:VersaTul.Data.Sql.Contracts.IConnectionInfo"/>.
+            </remarks>
+            <param name="connectionString">The connection string details.</param>
+            <param name="providerName">The connection string provider name.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.ConnectionInfo.#ctor(System.String,System.String)">
+            <summary>
+            Represents a connection string info.
+            </summary>
+            <remarks>
+            Creates a new instance of the <seealso cref="T:VersaTul.Data.Sql.Contracts.IConnectionInfo"/>.
+            </remarks>
+            <param name="connectionString">The connection string details.</param>
+            <param name="providerName">The connection string provider name.</param>
+        </member>
+        <member name="P:VersaTul.Data.Sql.ConnectionInfo.ConnectionString">
+            <summary>
+            Gets the connection string.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.ConnectionInfo.ProviderName">
+            <summary>
+            Gets the connection provider name.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IAddParameter">
+            <summary>
+            Represents the add method for inserting <seealso cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> objects into the underlying collection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IAddParameter.Add(VersaTul.Data.Sql.Contracts.IParameter)">
+            <summary>
+            Adds an <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> to the end of the List.
+            </summary>
+            <param name="parameter">The <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> to be added to the end of the List.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.ICommandFactory">
+            <summary>
+            Represents a collection of functionality that can be performed on any SQL database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.CreateCommand(VersaTul.Data.Sql.DataCommand,System.String,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Action{VersaTul.Data.Sql.Contracts.IParameter,System.Data.Common.DbCommand})">
+            <summary>
+            Creates a <seealso cref="T:System.Data.Common.DbCommand"/> from the given details.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <param name="parameters">The parameters to pass on to stored procedure.</param>
+            <param name="mapParameter">The action method to help with parameter mapping.</param>
+            <returns>Created <seealso cref="T:System.Data.Common.DbCommand"/></returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteNonQuery(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute a SQL statement against a connection object.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <returns>The number of affected rows.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteNonQueryAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute a SQL statement against a connection object.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <returns>The number of affected rows wrapped in a Task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteNonQueryAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Execute a SQL statement against a connection object.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="parameters">The parameters associated with the command.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>The number of affected rows wrapped in a Task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteReader(System.Data.Common.DbCommand)">
+            <summary>
+            Executes the <seealso cref="T:System.Data.Common.DbCommand"/> against the Connection and returns a <seealso cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <returns>An <seealso cref="T:System.Data.Common.DbDataReader"/> object.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteReaderAsync(System.Data.Common.DbCommand)">
+            <summary>
+            Executes the <seealso cref="T:System.Data.Common.DbCommand"/> against the Connection and returns a <seealso cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <returns>An <seealso cref="T:System.Data.Common.DbDataReader"/> object wrapped in a task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteReaderAsync(System.Data.Common.DbCommand,System.Threading.CancellationToken)">
+            <summary>
+            Executes the <seealso cref="T:System.Data.Common.DbCommand"/> against the Connection and returns a <seealso cref="T:System.Data.Common.DbDataReader"/>.
+            </summary>
+            <param name="command">The statment or stored procedure to execute</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>An <seealso cref="T:System.Data.Common.DbDataReader"/> object wrapped in a task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteScalar(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="command">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteScalarAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="command">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.ExecuteScalarAsync(System.Data.Common.DbCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="command">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.ICommandFactory.CreateConnection(System.String)">
+            <summary>
+            Returns a new instance of the provider's class that implements the DbConnection class.
+            </summary>
+            <param name="dBConnectionName">The name of connection to use as an overrider of the default.</param>
+            <returns>A new instance of DbConnection and the connection name used..</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IConnectionInfo">
+            <summary>
+            Represents a connection string details.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IConnectionInfo.ConnectionString">
+            <summary>
+            Gets the connection string.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IConnectionInfo.ProviderName">
+            <summary>
+            Gets the provider name of the connection string.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IDataConfiguration">
+            <summary>
+            Represents a set of methods or properties for getting configuration values from setting store.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IDataConfiguration.SqlDbConnectionName">
+            <summary>
+            Gets the Connection string name setting.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IDataConfiguration.CommandTimeout">
+            <summary>
+            Gets the time in seconds to wait for the command to execute.
+            </summary>
+            <remarks>A value of 0 indicates no limit (an attempt to execute a command will wait indefinitely).</remarks>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IDataReader">
+            <summary>
+            Represents a set of methods to read data from a SQL data-source.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReader.Read(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReader.Read(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReader.Read(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="procedure">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReader.Read(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="procedure">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IDataReaderAsync">
+            <summary>
+            Represents a set of methods to read data from a SQL data-source asynchronously.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataReaderAsync.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IDataSource">
+            <summary>
+            Represents a composite of the Data role interfaces that provides read and write capabilities.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataSource.CreateConnection(System.String)">
+            <summary>
+            Returns a new instance of the provider's class that implements the DbConnection class.
+            </summary>
+            <param name="dBConnectionName">The name of connection to use as an overrider of the default.</param>
+            <returns>A new instance of DbConnection and the connection name used..</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IDataWriter">
+            <summary>
+            Represents a set of methods to write data to a SQL data-source.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriter.Write(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriter.Write(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriter.Write(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriter.Write(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IDataWriterAsync">
+            <summary>
+            Represents a set of methods to write data to a SQL data-source asynchronously.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IDataWriterAsync.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IExecuteScalar">
+            <summary>
+            Represents a set of methods to write data to a SQL data-source in a scalar fashion.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IExecuteScalar.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IParameter">
+            <summary>
+            Represents the set of properties and methods that describes a parameter passed into the Sql Command.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameter.Name">
+            <summary>
+            Gets the name of the parameter with @ symbol attached.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameter.Value">
+            <summary>
+            Gets or sets the value of the parameter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameter.Type">
+            <summary>
+            Gets or sets the <see cref="T:System.Data.DbType"/> of the parameter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameter.Size">
+            <summary>
+            Gets or sets the maximum size, in bytes, of the data within the column.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameter.Direction">
+            <summary>
+            Gets or sets a value that indicates whether the parameter is input-only,
+            output-only, bidirectional, or a stored procedure return value parameter.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IParameterCollection">
+            <summary>
+            Represents a collection of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> objects.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameterCollection.Collection">
+            <summary>
+            Gets the list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> objects contained in the collection.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameterCollection.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object with the given name.
+            </summary>
+            <param name="name">The name of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object to lookup.</param>
+            <returns>Returns an <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object.</returns>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Contracts.IParameterCollection.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object at the given index.
+            </summary>
+            <param name="index">The  numerical position of the <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object to retrieved.</param>
+            <returns>Returns an <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object.</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Contracts.IProviderFactory">
+            <summary>
+            Represents a set of methods for creating instances of a provider's implementation of the data sourece classes.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Contracts.IProviderFactory.GetFactory(System.String)">
+            <summary>
+            Returns an instance of a <see cref="T:System.Data.Common.DbProviderFactory"/>.
+            </summary>
+            <param name="providerInvariantName">The provider name to return</param>
+            <returns>Returns an instance of a <see cref="T:System.Data.Common.DbProviderFactory"/></returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.DataCommand">
+            <summary>
+            Represents a set of instructions on how to get data from the underlining datasource.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.DataCommand.#ctor(System.String,VersaTul.Data.Sql.DataCommandType)">
+            <summary>
+            Creates a new instance of the <seealso cref="T:VersaTul.Data.Sql.DataCommand"/>.
+            </summary>
+            <param name="commandText">The command instruction to execute at the datasource.</param>
+            <param name="commandType">Inidcator of the type of command text to be executed.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.DataCommand.#ctor(System.String,VersaTul.Data.Sql.DataCommandType,System.Nullable{System.Int32})">
+            <summary>
+            Creates a new instance of the <seealso cref="T:VersaTul.Data.Sql.DataCommand"/>.
+            </summary>
+            <param name="commandText">The command instruction to execute at the datasource.</param>
+            <param name="commandType">Inidcator of the type of command text to be executed.</param>
+            <param name="commandTimeout">Set the time in seconds to wait for the command to execute before terminating.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:VersaTul.Data.Sql.DataCommand.CommandText">
+            <summary>
+            Gets the command text to execute at the datasource.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.DataCommand.CommandType">
+            <summary>
+            Gets an inidcator of the type of command text to be executed.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.DataCommand.CommandTimeout">
+            <summary>
+            Gets the time in seconds to wait for the command to execute.
+            </summary>
+            <remarks>A value of 0 indicates no limit (an attempt to execute a command will wait indefinitely).</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Sql.DataCommand.Transaction">
+            <summary>
+            Gets or sets the DbTransaction within which this DbCommand object executes.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Sql.DataCommandType">
+            <summary>
+            Represent the kind of procedure to be executed on the datasource.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Sql.Parameter">
+            <summary>
+            Represents a parameter to a Command and optionally its mapping to DataSet columns.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Parameter.#ctor(System.String,System.Object,System.Data.DbType,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Creates a parameter that will make a database call.
+            </summary>
+            <param name="name">The name of the parameter</param>
+            <param name="value">The value of the parameter</param>
+            <param name="type">The type of parameter</param>
+            <param name="size">The size of the parameter(N.B If this value is set to zero it will not be added to the parameter object.)</param>
+            <param name="direction"></param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Parameter.#ctor(System.String,System.Object,System.Data.DbType,System.Int32,System.Data.ParameterDirection,VersaTul.Data.Sql.ParameterRules)">
+            <summary>
+            Creates a parameter that will make a database call.
+            </summary>
+            <param name="name">The name of the parameter</param>
+            <param name="value">The value of the parameter</param>
+            <param name="type">The type of parameter</param>
+            <param name="size">The size of the parameter(N.B If this value is set to zero it will not be added to the parameter object.)</param>
+            <param name="direction"></param>
+            <param name="rule"></param>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Parameter.Direction">
+            <summary>
+            Gets or sets a value that indicates whether the parameter is input-only,
+            output-only, bidirectional, or a stored procedure return value parameter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Parameter.Name">
+            <summary>
+            Gets the name of the parameter with @ symbol attached.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Parameter.Size">
+            <summary>
+            Gets or sets the maximum size, in bytes, of the data within the column.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Parameter.Type">
+            <summary>
+            Gets or sets the <see cref="T:System.Data.DbType"/> of the parameter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.Parameter.Value">
+            <summary>
+            Gets or sets the value of the parameter.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Parameter.MapData(System.String,System.Object,System.Data.DbType,System.Int32,System.Data.ParameterDirection,VersaTul.Data.Sql.ParameterRules)">
+            <summary>
+            Populates the parameters passed in.
+            </summary>
+            <param name="name">The name of the parameter.</param>
+            <param name="value">The value of the parameter.</param>
+            <param name="type">The parameter type</param>
+            <param name="size">The parameter size</param>
+            <param name="direction">The direction of the parameter.</param>
+            <param name="rule">The parameter rule.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Parameter.ValidateParamterValue(System.Object,VersaTul.Data.Sql.ParameterRules)">
+            <summary>
+            Validate the Object Value, throw exception if failed.
+            </summary>
+            <param name="value"></param>
+            <param name="rule"></param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Parameter.CheckZeroNull(System.Type)">
+            <summary>
+            Checks the type of the parameter to ensure that the Zero converts to Null Rule is allowed.
+            </summary>
+            <param name="type">The Type of the parameter.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.Parameter.HandleRulePolicy(System.Object,System.Data.DbType,VersaTul.Data.Sql.ParameterRules)">
+            <summary>
+            Using the given rule evaluate all policies that governs the rule usage.
+            </summary>
+            <param name="value">The value of the parameter.</param>
+            <param name="type">The parameter type</param>
+            <param name="rule">The parameter rule.</param>
+            <returns>Returns the value after all policies have been evaluated.</returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.ParameterCollection">
+            <summary>
+            Represents a collection of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> objects.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.ParameterCollection.Collection">
+            <summary>
+            Gets the list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> objects contained in the collection.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.ParameterCollection.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object at the given index.
+            </summary>
+            <param name="index">The  numerical position of the <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object to retrieved.</param>
+            <returns>Returns an <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object.</returns>
+        </member>
+        <member name="P:VersaTul.Data.Sql.ParameterCollection.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object with the given name.
+            </summary>
+            <param name="name">The name of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object to lookup.</param>
+            <returns>Returns an <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> object.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.ParameterCollection.Add(VersaTul.Data.Sql.Contracts.IParameter)">
+            <summary>
+            Adds an <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> to the end of the List.
+            </summary>
+            <param name="parameter">The <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> to be added to the end of the List.</param>
+        </member>
+        <member name="T:VersaTul.Data.Sql.ParameterRules">
+            <summary>
+            Represent the Rules that can be applied to a Database Parameter Value.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Data.Sql.ParameterRules.Default">
+            <summary>
+            This rule indicates to the processor that a value that is NULL should be treated as DBNULL
+            during transmission to the Database.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Data.Sql.ParameterRules.ZeroDbNull">
+            <summary>
+            This rule indicates to the processor that the value zero should be changed to DBNull.
+            I.E means that a value must be of Type INT or INT family to use this rule.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Data.Sql.ParameterRules.NullToEmptyString">
+            <summary>
+            This rule indicates to the processor that a value that is NULL should be change to an EMPTY STRING
+            during transmission to Database.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Data.Sql.ParameterRules.ConstantToDbNull">
+            <summary>
+            This rule indicates to the processor that any constants value passed in should be changed to DBNULL.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Data.Sql.ParameterRules.DateOnly">
+            <summary>
+             This rule indicates to the processor that a value of System.DateTime should have its time portion stripped off
+             during transmission to Database.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Sql.ProviderFactory">
+            <summary>
+            Represents a set of methods for creating instances of a provider's implementation of the data sourece classes.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.ProviderFactory.GetFactory(System.String)">
+            <summary>
+            Returns an instance of a <see cref="T:System.Data.Common.DbProviderFactory"/>.
+            </summary>
+            <param name="providerInvariantName">The provider name to return</param>
+            <returns>Returns an instance of a <see cref="T:System.Data.Common.DbProviderFactory"/></returns>
+        </member>
+        <member name="T:VersaTul.Data.Sql.SqlDbDataSource">
+            <summary>
+            Represent a default implementation of the <see cref="T:VersaTul.Data.Sql.Contracts.IDataSource"/> interface.
+            </summary>
+            <remarks>
+            Creates a new instance of <see cref="T:VersaTul.Data.Sql.SqlDbDataSource"/> using the given <seealso cref="T:VersaTul.Data.Sql.Contracts.ICommandFactory"/>.
+            </remarks>
+            <param name="commandFactory">The command factory to use to create commands</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.#ctor(VersaTul.Data.Sql.Contracts.ICommandFactory)">
+            <summary>
+            Represent a default implementation of the <see cref="T:VersaTul.Data.Sql.Contracts.IDataSource"/> interface.
+            </summary>
+            <remarks>
+            Creates a new instance of <see cref="T:VersaTul.Data.Sql.SqlDbDataSource"/> using the given <seealso cref="T:VersaTul.Data.Sql.Contracts.ICommandFactory"/>.
+            </remarks>
+            <param name="commandFactory">The command factory to use to create commands</param>
+        </member>
+        <member name="P:VersaTul.Data.Sql.SqlDbDataSource.RetryPolicy">
+            <summary>
+            Optional retry policy hook. Return true to retry the failed execution for the given attempt number.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.SqlDbDataSource.RetryDelayProvider">
+            <summary>
+            Optional backoff provider hook for retries.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Sql.SqlDbDataSource.Retrying">
+            <summary>
+            Optional callback invoked before each retry attempt.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Read(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Read(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Read(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Read(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ReadAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Reads a forward-only stream of rows from a data source asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a forward-only stream of rows from a data source</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Write(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Write(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Write(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.Write(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>An integer of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.WriteAsync(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Execute the given stored procedure and returns the affected rows count asynchronously.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter" /> for the stored procedure.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A Task containing an integer value of the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalar``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>The first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.ExecuteScalarAsync``1(VersaTul.Data.Sql.DataCommand,VersaTul.Data.Sql.Contracts.IParameterCollection,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Executes the command and returns the first column of the first row in the first returned result set.
+            All other columns, rows and result sets are ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataCommand">The name of a stored procedure or SQL transac statement to execute.</param>
+            <param name="parameters">The list of <see cref="T:VersaTul.Data.Sql.Contracts.IParameter"/> for either stored procedure or SQL transac statement.</param>
+            <param name="dBConnectionName">The name of the connection string for database connection.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>Task result of the first column of the first row in the first result set.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.CreateConnection(System.String)">
+            <summary>
+            Returns a new instance of the provider's class that implements the DbConnection class.
+            </summary>
+            <param name="dBConnectionName">The name of connection to use as an overrider of the default.</param>
+            <returns>A new instance of DbConnection and the connection name used..</returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.CreateCommand(VersaTul.Data.Sql.DataCommand,System.String,VersaTul.Data.Sql.Contracts.IParameterCollection)">
+            <summary>
+            Creates a <seealso cref="T:System.Data.Common.DbCommand"/> from the given details.
+            </summary>
+            <param name="dataCommand">The name of the stored procedure.</param>
+            <param name="dBConnectionName">The connection name of the database connection string.</param>
+            <param name="parameters">The parameters to pass on to stored procedure.</param>
+            <returns>Created <seealso cref="T:System.Data.Common.DbCommand"/></returns>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.OnCommandExecuted(VersaTul.Data.Sql.DataCommand,System.String,VersaTul.Data.Sql.Contracts.IParameterCollection,System.TimeSpan,System.Boolean,System.Exception)">
+            <summary>
+            Hook that is triggered when command execution completes.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Sql.SqlDbDataSource.OnParameterMapped(VersaTul.Data.Sql.Contracts.IParameter)">
+            <summary>
+            Hook that is triggered when parameters are mapped onto command objects.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Sql.StoredCommand">
+            <summary>
+            Represents a <seealso cref="T:VersaTul.Data.Sql.DataCommand"/> that is a stored procedure.
+            </summary>
+            <remarks>
+            Creates a new instance of <seealso cref="T:VersaTul.Data.Sql.DataCommand"/> with the given stored procedure name.
+            </remarks>
+            <param name="commandText">The name of the stored procedure to be executed.</param>
+        </member>
+        <member name="M:VersaTul.Data.Sql.StoredCommand.#ctor(System.String,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            Represents a <seealso cref="T:VersaTul.Data.Sql.DataCommand"/> that is a stored procedure.
+            </summary>
+            <remarks>
+            Creates a new instance of <seealso cref="T:VersaTul.Data.Sql.DataCommand"/> with the given stored procedure name.
+            </remarks>
+            <param name="commandText">The name of the stored procedure to be executed.</param>
+        </member>
+    </members>
+</doc>

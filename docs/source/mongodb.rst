@@ -102,6 +102,8 @@ Key Capabilities
 5. Connection overrides let one repository shape target a different configured database.
 6. Repository predicates use MongoDB's native LINQ provider without an EF Core-specific expression dependency.
 
+For exact collection APIs, see ``IDataConfiguration.GetCollection``, ``IDataConfiguration.GetCollectionNameFromType``, and ``IDataConfiguration.GetDatabaseFromUrl`` in the generated API links below.
+
 MongoDB Client Configuration
 ----------------------------
 
@@ -225,3 +227,5 @@ Support
 Support and feedback matrix <https://docsversatul.readthedocs.io/en/latest/support.html>_.
 
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/mongodb.rst

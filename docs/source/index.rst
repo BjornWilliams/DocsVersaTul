@@ -98,6 +98,7 @@ Start Here
    security
    repository-access
    release-notes
+   api-reference
    api-contract-policy
    snippet-inventory
    faq

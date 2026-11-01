@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Configurations</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Configurations.AppConfiguration">
+            <summary>
+            Represents the base application configuration.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Configurations.AppConfiguration.ApplicationName">
+            <summary>
+            Gets a string defining the application identifier.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Configurations.AppConfiguration.ResourcePath">
+            <summary>
+            Gets a string defining the fully qualified path of the root folder for all files in the application.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Configurations.ConfigSettings">
+            <summary>
+            Represents a collection of Key Values.
+            [Keys] are strings
+            [Values] are object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configurations.ConfigSettings.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:VersaTul.Configurations.ConfigSettings"/> class.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configurations.ConfigSettings.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates a new instance of the <see cref="T:VersaTul.Configurations.ConfigSettings"/> class.
+            </summary>
+            <param name="dictionary">A collection of name value pairs to be used as default settings</param>
+        </member>
+        <member name="T:VersaTul.Configurations.Configuration">
+            <summary>
+            Represents a configuration file that is applicable to a particular application, or resource. This class must be inherited.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configurations.Configuration.Get``1(System.String)">
+            <summary>
+            Get the value of the specified key stored in the settings dictionary.
+            </summary>
+            <typeparam name="T">The type of value to be returned.</typeparam>
+            <param name="name">The name of the object to find.</param>
+            <returns>The data found for the given key.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:VersaTul.Configurations.Configuration.GetOrDefault``1(System.String)">
+            <summary>
+            Get the value of the specified key stored in the settings dictionary.
+            If key is not present then the default of the type T is returned.
+            </summary>
+            <typeparam name="T">The type of value to be returned.</typeparam>
+            <param name="name">The name of the object to find.</param>
+            <returns>The data found for the given key.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Configurations.Configuration.TryGetValue(System.String,System.Object@)" -->
+        <member name="M:VersaTul.Configurations.Configuration.Bind``1">
+            <summary>
+            Binds matching configuration keys to a strongly typed object.
+            </summary>
+            <typeparam name="T">The target type to bind.</typeparam>
+            <returns>A populated object of type <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="T:VersaTul.Configurations.Contracts.IAppConfiguration">
+            <summary>
+            Represents the base application configuration.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Configurations.Contracts.IAppConfiguration.ApplicationName">
+            <summary>
+            Gets a string defining the application identifier.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Configurations.Contracts.IAppConfiguration.ResourcePath">
+            <summary>
+            Gets a string defining the fully qualified path of the root folder for all files in the application.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Configurations.Contracts.IConfiguration">
+            <summary>
+            Represents a configuration file that is applicable to a particular application, or resource.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configurations.Contracts.IConfiguration.Get``1(System.String)">
+            <summary>
+            Get the value of the specified key stored in the settings dictionary.
+            </summary>
+            <typeparam name="T">The type of value to be returned.</typeparam>
+            <param name="key">The key of the object to find.</param>
+            <returns>The data found for the given key.</returns>
+            <exception cref="!:ArgumentNullException"></exception>
+            <exception cref="!:InvalidOperationException"></exception>
+        </member>
+        <member name="M:VersaTul.Configurations.Contracts.IConfiguration.GetOrDefault``1(System.String)">
+            <summary>
+            Get the value of the specified key stored in the settings dictionary.
+            If key is not present then the default of the type T is returned.
+            </summary>
+            <typeparam name="T">The type of value to be returned.</typeparam>
+            <param name="key">The key of the object to find.</param>
+            <returns>The data found for the given key.</returns>
+            <exception cref="!:ArgumentNullException"></exception>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Configurations.Contracts.IConfiguration.TryGetValue(System.String,System.Object@)" -->
+        <member name="M:VersaTul.Configurations.Contracts.IConfiguration.Bind``1">
+            <summary>
+            Binds matching configuration keys to a strongly typed object.
+            </summary>
+            <typeparam name="T">The target type to bind.</typeparam>
+            <returns>A populated object of type <typeparamref name="T"/>.</returns>
+        </member>
+    </members>
+</doc>

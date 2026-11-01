@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Logger.File</name>
+    </assembly>
+    <members>
+        <member name="M:VersaTul.Logger.File.Archiver.PerformArchiving">
+            <summary>
+            Checks if the log file has reached N size,
+            and creates a new log file and save the current file with time-stamp added to the name.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.File.Archiver.GenerateFileName">
+            <summary>
+            Generates a file name with date time stamp for archiving the log file.
+            </summary>
+            <returns>The name to be used for the log file archive.</returns>
+        </member>
+        <member name="T:VersaTul.Logger.File.Configurations.LogFileConfiguration">
+            <summary>
+            Represents a configuration file that is applicable to the Logger File application.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.File.Contracts.IArchiver">
+            <summary>
+            Represent functionality need to maintain the log file. Archiving files and starting new log files.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.File.Contracts.IArchiver.PerformArchiving">
+            <summary>
+            Checks if the log file has reached N size,
+            and creates a new log file and save the current file with time-stamp added to the name.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.File.Contracts.IArchiver.GenerateFileName">
+            <summary>
+            Generates a file name with date time stamp for archiving the log file.
+            </summary>
+            <returns>The name to be used for the log file archive.</returns>
+        </member>
+        <member name="T:VersaTul.Logger.File.Contracts.IFileLogger">
+            <summary>
+            Represent functionality need to log to a flat file source E.g text file.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.File.Contracts.ILogFileConfiguration">
+            <summary>
+            Represents a configuration file that is applicable to the Logger File application.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.File.Contracts.ILogFileConfiguration.MaxFileSize">
+            <summary>
+            Gets the maximum allowed value of the log file created by the system.
+            </summary>
+            <remarks>This setting has a default value of 2gbs.</remarks>
+        </member>
+        <member name="P:VersaTul.Logger.File.Contracts.ILogFileConfiguration.LogFileName">
+            <summary>
+            Gets the string defining the log file name.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.File.Contracts.ILogFileConfiguration.FilePath">
+            <summary>
+            Gets a string defining the fully qualified path of the log file.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.File.Contracts.ILogFileConfiguration.FullFilePath">
+            <summary>
+            Gets a string defining the fully qualified path of the log file.
+            </summary>
+            <remarks>
+            Do not put a starting slash '\' in order to start from working directory.
+            Otherwise start with a drive letter to specific the full path.
+            </remarks>
+        </member>
+        <member name="P:VersaTul.Logger.File.Contracts.ILogFileConfiguration.FullLogFileName">
+            <summary>
+            Gets a string defining the fully qualified path and filename of the log file.
+            </summary>
+            <remarks>
+            Do not put a starting slash '\' in order to start from working directory.
+            Otherwise start with a drive letter to specific the full path.
+            </remarks>
+        </member>
+        <member name="P:VersaTul.Logger.File.Contracts.ILogFileConfiguration.EnableDailyRolling">
+            <summary>
+            Gets a value indicating whether daily rolling archive policy is enabled.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.File.Contracts.ILogFileConfiguration.RetentionDays">
+            <summary>
+            Gets the number of days to retain archived log files. Values less than or equal to zero disable retention cleanup.
+            </summary>
+        </member>
+    </members>
+</doc>
