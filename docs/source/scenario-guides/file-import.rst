@@ -41,16 +41,12 @@ The runnable sample pins these package versions:
 
 For an actual SQL Server upload, add ``VersaTul.Data.MsSql`` version ``2.0.20`` and configure a connection outside source control. That optional upload package is not used by the runnable sample.
 
-Why These Packages Together
----------------------------
+Why This Package Combination
+----------------------------
 
-``Data.FileReader`` solves file parsing.
+``VersaTul.Data.FileReader`` turns the CSV fixture into an ``IDataReader``. ``VersaTul.Data.Bulk`` describes the destination and column mappings without choosing a database provider, so the same preparation step can be inspected and tested independently of an upload.
 
-``Data.Bulk`` solves copy-detail and column-mapping structure.
-
-``Data.MsSql`` solves the actual SQL Server bulk upload.
-
-That split is useful because you can reason about input parsing, mapping, and upload as separate concerns.
+Add ``VersaTul.Data.MsSql`` version ``2.0.20`` only when SQL Server is the destination and an actual upload is required. It is intentionally absent from this sample because the tutorial demonstrates parsing and mapping without needing a live database.
 
 Step 1: Read The File
 ---------------------

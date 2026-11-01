@@ -44,6 +44,13 @@ The runnable sample's pinned package versions are:
      - ``10.0.13``
      - In-memory ADO.NET provider used by the sample
 
+Why This Package Combination
+----------------------------
+
+``VersaTul.Data.Sql`` supplies the command factory and data-source API used by the tutorial. ``VersaTul.Configurations`` keeps the connection name, provider name, and timeout together in the settings object that ``DataConfiguration`` consumes. The sample adds ``Microsoft.Data.Sqlite`` only as its ADO.NET provider, so it can create a shared in-memory database without a server or credentials. Choose the provider package that matches your application when adapting the sample.
+
+``VersaTul.Data.MsSql`` is not needed for this provider-neutral round trip. Add it only when the application needs SQL Server-specific features such as bulk copy or table-valued parameters.
+
 Step 1: Configure The Connection
 --------------------------------
 

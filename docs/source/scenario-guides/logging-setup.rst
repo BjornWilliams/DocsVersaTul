@@ -44,6 +44,11 @@ The runnable sample pins these package versions:
      - ``1.0.16``
      - Shared formatting utilities
 
+Why This Package Combination
+----------------------------
+
+``VersaTul.Logger`` defines the shared log event and parser contracts, while ``VersaTul.Logger.File`` writes those events to a local file. ``VersaTul.Configurations`` supplies the file path, log name, and size limit. The sample also constructs the sink with ``VersaTul.Handler.File`` and ``VersaTul.Utilities`` helpers, so those are direct project dependencies too. This gives a small application a real file-backed result without adding a logging service or credentials.
+
 Step 1: Define The File Logger Configuration
 --------------------------------------------
 

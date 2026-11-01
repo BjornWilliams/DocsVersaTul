@@ -35,6 +35,9 @@ The runnable sample's direct package dependencies use these released versions:
    * - ``VersaTul.Collection.Streamers``
      - ``1.0.36``
      - CSV streaming and file creation
+   * - ``VersaTul.Display.Attributes``
+     - ``1.0.12``
+     - Export column names, ordering, formatting, and ignored fields
    * - ``VersaTul.Object.Converters``
      - ``1.0.15``
      - Object flattening and display-aware conversion
@@ -48,7 +51,7 @@ The runnable sample's direct package dependencies use these released versions:
 Step 1: Annotate The Export Model
 ---------------------------------
 
-Use display metadata to control how the export appears.
+Use display metadata to control the CSV headings, column order, decimal and date formats, and ignored fields.
 
 .. code-block:: csharp
    :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
@@ -104,16 +107,12 @@ For large exports, write directly to disk.
    var filePath = ((IFileWritableStreamer)csvStreamer.Create(orderRows, "orders-export"))
        .WriteToFile("C:\\exports");
 
-Why The Companion Packages Matter
----------------------------------
+Why This Package Combination
+----------------------------
 
-``Display.Attributes`` lets you control the final output contract.
+``VersaTul.Collection.Streamers`` writes the collection as CSV and owns the output stream. ``VersaTul.Display.Attributes`` supplies the CSV names, order, formats, and exclusion rule. ``VersaTul.Object.Converters`` provides the ``Flattener`` required by the streamer and turns the nested location into a readable field. ``VersaTul.Handler.File`` and ``VersaTul.Utilities`` provide the file and CSV escaping helpers used to construct the sample streamer.
 
-``Object.Converters`` helps flatten nested values and respects display-driven behavior during processing.
-
-``Collection.Streamers`` provides the one-destination-per-reader-binding export engine.
-
-Together, they give you a path from domain object to export file without hand-writing CSV headers, formatting logic, and flattening rules.
+The sample also writes JSON with ``System.Text.Json`` to show a second file format. VersaTul display metadata applies to the CSV output; JSON uses camel-case names and its own ``JsonIgnore`` attribute.
 
 What You Should See
 -------------------
@@ -141,7 +140,15 @@ The deterministic input is one person object:
 
 .. code-block:: csharp
 
-   new Person { Name = "Ada", Age = 37 }
+   new Person
+   {
+       Name = "Ada",
+       CreditLimit = 1250.456m,
+       Age = 37,
+       RegisteredOn = new DateTime(2024, 1, 15),
+       Location = new Location { City = "London" },
+       InternalNotes = "Do not include in either export"
+   }
 
 .. literalinclude:: ../../samples/DataExport/Program.cs
    :language: csharp

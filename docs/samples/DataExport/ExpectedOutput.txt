@@ -1,5 +1,5 @@
 people.csv:
-Age,Name
-37,Ada
+Full name,Credit limit,Age,Registered,Location
+Ada,1250.46,37,2024-01-15,City:London
 people.json:
-[{"name":"Ada","age":37}]
+[{"name":"Ada","creditLimit":1250.456,"age":37,"registeredOn":"2024-01-15T00:00:00","location":{"city":"London"}}]
