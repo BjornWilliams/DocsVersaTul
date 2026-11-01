@@ -111,6 +111,13 @@ When this workflow is working:
 2. Log rows are appended in the configured file format.
 3. Exception details are captured through the shared parser and file sink.
 
+Cleanup, Cancellation, and Production Notes
+--------------------------------------------
+
+- The sample removes its unique temporary log directory in ``finally``. A production path should have deliberate permissions, retention, backup, and disk-space monitoring.
+- The sample lets file-system and logger errors propagate to its caller. Catch and report them at the application boundary, and avoid writing credentials, tokens, or sensitive personal data to logs.
+- ``FileLogger`` also implements ``ICancellableFileLogger`` for calls that need a ``CancellationToken``. Cancellation covers the asynchronous write and path gate, but cannot interrupt synchronous rotation and a cancelled append may leave partial output. The basic ``ILogger`` contract shown in the guide has no cancellation parameter.
+
 Runnable Sample
 ---------------
 

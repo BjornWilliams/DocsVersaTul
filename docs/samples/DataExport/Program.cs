@@ -30,8 +30,8 @@ try
     var wrapper = new DirectoryWrapper();
     var files = new FileUtility(wrapper, wrapper);
     using var streamer = new CsvStreamer(new CommonUtility(), files, new Flattener());
-    using var csvStream = streamer.Create(people, "people").GetFileStream();
-    using var csvReader = new StreamReader(csvStream);
+    var csvStream = streamer.Create(people, "people").GetFileStream();
+    using var csvReader = new StreamReader(csvStream, leaveOpen: true);
     var csv = await csvReader.ReadToEndAsync();
 
     var json = JsonSerializer.Serialize(

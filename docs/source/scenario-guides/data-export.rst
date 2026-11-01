@@ -123,6 +123,13 @@ When this workflow is working:
 2. Values such as decimals and dates follow the export formatting rules.
 3. Ignored properties do not appear in the final export.
 
+Cleanup, Cancellation, and Production Notes
+--------------------------------------------
+
+- The sample deletes its temporary output directory in ``finally``. It disposes the ``CsvStreamer`` after use; the streamer owns its backing output stream and the stream returned by ``GetFileStream`` is borrowed. The ``StreamReader`` therefore uses ``leaveOpen: true`` and does not dispose that borrowed stream.
+- ``GetFileStream`` builds the result in memory. For large exports, use ``IFileWritableStreamer.WriteToFile`` with a ``CancellationToken`` and an output directory with the required permissions and available space.
+- The sample throws when generated content differs from the expected CSV or JSON. File, permission, and serialization errors also propagate; handle them at the application boundary and review both CSV display metadata and JSON serialization rules before exporting sensitive fields.
+
 Runnable Sample
 ---------------
 

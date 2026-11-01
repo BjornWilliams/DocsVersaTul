@@ -116,6 +116,13 @@ When this workflow is wired correctly:
 2. The bulk-copy step validates the mapping shape before upload.
 3. The SQL Server upload reports progress and completes as one deliberate import operation.
 
+Cleanup, Cancellation, and Production Notes
+--------------------------------------------
+
+- The sample's ``using`` scope disposes the CSV reader, which also closes the parser and file stream it owns. Keep the reader alive until any upload using its rows has finished.
+- ``CsvFileReader`` reads synchronously. When the SQL Server bulk implementation supports ``ICancellableBulkCopy``, use its asynchronous overload with a ``CancellationToken``; cancellation does not prove that the server accepted no rows.
+- The sample lets missing-file, CSV parsing, and mapping errors surface. Before uploading in production, validate headers and row values against the destination schema, decide how to report rejected rows, use an appropriate transaction or retry strategy, and keep database credentials outside source control.
+
 Runnable Sample
 ---------------
 

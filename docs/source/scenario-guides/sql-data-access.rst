@@ -155,6 +155,13 @@ When this workflow is working:
 2. SQL execution stays behind a reusable service abstraction.
 3. Mapping logic stays consistent across queries instead of being rewritten in each caller.
 
+Cleanup, Cancellation, and Production Notes
+--------------------------------------------
+
+- The sample's ``await using`` SQLite connection keeps the shared in-memory database alive and closes it when the program exits. The database disappears with that connection.
+- The sample uses synchronous calls for its tiny fixture. For application operations, use ``WriteAsync`` and ``ExecuteScalarAsync`` overloads that accept a ``CancellationToken``. Pass values as command parameters instead of building SQL from user input.
+- Provider and command failures are allowed to surface. Handle them at the service boundary; production deployments should also provision a persistent schema, use transaction boundaries where needed, and keep credentials in managed configuration or a secret store.
+
 Runnable Sample
 ---------------
 
