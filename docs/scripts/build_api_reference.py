@@ -36,6 +36,12 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def canonical_xml_sha256(data: bytes) -> str:
+    """Hash XML content independently of the checkout's line-ending convention."""
+    canonical_bytes = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return sha256(canonical_bytes)
+
+
 def download_package(package_id: str, version: str, cache_root: Path) -> Path:
     package_file = f"{package_id.lower()}.{version}.nupkg"
     package_path = cache_root / package_file
@@ -96,7 +102,7 @@ def load_release_inputs() -> tuple[list[dict], dict[str, dict], dict[str, dict]]
 
 def validate_xml_documentation(xml_path: Path, expected_hash: str) -> set[str]:
     payload = xml_path.read_bytes()
-    if sha256(payload) != expected_hash:
+    if canonical_xml_sha256(payload) != expected_hash:
         raise ValueError(f"XML documentation hash mismatch: {xml_path}")
     document = ET.fromstring(payload)
     members_node = document.find("./members")
