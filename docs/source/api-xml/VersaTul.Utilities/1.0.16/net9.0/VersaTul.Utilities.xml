@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Utilities</name>
+    </assembly>
+    <members>
+        <member name="M:VersaTul.Utilities.CollectionUtility`1.MakeBatches(System.Collections.Generic.IEnumerable{`0},System.Int32)">
+            <summary>
+            Distributes the given collection and arrange the set into sets or groups.
+            </summary>
+            <param name="entities">The collection to arrange in sets or groups.</param>
+            <param name="batchSize">The maximum amount to be in each batch.</param>
+            <returns>Returns a set of sets.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CollectionUtility`1.RandomSampler(System.Collections.Generic.IList{`0})">
+            <summary>
+            Randomly select an element from the given collection.
+            </summary>
+            <param name="source">The collection to select from.</param>
+            <returns>Returns the selected element.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.Transform``1(System.Object)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.Transform``1(System.Object,System.Boolean)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object,
+            with optional culture-invariant conversion behavior.
+            </summary>
+            <typeparam name="T">The target output type.</typeparam>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <param name="useInvariantCulture">True to use invariant culture for numeric/date conversions; otherwise current culture.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or default value if input is null/DBNull.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.Transform(System.Object,System.Type)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <param name="type">Represents type declarations: class types, interface types, array types, value types, enumeration types, type parameters, generic type definitions, and open or closed constructed generic types.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.Transform(System.Object,System.Type,System.Boolean)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object,
+            with optional culture-invariant conversion behavior.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <param name="type">Represents type declarations: class types, interface types, array types, value types, enumeration types, type parameters, generic type definitions, and open or closed constructed generic types.</param>
+            <param name="useInvariantCulture">True to use invariant culture for numeric/date conversions; otherwise current culture.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or default value if input is null/DBNull.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.TryTransform``1(System.Object,``0@)">
+            <summary>
+            Attempts to convert the given value to the requested type.
+            </summary>
+            <typeparam name="T">The output type to convert to.</typeparam>
+            <param name="value">The input value to convert.</param>
+            <param name="result">When this method returns, contains the converted value if conversion succeeded; otherwise default value.</param>
+            <returns>True if conversion succeeds; otherwise false.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.TryTransform(System.Object,System.Type,System.Object@)">
+            <summary>
+            Attempts to convert the given value to the requested runtime type.
+            </summary>
+            <param name="value">The input value to convert.</param>
+            <param name="type">The runtime type to convert to.</param>
+            <param name="result">When this method returns, contains the converted value if conversion succeeded; otherwise default value.</param>
+            <returns>True if conversion succeeds; otherwise false.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.DBNullFilter``1(System.Object)">
+            <summary>
+            Checks for DBNull value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.NullFilter``1(System.Object)">
+            <summary>
+            Checks for Null value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.NullOrEmptyFilter``1(System.String)">
+            <summary>
+            Checks for Null or and Empty string then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">The string to test.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.EncodeCSV(System.String)">
+            <summary>
+            Implement special handling for values that contain comma or quote.
+            This function will enclose in quotes and double up any double quotes.
+            </summary>
+            <param name="value">String value to check</param>
+            <returns>The encoded value as string</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.RemoveEndingCents(System.Decimal)">
+            <summary>
+            Removes all digits after the decimal place.
+            </summary>
+            <param name="amount">The value from which to remove decimals</param>
+            <returns>A string representation of the value.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.GetName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Given the property of a class as an expression returns the string name of the member.
+            </summary>
+            <typeparam name="TResult">The return type of the property</typeparam>
+            <param name="expression">Strongly type lambda data structure.</param>
+            <returns>The string name of the expression</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.GetName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Returns the name identifier of a given property expression.
+            </summary>
+            <typeparam name="TInput">The type from which property name will be taken</typeparam>
+            <typeparam name="TResult">The return type of the property.</typeparam>
+            <param name="expression">The lambda expression as a data structure.</param>
+            <returns>Returns the property name as string.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.GetExecutingPath">
+            <summary>
+            Retuens directory information for the executing application.
+            </summary>
+            <returns>The full UNC path.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.RandomString(System.Int32,System.String)">
+            <summary>
+            Returns a non-negative random string for the given length for the allowed characters.
+            </summary>
+            <param name="length">Required. The maximum length of the generated string.</param>
+            <param name="allowedChars">Optional. The default value is "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If the parameter length is less than zero.</exception>
+            <exception cref="T:System.ArgumentNullException">If the allowedChars parameter is null or empty.</exception>
+            <exception cref="T:System.InvalidOperationException">If allowedChars set length is less than internal byte size.</exception>
+            <returns>Returns a non-negative random string for the given length for the allowed characters.</returns>
+            <remarks>Guid.NewGuid and System.Random are not particularly random. By using a cryptographically-secure random number generator, the caller is always protected, regardless of use.</remarks>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.PropertyMap``2(``0,``1)">
+            <summary>
+            Maps an input object of one type into an output object of a different type where all property names match.
+            </summary>
+            <typeparam name="T">The type of object for the source value.</typeparam>
+            <typeparam name="U">The type of object for the destination value.</typeparam>
+            <param name="source">The source object to map from.</param>
+            <param name="destination">The destination object to map to.</param>
+        </member>
+        <member name="M:VersaTul.Utilities.CommonUtility.PropertyMap``2(``0,``1,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Maps an input object of one type into an output object of a different type where all property names match.
+            </summary>
+            <typeparam name="T">The type of object for the source value.</typeparam>
+            <typeparam name="U">The type of object for the destination value.</typeparam>
+            <param name="source">The source object to map from.</param>
+            <param name="destination">The destination object to map to.</param>
+            <param name="excludedProperties">A list of property names to be exclude from the mapping.</param>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.ICollectionUtility`1.MakeBatches(System.Collections.Generic.IEnumerable{`0},System.Int32)">
+            <summary>
+            Distributes the given collection and arrange the set into sets or groups.
+            </summary>
+            <param name="entities">The collection to arrange in sets or groups.</param>
+            <param name="batchSize">The maximum amount to be in each batch.</param>
+            <returns>Returns a set of sets.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.ICollectionUtility`1.RandomSampler(System.Collections.Generic.IList{`0})">
+            <summary>
+            Randomly select an element from the given collection.
+            </summary>
+            <param name="source">The collection to select from.</param>
+            <returns>Returns the selected element.</returns>
+        </member>
+        <member name="T:VersaTul.Utilities.Contracts.IEnumParser`1">
+            <summary>
+            Represents a utility class use for quickly parsing Enums.
+            </summary>
+            <typeparam name="T">An enumeration type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IEnumParser`1.Parse(System.Int32)">
+            <summary>
+            Converts the numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <param name="value"></param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IEnumParser`1.Parse(System.String)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <param name="value">A string containing the name or value to convert.</param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IEnumParser`1.Parse(System.String,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <param name="value">A string containing the name or value to convert.</param>
+            <param name="ignoreCase">Indicate wither or not to ignore the case.</param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IEnumParser`1.Parse(`0)">
+            <summary>
+            Returns a integer of the specified type and whose value is equivalent to the specified enumType.
+            </summary>
+            <param name="value">An enumeration type.</param>
+            <returns>The integer representation of the enumType.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IEnumParser`1.ParseToString(`0)">
+            <summary>
+            Returns a string of the specified type and whose value is equivalent to the specified enumType.
+            </summary>
+            <param name="value">An enumeration type.</param>
+            <returns>The string representation of the enumType.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IEnumParser`1.TryParse(System.String,`0@)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+            <param name="result">When this method returns, contains an object of type TEnum whose value is represented by value. This parameter is passed uninitialized.</param>
+            <returns>true if the value parameter was converted successfully; otherwise, false.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:VersaTul.Utilities.Contracts.IGenerator">
+            <summary>
+            Represents a set of methods that can be used to produces a sequence of numbers or letters that meet certain statistical requirements for randomness.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IGenerator.RandomString(System.Int32,System.String)">
+            <summary>
+            Returns a non-negative random string for the given length for the allowed characters.
+            </summary>
+            <param name="length">Required. The maximum length of the generated string.</param>
+            <param name="allowedChars">Optional. The default value is "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".</param>
+            <returns>Returns a non-negative random string for the given length for the allowed characters.</returns>
+            <remarks>Guid.NewGuid and System.Random are not particularly random. By using a cryptographically-secure random number generator, the caller is always protected, regardless of use.</remarks>
+        </member>
+        <member name="T:VersaTul.Utilities.Contracts.IMapperUtility">
+            <summary>
+            Represents a set of functionality that is commonly used for mapping objects.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IMapperUtility.PropertyMap``2(``0,``1)">
+            <summary>
+            Maps an input object of one type into an output object of a different type where all property names match.
+            </summary>
+            <typeparam name="T">The type of object for the source value.</typeparam>
+            <typeparam name="U">The type of object for the destination value.</typeparam>
+            <param name="source">The source object to map from.</param>
+            <param name="destination">The destination object to map to.</param>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IMapperUtility.PropertyMap``2(``0,``1,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Maps an input object of one type into an output object of a different type where all property names match.
+            </summary>
+            <typeparam name="T">The type of object for the source value.</typeparam>
+            <typeparam name="U">The type of object for the destination value.</typeparam>
+            <param name="source">The source object to map from.</param>
+            <param name="destination">The destination object to map to.</param>
+            <param name="excludedProperties">A list of property names to be exclude from the mapping.</param>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.DBNullFilter``1(System.Object)">
+            <summary>
+            Checks for DBNull value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.NullFilter``1(System.Object)">
+            <summary>
+            Checks for Null value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.NullOrEmptyFilter``1(System.String)">
+            <summary>
+            Checks for Null or and Empty string then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">The string to test.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.Transform``1(System.Object)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.Transform``1(System.Object,System.Boolean)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object,
+            with optional culture-invariant conversion behavior.
+            </summary>
+            <typeparam name="T">The target output type.</typeparam>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <param name="useInvariantCulture">True to use invariant culture for numeric/date conversions; otherwise current culture.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or default value if input is null/DBNull.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.Transform(System.Object,System.Type)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <param name="type">Represents type declarations: class types, interface types, array types, value types, enumeration types, type parameters, generic type definitions, and open or closed constructed generic types.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or A null reference (Nothing in Visual Basic), if value is null and conversionType is not a value type.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.Transform(System.Object,System.Type,System.Boolean)">
+            <summary>
+            Checks for DBNull or Null value then returns an object of a specified type whose value is equivalent to a specified object,
+            with optional culture-invariant conversion behavior.
+            </summary>
+            <param name="value">An object that implements the <see cref="T:System.IConvertible"/> interface.</param>
+            <param name="type">Represents target type declarations.</param>
+            <param name="useInvariantCulture">True to use invariant culture for numeric/date conversions; otherwise current culture.</param>
+            <returns>An object whose type is conversionType and whose value is equivalent to value. or default value if input is null/DBNull.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.TryTransform``1(System.Object,``0@)">
+            <summary>
+            Attempts to transform the given value to the requested type.
+            </summary>
+            <typeparam name="T">The output type to convert to.</typeparam>
+            <param name="value">The input value to convert.</param>
+            <param name="result">When this method returns, contains the converted value if conversion succeeded; otherwise default value.</param>
+            <returns>True if conversion succeeds; otherwise false.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.INullFiltering.TryTransform(System.Object,System.Type,System.Object@)">
+            <summary>
+            Attempts to transform the given value to the requested runtime type.
+            </summary>
+            <param name="value">The input value to convert.</param>
+            <param name="type">The runtime type to convert to.</param>
+            <param name="result">When this method returns, contains the converted value if conversion succeeded; otherwise default value.</param>
+            <returns>True if conversion succeeds; otherwise false.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IUtility.RemoveEndingCents(System.Decimal)">
+            <summary>
+            Removes all digits after the decimal place.
+            </summary>
+            <param name="amount">The value from which to remove decimals</param>
+            <returns>A string representation of the value.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IUtility.EncodeCSV(System.String)">
+            <summary>
+            Implement special handling for values that contain comma or quote.
+            This function will enclose in quotes and double up any double quotes.
+            </summary>
+            <param name="value">String value to check</param>
+            <returns>The encoded value as string</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IUtility.GetName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Returns the name identifier of a given property expression.
+            </summary>
+            <typeparam name="TResult">The return type of the property.</typeparam>
+            <param name="expression">The lambda expression as a data structure.</param>
+            <returns>Returns the property name as string.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IUtility.GetName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Returns the name identifier of a given property expression.
+            </summary>
+            <typeparam name="TInput">The type from which property name will be taken</typeparam>
+            <typeparam name="TResult">The return type of the property.</typeparam>
+            <param name="expression">The lambda expression as a data structure.</param>
+            <returns>Returns the property name as string.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.Contracts.IUtility.GetExecutingPath">
+            <summary>
+            Gets the base directory that the assembly resolver uses to probe for assemblies.
+            </summary>
+            <returns>The base directory that the assembly resolver uses to probe for assemblies.</returns>
+        </member>
+        <member name="T:VersaTul.Utilities.EnumParser`1">
+            <summary>
+            Represents a utility class use for quickly parsing Enums.
+            </summary>
+            <typeparam name="T">An enumeration type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Utilities.EnumParser`1.Parse(System.Int32)">
+            <summary>
+            Converts the numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <param name="value"></param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.EnumParser`1.Parse(System.String)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <param name="value">A string containing the name or value to convert.</param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Utilities.EnumParser`1.Parse(`0)">
+            <summary>
+            Returns a integer of the specified type and whose value is equivalent to the specified enumType.
+            </summary>
+            <param name="value">An enumeration type.</param>
+            <returns>The integer representation of the enumType.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Utilities.EnumParser`1.Parse(System.String,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <param name="value">A string containing the name or value to convert.</param>
+            <param name="ignoreCase">Indicate wither or not to ignore the case.</param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+        </member>
+        <member name="M:VersaTul.Utilities.EnumParser`1.ParseToString(`0)">
+            <summary>
+            Returns a string of the specified type and whose value is equivalent to the specified enumType.
+            </summary>
+            <param name="value">An enumeration type.</param>
+            <returns>The string representation of the enumType.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Utilities.EnumParser`1.TryParse(System.String,`0@)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+            <param name="result">When this method returns, contains an object of type TEnum whose value is represented by value. This parameter is passed uninitialized.</param>
+            <returns>true if the value parameter was converted successfully; otherwise, false.</returns>
+            <remarks></remarks>
+        </member>
+    </members>
+</doc>

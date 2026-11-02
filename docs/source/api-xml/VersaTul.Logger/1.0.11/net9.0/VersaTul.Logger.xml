@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Logger</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Logger.Contracts.ILogger">
+            <summary>
+            Represents the functionality provided by a logger.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.Contracts.ILogger.Log(System.Exception)">
+            <summary>
+            Logs the given Exception to the registered loggers.
+            </summary>
+            <param name="exception">The instance of an exception to log.</param>
+        </member>
+        <member name="M:VersaTul.Logger.Contracts.ILogger.Log(VersaTul.Logger.LogInfo)">
+            <summary>
+            Logs the given logInfo to the registered loggers.
+            </summary>
+            <param name="logInfo">The instance of the logInfo to log.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Logger.Contracts.ILogger.Log(VersaTul.Logger.LogInfo,System.Exception)" -->
+        <member name="M:VersaTul.Logger.Contracts.ILogger.LogAsync(System.Exception)">
+            <summary>
+            Logs the given Exception to the registered loggers.
+            </summary>
+            <param name="exception">The instance of an exception to log.</param>
+            <returns>Returns a <seealso cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="M:VersaTul.Logger.Contracts.ILogger.LogAsync(VersaTul.Logger.LogInfo)">
+            <summary>
+            Logs the given logInfo to the registered loggers.
+            </summary>
+            <param name="logInfo">The instance of the logInfo to log.</param>
+            <returns>Returns a <seealso cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Logger.Contracts.ILogger.LogAsync(VersaTul.Logger.LogInfo,System.Exception)" -->
+        <member name="T:VersaTul.Logger.Contracts.ILogParser">
+            <summary>
+            Represents the parsing functionality to use for parsing logged data.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.Contracts.ILogParser.Parse(System.Exception,VersaTul.Logger.ParseFormat)">
+            <summary>
+            Parse the given exception and all inner exception into Key/value string format.
+            </summary>
+            <param name="exception">The exception to parse.</param>
+            <param name="parseFormat">The format to return as string.</param>
+            <returns>Returns a Proptery=Value string format.</returns>
+        </member>
+        <member name="M:VersaTul.Logger.Contracts.ILogParser.Parse(VersaTul.Logger.LogInfo,VersaTul.Logger.ParseFormat)">
+            <summary>
+            Parse the given LogInfo into Key/Value string format.
+            </summary>
+            <param name="logInfo">The log info to be parsed.</param>
+            <param name="parseFormat">The format to return as string.</param>
+            <returns>Returns a Proptery=Value string format.</returns>
+        </member>
+        <member name="M:VersaTul.Logger.Contracts.ILogParser.Parse(VersaTul.Logger.LogInfo,System.Exception,VersaTul.Logger.ParseFormat)">
+            <summary>
+            Parse the given LogInfo into Key/Value string format.
+            Parse the given exception and all inner exception into Key/value string format.
+            </summary>
+            <param name="logInfo">The log info to be parsed.</param>
+            <param name="exception">The exception to parse.</param>
+            <param name="parseFormat">The format to return as string.</param>
+            <returns>Returns a Proptery=Value string format.</returns>
+        </member>
+        <member name="T:VersaTul.Logger.LogInfo">
+            <summary>
+            Represents information to be sent for logging.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.LogInfo.CategoryName">
+            <summary>
+            Gets a name identifier that can be used to group messages in the logger.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.LogInfo.Date">
+            <summary>
+            Gets the date of the info in the log.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.LogInfo.Message">
+            <summary>
+            Gets the message that in the log.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.LogInfo.LogLevel">
+            <summary>
+            Gets the log level of the message.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.LogInfo.TraceId">
+            <summary>
+            Gets an optional trace identifier for correlation across distributed systems.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.LogInfo.ToString">
+            <summary>
+            Rturns a TAB seperated string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Logger.LogLevel">
+            <summary>
+            Reprensents the level of information to be logged.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Logger.LogLevel.Information">
+            <summary>
+            An event that describes the successful operation of a task, such as an application, driver, or service.
+            For example, an Information event is logged when a network driver loads successfully.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Logger.LogLevel.Warning">
+            <summary>
+            An event that describes the successful operation of a task, such as an application, driver, or service.
+            For example, an Information event is logged when a network driver loads successfully.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Logger.LogLevel.Error">
+            <summary>
+            An event that is not necessarily significant, however, may indicate the possible occurrence of a future problem.
+            For example, a Warning message is logged when disk space starts to run low.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.LogParser">
+            <summary>
+            Represents the parsing functionality to use for parsing logged data.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.LogParser.Parse(System.Exception,VersaTul.Logger.ParseFormat)">
+            <summary>
+            Parse the given exception and all inner exception into Key/value string format.
+            </summary>
+            <param name="exception"></param>
+            <param name="parseFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Logger.LogParser.Parse(VersaTul.Logger.LogInfo,VersaTul.Logger.ParseFormat)">
+            <summary>
+            Parse the given LogInfo into Key/Value string format.
+            </summary>
+            <param name="logInfo">The log info to be parsed.</param>
+            <param name="parseFormat">The format to return as string.</param>
+            <returns>Returns a Proptery=Value string format.</returns>
+        </member>
+        <member name="M:VersaTul.Logger.LogParser.Parse(VersaTul.Logger.LogInfo,System.Exception,VersaTul.Logger.ParseFormat)">
+            <summary>
+            Parse the given LogInfo into Key/Value string format.
+            Parse the given exception and all inner exception into Key/value string format.
+            </summary>
+            <param name="logInfo">The log info to be parsed.</param>
+            <param name="exception">The exception to parse.</param>
+            <param name="parseFormat">The format to return as string.</param>
+            <returns>Returns a Proptery=Value string format.</returns>
+        </member>
+        <member name="T:VersaTul.Logger.ParseFormat">
+            <summary>
+            Represents the supported formats for parsing.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.StructuredLogSchema">
+            <summary>
+            Represents strongly typed JSON log output schema.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.StructuredExceptionSchema">
+            <summary>
+            Represents structured exception details for JSON log schema.
+            </summary>
+        </member>
+    </members>
+</doc>

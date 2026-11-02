@@ -1,6 +1,32 @@
 Data Bulk
 =========
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Data.Bulk?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Data.Bulk
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Data.Bulk?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Data.Bulk
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Data.Bulk
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.11` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Data.Bulk/1.0.11>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -18,6 +44,12 @@ Use this package when you want to:
 3. Work with bulk-copy results and error reporting consistently.
 4. Build data-loading workflows that can be backed by a specific implementation such as :doc:`mssql`.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.Bulk on NuGet <https://www.nuget.org/packages/VersaTul.Data.Bulk>`_
+`VersaTul.Data.Bulk versions and release notes <https://www.nuget.org/packages/VersaTul.Data.Bulk#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -27,11 +59,6 @@ Install the package with the .NET CLI:
 
     dotnet add package VersaTul.Data.Bulk
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-    PM> NuGet\Install-Package VersaTul.Data.Bulk -Version latest
 
 Related Packages
 ----------------
@@ -65,6 +92,13 @@ Core Types And Concepts
 ``BulkCopyException``
     Wrapper exception used when a copy step fails.
 
+Result Semantics
+----------------
+
+``BulkCopyResult.Results`` is initialized to an empty collection, so a newly constructed result can be queried safely. ``Success`` is ``true`` only when at least one copy result exists and every result completed without an error. An empty or null result collection is not considered a successful upload.
+
+These result types are data models; creating or populating them does not measure elapsed time or infer a failed stage. ``CopyResult.Elapsed`` defaults to zero and ``FailedStage`` defaults to ``null``. The SQL Server implementation in :doc:`mssql` fills elapsed time for its copy results and records the stage on failures. Other ``BulkCopy`` implementations must populate these fields themselves if they provide the same diagnostics.
+
 Key Capabilities
 ----------------
 
@@ -80,6 +114,7 @@ Basic Example
 The abstraction assumes your source data is already available as an ``IDataReader``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Data.Bulk;
 
@@ -101,6 +136,7 @@ Async Progress Example
 ----------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     var result = await bulkCopy.DoCopyAsync(
          new[] { copyDetail },
@@ -121,6 +157,8 @@ Mapping Options
 4. Source name to destination ordinal.
 5. Strongly typed expression-to-expression mapping.
 
+Each mapping side has one active identifier: a name or a nonnegative ordinal. Setting a name clears the corresponding ordinal, and setting a nonnegative ordinal clears the corresponding name. The ``-1`` ordinal value means that no ordinal is selected, so a mapping cannot retain both a name and an ordinal for the same side.
+
 Notes
 -----
 
@@ -128,4 +166,40 @@ Notes
 2. The source side is ``IDataReader``-based, which makes the package fit naturally with :doc:`file-reader` and stream-based workflows.
 3. Use the concrete implementation from :doc:`mssql` when targeting SQL Server bulk import.
 
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
 
+Canonical package quickstart
+----------------------------
+
+Shared types and abstractions for implementing batch and bulk-copy operations across database providers.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.Bulk
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.Bulk minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Bulk/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/bulk.rst

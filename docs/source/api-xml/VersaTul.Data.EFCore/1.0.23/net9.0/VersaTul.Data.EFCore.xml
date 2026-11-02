@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Data.EFCore</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Data.EFCore.BaseRepository`2">
+            <summary>
+            Represent an abstract class that provides common functionality for all <see cref="T:VersaTul.Data.Contracts.IRepository`2"/> class.
+            </summary>
+            <typeparam name="TEntity">The type of entity</typeparam>
+            <typeparam name="TKey">The key type for the entity</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.EFCore.BaseRepository`2.DataContext">
+            <summary>
+            Gets the base Data Context used to connect to the database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Add(`0)">
+            <summary>
+            Add the given entity to the database.
+            </summary>
+            <param name="entity">The new entity to save.</param>
+            <returns>The newly saved entity with identity key filled in.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.AddAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Add the given entity to the data store.
+            </summary>
+            <param name="entity">The new entity to save.</param>
+            <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
+            <returns>The newly saved entity with identity key filled in.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.AddRange(`0[])">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.AddRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+            <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
+            <returns>An asynchrounous task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.AddRangeAsync(`0[])">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+            <returns>An asynchrounous task.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.EFCore.BaseRepository`2.AsAsyncEnumerable" -->
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.EFCore.BaseRepository`2.AsQueryable" -->
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.EFCore.BaseRepository`2.AsQueryable(VersaTul.Data.EFCore.Contracts.IQuerySpecification{`0})" -->
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.EFCore.BaseRepository`2.AsNoTrackingQueryable" -->
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Find(System.Object[])">
+            <summary>
+            Finds an entity with the given primary key values.
+            </summary>
+            <param name="keyValues">The values of the primary key for the entity to be found.</param>
+            <returns>TEntity The entity found, or null.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.EFCore.BaseRepository`2.FindAsync(System.Object[])" -->
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.EFCore.BaseRepository`2.FindAsync(System.Object[],System.Threading.CancellationToken)" -->
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Get">
+            <summary>
+            Gets all entities in the database.
+            </summary>
+            <returns>A collection of the specified entities.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Get(VersaTul.Data.EFCore.Contracts.IQuerySpecification{`0})">
+            <summary>
+            Gets entities in the database matching the given specification.
+            </summary>
+            <param name="specification">The specification used to filter entities.</param>
+            <returns>A collection of the specified entities.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Get(`1)">
+            <summary>
+            Get the entity associated with the given primary key.
+            </summary>
+            <param name="key">The primary key of the entity to get.</param>
+            <returns>The entity associated to the given key.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.GetAsync">
+            <summary>
+            Gets all entities in the database Asynchronously.
+            </summary>
+            <returns>A Task containing a collection of the specified entities.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.GetAsync(VersaTul.Data.EFCore.Contracts.IQuerySpecification{`0},System.Threading.CancellationToken)">
+            <summary>
+            Gets entities in the database asynchronously matching the given specification.
+            </summary>
+            <param name="specification">The specification used to filter entities.</param>
+            <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
+            <returns>A Task containing a collection of the specified entities.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.GetNoTrackingAsync">
+            <summary>
+            Gets all entities in the database asynchronously with change tracking disabled.
+            </summary>
+            <returns>A Task containing a collection of the specified entities.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.GetAsync(`1)">
+            <summary>
+            Get the entity associated with the given primary key Asynchronously.
+            </summary>
+            <param name="key">The primary key of the entity to get.</param>
+            <returns>A Task containing entity associated to the given key.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.GetAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            Get the entity associated with the given primary key Asynchronously.
+            </summary>
+            <param name="key">The primary key of the entity to get.</param>
+            <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
+            <returns>A Task containing entity associated to the given key.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Remove(`0)">
+            <summary>
+            Deletes the given entity from the database.
+            </summary>
+            <param name="entity">The existing entity to delete.</param>
+            <returns>The deleted entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Remove(`1)">
+            <summary>
+            Deletes the given entity from the database by using the primary key.
+            </summary>
+            <param name="key">The primary key of entity to delete.</param>
+            <returns>The deleted entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Deletes the given entities from the data store.
+            </summary>
+            <param name="entities">The entities to remove.</param>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.RemoveRange(`0[])">
+            <summary>
+            Deletes the given entities from the data store.
+            </summary>
+            <param name="entities">The entities to remove.</param>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.Update(`0)">
+            <summary>
+            Updates the given entity in the database.
+            </summary>
+            <param name="entity">The existing entity to update.</param>
+            <returns>The updated entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.UpdateRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Updates the given entities in the data store.
+            </summary>
+            <param name="entities">The entities to update.</param>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseRepository`2.UpdateRange(`0[])">
+            <summary>
+            Updates the given entities in the data store.
+            </summary>
+            <param name="entities">The entities to update.</param>
+        </member>
+        <member name="T:VersaTul.Data.EFCore.BaseUnitOfWork">
+            <summary>
+            Represent basic implementation of the <see cref="T:VersaTul.Data.Contracts.IUnitOfWork"/>.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.EFCore.BaseUnitOfWork.DataContext">
+            <summary>
+            Get the <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> associated with the unit of work.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseUnitOfWork.Commit">
+            <summary>
+            Save all changes made in this context to the database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseUnitOfWork.CommitAsync">
+            <summary>
+            Save all changes made in this context to the database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseUnitOfWork.Dispose">
+            <summary>
+            Release the allocated resource for this context.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseUnitOfWork.Dispose(System.Boolean)">
+            <summary>
+            Release the allocated resource for this context.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:VersaTul.Data.EFCore.BaseUnitOfWork.Rollback">
+            <summary>
+            Reloads entity from the database overwriting any property values with value from the database.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.EFCore.Contracts.IQuerySpecification`1">
+            <summary>
+            Represents reusable query composition criteria for EF Core repository reads.
+            </summary>
+            <typeparam name="TEntity">The entity type the specification targets.</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.EFCore.Contracts.IQuerySpecification`1.Criteria">
+            <summary>
+            Gets the filtering criteria expression.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.EFCore.Contracts.IUnitOfWork">
+            <summary>
+            Represent a unit of work sent to sql database.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.EFCore.Contracts.IUnitOfWork.DataContext">
+            <summary>
+            Get the <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> associated with the unit of work.
+            </summary>
+        </member>
+    </members>
+</doc>

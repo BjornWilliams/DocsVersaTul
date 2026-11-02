@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Logger.Mail</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Logger.Mail.Contracts.IMailLogger">
+            <summary>
+            Represent functionality need to log to a email source E.g errors@domain.com.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.Mail.MailLogger">
+            <summary>
+            Represent functionality need to log to a email source E.g errors@domain.com.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,449 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Data.FileReader</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Data.FileReader.Contracts.ICsvReader">
+            <summary>
+            Defines methods for reading data from a CSV (Comma-Separated Values) source.
+            </summary>
+            <remarks>This interface extends <see cref="T:VersaTul.Data.FileReader.Contracts.IReader"/> to provide functionality specific to CSV data.
+            Implementations of this interface are expected to handle parsing of CSV files, including handling delimiters,
+            quoted fields, and other CSV-specific features.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.Contracts.IFileReader">
+            <summary>
+            Interface for reading data from a file.
+            </summary>
+            <remarks>
+            This interface defines a method for reading data from a file and returning it as an IDataReader.
+            </remarks>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Contracts.IFileReader.Read(System.String,System.String,VersaTul.Data.FileReader.Contracts.IOptions)">
+            <summary>
+            Reads data from the specified file in the given directory using the provided options.
+            </summary>
+            <remarks>The method attempts to read the file using the provided options. If the file cannot
+            be read due to an error, the method returns <see langword="null"/> instead of throwing an
+            exception.</remarks>
+            <param name="directoryPath">The path to the directory containing the file to be read. Cannot be null or empty.</param>
+            <param name="filename">The name of the file to read. Cannot be null or empty.</param>
+            <param name="options">The options to configure the reading operation. Cannot be null.</param>
+            <returns>An <see cref="T:System.Data.IDataReader"/> instance for accessing the file's data, or <see langword="null"/> if the file
+            could not be read.</returns>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Contracts.IFileReader.Read(System.String,VersaTul.Data.FileReader.Contracts.IOptions)">
+            <summary>
+            Reads data from the specified directory and returns a collection of data readers.
+            </summary>
+            <param name="directoryPath">The path to the directory containing the data to be read. Must not be null or empty.</param>
+            <param name="options">The options that configure how the data is read. Must not be null.</param>
+            <returns>A collection of <see cref="T:System.Data.IDataReader"/> instances, each representing a data source read from the specified
+            directory. The collection will be empty if no data sources are found.</returns>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.Contracts.IOptions">
+            <summary>
+            Represents configuration options for file processing, including header presence and file extension filters.
+            </summary>
+            <remarks>This interface is used to define settings for file processing operations. It allows
+            specifying whether the file contains a header row and provides a collection of file extensions to filter during
+            processing.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Contracts.IOptions.HasHeader">
+            <summary>
+            Gets or Sets if the file contains a header as first row.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Contracts.IOptions.ExtensionFilters">
+            <summary>
+            Gets or Sets the list of file extensions to filter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Contracts.IOptions.SearchOption">
+            <summary>
+            Gets or sets the directory search behavior used when discovering files.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.Contracts.IReader">
+            <summary>
+            Interface for reading data from a file.
+            </summary>
+            <remarks>
+            This interface defines a method for reading data from a file and returning it as an IDataReader.
+            </remarks>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Contracts.IReader.Read(System.String,VersaTul.Data.FileReader.Contracts.IOptions)">
+            <summary>
+            Reads data from the specified source file and returns an <see cref="T:System.Data.IDataReader"/> for accessing the data.
+            </summary>
+            <param name="sourceFilePath">The full path to the source file to be read. Must not be null or empty.</param>
+            <param name="options">An <see cref="T:VersaTul.Data.FileReader.Contracts.IOptions"/> instance specifying configuration options for the read operation. Must not be
+            null.</param>
+            <returns>An <see cref="T:System.Data.IDataReader"/> instance for accessing the data in the specified file.</returns>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.Contracts.ITextReader">
+            <summary>
+            Defines a reader that provides functionality for reading text data.
+            </summary>
+            <remarks>This interface extends <see cref="T:VersaTul.Data.FileReader.Contracts.IReader"/> to include operations specific to text-based
+            data. Implementations of this interface are expected to handle text input efficiently and may provide additional
+            features such as encoding support or line-based reading.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.DataFileReader">
+            <summary>
+            Provides functionality to read files from a directory and process them based on their extensions.
+            </summary>
+            <remarks>The <see cref="T:VersaTul.Data.FileReader.DataFileReader"/> class supports reading files with specific extensions (e.g.,
+            CSV, JSON, and text files)  and delegates the processing of these files to the appropriate reader
+            implementations. It uses dependency injection  to manage file utilities and readers for different file
+            types.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.DataFileReader.#ctor(VersaTul.Handler.File.Contracts.IFileUtility,VersaTul.Data.FileReader.Contracts.ICsvReader,VersaTul.Data.FileReader.Contracts.ITextReader)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VersaTul.Data.FileReader.DataFileReader"/> class, which provides functionality  for reading
+            files in various formats such as CSV, text, and JSON.
+            </summary>
+            <param name="fileUtility">An instance of <see cref="T:VersaTul.Handler.File.Contracts.IFileUtility"/> used for file-related operations.</param>
+            <param name="csvReader">An instance of <see cref="T:VersaTul.Data.FileReader.Contracts.ICsvReader"/> used to read CSV files.</param>
+            <param name="textReader">An instance of <see cref="T:VersaTul.Data.FileReader.Contracts.ITextReader"/> used to read plain text files.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if any of the parameters <paramref name="fileUtility"/>, <paramref name="csvReader"/>,  <paramref
+            name="textReader"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.DataFileReader.Read(System.String,System.String,VersaTul.Data.FileReader.Contracts.IOptions)">
+            <summary>
+            Reads data from a file located in the specified directory and returns an <see cref="T:System.Data.IDataReader"/> for
+            accessing the data.
+            </summary>
+            <remarks>The method supports files with the following extensions: CSV, text, and JSON. If the
+            file extension is unsupported, the method throws a <see cref="T:System.NotImplementedException"/>.</remarks>
+            <param name="directoryPath">The path to the directory containing the file. Cannot be null, empty, or whitespace.</param>
+            <param name="filename">The name of the file to read, including its extension. Cannot be null, empty, or whitespace.</param>
+            <param name="options">An <see cref="T:VersaTul.Data.FileReader.Contracts.IOptions"/> instance specifying options for reading the file. Cannot be null.</param>
+            <returns>An <see cref="T:System.Data.IDataReader"/> instance for accessing the file's data.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="directoryPath"/>, <paramref name="filename"/>, or <paramref name="options"/> is
+            null or contains invalid values.</exception>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.DataFileReader.Read(System.String,VersaTul.Data.FileReader.Contracts.IOptions)">
+            <summary>
+            Reads data files from the specified directory and returns a collection of data readers for the files that
+            match the provided extension filters.
+            </summary>
+            <remarks>The method uses the extension filters specified in the <paramref name="options"/>
+            parameter to determine which files to process. Supported extensions include CSV, TEXT, and JSON. Files are
+            searched recursively within the specified directory.</remarks>
+            <param name="directoryPath">The path to the directory containing the files to read. This parameter cannot be null, empty, or consist
+            only of whitespace.</param>
+            <param name="options">The options that specify the extension filters and other settings for reading the files. This parameter
+            cannot be null.</param>
+            <returns>A collection of <see cref="T:System.Data.IDataReader"/> instances, each representing a data reader for a file that matches
+            the specified extension filters. If no matching files are found, an empty collection is returned.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="directoryPath"/> is null, empty, or consists only of whitespace, or if <paramref
+            name="options"/> is null.</exception>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.ExtensionFilters">
+            <summary>
+            Specifies the file extension filters that can be applied when selecting or processing files.
+            </summary>
+            <remarks>This enumeration provides predefined file extension types, such as text files, CSV files, and
+            JSON files,  to standardize and simplify file filtering operations. Use these values to indicate the desired
+            file type  when working with file-related APIs.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.FileOptions">
+            <summary>
+            Represents configuration options for file operations, including header handling and supported file extensions.
+            </summary>
+            <remarks>This class provides options to configure file reading or writing operations.  It allows
+            specifying whether the file includes a header row and defining the supported file extensions.</remarks>
+            <param name="hasHeader"></param>
+            <param name="extensionFilters"></param>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.FileOptions.#ctor(System.Boolean,System.Collections.Generic.IEnumerable{VersaTul.Data.FileReader.ExtensionFilters},System.IO.SearchOption)">
+            <summary>
+            Represents configuration options for file operations, including header handling and supported file extensions.
+            </summary>
+            <remarks>This class provides options to configure file reading or writing operations.  It allows
+            specifying whether the file includes a header row and defining the supported file extensions.</remarks>
+            <param name="hasHeader"></param>
+            <param name="extensionFilters"></param>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.FileOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VersaTul.Data.FileReader.FileOptions"/> class with default settings.
+            </summary>
+            <remarks>This constructor initializes the <see cref="T:VersaTul.Data.FileReader.FileOptions"/> instance with default
+            values,  enabling file reading by default and setting the allowed file extensions to text, CSV, and JSON
+            formats.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.FileOptions.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VersaTul.Data.FileReader.FileOptions"/> class with the specified header option and
+            default file extension filters.
+            </summary>
+            <remarks>This constructor initializes the <see cref="T:VersaTul.Data.FileReader.FileOptions"/> instance with a default
+            set of file extension filters,  including text, CSV, and JSON formats. Use this constructor when you want to
+            specify whether the file has a header  but do not need to customize the file extension filters.</remarks>
+            <param name="hasHeader">A value indicating whether the file being processed contains a header row.  <see langword="true"/> if the
+            file has a header row; otherwise, <see langword="false"/>.</param>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.FileOptions.HasHeader">
+            <summary>
+            Gets or sets a value indicating whether the data source includes a header row.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.FileOptions.ExtensionFilters">
+            <summary>
+            Gets or sets the collection of extension filters used to determine valid file types.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.FileOptions.SearchOption">
+            <summary>
+            Gets or sets the search behavior used when discovering files.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.FileSearchInfo">
+            <summary>
+            Represents information about a file search, including the file extension, filter type, and filter text.
+            </summary>
+            <remarks>This class encapsulates the criteria used for filtering files during a search operation.  It
+            includes the file extension to match, the type of filter to apply, and an optional filter text for additional
+            customization. Instances of this class are immutable.</remarks>
+            <param name="extension"></param>
+            <param name="filter"></param>
+            <param name="filterText"></param>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.FileSearchInfo.#ctor(System.String,VersaTul.Data.FileReader.ExtensionFilters,System.String)">
+            <summary>
+            Represents information about a file search, including the file extension, filter type, and filter text.
+            </summary>
+            <remarks>This class encapsulates the criteria used for filtering files during a search operation.  It
+            includes the file extension to match, the type of filter to apply, and an optional filter text for additional
+            customization. Instances of this class are immutable.</remarks>
+            <param name="extension"></param>
+            <param name="filter"></param>
+            <param name="filterText"></param>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.FileSearchInfo.Extension">
+            <summary>
+            Gets the file extension associated with the current object.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.FileSearchInfo.Filter">
+            <summary>
+            Gets the collection of file extension filters used to determine valid file types.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.FileSearchInfo.FilterText">
+            <summary>
+            Gets the text used to filter items in a collection or search operation.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.FileSearchInfo.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current <see cref="T:VersaTul.Data.FileReader.FileSearchInfo"/> instance.
+            </summary>
+            <param name="obj">The object to compare with the current instance. This can be <see langword="null"/>.</param>
+            <returns><see langword="true"/> if the specified object is a <see cref="T:VersaTul.Data.FileReader.FileSearchInfo"/> instance and its properties
+            are equal to those of the current instance; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.FileSearchInfo.GetHashCode">
+            <summary>
+            Returns a hash code for the current object.
+            </summary>
+            <remarks>The hash code is computed based on the values of the <see cref="P:VersaTul.Data.FileReader.FileSearchInfo.Extension"/>, <see
+            cref="P:VersaTul.Data.FileReader.FileSearchInfo.Filter"/>,  and <see cref="P:VersaTul.Data.FileReader.FileSearchInfo.FilterText"/> properties. This ensures that objects with the same property
+            values  produce the same hash code.</remarks>
+            <returns>An integer representing the hash code for the current object.</returns>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.Readers.CsvFileReader">
+            <summary>
+            Provides functionality to read data from a CSV file and return it as an <see cref="T:System.Data.IDataReader"/>.
+            </summary>
+            <remarks>This class reads the contents of a CSV file specified by the file path and returns an <see
+            cref="T:System.Data.IDataReader"/>  for accessing the data. The behavior of the reader can be customized using the provided
+            <see cref="T:VersaTul.Data.FileReader.Contracts.IOptions"/>.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.CsvFileReader.Read(System.String,VersaTul.Data.FileReader.Contracts.IOptions)">
+            <summary>
+            Reads data from the specified CSV file and returns a data reader for accessing the content.
+            </summary>
+            <param name="sourceFilePath">The full path to the CSV file to be read. Must not be null or empty.</param>
+            <param name="options">The options specifying how the CSV file should be read, including whether it has a header row.</param>
+            <returns>An <see cref="T:System.Data.IDataReader"/> instance for accessing the data in the CSV file.</returns>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.Readers.DisposableDataReader">
+            <summary>
+            Wraps an <see cref="T:System.Data.IDataReader"/> and an additional disposable resource so that disposing the wrapper
+            disposes both the underlying reader and the extra resource (for example a <see cref="T:System.IO.StreamReader"/>).
+            </summary>
+            <remarks>
+            Creates a new <see cref="T:VersaTul.Data.FileReader.Readers.DisposableDataReader"/> that delegates calls to the supplied <paramref name="inner"/>
+            reader and disposes the <paramref name="extra"/> resource when disposed.
+            </remarks>
+            <param name="inner">The inner <see cref="T:System.Data.IDataReader"/> to wrap. Cannot be <c>null</c>.</param>
+            <param name="extra">An optional additional <see cref="T:System.IDisposable"/> resource that will be disposed when this instance is disposed.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.#ctor(System.Data.IDataReader,System.IDisposable)">
+            <summary>
+            Wraps an <see cref="T:System.Data.IDataReader"/> and an additional disposable resource so that disposing the wrapper
+            disposes both the underlying reader and the extra resource (for example a <see cref="T:System.IO.StreamReader"/>).
+            </summary>
+            <remarks>
+            Creates a new <see cref="T:VersaTul.Data.FileReader.Readers.DisposableDataReader"/> that delegates calls to the supplied <paramref name="inner"/>
+            reader and disposes the <paramref name="extra"/> resource when disposed.
+            </remarks>
+            <param name="inner">The inner <see cref="T:System.Data.IDataReader"/> to wrap. Cannot be <c>null</c>.</param>
+            <param name="extra">An optional additional <see cref="T:System.IDisposable"/> resource that will be disposed when this instance is disposed.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Readers.DisposableDataReader.FieldCount">
+            <summary>
+            Gets the number of columns in the current row.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Readers.DisposableDataReader.Item(System.Int32)">
+            <summary>
+            Gets the value of the specified column index.
+            </summary>
+            <param name="i">The zero-based column ordinal.</param>
+            <returns>The column value as an <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Readers.DisposableDataReader.Item(System.String)">
+            <summary>
+            Gets the value of the specified column name.
+            </summary>
+            <param name="name">The column name.</param>
+            <returns>The column value as an <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.Close">
+            <summary>
+            Closes the reader and disposes the extra resource.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Readers.DisposableDataReader.Depth">
+            <summary>
+            Gets the depth of nesting for the current row. Delegates to the inner reader.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetSchemaTable">
+            <summary>
+            Returns schema information for the current result set.
+            </summary>
+            <returns>A <see cref="T:System.Data.DataTable"/> describing the column metadata.</returns>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Readers.DisposableDataReader.IsClosed">
+            <summary>
+            Gets a value indicating whether the reader is closed.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.NextResult">
+            <summary>
+            Advances the reader to the next result set.
+            </summary>
+            <returns><c>true</c> if there are more result sets; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.Read">
+            <summary>
+            Advances the reader to the next record.
+            </summary>
+            <returns><c>true</c> if there are more rows; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="P:VersaTul.Data.FileReader.Readers.DisposableDataReader.RecordsAffected">
+            <summary>
+            Gets the number of rows affected. Delegates to the inner reader.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.Dispose">
+            <summary>
+            Disposes the inner reader and the extra resource. Suppresses finalization.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetBoolean(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetBoolean(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetByte(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetByte(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetChar(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetChar(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetData(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetData(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetDataTypeName(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetDataTypeName(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetDateTime(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetDateTime(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetDecimal(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetDecimal(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetDouble(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetDouble(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetFieldType(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetFieldType(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetFloat(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetFloat(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetGuid(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetGuid(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetInt16(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetInt16(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetInt32(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetInt32(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetInt64(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetInt64(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetName(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetName(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetOrdinal(System.String)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetOrdinal(System.String)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetString(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetString(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetValue(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetValue(System.Int32)"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.GetValues(System.Object[])">
+            <summary>See <see cref="M:System.Data.IDataRecord.GetValues(System.Object[])"/>.</summary>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.DisposableDataReader.IsDBNull(System.Int32)">
+            <summary>See <see cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)"/>.</summary>
+        </member>
+        <member name="T:VersaTul.Data.FileReader.Readers.TextFileReader">
+            <summary>
+            Provides functionality to read text files and expose their contents as a data reader with each line represented
+            as a row.
+            </summary>
+            <remarks>This class implements the ITextReader interface to enable integration with data processing
+            workflows that consume IDataReader instances. Each line of the input text file is treated as a separate row with
+            a single column named "Line". This design allows for simple line-by-line processing of text files using standard
+            data access patterns.</remarks>
+        </member>
+        <member name="M:VersaTul.Data.FileReader.Readers.TextFileReader.Read(System.String,VersaTul.Data.FileReader.Contracts.IOptions)">
+            <summary>
+            Reads all lines from the specified source file and returns an IDataReader containing each line as a row.
+            </summary>
+            <param name="sourceFilePath">The full path to the source file to read. Cannot be null or empty.</param>
+            <param name="options">An options object that specifies additional settings for the read operation. Cannot be null.</param>
+            <returns>An IDataReader where each row contains a single line from the source file. The reader will have one column
+            named "Line".</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if sourceFilePath is null or empty, or if options is null.</exception>
+        </member>
+    </members>
+</doc>

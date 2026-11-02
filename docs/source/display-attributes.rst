@@ -1,6 +1,32 @@
 Display Attributes
 ==================
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Display.Attributes?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Display.Attributes
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Display.Attributes?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Display.Attributes
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Display.Attributes
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.12` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Display.Attributes/1.0.12>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -19,6 +45,12 @@ Use this package when you want to:
 4. Format date values with a display-specific format string.
 5. Exclude properties from exported output.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Display.Attributes on NuGet <https://www.nuget.org/packages/VersaTul.Display.Attributes>`_
+`VersaTul.Display.Attributes versions and release notes <https://www.nuget.org/packages/VersaTul.Display.Attributes#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -28,11 +60,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Display.Attributes
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Display.Attributes -Version latest
 
 Related Packages
 ----------------
@@ -70,6 +97,7 @@ Attribute Example
 -----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Display.Attributes;
 
@@ -94,6 +122,7 @@ Analyzer Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var analyzer = new DisplayAnalyzer();
 
@@ -101,9 +130,79 @@ Analyzer Example
    var display = analyzer.GetAttribute(property);
    var formatted = analyzer.FormatValue(display, DateTime.UtcNow);
 
+Member Identity And Concurrent Use
+----------------------------------
+
+Metadata is cached by declaring type, module and member token. Inherited views
+reuse the declaring member, while constructed generic declaring types remain
+distinct. All display settings, including date format and culture, are preserved.
+Formatting receives a copy of cached settings so a custom formatter cannot alter
+metadata used by later calls.
+
+Use the concrete analyzer's member-aware method for precise formatting:
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+   var property = typeof(Order).GetProperty(nameof(Order.SubTotal));
+   var formatted = analyzer.FormatPropertyValue(property, 12.345m);
+
+The existing ``FormatValue(value, propertyName)`` method remains valid for a unique
+registered member name. If different declaring members share that name, it now
+throws ``InvalidOperationException`` instead of silently reusing the first
+member's metadata. Unknown names still throw ``KeyNotFoundException``. This is a
+Major release migration: use ``FormatPropertyValue(property, value)`` when member
+names can be ambiguous. Existing IDisplayAnalyzer implementations do not need a
+new member; interface callers can use
+``FormatValue(analyzer.GetAttribute(property), value)``.
+
+Metadata caching, heading snapshots and formatter registration support concurrent
+use. Each operation captures a stable formatter snapshot, so registration during
+execution affects subsequent snapshots. Registered formatter instances may run
+concurrently and must synchronize their own mutable state. Built-in formatters
+keep per-operation state in PropertyData rather than on the formatter instance.
+
 Notes
 -----
 
 1. ``DisplayAnalyzer.PropertyNames`` returns resolved export names ordered by sequence and then name.
 2. The analyzer caches resolved property metadata internally as names are requested.
 3. Custom formatters are the extension point when you need export-specific formatting beyond the built-ins.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Control exported property names, order, precision, date formats, culture, and ignored fields with attributes and configurable formatters.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Display.Attributes
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Display.Attributes/Program.cs
+   :language: csharp
+   :caption: VersaTul.Display.Attributes minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Display.Attributes/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/display-attributes.rst

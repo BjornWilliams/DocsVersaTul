@@ -1,6 +1,32 @@
 Compression
 ===========
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Compression?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Compression
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Compression?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Compression
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Compression
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.17` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Compression/1.0.17>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -18,6 +44,12 @@ Use this package when you want to:
 3. Keep compression concerns separate from file generation logic.
 4. Support workflows that generate exports before saving, emailing, or uploading them.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Compression on NuGet <https://www.nuget.org/packages/VersaTul.Compression>`_
+`VersaTul.Compression versions and release notes <https://www.nuget.org/packages/VersaTul.Compression#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -27,11 +59,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Compression
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Compression -Version latest
 
 Related Packages
 ----------------
@@ -63,6 +90,7 @@ Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.IO;
    using VersaTul.Compression;
@@ -83,6 +111,7 @@ Unzip Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using var archiveStream = File.OpenRead("exports.zip");
 
@@ -98,3 +127,41 @@ Notes
 
 1. ``ZipStream.Stream`` is a ``MemoryStream``, so this package is best suited to in-memory export workflows.
 2. The package does not decide where archives are stored or sent; pair it with :doc:`handler-file` or :doc:`streamers` depending on your workflow.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Compress and decompress streams and memory streams using .NET System.IO.Compression APIs, with ZIP archive helpers.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Compression
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Compression/Program.cs
+   :language: csharp
+   :caption: VersaTul.Compression minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Compression/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/compression.rst

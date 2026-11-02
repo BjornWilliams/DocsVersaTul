@@ -18,21 +18,43 @@ Use this workflow when you need to:
 2. Control the shape of exported columns without renaming your model properties.
 3. Keep export formatting decisions near the model instead of scattering them through file-writing code.
 
-Packages To Install
--------------------
+Prerequisites and Tested Versions
+---------------------------------
 
-.. code-block:: console
+- Install a .NET SDK that supports the target framework. The sample projects target ``net8.0``, ``net9.0``, and ``net10.0``; the documentation workflow validates all three.
+- The runnable sample writes files under a unique temporary directory and removes it when finished. It needs no external service or credentials.
 
-   dotnet add package VersaTul.Collection.Streamers
-   dotnet add package VersaTul.Display.Attributes
-   dotnet add package VersaTul.Object.Converters
+The runnable sample's direct package dependencies use these released versions:
+
+.. list-table:: Tested data-export sample packages
+   :header-rows: 1
+
+   * - Package
+     - Version
+     - Role
+   * - ``VersaTul.Collection.Streamers``
+     - ``1.0.36``
+     - CSV streaming and file creation
+   * - ``VersaTul.Display.Attributes``
+     - ``1.0.12``
+     - Export column names, ordering, formatting, and ignored fields
+   * - ``VersaTul.Object.Converters``
+     - ``1.0.15``
+     - Object flattening and display-aware conversion
+   * - ``VersaTul.Handler.File``
+     - ``1.0.21``
+     - File utilities used by the streamer
+   * - ``VersaTul.Utilities``
+     - ``1.0.16``
+     - Shared escaping and formatting utilities
 
 Step 1: Annotate The Export Model
 ---------------------------------
 
-Use display metadata to control how the export appears.
+Use display metadata to control the CSV headings, column order, decimal and date formats, and ignored fields.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Display.Attributes;
 
@@ -60,12 +82,13 @@ Step 2: Create The Stream
 Create a streamer for the target format.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers;
 
-   var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
+   using var csvStreamer = new CsvStreamer(utility, fileUtility, flattener);
 
-   using var fileStream = csvStreamer
+   var fileStream = csvStreamer
        .Create(orderRows, "orders-export")
        .GetFileStream();
 
@@ -77,22 +100,19 @@ Step 3: Save The Export
 For large exports, write directly to disk.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Collection.Streamers.Contracts;
 
    var filePath = ((IFileWritableStreamer)csvStreamer.Create(orderRows, "orders-export"))
        .WriteToFile("C:\\exports");
 
-Why The Companion Packages Matter
----------------------------------
+Why This Package Combination
+----------------------------
 
-``Display.Attributes`` lets you control the final output contract.
+``VersaTul.Collection.Streamers`` writes the collection as CSV and owns the output stream. ``VersaTul.Display.Attributes`` supplies the CSV names, order, formats, and exclusion rule. ``VersaTul.Object.Converters`` provides the ``Flattener`` required by the streamer and turns the nested location into a readable field. ``VersaTul.Handler.File`` and ``VersaTul.Utilities`` provide the file and CSV escaping helpers used to construct the sample streamer.
 
-``Object.Converters`` helps flatten nested values and respects display-driven behavior during processing.
-
-``Collection.Streamers`` provides the reusable export engine.
-
-Together, they give you a path from domain object to export file without hand-writing CSV headers, formatting logic, and flattening rules.
+The sample also writes JSON with ``System.Text.Json`` to show a second file format. VersaTul display metadata applies to the CSV output; JSON uses camel-case names and its own ``JsonIgnore`` attribute.
 
 What You Should See
 -------------------
@@ -103,6 +123,58 @@ When this workflow is working:
 2. Values such as decimals and dates follow the export formatting rules.
 3. Ignored properties do not appear in the final export.
 
+Cleanup, Cancellation, and Production Notes
+--------------------------------------------
+
+- The sample deletes its temporary output directory in ``finally``. It disposes the ``CsvStreamer`` after use; the streamer owns its backing output stream and the stream returned by ``GetFileStream`` is borrowed. The ``StreamReader`` therefore uses ``leaveOpen: true`` and does not dispose that borrowed stream.
+- ``GetFileStream`` builds the result in memory. For large exports, use ``IFileWritableStreamer.WriteToFile`` with a ``CancellationToken`` and an output directory with the required permissions and available space.
+- The sample throws when generated content differs from the expected CSV or JSON. File, permission, and serialization errors also propagate; handle them at the application boundary and review both CSV display metadata and JSON serialization rules before exporting sensitive fields.
+
+Runnable Sample
+---------------
+
+The complete `DataExport project <https://github.com/BjornWilliams/DocsVersaTul/tree/VT-Upgrade-And-Revisions/docs/samples/DataExport>`_ creates CSV and JSON files from a sample object. Clone the audit branch and run it from the repository root:
+
+.. code-block:: console
+
+   git clone --branch VT-Upgrade-And-Revisions https://github.com/BjornWilliams/DocsVersaTul.git
+   cd DocsVersaTul
+   dotnet run --project docs/samples/DataExport/DataExport.csproj --framework net8.0
+
+The project also targets ``net9.0`` and ``net10.0``; substitute either framework in the command to run those targets. The sample source is included below for reference.
+
+The deterministic input is one person object:
+
+.. code-block:: csharp
+   :caption: Input fixture for the runnable sample.
+
+   new Person
+   {
+       Name = "Ada",
+       CreditLimit = 1250.456m,
+       Age = 37,
+       RegisteredOn = new DateTime(2024, 1, 15),
+       Location = new Location { City = "London" },
+       InternalNotes = "Do not include in either export"
+   }
+
+.. literalinclude:: ../../samples/DataExport/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+The exact expected console output, including both generated-file contents, is:
+
+.. literalinclude:: ../../samples/DataExport/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Likely Failure Messages and Fixes
+---------------------------------
+
+1. ``error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0.`` — Install the .NET 10 SDK, or run the sample with ``--framework net8.0`` or ``net9.0``.
+2. ``error NU1301: Unable to load the service index for source https://api.nuget.org/v3/index.json.`` — Restore network access or configure the NuGet feed that contains the pinned packages, then rerun ``dotnet restore``.
+3. ``InvalidOperationException: The export files did not match the expected CSV and JSON content.`` — Compare both generated files with the included expected output; check the package pins, display attributes, and JSON options before changing the expected file.
+
 Common Mistakes
 ---------------
 
@@ -110,16 +182,7 @@ Common Mistakes
 2. Encoding formatting rules in ad hoc exporter code instead of display metadata.
 3. Forgetting that direct-to-disk writing is often the better choice for large files.
 
-Related Package Pages
----------------------
+Next Step
+---------
 
-1. :doc:`/streamers`
-2. :doc:`/display-attributes`
-3. :doc:`/converters`
-
-What To Read Next
------------------
-
-1. Read :doc:`/streamers` for format and file-writing options.
-2. Read :doc:`/display-attributes` for metadata and custom formatter details.
-3. Read :doc:`/converters` if your export input contains nested objects or collections that must be flattened first.
+For supported export formats and direct-to-file options, continue with :doc:`/streamers`.

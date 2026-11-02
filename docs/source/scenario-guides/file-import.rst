@@ -18,25 +18,35 @@ Use this workflow when you need to:
 2. Reuse the same import approach for one file or many files.
 3. Keep parsing concerns separate from database upload concerns.
 
-Packages To Install
--------------------
+Prerequisites and Tested Versions
+---------------------------------
 
-.. code-block:: console
+- Install a .NET SDK that supports the target framework. The sample projects target ``net8.0``, ``net9.0``, and ``net10.0``; the documentation workflow validates all three.
+- The runnable sample reads a checked-in CSV and prepares a ``CopyDetail`` mapping. It deliberately does not connect to SQL Server, so it needs no server or credentials.
 
-   dotnet add package VersaTul.Data.FileReader
-   dotnet add package VersaTul.Data.Bulk
-   dotnet add package VersaTul.Data.MsSql
+The runnable sample pins these package versions:
 
-Why These Packages Together
----------------------------
+.. list-table:: Tested file-import sample packages
+   :header-rows: 1
 
-``Data.FileReader`` solves file parsing.
+   * - Package
+     - Version
+     - Role
+   * - ``VersaTul.Data.FileReader``
+     - ``1.0.9``
+     - CSV reader
+   * - ``VersaTul.Data.Bulk``
+     - ``1.0.11``
+     - Copy detail and column mapping
 
-``Data.Bulk`` solves copy-detail and column-mapping structure.
+For an actual SQL Server upload, add ``VersaTul.Data.MsSql`` version ``2.0.20`` and configure a connection outside source control. That optional upload package is not used by the runnable sample.
 
-``Data.MsSql`` solves the actual SQL Server bulk upload.
+Why This Package Combination
+----------------------------
 
-That split is useful because you can reason about input parsing, mapping, and upload as separate concerns.
+``VersaTul.Data.FileReader`` turns the CSV fixture into an ``IDataReader``. ``VersaTul.Data.Bulk`` describes the destination and column mappings without choosing a database provider, so the same preparation step can be inspected and tested independently of an upload.
+
+Add ``VersaTul.Data.MsSql`` version ``2.0.20`` only when SQL Server is the destination and an actual upload is required. It is intentionally absent from this sample because the tutorial demonstrates parsing and mapping without needing a live database.
 
 Step 1: Read The File
 ---------------------
@@ -44,6 +54,7 @@ Step 1: Read The File
 Start by turning the CSV file into an ``IDataReader``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.FileReader;
 
@@ -63,6 +74,7 @@ Step 2: Define Column Mappings
 Map the incoming columns to the destination table.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Bulk;
 
@@ -83,6 +95,7 @@ Step 3: Execute The Upload
 If the destination is SQL Server, hand the prepared copy detail to the ``VersaTul.Data.MsSql`` bulk uploader.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.MsSql.Bulk;
 
@@ -103,6 +116,42 @@ When this workflow is wired correctly:
 2. The bulk-copy step validates the mapping shape before upload.
 3. The SQL Server upload reports progress and completes as one deliberate import operation.
 
+Cleanup, Cancellation, and Production Notes
+--------------------------------------------
+
+- The sample's ``using`` scope disposes the CSV reader, which also closes the parser and file stream it owns. Keep the reader alive until any upload using its rows has finished.
+- ``CsvFileReader`` reads synchronously. When the SQL Server bulk implementation supports ``ICancellableBulkCopy``, use its asynchronous overload with a ``CancellationToken``; cancellation does not prove that the server accepted no rows.
+- The sample lets missing-file, CSV parsing, and mapping errors surface. Before uploading in production, validate headers and row values against the destination schema, decide how to report rejected rows, use an appropriate transaction or retry strategy, and keep database credentials outside source control.
+
+Runnable Sample
+---------------
+
+The complete `FileImport project <https://github.com/BjornWilliams/DocsVersaTul/tree/VT-Upgrade-And-Revisions/docs/samples/FileImport>`_ reads its checked-in fixture and prepares the column mapping. Clone the audit branch and run it from the repository root:
+
+.. code-block:: console
+
+   git clone --branch VT-Upgrade-And-Revisions https://github.com/BjornWilliams/DocsVersaTul.git
+   cd DocsVersaTul
+   dotnet run --project docs/samples/FileImport/FileImport.csproj --framework net8.0
+
+The project also targets ``net9.0`` and ``net10.0``; substitute either framework in the command to run those targets. The sample source is included below for reference.
+
+.. literalinclude:: ../../samples/FileImport/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+The sample input fixture is the checked-in ``people.csv`` file:
+
+.. literalinclude:: ../../samples/FileImport/Fixtures/people.csv
+   :language: text
+   :caption: people.csv
+
+The exact expected console output is:
+
+.. literalinclude:: ../../samples/FileImport/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
 Why This Workflow Helps Adoption
 --------------------------------
 
@@ -114,6 +163,13 @@ You avoid writing:
 2. a custom tabular-to-database mapper, and
 3. a custom SQL Server bulk import wrapper.
 
+Likely Failure Messages and Fixes
+---------------------------------
+
+1. ``error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0.`` — Install the .NET 10 SDK, or run the sample with ``--framework net8.0`` or ``net9.0``.
+2. ``error NU1301: Unable to load the service index for source https://api.nuget.org/v3/index.json.`` — Restore network access or configure the NuGet feed that contains the pinned packages, then rerun ``dotnet restore``.
+3. ``FileNotFoundException: The checked-in people.csv fixture was not copied to the sample output.`` — Run the project file from the sample link and confirm its ``Fixtures/people.csv`` item is copied to the output directory.
+
 Common Mistakes
 ---------------
 
@@ -121,16 +177,7 @@ Common Mistakes
 2. Starting with ``VersaTul.Data.FileReader`` but not planning the upload target.
 3. Choosing ``VersaTul.Data.Sql`` instead of ``VersaTul.Data.MsSql`` when SQL Server bulk upload is the real requirement.
 
-Related Package Pages
----------------------
+Next Step
+---------
 
-1. :doc:`/file-reader`
-2. :doc:`/bulk`
-3. :doc:`/mssql`
-
-What To Read Next
------------------
-
-1. Read :doc:`/file-reader` if you need more detail on file options and directory reads.
-2. Read :doc:`/bulk` if you want deeper mapping and result-model detail.
-3. Read :doc:`sql-data-access` if your next step is building a reusable relational data-service layer around the import workflow.
+To upload the mapped rows to SQL Server, continue with :doc:`/mssql`.

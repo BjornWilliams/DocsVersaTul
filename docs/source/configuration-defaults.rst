@@ -1,6 +1,32 @@
 Configuration Defaults
 ======================
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Configuration.Defaults?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Configuration.Defaults
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Configuration.Defaults?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Configuration.Defaults
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Configuration.Defaults
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.23` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Configuration.Defaults/1.0.23>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -18,6 +44,12 @@ Use this package when you want to:
 3. Build configuration dictionaries fluently in code.
 4. Standardize configuration setup across multiple services or projects.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Configuration.Defaults on NuGet <https://www.nuget.org/packages/VersaTul.Configuration.Defaults>`_
+`VersaTul.Configuration.Defaults versions and release notes <https://www.nuget.org/packages/VersaTul.Configuration.Defaults#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -27,11 +59,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Configuration.Defaults
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Configuration.Defaults -Version latest
 
 Related Packages
 ----------------
@@ -78,6 +105,7 @@ Basic Example
 This example starts with the MongoDB defaults and overrides the connection string.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configuration.Defaults.MongoDB;
 
@@ -99,6 +127,7 @@ Composed Example
 You can combine package defaults with environment metadata and project-specific overrides.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Configuration.Defaults;
    using VersaTul.Configuration.Defaults.Sql;
@@ -119,7 +148,7 @@ Some of the most commonly used defaults include:
 1. SQL: ``CommandTimeout`` and ``SqlDbConnectionName``.
 2. MS SQL: ``BulkCopyTimeout``.
 3. MongoDB: ``MongoDbConnectionName``, ``SocketTimeout``, ``ConnectTimeout``, and ``MaxConnectionIdleTime``.
-4. Mailer: ``SmtpServer``, ``SmtpPort``, ``FromAddress``, ``ToAddress``, and ``MaxAttachmentSize``.
+4. Mailer: ``SmtpServer``, ``SmtpPort``, ``FromAddress``, ``ToAddress``, and ``MaxAttachmentSize``. ``MailConfiguration`` additionally applies secure defaults of ``EnableSsl=true`` and ``UseDefaultCredentials=false`` when those optional keys are omitted.
 5. Logger builders: keys such as file path, file name, endpoint, or base URL depending on the logger implementation.
 
 Notes
@@ -129,3 +158,41 @@ Notes
 2. Override only the values that differ for your environment or application.
 3. Feed the resulting ``ConfigSettings`` directly into your configuration class from :doc:`configuration`.
 4. If you need to audit what a builder produced before runtime wiring, use ``BuildSnapshot()``.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Ready-made configuration builders for VersaTul projects that use Entity Framework Core or MongoDB.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Configuration.Defaults
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configuration.Defaults/Program.cs
+   :language: csharp
+   :caption: VersaTul.Configuration.Defaults minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Configuration.Defaults/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/configuration-defaults.rst

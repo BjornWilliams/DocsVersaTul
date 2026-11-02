@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Compression</name>
+    </assembly>
+    <members>
+        <member name="M:VersaTul.Compression.Archiver.Archive(System.IO.Compression.ZipArchive,VersaTul.Compression.ZipStream)">
+            <summary>
+            Writes the entire contents of this memory stream to zipArchive stream.
+            </summary>
+            <param name="zipArchive">package to hold compressed files in the zip archive format.</param>
+            <param name="zipStream">The stream to be zipped.</param>
+        </member>
+        <member name="M:VersaTul.Compression.Archiver.Archive(System.IO.Compression.ZipArchive,VersaTul.Compression.ZipStream,System.IO.Compression.CompressionLevel)">
+            <summary>
+            Writes the entire contents of this memory stream to zipArchive stream using the specified compression level.
+            </summary>
+            <param name="zipArchive">package to hold compressed files in the zip archive format.</param>
+            <param name="zipStream">The stream to be zipped.</param>
+            <param name="compressionLevel">The compression level to use.</param>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IArchiver.Archive(System.IO.Compression.ZipArchive,VersaTul.Compression.ZipStream)">
+            <summary>
+            Writes the entire contents of this memory stream to zipArchive stream.
+            </summary>
+            <param name="zipArchive">package to hold compressed files in the zip archive format.</param>
+            <param name="zipStream">The stream to be zipped up.</param>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IArchiver.Archive(System.IO.Compression.ZipArchive,VersaTul.Compression.ZipStream,System.IO.Compression.CompressionLevel)">
+            <summary>
+            Writes the entire contents of this memory stream to zipArchive stream using the specified compression level.
+            </summary>
+            <param name="zipArchive">package to hold compressed files in the zip archive format.</param>
+            <param name="zipStream">The stream to be zipped up.</param>
+            <param name="compressionLevel">The compression level to use.</param>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IZipper.Zip(VersaTul.Compression.ZipStream)">
+            <summary>
+            Zip the given <see cref="T:VersaTul.Compression.ZipStream"/> into zip folder.
+            </summary>
+            <param name="zipStream">The stream to be zipped.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IZipper.Zip(VersaTul.Compression.ZipStream,System.IO.Compression.CompressionLevel)">
+            <summary>
+            Zip the given <see cref="T:VersaTul.Compression.ZipStream"/> into zip folder using the specified compression level.
+            </summary>
+            <param name="zipStream">The stream to be zipped.</param>
+            <param name="compressionLevel">The compression level to use.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IZipper.Zip(System.Collections.Generic.IEnumerable{VersaTul.Compression.ZipStream})">
+            <summary>
+            Zips the given collection of <seealso cref="T:VersaTul.Compression.ZipStream"/> into a zip folder.
+            </summary>
+            <param name="zipStreams">The collection of streams to be zipped.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IZipper.Zip(System.Collections.Generic.IEnumerable{VersaTul.Compression.ZipStream},System.IO.Compression.CompressionLevel)">
+            <summary>
+            Zips the given collection of <seealso cref="T:VersaTul.Compression.ZipStream"/> into a zip folder using the specified compression level.
+            </summary>
+            <param name="zipStreams">The collection of streams to be zipped.</param>
+            <param name="compressionLevel">The compression level to use.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IZipper.Unzip(System.IO.Stream)">
+            <summary>
+            Unzips the given zip archive stream.
+            </summary>
+            <param name="archiveStream">The zip archive stream.</param>
+            <returns>The extracted zip streams.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Contracts.IZipper.Unzip(System.IO.Stream,System.Func{System.String,System.Boolean})">
+            <summary>
+            Unzips the given zip archive stream using an optional entry filter.
+            </summary>
+            <param name="archiveStream">The zip archive stream.</param>
+            <param name="entryFilter">Optional filter for entries to extract.</param>
+            <returns>The extracted zip streams.</returns>
+        </member>
+        <member name="T:VersaTul.Compression.Zipper">
+            <summary>
+            Provides methods and properties used to compress and decompress streams.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Compression.Zipper.Zip(VersaTul.Compression.ZipStream)">
+            <summary>
+            Zip the given <see cref="T:VersaTul.Compression.ZipStream"/> into zip folder.
+            </summary>
+            <param name="zipStream">The stream to be zipped.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Zipper.Zip(VersaTul.Compression.ZipStream,System.IO.Compression.CompressionLevel)">
+            <summary>
+            Zip the given <see cref="T:VersaTul.Compression.ZipStream"/> into zip folder using the specified compression level.
+            </summary>
+            <param name="zipStream">The stream to be zipped.</param>
+            <param name="compressionLevel">The compression level to use.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Zipper.Zip(System.Collections.Generic.IEnumerable{VersaTul.Compression.ZipStream})">
+            <summary>
+            Zips the given collection of <seealso cref="T:VersaTul.Compression.ZipStream"/> into a zip folder.
+            </summary>
+            <param name="zipStreams">The collection of streams to be zipped.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Zipper.Zip(System.Collections.Generic.IEnumerable{VersaTul.Compression.ZipStream},System.IO.Compression.CompressionLevel)">
+            <summary>
+            Zips the given collection of <seealso cref="T:VersaTul.Compression.ZipStream"/> into a zip folder using the specified compression level.
+            </summary>
+            <param name="zipStreams">The collection of streams to be zipped.</param>
+            <param name="compressionLevel">The compression level to use.</param>
+            <returns>The memory stream containing zip files.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Zipper.Unzip(System.IO.Stream)">
+            <summary>
+            Unzips the given zip archive stream.
+            </summary>
+            <param name="archiveStream">The zip archive stream.</param>
+            <returns>The extracted zip streams.</returns>
+        </member>
+        <member name="M:VersaTul.Compression.Zipper.Unzip(System.IO.Stream,System.Func{System.String,System.Boolean})">
+            <summary>
+            Unzips the given zip archive stream using an optional entry filter.
+            </summary>
+            <param name="archiveStream">The zip archive stream.</param>
+            <param name="entryFilter">Optional filter for entries to extract.</param>
+            <returns>The extracted zip streams.</returns>
+        </member>
+        <member name="T:VersaTul.Compression.ZipStream">
+            <summary>
+            Represents a class containing the Memory Stream and the Filename to save it as.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Compression.ZipStream.ContentType">
+            <summary>
+            Gets the type of content in the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Compression.ZipStream.FileName">
+            <summary>
+            Gets or Sets the filename used with stream.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Compression.ZipStream.Stream">
+            <summary>
+            Gets or Sets the stream to zip.
+            </summary>
+        </member>
+    </members>
+</doc>

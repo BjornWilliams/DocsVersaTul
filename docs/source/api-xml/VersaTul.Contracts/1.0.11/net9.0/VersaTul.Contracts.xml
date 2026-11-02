@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Contracts.IAsyncExecutable">
+            <summary>
+            Represents an asynchronous command-style contract with no input or output payload.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Contracts.IAsyncExecutable.ExecuteAsync">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Contracts.IAsyncExecutable`1">
+            <summary>
+            Represents an asynchronous command-style contract with an input payload.
+            </summary>
+            <typeparam name="TInput">The input payload type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Contracts.IAsyncExecutable`1.ExecuteAsync(`0)">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+            <param name="input">The input payload.</param>
+        </member>
+        <member name="T:VersaTul.Contracts.IAsyncQuery`1">
+            <summary>
+            Represents an asynchronous query-style contract with an output payload.
+            </summary>
+            <typeparam name="TOutput">The output payload type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Contracts.IAsyncQuery`1.ExecuteAsync">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+            <returns>The output payload.</returns>
+        </member>
+        <member name="T:VersaTul.Contracts.IAsyncQuery`2">
+            <summary>
+            Represents an asynchronous query-style contract with input and output payloads.
+            </summary>
+            <typeparam name="TInput">The input payload type.</typeparam>
+            <typeparam name="TOutput">The output payload type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Contracts.IAsyncQuery`2.ExecuteAsync(`0)">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+            <param name="input">The input payload.</param>
+            <returns>The output payload.</returns>
+        </member>
+        <member name="T:VersaTul.Contracts.ICancellableAsyncExecutable">
+            <summary>
+            Represents an asynchronous command-style contract with cancellation support.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Contracts.ICancellableAsyncExecutable.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+            <param name="cancellationToken">A token to cancel execution.</param>
+        </member>
+        <member name="T:VersaTul.Contracts.ICancellableAsyncExecutable`1">
+            <summary>
+            Represents an asynchronous command-style contract with input payload and cancellation support.
+            </summary>
+            <typeparam name="TInput">The input payload type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Contracts.ICancellableAsyncExecutable`1.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+            <param name="input">The input payload.</param>
+            <param name="cancellationToken">A token to cancel execution.</param>
+        </member>
+        <member name="T:VersaTul.Contracts.ICancellableAsyncQuery`1">
+            <summary>
+            Represents an asynchronous query-style contract with cancellation support.
+            </summary>
+            <typeparam name="TOutput">The output payload type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Contracts.ICancellableAsyncQuery`1.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+            <param name="cancellationToken">A token to cancel execution.</param>
+            <returns>The output payload.</returns>
+        </member>
+        <member name="T:VersaTul.Contracts.ICancellableAsyncQuery`2">
+            <summary>
+            Represents an asynchronous query-style contract with input, output and cancellation support.
+            </summary>
+            <typeparam name="TInput">The input payload type.</typeparam>
+            <typeparam name="TOutput">The output payload type.</typeparam>
+        </member>
+        <member name="M:VersaTul.Contracts.ICancellableAsyncQuery`2.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Executes the operation asynchronously.
+            </summary>
+            <param name="input">The input payload.</param>
+            <param name="cancellationToken">A token to cancel execution.</param>
+            <returns>The output payload.</returns>
+        </member>
+        <member name="T:VersaTul.Contracts.IPredicate`1">
+            <summary>
+            Represents a set of expression that can be applied to the type T.
+            </summary>
+            <typeparam name="T">The type of object expression are for.</typeparam>
+        </member>
+        <member name="P:VersaTul.Contracts.IPredicate`1.Condition">
+            <summary>
+            Gets or Sets an expression for filtering with Func of T.
+            </summary>
+        </member>
+    </members>
+</doc>

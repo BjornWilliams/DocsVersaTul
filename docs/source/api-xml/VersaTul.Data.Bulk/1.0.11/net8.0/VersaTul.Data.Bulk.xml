@@ -1,0 +1,391 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Data.Bulk</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Data.Bulk.BulkCopyColumnMapping">
+            <summary>
+            Defines the mapping between a column in a SqlBulkCopy instance's data source and a column in the instance's destination table.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.BulkCopyColumnMapping.#ctor">
+            <summary>
+            Parameterless constructor that initializes a new BulkCopyColumnMapping object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.BulkCopyColumnMapping.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new column mapping, using column names to refer to source and destination columns.
+            </summary>
+            <param name="sourceColumn">The name of the source column within the data source.</param>
+            <param name="destinationColumn">The name of the destination column within the destination table.</param>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.BulkCopyColumnMapping.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new column mapping, using column ordinals to refer to source and destination columns.
+            </summary>
+            <param name="sourceColumnOrdinal">The ordinal position of the source column within the data source.</param>
+            <param name="destinationOrdinal">The ordinal position of the destination column within the destination table.</param>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.BulkCopyColumnMapping.#ctor(System.Int32,System.String)">
+            <summary>
+            Creates a new column mapping, using a column ordinal to refer to the source column and a column name for the target column.
+            </summary>
+            <param name="sourceColumnOrdinal">The ordinal position of the source column within the data source.</param>
+            <param name="destinationColumn">The name of the destination column within the destination table.</param>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.BulkCopyColumnMapping.#ctor(System.String,System.Int32)">
+            <summary>
+            Creates a new column mapping, using a column name to refer to the source column and a column ordinal for the target column.
+            </summary>
+            <param name="sourceColumn">The name of the source column within the data source.</param>
+            <param name="destinationOrdinal">The ordinal position of the destination column within the destination table.</param>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.BulkCopyColumnMapping.SourceColumn">
+            <summary>
+            Gets or Sets the string value of the SourceColumn property.
+            </summary>
+            <remarks>The SourceColumn and SourceOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.BulkCopyColumnMapping.DestinationColumn">
+            <summary>
+            Gets or Sets the string value of the DestinationColumn property.
+            </summary>
+            <remarks>The DestinationColumn and DestinationOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.BulkCopyColumnMapping.SourceOrdinal">
+            <summary>
+            Gets or Sets the integer value of the SourceOrdinal property, or -1 if the property has not been set.
+            </summary>
+            <remarks>The SourceColumn and SourceOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.BulkCopyColumnMapping.DestinationOrdinal">
+            <summary>
+            Gets or Sets the integer value of the DestinationOrdinal property, or -1 if the property has not been set.
+            </summary>
+            <remarks>The DestinationColumn and DestinationOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.BulkCopyColumnMapping`2">
+            <summary>
+            Defines the mapping between a column in a SqlBulkCopy instance's data source and a column in the instance's destination table.
+            </summary>
+            <typeparam name="TSource">The type of the instance where source columns are to be taken from.</typeparam>
+            <typeparam name="TDestination">The type of the instance where destination columns are to be taken from.</typeparam>
+            <remarks>
+            Initializes a new instance of the BulkCopyColumnMapping class.
+            </remarks>
+            <param name="sourceColumnExpression">Strongly type lambda data structure from which source property name is taken</param>
+            <param name="destinationColumnExpression">Strongly type lambda data structure from which destination property name is taken</param>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.BulkCopyColumnMapping`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}})">
+            <summary>
+            Defines the mapping between a column in a SqlBulkCopy instance's data source and a column in the instance's destination table.
+            </summary>
+            <typeparam name="TSource">The type of the instance where source columns are to be taken from.</typeparam>
+            <typeparam name="TDestination">The type of the instance where destination columns are to be taken from.</typeparam>
+            <remarks>
+            Initializes a new instance of the BulkCopyColumnMapping class.
+            </remarks>
+            <param name="sourceColumnExpression">Strongly type lambda data structure from which source property name is taken</param>
+            <param name="destinationColumnExpression">Strongly type lambda data structure from which destination property name is taken</param>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.BulkCopyColumnMapping`2.GetName``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Given the property of a class as an expression returns the string name of the member.
+            </summary>
+            <typeparam name="T">The type of the instance where property is found.</typeparam>
+            <param name="expression">Strongly type lambda data structure.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.Contracts.IBulkCopy">
+            <summary>
+            Represents the functionality for bulk uploading data from one data source to another.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Contracts.IBulkCopy.BatchSize">
+            <summary>
+            Gets or Sets the number of rows in each batch.
+            </summary>
+            <remarks>At the end of each batch, the rows in the batch are sent to the server.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Contracts.IBulkCopy.EnableStreaming">
+            <summary>
+            Gets or Sets a value enabling or disabling streaming data from an <see cref="!:IDataReader"/> object.
+            </summary>
+            <remarks>
+            True if a BulkCopy object can stream data from an IDataReader object; otherwise, false. The default is false.
+            </remarks>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopy(VersaTul.Data.Bulk.CopyDetail)">
+            <summary>
+             Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopy(VersaTul.Data.Bulk.CopyDetail,System.String)">
+            <summary>
+            Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <param name="dBConnectionName">Connection string name to use instead of any defaults that were provided.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopy(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail})">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopy(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail},System.String)">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <param name="dBConnectionName">Connection string name to use instead of Default.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopyAsync(VersaTul.Data.Bulk.CopyDetail)">
+            <summary>
+             Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopyAsync(VersaTul.Data.Bulk.CopyDetail,System.String)">
+            <summary>
+             Bulk Insert the given <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="copyDetail">The details of the data to be copied, such as destination, source and mappings.</param>
+            <param name="dBConnectionName">Connection string name to use instead of any defaults that were provided.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopyAsync(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail})">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopyAsync(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail},System.String)">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/>.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <param name="dBConnectionName">Connection string name to use instead of Default.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Contracts.IBulkCopy.DoCopyAsync(System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.CopyDetail},System.String,System.Action{VersaTul.Data.Bulk.Results.BulkCopyProgress})">
+            <summary>
+            Bulk Insert a given collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> with optional progress callback.
+            </summary>
+            <param name="collection">A collection of <seealso cref="T:VersaTul.Data.Bulk.CopyDetail"/> to be processed.</param>
+            <param name="dBConnectionName">Connection string name to use instead of Default.</param>
+            <param name="progressCallback">Optional callback invoked after each item is processed.</param>
+            <returns>
+            Returns the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            Upon failure the exception object is made available from the <see cref="T:VersaTul.Data.Bulk.Results.BulkCopyResult"/> object.
+            </returns>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping">
+            <summary>
+            Defines the mapping between a column in a Bulk Copy instance data source and a column in the instance's destination source.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping.SourceColumn">
+            <summary>
+            Gets or Sets the string value of the SourceColumn property.
+            </summary>
+            <remarks>The SourceColumn and SourceOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping.DestinationColumn">
+            <summary>
+            Gets or Sets the string value of the DestinationColumn property.
+            </summary>
+            <remarks>The DestinationColumn and DestinationOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping.SourceOrdinal">
+            <summary>
+            Gets or Sets the integer value of the SourceOrdinal property, or -1 if the property has not been set.
+            </summary>
+            <remarks>The SourceColumn and SourceOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping.DestinationOrdinal">
+            <summary>
+            Gets or Sets the integer value of the DestinationOrdinal property, or -1 if the property has not been set.
+            </summary>
+            <remarks>The DestinationColumn and DestinationOrdinal properties are mutually exclusive. The last value set takes precedence.</remarks>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.CopyDetail">
+            <summary>
+            Represents the details that will be used by the <see cref="!:BulkCopy"/>.
+            </summary>
+            <remarks>
+            Creates and Instance with the given values.
+            </remarks>
+            <param name="destinationName">The name of the target to insert the data into.</param>
+            <param name="reader">The forward only stream from the result set.</param>
+            <param name="columnMappings">The column definitions and mapping between the source column and destination taget.</param>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.CopyDetail.#ctor(System.String,System.Data.IDataReader,System.Collections.Generic.IEnumerable{VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping})">
+            <summary>
+            Creates and Instance with the given values.
+            </summary>
+            <param name="destinationName">The name of the target to insert the data into.</param>
+            <param name="reader">The forward only stream from the result set.</param>
+            <param name="columnMappings">The column definitions and mapping between the source column and destination taget.</param>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.CopyDetail.DestinationName">
+            <summary>
+            Get the destination name to save data into.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.CopyDetail.ColumnMappings">
+            <summary>
+            Get a read-only list of <seealso cref="T:VersaTul.Data.Bulk.Contracts.IBulkCopyColumnMapping"/>.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.CopyDetail.SourceData">
+            <summary>
+            Get the source data to bulk upload.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.Exceptions.BulkCopyException">
+            <summary>
+            Represents a Bulk upload exception.
+            </summary>
+            <param name="message">The user friendly error message.</param>
+            <param name="innerException">The actual exception that caused the upload to fail.</param>
+        </member>
+        <member name="M:VersaTul.Data.Bulk.Exceptions.BulkCopyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Represents a Bulk upload exception.
+            </summary>
+            <param name="message">The user friendly error message.</param>
+            <param name="innerException">The actual exception that caused the upload to fail.</param>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.Results.BulkCopyProgress">
+            <summary>
+            Represents progress details for bulk copy operations.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyProgress.TotalItems">
+            <summary>
+            Gets or sets the total number of copy items to process.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyProgress.ProcessedItems">
+            <summary>
+            Gets or sets the number of items processed so far.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyProgress.CopyDetail">
+            <summary>
+            Gets or sets the copy detail currently being processed.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyProgress.IsSuccess">
+            <summary>
+            Gets or sets a value indicating whether the current item was processed successfully.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.Results.BulkCopyResult">
+            <summary>
+            Represents the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyResult.Results">
+            <summary>
+            Gets or Sets the list of <see cref="T:VersaTul.Data.Bulk.CopyDetail"/> objects to be uploaded.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyResult.Success">
+            <summary>
+            Gets an indication of the operation was successful.
+            The Process is considered successful if all <see cref="T:VersaTul.Data.Bulk.CopyDetail"/> given are inserted successfully.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyResult.SuccessfulCount">
+            <summary>
+            Gets the number of successful copy operations.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyResult.FailedCount">
+            <summary>
+            Gets the number of failed copy operations.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyResult.TotalElapsed">
+            <summary>
+            Gets the total elapsed time for all copy operations.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.BulkCopyResult.FailedResults">
+            <summary>
+            Gets failed copy result entries.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Bulk.Results.CopyResult">
+            <summary>
+            Represents the outcome of the copy procedure for the bulk copy operation indicating success or failure.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.CopyResult.CopyDetail">
+            <summary>
+            Gets or Sets the <see cref="P:VersaTul.Data.Bulk.Results.CopyResult.CopyDetail"/> that was given to be uploaded.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.CopyResult.HasError">
+            <summary>
+            Gets an indication of the state of the upload.
+            True if no error, otherwise False.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.CopyResult.CopyException">
+            <summary>
+            Gets the <see cref="T:VersaTul.Data.Bulk.Exceptions.BulkCopyException"/> whenever an upload failes.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.CopyResult.Elapsed">
+            <summary>
+            Gets or Sets the elapsed time for the copy operation.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.CopyResult.FailedStage">
+            <summary>
+            Gets or Sets the stage where processing failed, if any.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Bulk.Results.CopyResult.ErrorMessage">
+            <summary>
+            Gets an error message when processing fails.
+            </summary>
+        </member>
+    </members>
+</doc>

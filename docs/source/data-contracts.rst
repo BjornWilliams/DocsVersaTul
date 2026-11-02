@@ -1,6 +1,32 @@
 Data Contracts
 ==============
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Data.Contracts?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Data.Contracts
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Data.Contracts?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Data.Contracts
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Data.Contracts
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.14` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Data.Contracts/1.0.14>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -19,6 +45,12 @@ Use this package when you want to:
 4. Represent paged requests and paged results consistently.
 5. Add async stream support to repository abstractions.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Data.Contracts on NuGet <https://www.nuget.org/packages/VersaTul.Data.Contracts>`_
+`VersaTul.Data.Contracts versions and release notes <https://www.nuget.org/packages/VersaTul.Data.Contracts#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -28,11 +60,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Data.Contracts
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Data.Contracts -Version latest
 
 Related Packages
 ----------------
@@ -48,13 +75,15 @@ Core Types And Concepts
    Standardizes how connection strings and provider names are retrieved.
 
 ``IRepository<TEntity, TKey>``
-   Defines CRUD-style operations, queryable access, async reads, and range operations for a repository.
+   Defines CRUD-style operations, queryable access, async reads, and range operations for a repository. ``Find``, ``FindAsync``, ``Get``, and ``GetAsync`` report possibly absent entities with nullable result annotations.
+
+For common write and read paths, see the generated ``AddAsync``, ``GetAsync``, and ``Remove`` member links below; the reference shows the exact released overloads.
 
 ``IAsyncStreamRepository<TEntity, TKey>``
    Extends the repository model with cancellation-aware async streaming.
 
 ``IUnitOfWork``
-   Defines transactional save and rollback behavior plus disposal semantics.
+   Defines commit and implementation-specific pending-change reset behavior plus disposal semantics. It retains ``CommitAsync()`` and also exposes ``CommitAsync(CancellationToken)`` for cancellation-aware persistence. ``Rollback()`` is not necessarily a database transaction rollback.
 
 ``IPagedRequest`` and ``PagedRequest``
    Represent page number, page size, and derived skip value.
@@ -74,6 +103,7 @@ Repository Example
 ------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Contracts;
 
@@ -90,16 +120,22 @@ Repository Example
            this.repository = repository;
        }
 
-       public async Task<Customer> GetAsync(int id)
+       public async Task<Customer?> GetAsync(int id)
        {
            return await repository.GetAsync(id);
        }
    }
 
+Nullable Read Results And Commit Cancellation
+----------------------------------------------
+
+Repository lookups can legitimately find no entity. Treat the results of ``Find``, ``FindAsync``, ``Get``, and ``GetAsync`` as nullable and handle ``null`` before using the entity. Unit-of-work callers that need cancellation can pass a token to ``CommitAsync(cancellationToken)``; the implementation observes it while saving changes.
+
 Paging Example
 --------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Contracts;
 
@@ -117,10 +153,52 @@ Paging Example
        PageSize = request.PageSize
    };
 
+Paging Validation
+-----------------
+
+``PagedRequest`` and ``PagedResult<T>`` require positive page numbers and page sizes, and reject negative total counts. ``PagedRequest.Skip`` uses checked arithmetic and ``PagedResult<T>.TotalPages`` checks its existing ``int`` return boundary; both raise ``OverflowException`` instead of returning wrapped values when the result cannot fit.
+
 Notes
 -----
 
 1. ``IRepository<TEntity, TKey>`` is intentionally broad enough for multiple backing stores.
 2. ``IAsyncStreamRepository<TEntity, TKey>`` is useful when the consumer prefers stream-first enumeration.
-3. ``IUnitOfWork`` is most relevant in packages such as :doc:`efcore` where change tracking and commit behavior are explicit.
-    
+3. ``IUnitOfWork`` is most relevant in packages such as :doc:`efcore` where change tracking and commit behavior are explicit. In the EF Core implementation, ``Rollback()`` detaches added entities, reloads modified and deleted entities, and leaves unchanged or detached entities untouched; it does not reverse a transaction that was already committed.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Reusable data-access contracts for connections, repositories, queries, cancellation, and paged results across data providers.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Data.Contracts
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Contracts/Program.cs
+   :language: csharp
+   :caption: VersaTul.Data.Contracts minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Data.Contracts/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/data-contracts.rst

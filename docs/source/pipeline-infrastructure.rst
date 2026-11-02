@@ -1,6 +1,32 @@
 Pipeline Infrastructure
 =======================
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Pipeline.Infrastructure?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Pipeline.Infrastructure?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.24` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure/1.0.24>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -18,6 +44,12 @@ Use this package when you want to:
 3. Add optional diagnostics around step execution time and failures.
 4. Reuse the same pipeline pattern across formatters, validation, or normalization flows.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Pipeline.Infrastructure on NuGet <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure>`_
+`VersaTul.Pipeline.Infrastructure versions and release notes <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -27,11 +59,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Pipeline.Infrastructure
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Pipeline.Infrastructure -Version latest
 
 Related Packages
 ----------------
@@ -63,6 +90,7 @@ Step Example
 ------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Pipeline.Infrastructure.Contracts;
 
@@ -80,6 +108,7 @@ Pipeline Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Pipeline.Infrastructure;
    using VersaTul.Pipeline.Infrastructure.Extensions;
@@ -98,6 +127,7 @@ Diagnostics Example
 -------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    var value = 5.AddStep(new AddOneStep(), (elapsed, error) =>
    {
@@ -114,3 +144,41 @@ Notes
 1. ``Pipeline<TIn, TOut>.Execute()`` throws if ``Step`` is not configured.
 2. Async support is provided through ``PipelineExtensions`` overloads rather than a separate async pipeline base class.
 3. This package is deliberately minimal, which makes it a good fit for custom domain pipelines without framework overhead.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Compose ordered processing pipelines from reusable steps and filters to transform objects through multiple stages.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Pipeline.Infrastructure
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Pipeline.Infrastructure/Program.cs
+   :language: csharp
+   :caption: VersaTul.Pipeline.Infrastructure minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Pipeline.Infrastructure/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/pipeline-infrastructure.rst

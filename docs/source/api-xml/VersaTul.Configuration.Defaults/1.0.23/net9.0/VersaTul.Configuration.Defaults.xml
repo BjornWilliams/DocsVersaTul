@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Configuration.Defaults</name>
+    </assembly>
+    <members>
+        <member name="M:VersaTul.Configuration.Defaults.Caching.Builder.#ctor">
+            <summary>
+            Creates a new instance of the Caching Default Settings.
+            Defaults:
+            [CacheDuration] = 60 seconds
+            </summary>
+        </member>
+        <member name="T:VersaTul.Configuration.Defaults.ConfigurationBuilder">
+            <summary>
+            Represent the functionality needed to setup default settings.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:VersaTul.Configuration.Defaults.ConfigurationBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.BuildConfig">
+            <summary>
+            Create a new <seealso cref="T:VersaTul.Configurations.ConfigSettings"/> from the underlining dictionary keys and values.
+            </summary>
+            <returns>The configurations.</returns>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.BuildSnapshot">
+            <summary>
+            Create an immutable snapshot of the current configuration keys and values.
+            </summary>
+            <returns>A read-only snapshot of the configurations.</returns>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.AddEnvironmentPreset(VersaTul.Configuration.Defaults.ConfigurationEnvironment)">
+            <summary>
+            Adds a standard environment preset to the current configuration.
+            </summary>
+            <param name="environment">The target environment preset.</param>
+            <returns>The current builder instance.</returns>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.AddDevelopmentPreset">
+            <summary>
+            Adds development environment preset values.
+            </summary>
+            <returns>The current builder instance.</returns>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.AddTestPreset">
+            <summary>
+            Adds test environment preset values.
+            </summary>
+            <returns>The current builder instance.</returns>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.AddProductionPreset">
+            <summary>
+            Adds production environment preset values.
+            </summary>
+            <returns>The current builder instance.</returns>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.AddOrReplace(System.String,System.Object)">
+            <summary>
+            Add or Replace the given key and value in the configuration dictionary.
+            </summary>
+            <param name="key">The key for storing and retrieving the setting</param>
+            <param name="value">The value of the setting</param>
+            <exception cref="T:System.ArgumentNullException">Throws if the key is Null or Empty.</exception>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.AddOrReplace(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}})">
+            <summary>
+            Add or Replace the given keys and values in the configuration dictionary.
+            </summary>
+            <param name="valuePairs">The collection of keys and values to add or replace in configurartions.</param>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.ConfigurationBuilder.AddOrReplace(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Add or Replace the given keys and values in the configuration dictionary.
+            </summary>
+            <param name="keyValuePairs">The collection of keys and values to add or replace in configurartions.</param>
+        </member>
+        <member name="T:VersaTul.Configuration.Defaults.ConfigurationEnvironment">
+            <summary>
+            Represents supported environment presets for configuration defaults.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.EntityFrameworkCore.Builder.#ctor">
+            <summary>
+            Creates a new instance of the EntityFrameworkCore Default Settings.
+            Defaults:
+            [EfDbConnectionName] = DBCon
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.Logger.Builder.#ctor">
+            <summary>
+            Creates a new instance of the Logger Default Settings.
+            Defaults:
+            [MaxFileSize] = 2gbs
+            [LogFileName] = "log"
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.Mailer.Builder.#ctor">
+            <summary>
+            Creates a new instance of the Mailer Default Settings.
+            Defaults:
+            [SmtpServer] = 127.0.0.1
+            [SmtpPort] = 25
+            [SmtpUserName] = string.Empty
+            [SmtpPassword] = string.Empty
+            [MaxAttachmentSize] = 10000000 10MGB
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.MongoDB.Builder.#ctor">
+            <summary>
+            Creates a new instance of the MongoDB Default Settings.
+            Defaults:
+            [MongoDbConnectionName] = MongoDb
+            [SocketTimeout] = 600000
+            [ConnectTimeout] = 600000
+            [MaxConnectionIdleTime] = 600000
+            [EnabledSslProtocols] = false
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.MsSql.Builder.#ctor">
+            <summary>
+            Creates a new instance of the MsSql Default Settings.
+            Defaults:
+            [BulkCopyTimeout] = 1800
+            </summary>
+        </member>
+        <member name="M:VersaTul.Configuration.Defaults.Sql.Builder.#ctor">
+            <summary>
+            Creates a new instance of the Sql Default Settings.
+            Defaults:
+            [CommandTimeout] = 600
+            [SqlDbConnectionName] = DBCon
+            </summary>
+        </member>
+    </members>
+</doc>

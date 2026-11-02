@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Mailer</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Mailer.Configurations.MailConfiguration">
+            <summary>
+            Represents a configuration file that is applicable to the mailing application.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.SmtpServer">
+            <summary>
+            Gets the SMTP server host name.
+            </summary>
+            <value>Returns a string representing the name or IP address of the host used for SMTP transactions.</value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.SmtpPort">
+            <summary>
+            Gets the SMTP server port number.
+            </summary>
+            <value>Returns a integer representing the port of the host used for SMTP transactions.</value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.SmtpUserName">
+            <summary>
+            Gets the user name for logging on to the SMTP Server.
+            </summary>
+            <value>String user name.</value>
+            <remarks>Returns empty string by default.</remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.SmtpPassword">
+            <summary>
+            Gets the password for logging on to the SMTP Server.
+            </summary>
+            <value>String password</value>
+            <remarks>Returns empty string by default.</remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.FromAddress">
+            <summary>
+            Gets address from which an email was sent.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.ToAddress">
+            <summary>
+            Gets address to which email will be sent.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.MaxAttachmentSize">
+            <summary>
+            Gets the maximum size in bytes that is allowed to sent as email attachment size.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.SmtpTimeoutMilliseconds">
+            <summary>
+            Gets the SMTP timeout in milliseconds.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.RetryCount">
+            <summary>
+            Gets the maximum retry attempts for transient SMTP failures.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Configurations.MailConfiguration.RetryDelayMilliseconds">
+            <summary>
+            Gets the base delay in milliseconds used between retry attempts.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Mailer.Contracts.IMailAttachment">
+            <summary>
+            Represents an abstract mail attachment payload.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Mailer.Contracts.IMailConfiguration">
+            <summary>
+            Represents a configuration file that is applicable to the mailing application.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.SmtpServer">
+            <summary>
+            Gets the SMTP server host name.
+            </summary>
+            <value>Returns a string representing the name or IP address of the host used for SMTP transactions.</value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.SmtpPort">
+            <summary>
+            Gets the SMTP server port number.
+            </summary>
+            <value>Returns a integer representing the port of the host used for SMTP transactions.</value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.SmtpUserName">
+            <summary>
+            Gets the user name for logging on to the SMTP Server.
+            </summary>
+            <value>String user name.</value>
+            <remarks>Returns empty string by default.</remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.SmtpPassword">
+            <summary>
+            Gets the password for logging on to the SMTP Server.
+            </summary>
+            <value>String password</value>
+            <remarks>Returns empty string by default.</remarks>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.FromAddress">
+            <summary>
+            Gets address from which an email was sent.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.ToAddress">
+            <summary>
+            Gets address to which email will be sent.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.MaxAttachmentSize">
+            <summary>
+            Gets the maximum size in bytes that is allowed to sent as email attachment size.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.SmtpTimeoutMilliseconds">
+            <summary>
+            Gets the SMTP timeout in milliseconds.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.RetryCount">
+            <summary>
+            Gets the maximum retry attempts for transient SMTP failures.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Mailer.Contracts.IMailConfiguration.RetryDelayMilliseconds">
+            <summary>
+            Gets the base delay in milliseconds used between retry attempts.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Mailer.Contracts.IMailDispatcher">
+            <summary>
+            Represents the functionality to send emails messages.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Mailer.Contracts.IMailDispatcher.SendMail(System.String,System.String,System.String,System.String)">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="body">The details of the e-mail.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Mailer.Contracts.IMailDispatcher.SendMail(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="body">The details of the e-mail.</param>
+            <param name="isHtml">If set to <see langword="true" />, then send email as HTML; otherwise, as just text.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Mailer.Contracts.IMailDispatcher.SendMail(System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.Net.Mail.Attachment})">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="body">The details of the e-mail.</param>
+            <param name="isHtml">If set to <see langword="true" />, then send email as HTML; otherwise, as just text.</param>
+            <param name="attachments">A collection of e-mail attachments.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Mailer.Contracts.IMailDispatcher.SendMail(System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{VersaTul.Mailer.Contracts.IMailAttachment})">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver with abstract attachment payloads.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="body">The details of the e-mail.</param>
+            <param name="isHtml">If set to <see langword="true" />, then send email as HTML; otherwise, as just text.</param>
+            <param name="attachments">A collection of abstract e-mail attachments.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+        </member>
+        <member name="M:VersaTul.Mailer.Contracts.IMailDispatcher.SendTemplatedMail(System.String,System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Uses SMTP to transmit templated e-mail to receiver.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="template">The template body containing token placeholders like {{TokenName}}.</param>
+            <param name="tokens">The key/value token dictionary.</param>
+            <param name="isHtml">If set to <see langword="true" />, then send email as HTML; otherwise, as just text.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+        </member>
+        <member name="T:VersaTul.Mailer.Contracts.IMailTemplateRenderer">
+            <summary>
+            Represents templated mail body rendering functionality.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Mailer.Contracts.ISmtpClient">
+            <summary>
+            Represents an implemetation that can be used to send SMTP messages.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Mailer.Contracts.ISmtpClient.Send(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends the specified message to an SMTP server for delivery.
+            </summary>
+            <param name="mailMessage">An email message that can me sent using an SMTP email client.</param>
+        </member>
+        <member name="T:VersaTul.Mailer.MailAttachment">
+            <summary>
+            Represents a concrete mail attachment payload.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Mailer.MailDispatcher">
+            <summary>
+            Represents the functionality to send emails messages.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Mailer.MailDispatcher.SendMail(System.String,System.String,System.String,System.String)">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="body">The details of the e-mail.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+            <remarks>Mail is treated as raw text and not as Html.</remarks>
+        </member>
+        <member name="M:VersaTul.Mailer.MailDispatcher.SendMail(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="body">The details of the e-mail.</param>
+            <param name="isHtml">If set to <see langword="true" />, then send email as HTML; otherwise, as just text.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Mailer.MailDispatcher.SendMail(System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.Net.Mail.Attachment})">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver.
+            </summary>
+            <param name="fromAddress">The email address that the e-mail originated from.</param>
+            <param name="toAddress">The email address for which the e-mail is intended.</param>
+            <param name="subject">A brief description of e-mail content.</param>
+            <param name="body">The details of the e-mail.</param>
+            <param name="isHtml">If set to <see langword="true" />, then send email as HTML; otherwise, as just text.</param>
+            <param name="attachments">A collection of e-mail attachments.</param>
+            <returns>A boolean indicating success or failure to send e-mail.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Mailer.MailDispatcher.SendMail(System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{VersaTul.Mailer.Contracts.IMailAttachment})">
+            <summary>
+            Uses SMTP to transmit e-mail to receiver with abstract attachment payloads.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Mailer.MailDispatcher.SendTemplatedMail(System.String,System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Uses SMTP to transmit templated e-mail to receiver.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Mailer.MailTemplateRenderer">
+            <summary>
+            Default token replacement renderer for templated mail content.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Mailer.SmtpClients.SmtpClientWrapper">
+            <summary>
+            Represent a wrapper around the <seealso cref="T:System.Net.Mail.SmtpClient"/> class to send email messages.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Mailer.SmtpClients.SmtpClientWrapper.#ctor(VersaTul.Mailer.Contracts.IMailConfiguration)">
+            <summary>
+            Create a new instance of the <seealso cref="T:System.Net.Mail.SmtpClient"/> using the given <seealso cref="T:VersaTul.Mailer.Contracts.IMailConfiguration"/> settings.
+            </summary>
+            <param name="configuration">The mail settings to use configure the client.</param>
+        </member>
+        <member name="M:VersaTul.Mailer.SmtpClients.SmtpClientWrapper.Send(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends the specified message to an SMTP server for delivery.
+            </summary>
+            <param name="mailMessage">An email message that can me sent using an SMTP email client.</param>
+        </member>
+    </members>
+</doc>

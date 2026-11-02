@@ -1,0 +1,3 @@
+Connection: Server=.;Database=Demo;Trusted_Connection=True;
+Timeout: 30
+Archive: C:\Exports

@@ -1,0 +1,854 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Handler.File</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Handler.File.Contracts.IDirectoryWrapper">
+            <summary>
+            Represents a wrapper for System.IO.Directory
+            </summary>
+            <remarks>
+            Beaware when adding methods here they should only manipulate Directories.
+            Also make sure the same method is not present on <seealso cref="T:VersaTul.Handler.File.Contracts.IFileWrapper"/>.
+            </remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.CreateDirectory(System.String)">
+            <summary>
+            Creates all directories and subdirectories in the specified path unless they already exist.
+            </summary>
+            <param name="path">The directory to create.</param>
+            <returns>
+            An object that represents the directory at the specified path.
+            This object is returned regardless of whether a directory at the specified path already exists.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.DirectoryExists(System.String)">
+            <summary>
+            Determines whether the given path refers to an existing directory on disk.
+            </summary>
+            <param name="path">The path to test.</param>
+            <returns>
+            true if path refers to an existing directory; false
+            if the directory does not exist or an error occurs when trying to determine
+            if the specified directory exists.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.GetFiles(System.String)">
+            <summary>
+            Returns the names of files (including their paths) in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.GetFiles(System.String,System.String)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search.
+            This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path.
+            This parameter can contain a combination of valid literal path and wildcard (* and ?) characters,
+            but it doesn't support regular expressions.</param>
+            <returns>
+            An array of the full names (including paths) for the files in the specified directory that match
+            the specified search pattern, or an empty array if no files are found.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.GetFiles(System.String,System.String,System.IO.EnumerationOptions)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern and enumeration options in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of subdirectories in path. This parameter can contain a combination of valid literal and wildcard characters, but it doesn't support regular expressions.</param>
+            <param name="enumerationOptions">An object that describes the search and enumeration configuration to use.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and enumeration options, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.GetFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory, using a value to determine whether to search subdirectories.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wildcard (* and ?) characters, but it doesn't support regular expressions.</param>
+            <param name="searchOption">One of the enumeration values that specifies whether the search operation should include all subdirectories or only the current directory.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and option, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.DeleteDirectory(System.String)">
+            <summary>
+            Deletes an empty directory from a specified path.
+            </summary>
+            <param name="path">The name of the empty directory to remove. This directory must be writable and empty.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IDirectoryWrapper.DeleteDirectory(System.String,System.Boolean)">
+            <summary>
+            Deletes the specified directory and, if indicated, any subdirectories and files in the directory.
+            </summary>
+            <param name="path">The name of the directory to remove.</param>
+            <param name="recursive">true to remove directories, subdirectories, and files in path; otherwise, false.</param>
+        </member>
+        <member name="T:VersaTul.Handler.File.Contracts.IFileHandler">
+            <summary>
+            Represent general file manipulation functionality.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.GetFileName(System.String)">
+            <summary>
+            Returns the Filename only from a given file path.
+            </summary>
+            <param name="path">The full path to the file.</param>
+            <returns>The file name as string.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.GetFileNameWithOutExtension(System.String)">
+            <summary>
+            Returns the Filename only from a given file path with the file extension removed.
+            </summary>
+            <param name="path">The full path to the file.</param>
+            <returns>The file name as string.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.RemoveFile(System.String)">
+            <summary>
+            Deletes the given file from the hard disc.
+            </summary>
+            <param name="sourceFile">The report name and Path to remove</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.GetExtension(System.String)">
+            <summary>
+            Returns the extension of the given file without the (dot) notation.
+            </summary>
+            <param name="fileName">The name of the file with extension.</param>
+            <returns></returns>
+            <remarks>The dot is removed.</remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.CheckFileExtensionMatch(System.String,System.String)">
+            <summary>
+            Checks if the given filename and file extension are the same.
+            </summary>
+            <param name="fileName">The name of the file to get extension from.</param>
+            <param name="extension">The extension to compare against.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if fileName or extension is null or empty strings.</exception>
+            <returns>A boolean indicating if there was a match.s</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.FindFilesWithExtension(System.String,System.String)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified extension in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="extension">The file extension starting with the (.) dot notation.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.CreateDirectoryIfNotExists(System.String)">
+            <summary>
+            Determines whether the given path refers to an existing directory on disk and if not creates all the directories in a specified path.
+            </summary>
+            <param name="path">The directory to create.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.FindFiles(System.String,System.String)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wild-card (* and ?) characters (see Remarks), but doesn't support regular expressions.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.EnsureExtension(System.String,System.String)">
+            <summary>
+            Checks the give fileName contains the given extension, if not then the fileName is updated to match.
+            </summary>
+            <param name="fileName">The name of the file to get extension from.</param>
+            <param name="extension">The extension to compare against.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if fileName or extension is null or empty strings.</exception>
+            <returns>The original or the newly updated fileName.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.ReadLine(System.String,System.Action{System.String})">
+            <summary>
+            Opens the given file and reads the content line by line as string passed into the given action.
+            </summary>
+            <param name="path">The complete file path to file to be open and read.</param>
+            <param name="action">The action to perform on each line of data read from file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.DeleteFiles(System.String)">
+            <summary>
+            Delete all files in the given path.
+            </summary>
+            <param name="path">The fully qualified directory path where files are found.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.DeleteFiles(System.String,System.String)">
+            <summary>
+            Delete all files in the given path that match the search pattern.
+            </summary>
+            <param name="path">The fully qualified directory path where files are found.</param>
+            <param name="searchPattern">The search string to match against the names of files in path.
+            This parameter can contain a combination of valid literal path and wild-card (* and ?) characters (see Remarks),
+            but doesn't support regular expressions.
+            </param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileHandler.NormalizePath(System.String,System.Boolean)">
+            <summary>
+            Normalizes path separators for cross-platform consistency.
+            </summary>
+            <param name="path">The input path.</param>
+            <param name="ensureTrailingSeparator">If true, ensures the normalized path ends with a directory separator.</param>
+            <returns>The normalized path value.</returns>
+        </member>
+        <member name="T:VersaTul.Handler.File.Contracts.IFileUtility">
+            <summary>
+            Represent general file manipulation functionality as well as functionality to work with VersaTul File Types.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileUtility.ReadAll(System.String)">
+            <summary>
+            Opens a text file, reads all lines of the file, and then closes the file.
+            </summary>
+            <param name="path">The file to open for reading.</param>
+            <returns>A <see cref="T:VersaTul.Handler.File.FileResult"/> of the file details.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileUtility.ReadAllAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Opens a text file, reads all lines of the file asynchronously, and then closes the file.
+            </summary>
+            <param name="path">The file to open for reading.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A task containing a <see cref="T:VersaTul.Handler.File.FileResult"/> of the file details.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileUtility.SaveOrUpdate(VersaTul.Handler.File.Types.FileInfo)">
+            <summary>
+            Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
+            </summary>
+            <param name="file">The file to append the lines to. The file is created if it doesn't already exist.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileUtility.SaveOrUpdateAsync(VersaTul.Handler.File.Types.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Appends lines to a file asynchronously and then closes the file.
+            </summary>
+            <param name="file">The file to append the lines to. The file is created if it doesn't already exist.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileUtility.Save(VersaTul.Handler.File.Types.StreamFileInfo)">
+            <summary>
+            Writes the given stream to a file.
+            If the specified file does not exist, this method creates the file, writes the specified stream to the file, and then closes the file.
+            </summary>
+            <param name="file">The file stream to write data from. The file is created if it doesn't already exist.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileUtility.SaveAsync(VersaTul.Handler.File.Types.StreamFileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Writes the given stream to a file asynchronously.
+            </summary>
+            <param name="file">The file stream to write data from. The file is created if it doesn't already exist.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+        </member>
+        <member name="T:VersaTul.Handler.File.Contracts.IFileWrapper">
+            <summary>
+            Represents a wrapper for System.IO.File.
+            </summary>
+            <remarks>
+            Beaware when adding methods here they should only manipulate Files.
+            Also make sure the same method is not present on <seealso cref="T:VersaTul.Handler.File.Contracts.IDirectoryWrapper"/>.
+            </remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileWrapper.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends lines to a file, and then closes the file. If the specified file does not exist,
+            this method creates a file, writes the specified lines to the file, and then closes the file.
+            </summary>
+            <param name="path">The file to append the lines to. The file is created if it doesn't already exist.</param>
+            <param name="contents">The lines to append to the file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileWrapper.DeleteFile(System.String)">
+            <summary>
+            Deletes the specified file.
+            </summary>
+            <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileWrapper.FileExists(System.String)">
+            <summary>
+            Determines whether the specified file exists.
+            </summary>
+            <param name="path">The file to check.</param>
+            <returns>
+            true if the caller has the required permissions and path contains the name of an existing file;
+            otherwise, false. This method also returns false if path is null, an invalid path, or a zero-length string.
+            If the caller does not have sufficient permissions to read the specified file, no exception is thrown and the
+            method returns false regardless of the existence of path.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileWrapper.ReadAllLines(System.String)">
+            <summary>
+            Opens a text file, reads all lines of the file into a string array,
+            and then closes the file.
+            </summary>
+            <param name="path">The file to open for reading.</param>
+            <returns>A string array containing all lines of the file.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileWrapper.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new file, write the specified string array to the file, and then closes the file.
+            </summary>
+            <param name="path">The file to write to.</param>
+            <param name="contents">The lines to write to the file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.Contracts.IFileWrapper.Write(System.String,System.IO.MemoryStream)">
+            <summary>
+            Writes the given memory stream to physical file on disk at the specified path.
+            </summary>
+            <param name="filePath">The path where the file will be created.</param>
+            <param name="content">The content to write to the file.</param>
+        </member>
+        <member name="T:VersaTul.Handler.File.DirectoryWrapper">
+            <summary>
+            Represents a wrapper for System.IO.File.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends lines to a file, and then closes the file. If the specified file does not exist,
+            this method creates a file, writes the specified lines to the file, and then closes the file.
+            </summary>
+            <param name="path">The file to append the lines to. The file is created if it doesn't already exist.</param>
+            <param name="contents">The lines to append to the file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.CreateDirectory(System.String)">
+            <summary>
+            Creates all directories and subdirectories in the specified path unless they already exist.
+            </summary>
+            <param name="path">The directory to create.</param>
+            <returns>
+            An object that represents the directory at the specified path.
+            This object is returned regardless of whether a directory at the specified path already exists.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.DeleteFile(System.String)">
+            <summary>
+            Deletes the specified file.
+            </summary>
+            <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.FileExists(System.String)">
+            <summary>
+            Determines whether the specified file exists.
+            </summary>
+            <param name="path">The file to check.</param>
+            <returns>
+            true if the caller has the required permissions and path contains the name of an existing file;
+            otherwise, false. This method also returns false if path is null, an invalid path, or a zero-length string.
+            If the caller does not have sufficient permissions to read the specified file, no exception is thrown and the
+            method returns false regardless of the existence of path.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.DirectoryExists(System.String)">
+            <summary>
+            Determines whether the given path refers to an existing directory on disk.
+            </summary>
+            <param name="path">The path to test.</param>
+            <returns>
+            true if path refers to an existing directory; false
+            if the directory does not exist or an error occurs when trying to determine
+            if the specified directory exists.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.ReadAllLines(System.String)">
+            <summary>
+            Opens a text file, reads all lines of the file into a string array,
+            and then closes the file.
+            </summary>
+            <param name="path">The file to open for reading.</param>
+            <returns>A string array containing all lines of the file.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new file, write the specified string array to the file, and then closes the file.
+            </summary>
+            <param name="path">The file to write to.</param>
+            <param name="contents">The lines to write to the file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.GetFiles(System.String,System.String)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern
+            in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search.
+            This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path.
+            This parameter can contain a combination of valid literal path and wildcard (* and ?) characters,
+            but it doesn't support regular expressions.</param>
+            <returns>
+            An array of the full names (including paths) for the files in the specified directory that match
+            the specified search pattern, or an empty array if no files are found.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.Write(System.String,System.IO.MemoryStream)">
+            <summary>
+            Writes the given memory stream to physical file on disk at the specified path.
+            </summary>
+            <param name="filePath">The path where the file will be created.</param>
+            <param name="content">The content to write to the file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.GetFiles(System.String)">
+            <summary>
+            Returns the names of files (including their paths) in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.GetFiles(System.String,System.String,System.IO.EnumerationOptions)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern and enumeration options in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of subdirectories in path. This parameter can contain a combination of valid literal and wildcard characters, but it doesn't support regular expressions.</param>
+            <param name="enumerationOptions">An object that describes the search and enumeration configuration to use.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and enumeration options, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.GetFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory, using a value to determine whether to search subdirectories.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wildcard (* and ?) characters, but it doesn't support regular expressions.</param>
+            <param name="searchOption">One of the enumeration values that specifies whether the search operation should include all subdirectories or only the current directory.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and option, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.DeleteDirectory(System.String)">
+            <summary>
+            Deletes an empty directory from a specified path.
+            </summary>
+            <param name="path">The name of the empty directory to remove. This directory must be writable and empty.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.DirectoryWrapper.DeleteDirectory(System.String,System.Boolean)">
+            <summary>
+            Deletes the specified directory and, if indicated, any subdirectories and files in the directory.
+            </summary>
+            <param name="path">The name of the directory to remove.</param>
+            <param name="recursive">true to remove directories, subdirectories, and files in path; otherwise, false.</param>
+        </member>
+        <member name="T:VersaTul.Handler.File.FileExtensions">
+            <summary>
+            Represent file extensions.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:VersaTul.Handler.File.FileExtensions.Text">
+            <summary>
+            Returns .txt for text files
+            </summary>
+        </member>
+        <member name="F:VersaTul.Handler.File.FileExtensions.Tsv">
+            <summary>
+            Returns .tsv for tab separated value files.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Handler.File.FileExtensions.Csv">
+            <summary>
+            Returns .csv for comma separated value files.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Handler.File.FileExtensions.Zip">
+            <summary>
+            Returns .zip for compressed files
+            </summary>
+        </member>
+        <member name="F:VersaTul.Handler.File.FileExtensions.Json">
+            <summary>
+            Returns .json for Json files.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Handler.File.FileExtensions.Custom">
+            <summary>
+            Returns .ctm for Custom files.
+            </summary>
+        </member>
+        <member name="F:VersaTul.Handler.File.FileExtensions.Bat">
+            <summary>
+            Returns .bat for batch files.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.FileHandler">
+            <summary>
+            Represent general file manipulation functionality.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends lines to a file, and then closes the file. If the specified file does not exist,
+            this method creates a file, writes the specified lines to the file, and then closes the file.
+            </summary>
+            <param name="path">The file to append the lines to. The file is created if it doesn't already exist.</param>
+            <param name="contents">The lines to append to the file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.CheckFileExtensionMatch(System.String,System.String)">
+            <summary>
+            Checks if the given filename and file extension are the same.
+            </summary>
+            <param name="fileName">The name of the file to get extension from.</param>
+            <param name="extension">The extension to compare against.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if fileName or extension is null or empty strings.</exception>
+            <returns>A boolean indicating if there was a match.s</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.CreateDirectory(System.String)">
+            <summary>
+            Creates all directories and subdirectories in the specified path unless they already exist.
+            </summary>
+            <param name="path">The directory to create.</param>
+            <returns>
+            An object that represents the directory at the specified path.
+            This object is returned regardless of whether a directory at the specified path already exists.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.CreateDirectoryIfNotExists(System.String)">
+            <summary>
+            Determines whether the given path refers to an existing directory on disk and if not creates all the directories in a specified path.
+            </summary>
+            <param name="path">The directory to create.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.DeleteDirectory(System.String)">
+            <summary>
+            Deletes an empty directory from a specified path.
+            </summary>
+            <param name="path">The name of the empty directory to remove. This directory must be writable and empty.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.DeleteDirectory(System.String,System.Boolean)">
+            <summary>
+            Deletes the specified directory and, if indicated, any subdirectories and files in the directory.
+            </summary>
+            <param name="path">The name of the directory to remove.</param>
+            <param name="recursive">true to remove directories, subdirectories, and files in path; otherwise, false.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.DeleteFile(System.String)">
+            <summary>
+            Deletes the specified file.
+            </summary>
+            <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.DeleteFiles(System.String)">
+            <summary>
+            Delete all files in the given path.
+            </summary>
+            <param name="path">The fully qualified directory path where files are found.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.DeleteFiles(System.String,System.String)">
+            <summary>
+            Delete all files in the given path that match the search pattern.
+            </summary>
+            <param name="path">The fully qualified directory path where files are found.</param>
+            <param name="searchPattern">The search string to match against the names of files in path.
+            This parameter can contain a combination of valid literal path and wild-card (* and ?) characters (see Remarks),
+            but doesn't support regular expressions.
+            </param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.DirectoryExists(System.String)">
+            <summary>
+            Determines whether the given path refers to an existing directory on disk.
+            </summary>
+            <param name="path">The path to test.</param>
+            <returns>
+            true if path refers to an existing directory; false
+            if the directory does not exist or an error occurs when trying to determine
+            if the specified directory exists.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.EnsureExtension(System.String,System.String)">
+            <summary>
+            Checks the give fileName contains the given extension, if not then the fileName is updated to match.
+            </summary>
+            <param name="fileName">The name of the file to get extension from.</param>
+            <param name="extension">The extension to compare against.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if fileName or extension is null or empty strings.</exception>
+            <returns>The original or the newly updated fileName.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.FileExists(System.String)">
+            <summary>
+            Determines whether the specified file exists.
+            </summary>
+            <param name="path">The file to check.</param>
+            <returns>
+            true if the caller has the required permissions and path contains the name of an existing file;
+            otherwise, false. This method also returns false if path is null, an invalid path, or a zero-length string.
+            If the caller does not have sufficient permissions to read the specified file, no exception is thrown and the
+            method returns false regardless of the existence of path.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.FindFiles(System.String,System.String)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wild-card (* and ?) characters (see Remarks), but doesn't support regular expressions.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.FindFiles(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory, using a value to determine whether to search subdirectories.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wildcard (* and ?) characters, but it doesn't support regular expressions.</param>
+            <param name="allDirectories">Specifies whether the search operation should include all subdirectories or only the current directory.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and option, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.FindFilesWithExtension(System.String,System.String)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified extension in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="extension">The file extension starting with the (.) dot notation.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.GetExtension(System.String)">
+            <summary>
+            Returns the extension of the given file without the (dot) notation.
+            </summary>
+            <param name="fileName">The name of the file with extension.</param>
+            <returns></returns>
+            <remarks>The dot is removed.</remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.GetFileName(System.String)">
+            <summary>
+            Returns the Filename only from a given file path.
+            </summary>
+            <param name="path">The full path to the file.</param>
+            <returns>The file name as string.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.GetFileNameWithOutExtension(System.String)">
+            <summary>
+            Returns the Filename only from a given file path with the file extension removed.
+            </summary>
+            <param name="path">The full path to the file.</param>
+            <returns>The file name as string.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.NormalizePath(System.String,System.Boolean)">
+            <summary>
+            Normalizes path separators for cross-platform consistency.
+            </summary>
+            <param name="path">The input path.</param>
+            <param name="ensureTrailingSeparator">If true, ensures the normalized path ends with a directory separator.</param>
+            <returns>The normalized path value.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.GetFiles(System.String)">
+            <summary>
+            Returns the names of files (including their paths) in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.GetFiles(System.String,System.String)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search.
+            This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path.
+            This parameter can contain a combination of valid literal path and wildcard (* and ?) characters,
+            but it doesn't support regular expressions.</param>
+            <returns>
+            An array of the full names (including paths) for the files in the specified directory that match
+            the specified search pattern, or an empty array if no files are found.
+            </returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.GetFiles(System.String,System.String,System.IO.EnumerationOptions)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern and enumeration options in the specified directory.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of subdirectories in path. This parameter can contain a combination of valid literal and wildcard characters, but it doesn't support regular expressions.</param>
+            <param name="enumerationOptions">An object that describes the search and enumeration configuration to use.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and enumeration options, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.GetFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Returns the names of files (including their paths) that match the specified search pattern in the specified directory, using a value to determine whether to search subdirectories.
+            </summary>
+            <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>
+            <param name="searchPattern">The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wildcard (* and ?) characters, but it doesn't support regular expressions.</param>
+            <param name="searchOption">One of the enumeration values that specifies whether the search operation should include all subdirectories or only the current directory.</param>
+            <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and option, or an empty array if no files are found.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.ReadAllLines(System.String)">
+            <summary>
+            Opens a text file, reads all lines of the file into a string array,
+            and then closes the file.
+            </summary>
+            <param name="path">The file to open for reading.</param>
+            <returns>A string array containing all lines of the file.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.ReadLine(System.String,System.Action{System.String})">
+            <summary>
+            Opens the given file and reads the content line by line as string passed into the given action.
+            </summary>
+            <param name="path">The complete file path to file to be open and read.</param>
+            <param name="action">The action to perform on each line of data read from file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.RemoveFile(System.String)">
+            <summary>
+            Deletes the given file from the hard disc.
+            </summary>
+            <param name="sourceFile">The report name and Path to remove</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.Write(System.String,System.IO.MemoryStream)">
+            <summary>
+            Writes the given memory stream to physical file on disk at the specified path.
+            </summary>
+            <param name="filePath">The path where the file will be created.</param>
+            <param name="content">The content to write to the file.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileHandler.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new file, write the specified string array to the file, and then closes the file.
+            </summary>
+            <param name="path">The file to write to.</param>
+            <param name="contents">The lines to write to the file.</param>
+        </member>
+        <member name="T:VersaTul.Handler.File.FileResult">
+            <summary>
+            Represent a File result from the FileUtil.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Handler.File.FileResult.Content">
+            <summary>
+            Gets or sets the content of the file.
+            </summary>
+            <value></value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Handler.File.FileResult.IsBlank">
+            <summary>
+            Gets or sets a value indicating whether this instance file is blank.
+            </summary>
+            <value>
+              <see langword="true" /> if this instance ; otherwise, <see langword="false" />.</value>
+            <remarks></remarks>
+        </member>
+        <member name="P:VersaTul.Handler.File.FileResult.IsExists">
+            <summary>
+            Gets or sets a value indicating whether this instance file doest exists.
+            </summary>
+            <value>
+              <see langword="true" /> if this instance ; otherwise, <see langword="false" />.</value>
+            <remarks></remarks>
+        </member>
+        <member name="T:VersaTul.Handler.File.FileUtility">
+            <summary>
+            Represents a wrapper class around the <seealso cref="T:System.IO.File"/> class that works with <seealso cref="T:VersaTul.Handler.File.Types.FileInfo"/> objects to read and write data to files.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileUtility.ReadAll(System.String)">
+            <summary>
+            Opens a text file, reads all lines of the file, and then closes the file.
+            </summary>
+            <param name="path">The file to open for reading.</param>
+            <returns>A <see cref="T:VersaTul.Handler.File.FileResult"/> of the file details.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileUtility.ReadAllAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Opens a text file, reads all lines of the file asynchronously, and then closes the file.
+            </summary>
+            <param name="path">The file to open for reading.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+            <returns>A <see cref="T:VersaTul.Handler.File.FileResult"/> of the file details.</returns>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileUtility.Save(VersaTul.Handler.File.Types.StreamFileInfo)">
+            <summary>
+            Writes the given stream to a file.
+            If the specified file does not exist, this method creates the file, writes the specified stream to the file, and then closes the file.
+            </summary>
+            <param name="file">The file stream to write data from. The file is created if it doesn't already exist.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileUtility.SaveAsync(VersaTul.Handler.File.Types.StreamFileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Writes the given stream to a file asynchronously.
+            </summary>
+            <param name="file">The file stream to write data from. The file is created if it doesn't already exist.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileUtility.SaveOrUpdate(VersaTul.Handler.File.Types.FileInfo)">
+            <summary>
+            Appends lines to a file, and then closes the file. If the specified file does not exist,
+            this method creates a file, writes the specified lines to the file, and then closes the file.
+            </summary>
+            <param name="file">The file to append the lines to. The file is created if it doesn't already exist.</param>
+        </member>
+        <member name="M:VersaTul.Handler.File.FileUtility.SaveOrUpdateAsync(VersaTul.Handler.File.Types.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Appends lines to a file asynchronously and then closes the file.
+            </summary>
+            <param name="file">The file to append the lines to. The file is created if it doesn't already exist.</param>
+            <param name="cancellationToken">A token to observe while waiting for operation completion.</param>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.BaseInfo">
+            <summary>
+            Represent the basic File details.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Handler.File.Types.BaseInfo.Name">
+            <summary>
+            Gets or Sets the name of the file.
+            This should be the file name without the extension.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Handler.File.Types.BaseInfo.Path">
+            <summary>
+            Gets or Sets the fully qualified path of the file.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Handler.File.Types.BaseInfo.FilePath">
+            <summary>
+            Gets the directory path of the file.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Handler.File.Types.BaseInfo.FileExtension">
+            <summary>
+            Gets or Sets the file extension.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.CsvFileInfo">
+            <summary>
+            Represent a csv file details and content.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.CustomFileInfo">
+            <summary>
+            Represent a custom file details and content.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.FileInfo">
+            <summary>
+            Represent the File details and Content.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Handler.File.Types.FileInfo.Content">
+            <summary>
+            Gets or Sets the content in the file.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.StreamFileInfo">
+            <summary>
+            Represent the File details and Content as a stream.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Handler.File.Types.StreamFileInfo.Content">
+            <summary>
+            Gets or Sets the content in the file.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.TabFileInfo">
+            <summary>
+            Represents a tab-separated values (TSV) file with path, name, and content.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.TextFileInfo">
+            <summary>
+            Represent a text file details and content.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Handler.File.Types.ZipFileInfo">
+            <summary>
+            Represent a zip file details and content as stream.
+            </summary>
+        </member>
+    </members>
+</doc>

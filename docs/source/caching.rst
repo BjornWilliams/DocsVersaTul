@@ -1,6 +1,32 @@
 Caching
 =======
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Caching?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Caching
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Caching?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Caching
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Caching
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.24` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Caching/1.0.24>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -19,6 +45,12 @@ Use this package when you want to:
 4. Use absolute or sliding expiration policies.
 5. React to cache item eviction events.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Caching on NuGet <https://www.nuget.org/packages/VersaTul.Caching>`_
+`VersaTul.Caching versions and release notes <https://www.nuget.org/packages/VersaTul.Caching#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -28,11 +60,6 @@ Install the package with the .NET CLI:
 
    dotnet add package VersaTul.Caching
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Caching -Version latest
 
 Related Packages
 ----------------
@@ -68,13 +95,14 @@ Key Capabilities
 2. ``Add()`` and ``SetAsync()`` support default duration, explicit duration, and ``CacheExpiration`` overloads.
 3. ``IsExists()`` checks whether a key is present.
 4. ``Remove()`` and ``Clear()`` remove one or all entries.
-5. ``ItemRemoved`` lets you observe cache evictions.
+5. ``ICacheProviderWithEvents<T>.ItemRemovedDetailed`` lets you observe cache evictions with typed key, value, and reason metadata. The legacy ``ItemRemoved`` event remains available for compatibility but is obsolete.
 6. ``MemCacheProvider<T>`` supports injecting ``MemoryCacheOptions``, ``ILoggerFactory``, and a custom ``ICacheClock``.
 
 Basic Example
 -------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Caching;
    using VersaTul.Caching.Configurations;
@@ -98,6 +126,7 @@ Expiration Example
 Use ``CacheExpiration`` when you want explicit absolute or sliding expiration behavior.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Caching;
 
@@ -109,22 +138,90 @@ Use ``CacheExpiration`` when you want explicit absolute or sliding expiration be
            Sliding = TimeSpan.FromMinutes(15)
        });
 
+Expiration Behavior
+-------------------
+
+``CacheExpiration.Sliding`` uses the cache engine's native sliding expiration, so each access resets the sliding window. ``CacheExpiration.Absolute`` expires at its specified timestamp and is not extended by access. When both values are supplied, the effective expiration is the earlier of the next sliding deadline and the absolute timestamp, so sliding access never extends an entry beyond its absolute deadline.
+
+When an ``ICacheClock`` is injected, the same clock drives expiration validation and the underlying cache engine, so advancing a deterministic test clock changes the actual cache state.
+
 Async And Eviction Example
 --------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
-   cacheProvider.ItemRemoved += (_, args) =>
+   using var cacheOwner = new MemCacheProvider<Person>(cacheConfig);
+   ICacheProviderWithEvents<Person> eventingCache = cacheOwner;
+
+   eventingCache.ItemRemovedDetailed += (_, args) =>
    {
        Console.WriteLine($"Removed cache item {args.Key} because {args.Reason}");
    };
 
-   await cacheProvider.SetAsync("profile:42", person, 120);
-   var cached = await cacheProvider.GetAsync("profile:42");
+   await eventingCache.SetAsync("profile:42", person, 120);
+   var cached = await eventingCache.GetAsync("profile:42");
+
+The legacy ``ICacheProvider.ItemRemoved`` event uses a non-generic ``EventHandler`` and does not expose a key or removal reason. Use ``ItemRemovedDetailed`` when those typed values are needed.
 
 Notes
 -----
 
 1. The default ``Add(key, value)`` overload uses ``CacheDuration`` from ``ICacheConfiguration``.
 2. ``CacheExpiration`` must contain either an absolute or sliding value.
-3. Inject a custom ``ICacheClock`` when you need deterministic time behavior in tests.
+3. Inject a custom ``ICacheClock`` when you need deterministic time behavior in tests; it controls both validation and actual cache expiration.
+4. ``MemCacheProvider<T>`` owns the ``MemoryCache`` instance it creates and implements ``IDisposable``. Dispose manually created providers; the current constructors do not accept an externally owned cache.
+5. Removal callback exceptions are isolated per subscriber and logged through the optional ``ILoggerFactory``; one failing callback does not prevent later callbacks or destabilize cache eviction.
+
+Runnable Sample
+---------------
+
+The complete cache removal-event example is maintained as a buildable project and included here directly.
+
+.. literalinclude:: ../samples/Caching/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../samples/Caching/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+A .NET caching library with a swappable cache-provider interface and an in-memory provider built on Microsoft.Extensions.Caching.Memory.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Caching
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Caching/Program.cs
+   :language: csharp
+   :caption: VersaTul.Caching minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Caching/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/caching.rst

@@ -1,0 +1,1 @@
+SMTP test server accepted the message.

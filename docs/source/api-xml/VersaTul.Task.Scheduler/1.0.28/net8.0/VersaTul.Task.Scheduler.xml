@@ -1,0 +1,1291 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Task.Scheduler</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs"/> allows exceptions to be captured and sent to the OnError event of the timer.
+            </summary>
+            <remarks>
+            Creates a new instance of the <see cref="T:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs"/> class.
+            </remarks>
+            <param name="eventTime">The date and time of the event.</param>
+            <param name="exception">The exception that occurred during the event.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs.#ctor(System.DateTime,System.Exception)">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs"/> allows exceptions to be captured and sent to the OnError event of the timer.
+            </summary>
+            <remarks>
+            Creates a new instance of the <see cref="T:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs"/> class.
+            </remarks>
+            <param name="eventTime">The date and time of the event.</param>
+            <param name="exception">The exception that occurred during the event.</param>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs.EventTime">
+            <summary>
+            Gets the date and time of the event.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Arguments.ExceptionEventArgs.Exception">
+            <summary>
+            Gets the Exception that occurred during the event.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Arguments.ReportEventArgs">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Arguments.ReportEventArgs"/> represent the event arguments of a report.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Arguments.ReportEventArgs.#ctor(System.DateTime,System.Int32)">
+            <summary>
+            Creates a new instance of the <see cref="T:VersaTul.Task.Scheduler.Arguments.ReportEventArgs"/> class.
+            </summary>
+            <param name="time">The date and time of the event.</param>
+            <param name="reportNo">The unique identifier of the event.</param>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Arguments.ReportEventArgs.ReportNo">
+            <summary>
+            Gets the report identifier.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Arguments.ReportEventArgs.EventTime">
+            <summary>
+            Gets the report event time.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Arguments.ScheduledEventArgs">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Arguments.ScheduledEventArgs"/> represent the event arguments of a schedule timer.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Arguments.ScheduledEventArgs.#ctor(System.DateTime)">
+            <summary>
+             Creates a new instance of the <see cref="T:VersaTul.Task.Scheduler.Arguments.ScheduledEventArgs"/> class.
+            </summary>
+            <param name="eventTime">The date and time of the event scheduled.</param>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Arguments.ScheduledEventArgs.EventTime">
+            <summary>
+            Gets the scheduled event time.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IBlockEvent">
+            <summary>
+            This interface represents an Event filter that enables a window of activity.  For cases where you want to
+            run every 15 minutes between 6:00 AM and 5:00 PM. Or just on weekdays or weekends.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IBlockEvent.NextEvent(System.DateTime,System.Boolean,System.Int32)">
+            <summary>
+            Returns the next run time of the scheduled event.
+            Optionally excludes the starting time from the next event lookup.
+            </summary>
+            <param name="startTime"></param>
+            <param name="includeStartTime"></param>
+            <param name="counter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IClock">
+            <summary>
+            Provides the current UTC time for scheduler operations.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IDateStorage">
+            <summary>
+            Represent a data store for the <seealso cref="!:FileEventStorage"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IDateStorage.GetTime">
+            <summary>
+            Gets the stored time from storage mechanism.
+            </summary>
+            <returns>The dateTime value from the store.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IDateStorage.Save(System.DateTime)">
+            <summary>
+            Stores the given time into the storage mechanism.
+            </summary>
+            <param name="dateTime">The date and time to store.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IEvent">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Contracts.IEvent"/> represents a scheduled event.
+            You can query it for the number of events that occur
+            in a time interval and for the remaining interval before the next event.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IEvent.AddEvent(System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Adds the time of the events that occur in the given time interval.
+            The interval is closed at the start and open at the end so that
+            intervals can be stacked without overlapping.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A list of the scheduled event intervals.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IEvent.NextEvent(System.DateTime,System.Boolean)">
+            <summary>
+            Returns the next run time of the scheduled event.
+            Optionally excludes the starting time from the next event lookup.
+            </summary>
+            <param name="startTime">The starting time of the event.</param>
+            <param name="includeStartTime">If true then the starting time is included in the query, False it is excluded.</param>
+            <returns>The next execution time either on or after the starting time.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IEventStorage">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Contracts.IEventStorage"/> is used to provide persistence of schedule during service shutdowns.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IEventStorage.RecordLastTime(System.DateTime)">
+            <summary>
+            Saves the given event.
+            </summary>
+            <param name="dateTime">The date and time of the event.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IEventStorage.ReadLastTime">
+            <summary>
+            Gets the last event saved.
+            </summary>
+            <returns>The date and time of the last saved event.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IMethodCall">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Contracts.IMethodCall"/> represents a partially specified parameter data list and a method.
+            This allows methods to be dynamically late invoked for things like timers and other event driven frameworks.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Contracts.IMethodCall.ParameterSetterCollection">
+            <summary>
+            Gets the <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection"/> of the method.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IMethodCall.Execute">
+            <summary>
+            Invokes the method.
+            </summary>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IMethodCall.Execute(VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Invokes the method using the specified <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.
+            </summary>
+            <param name="parameterSetter">An <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> for the invoked method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IMethodCall.EventHandler(System.Object,System.EventArgs)">
+            <summary>
+            Invokes the method.
+            </summary>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <param name="e">The event arguments to invoke with.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IMethodCall.BeginExecute(System.AsyncCallback,System.Object)">
+            <summary>
+            When implemented in a derived class and using the specified execution context, callback method, and user state, enqueues an asynchronous activity in a run-time workflow.
+            </summary>
+            <param name="callback">The method to be called after the asynchronous activity and completion notification have occurred.</param>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <returns>The object that saves variable information for an instance of an asynchronous activity.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IMethodCall.BeginExecute(VersaTul.Task.Scheduler.Contracts.IParameterSetter,System.AsyncCallback,System.Object)">
+            <summary>
+            When implemented in a derived class and using the specified execution context, callback method, and user state, enqueues an asynchronous activity in a run-time workflow.
+            </summary>
+            <param name="parameterSetter">An <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> for the invoked method.</param>
+            <param name="callback">The method to be called after the asynchronous activity and completion notification have occurred.</param>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <returns>The object that saves variable information for an instance of an asynchronous activity.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IOffset">
+            <summary>
+            Represents time offsets represented as <seealso cref="T:System.TimeSpan"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IOffset.ByMilliseconds(System.String)">
+            <summary>
+            Get offset by milliseconds.
+            </summary>
+            <param name="offset">A single integer representing the offset in ms '0'</param>
+            <returns>The time offset by the given milliseconds as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IOffset.BySeconds(System.String)">
+            <summary>
+            Get offset by seconds.
+            </summary>
+            <param name="offset">A comma separate list of integers representing the number of seconds and ms '1,0'</param>
+            <returns>The time offset by the given seconds as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IOffset.ByMinutes(System.String)">
+            <summary>
+            Get offset by minutes.
+            </summary>
+            <param name="offset">A comma separated list of integers representing the number of minutes, seconds and ms '1,3,4'</param>
+            <returns>The time offset by the given minute as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IOffset.ByHours(System.String)">
+            <summary>
+            Get offset by hours.
+            </summary>
+            <param name="offset"> A time in hh:mm:ss AM/PM format</param>
+            <returns>The time offset by the given hours as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IOffset.ByDaysForWeek(System.String)">
+            <summary>
+            Get offset by days.
+            </summary>
+            <param name="offset">n, time where n represents an integer and time is a time in the Daily format '1, 6:00AM'</param>
+            <returns>The time offset by the given day(s) as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IOffset.ByDaysForMonth(System.String)">
+            <summary>
+            Get offset by weeks.
+            </summary>
+            <param name="offset">the same format as weekly. '1, 6:00PM'</param>
+            <returns>The time offset by the given week(s) as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IOffset.Parse(VersaTul.Task.Scheduler.EventTime,System.String)">
+            <summary>
+
+            BySecond - single integer representing the offset in ms '0'
+            ByMinute - A comma separate list of integers representing the number of seconds and ms '1,0'
+            Hourly - A comma separated list of integers representing the number of minutes, seconds and ms '1,3,4'
+            Daily - A time in hh:mm:ss AM/PM format
+            Weekly - n, time where n represents an integer and time is a time in the Daily format '1, 6:00AM'
+            Monthly - the same format as weekly. '1, 6:00PM'
+            </summary>
+            <param name="eventTime">The named time of an event.</param>
+            <param name="offset">see message for formats..</param>
+            <returns>The time offset by the given event time and offset as a TimSpan.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> represents a serialized parameter list.  This is used to provide a partial specialized
+            method call. This is useful for remote invocation of method calls. For example if you have a method with
+            3 parameters.
+            The first 2 might represent static data such as a report and a storage location.
+            The third might be the time that the report is invoked, which is only known when the method is invoked.
+            Using this, you just pass the method and the first 2 parameters to a timer object, which supplies the 3rd parameter.
+            Without these objects, you would have to generate a custom object type for each method you wished to
+            execute in this manner and store the static parameters as instance variables.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IParameterSetter.Reset">
+            <summary>
+            This resets the setter to the beginning. It is used for setters that rely on positional state
+            information. It is called prior to setting any method values.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IParameterSetter.GetParameterValue(System.Reflection.ParameterInfo,System.Int32,System.Object@)">
+            <summary>
+            This method is used to both query support for setting a parameter and actually set the value.
+            True is returned if the parameter passed in is updated.
+            </summary>
+            <param name="parameterInfo">The reflection information about this parameter.</param>
+            <param name="location">The location of the parameter in the parameter list.</param>
+            <param name="parameter">The parameter object</param>
+            <returns>true if the parameter is matched and false otherwise</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection"/> represents a collection of <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection.Add(VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Add the given <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to the collection.
+            </summary>
+            <param name="parameterSetter">The <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to add to the collection.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection.GetParameters(System.Reflection.MethodInfo)">
+            <summary>
+            Return the parameter details for the given method meta-data.
+            </summary>
+            <param name="method">The method meta-data for which parameter detail will be looked up.</param>
+            <returns>A collection of parameter <seealso cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection.GetParameters(System.Reflection.MethodInfo,VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Return the parameter details for the given method meta-data and <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.
+            </summary>
+            <param name="method">The method meta-data for which parameter detail will be looked up.</param>
+            <param name="parameterSetter">The <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to filter the results by.</param>
+            <returns>A collection of parameter <seealso cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection.Reset">
+            <summary>
+            Resets all the <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> in the collection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection.ToArray">
+            <summary>
+            Returns the collection of <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> as an array.
+            </summary>
+            <returns>A collection of <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IQueuedEvent.Add(VersaTul.Task.Scheduler.Contracts.IEvent)">
+            <summary>
+            Adds a Scheduled Item to the queue.
+            </summary>
+            <param name="scheduledEvent">The scheduled item to add</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IQueuedEvent.Clear">
+            <summary>
+            Clears the list of scheduled times.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Contracts.IResultFilter">
+            <summary>
+            The <see cref="T:VersaTul.Task.Scheduler.Contracts.IResultFilter"/> interface represents filters that either sort the events for an interval or
+            remove duplicate events either selecting the first or the last event.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Contracts.IResultFilter.FilterResultsInInterval(System.DateTime,System.DateTime,System.Collections.Generic.List{System.DateTime})">
+            <summary>
+            Sorts the events for an interval or remove duplicate events either the first or the last.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A collection of the next intervals.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.EventInstance">
+            <summary>
+            There have been quite a few requests to allow scheduling of multiple delegates and method parameter data
+            from the same timer.  This class allows you to match the event with the time that it fired.  I want to keep
+            the same simple implementation of the EventQueue and interval classes since they can be reused elsewhere.
+            The timer should be responsible for matching this data up.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.EventInstance.DateTime">
+            <summary>
+            Gets the date and time of the instance.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.EventInstance.ScheduledItem">
+            <summary>
+            Gets the <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IEvent"/> of the instance .
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.EventInstance.State">
+            <summary>
+            Gets the state of the object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.EventInstance.CompareTo(System.Object)">
+            <summary>
+            Compares the given obj to an <see cref="T:VersaTul.Task.Scheduler.EventInstance"/> or <seealso cref="P:VersaTul.Task.Scheduler.EventInstance.DateTime"/>.
+            </summary>
+            <param name="obj">The instance or date-time to compare.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Events.BlockEvent">
+            <summary>
+            This class will be used to implement a filter that enables a window of activity.  For cases where you want to
+            run every 15 minutes between 6:00 AM and 5:00 PM. Or just on weekdays or weekends.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.BlockEvent.AddEvent(System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Adds the time of the events that occur in the given time interval.
+            The interval is closed at the start and open at the end so that
+            intervals can be stacked without overlapping.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A list of the scheduled event intervals.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.BlockEvent.NextEvent(System.DateTime,System.Boolean)">
+            <summary>
+            Returns the next run time of the scheduled event.
+            Optionally excludes the starting time from the next event lookup.
+            </summary>
+            <param name="startTime">The starting time of the event.</param>
+            <param name="includeStartTime">If true then the starting time is included in the query, False it is excluded.</param>
+            <returns>The next execution time either on or after the starting time.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.BlockEvent.NextEvent(System.DateTime,System.Boolean,System.Int32)">
+            <summary>
+            Iterative computation of next event honoring block begin/end.
+            Throws when max iterations are exhausted (counter == 0).
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Events.CronEvent">
+            <summary>
+            Represents a cron-based scheduled event (minute hour day-of-month month day-of-week).
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Events.IntervalEvent">
+            <summary>
+            The interval event represents the simple scheduling that .net supports natively. It consists of a start
+            absolute time and an interval that is counted off from the start time.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.IntervalEvent.AddEvent(System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Adds the time of the events that occur in the given time interval.
+            The interval is closed at the start and open at the end so that
+            intervals can be stacked without overlapping.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A list of the scheduled event intervals.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.IntervalEvent.NextEvent(System.DateTime,System.Boolean)">
+            <summary>
+            Returns the next run time of the scheduled event.
+            Optionally excludes the starting time from the next event lookup.
+            </summary>
+            <param name="startTime">The starting time of the event.</param>
+            <param name="includeStartTime">If true then the starting time is included in the query, False it is excluded.</param>
+            <returns>The next execution time either on or after the starting time.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Events.QueuedEvent">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Events.QueuedEvent"/> is a collection of scheduled items that represents the union of all child scheduled items.
+            This is useful for events that occur every 10 minutes or at multiple intervals not covered by the simple
+            scheduled items.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.QueuedEvent.Add(VersaTul.Task.Scheduler.Contracts.IEvent)">
+            <summary>
+            Adds a Scheduled Item to the queue.
+            </summary>
+            <param name="scheduledEvent">The scheduled item to add</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.QueuedEvent.Clear">
+            <summary>
+            Clears the list of scheduled times.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.QueuedEvent.AddEvent(System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Adds the time of the events that occur in the given time interval.
+            The interval is closed at the start and open at the end so that
+            intervals can be stacked without overlapping.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A list of the scheduled items.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.QueuedEvent.NextEvent(System.DateTime,System.Boolean)">
+            <summary>
+            Returns the next run time of the scheduled item. Optionally excludes the starting time.
+            </summary>
+            <param name="time">The starting time of the interval</param>
+            <param name="includeStartTime">If true then the starting time is included in the query, False it is excluded.</param>
+            <returns>The next execution time either on or after the starting time.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Events.ScheduledEvent">
+            <summary>
+            This class represents a simple schedule. It can represent a repeating event that occurs anywhere from every
+            second to once a month. It consists of an enumeration to mark the interval and an offset from that interval.
+            For example new ScheduledEvent(Hourly, new TimeSpan(0, 15, 0)) would represent an event that fired 15 minutes
+            after the hour every hour.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.ScheduledEvent.#ctor(VersaTul.Task.Scheduler.EventTime,System.TimeSpan)">
+            <summary>
+             Creates a simple scheduled time.
+            </summary>
+            <param name="eventTime">The named time for the event.</param>
+            <param name="timeSpan">The offSet of the time.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.ScheduledEvent.#ctor(System.String,System.String,VersaTul.Utilities.Contracts.IEnumParser{VersaTul.Task.Scheduler.EventTime},VersaTul.Task.Scheduler.Contracts.IOffset)">
+            <summary>
+            Creates a simple scheduled time element from a pair of strings.
+            Here are the supported formats
+
+            BySecond - single integer representing the offset in ms
+            ByMinute - A comma separate list of integers representing the number of seconds and ms
+            Hourly - A comma separated list of integers representing the number of minutes, seconds and ms
+            Daily - A time in hh:mm:ss AM/PM format
+            Weekly - n, time where n represents an integer and time is a time in the Daily format
+            Monthly - the same format as weekly.
+
+            </summary>
+            <param name="eventBase">A string representing the base enumeration for the scheduled time</param>
+            <param name="offset">A string representing the offset for the time.</param>
+            <param name="enumParser">The parser to help with eventBase conversion.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.ScheduledEvent.IncrementInterval(System.DateTime)">
+            <summary>
+            Increments the given interval by the underlining <seealso cref="T:VersaTul.Task.Scheduler.EventTime"/>.
+            </summary>
+            <param name="interval">The date and time of the interval.</param>
+            <returns>The updated date and time with offset.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.ScheduledEvent.SyncTime(System.DateTime)">
+            <summary>
+            Gets the generated time from the given time base on the underlining <seealso cref="T:VersaTul.Task.Scheduler.EventTime"/>.
+            </summary>
+            <param name="time">The date and time of the event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.ScheduledEvent.AddEvent(System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Adds the time of the events that occur in the given time interval.
+            The interval is closed at the start and open at the end so that
+            intervals can be stacked without overlapping.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A list of the scheduled event intervals.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.ScheduledEvent.NextEvent(System.DateTime,System.Boolean)">
+            <summary>
+            Returns the next run time of the scheduled event.
+            Optionally excludes the starting time from the next event lookup.
+            </summary>
+            <param name="time">The starting time of the event.</param>
+            <param name="includeStartTime">If true then the starting time is included in the query, False it is excluded.</param>
+            <returns>The next execution time either on or after the starting time.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Events.SingleEvent">
+            <summary>
+            Single event represents an event which only fires once.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.SingleEvent.AddEvent(System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Adds the time of the events that occur in the given time interval.
+            The interval is closed at the start and open at the end so that
+            intervals can be stacked without overlapping.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A list of the scheduled items.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Events.SingleEvent.NextEvent(System.DateTime,System.Boolean)">
+            <summary>
+            Returns the next run time of the scheduled item. Optionally excludes the starting time.
+            </summary>
+            <param name="time">The starting time of the interval</param>
+            <param name="includeStartTime">If true then the starting time is included in the query, False it is excluded.</param>
+            <returns>The next execution time either on or after the starting time.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.EventTime">
+            <summary>
+            Represents the named time of an event.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Filters.FirstEventFilter">
+            <summary>
+            This causes only the first event of the interval to be counted.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Filters.FirstEventFilter.FilterResultsInInterval(System.DateTime,System.DateTime,System.Collections.Generic.List{System.DateTime})">
+            <summary>
+            Sorts the events and remove all but the first one.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A collection of the next intervals.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Filters.LastEventFilter">
+            <summary>
+            This causes only the last event of the interval to be counted.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Filters.LastEventFilter.FilterResultsInInterval(System.DateTime,System.DateTime,System.Collections.Generic.List{System.DateTime})">
+            <summary>
+            Sorts the events for an interval or remove the last duplicate events.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A collection of the next intervals.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Filters.NoEventFilter">
+            <summary>
+            This is an empty filter that does not filter any of the events.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Filters.NoEventFilter.FilterResultsInInterval(System.DateTime,System.DateTime,System.Collections.Generic.List{System.DateTime})">
+            <summary>
+            Sorts the events for an interval or remove duplicate events either the first or the last.
+            </summary>
+            <param name="begin">The beginning of the interval.</param>
+            <param name="end">The end of the interval.</param>
+            <param name="intervals">A collection of the next intervals.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Handlers.ConvertHandler">
+            <summary>
+            Represents the method that will handle converting the report requirements as needed.
+            </summary>
+            <param name="Handler"><seealso cref="T:VersaTul.Task.Scheduler.Handlers.ReportEventHandler"/></param>
+            <param name="ReportNo">The numerical identifier of the report.</param>
+            <param name="sender">The source of the event.</param>
+            <param name="time">The date and time to run the report.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Handlers.ExceptionEventHandler">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Handlers.ExceptionEventHandler"/> is the method type used by the OnError event for the timer.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Handlers.ExecuteHandler">
+            <summary>
+            Represents the method to handle running the process.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="EventTime">The date and time of event.</param>
+            <param name="Error"><seealso cref="T:VersaTul.Task.Scheduler.Handlers.ExceptionEventHandler"/></param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Handlers.ReportEventHandler">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Handlers.ReportEventHandler"/> represent the method that will handle an event when the event provides data.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="eventArgs">An object that contains the event data.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Handlers.ScheduledEventHandler">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Handlers.ScheduledEventHandler"/> represent the method that will handle an event when the event provides data.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">An object that contains the event data.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Offset.ByMilliseconds(System.String)">
+            <summary>
+            Get offset by milliseconds.
+            </summary>
+            <param name="offset">A single integer representing the offset in ms '0'</param>
+            <returns>The time offset by the given milliseconds as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Offset.BySeconds(System.String)">
+            <summary>
+            Get offset by seconds.
+            </summary>
+            <param name="offset">A comma separate list of integers representing the number of seconds and ms '1,0'</param>
+            <returns>The time offset by the given seconds as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Offset.ByMinutes(System.String)">
+            <summary>
+            Get offset by minutes.
+            </summary>
+            <param name="offset">A comma separated list of integers representing the number of minutes, seconds and ms '1,3,4'</param>
+            <returns>The time offset by the given minute as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Offset.ByHours(System.String)">
+            <summary>
+            Get offset by hours.
+            </summary>
+            <param name="offset"> A time in hh:mm:ss AM/PM format</param>
+            <returns>The time offset by the given hours as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Offset.ByDaysForWeek(System.String)">
+            <summary>
+            Get offset by days.
+            </summary>
+            <param name="offset">n, time where n represents an integer and time is a time in the Daily format '1, 6:00AM'</param>
+            <returns>The time offset by the given day(s) as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Offset.Parse(VersaTul.Task.Scheduler.EventTime,System.String)">
+            <summary>
+
+            BySecond - single integer representing the offset in ms '0'
+            ByMinute - A comma separate list of integers representing the number of seconds and ms '1,0'
+            Hourly - A comma separated list of integers representing the number of minutes, seconds and ms '1,3,4'
+            Daily - A time in hh:mm:ss AM/PM format
+            Weekly - n, time where n represents an integer and time is a time in the Daily format '1, 6:00AM'
+            Monthly - the same format as weekly. '1, 6:00PM'
+            </summary>
+            <param name="eventTime">The named time of an event.</param>
+            <param name="offset">see message for formats..</param>
+            <returns>The time offset by the given event time and offset as a TimSpan.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Offset.ByDaysForMonth(System.String)">
+            <summary>
+            Get offset by weeks.
+            </summary>
+            <param name="offset">the same format as weekly. '1, 6:00PM'</param>
+            <returns>The time offset by the given week(s) as a TimSpan.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.MethodCalls.BaseMethodCall">
+            <summary>
+            This is a base class that handles the Parameter collection management for the 2 dynamic method call methods.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.BaseMethodCall.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:VersaTul.Task.Scheduler.Setters.MethodCalls.BaseMethodCall"/> class.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Setters.MethodCalls.BaseMethodCall.SetterCollection">
+            <summary>
+            Gets <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.BaseMethodCall.GetParameterCollection(System.Reflection.MethodInfo)">
+            <summary>
+            Return the parameter details for the given method meta-data.
+            </summary>
+            <param name="method">The method meta-data for which parameter detail will be looked up.</param>
+            <returns>A collection of parameter <seealso cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.BaseMethodCall.GetParameterCollection(System.Reflection.MethodInfo,VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Return the parameter details for the given method meta-data and <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.
+            </summary>
+            <param name="method">The method meta-data for which parameter detail will be looked up.</param>
+            <param name="parameterSetter">The <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to filter the results by.</param>
+            <returns>A collection of parameter <seealso cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall">
+            <summary>
+            Represents method call captures the data required to do a deferred method call.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.#ctor(System.Delegate)">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall"/> class.
+            </summary>
+            <param name="action">The method to execute.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.#ctor(System.Delegate,System.Object[])">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall"/> class.
+            </summary>
+            <param name="action">The method to execute.</param>
+            <param name="parameters">The parameters to be passed to the method.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.#ctor(System.Delegate,VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall"/> class.
+            </summary>
+            <param name="action">The method to execute.</param>
+            <param name="parameterSetter">The <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to give to the method.</param>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.Action">
+            <summary>
+            Gets the delegate method.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.Method">
+            <summary>
+            Gets the meta-data for the method.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.ParameterSetterCollection">
+            <summary>
+            Gets the <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.BeginExecute(System.AsyncCallback,System.Object)">
+            <summary>
+            When implemented in a derived class and using the specified execution context, callback method,
+            and user state, enqueues an asynchronous activity in a run-time workflow.
+            </summary>
+            <param name="callback">The method to be called after the asynchronous activity and completion notification have occurred.</param>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <returns>The object that saves variable information for an instance of an asynchronous activity.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.BeginExecute(VersaTul.Task.Scheduler.Contracts.IParameterSetter,System.AsyncCallback,System.Object)">
+            <summary>
+            When implemented in a derived class and using the specified execution context, callback method,
+            and user state, enqueues an asynchronous activity in a run-time workflow.
+            </summary>
+            <param name="parameterSetter">An <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> for the invoked method.</param>
+            <param name="callback">The method to be called after the asynchronous activity and completion notification have occurred.</param>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <returns>The object that saves variable information for an instance of an asynchronous activity.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.EventHandler(System.Object,System.EventArgs)">
+            <summary>
+            Invokes the method.
+            </summary>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <param name="e">The event arguments to invoke with.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.Execute">
+            <summary>
+            Invokes the method.
+            </summary>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DelegateMethodCall.Execute(VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Invokes the method using the specified <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.
+            </summary>
+            <param name="parameterSetter">An <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> for the invoked method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall">
+            <summary>
+            Represents a dynamically populated method call that captures the data required to do a deferred method call.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.#ctor(System.Reflection.MethodInfo)">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall"/> class.
+            </summary>
+            <param name="method">An object that saves variable information for an instance of an asynchronous activity.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.#ctor(System.Object,System.Reflection.MethodInfo)">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall"/> class.
+            </summary>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <param name="method">The method meta-data.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.#ctor(System.Object,System.Reflection.MethodInfo,VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall"/> class.
+            </summary>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <param name="method">The method meta-data.</param>
+            <param name="parameterSetter">The <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to give to the method.</param>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.Method">
+            <summary>
+            Gets the meta-data for the method.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.State">
+            <summary>
+            Gets the state of the method.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.ParameterSetterCollection">
+            <summary>
+            Gets the <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetterCollection"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.BeginExecute(System.AsyncCallback,System.Object)">
+            <summary>
+            When implemented in a derived class and using the specified execution context, callback method, and user state, enqueues an asynchronous activity in a run-time workflow.
+            </summary>
+            <param name="callback">The method to be called after the asynchronous activity and completion notification have occurred.</param>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <returns>The object that saves variable information for an instance of an asynchronous activity.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.BeginExecute(VersaTul.Task.Scheduler.Contracts.IParameterSetter,System.AsyncCallback,System.Object)">
+            <summary>
+            When implemented in a derived class and using the specified execution context, callback method, and user state, enqueues an asynchronous activity in a run-time workflow.
+            </summary>
+            <param name="parameterSetter">An <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> for the invoked method.</param>
+            <param name="callback">The method to be called after the asynchronous activity and completion notification have occurred.</param>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <returns>The object that saves variable information for an instance of an asynchronous activity.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.EventHandler(System.Object,System.EventArgs)">
+            <summary>
+            Invokes the method.
+            </summary>
+            <param name="state">An object that saves variable information for an instance of an asynchronous activity.</param>
+            <param name="e">The event arguments to invoke with.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.Execute">
+            <summary>
+            Invokes the method.
+            </summary>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.MethodCalls.DynamicMethodCall.Execute(VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Invokes the method using the specified <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.
+            </summary>
+            <param name="parameterSetter">An <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> for the invoked method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.MethodCalls.InvokeMethodCall">
+            <summary>
+            Provides the ability to dynamically invoke a method at runtime.
+            </summary>
+            <returns>The value of the method.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.MethodCalls.InvokeMethodCallWithParameter">
+            <summary>
+            Provides the ability to dynamically invoke a method at runtime.
+            Represents a method that takes an <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> and returns a Object.
+            </summary>
+            <param name="parameterSetter">The parameters to set in the method.</param>
+            <returns>The value of the method.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.NamedParameterSetter">
+            <summary>
+            This setter object stores the parameter data in a Hash-table and uses the hash-table keys to match
+            the parameter names of the method to the parameter data. This allows methods to be called like
+            stored procedures, with the parameters being passed in independent of order.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.NamedParameterSetter.GetParameterValue(System.Reflection.ParameterInfo,System.Int32,System.Object@)">
+            <summary>
+            This method is used to both query support for setting a parameter and actually set the value.
+            True is returned if the parameter passed in is updated.
+            </summary>
+            <param name="parameterInfo">The reflection information about this parameter.</param>
+            <param name="location">The location of the parameter in the parameter list.</param>
+            <param name="parameter">The parameter object</param>
+            <returns>true if the parameter is matched and false otherwise</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.NamedParameterSetter.Reset">
+            <summary>
+            This resets the setter to the beginning. It is used for setters that rely on positional state
+            information. It is called prior to setting any method values.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.OrderParameterSetter">
+            <summary>
+            This setter object takes a simple object array full of parameter data.  It applies the objects in order
+            to the method parameter list.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.OrderParameterSetter.GetParameterValue(System.Reflection.ParameterInfo,System.Int32,System.Object@)">
+            <summary>
+            This method is used to both query support for setting a parameter and actually set the value.
+            True is returned if the parameter passed in is updated.
+            </summary>
+            <param name="parameterInfo">The reflection information about this parameter.</param>
+            <param name="location">The location of the parameter in the parameter list.</param>
+            <param name="parameter">The parameter object</param>
+            <returns>true if the parameter is matched and false otherwise</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.OrderParameterSetter.Reset">
+            <summary>
+            This resets the setter to the beginning. It is used for setters that rely on positional state
+            information. It is called prior to setting any method values.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection"/> maintains a collection of IParameterSetter objects and applies them in order to each
+            parameter of the method.  Each time a match occurs the next parameter is tried starting with the first
+            setter object until it is matched.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection.Add(VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Add the given <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to the collection.
+            </summary>
+            <param name="parameterSetter">The <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to add to the collection.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection.GetParameters(System.Reflection.MethodInfo)">
+            <summary>
+            Return the parameter details for the given method meta-data.
+            </summary>
+            <param name="method">The method meta-data for which parameter detail will be looked up.</param>
+            <returns>A collection of parameter <seealso cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection.GetParameters(System.Reflection.MethodInfo,VersaTul.Task.Scheduler.Contracts.IParameterSetter)">
+            <summary>
+            Return the parameter details for the given method meta-data and <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.
+            </summary>
+            <param name="method">The method meta-data for which parameter detail will be looked up.</param>
+            <param name="parameterSetter">The <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> to filter the results by.</param>
+            <returns>A collection of parameter <seealso cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection.Reset">
+            <summary>
+            Resets all the <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> in the collection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection.ToArray">
+            <summary>
+            Returns the collection of <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/> as an array.
+            </summary>
+            <returns>A collection of <seealso cref="T:VersaTul.Task.Scheduler.Contracts.IParameterSetter"/>.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.ParameterSetterCollection.TrySetValue(System.Reflection.ParameterInfo,System.Int32,System.Object@)">
+            <summary>
+            Try's to set the value for a parameter from the collection of parameters.
+            </summary>
+            <param name="parameterInfo">The meta-data of the parameter.</param>
+            <param name="index">The position of the parameter to lookup.</param>
+            <param name="value">The value is retrieved from the parameter.</param>
+            <returns>True if value is found, otherwise False.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Setters.TimerParameterSetter">
+            <summary>
+            The timer job allows delegates to be specified with unbound parameters. This ParameterSetter assigns all unbound date-time parameters
+            with the specified time and all unbound object parameters with the calling object.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.TimerParameterSetter.#ctor(System.DateTime,System.Object)">
+            <summary>
+            Creates a new instance of <see cref="!:ParameterSetter"/> with the time to pass to unbound time parameters and object to pass to unbound object parameters.
+            </summary>
+            <param name="dateTime">The time to pass to the unbound DateTime parameters</param>
+            <param name="sender">The object to pass to the unbound object parameters</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.TimerParameterSetter.GetParameterValue(System.Reflection.ParameterInfo,System.Int32,System.Object@)">
+            <summary>
+            This method is used to both query support for setting a parameter and actually set the value.
+            True is returned if the parameter passed in is updated.
+            </summary>
+            <param name="parameterInfo">The reflection information about this parameter.</param>
+            <param name="location">The location of the parameter in the parameter list.</param>
+            <param name="parameter">The parameter object</param>
+            <returns>true if the parameter is matched and false otherwise</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Setters.TimerParameterSetter.Reset">
+            <summary>
+            This resets the setter to the beginning. It is used for setters that rely on positional state
+            information. It is called prior to setting any method values.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Storages.DateStorage">
+            <summary>
+            Represents the storage mechanism for the <seealso cref="T:VersaTul.Task.Scheduler.Storages.FileEventStorage"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.DateStorage.#ctor(VersaTul.Handler.File.Contracts.IFileUtility,VersaTul.Handler.File.Types.FileInfo)">
+            <summary>
+            Creates a new instance of the <see cref="!:DateStore"/> class.
+            </summary>
+            <param name="fileUtility">The text file to be stored on disc.</param>
+            <param name="fileInfo">The details about the text file as well as its data to be stored.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.DateStorage.GetTime">
+            <summary>
+            Gets the stored time from storage mechanism.
+            </summary>
+            <returns>The dateTime value from the store.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.DateStorage.Save(System.DateTime)">
+            <summary>
+            Stores the given time into the storage mechanism.
+            </summary>
+            <param name="dateTime">The date and time to store.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Storages.FileEventStorage">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Storages.FileEventStorage"/> saves the last time in an XmlDocument so that recovery will include periods that the
+            process is shutdown.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.FileEventStorage.ReadLastTime">
+            <summary>
+            Gets the last event saved.
+            </summary>
+            <returns>The date and time of the last saved event.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.FileEventStorage.RecordLastTime(System.DateTime)">
+            <summary>
+            Saves the given event.
+            </summary>
+            <param name="dateTime">The date and time of the event.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Storages.LocalEventStorage">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Storages.LocalEventStorage"/> keeps the last time in memory so that skipped events are not recovered.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.LocalEventStorage.ReadLastTime">
+            <summary>
+            Gets the last event saved.
+            </summary>
+            <returns>The date and time of the last saved event.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.LocalEventStorage.RecordLastTime(System.DateTime)">
+            <summary>
+            Saves the given event.
+            </summary>
+            <param name="dateTime">The date and time of the event.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Storages.NoEventStorage">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Storages.NoEventStorage"/> disables error recovery by returning current date and time for the last time an event fired.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.NoEventStorage.ReadLastTime">
+            <summary>
+            Gets the last event saved.
+            However this is the current date and time.
+            </summary>
+            <returns>The date and time of the last saved event.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Storages.NoEventStorage.RecordLastTime(System.DateTime)">
+            <summary>
+            Saves the given event.
+            </summary>
+            <param name="Time">The date and time of the event.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Storages.ResilientEventStorage">
+            <summary>
+            Adds retry and recovery behavior around an event storage provider.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Timers.BaseTimer">
+            <summary>
+            <see cref="T:VersaTul.Task.Scheduler.Timers.BaseTimer"/> represents a timer that fires on a more human friendly schedule.  For example it is easy to
+            set it to fire every day at 6:00PM. It is useful for batch jobs or alarms that might be difficult to
+            schedule with the native .net timers.
+            It is similar to the .net timer that it is based on with the start and stop methods functioning similarly.
+            The main difference is the event uses a different delegate and argument since the .net timer argument
+            class is not create-able.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Add(VersaTul.Task.Scheduler.TimerTask)">
+            <summary>
+            Adds a timer task to the timer.
+            </summary>
+            <param name="timerTask">The time task to be added.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Add(VersaTul.Task.Scheduler.Contracts.IEvent,System.Delegate,System.Object[])">
+            <summary>
+             Adds a timer task to the timer.
+             This method passes in a delegate and the parameters similar to the Invoke method of windows forms.
+            </summary>
+            <param name="scheduledItem">The schedule that this delegate is to be run on.</param>
+            <param name="delegate">The delegate to run</param>
+            <param name="parameters">The method parameters to pass if you leave any DateTime parameters unbound, then they will be set with the scheduled run time of the
+            method.  Any unbound object parameters will get this Job object passed in.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.AddSyncronized(VersaTul.Task.Scheduler.Contracts.IEvent,System.Delegate,System.Object[])">
+            <summary>
+            Adds a timer task to the timer to operate asynchronously.
+            </summary>
+            <param name="scheduledItem">The schedule that this delegate is to be run on.</param>
+            <param name="delegate">The delegate to run</param>
+            <param name="parameters">The method parameters to pass if you leave any DateTime parameters unbound, then they will be set with the scheduled run time of the
+            method.  Any unbound object parameters will get this Job object passed in.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Clear">
+            <summary>
+            Clears out all scheduled tasks.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Start">
+            <summary>
+            Begins executing all assigned tasks at the scheduled times.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Stop">
+            <summary>
+            Halts executing all jobs.
+            When the timer is restarted all jobs that would have run while the timer was stopped are re-tried.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.NextInterval(System.DateTime)">
+            <summary>
+            Gets the next time any of the timer task in the list will run. Allows matching the exact start time. If no matches are found the return
+            is DateTime.MaxValue;
+            </summary>
+            <param name="thisTime">The starting time for the interval being queried. This time is included in the interval</param>
+            <returns>The first absolute date one of the jobs will execute on.  If none of the jobs needs to run DateTime.MaxValue is returned.</returns>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.QueueNextTime(System.DateTime)">
+            <summary>
+            Gets the next time any of the timer task in the list will run.
+            </summary>
+            <param name="thisTime">The starting time for the interval being queried. This time is included in the interval</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Dispose">
+            <summary>
+            Dispose of the timers.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Dispose(System.Boolean)">
+            <summary>
+            Dispose timers
+            </summary>
+            <param name="disposing">Indication of dispose state.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.Timer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Event listener for Timer execution.
+            </summary>
+            <param name="sender">The timer firing event.</param>
+            <param name="e">Data for the elapsed event.</param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.BaseTimer.OnError(System.DateTime,System.Exception)">
+            <summary>
+            Generate the timer event handler to notify listening partys.
+            </summary>
+            <param name="eventTime">The date and time of event.</param>
+            <param name="exception">The exception that caused the error.</param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.Timers.ReportTimer">
+            <summary>
+            Summary description for ReportTimer.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.ReportTimer.AddEvent(VersaTul.Task.Scheduler.Contracts.IEvent,System.Int32)">
+            <summary>
+            Add event is used in conjunction with the Elapsed event handler. Set the Elapsed handler,
+            add your schedule and call start.
+            </summary>
+            <param name="scheduledItem"></param>
+            <param name="reportNo"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="E:VersaTul.Task.Scheduler.Timers.ScheduleTimer.Elapsed">
+            <summary>
+            The event to fire when you only need to fire one event.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.Timers.ScheduleTimer.AddEvent(VersaTul.Task.Scheduler.Contracts.IEvent)">
+            <summary>
+            Add event is used in conjunction with the Elapsed event handler.  Set the Elapsed handler,
+            add your schedule and call start.
+            </summary>
+            <param name="scheduledItem">The schedule to fire the event at.
+            Adding additional schedules will cause the event to fire whenever either schedule calls for it.
+            </param>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.TimerTask">
+            <summary>
+            Timer task groups a schedule, synchronization data, a result filter, method information and an enabled state so that multiple tasks
+            can be managed by the same timer.
+            Each one operating independently of the others with different synchronization and recovery settings.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.TimerTask.Filter">
+            <summary>
+            Gets or Sets the <see cref="T:VersaTul.Task.Scheduler.Contracts.IResultFilter"/>.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.TimerTask.SyncronizedEvent">
+            <summary>
+            Gets or Sets the Syncronization event.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.TimerTask.Enabled">
+            <summary>
+            Gets or Sets if the time is enabled.
+            </summary>
+            <remarks>Defaults to True.</remarks>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.TimerTask.NextRunTime(System.DateTime,System.Boolean)">
+            <summary>
+            Returns the next run time of the scheduled event.
+            Optionally excludes the starting time from the next event lookup.
+            </summary>
+            <param name="startTime">The starting time of the event.</param>
+            <param name="includeStartTime">If true then the starting time is included in the query, False it is excluded.</param>
+            <returns>The next execution time either on or after the starting time.</returns>
+        </member>
+        <member name="T:VersaTul.Task.Scheduler.TimerTaskCollection">
+            <summary>
+            Timer task manages a group of timer tasks.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Task.Scheduler.TimerTaskCollection.Tasks">
+            <summary>
+            Gets a collection of TimeTask.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.TimerTaskCollection.Add(VersaTul.Task.Scheduler.TimerTask)">
+            <summary>
+            Adds the given task to the time task collection.
+            </summary>
+            <param name="timerTask"></param>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.TimerTaskCollection.Clear">
+            <summary>
+            Removes all the timer tasks from the timer task collection.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Task.Scheduler.TimerTaskCollection.NextRunTime(System.DateTime)">
+            <summary>
+            Gets the next time any of the timer task in the list will run. Allows matching the exact start time. If no matches are found the return
+            is DateTime.MaxValue;
+            </summary>
+            <param name="time">The starting time for the interval being queried.  This time is included in the interval</param>
+            <returns>The first absolute date one of the jobs will execute on.  If none of the jobs needs to run DateTime.MaxValue is returned.</returns>
+        </member>
+    </members>
+</doc>

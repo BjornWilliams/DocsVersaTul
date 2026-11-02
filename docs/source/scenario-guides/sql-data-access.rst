@@ -20,14 +20,36 @@ Use this workflow when you need to:
 2. Standardize how commands, parameters, and mapping are handled.
 3. Stay provider-agnostic unless a SQL Server-specific need is proven.
 
-Packages To Install
--------------------
+Prerequisites and Tested Versions
+---------------------------------
 
-.. code-block:: console
+- Install a .NET SDK that supports the target framework. The sample projects target ``net8.0``, ``net9.0``, and ``net10.0``; the documentation workflow validates all three.
+- The runnable sample uses a shared in-memory SQLite database. No database server, credentials, or network service is required.
 
-   dotnet add package VersaTul.Data.Sql
-   dotnet add package VersaTul.Configurations
-   dotnet add package VersaTul.Configuration.Defaults
+The runnable sample's pinned package versions are:
+
+.. list-table:: Tested SQL data-access sample packages
+   :header-rows: 1
+
+   * - Package
+     - Version
+     - Role
+   * - ``VersaTul.Data.Sql``
+     - ``2.0.21``
+     - Provider-agnostic command execution
+   * - ``VersaTul.Configurations``
+     - ``1.0.18``
+     - Typed configuration settings
+   * - ``Microsoft.Data.Sqlite``
+     - ``10.0.13``
+     - In-memory ADO.NET provider used by the sample
+
+Why This Package Combination
+----------------------------
+
+``VersaTul.Data.Sql`` supplies the command factory and data-source API used by the tutorial. ``VersaTul.Configurations`` keeps the connection name, provider name, and timeout together in the settings object that ``DataConfiguration`` consumes. The sample adds ``Microsoft.Data.Sqlite`` only as its ADO.NET provider, so it can create a shared in-memory database without a server or credentials. Choose the provider package that matches your application when adapting the sample.
+
+``VersaTul.Data.MsSql`` is not needed for this provider-neutral round trip. Add it only when the application needs SQL Server-specific features such as bulk copy or table-valued parameters.
 
 Step 1: Configure The Connection
 --------------------------------
@@ -35,6 +57,7 @@ Step 1: Configure The Connection
 Register the provider and build the configuration source.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data.Common;
    using VersaTul.Configuration.Defaults.Sql;
@@ -55,6 +78,7 @@ Step 2: Build The Data Source
 -----------------------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using VersaTul.Data.Sql;
    using VersaTul.Data.Sql.Configurations;
@@ -72,6 +96,7 @@ Step 3: Put Mapping In A Service Layer
 Implement a project-specific data service on top of ``BaseDataService``.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
    using System.Data;
    using VersaTul.Data.Sql.Contracts;
@@ -130,6 +155,50 @@ When this workflow is working:
 2. SQL execution stays behind a reusable service abstraction.
 3. Mapping logic stays consistent across queries instead of being rewritten in each caller.
 
+Cleanup, Cancellation, and Production Notes
+--------------------------------------------
+
+- The sample's ``await using`` SQLite connection keeps the shared in-memory database alive and closes it when the program exits. The database disappears with that connection.
+- The sample uses synchronous calls for its tiny fixture. For application operations, use ``WriteAsync`` and ``ExecuteScalarAsync`` overloads that accept a ``CancellationToken``. Pass values as command parameters instead of building SQL from user input.
+- Provider and command failures are allowed to surface. Handle them at the service boundary; production deployments should also provision a persistent schema, use transaction boundaries where needed, and keep credentials in managed configuration or a secret store.
+
+Runnable Sample
+---------------
+
+The complete `SqlDataAccess project <https://github.com/BjornWilliams/DocsVersaTul/tree/VT-Upgrade-And-Revisions/docs/samples/SqlDataAccess>`_ creates and queries an ephemeral SQLite database. Clone the audit branch and run it from the repository root:
+
+.. code-block:: console
+
+   git clone --branch VT-Upgrade-And-Revisions https://github.com/BjornWilliams/DocsVersaTul.git
+   cd DocsVersaTul
+   dotnet run --project docs/samples/SqlDataAccess/SqlDataAccess.csproj --framework net8.0
+
+The project also targets ``net9.0`` and ``net10.0``; substitute either framework in the command to run those targets. The sample source is included below for reference.
+
+The deterministic input fixture creates a ``people`` table and inserts one row:
+
+.. code-block:: sql
+
+   CREATE TABLE people (name TEXT NOT NULL);
+   INSERT INTO people (name) VALUES ('Ada');
+
+.. literalinclude:: ../../samples/SqlDataAccess/Program.cs
+   :language: csharp
+   :caption: Program.cs
+
+Its expected console output is:
+
+.. literalinclude:: ../../samples/SqlDataAccess/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Likely Failure Messages and Fixes
+---------------------------------
+
+1. ``error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0.`` — Install the .NET 10 SDK, or run the sample with ``--framework net8.0`` or ``net9.0``.
+2. ``error NU1301: Unable to load the service index for source https://api.nuget.org/v3/index.json.`` — Restore network access or configure the NuGet feed that contains the pinned packages, then rerun ``dotnet restore``.
+3. ``InvalidOperationException: The SQLite round trip returned an unexpected result.`` — Keep the registered SQLite provider and shared in-memory connection string from the sample, and check that the create, insert, and select commands run against the same database.
+
 Common Mistakes
 ---------------
 
@@ -137,17 +206,7 @@ Common Mistakes
 2. Keeping SQL statements in controllers, handlers, or unrelated service layers.
 3. Treating connection configuration as an incidental detail instead of part of the data-access contract.
 
-Related Package Pages
----------------------
+Next Step
+---------
 
-1. :doc:`/sql`
-2. :doc:`/mssql`
-3. :doc:`/configuration`
-4. :doc:`/configuration-defaults`
-
-What To Read Next
------------------
-
-1. Read :doc:`/sql` for the full relational package surface.
-2. Read :doc:`/mssql` if SQL Server-specific behavior is the next requirement.
-3. Read :doc:`file-import` if the next step is ingesting flat-file data into a relational store.
+When you need SQL Server-specific behavior, continue with :doc:`/mssql`.

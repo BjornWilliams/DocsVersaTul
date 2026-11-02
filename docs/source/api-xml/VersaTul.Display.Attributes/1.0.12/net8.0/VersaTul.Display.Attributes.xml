@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Display.Attributes</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer">
+            <summary>
+            Specifies the functionality provided by a Display analyzer.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer.PropertyNames">
+            <summary>
+            Gets a list of column names for displaying as report headings.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer.FormatValue(VersaTul.Display.Attributes.DisplayAttribute,System.Object)">
+            <summary>
+            Formats the given property value base on the Display setting.
+            </summary>
+            <param name="displayAttribute">Display details used for formatting.</param>
+            <param name="propertyValue">The value of the property.</param>
+            <returns>The formatted result of the property value.</returns>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer.FormatValue(System.Object,System.String)">
+            <summary>
+            Formats the given property value base on the Display setting.
+            </summary>
+            <param name="propertyValue">The value of the property.</param>
+            <param name="propertyName">The name of the property.</param>
+            <returns>The formatted result of the property value.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer.GetAttribute(System.Reflection.PropertyInfo)">
+            <summary>
+            Get the <see cref="T:VersaTul.Display.Attributes.DisplayAttribute"/> added to the given Property.
+            </summary>
+            <param name="propertyInfo">The property meta-data of a property.</param>
+            <returns>The <see cref="T:VersaTul.Display.Attributes.DisplayAttribute"/> attached to the property.</returns>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer.GetName(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns the name of the property wither the name of the current member or the overridden name by the Display Attribute.
+            </summary>
+            <param name="propertyInfo">The property meta-data of a property.</param>
+            <returns>The string name of the property.</returns>
+            <remarks>The name of the property if no override name is set using the <seealso cref="T:VersaTul.Display.Attributes.DisplayAttribute"/>.</remarks>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Contracts.IDisplayAnalyzer.RegisterFormatter(VersaTul.Display.Attributes.Contracts.IFormatter)">
+            <summary>
+            Registers a custom formatter into the formatting pipeline.
+            </summary>
+            <param name="formatter">The formatter to register.</param>
+        </member>
+        <member name="T:VersaTul.Display.Attributes.Contracts.IFormatter">
+            <summary>
+            Specifies the functionality provided by a Display formatter.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.DisplayAnalyzer.PropertyNames">
+            <summary>
+            Gets a list of column names for displaying as report headings.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.DisplayAnalyzer.FormatValue(VersaTul.Display.Attributes.DisplayAttribute,System.Object)">
+            <summary>
+            Formats the given property value base on the Display setting.
+            </summary>
+            <param name="displayAttribute">Display details used for formatting.</param>
+            <param name="propertyValue">The value of the property.</param>
+            <returns>The formatted result of the property value.</returns>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.DisplayAnalyzer.FormatValue(System.Object,System.String)">
+            <summary>
+            Formats the given property value base on the Display setting.
+            </summary>
+            <param name="propertyValue">The value of the property.</param>
+            <param name="propertyName">The name of the property.</param>
+            <returns>The formatted result of the property value.</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.DisplayAnalyzer.GetAttribute(System.Reflection.PropertyInfo)">
+            <summary>
+            Get the <see cref="T:VersaTul.Display.Attributes.DisplayAttribute"/> added to the given Property.
+            </summary>
+            <param name="propertyInfo">The property meta-data of a property.</param>
+            <returns>The <see cref="T:VersaTul.Display.Attributes.DisplayAttribute"/> attached to the property.</returns>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.DisplayAnalyzer.GetName(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns the name of the property wither the name of the current member or the overridden name by the Display Attribute.
+            </summary>
+            <param name="propertyInfo">The property meta-data of a property.</param>
+            <returns>The string name of the property.</returns>
+            <remarks>The name of the property if no override name is set using the <seealso cref="T:VersaTul.Display.Attributes.DisplayAttribute"/>.</remarks>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.DisplayAnalyzer.RegisterFormatter(VersaTul.Display.Attributes.Contracts.IFormatter)">
+            <summary>
+            Registers a custom formatter into the formatting pipeline.
+            </summary>
+            <param name="formatter">The formatter to register.</param>
+        </member>
+        <member name="T:VersaTul.Display.Attributes.DisplayAttribute">
+            <summary>
+            Apply to a property in order to provide meta-data to the export engine for outputting collections as files.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.DisplayAttribute.Ignore">
+            <summary>
+            Gets or Set whether or not a property should be outputted as a column.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.DisplayAttribute.Name">
+            <summary>
+            Gets or Sets a new description for the property to be outputted as.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.DisplayAttribute.Sequence">
+            <summary>
+            Gets or Sets the order in which the property will be displayed.
+            </summary>
+            <remarks>Defaults to the int.MaxValue.</remarks>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.DisplayAttribute.Decimals">
+            <summary>
+            Gets or Sets the number of decimal places to round the decimal value of the property.
+            </summary>
+            <remarks>Defaults to the int.MinValue.</remarks>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.DisplayAttribute.DateFormattingString">
+            <summary>
+            Gets or Sets the formatting string for a <see cref="T:System.DateTime"/> property.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.DisplayAttribute.CultureName">
+            <summary>
+            Gets or Sets the optional culture name used when formatting date and numeric values.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Display.Attributes.Formatters.DateFormatter">
+            <summary>
+            Represents the <seealso cref="T:VersaTul.Display.Attributes.Contracts.IFormatter"/> for formatting dates.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Formatters.DateFormatter.Execute(VersaTul.Display.Attributes.Formatters.PropertyData)">
+            <summary>
+            Formats the given <seealso cref="T:VersaTul.Display.Attributes.Formatters.PropertyData"/> value to the desired date format.
+            </summary>
+            <param name="input">The object propety details to be formatted.</param>
+            <returns>If applicable the Objects formatted property value or the given <seealso cref="T:VersaTul.Display.Attributes.Formatters.PropertyData"/>.</returns>
+        </member>
+        <member name="T:VersaTul.Display.Attributes.Formatters.DecimalFormatter">
+            <summary>
+            Represents the <seealso cref="T:VersaTul.Display.Attributes.Contracts.IFormatter"/> for formatting decimals.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Formatters.DecimalFormatter.Execute(VersaTul.Display.Attributes.Formatters.PropertyData)">
+            <summary>
+            Formats the given <seealso cref="T:VersaTul.Display.Attributes.Formatters.PropertyData"/> value to the desired decimal places.
+            </summary>
+            <param name="input">The object propety details to be formatted.</param>
+            <returns>If applicable the Objects formatted property value or the given <seealso cref="T:VersaTul.Display.Attributes.Formatters.PropertyData"/>.</returns>
+        </member>
+        <member name="T:VersaTul.Display.Attributes.Formatters.FormatPipeline">
+            <summary>
+            Represent the <seealso cref="T:VersaTul.Pipeline.Infrastructure.Pipeline`2"/> used for processing display formatters.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Formatters.FormatPipeline.#ctor">
+            <summary>
+            Creates a new instance of the formatting <see cref="T:VersaTul.Display.Attributes.Formatters.FormatPipeline"/>.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Formatters.FormatPipeline.#ctor(System.Collections.Generic.IEnumerable{VersaTul.Display.Attributes.Contracts.IFormatter})">
+            <summary>
+            Creates a new instance of the formatting <see cref="T:VersaTul.Display.Attributes.Formatters.FormatPipeline"/> with custom formatters.
+            </summary>
+            <param name="formatters">The formatters to execute in order.</param>
+        </member>
+        <member name="M:VersaTul.Display.Attributes.Formatters.FormatPipeline.Register(VersaTul.Display.Attributes.Contracts.IFormatter)">
+            <summary>
+            Registers a custom formatter to the end of the pipeline.
+            </summary>
+            <param name="formatter">The formatter to register.</param>
+        </member>
+        <member name="T:VersaTul.Display.Attributes.Formatters.PropertyData">
+            <summary>
+            Represents an objects property with it's associated <seealso cref="T:VersaTul.Display.Attributes.DisplayAttribute"/> and Value.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.Formatters.PropertyData.Attribute">
+            <summary>
+            Gets or Sets the <seealso cref="T:VersaTul.Display.Attributes.DisplayAttribute"/> for the objects property.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Display.Attributes.Formatters.PropertyData.Value">
+            <summary>
+            Gets or Sets the value of the Objects property.
+            </summary>
+        </member>
+    </members>
+</doc>

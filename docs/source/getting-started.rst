@@ -68,46 +68,15 @@ Example using the .NET CLI:
 
    dotnet add package VersaTul.Configurations
 
-Example using the Package Manager Console:
-
-.. code-block:: console
-
-   PM> NuGet\Install-Package VersaTul.Configurations -Version latest
 
 Paste This Example
 ------------------
 
 Replace the generated program with the following example:
 
-.. code-block:: csharp
-
-   using VersaTul.Configurations;
-
-   var settings = new ConfigSettings
-   {
-       { "ConnectionString", "Server=.;Database=Demo;Trusted_Connection=True;" },
-       { "TimeoutSeconds", 30 },
-       { "ArchiveDirectory", "C:\\Exports" }
-   };
-
-   var configuration = new StorageConfiguration(settings);
-
-   Console.WriteLine($"Connection: {configuration.ConnectionString}");
-   Console.WriteLine($"Timeout: {configuration.TimeoutSeconds}");
-   Console.WriteLine($"Archive: {configuration.ArchivePath}");
-
-   public class StorageConfiguration : Configuration
-   {
-       public StorageConfiguration(ConfigSettings settings) : base(settings)
-       {
-       }
-
-       public string ConnectionString => Get<string>();
-
-       public int TimeoutSeconds => GetOrDefault<int>();
-
-       public string ArchivePath => Get<string>("ArchiveDirectory");
-   }
+.. literalinclude:: ../samples/GettingStarted/Program.cs
+   :language: csharp
+   :caption: Program.cs
 
 Run The App
 -----------
@@ -121,11 +90,9 @@ What You Should See
 
 You should see output shaped like this:
 
-.. code-block:: text
-
-   Connection: Server=.;Database=Demo;Trusted_Connection=True;
-   Timeout: 30
-   Archive: C:\Exports
+.. literalinclude:: ../samples/GettingStarted/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
 
 If you see those values, the key VersaTul behavior is already working: your code is reading strongly typed settings from a simple settings store with almost no wiring.
 

@@ -1,0 +1,127 @@
+{
+  "caching": {
+    "packageId": "VersaTul.Caching",
+    "title": "Cache application data with VersaTul.Caching",
+    "description": "Add in-process caching to a .NET application with VersaTul.Caching. Keep service code behind the cache provider contract and configure expiration for frequently used data."
+  },
+  "streamers": {
+    "packageId": "VersaTul.Collection.Streamers",
+    "title": "Export .NET collections with VersaTul.Collection.Streamers",
+    "description": "Export .NET collections to files, ZIP archives, email, or data readers with VersaTul.Collection.Streamers. Reuse formatting and serialization across forward-only output workflows."
+  },
+  "compression": {
+    "packageId": "VersaTul.Compression",
+    "title": "Create ZIP archives from streams with VersaTul.Compression",
+    "description": "Create or extract ZIP archives from named in-memory streams with VersaTul.Compression. Keep file names and content types alongside stream data in application workflows."
+  },
+  "configuration-defaults": {
+    "packageId": "VersaTul.Configuration.Defaults",
+    "title": "Bootstrap package settings with VersaTul.Configuration.Defaults",
+    "description": "Bootstrap VersaTul package settings with ready-to-override values from VersaTul.Configuration.Defaults. Start with baseline keys and customize only environment-specific values."
+  },
+  "configuration": {
+    "packageId": "VersaTul.Configurations",
+    "title": "Read typed application settings with VersaTul.Configurations",
+    "description": "Read application settings through testable, strongly typed key/value contracts with VersaTul.Configurations. Keep configuration portable without the full .NET configuration stack."
+  },
+  "contracts": {
+    "packageId": "VersaTul.Contracts",
+    "title": "Share reusable .NET contracts with VersaTul.Contracts",
+    "description": "Define shared predicate, command, and query contracts with VersaTul.Contracts. Decouple application services from concrete implementations across VersaTul packages."
+  },
+  "bulk": {
+    "packageId": "VersaTul.Data.Bulk",
+    "title": "Model provider-neutral bulk imports with VersaTul.Data.Bulk",
+    "description": "Model bulk imports and source-to-destination column mappings with VersaTul.Data.Bulk. Reuse a provider-neutral contract before selecting a database bulk-copy implementation."
+  },
+  "data-contracts": {
+    "packageId": "VersaTul.Data.Contracts",
+    "title": "Define repository interfaces with VersaTul.Data.Contracts",
+    "description": "Define repository and unit-of-work interfaces with VersaTul.Data.Contracts. Keep application data services independent from EF Core and provider-specific packages."
+  },
+  "efcore": {
+    "packageId": "VersaTul.Data.EFCore",
+    "title": "Build EF Core repositories with VersaTul.Data.EFCore",
+    "description": "Build reusable EF Core repositories with VersaTul.Data.EFCore. Share CRUD, DbContext commit, and rollback behavior across .NET application services."
+  },
+  "file-reader": {
+    "packageId": "VersaTul.Data.FileReader",
+    "title": "Read CSV and text into IDataReader with VersaTul.Data.FileReader",
+    "description": "Read CSV and delimited text into IDataReader workflows with VersaTul.Data.FileReader. Convert flat files for imports and bulk-copy pipelines without custom row adapters."
+  },
+  "mongodb": {
+    "packageId": "VersaTul.Data.MongoDB",
+    "title": "Build typed MongoDB repositories with VersaTul.Data.MongoDB",
+    "description": "Build typed MongoDB repositories with VersaTul.Data.MongoDB. Centralize collection mapping and serialization instead of scattering MongoDB driver code through services."
+  },
+  "mssql": {
+    "packageId": "VersaTul.Data.MsSql",
+    "title": "Use SQL Server bulk copy with VersaTul.Data.MsSql",
+    "description": "Run SQL Server commands, structured parameters, and transactional bulk imports with VersaTul.Data.MsSql. Add SQL Server-specific access alongside VersaTul.Data.Sql."
+  },
+  "sql": {
+    "packageId": "VersaTul.Data.Sql",
+    "title": "Execute relational SQL with VersaTul.Data.Sql",
+    "description": "Execute SQL commands and stored procedures with VersaTul.Data.Sql. Reuse parameter handling, connection selection, and result mapping without choosing SQL Server alone."
+  },
+  "display-attributes": {
+    "packageId": "VersaTul.Display.Attributes",
+    "title": "Control exported columns with VersaTul.Display.Attributes",
+    "description": "Control exported column names and ordering from model metadata with VersaTul.Display.Attributes. Shape tabular output without renaming C# model properties."
+  },
+  "extensions": {
+    "packageId": "VersaTul.Extensions",
+    "title": "Add conversion helpers with VersaTul.Extensions",
+    "description": "Add concise conversion and normalization helpers to .NET objects with VersaTul.Extensions. Use extension methods backed by VersaTul.Utilities and VersaTul.Object.Converters."
+  },
+  "handler-file": {
+    "packageId": "VersaTul.Handler.File",
+    "title": "Handle application files through VersaTul.Handler.File",
+    "description": "Read, write, and archive application files through testable interfaces with VersaTul.Handler.File. Keep paths, extensions, and stream operations behind file abstractions."
+  },
+  "logger": {
+    "packageId": "VersaTul.Logger",
+    "title": "Create structured log events with VersaTul.Logger",
+    "description": "Create structured log events independent of the delivery target with VersaTul.Logger. Share log levels and a common payload across file, mail, and web sinks."
+  },
+  "logger-file": {
+    "packageId": "VersaTul.Logger.File",
+    "title": "Write rolling file logs with VersaTul.Logger.File",
+    "description": "Write rolling diagnostic logs to disk with VersaTul.Logger.File. Add rotation and archiving for services and batch jobs without managing file growth in application code."
+  },
+  "logger-mail": {
+    "packageId": "VersaTul.Logger.Mail",
+    "title": "Send operational log alerts with VersaTul.Logger.Mail",
+    "description": "Send operational log events by email with VersaTul.Logger.Mail. Batch and throttle notifications, retry delivery, and route failed messages to a dead-letter queue."
+  },
+  "logger-web": {
+    "packageId": "VersaTul.Logger.Web",
+    "title": "Forward structured logs over HTTP with VersaTul.Logger.Web",
+    "description": "Forward structured logs to an HTTP endpoint with VersaTul.Logger.Web. Send JSON to an API or collector while application code uses the shared ILogger contract."
+  },
+  "mailer": {
+    "packageId": "VersaTul.Mailer",
+    "title": "Send templated email with VersaTul.Mailer",
+    "description": "Send plain-text or HTML email with attachments and token templates using VersaTul.Mailer. Keep SMTP settings and dispatch separate from calling workflows."
+  },
+  "converters": {
+    "packageId": "VersaTul.Object.Converters",
+    "title": "Convert objects to key/value data with VersaTul.Object.Converters",
+    "description": "Convert .NET objects, nested dictionaries, and enumerables into key/value data with VersaTul.Object.Converters. Prepare values for reports, exports, and formatting."
+  },
+  "pipeline-infrastructure": {
+    "packageId": "VersaTul.Pipeline.Infrastructure",
+    "title": "Compose typed processing steps with VersaTul.Pipeline.Infrastructure",
+    "description": "Compose synchronous or asynchronous transformations into reusable steps with VersaTul.Pipeline.Infrastructure. Build typed pipelines without a larger orchestration framework."
+  },
+  "scheduler": {
+    "packageId": "VersaTul.Task.Scheduler",
+    "title": "Schedule background jobs with VersaTul.Task.Scheduler",
+    "description": "Schedule recurring and one-off .NET background jobs with VersaTul.Task.Scheduler. Combine calendar and interval schedules for services and worker processes."
+  },
+  "utilities": {
+    "packageId": "VersaTul.Utilities",
+    "title": "Convert values safely with VersaTul.Utilities",
+    "description": "Handle conversions, null values, DBNull, and shared helper operations with VersaTul.Utilities. Reuse foundational helpers used across VersaTul library packages."
+  }
+}

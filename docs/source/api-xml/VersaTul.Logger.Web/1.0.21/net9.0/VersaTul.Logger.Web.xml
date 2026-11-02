@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Logger.Web</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Logger.Web.Configurations.LogWebConfiguration">
+            <summary>
+            Represents functionality needed to get settings for the Web logger.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Logger.Web.Configurations.LogWebConfiguration.#ctor(VersaTul.Configurations.ConfigSettings)">
+            <summary>
+            Create a new instance of the <see cref="T:VersaTul.Logger.Web.Configurations.LogWebConfiguration"/> class.
+            </summary>
+            <param name="configSettings">Settings to use in web logger</param>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Configurations.LogWebConfiguration.BaseUrl">
+            <summary>
+            Gets the Base Url of the API E.G http://domain.com/api
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Configurations.LogWebConfiguration.LogEndPoint">
+            <summary>
+            Gets the relative end point to send data to.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Configurations.LogWebConfiguration.WebhookAuthHeader">
+            <summary>
+            Gets optional authorization header name used for webhook authentication.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Configurations.LogWebConfiguration.WebhookAuthToken">
+            <summary>
+            Gets optional authorization token used for webhook authentication.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Configurations.LogWebConfiguration.WebhookSigningSecret">
+            <summary>
+            Gets optional shared secret used to sign webhook payloads.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Configurations.LogWebConfiguration.CircuitBreakerFailureThreshold">
+            <summary>
+            Gets the number of consecutive failures before circuit breaker opens.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Configurations.LogWebConfiguration.CircuitBreakerCooldownSeconds">
+            <summary>
+            Gets the circuit breaker cooldown period in seconds.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.Web.Contracts.ILogWebConfiguration">
+            <summary>
+            Represents functionality needed to get settings for the Web logger.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Contracts.ILogWebConfiguration.BaseUrl">
+            <summary>
+            Gets the Base Url of the API E.G http://domain.com/api
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Contracts.ILogWebConfiguration.LogEndPoint">
+            <summary>
+            Gets the relative end point to send data to.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Contracts.ILogWebConfiguration.WebhookAuthHeader">
+            <summary>
+            Gets optional authorization header name used for webhook authentication.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Contracts.ILogWebConfiguration.WebhookAuthToken">
+            <summary>
+            Gets optional authorization token used for webhook authentication.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Contracts.ILogWebConfiguration.WebhookSigningSecret">
+            <summary>
+            Gets optional shared secret used to sign webhook payloads.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Contracts.ILogWebConfiguration.CircuitBreakerFailureThreshold">
+            <summary>
+            Gets the number of consecutive failures before circuit breaker opens.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Logger.Web.Contracts.ILogWebConfiguration.CircuitBreakerCooldownSeconds">
+            <summary>
+            Gets the circuit breaker cooldown period in seconds.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.Web.Contracts.IWebLogger">
+            <summary>
+            Represent functionality need to log to an API endpoint
+            </summary>
+        </member>
+        <member name="T:VersaTul.Logger.Web.WebLogger">
+            <summary>
+            Represent functionality need to log to an API endpoint.
+            </summary>
+        </member>
+    </members>
+</doc>

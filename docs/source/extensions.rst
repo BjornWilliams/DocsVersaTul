@@ -1,6 +1,32 @@
 Extensions
 ==========
 
+.. BEGIN VERSATUL GENERATED PACKAGE BADGES
+
+.. image:: https://img.shields.io/nuget/v/VersaTul.Extensions?logo=nuget&label=NuGet%20version
+   :target: https://www.nuget.org/packages/VersaTul.Extensions
+   :alt: Latest NuGet version
+
+.. image:: https://img.shields.io/nuget/dt/VersaTul.Extensions?logo=nuget&label=NuGet%20downloads
+   :target: https://www.nuget.org/packages/VersaTul.Extensions
+   :alt: Total NuGet downloads
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://www.nuget.org/packages/VersaTul.Extensions
+   :alt: MIT license
+
+.. END VERSATUL GENERATED PACKAGE BADGES
+
+.. BEGIN VERSATUL GENERATED PACKAGE STATUS
+
+**Maintenance:** Community maintained; support is best-effort with no published response SLA.
+
+**Last verified published version:** `1.0.16` on `2026-10-31` (NuGet Gallery).
+
+`NuGet version details <https://www.nuget.org/packages/VersaTul.Extensions/1.0.16>`_.
+
+.. END VERSATUL GENERATED PACKAGE STATUS
+
 Overview
 --------
 
@@ -19,6 +45,12 @@ Use this package when you want to:
 4. Convert objects into dictionaries or flattened representations.
 5. Perform small currency-related transformations.
 
+Package And Change History
+--------------------------
+
+`VersaTul.Extensions on NuGet <https://www.nuget.org/packages/VersaTul.Extensions>`_
+`VersaTul.Extensions versions and release notes <https://www.nuget.org/packages/VersaTul.Extensions#versions-body-tab>`_
+
 Installation
 ------------
 
@@ -28,11 +60,6 @@ Install the package with the .NET CLI:
 
     dotnet add package VersaTul.Extensions
 
-Or with the Package Manager Console:
-
-.. code-block:: console
-
-    PM> NuGet\Install-Package VersaTul.Extensions -Version latest
 
 Related Packages
 ----------------
@@ -51,7 +78,7 @@ Core Types And Concepts
     Includes string helpers such as ``ToCamelCase()``, ``ToCamelCaseSpan()``, ``ToTitleCase()``, and ``ToTitleCaseSpan()``.
 
 ``ConvertExtensions``
-    Includes conversion helpers such as ``To<T>()``, collection conversion overloads, ``AsDictionary()``, and ``AsFlattened()``.
+    Includes conversion helpers such as ``To<T>()``, collection conversion overloads, ``AsDictionary()``, ``AsDictionaries()``, and ``AsFlattened()``.
 
 ``CurrencyExtensions``
     Includes ``RoundTo()``, ``ToCurrency()``, ``ToMicron()``, and ``FromMicron()``.
@@ -62,6 +89,7 @@ Basic Example
 These helpers are designed for direct, low-friction use in application code.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Extensions;
 
@@ -81,6 +109,7 @@ Dictionary And Flattening Example
 ``ConvertExtensions`` can project objects into dictionaries and flatten those dictionaries for export-style scenarios.
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Extensions;
 
@@ -94,10 +123,80 @@ Dictionary And Flattening Example
     var dictionary = person.AsDictionary();
     var flattened = dictionary.AsFlattened();
 
+Collection Dictionaries And Migration
+-------------------------------------
+
+``AsDictionary()`` accepts a single non-null object. All enumerable sources,
+including empty and primitive collections, throw ``NotSupportedException`` with
+guidance to use ``AsDictionaries()``. The single-object method retains its
+``class, new()`` generic constraint and its property-processing behavior.
+
+For a collection of reference-type object rows, use ``AsDictionaries()``. It
+enumerates the source once and eagerly returns a read-only list of dictionaries
+in source order. Each dictionary remains mutable. Repeated reads of the returned
+list do not read the source again. The collection method has a ``class``
+constraint, so it also supports anonymous rows.
+
+.. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
+
+    using VersaTul.Extensions;
+
+    var people = new[]
+    {
+        new { Name = "Ada", Age = 37 },
+        new { Name = "Grace", Age = 42 }
+    };
+
+    var rows = people.AsDictionaries();
+    var firstName = rows[0]["Name"]; // "Ada"
+
+An empty source returns an empty list. A null source throws
+``ArgumentNullException``; a null element throws ``ArgumentException``. An element
+that is itself enumerable throws ``NotSupportedException``. Primitive sequences
+are not object rows; use the scalar conversion methods for them.
+
+Both methods use each object's runtime type with default property flags
+``DeclaredOnly | Public | Instance``. Pass ``BindingFlags.Public |
+BindingFlags.Instance`` to include inherited properties. Nested property values
+retain the existing object processor behavior.
+
+This is a major-release migration: replace collection calls such as
+``people.AsDictionary()`` with ``people.AsDictionaries()`` and consume one
+dictionary per row. Previously, empty and primitive collections returned an empty
+dictionary while ordinary object collections could fail during reflection.
+Collection input is now rejected consistently. A null single-object source now
+throws ``ArgumentNullException`` rather than an accidental null-reference failure.
+
+Scalar Conversion
+-----------------
+
+``value.To<T>()`` and the new ``value.ConvertTo(typeof(T))`` use the
+:ref:`scalar-conversion-matrix`, including nullable targets. Text uses current
+culture. Use CommonUtility's invariant overload when input requires invariant parsing.
+
+ConvertTo has a distinct name from the existing enumerable To(Type) overload, so
+strings are treated as scalars. Generic null/DBNull input returns default(T);
+runtime-type conversion returns null. Malformed inputs throw parser/conversion
+exceptions; use Utilities' TryTransform APIs when failure should return false.
+
+Random Selection
+----------------
+
+``Pick(amount)`` uses ``Random.Shared``. Null input and negative amounts are
+rejected; amounts above the source count are capped. A zero amount does not
+enumerate the source. Other selections materialize the source once without
+modifying it. Positions are selected without replacement; duplicate input values
+can still appear in the result.
+
+Use ``source.Pick(amount, new Random(seed))`` for repeatable tests. An injected
+random instance must support the caller's concurrency pattern.
+
 Currency Example
 ----------------
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative fragment, not a copy-paste quickstart.
 
     using VersaTul.Extensions;
 
@@ -113,3 +212,41 @@ Notes
 1. ``To<T>()`` and related conversion helpers delegate to ``CommonUtility`` under the hood.
 2. ``AsDictionary()`` and ``AsFlattened()`` are especially useful with export, reporting, and logging workflows.
 3. The span-based string helpers provide alternate implementations for text normalization scenarios.
+
+.. BEGIN VERSATUL GENERATED PACKAGE QUICKSTART
+
+Canonical package quickstart
+----------------------------
+
+Extension methods for arrays, conversions, and other common operations used in .NET applications.
+
+Install the package in your application with the .NET CLI:
+
+.. code-block:: console
+
+   dotnet add package VersaTul.Extensions
+
+Minimal package example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This compiler-verified example is also used by the packed package README.
+
+.. literalinclude:: ../samples/Packages/VersaTul.Extensions/Program.cs
+   :language: csharp
+   :caption: VersaTul.Extensions minimal package example
+
+Expected output
+^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../samples/Packages/VersaTul.Extensions/ExpectedOutput.txt
+   :language: text
+   :caption: Expected output
+
+Support
+^^^^^^^
+
+:doc:`Support and feedback matrix <support>`.
+
+.. END VERSATUL GENERATED PACKAGE QUICKSTART
+
+.. include:: _generated_api_links/extensions.rst

@@ -7,76 +7,67 @@ VersaTul Documentation
 
 **VersaTul** is a collection of focused .NET libraries for common application work such as configuration, data access, import and export flows, logging, mail delivery, and scheduled processing.
 
-It is designed for teams that want reusable building blocks without committing to one large framework. You can start with a single NuGet package for one concrete problem and add adjacent packages only when you need them.
+It is designed for teams that want reusable building blocks without committing to one large framework. For a first evaluation, choose one problem below and follow its guide; add adjacent packages only when the workflow needs them.
 
-If you are evaluating the library for the first time, the fastest path is:
+.. list-table:: Package proof at a glance
+   :widths: 23 12 22 23 20
 
-1. Pick the developer job you need to solve.
-2. Start with one package or one small package combination.
-3. Follow a short quickstart or scenario path.
-4. Expand into the package reference only after the first workflow is working.
+   * - **Targets**
+       Current source directly builds and tests ``net8.0``, ``net9.0``, and ``net10.0``; .NET 10 is recommended for production. :doc:`compatibility` explains the assets in each published version.
+     - **License**
+       `MIT <https://licenses.nuget.org/MIT>`_
+     - **Latest quickstart package**
+       `VersaTul.Configurations 1.0.18 <https://www.nuget.org/packages/VersaTul.Configurations/1.0.18>`_
+     - **Sample and build checks**
+       The `pull-request workflow <https://github.com/BjornWilliams/DocsVersaTul/actions/workflows/documentation-samples.yml>`_ builds the docs and runs output-checked samples on all three target frameworks.
+     - **Source and support**
+       :doc:`repository-access` (sign-in may be required); :doc:`support` (public issue forms).
+
+**Primary next step:** :doc:`getting-started` · **Secondary:** :doc:`package-catalog`
+
+Start In 5 Minutes
+------------------
+
+**Before:** application code reads settings by string key and must remember which values are required or optional. **After:** define that contract once in a small ``Configuration`` type, then read ``ConnectionString``, ``TimeoutSeconds``, and ``ArchivePath`` as C# properties. The example uses ``VersaTul.Configurations`` and does not connect to a database or service.
+
+Run the tested sample from the DocsVersaTul repository root:
+
+.. code-block:: console
+
+   dotnet run --project docs/samples/GettingStarted/GettingStarted.csproj --framework net8.0
+
+The sample also targets ``net9.0`` and ``net10.0``. Its direct package version is pinned in ``docs/samples/Directory.Packages.props``.
+
+.. literalinclude:: ../samples/GettingStarted/Program.cs
+   :language: csharp
+   :caption: Strongly typed settings sample
+
+Expected output:
+
+.. literalinclude:: ../samples/GettingStarted/ExpectedOutput.txt
+   :language: text
+   :caption: Output checked by the sample validator
 
 Start By Problem
 ----------------
 
 Use these paths if you want the quickest route to a relevant package.
 
-1. I need strongly typed application settings: start with :doc:`getting-started`.
+1. I need strongly typed application settings: try the tested example above.
 2. I need relational data access: start with :doc:`scenario-guides/sql-data-access`.
 3. I need to import CSV or text data: start with :doc:`scenario-guides/file-import`.
 4. I need export or formatting helpers: start with :doc:`scenario-guides/data-export`.
 5. I need logging in a service or background process: start with :doc:`scenario-guides/logging-setup`.
 6. I need a package starting set for my application type: start with :doc:`recommended-paths`.
 
-Start In 5 Minutes
-------------------
-
-If you want a fast first win, start with the onboarding path instead of browsing the full catalog.
-
-1. Read :doc:`getting-started` for a copy-paste configuration quickstart.
-2. Read :doc:`package-selection` for an intent-first guide to the package ecosystem.
-3. Use :doc:`scenario-guides/index` for end-to-end workflows that combine multiple packages.
-4. Use :doc:`package-catalog` after you know the workflow or package family you want.
-
-Adoption FAQ
-------------
-
-Common evaluation answers:
-
-1. Start with one package, not the whole ecosystem.
-2. Prefer :doc:`sql` when provider flexibility matters and :doc:`mssql` when SQL Server-specific behavior is the real requirement.
-3. Use :doc:`logger` with a sink package such as :doc:`logger-file`; the base logger package is not a sink by itself.
-4. Use :doc:`recommended-paths` if you want a package starting set by app type.
-5. Use :doc:`faq` if you want the broader adoption and selection guidance in one place.
-
-What To Read Next
------------------
-
-1. Read :doc:`getting-started` if you want the smallest copy-paste success case first.
-2. Read :doc:`recommended-paths` if you already know your application shape.
-3. Read :doc:`scenario-guides/index` if your main question is how packages combine in a real workflow.
-4. Read :doc:`package-selection` if you still need help narrowing the first package family.
-
-Popular Workflows
------------------
-
-These are the highest-value package combinations for first-time adopters.
-
-1. Configuration bootstrap: start with :doc:`getting-started` and then add ``VersaTul.Configuration.Defaults``.
-2. SQL-backed service: follow :doc:`scenario-guides/sql-data-access`.
-3. File import pipeline: follow :doc:`scenario-guides/file-import`.
-4. Export pipeline: follow :doc:`scenario-guides/data-export`.
-5. Logging setup: follow :doc:`scenario-guides/logging-setup`.
-
-How VersaTul Is Organized
+Why VersaTul Is Different
 -------------------------
 
-The ecosystem is organized as focused NuGet packages that can be used independently or combined to build larger solutions. Across the library set you will find support for:
+VersaTul uses focused packages that teams can combine as a workflow grows:
 
-1. **Foundational application building blocks** such as contracts, configuration, utilities, and object conversion.
-2. **Data access and data movement** including SQL, SQL Server, MongoDB, EF Core, bulk copy, file readers, and caching.
-3. **File, transformation, and processing workflows** including compression, streamers, file handling, display metadata, and pipelines.
-4. **Operational concerns** such as logging, mail delivery, and task scheduling.
+1. **Choose the parts you need.** Start with one package and add adjacent packages only when useful. For logging, :doc:`logger` supplies shared contracts while :doc:`logger-file` adds a concrete file sink.
+2. **Keep contracts separate from implementations.** :doc:`data-contracts` defines repository and unit-of-work contracts. Pair them with :doc:`efcore` when EF Core fits, use :doc:`sql` for provider-agnostic SQL commands, or choose :doc:`mssql` when SQL Server-specific behavior is required.
+3. **Follow practical workflows.** The :doc:`scenario-guides/sql-data-access` sample uses shared in-memory SQLite, :doc:`scenario-guides/file-import` maps a checked-in CSV, and :doc:`scenario-guides/logging-setup` writes to a temporary directory. Their expected outputs are checked by the sample workflow across the three target frameworks.
 
 .. note::
 
@@ -93,8 +84,17 @@ Start Here
    scenario-guides/index
    recommended-paths
    compatibility
+   dotnet-10-upgrade
+   support
+   security
+   repository-access
+   release-notes
+   api-reference
+   api-contract-policy
+   snippet-inventory
    faq
    package-catalog
+   package-inventory
 
 
 Package Reference

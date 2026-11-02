@@ -1,0 +1,314 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VersaTul.Data.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:VersaTul.Data.Contracts.IAsyncStreamRepository`2">
+            <summary>
+            Represents optional async stream-first repository contract primitives.
+            </summary>
+            <typeparam name="TEntity">The entity that the repository manages.</typeparam>
+            <typeparam name="TKey">The primary key type of the entity.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IAsyncStreamRepository`2.AsAsyncEnumerable(System.Threading.CancellationToken)">
+            <summary>
+            Returns entities as an async stream with cancellation support.
+            </summary>
+            <param name="cancellationToken">A cancellation token for stream enumeration.</param>
+            <returns>An async stream of entities.</returns>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.IDataConnection">
+            <summary>
+            Represent the Database Connection details to connect to a database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IDataConnection.GetConnectionString">
+            <summary>
+            Gets the ConnectionString for the current application's default configuration.
+            </summary>
+            <returns>The connection string.</returns>
+            <remarks>Uses the default connection name <c>DBCon.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IDataConnection.GetConnectionString(System.String)">
+            <summary>
+            Gets the ConnectionString for the current application's for the given connection name configuration.
+            </summary>
+            <param name="connectionName">The name of the connection string. Maps to the name attribute.</param>
+            <returns>The connection string.</returns>
+            <remarks>If an empty string is passed then method will default to the classes default connection name <c>DBCon.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IDataConnection.GetProviderName">
+            <summary>
+            Gets the fully qualified provider name.
+            </summary>
+            <returns>The providerName as string</returns>
+            <remarks>Uses the default connection name <c>DBCon.</c></remarks>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IDataConnection.GetProviderName(System.String)">
+            <summary>
+            Gets the fully qualified provider name for the given connection name.
+            </summary>
+            <param name="connectionName">The name of the connection string. Maps to the name attribute.</param>
+            <returns>The providerName as string</returns>
+            <remarks>If an empty string is passed then method will default to the classes default connection name <c>DBCon.</c></remarks>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.IPagedRequest">
+            <summary>
+            Represents pagination request details.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedRequest.PageNumber">
+            <summary>
+            Gets or sets the one-based page number.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedRequest.PageSize">
+            <summary>
+            Gets or sets the page size.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedRequest.Skip">
+            <summary>
+            Gets the number of items to skip.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.IPagedResult`1">
+            <summary>
+            Represents a paged query result.
+            </summary>
+            <typeparam name="T">The entity item type.</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedResult`1.Items">
+            <summary>
+            Gets or sets the items for the current page.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedResult`1.TotalCount">
+            <summary>
+            Gets or sets the total available record count.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedResult`1.PageNumber">
+            <summary>
+            Gets or sets the current page number.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedResult`1.PageSize">
+            <summary>
+            Gets or sets the page size.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.IPagedResult`1.TotalPages">
+            <summary>
+            Gets the total page count.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.IRepository">
+            <summary>
+            Represents a collection of functionality that can be performed on the data store.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.IRepository`2">
+            <summary>
+            Represents a collection of functionality that can be performed on the data store for the given Entity.
+            </summary>
+            <typeparam name="TEntity">The Entity that the Repository manages.</typeparam>
+            <typeparam name="TKey">The primary key type of the Entity.</typeparam>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.Add(`0)">
+            <summary>
+            Add the given entity to the data store.
+            </summary>
+            <param name="entity">The new entity to save.</param>
+            <returns>The newly saved entity with identity key filled in.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Add the given entity to the data store.
+            </summary>
+            <param name="entity">The new entity to save.</param>
+            <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
+            <returns>The newly saved entity with identity key filled in.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.AddRange(`0[])">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.AddRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+            <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
+            <returns>An asynchrounous task.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.AddRangeAsync(`0[])">
+            <summary>
+            Add the given entities to the data store.
+            </summary>
+            <param name="entities">The new entities to save.</param>
+            <returns>An asynchrounous task.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.Contracts.IRepository`2.AsAsyncEnumerable" -->
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.Contracts.IRepository`2.AsQueryable" -->
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.Find(System.Object[])">
+            <summary>
+            Finds an entity with the given primary key values.
+            </summary>
+            <param name="keyValues">The values of the primary key for the entity to be found.</param>
+            <returns>TEntity The entity found, or null.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.Contracts.IRepository`2.FindAsync(System.Object[])" -->
+        <!-- Badly formed XML comment ignored for member "M:VersaTul.Data.Contracts.IRepository`2.FindAsync(System.Object[],System.Threading.CancellationToken)" -->
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.Get">
+            <summary>
+            Gets all entities in the data Store.
+            </summary>
+            <returns>A collection of the specified entities.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.Get(`1)">
+            <summary>
+            Get the entity associated with the given primary key.
+            </summary>
+            <param name="key">The primary key of the entity to get.</param>
+            <returns>The entity associated to the given key.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.GetAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            Get the entity associated with the given primary key Asynchronously.
+            </summary>
+            <param name="key">The primary key of the entity to get.</param>
+            <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
+            <returns>A Task containing entity associated to the given key.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.Update(`0)">
+            <summary>
+            Updates the given entity in the data store.
+            </summary>
+            <param name="entity">The existing entity to update.</param>
+            <returns>The updated entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.UpdateRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Updates the given entities in the data store.
+            </summary>
+            <param name="entities">The entities to update.</param>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.UpdateRange(`0[])">
+            <summary>
+            Updates the given entities in the data store.
+            </summary>
+            <param name="entities">The entities to update.</param>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.Remove(`0)">
+            <summary>
+            Deletes the given entity from the data store.
+            </summary>
+            <param name="entity">The entities to remove.</param>
+            <returns>The deleted entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.Remove(`1)">
+            <summary>
+            Deletes the given entity from the data store by using the primary key.
+            </summary>
+            <param name="key">The primary key of entity to delete.</param>
+            <returns>The deleted entity.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Deletes the given entities from the data store.
+            </summary>
+            <param name="entities">The entities to remove.</param>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IRepository`2.RemoveRange(`0[])">
+            <summary>
+            Deletes the given entities from the data store.
+            </summary>
+            <param name="entities">The entities to remove.</param>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.IUnitOfWork">
+            <summary>
+            Represents the absolute unit of work to be sent to a database.
+            </summary>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IUnitOfWork.Commit">
+            <summary>
+            Saves the changes from the DbContext out the database.
+            </summary>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IUnitOfWork.CommitAsync">
+            <summary>
+            Saves the changes from the DbContext out the database Asynchronously.
+            </summary>
+            <returns>A task containing the number of rows affected.</returns>
+        </member>
+        <member name="M:VersaTul.Data.Contracts.IUnitOfWork.Rollback">
+            <summary>
+            Pull data from database and override changes in the Change Tracker.
+            This method is not a true rollback in the database.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.PagedRequest">
+            <summary>
+            Represents pagination request details.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedRequest.PageNumber">
+            <summary>
+            Gets or sets the one-based page number.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedRequest.PageSize">
+            <summary>
+            Gets or sets the page size.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedRequest.Skip">
+            <summary>
+            Gets the number of items to skip.
+            </summary>
+        </member>
+        <member name="T:VersaTul.Data.Contracts.PagedResult`1">
+            <summary>
+            Represents a paged query result.
+            </summary>
+            <typeparam name="T">The entity item type.</typeparam>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedResult`1.Items">
+            <summary>
+            Gets or sets the items for the current page.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedResult`1.TotalCount">
+            <summary>
+            Gets or sets the total available record count.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedResult`1.PageNumber">
+            <summary>
+            Gets or sets the current page number.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedResult`1.PageSize">
+            <summary>
+            Gets or sets the page size.
+            </summary>
+        </member>
+        <member name="P:VersaTul.Data.Contracts.PagedResult`1.TotalPages">
+            <summary>
+            Gets the total page count.
+            </summary>
+        </member>
+    </members>
+</doc>
