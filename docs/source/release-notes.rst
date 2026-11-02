@@ -14,10 +14,17 @@ for the exact set of independently versioned NuGet packages it describes. A
 documentation identifier such as ``2026.10`` is not a shared NuGet version;
 each package continues to follow its own SemVer line and release pipeline.
 
-The ``latest`` view is for current stable documentation. Unreleased, source-only
-API guidance must use a clearly labeled preview. Historical documentation
-snapshots are retained while they are needed to document a supported package
-major line. Link a NuGet package version to a documentation snapshot only when
+The Read the Docs ``latest`` URL is reserved for the published stable site: its
+version must follow the repository's ``stable`` branch, not the default
+development branch. Pull-request and development builds remain previews and
+must be labeled as such. Documentation release tags use the ``YYYY.MM`` value
+from ``docs/RELEASE``; Read the Docs activates these tags as separate snapshots.
+Keep a snapshot active while it documents a supported package major line. If a
+line is no longer supported, hide its snapshot instead of deleting it so
+existing version-specific links continue to work.
+
+Each snapshot records the exact independently versioned NuGet packages it
+describes. Link a NuGet package version to a documentation snapshot only when
 that snapshot describes the exact package version and behavior; otherwise, use
 the package's version history and the current package guide without implying an
 exact version match. The :doc:`api-reference` lists the exact package versions
