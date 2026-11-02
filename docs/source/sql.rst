@@ -330,3 +330,5 @@ Support
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
 
 .. include:: _generated_api_links/sql.rst
+
+.. include:: _generated_historical_api_links/sql.rst

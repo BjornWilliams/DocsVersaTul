@@ -90,6 +90,8 @@ exclude_patterns = [
     "_api_ref",
     "_generated_api_links",
     "_generated_api_versions.rst",
+    "_generated_historical_api_versions.rst",
+    "_generated_historical_api_links",
     "Thumbs.db",
     ".DS_Store",
 ]

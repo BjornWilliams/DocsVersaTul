@@ -19,3 +19,4 @@ export PATH="${DOTNET_ROOT}:${PATH}"
 
 dotnet tool restore
 python docs/scripts/build_api_reference.py
+python docs/scripts/build_historical_api_reference.py

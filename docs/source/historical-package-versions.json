@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "targetFramework": "net6.0",
+  "packages": [
+    {
+      "packageId": "VersaTul.Data.Sql",
+      "version": "1.0.15",
+      "packageSha256": "d49f0b00e3d9d3bb6027af67ffd6f0020bb5b04ac1ea7f2c8b0e382b85abdd6e",
+      "assemblyFile": "lib/net6.0/VersaTul.Data.Sql.dll",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.Sql/1.0.15",
+      "pageName": "sql"
+    },
+    {
+      "packageId": "VersaTul.Data.MsSql",
+      "version": "1.0.13",
+      "packageSha256": "b311eb79a5bd9639f318290aa184eef389ebc146a8fd6a8f409e32eeadd57b40",
+      "assemblyFile": "lib/net6.0/VersaTul.Data.MsSql.dll",
+      "packageUrl": "https://www.nuget.org/packages/VersaTul.Data.MsSql/1.0.13",
+      "pageName": "mssql"
+    }
+  ]
+}

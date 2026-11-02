@@ -158,3 +158,5 @@ cython_debug/
 /docs/source/_api_ref/
 /docs/source/_generated_api_links/
 /docs/source/_generated_api_versions.rst
+/docs/source/_generated_historical_api_links/
+/docs/source/_generated_historical_api_versions.rst

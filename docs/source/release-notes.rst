@@ -23,6 +23,16 @@ Keep a snapshot active while it documents a supported package major line. If a
 line is no longer supported, hide its snapshot instead of deleting it so
 existing version-specific links continue to work.
 
+The retained previous-major documentation scope is the ``1.x`` line of
+``VersaTul.Data.Sql`` (last package version ``1.0.15``) and
+``VersaTul.Data.MsSql`` (last package version ``1.0.13``). Their exact
+signatures are available from the historical API reference, and each exact
+NuGet version page preserves its published package description and dependency
+metadata. This documentation-retention decision does not promise new package
+maintenance or releases for those older lines. No previous-major line is
+declared for the other packages in the initial ``2026.10`` documentation
+snapshot.
+
 Each snapshot records the exact independently versioned NuGet packages it
 describes. Link a NuGet package version to a documentation snapshot only when
 that snapshot describes the exact package version and behavior; otherwise, use

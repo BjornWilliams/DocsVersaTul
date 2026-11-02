@@ -409,7 +409,7 @@ def render_package_api_fragment(
             raise ValueError(f"No public API types were found for {package_id} ({framework}).")
         lines.append(
             f"* Browse this package's `{framework} API reference "
-            f"<{PUBLIC_DOCS_BASE}/_api_ref/{framework}/index.html>`_."
+            f"<{PUBLIC_DOCS_BASE}/{framework}/index.html>`_."
         )
 
         def match_types(candidates: list[dict[str, str]]) -> list[tuple[int, str, dict[str, str]]]:
@@ -455,7 +455,7 @@ def render_package_api_fragment(
         lines.append("")
         for reference in chosen_types:
             simple_name = reference["uid"].split(".")[-1].split("+")[-1].split("`")[0]
-            url = f"{PUBLIC_DOCS_BASE}/_api_ref/{framework}/{reference['href']}"
+            url = f"{PUBLIC_DOCS_BASE}/{framework}/{reference['href']}"
             lines.append(f"* `{simple_name} <{url}>`_")
             type_prefix = reference["uid"] + "."
             member_links: list[tuple[int, dict[str, str], str]] = []
@@ -482,7 +482,7 @@ def render_package_api_fragment(
                 seen_members.add(member_name)
                 lines.append(
                     f"  * `{simple_name}.{member_name} "
-                    f"<{PUBLIC_DOCS_BASE}/_api_ref/{framework}/{member['href']}>`_"
+                    f"<{PUBLIC_DOCS_BASE}/{framework}/{member['href']}>`_"
                 )
                 if len(seen_members) == 3:
                     break

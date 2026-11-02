@@ -6,8 +6,12 @@ timeout = 20
 max_concurrency = 8
 no_progress = true
 # These literal endpoints in logger-web.rst are illustrative, not public URLs.
+# A dated DocsVersaTul snapshot URL is a self-link whose target is built by the
+# same RTD tag job; the local build checks its page and DocFX outputs before
+# publication, while the tag is intentionally absent during pull-request runs.
 exclude = [
     '^https://host/api$',
     '^https://host/api/events$',
-    '^https://docsversatul\.readthedocs\.io/en/latest/_api_ref/',
+    '^https://docsversatul\.readthedocs\.io/en/latest/(net8\.0|net9\.0)/',
+    '^https://docsversatul\.readthedocs\.io/en/\d{4}\.\d{2}/',
 ]
