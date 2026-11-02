@@ -38,6 +38,8 @@ version history.
 The :doc:`release-notes-preview` page records source-branch changes that have
 not been published as NuGet versions. It is explicitly a preview; use the
 version-specific NuGet page above for released notes.
+The :doc:`deprecations` page lists obsolete APIs, their replacements, and the
+current removal timelines.
 
 The NuGet profile lists all packages published by the VersaTul owner:
 `VersaTul on NuGet <https://www.nuget.org/profiles/bwiliams256>`_.

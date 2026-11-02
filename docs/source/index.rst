@@ -90,6 +90,7 @@ Start Here
    repository-access
    release-notes
    release-notes-preview
+   deprecations
    api-reference
    api-contract-policy
    snippet-inventory
