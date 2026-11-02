@@ -35,6 +35,10 @@ this time. To review a package's history, open its page from the :doc:`package-c
 and select **Versions**. Later package pages link directly to that package's
 version history.
 
+The :doc:`release-notes-preview` page records source-branch changes that have
+not been published as NuGet versions. It is explicitly a preview; use the
+version-specific NuGet page above for released notes.
+
 The NuGet profile lists all packages published by the VersaTul owner:
 `VersaTul on NuGet <https://www.nuget.org/profiles/bwiliams256>`_.
 
