@@ -54,5 +54,26 @@ The `code of conduct
 <https://github.com/BjornWilliams/DocsVersaTul/blob/main/CODE_OF_CONDUCT.md>`_
 covers project interactions and explains how to request a private channel for
 conduct concerns.
-For package status and version history, see :doc:`compatibility` and
-:doc:`release-notes`.
+
+Support, release, and response expectations
+--------------------------------------------
+
+The repository owner and maintainers review public requests as time allows.
+This issue tracker is a feedback channel, not a support contract. There is no
+response-time or service-level commitment, guaranteed fix, emergency incident
+response, paid support arrangement, or promise that a feature proposal will be
+accepted. Do not use public issues for production incidents or urgent security
+reports.
+
+VersaTul NuGet packages are versioned and released independently. They do not
+share a release date or fixed release cadence. Use the exact package version's
+NuGet page for its framework assets and release notes. Current source build and
+test coverage does not change the assets or support status of a version that
+was already published. The :doc:`compatibility` page describes framework
+status; :doc:`release-notes` describes package and documentation versions.
+
+The ``2026.10`` documentation snapshot retains historical API information for
+``VersaTul.Data.Sql`` 1.0.15 and ``VersaTul.Data.MsSql`` 1.0.13. Keeping those
+pages available preserves existing links. It does not promise maintenance,
+fixes, or future releases for those 1.x package lines. Other older package
+majors are not declared supported by that initial snapshot.
