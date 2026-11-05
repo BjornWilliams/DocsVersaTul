@@ -513,6 +513,24 @@
       "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
+      "id": "deprecations.rst#1",
+      "file": "deprecations.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative event-subscription fragment; requires an application cache instance and is not built or run independently."
+    },
+    {
+      "id": "deprecations.rst#2",
+      "file": "deprecations.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative async migration fragment; requires an application method-call instance and cancellation token context; not built or run independently."
+    },
+    {
       "id": "display-attributes.rst#1",
       "file": "display-attributes.rst",
       "ordinal": 1,
@@ -1456,6 +1474,33 @@
       "argument": "../samples/Packages/VersaTul.Pipeline.Infrastructure/ExpectedOutput.txt",
       "classification": "executed",
       "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
+    },
+    {
+      "id": "release-notes-preview.rst#1",
+      "file": "release-notes-preview.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative IDataRecord migration; requires an application CollectionReader instance; not built or run independently."
+    },
+    {
+      "id": "release-notes-preview.rst#2",
+      "file": "release-notes-preview.rst",
+      "ordinal": 2,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative CommandDiagnostics callback; requires a configured SQL source; not built or run independently."
+    },
+    {
+      "id": "release-notes-preview.rst#3",
+      "file": "release-notes-preview.rst",
+      "ordinal": 3,
+      "directive": "code-block",
+      "argument": "csharp",
+      "classification": "pseudocode",
+      "verification": "Illustrative reflection query; requires an application MethodInfo; not built or run independently."
     },
     {
       "id": "scenario-guides/data-export.rst#1",

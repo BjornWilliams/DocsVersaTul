@@ -34,6 +34,7 @@ Use ``ItemRemovedDetailed`` to receive typed event data instead of the legacy
 ``ItemRemoved`` event:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative event subscription, not a standalone sample.
 
    cacheProvider.ItemRemovedDetailed += (_, args) =>
    {
@@ -49,6 +50,7 @@ Scheduler method calls
 Replace ``BeginExecute`` with the task-based interface and await completion:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative async migration, not a standalone sample.
 
    IAsyncMethodCall asyncCall = (IAsyncMethodCall)methodCall;
    object? result = await asyncCall.ExecuteAsync(cancellationToken);

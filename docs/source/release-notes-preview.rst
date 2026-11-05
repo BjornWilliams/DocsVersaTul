@@ -28,6 +28,7 @@ interface directly are now separate adapters.
 Migration:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative migration fragment, not a standalone sample.
 
    using System.Data;
 
@@ -49,6 +50,7 @@ successful command. The callback CLR type is unchanged.
 Migration:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative callback fragment, not a standalone sample.
 
    source.CommandDiagnostics = (_, connectionName, _, succeeded, exception) =>
    {
@@ -71,6 +73,7 @@ change. Reflection code that reads only method-level
 Migration:
 
 .. code-block:: csharp
+   :caption: Pseudocode: illustrative reflection fragment, not a standalone sample.
 
    using System.Linq;
    using System.Reflection;
