@@ -46,6 +46,9 @@ jobs:
       - name: Generate released API references and XML coverage
         run: python docs/scripts/build_api_reference.py
 
+      - name: Generate retained historical API references
+        run: python docs/scripts/build_historical_api_reference.py
+
       - name: Build documentation with warnings as errors
         id: sphinx_build
         shell: bash
