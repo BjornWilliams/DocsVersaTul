@@ -63,6 +63,10 @@
 
 {% block footer %}
   {{ super() }}
+  <div class="versatul-page-contribution">
+    <a href="{{ versatul_github_edit_base }}{{ pagename|e }}.rst">Edit this page on GitHub</a>
+    · <a href="https://github.com/BjornWilliams/DocsVersaTul/issues/new?template=documentation_help.yml">Request documentation help</a>
+  </div>
   <div class="versatul-footer-routes">
     <strong>VersaTul:</strong>
     <a href="{{ pathto('package-catalog') }}">Package catalog</a> ·
