@@ -16,6 +16,38 @@ if not release or release.casefold() in {"current", "latest"}:
     raise ValueError(f"Set a dated docs release in {release_file}")
 version = release
 
+readthedocs_build = os.environ.get("READTHEDOCS", "").casefold() == "true"
+readthedocs_version_type = os.environ.get("READTHEDOCS_VERSION_TYPE", "").casefold()
+readthedocs_version = os.environ.get("READTHEDOCS_VERSION", "")
+
+# Stable RTD releases are tagged with the same YYYY.MM identifier stored in
+# docs/RELEASE. This prevents a tag from silently publishing another snapshot.
+if (
+    readthedocs_build
+    and readthedocs_version_type == "tag"
+    and readthedocs_version != release
+):
+    raise ValueError(
+        "Read the Docs tag version must match docs/RELEASE: "
+        f"{readthedocs_version!r} != {release!r}"
+    )
+
+# Development and pull-request builds can contain source-only APIs. Show a
+# visible warning on every page unless this is a dated tag or the dedicated
+# stable branch that backs the published latest view. Local builds are previews.
+published_documentation = readthedocs_build and (
+    readthedocs_version_type == "tag"
+    or (readthedocs_version_type == "branch" and readthedocs_version == "stable")
+)
+if not published_documentation:
+    rst_prolog = """
+.. warning::
+
+   **Preview documentation.** This build may describe source changes that are
+   not present in published NuGet packages. Verify the exact package version
+   before relying on its behavior.
+"""
+
 # Read the Docs supplies the canonical URL for the version being built. Keep
 # the production URL as the local-build fallback so generated links remain
 # canonical outside Read the Docs too.
@@ -58,6 +90,8 @@ exclude_patterns = [
     "_api_ref",
     "_generated_api_links",
     "_generated_api_versions.rst",
+    "_generated_historical_api_versions.rst",
+    "_generated_historical_api_links",
     "Thumbs.db",
     ".DS_Store",
 ]

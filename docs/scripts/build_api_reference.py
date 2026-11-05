@@ -23,9 +23,13 @@ BUILD_ROOT = REPOSITORY_ROOT / "docs" / "build" / "api-reference"
 INVENTORY_PATH = SOURCE_ROOT / "package-inventory.json"
 VERSION_STATUS_PATH = SOURCE_ROOT / "package-version-status.json"
 XML_MANIFEST_PATH = SOURCE_ROOT / "api-xml-manifest.json"
+DOCS_RELEASE_PATH = REPOSITORY_ROOT / "docs" / "RELEASE"
 GENERATED_ROOT = SOURCE_ROOT / "_api_ref"
 FRAMEWORKS = ("net8.0", "net9.0")
-PUBLIC_DOCS_BASE = "https://docsversatul.readthedocs.io/en/latest"
+DOCS_RELEASE = DOCS_RELEASE_PATH.read_text(encoding="utf-8").strip()
+if not re.fullmatch(r"\d{4}\.\d{2}", DOCS_RELEASE):
+    raise ValueError(f"Set docs/RELEASE to a dated YYYY.MM snapshot, found {DOCS_RELEASE!r}.")
+PUBLIC_DOCS_BASE = f"https://docsversatul.readthedocs.io/en/{DOCS_RELEASE}"
 
 
 def read_json(path: Path) -> object:
@@ -229,15 +233,17 @@ def build_docfx_site(
     frameworks_by_id = {package["packageId"]: package["frameworks"] for package in packages}
 
     table = [
-        "| Package | Released version | Package source commit |",
-        "| --- | --- | --- |",
+        "| Package | Released NuGet version | Matching docs snapshot | Package source commit |",
+        "| --- | --- | --- | --- |",
     ]
     for package in package_rows:
         table.append(
-            "| `{}` | [{}]({}) | `{}` |".format(
+            "| `{}` | [{}]({}) | [{}]({}) | `{}` |".format(
                 package["packageId"],
                 package["version"],
                 package["packageUrl"],
+                DOCS_RELEASE,
+                package["documentationUrl"],
                 package["repositoryCommit"],
             )
         )
@@ -387,6 +393,9 @@ def render_package_api_fragment(
         f"The current published surface is {page_label}. This package's links use that exact "
         f"version; links to related packages use their independently listed release versions.",
         "",
+        f"The matching DocsVersaTul snapshot is `{DOCS_RELEASE} "
+        f"<{package['documentationUrl']}>`_.",
+        "",
     ]
     for framework in package["frameworks"]:
         references = references_by_framework[framework]
@@ -400,7 +409,7 @@ def render_package_api_fragment(
             raise ValueError(f"No public API types were found for {package_id} ({framework}).")
         lines.append(
             f"* Browse this package's `{framework} API reference "
-            f"<{PUBLIC_DOCS_BASE}/_api_ref/{framework}/index.html>`_."
+            f"<{PUBLIC_DOCS_BASE}/{framework}/index.html>`_."
         )
 
         def match_types(candidates: list[dict[str, str]]) -> list[tuple[int, str, dict[str, str]]]:
@@ -446,7 +455,7 @@ def render_package_api_fragment(
         lines.append("")
         for reference in chosen_types:
             simple_name = reference["uid"].split(".")[-1].split("+")[-1].split("`")[0]
-            url = f"{PUBLIC_DOCS_BASE}/_api_ref/{framework}/{reference['href']}"
+            url = f"{PUBLIC_DOCS_BASE}/{framework}/{reference['href']}"
             lines.append(f"* `{simple_name} <{url}>`_")
             type_prefix = reference["uid"] + "."
             member_links: list[tuple[int, dict[str, str], str]] = []
@@ -473,7 +482,7 @@ def render_package_api_fragment(
                 seen_members.add(member_name)
                 lines.append(
                     f"  * `{simple_name}.{member_name} "
-                    f"<{PUBLIC_DOCS_BASE}/_api_ref/{framework}/{member['href']}>`_"
+                    f"<{PUBLIC_DOCS_BASE}/{framework}/{member['href']}>`_"
                 )
                 if len(seen_members) == 3:
                     break
@@ -567,6 +576,7 @@ def main() -> int:
             "assets": assets,
             "frameworks": sorted(set(package_frameworks)),
             "pageName": inventory_row["PageName"],
+            "documentationUrl": f"{PUBLIC_DOCS_BASE}/{inventory_row['PageName']}.html",
         }
         packages.append(package)
 
@@ -643,14 +653,15 @@ def main() -> int:
         "Released package versions represented by this generated reference",
         "--------------------------------------------------------------------",
         "",
-        "Each NuGet package is versioned independently. These links show the exact version "
-        "used to build the signatures and XML comments.",
+        "Each NuGet package is versioned independently. The docs link is the site snapshot "
+        "that documents the exact package version used to build the signatures and XML comments.",
         "",
         ".. list-table:: Released package API versions and direct target frameworks",
         "   :header-rows: 1",
         "",
         "   * - Package",
-        "     - Version",
+        "     - NuGet version",
+        "     - Matching docs snapshot",
         "     - Direct TFM assets",
     ]
     for package in packages:
@@ -658,6 +669,7 @@ def main() -> int:
             [
                 f"   * - `{package['packageId']}`",
                 f"     - `{package['version']} <{package['packageUrl']}>`_",
+                f"     - `{DOCS_RELEASE} <{package['documentationUrl']}>`_",
                 f"     - {', '.join(f'``{tfm}``' for tfm in package['frameworks'])}",
             ]
         )

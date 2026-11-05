@@ -248,6 +248,14 @@ Inventory
      - ``literalinclude:: ../samples/Packages/VersaTul.Data.Contracts/ExpectedOutput.txt``
      - **Executed**
      - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
+   * - ``deprecations.rst#1``
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative event-subscription fragment; requires an application cache instance and is not built or run independently.
+   * - ``deprecations.rst#2``
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative async migration fragment; requires an application method-call instance and cancellation token context; not built or run independently.
    * - ``display-attributes.rst#1``
      - ``code-block:: console``
      - **Configuration-only**
@@ -668,6 +676,18 @@ Inventory
      - ``literalinclude:: ../samples/Packages/VersaTul.Pipeline.Infrastructure/ExpectedOutput.txt``
      - **Executed**
      - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
+   * - ``release-notes-preview.rst#1``
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative IDataRecord migration; requires an application CollectionReader instance; not built or run independently.
+   * - ``release-notes-preview.rst#2``
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative CommandDiagnostics callback; requires a configured SQL source; not built or run independently.
+   * - ``release-notes-preview.rst#3``
+     - ``code-block:: csharp``
+     - **Pseudocode**
+     - Illustrative reflection query; requires an application MethodInfo; not built or run independently.
    * - ``scenario-guides/data-export.rst#1``
      - ``code-block:: csharp``
      - **Pseudocode**

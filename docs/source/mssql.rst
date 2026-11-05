@@ -287,3 +287,5 @@ Support
 .. END VERSATUL GENERATED PACKAGE QUICKSTART
 
 .. include:: _generated_api_links/mssql.rst
+
+.. include:: _generated_historical_api_links/mssql.rst
