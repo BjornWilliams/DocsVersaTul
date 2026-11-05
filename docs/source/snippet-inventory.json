@@ -387,6 +387,15 @@
       "verification": "Compared with stdout from the canonical package README sample after it is built and run for every supported framework."
     },
     {
+      "id": "contributing.rst#1",
+      "file": "contributing.rst",
+      "ordinal": 1,
+      "directive": "code-block",
+      "argument": "console",
+      "classification": "configuration-only",
+      "verification": "Contributor test commands illustrate the per-package, per-target-framework workflow; they are not run by the published documentation sample workflow."
+    },
+    {
       "id": "converters.rst#1",
       "file": "converters.rst",
       "ordinal": 1,

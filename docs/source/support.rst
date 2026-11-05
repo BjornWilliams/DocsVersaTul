@@ -26,7 +26,7 @@ data before posting. These forms are maintained in the public
      - Public
      - Related package, the user problem, desired outcome, and known compatibility or migration constraints. A proposed API is optional.
    * - Documentation help
-     - `Request documentation help <https://github.com/BjornWilliams/DocsVersaTul/issues/new?template=documentation_help.yml>`_
+     - `Request documentation help <https://github.com/BjornWilliams/DocsVersaTul/issues/new/choose>`_ and choose **Documentation help**
      - Public
      - Page URL, the task you were trying to complete, what is unclear or incorrect, and an optional suggested correction.
    * - Security disclosure
@@ -42,18 +42,16 @@ optional. For a documentation request, link to the page and describe the task
 that the page did not help you complete.
 
 Security concerns do not belong in public issues, discussions, pull requests,
-or commits. If the `private vulnerability report form
-<https://github.com/BjornWilliams/DocsVersaTul/security/advisories/new>`_ is
-unavailable, use **Contact owners** on the affected NuGet package page only to
+or commits. If GitHub's Security tab does not offer private vulnerability
+reporting, use **Contact owners** on the affected NuGet package page only to
 request a private channel. Share details after the maintainer confirms the
-reply channel is private. See the repository's public
-`SECURITY.md <https://github.com/BjornWilliams/DocsVersaTul/blob/main/SECURITY.md>`_
-for the complete instructions.
+reply channel is private. The repository's public ``SECURITY.md`` contains the
+same instructions.
 
-The `code of conduct
-<https://github.com/BjornWilliams/DocsVersaTul/blob/main/CODE_OF_CONDUCT.md>`_
-covers project interactions and explains how to request a private channel for
-conduct concerns.
+The repository's public ``CODE_OF_CONDUCT.md`` covers project interactions and
+explains how to request a private channel for conduct concerns.
+For repository layout and the per-package test workflow, see
+:doc:`contributing`.
 
 Support, release, and response expectations
 --------------------------------------------

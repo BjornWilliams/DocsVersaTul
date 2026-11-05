@@ -88,6 +88,7 @@ Start Here
    support
    security
    repository-access
+   contributing
    release-notes
    release-notes-preview
    deprecations
