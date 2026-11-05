@@ -33,7 +33,7 @@ page for the current framework status. Current source build coverage does not
 change the assets or support state of a package version that was already
 published.
 
-The `2026.10` documentation snapshot retains historical API information for
+The prepared `2026.10` documentation snapshot retains historical API information for
 `VersaTul.Data.Sql` 1.0.15 and `VersaTul.Data.MsSql` 1.0.13. Retaining those
 pages preserves links; it does not promise maintenance, fixes, or future
 releases for those 1.x package lines. Other older package majors are not
