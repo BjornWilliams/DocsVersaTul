@@ -1,0 +1,51 @@
+name: Documentation help
+description: Report a documentation error, missing explanation, or navigation problem.
+title: "[Docs]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This creates a public issue. Do not include credentials, personal information, private production data, or vulnerability details.
+        For a security concern, follow the private-channel guidance in https://github.com/BjornWilliams/DocsVersaTul/blob/main/SECURITY.md.
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: What kind of documentation help do you need?
+      options:
+        - Report an incorrect statement
+        - Request a missing explanation or example
+        - Report a navigation or broken-link problem
+        - Ask for help finding the right page
+    validations:
+      required: true
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: Link the page, if one exists.
+      placeholder: https://docsversatul.readthedocs.io/en/latest/getting-started.html
+  - type: input
+    id: package-version
+    attributes:
+      label: Package and version
+      description: Include these when the request concerns package behavior.
+      placeholder: VersaTul.Configurations 1.0.18
+  - type: textarea
+    id: goal
+    attributes:
+      label: What were you trying to do?
+      description: Describe the task or question that led you to this page.
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is unclear or incorrect?
+      description: Quote only the short relevant passage and explain the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-change
+    attributes:
+      label: Suggested change
+      description: Optional. A suggested wording or example is helpful but not required.
