@@ -64,7 +64,7 @@ html_context = {
     "versatul_site_baseurl": html_baseurl,
     "versatul_social_image_url": versatul_social_image_url,
     # Point every published and preview page at the maintained source branch.
-    "versatul_github_edit_base": "https://github.com/BjornWilliams/DocsVersaTul/edit/stable/docs/source/",
+    "versatul_github_edit_base": "https://github.com/BjornWilliams/DocsVersaTul/edit/main/docs/source/",
 }
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "_ext"))

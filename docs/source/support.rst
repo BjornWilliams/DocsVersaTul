@@ -70,7 +70,7 @@ test coverage does not change the assets or support status of a version that
 was already published. The :doc:`compatibility` page describes framework
 status; :doc:`release-notes` describes package and documentation versions.
 
-The prepared ``2026.10`` documentation snapshot retains historical API information for
+The published ``2026.10`` documentation snapshot retains historical API information for
 ``VersaTul.Data.Sql`` 1.0.15 and ``VersaTul.Data.MsSql`` 1.0.13. Keeping those
 pages available preserves existing links. It does not promise maintenance,
 fixes, or future releases for those 1.x package lines. Other older package

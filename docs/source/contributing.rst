@@ -12,6 +12,10 @@ planning a source-code contribution.
 Where changes belong
 --------------------
 
+The **Edit this page on GitHub** link opens the maintained ``main`` branch.
+Propose documentation corrections there; dated documentation tags preserve
+their published snapshots.
+
 * Propose documentation corrections through the `GitHub issue chooser
   <https://github.com/BjornWilliams/DocsVersaTul/issues/new/choose>`_ and
   select **Documentation help**, or use the page's **Edit this page on GitHub**
