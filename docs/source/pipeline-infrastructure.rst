@@ -47,7 +47,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Pipeline.Infrastructure on NuGet <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure>`_
+`VersaTul.Pipeline.Infrastructure on NuGet <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=pipeline-infrastructure>`_
 `VersaTul.Pipeline.Infrastructure versions and release notes <https://www.nuget.org/packages/VersaTul.Pipeline.Infrastructure#versions-body-tab>`_
 
 Installation

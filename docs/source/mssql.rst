@@ -55,7 +55,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Data.MsSql on NuGet <https://www.nuget.org/packages/VersaTul.Data.MsSql>`_
+`VersaTul.Data.MsSql on NuGet <https://www.nuget.org/packages/VersaTul.Data.MsSql?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=mssql>`_
 `VersaTul.Data.MsSql versions and release notes <https://www.nuget.org/packages/VersaTul.Data.MsSql#versions-body-tab>`_
 
 Installation

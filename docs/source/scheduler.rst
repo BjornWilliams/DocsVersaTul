@@ -47,7 +47,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Task.Scheduler on NuGet <https://www.nuget.org/packages/VersaTul.Task.Scheduler>`_
+`VersaTul.Task.Scheduler on NuGet <https://www.nuget.org/packages/VersaTul.Task.Scheduler?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=scheduler>`_
 `VersaTul.Task.Scheduler versions and release notes <https://www.nuget.org/packages/VersaTul.Task.Scheduler#versions-body-tab>`_
 
 Installation

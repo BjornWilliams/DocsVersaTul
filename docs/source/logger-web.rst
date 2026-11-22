@@ -47,7 +47,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Logger.Web on NuGet <https://www.nuget.org/packages/VersaTul.Logger.Web>`_
+`VersaTul.Logger.Web on NuGet <https://www.nuget.org/packages/VersaTul.Logger.Web?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=logger-web>`_
 `VersaTul.Logger.Web versions and release notes <https://www.nuget.org/packages/VersaTul.Logger.Web#versions-body-tab>`_
 
 Installation

@@ -56,7 +56,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Collection.Streamers on NuGet <https://www.nuget.org/packages/VersaTul.Collection.Streamers>`_
+`VersaTul.Collection.Streamers on NuGet <https://www.nuget.org/packages/VersaTul.Collection.Streamers?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=streamers>`_
 `VersaTul.Collection.Streamers versions and release notes <https://www.nuget.org/packages/VersaTul.Collection.Streamers#versions-body-tab>`_
 
 Installation
