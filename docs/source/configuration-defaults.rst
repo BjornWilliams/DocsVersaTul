@@ -47,7 +47,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Configuration.Defaults on NuGet <https://www.nuget.org/packages/VersaTul.Configuration.Defaults>`_
+`VersaTul.Configuration.Defaults on NuGet <https://www.nuget.org/packages/VersaTul.Configuration.Defaults?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=configuration-defaults>`_
 `VersaTul.Configuration.Defaults versions and release notes <https://www.nuget.org/packages/VersaTul.Configuration.Defaults#versions-body-tab>`_
 
 Installation

@@ -54,7 +54,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Logger.File on NuGet <https://www.nuget.org/packages/VersaTul.Logger.File>`_
+`VersaTul.Logger.File on NuGet <https://www.nuget.org/packages/VersaTul.Logger.File?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=logger-file>`_
 `VersaTul.Logger.File versions and release notes <https://www.nuget.org/packages/VersaTul.Logger.File#versions-body-tab>`_
 
 Installation

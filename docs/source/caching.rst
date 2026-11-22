@@ -48,7 +48,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Caching on NuGet <https://www.nuget.org/packages/VersaTul.Caching>`_
+`VersaTul.Caching on NuGet <https://www.nuget.org/packages/VersaTul.Caching?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=caching>`_
 `VersaTul.Caching versions and release notes <https://www.nuget.org/packages/VersaTul.Caching#versions-body-tab>`_
 
 Installation

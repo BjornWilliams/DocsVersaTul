@@ -60,7 +60,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Configurations on NuGet <https://www.nuget.org/packages/VersaTul.Configurations>`_
+`VersaTul.Configurations on NuGet <https://www.nuget.org/packages/VersaTul.Configurations?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=configuration>`_
 `VersaTul.Configurations versions and release notes <https://www.nuget.org/packages/VersaTul.Configurations#versions-body-tab>`_
 
 Installation

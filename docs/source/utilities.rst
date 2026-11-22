@@ -49,7 +49,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Utilities on NuGet <https://www.nuget.org/packages/VersaTul.Utilities>`_
+`VersaTul.Utilities on NuGet <https://www.nuget.org/packages/VersaTul.Utilities?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=utilities>`_
 `VersaTul.Utilities versions and release notes <https://www.nuget.org/packages/VersaTul.Utilities#versions-body-tab>`_
 
 Installation

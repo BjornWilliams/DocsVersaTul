@@ -48,7 +48,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Display.Attributes on NuGet <https://www.nuget.org/packages/VersaTul.Display.Attributes>`_
+`VersaTul.Display.Attributes on NuGet <https://www.nuget.org/packages/VersaTul.Display.Attributes?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=display-attributes>`_
 `VersaTul.Display.Attributes versions and release notes <https://www.nuget.org/packages/VersaTul.Display.Attributes#versions-body-tab>`_
 
 Installation

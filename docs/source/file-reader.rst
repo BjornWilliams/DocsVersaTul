@@ -56,7 +56,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Data.FileReader on NuGet <https://www.nuget.org/packages/VersaTul.Data.FileReader>`_
+`VersaTul.Data.FileReader on NuGet <https://www.nuget.org/packages/VersaTul.Data.FileReader?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=file-reader>`_
 `VersaTul.Data.FileReader versions and release notes <https://www.nuget.org/packages/VersaTul.Data.FileReader#versions-body-tab>`_
 
 Installation

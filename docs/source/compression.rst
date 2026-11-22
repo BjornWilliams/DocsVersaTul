@@ -47,7 +47,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Compression on NuGet <https://www.nuget.org/packages/VersaTul.Compression>`_
+`VersaTul.Compression on NuGet <https://www.nuget.org/packages/VersaTul.Compression?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=compression>`_
 `VersaTul.Compression versions and release notes <https://www.nuget.org/packages/VersaTul.Compression#versions-body-tab>`_
 
 Installation

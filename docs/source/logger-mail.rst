@@ -47,7 +47,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Logger.Mail on NuGet <https://www.nuget.org/packages/VersaTul.Logger.Mail>`_
+`VersaTul.Logger.Mail on NuGet <https://www.nuget.org/packages/VersaTul.Logger.Mail?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=logger-mail>`_
 `VersaTul.Logger.Mail versions and release notes <https://www.nuget.org/packages/VersaTul.Logger.Mail#versions-body-tab>`_
 
 Installation

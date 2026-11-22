@@ -48,7 +48,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Data.Contracts on NuGet <https://www.nuget.org/packages/VersaTul.Data.Contracts>`_
+`VersaTul.Data.Contracts on NuGet <https://www.nuget.org/packages/VersaTul.Data.Contracts?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=data-contracts>`_
 `VersaTul.Data.Contracts versions and release notes <https://www.nuget.org/packages/VersaTul.Data.Contracts#versions-body-tab>`_
 
 Installation

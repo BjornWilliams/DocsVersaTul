@@ -48,7 +48,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Data.MongoDB on NuGet <https://www.nuget.org/packages/VersaTul.Data.MongoDB>`_
+`VersaTul.Data.MongoDB on NuGet <https://www.nuget.org/packages/VersaTul.Data.MongoDB?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=mongodb>`_
 `VersaTul.Data.MongoDB versions and release notes <https://www.nuget.org/packages/VersaTul.Data.MongoDB#versions-body-tab>`_
 
 Installation

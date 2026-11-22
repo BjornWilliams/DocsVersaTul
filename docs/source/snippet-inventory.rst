@@ -192,6 +192,10 @@ Inventory
      - ``literalinclude:: ../samples/Packages/VersaTul.Contracts/ExpectedOutput.txt``
      - **Executed**
      - Compared with stdout from the canonical package README sample after it is built and run for every supported framework.
+   * - ``contributing.rst#1``
+     - ``code-block:: console``
+     - **Configuration-only**
+     - Contributor test commands illustrate the per-package, per-target-framework workflow; they are not run by the published documentation sample workflow.
    * - ``converters.rst#1``
      - ``code-block:: console``
      - **Configuration-only**

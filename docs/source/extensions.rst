@@ -48,7 +48,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Extensions on NuGet <https://www.nuget.org/packages/VersaTul.Extensions>`_
+`VersaTul.Extensions on NuGet <https://www.nuget.org/packages/VersaTul.Extensions?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=extensions>`_
 `VersaTul.Extensions versions and release notes <https://www.nuget.org/packages/VersaTul.Extensions#versions-body-tab>`_
 
 Installation

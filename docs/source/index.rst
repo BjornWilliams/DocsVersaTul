@@ -17,7 +17,7 @@ It is designed for teams that want reusable building blocks without committing t
      - **License**
        `MIT <https://licenses.nuget.org/MIT>`_
      - **Latest quickstart package**
-       `VersaTul.Configurations 1.0.18 <https://www.nuget.org/packages/VersaTul.Configurations/1.0.18>`_
+       `VersaTul.Configurations 1.0.18 <https://www.nuget.org/packages/VersaTul.Configurations/1.0.18?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=index>`_
      - **Sample and build checks**
        The `pull-request workflow <https://github.com/BjornWilliams/DocsVersaTul/actions/workflows/documentation-samples.yml>`_ builds the docs and runs output-checked samples on all three target frameworks.
      - **Source and support**
@@ -87,7 +87,9 @@ Start Here
    dotnet-10-upgrade
    support
    security
+   adoption-measurement
    repository-access
+   contributing
    release-notes
    release-notes-preview
    deprecations

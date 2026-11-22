@@ -47,7 +47,7 @@ Use this package when you want to:
 Package And Change History
 --------------------------
 
-`VersaTul.Object.Converters on NuGet <https://www.nuget.org/packages/VersaTul.Object.Converters>`_
+`VersaTul.Object.Converters on NuGet <https://www.nuget.org/packages/VersaTul.Object.Converters?utm_source=docsversatul&utm_medium=documentation&utm_campaign=adoption&utm_content=converters>`_
 `VersaTul.Object.Converters versions and release notes <https://www.nuget.org/packages/VersaTul.Object.Converters#versions-body-tab>`_
 
 Installation
